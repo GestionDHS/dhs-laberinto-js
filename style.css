@@ -1,0 +1,27 @@
+body{
+  background-color: rgb(24, 24, 27);
+  color:white;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: sans-serif;
+  height:100vh;
+  margin:0%;
+}
+a{
+  color: white;
+  text-decoration: none;
+}
+img{
+  width:40%;
+  margin: auto;
+  display: block,
+}
+p{
+  font-size: 12px;
+  font-style: italic !important;
+}
+span{
+  text-decoration: underline;
+}
