@@ -3,13 +3,20 @@ export class DHS_Gallery{
         this.ready = true;
     }
 
-    //devuelve por clave , o sea arriba,abajo,lupe,etc
-    obtenerImagenes(arrayPropiedad){
-        return arrayPropiedad.forEach(unaPropiedad => { 
-            this.imageLib[unaPropiedad]          
+    //lo pido por clave , o sea arriba,abajo,lupe,etc
+    obtenerImagenes(imagenesJuego){
+        return imagenesJuego.forEach(unElemento => { 
+            this.imageLib[unElemento]          
         })
     }
     
+    obtenerUrlDe(unObjeto){
+        return this.imageLib[unObjeto].url
+    }
+    
+    obtenerNombreDe(unObjeto){
+        return this.imageLib[unObjeto].nombre
+    }
 
     imageLib = {
         // for theme absolute-movements
