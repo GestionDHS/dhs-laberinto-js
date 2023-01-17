@@ -8,7 +8,7 @@ class Personaje {
   }
 }
 
-//es la parte visible??
+//es la parte visible?? // donde se relaciona con el personaje?
 class INTERFAZ_PERSONAJE {
     constructor(interfazConfigObj) {
       this.interfazConfigObj = interfazConfigObj;

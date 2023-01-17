@@ -80,7 +80,7 @@ export class Sortable_Blocks {
       this.availableBlocksList.push(miBlock);
       this.lista.appendChild(miBlock);
     }
-    agregarBloqueListaB(pars) {
+    agregarBloqueListaB(direccion) {
       const miBlock = this.generador.crearBloqueSimple(direccion);
       this.lista2.appendChild(miBlock);
     }

@@ -6,10 +6,8 @@ import { DHS_Gallery } from "./Dhs-galeria";
 import { Sortable_Blocks } from "./Sortable_blocks";
 
 class Actividad{
-    constructor(botonEjecutar,imagenesJuego){
-        this.dhs_gallery= new DHS_Gallery()
+    constructor(botonEjecutar, unJuego, unEscenario){
         this.botonEjecutar = document.getElementById(gameActConfigObj.idBotonEjecutar)
-        this.imagenesJuego=this.dhs_gallery.obtenerImagenes(imagenesJuego)
     }
 }
 
