@@ -4,7 +4,7 @@ class Personaje {
     this.nombre = nombre;
     this.vivo = true;
     this.vidas = vidas;
-    this.vidasRestantes = vidas;
+    this.vidasRestantes = vidas;// van a tener más de una vida?
   }
 }
 
