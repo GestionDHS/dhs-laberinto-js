@@ -1,4 +1,4 @@
-# Proyecto Bloques K01
+# Proyecto Bloques K01  ![DHSchools](../logodhs.png)
 ## Tecnology
 - vite.js
 
