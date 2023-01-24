@@ -15,7 +15,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
-        pages: resolve(root, "pages", "act1", "act1.html"),
+        pages: resolve(root, "pages", "actividad001", "act1.html"),
       },
     },
   },
