@@ -5,7 +5,7 @@ export class Escenario{
         this.renderizarLaberinto(elementoHTML, unidadAnchoDeseada);
         this.objetosCasilleros = []; // La matriz de objetos Casilleros
         //entiendo la facilidad pero le buscaria la vuelta para que sea todo orientado a objetos
-      for (let f = 0; f < matrizCruda.length; f++) {
+        for (let f = 0; f < matrizCruda.length; f++) {
         let newRow = [];
         for (let c = 0; c < matrizCruda[f].length; c++) {
           let newCas;
@@ -41,13 +41,13 @@ class Casillero {
       this.elementoHTML.classList.add("casillero");
       this.idElemento = "cas-" + fila + "-" + columna;
       this.elementoHTML.setAttribute("id", this.idElemento);
-  
+     // personaje en casilla
       this.occupants = [];
       this.setear(type)
     }
     setear(tipo) {
       this.type = tipo;
-      this.walkable = tipo == "path";
+      this.walkable = tipo == "path"; // puedo pisar el casillero
       this.elementoHTML.setAttribute("class", "casillero " + tipo);
     }
   }

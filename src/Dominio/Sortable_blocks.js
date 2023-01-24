@@ -7,7 +7,6 @@ export class Sortable_Blocks {
       this.lista2 = document.getElementById(
         sortableBlocksConfigObj.idListaDestino
       );
-    //   this.ulEmbedded = document.getElementById(sortableBlocksConfigObj.idUlEmbedded)
       this.listaErase = document.getElementById(
         sortableBlocksConfigObj.idListaErase
       );
@@ -18,6 +17,7 @@ export class Sortable_Blocks {
       this.edicionHabilitable = sortableBlocksConfigObj.edicionHabilitable;
       this.availableBlocksList = []; // Para clonarlos en B si hay preseteados.
   
+      //existe entre bloques disponibles y codigo alumno se emparejan por el name...
       this.sortable = new Sortable(this.lista, {
         group: {
           name: `${sortableBlocksConfigObj.nameGroup}`,
@@ -48,11 +48,9 @@ export class Sortable_Blocks {
           forceFallback: false,
           fallbackClass: "sortable-fallback",
         }) ?? console.log("No vino el idListaErase");
-      if (this.editable) {
-        this.habilitarEdicion();
-      } else {
-        this.deshabilitarEdicion();
-      }
+        
+      this.editable?this.habilitarEdicion():this.deshabilitarEdicion();
+      
     }
     async erase() {
       const confirmacion = await Swal.fire({
@@ -98,34 +96,34 @@ export class Sortable_Blocks {
         }
       }
     }
-    // Obligatoria
-    // habilitarEdicion() {
-    //   if (this.edicionHabilitable) {
-    //     this.habilitarErase();
-    //     this.habilitarSort();
-    //   }
-    // }
-    // Obligatoria / se precisa para el primer ejercicio
-    // deshabilitarEdicion() {
-    //   this.deshabilitarErase();
-    //   this.deshabilitarSort();
-    // }
-    // habilitarSort() {
-    //   this.sortable.option("disabled", false);
-    //   this.sortable2.option("disabled", false);
-    // }
-    // deshabilitarSort() {
-    //   this.sortable.option("disabled", true);
-    //   this.sortable2.option("disabled", true);
-    // }
-    // habilitarErase() {
-    //   this.botonErase.addEventListener("click", this.erase);
-    //   this.erased.option("disabled", false);
-    // }
-    // deshabilitarErase() {
-    //   this.botonErase.removeEventListener("click", this.erase);
-    //   this.erased.option("disabled", true);
-    // }
+   // Obligatoria
+    habilitarEdicion() {
+      if (this.edicionHabilitable) {
+        this.habilitarErase();
+        this.habilitarSort();
+      }
+    }
+   // Obligatoria / se precisa para el primer ejercicio
+    deshabilitarEdicion() {
+      this.deshabilitarErase();
+      this.deshabilitarSort();
+    }
+    habilitarSort() {
+      this.sortable.option("disabled", false);
+      this.sortable2.option("disabled", false);
+    }
+    deshabilitarSort() {
+      this.sortable.option("disabled", true);
+      this.sortable2.option("disabled", true);
+    }
+    habilitarErase() {
+      this.botonErase.addEventListener("click", this.erase);
+      this.erased.option("disabled", false);
+    }
+    deshabilitarErase() {
+      this.botonErase.removeEventListener("click", this.erase);
+      this.erased.option("disabled", true);
+    }
   
     sendOrders() {
       const lista = this.lista2.querySelectorAll("li");

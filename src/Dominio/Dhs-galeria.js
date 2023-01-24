@@ -4,8 +4,9 @@ export class DHS_Gallery{
     }
 
     //lo pido por clave , o sea arriba,abajo,lupe,etc
-    obtenerImagenes(imagenesJuego){
-        return imagenesJuego.forEach(unElemento => { 
+    //ojo si necesito todos los de un theme
+    obtenerImagenes(clave){
+        return clave.forEach(unElemento => { 
             this.imageLib[unElemento]          
         })
     }
@@ -13,7 +14,7 @@ export class DHS_Gallery{
     obtenerUrlDe(unObjeto){
         return this.imageLib[unObjeto].url
     }
-    
+
     obtenerNombreDe(unObjeto){
         return this.imageLib[unObjeto].nombre
     }
