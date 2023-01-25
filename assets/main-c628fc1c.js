@@ -2,7 +2,7 @@ import"./modulepreload-polyfill-ec808ebb.js";document.querySelector("#app").inne
   <div>
   <a href="https://www.digitalhouse.com/ar/productos/escuelas">
   <h1>Actividades Especiales</h1>
-  <img src="../logodhs.png">
+  <img src="./logodhs.png">
   <p>By <span>Digital House Schools</span></p>
 </a>
   </div>
