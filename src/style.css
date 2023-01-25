@@ -1,6 +1,16 @@
+:root {
+  --color-primario:#05C7F2;
+  --color-secundario:#1D1F59;
+  --color-terciario:#F20505;
+  --color-cuarto:#0367A6;
+  --acento:#FFD148;
+  --color-negro: black;
+  --color-blanco:white;
+}
+
 body{
-  background-color: rgb(24, 24, 27);
-  color:white;
+  background-color: var(--color-negro);
+  color:var(--color-blanco);
   display:flex;
   justify-content: center;
   align-items: center;
@@ -9,8 +19,9 @@ body{
   height:100vh;
   margin:0%;
 }
+
 a{
-  color: white;
+  color:var(--color-blanco);
   text-decoration: none;
 }
 img{
