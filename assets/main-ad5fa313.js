@@ -1,8 +1,8 @@
-import"./modulepreload-polyfill-ec808ebb.js";document.querySelector("#app").innerHTML=`
+import{d as s}from"./logodhs-4f1cd96c.js";document.querySelector("#app").innerHTML=`
   <div>
   <a href="https://www.digitalhouse.com/ar/productos/escuelas">
   <h1>Actividades Especiales</h1>
-  <img src="./logodhs.png">
+  <img src="${s}">
   <p>By <span>Digital House Schools</span></p>
 </a>
   </div>
