@@ -1,0 +1,33 @@
+body{
+    background-color: var(--color-blanco);
+    display:grid;
+    grid-template-columns: 1.3fr 2fr 2fr; 
+}
+.panel-izquierdo{
+    height: 100vh;
+    color: var(--color-negro);
+    grid-column: 1/2;
+}
+.panel-central{
+    height: 100vh;
+    background-color: var(--color-primario);
+    color: var(--color-negro);
+    grid-column: 2/3;
+}
+
+.panel-derecho{
+    height: 100vh;
+    color: var(--color-negro);
+    grid-column: 3/4;
+}
+
+ul{
+    list-style: none;
+}
+
+.bloques-fruta{
+    height:30px;
+    width: 80px;
+    background-color: var(--acento);
+    margin-top: 2px;
+}
