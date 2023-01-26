@@ -31,3 +31,7 @@ ul{
     background-color: var(--acento);
     margin-top: 2px;
 }
+
+span{
+    text-decoration:none;
+  }
