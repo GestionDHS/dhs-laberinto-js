@@ -2,9 +2,7 @@ import  {Juego}  from "../../clases/Juego";
 
 const miJuego=new Juego()
 miJuego.listaBloquesAGenerar=["arriba","abajo"]
-console.log(miJuego.listaBloquesAGenerar)
-console.log(miJuego.listaBloquesDisponibles)
-miJuego.renderizarBloquesDisponibles(["arriba","abajo"])
+miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesDisponibles,miJuego.listaBloquesAGenerar)
 
 document.querySelector("body").innerHTML = `
 

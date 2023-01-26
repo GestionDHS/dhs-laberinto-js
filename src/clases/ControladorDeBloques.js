@@ -6,9 +6,7 @@ export class ControladorDeBloques {
   }
 
   crearBloques(listaAGenerar) {
-    console.log("entro en crearBloques");
     let listaBloques = [];
-    console.log("entreAlcontrolador y me voy al generador");
     listaAGenerar.forEach((bloque) => {
       let bloqueGenerado = this.generadorDeBloque.crearBloqueSimple(bloque);
       listaBloques.push(bloqueGenerado);
