@@ -31,8 +31,5 @@ export class GeneradorDeBloque {
       inputElements: x.enableParameters ? [inputPasos.cloneNode(true)] : null,
     }
   }
-  // crearBloqueconInputoSelect() {}
-  // crarBloqueEmbeboido() {
-  //   //repet
-  // }
+ 
 }

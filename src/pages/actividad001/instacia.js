@@ -1,3 +1,10 @@
+import  {Juego}  from "../../clases/Juego";
+
+const miJuego=new Juego()
+miJuego.listaBloquesAGenerar=["arriba","abajo"]
+console.log(miJuego.listaBloquesAGenerar)
+console.log(miJuego.listaBloquesDisponibles)
+miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesAGenerar)
 
 document.querySelector("body").innerHTML = `
 
@@ -42,3 +49,4 @@ document.querySelector("body").innerHTML = `
     </section>
 `;
 /**<img src="${dh}" style="background:black"> */
+
