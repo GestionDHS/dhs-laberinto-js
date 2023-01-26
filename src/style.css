@@ -8,6 +8,7 @@
   --color-blanco:white;
 }
 
+
 body{
   background-color: var(--color-negro);
   color:var(--color-blanco);
