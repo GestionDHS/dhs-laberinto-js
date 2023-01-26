@@ -1,7 +1,7 @@
 import { DHS_Gallery } from "./Dhs-galeria";
 
 export class GeneradorDeBloque {
-  constructor(galeriaImagenes) {
+  constructor() {
     this.galeriaImagenes = new DHS_Gallery();
   }
 

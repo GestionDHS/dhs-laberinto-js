@@ -1,21 +1,25 @@
 import { ControladorDeBloques } from "./ControladorDeBloques";
-import { VizualizadorDebugger } from "./VizualizadorDebugger";
+import { VisualizadorDebugger } from "./VisualizadorDebugger";
 
 export class Juego {
   constructor(
-    listaBloquesAGenerar,
-    listaBloquesDisponibles,
-    listaBloquesInstrucciones /*escenario*/
+    listaBloquesAGenerar
+    /*escenario*/
   ) {
     this.controlador = new ControladorDeBloques();
-    this.vizualizador = new VizualizadorDebugger();
+    this.vizualizador = new VisualizadorDebugger();
     this.listaBloquesAGenerar = listaBloquesAGenerar;
-    this.listaBloquesDisponibles = listaBloquesDisponibles;
-    this.listaBloquesInstrucciones = listaBloquesInstrucciones;
+    this.listaBloquesDisponibles = document.getElementById(
+      "dhs-lista-bloques-disponibles"
+    );
+    this.listaBloquesInstrucciones =
+      document.getElementById("dhs-instrucciones");
   }
 
-  renderizarBloquesDisponibles(listaARenderizar,listaAGenerar) {
-    listaARenderizar=this.controlador.crearBloques(listaAGenerar)
-    return listaARenderizar
+  renderizarBloquesDisponibles(listaARenderizar, listaAGenerar) {
+    let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);
+    listaDeObjetos.forEach((unBloque) =>
+      listaARenderizar.appendChild(unBloque)
+    );
   }
 }

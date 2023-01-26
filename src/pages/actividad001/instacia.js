@@ -1,8 +1,6 @@
 import  {Juego}  from "../../clases/Juego";
 
-const miJuego=new Juego()
-miJuego.listaBloquesAGenerar=["arriba","abajo"]
-miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesDisponibles,miJuego.listaBloquesAGenerar)
+
 
 document.querySelector("body").innerHTML = `
 
@@ -12,12 +10,6 @@ document.querySelector("body").innerHTML = `
        <h4>Bloques Disponibles</h4>
        <ul  id="dhs-lista-bloques-disponibles">
          <!-- ver que onda el script -->
-         <li><div class="bloques-fruta"></div></li>
-         <li><div class="bloques-fruta"></div></li>
-         <li><div class="bloques-fruta"></div></li>
-         <li><div class="bloques-fruta"></div></li>
-         <li><div class="bloques-fruta"></div></li>
-         <li><div class="bloques-fruta"></div></li>
        </ul>
      </div>
     </section>
@@ -48,3 +40,6 @@ document.querySelector("body").innerHTML = `
 `;
 /**<img src="${dh}" style="background:black"> */
 
+const miJuego=new Juego()
+miJuego.listaBloquesAGenerar=["arriba","abajo","izquierda","derecha","llave"]
+miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesDisponibles,miJuego.listaBloquesAGenerar)
