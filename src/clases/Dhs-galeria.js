@@ -17,7 +17,9 @@ export class DHS_Gallery{
     obtenerNombreDe(unObjeto){
         return this.imageLib[unObjeto].nombre
     }
-
+    obtenerNombreCompletoDe(dir){
+        return this.imageLib[dir]
+    }
     imageLib = {
         // for theme absolute-movements
         arriba: {

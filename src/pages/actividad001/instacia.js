@@ -4,7 +4,7 @@ const miJuego=new Juego()
 miJuego.listaBloquesAGenerar=["arriba","abajo"]
 console.log(miJuego.listaBloquesAGenerar)
 console.log(miJuego.listaBloquesDisponibles)
-miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesAGenerar)
+miJuego.renderizarBloquesDisponibles(["arriba","abajo"])
 
 document.querySelector("body").innerHTML = `
 
