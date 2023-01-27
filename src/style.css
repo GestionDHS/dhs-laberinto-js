@@ -7,11 +7,15 @@
   --color-negro: black;
   --color-blanco:white;
 }
-
+#app{
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-negro);
+  display: grid;
+  place-items: center;
+}
 
 body{
-  background-color: var(--color-negro);
-  color:var(--color-blanco);
   display:flex;
   justify-content: center;
   align-items: center;
@@ -34,6 +38,4 @@ p{
   font-size: 12px;
   font-style: italic !important;
 }
-span{
-  text-decoration: underline;
-}
+

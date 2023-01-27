@@ -1,47 +1,28 @@
-import  {Juego}  from "../../clases/Juego";
+import { Juego } from "../../clases/Juego";
+import { template } from "../../clases/Template";
+document.querySelector("#appActividad").innerHTML = template(``);
+document.querySelector("#elemento-escenario").innerHTML = `<div id="dhs-laberinto">
+<div>L</div>
+<div>A</div>
+<div>B</div>
+<div>E</div>
+<div>R</div>
+<div>I</div>
+<div>N</div>
+<div>T</div>
+<div>O</div>
+</div>`
 
 
-
-document.querySelector("body").innerHTML = `
-
-<!-- seccion izquierda -->
-    <section class="panel-izquierdo">
-     <div id="lista-bloques-disponibles">
-       <h4>Bloques Disponibles</h4>
-       <ul  id="dhs-lista-bloques-disponibles">
-         <!-- ver que onda el script -->
-       </ul>
-     </div>
-    </section>
-
-    <!-- seccion central -->
-
-    <section class="panel-central">
-    <div id="dhs-instrucciones">
-        <h4 id="dhs-encabezado-lista2">Instrucciones</h4>
-        <ul  id="dhs-lista-instrucciones" >
-        <!-- ver que onda el script -->
-       
-        </ul>
-    </div>
-    </section>
-
-    <!-- seccion derecha -->
-
-    <section class="panel-derecho">
-    <div id="panelJuego">
-       <h4 id="dhs-encabezado-desafio">Laberinto</h4>
-       <div id="elemento-escenario"></div>
-       <button >
-         <span>EJECUTAR</span>
-       </button>
-     </div>
-    </section>
-`;
-/**<img src="${dh}" style="background:black"> */
-
-const miJuego=new Juego()
-let bloquesPrecargados=["arriba"]
-let BloquesParaElegir=["arriba","abajo","izquierda","derecha","llave"]
-miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesDisponibles,BloquesParaElegir)
-miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesInstrucciones,bloquesPrecargados)
+const miJuego = new Juego();/* la lista de bloques a generar se la podemos mandar aca mismo */
+miJuego.listaBloquesAGenerar = [
+  "arriba",
+  "abajo",
+  "izquierda",
+  "derecha",
+  "llave",
+];
+miJuego.renderizarBloquesDisponibles(
+  miJuego.listaBloquesDisponibles,
+  miJuego.listaBloquesAGenerar
+);

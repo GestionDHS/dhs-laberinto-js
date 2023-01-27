@@ -4,7 +4,6 @@ import { VisualizadorDebugger } from "./VisualizadorDebugger";
 export class Juego {
   constructor(
     listaBloquesAGenerar
-    /*escenario*/
   ) {
     this.controlador = new ControladorDeBloques();
     this.vizualizador = new VisualizadorDebugger();
