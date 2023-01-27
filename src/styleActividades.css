@@ -28,6 +28,9 @@ h4{
     color: var(--color-negro);
     grid-column: 2/3;
 }
+#dhs-lista-instrucciones{
+    height: 90vh;
+}
 .panel-derecho{
     height: 100vh;
     color: var(--color-negro);
