@@ -41,5 +41,7 @@ document.querySelector("body").innerHTML = `
 /**<img src="${dh}" style="background:black"> */
 
 const miJuego=new Juego()
-miJuego.listaBloquesAGenerar=["arriba","abajo","izquierda","derecha","llave"]
-miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesDisponibles,miJuego.listaBloquesAGenerar)
+let bloquesPrecargados=["arriba"]
+let BloquesParaElegir=["arriba","abajo","izquierda","derecha","llave"]
+miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesDisponibles,BloquesParaElegir)
+miJuego.renderizarBloquesDisponibles(miJuego.listaBloquesInstrucciones,bloquesPrecargados)

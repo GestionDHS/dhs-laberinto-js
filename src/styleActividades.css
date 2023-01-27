@@ -1,7 +1,7 @@
 body{
     background-color: var(--color-blanco);
     display:grid;
-    grid-template-columns: 1.3fr 2fr 2fr; 
+    grid-template-columns: 1.5fr 2fr 2.5fr; 
 }
 .panel-izquierdo{
     height: 100vh;
