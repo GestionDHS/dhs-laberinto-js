@@ -7,6 +7,13 @@
   --color-negro: black;
   --color-blanco:white;
 }
+#app{
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-negro);
+  display: grid;
+  place-items: center;
+}
 
 body{
   display:flex;
