@@ -17,12 +17,11 @@ h4{
 }
 
 .panel-izquierdo{
-    height: 100%;
     color: var(--color-negro);
     grid-column: 1/2;
     display: flex;
     flex-direction: column;
-    margin:5px auto;
+    
 }
 
 #dhs-lista-bloques-disponibles{
@@ -30,14 +29,17 @@ h4{
     padding: 0;
 }
 .panel-central{
-    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between ;
     background-color: var(--color-primario);
     color: var(--color-negro);
     grid-column: 2/3;
 }
 
 .panel-derecho{
-    height: 100vh;
+    display:flex;
+    flex-direction: column;
     color: var(--color-negro);
     grid-column: 3/4;
 }
@@ -59,16 +61,7 @@ h4{
     margin: 0;
     padding: 0;
 }
-.bloques-fruta{
-    height:40px;
-    max-width:calc(90% - 10px);
-    background-color: var(--acento);
-    margin: 10px auto;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 #dhs-btn-ejecutar{
     border:none;
     border-radius: 6px;
@@ -101,3 +94,20 @@ li {
       text-decoration: none;
   }
 
+  .dhs-erase {
+    border:2px solid;
+    border-color:var(--color-secundario);
+    color: var(--color-blanco);
+    height:12vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dhs-erase span{
+      margin-left: 3%;
+  }
+
+  .dhs-erase i{
+      color: var(--color-terciario);
+  }

@@ -16,16 +16,16 @@ export class ControladorDeBloques {
   }
   hacerloSortable(elementoUlOrigen, elementoUlDestino) {
     //let sortableULOrigen = Sortable.create(elemento, options) o new Sortable(elemento, options)
-
     Sortable.create(elementoUlOrigen, {
       group: {
-        name: "sortable",
+        name: "sortable" ,
         pull: "clone",
         put: false,
       },
       sort: false,
       animation: 500,
     });
+    
     Sortable.create(elementoUlDestino, {
       group: {
         name: "sortable",

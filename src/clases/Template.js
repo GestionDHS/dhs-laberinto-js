@@ -1,13 +1,14 @@
 //es responsabilidad del juego rellenarlo
 import "../style.css";
 import "../styleActividades.css";
+import { tacho } from "./Iconos";
 export function template(element) {
   return `
   <!-- seccion izquierda -->
       <section class="panel-izquierdo">
        <div id="lista-bloques-disponibles">
          <h4>Bloques Disponibles</h4>
-         <ul  id="dhs-lista-bloques-disponibles">
+         <ul  name="listaDeBloquesDisponibles" id="dhs-lista-bloques-disponibles">
            <!-- ver que onda el script -->
          </ul>
        </div>
@@ -18,10 +19,14 @@ export function template(element) {
       <section class="panel-central">
       <div id="dhs-instrucciones">
           <h4 id="dhs-encabezado-lista2">Instrucciones</h4>
-          <ul  id="dhs-lista-instrucciones" >
+          <ul  name="listaDeInstrucciones"  id="dhs-lista-instrucciones" >
           <!-- ver que onda el script -->
          
           </ul>
+      </div>
+      <div class="dhs-erase">
+      <i> ${tacho} </i>
+      <span> Eliminar </span>
       </div>
       </section>
   

@@ -13,7 +13,7 @@ document.querySelector("#elemento-escenario").innerHTML = `<div id="dhs-laberint
 <div>O</div>
 </div>`
 
-
+//hacer dos metodos publicos para la instanciacion
 const miJuego = new Juego();/* la lista de bloques a generar se la podemos mandar aca mismo */
 miJuego.listaBloquesAGenerar = [
   "arriba",

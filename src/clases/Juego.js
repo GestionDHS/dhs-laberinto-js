@@ -21,6 +21,7 @@ export class Juego {
       listaARenderizar.appendChild(unBloque)
     );
     this.controlador.hacerloSortable(this.listaBloquesDisponibles,this.listaBloquesInstrucciones)
+    
   }
   
 }
