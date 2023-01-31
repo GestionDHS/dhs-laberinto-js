@@ -80,6 +80,7 @@ async BorrarListaDeBloques() {
     background: "var(--color-gris-turquesa)",
     confirmButtonColor:"var(--color-confirmacion)",
     cancelButtonColor: "var(--color-terciario)",
+    width:"28em"
     
   });
   if (confirmacion.isConfirmed) {
