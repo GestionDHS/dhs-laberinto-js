@@ -94,10 +94,9 @@ span {
 }
 
 .dhs-basura {
-  border: 2px solid;
+ 
   border-color: var(--color-grisDeTurquesa);
   color: var(--color-grisDeTurquesa);
-  /*color: var(--color-terciario);*/
   height: 12vh;
   display: flex;
   align-items: center;

@@ -56,11 +56,33 @@ export class ControladorDeBloques {
       fallbackClass: "sortable-fallback",
     });
   }
+
   borrarTodo(){
-    const btn = document.querySelector("#basura")
-    btn.addEventListener("click",(e)=>{
-      const instrucciones = document.querySelector("#dhs-lista-instrucciones")
-      instrucciones.innerHTML=""
+      const btn = document.querySelector("#basura")
+      btn.addEventListener("click",(e)=>{
+      this.BorrarListaDeBloques()
     })
   }
+
+
+async BorrarListaDeBloques() {
+  const confirmacion = await Swal.fire({
+    title:
+      "Con este botón podrás borrar todas las instrucciones ya programadas.",
+    text: "¿Deseas eliminarlas?",
+    icon: "warning",
+    confirmButtonText: "¡Sí, eliminar!",
+    showCancelButton: true,
+    cancelButtonText: "¡No, cancelar!",
+    color: "white",
+    background: "gray",
+    confirmButtonColor:"var(--color-confirmacion)",
+    cancelButtonColor: "var(--color-terciario)",
+    
+  });
+  if (confirmacion.isConfirmed) {
+    const instrucciones = document.querySelector("#dhs-lista-instrucciones")
+      instrucciones.innerHTML=""
+  }
+}
 }

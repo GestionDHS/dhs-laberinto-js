@@ -24,9 +24,9 @@ export function template(element) {
          
           </ul>
       </div>
-      <div class="dhs-basura">
+      <div class="dhs-basura" >
       <ul id="dhs-basura-lista"></ul>
-      <i id="basura"> ${tacho} </i>
+      <i id="basura" > ${tacho} </i>
       </div>
       </section>
   
