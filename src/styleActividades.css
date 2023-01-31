@@ -94,9 +94,7 @@ span {
 }
 
 .dhs-basura {
- 
-  border-color: var(--color-grisDeTurquesa);
-  color: var(--color-grisDeTurquesa);
+  color: var(--color-gris-turquesa);
   height: 12vh;
   display: flex;
   align-items: center;
@@ -132,4 +130,10 @@ span {
   
   .sortable-ghost {
     visibility: hidden;
+  }
+
+  /* SwAl */
+  .swal2-container{
+    position:absolute;
+    z-index: 99;
   }
