@@ -30,7 +30,7 @@ export class ControladorDeBloques {
     Sortable.create(elementoUlDestino, {
       group: {
         name: "sortable",
-        pull: "clone",
+        pull: true,
       },
       sort: true,
       animation: 400,
@@ -40,7 +40,7 @@ export class ControladorDeBloques {
     Sortable.create(elementoUlDestino, {
       group: {
         name: "basura",
-        pull: false,
+        pull:false,
       },
       sort: false,
       animation: 550,
@@ -55,5 +55,12 @@ export class ControladorDeBloques {
       forceFallback: false,
       fallbackClass: "sortable-fallback",
     });
+  }
+  borrarTodo(){
+    const btn = document.querySelector("#basura")
+    btn.addEventListener("click",(e)=>{
+      const instrucciones = document.querySelector("#dhs-lista-instrucciones")
+      instrucciones.innerHTML=""
+    })
   }
 }

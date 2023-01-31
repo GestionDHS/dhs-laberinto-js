@@ -11,6 +11,7 @@ export class Juego {
     );//es el ul
     this.listaBloquesInstrucciones =
       document.getElementById("dhs-lista-instrucciones");
+      this.controlador.borrarTodo()
   }
 
   renderizarBloquesDisponibles(listaARenderizar, listaAGenerar) {
