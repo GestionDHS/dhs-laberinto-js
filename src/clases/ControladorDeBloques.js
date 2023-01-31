@@ -16,16 +16,17 @@ export class ControladorDeBloques {
   }
   hacerloSortable(elementoUlOrigen, elementoUlDestino) {
     //let sortableULOrigen = Sortable.create(elemento, options) o new Sortable(elemento, options)
+    let basura = document.querySelector("#dhs-basura-lista");
     Sortable.create(elementoUlOrigen, {
       group: {
-        name: "sortable" ,
+        name: "sortable",
         pull: "clone",
         put: false,
       },
       sort: false,
       animation: 500,
     });
-    
+
     Sortable.create(elementoUlDestino, {
       group: {
         name: "sortable",
@@ -34,6 +35,25 @@ export class ControladorDeBloques {
       sort: true,
       animation: 400,
       easing: "cubic-bezier(1, 0, 0, 1)",
+    });
+
+    Sortable.create(elementoUlDestino, {
+      group: {
+        name: "basura",
+        pull: false,
+      },
+      sort: false,
+      animation: 550,
+    });
+    Sortable.create(basura, {
+      group: {
+        name: "basura",
+        pull: false,
+        put: true,
+      },
+      animation: 550,
+      forceFallback: false,
+      fallbackClass: "sortable-fallback",
     });
   }
 }

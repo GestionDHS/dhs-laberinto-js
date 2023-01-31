@@ -1,11 +1,12 @@
 :root {
   --color-primario:#05C7F2;
   --color-secundario:#1D1F59;
-  --color-terciario:#F20505;
+  --color-terciario:#f20505cb;
   --color-cuarto:#0367A6;
   --acento:#FFD148;
   --color-negro: black;
   --color-blanco:white;
+  --color-grisDeTurquesa:#0e7d96;
 }
 #app{
   width: 100%;
