@@ -71,7 +71,7 @@ async BorrarListaDeBloques() {
       "Con este botón podrás borrar todas las instrucciones ya programadas.",
     text: "¿Deseas eliminarlas?",
     icon: "warning",
-    // iconcolor: "green",
+    iconColor: "white",
     toast:true,
     confirmButtonText: "¡Sí, eliminar!",
     showCancelButton: true,
