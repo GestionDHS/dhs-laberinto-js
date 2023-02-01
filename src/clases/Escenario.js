@@ -1,44 +1,45 @@
-class Escenario{
-    constructor(tablero,unidadAnchoDeseada){
-        this.tablero=tablero
-        this.unidadAnchoDeseada=unidadAnchoDeseada
-        this.renderizarLaberinto(elementoHTML, unidadAnchoDeseada);
-        this.objetosCasilleros = []; // La matriz de objetos Casilleros
-        for (let fila = 0; fila < tablero.length; fila++) {
-            let nuevaFila = [];
-            for (let columna = 0; columna < tablero[fila].length; c++) {
-                let nuevoCasillero;
-                tablero[fila][columna]==1?this.crearCasilleroTipo("pared"):this.crearCasilleroTipo("camino")
-                nuevaFila.push(nuevoCasillero);
-                this.elementoHTML.appendChild(nuevoCasillero.elementoHTML);
-            }
-            this.objetosCasilleros.push(nuevaFila);
-          }
-    }   
-   
-
-    crearCasilleroTipo(caminoOPared){
-        newCas = new Casillero(caminoOPared, filas, columnas);
+export class Escenario {
+  constructor(tablero, unidadAnchoDeseada, elementoHTML) {
+    this.tablero = tablero;
+    this.unidadAnchoDeseada = unidadAnchoDeseada;
+    this.elementoHTML = elementoHTML;
+    this.objetosCasilleros = []; // La matriz de objetos Casilleros
+  }
+  crearEscenario() {
+    for (let fila = 0; fila < this.tablero.length; fila++) {
+      let nuevaFila = [];
+      for (let columna = 0; columna < this.tablero[fila].length; columna++) {
+        let nuevoCasillero;
+        if (this.tablero[fila][columna] == 1) {
+          nuevoCasillero = this.crearCasilleroTipo("pared", fila, columna);
+        } else {
+          nuevoCasillero = this.crearCasilleroTipo("camino", fila, columna);
+        }
+        nuevaFila.push(nuevoCasillero);
+        this.elementoHTML.appendChild(nuevoCasillero.casilla);
+      }
+      this.objetosCasilleros.push(nuevaFila);
     }
+    this.renderizarLaberinto();
+  }
+  crearCasilleroTipo(caminoOPared, fila, columna) {
+    return new Casillero(caminoOPared, fila, columna);
+  }
 
-    renderizarLaberinto(elementoHTML, unidadAnchoDeseada){
-        this.unidadAncho = unidadAnchoDeseada
-        this.anchoTotal = this.unidadAncho * this.tablero[0].length
-        this.altoTotal = this.unidadAncho * this.tablero.length
-        this.elementoHTML = elementoHTML
-        this.elementoHTML.style.width = this.anchoTotal + "px"
-        this.elementoHTML.style.height = this.altoTotal + "px"
-    }      
-    }
+  renderizarLaberinto() {
+    this.anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
+    this.altoTotal = this.unidadAnchoDeseada * this.tablero.length;
+    this.elementoHTML.style.width = this.anchoTotal + "px";
+    this.elementoHTML.style.height = this.altoTotal + "px";
+  }
+}
 
-
-
-
-class Casillero{
-    constructor(fila,columna){
-        this.casilla = document.createElement("DIV");
-        this.casilla.classList.add("casillero");
-        this.idElemento = "cas-" + fila + "-" + columna;
-        this.casilla.setAttribute("id", this.idElemento);
-    }
+class Casillero {
+  constructor(caminoOPared, fila, columna) {
+    this.casilla = document.createElement("DIV");
+    this.casilla.classList.add(`casillero-${caminoOPared}`);
+    this.idElemento = "cas-" + fila + "-" + columna;
+    this.casilla.setAttribute("id", this.idElemento);
+    this.tipo = caminoOPared;
+  }
 }

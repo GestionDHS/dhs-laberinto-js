@@ -36,7 +36,7 @@ export function template(element) {
       <div id="panelJuego">
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
-         <button >
+         <button id="dhs-boton">
            <span>EJECUTAR</span>
          </button>
        </div>
