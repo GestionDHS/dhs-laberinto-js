@@ -5,9 +5,11 @@
   display: grid;
   grid-template-columns: 1.5fr 2fr 2.5fr;
 }
+
 i{
   margin-left: 8%;
 }
+
 ul {
   list-style: none;
 }
@@ -47,7 +49,7 @@ h4 {
   grid-column: 3/4;
 }
 #dhs-laberinto {
-  width: 390px;
+  width: 390px; /* de que son estas medidas*/
   height: 350px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -169,27 +171,29 @@ span {
     float: left;
     border-width: 1px;
     border-style: solid;
-    background-size: cover;
+    
   }
   
-  .casillero img {
-    width: 100%;
-    height: 100%;
-  }
+  
 
 /*A pata*/
   .casillero-camino{
     float: left;
-    background-color: rgb(0, 166, 255);
-    width: 50px;
-    height: 50px;
+    background-image: url("./pages/lupe-commons/img/pasto.png");
+    width:15.2%;
+    height: 18%;
+    background-size: cover;
+    
   }
   .casillero-pared{
     float: left;
-    background-color: rgb(15, 15, 16);
-    width: 50px;
-    height: 50px;
+    background-image:url("./pages/lupe-commons/img/arboles-pasto.png") ;
+    width:15.2%;
+    height: 18%;
+    background-size: cover;
   }
+
+  
   /*fin a pata*/
   
   /* Btn Ejecutar*/
