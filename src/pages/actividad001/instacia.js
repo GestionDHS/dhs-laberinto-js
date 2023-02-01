@@ -1,20 +1,14 @@
+/*EL ARCHIVO FUNCIONES DE INSTANCIA CONTIENE TODAS LAS FUNCIONES PARA INSTANCIAR
+IMPORTANTE!! IMPORTAR TODAS LAS FUNCIONES QUE UTILIZO!!*/
+import {generarListaBloquesDisponibles,generarEscenario } from "../../clases/funcionesDeInstancia"; 
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
 document.querySelector("#appActividad").innerHTML = template(``);
-// document.querySelector("#elemento-escenario").innerHTML = `<div id="dhs-laberinto">
-// <div>L</div>
-// <div>A</div>
-// <div>B</div>
-// <div>E</div>
-// <div>R</div>
-// <div>I</div>
-// <div>N</div>
-// <div>T</div>
-// <div>O</div>
-// </div>`
 
-//hacer dos metodos publicos para la instanciacion
-const miJuego = new Juego();/* la lista de bloques a generar se la podemos mandar aca mismo */
+// PRIMERO: instanciar el juego
+const miJuego = new Juego()
+
+// SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 miJuego.listaBloquesAGenerar = [
   "arriba",
   "abajo",
@@ -22,10 +16,12 @@ miJuego.listaBloquesAGenerar = [
   "derecha",
   "llave",
 ];
-miJuego.renderizarBloquesDisponibles(
-  miJuego.listaBloquesDisponibles,
-  miJuego.listaBloquesAGenerar
-);
+
+// TERCERO: usar las funciones de instancia para renderizar los bloques
+generarListaBloquesDisponibles(miJuego,miJuego.listaBloquesAGenerar)
+
+
+// CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const tablero = [
   [1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 1],
@@ -33,5 +29,6 @@ const tablero = [
   [1, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1],
 ];
-const elementoHTMLLaberinto = document.getElementById("elemento-escenario")
-miJuego.generarEscenario(tablero, 55,elementoHTMLLaberinto)
+
+// QUINTO: usar funcion de instancia para renderizar el tablero
+generarEscenario( miJuego, tablero )

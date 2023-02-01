@@ -10,11 +10,7 @@ export class Escenario {
       let nuevaFila = [];
       for (let columna = 0; columna < this.tablero[fila].length; columna++) {
         let nuevoCasillero;
-        if (this.tablero[fila][columna] == 1) {
-          nuevoCasillero = this.crearCasilleroTipo("pared", fila, columna);
-        } else {
-          nuevoCasillero = this.crearCasilleroTipo("camino", fila, columna);
-        }
+        nuevoCasillero = this.tablero[fila][columna] == 1? this.crearCasilleroTipo("pared", fila, columna):this.crearCasilleroTipo("camino", fila, columna);
         nuevaFila.push(nuevoCasillero);
         this.elementoHTML.appendChild(nuevoCasillero.casilla);
       }
@@ -22,6 +18,7 @@ export class Escenario {
     }
     this.renderizarLaberinto();
   }
+
   crearCasilleroTipo(caminoOPared, fila, columna) {
     return new Casillero(caminoOPared, fila, columna);
   }

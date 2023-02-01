@@ -1,10 +1,11 @@
 import { library, icon } from '@fortawesome/fontawesome-svg-core';
-import {faTrashCan} from '@fortawesome/free-solid-svg-icons';
+import {faPlay, faTrashCan} from '@fortawesome/free-solid-svg-icons';
 
 
 library.add(
-faTrashCan
+faTrashCan,
+faPlay
 );
 
 export const tacho = icon({ prefix: 'fas', iconName: 'trash-can' }).html;
-
+export const play = icon({ prefix: 'fas', iconName: 'play' }).html;

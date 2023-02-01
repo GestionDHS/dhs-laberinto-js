@@ -1,7 +1,7 @@
 //es responsabilidad del juego rellenarlo
 import "../style.css";
 import "../styleActividades.css";
-import { tacho } from "./Iconos";
+import { tacho,play } from "./Iconos";
 export function template(element) {
   return `
   <!-- seccion izquierda -->
@@ -37,7 +37,8 @@ export function template(element) {
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
          <button id="dhs-boton">
-           <span>EJECUTAR</span>
+         <span>EJECUTAR</span>
+         <i> ${play} </i>
          </button>
        </div>
       </section>
