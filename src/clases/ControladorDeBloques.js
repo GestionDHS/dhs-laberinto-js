@@ -40,7 +40,7 @@ export class ControladorDeBloques {
     Sortable.create(elementoUlDestino, {
       group: {
         name: "basura",
-        pull:false,
+        pull: false,
       },
       sort: false,
       animation: 550,
@@ -57,35 +57,36 @@ export class ControladorDeBloques {
     });
   }
 
-  borrarTodo(){
-      const btn = document.querySelector("#basura")
-      btn.addEventListener("click",(e)=>{
-      this.BorrarListaDeBloques()
-    })
+  borrarTodo() {
+    const btn = document.querySelector("#basura");
+    btn.addEventListener("click", (e) => {
+      this.BorrarListaDeBloques();
+    });
   }
 
-
-async BorrarListaDeBloques() {
-  const confirmacion = await Swal.fire({
-    title:
-      "Con este botón podrás borrar todas las instrucciones ya programadas.",
-    text: "¿Deseas eliminarlas?",
-    icon: "warning",
-    iconColor: "white",
-    toast:true,
-    confirmButtonText: "¡Sí, eliminar!",
-    showCancelButton: true,
-    cancelButtonText: "¡No, cancelar!",
-    color: "white",
-    background: "var(--color-gris-turquesa)",
-    confirmButtonColor:"var(--color-confirmacion)",
-    cancelButtonColor: "var(--color-terciario)",
-    width:"28em"
-    
-  });
-  if (confirmacion.isConfirmed) {
-    const instrucciones = document.querySelector("#dhs-lista-instrucciones")
-      instrucciones.innerHTML=""
+  async BorrarListaDeBloques() {
+    const confirmacion = await Swal.fire({
+      title:
+        "Con este botón podrás borrar todas las instrucciones ya programadas.",
+      text: "¿Deseas eliminarlas?",
+      icon: "warning",
+      iconColor: "white",
+      confirmButtonText: "¡Sí, eliminar!",
+      showCancelButton: true,
+      cancelButtonText: "¡No, cancelar!",
+      color: "white",
+      background: "var(--color-gris-turquesa)",
+      confirmButtonColor: "var(--color-confirmacion)",
+      cancelButtonColor: "var(--color-terciario)",
+      width: "50em",
+      heightAuto:false,
+      fontSize: "2em",
+      allowOutsideClick:false,
+      backdrop: "rgba(0,0,0,.4)",
+    });
+    if (confirmacion.isConfirmed) {
+      const instrucciones = document.querySelector("#dhs-lista-instrucciones");
+      instrucciones.innerHTML = "";
+    }
   }
-}
 }
