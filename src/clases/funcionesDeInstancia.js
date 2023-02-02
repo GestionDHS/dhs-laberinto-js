@@ -27,4 +27,5 @@
  {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario")
     unJuego.generarEscenario(tablero, 55, elementoHTMLLaberinto)
+    //medida en em
  }

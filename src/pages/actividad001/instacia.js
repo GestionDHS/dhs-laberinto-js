@@ -19,6 +19,7 @@ miJuego.listaBloquesAGenerar = [
 
 // TERCERO: usar las funciones de instancia para renderizar los bloques
 generarListaBloquesDisponibles(miJuego,miJuego.listaBloquesAGenerar)
+//que vaya como método de Juego
 
 
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO

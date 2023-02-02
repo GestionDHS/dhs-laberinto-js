@@ -10,7 +10,7 @@ export class Escenario {
       let nuevaFila = [];
       for (let columna = 0; columna < this.tablero[fila].length; columna++) {
         let nuevoCasillero;
-        nuevoCasillero = this.tablero[fila][columna] == 1? this.crearCasilleroTipo("pared", fila, columna):this.crearCasilleroTipo("camino", fila, columna);
+        nuevoCasillero = this.tablero[fila][columna] == 1 ? this.crearCasilleroTipo("pared", fila, columna):this.crearCasilleroTipo("camino", fila, columna);
         nuevaFila.push(nuevoCasillero);
         this.elementoHTML.appendChild(nuevoCasillero.casilla);
       }
