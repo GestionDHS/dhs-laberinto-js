@@ -16,7 +16,7 @@ export function template(element) {
   
       <!-- seccion central -->
   
-      <section class="panel-central">
+      <section class="panel-central flex-col">
       <div id="dhs-instrucciones">
           <h4 id="dhs-encabezado-lista2">Instrucciones</h4>
           <ul  name="listaDeInstrucciones"  id="dhs-lista-instrucciones" >
@@ -32,8 +32,8 @@ export function template(element) {
   
       <!-- seccion derecha -->
   
-      <section class="panel-derecho">
-      <div id="panelJuego">
+      <section class="panel-derecho flex-col">
+      <div id="panel-juego">
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
          <button id="dhs-boton">

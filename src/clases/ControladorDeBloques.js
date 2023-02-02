@@ -70,7 +70,7 @@ export class ControladorDeBloques {
         "Con este botón podrás borrar todas las instrucciones ya programadas.",
       text: "¿Deseas eliminarlas?",
       icon: "warning",
-      iconColor: "var(--color-gris-turquesa)",
+      iconColor: "--color-gris-turquesa",
       confirmButtonText: "¡Sí, eliminar!",
       showCancelButton: true,
       cancelButtonText: "¡No, cancelar!",

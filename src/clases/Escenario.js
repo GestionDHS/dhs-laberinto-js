@@ -26,8 +26,13 @@ export class Escenario {
   renderizarLaberinto() {
     this.anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
     this.altoTotal = this.unidadAnchoDeseada * this.tablero.length;
-    this.elementoHTML.style.width = this.anchoTotal + "px";
-    this.elementoHTML.style.height = this.altoTotal + "px";
+    // this.elementoHTML.style.width = this.anchoTotal + "px";
+    // this.elementoHTML.style.height = this.altoTotal + "px";
+    
+    //cantidad de filas x 3.5 + "em"
+    //cantidad de colimnas x 3.5 + em
+    this.elementoHTML.style.width =  "20em";
+    this.elementoHTML.style.height = "18em";
   }
 }
 
