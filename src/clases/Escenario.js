@@ -35,6 +35,7 @@ class Casillero {
   constructor(caminoOPared, fila, columna) {
     this.casilla = document.createElement("DIV");
     this.casilla.classList.add(`casillero-${caminoOPared}`);
+    this.casilla.classList.add(`casillero`);
     this.idElemento = "cas-" + fila + "-" + columna;
     this.casilla.setAttribute("id", this.idElemento);
     this.tipo = caminoOPared;

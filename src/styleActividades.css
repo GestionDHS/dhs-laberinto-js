@@ -167,34 +167,24 @@ span {
     z-index: 1;
   }
   
+
+  /*Fondo Casilleros*/
+
   .casillero {
     float: left;
-    border-width: 1px;
-    border-style: solid;
-    
-  }
-  
-  
-
-/*A pata*/
-  .casillero-camino{
-    float: left;
-    background-image: url("./pages/lupe-commons/img/pasto.png");
+    border: 1px solid var(--color-confirmacion);
     width:15.2%;
     height: 18%;
     background-size: cover;
-    
+  }
+  .casillero-camino{
+    float: left;
+    background-image: url("./pages/lupe-commons/img/pasto.png");
   }
   .casillero-pared{
     float: left;
     background-image:url("./pages/lupe-commons/img/arboles-pasto.png") ;
-    width:15.2%;
-    height: 18%;
-    background-size: cover;
   }
-
-  
-  /*fin a pata*/
   
   /* Btn Ejecutar*/
   #dhs-boton {
