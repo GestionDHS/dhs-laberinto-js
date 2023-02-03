@@ -171,19 +171,15 @@ span {
   /*Fondo Casilleros*/
 
   .casillero {
-    float: left;
-    border: 1px solid var(--color-confirmacion);
-    width:15.2%;
-    height: 18%;
+    float:left;
     background-size: cover;
   }
   .casillero-camino{
-    float: left;
+   
     background-image: url("./pages/lupe-commons/img/pasto.png");
   }
   .casillero-pared{
-    float: left;
-    background-image:url("./pages/lupe-commons/img/arboles-pasto.png") ;
+     background-image:url("./pages/lupe-commons/img/arboles-pasto.png") ;
   }
   
   /* Btn Ejecutar*/

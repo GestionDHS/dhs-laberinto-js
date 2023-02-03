@@ -1,8 +1,11 @@
 export class Escenario {
-  constructor(tablero, unidadAnchoDeseada, elementoHTML) {
+  constructor(tablero, unidadAnchoDeseada, elementoHTML,colorBordes,nombreImagenCamino,nombreImagenPared) {
     this.tablero = tablero;
     this.unidadAnchoDeseada = unidadAnchoDeseada;
     this.elementoHTML = elementoHTML;
+    this.colorBordes=colorBordes;
+    this.nombreImagenCamino=nombreImagenCamino;
+    this.nombreImagenPared=nombreImagenPared;
     this.objetosCasilleros = []; // La matriz de objetos Casilleros
   }
   crearEscenario() {
@@ -16,7 +19,17 @@ export class Escenario {
       }
       this.objetosCasilleros.push(nuevaFila);
     }
+    const reglaCasilleros = document.createElement("STYLE");
+    reglaCasilleros.innerHTML = `
+      .casillero{
+        width: ${this.unidadAnchoDeseada}px;
+        height: ${this.unidadAnchoDeseada}px;
+        border: 1px solid ${this.colorBordes};
+      }
+      `
+    document.querySelector("head").appendChild(reglaCasilleros)
     this.renderizarLaberinto();
+    console.log(this.tablero)
   }
 
   crearCasilleroTipo(caminoOPared, fila, columna) {

@@ -1,6 +1,4 @@
-/*EL ARCHIVO FUNCIONES DE INSTANCIA CONTIENE TODAS LAS FUNCIONES PARA INSTANCIAR
-IMPORTANTE!! IMPORTAR TODAS LAS FUNCIONES QUE UTILIZO!!*/
-import {generarListaBloquesDisponibles,generarEscenario } from "../../clases/funcionesDeInstancia"; 
+
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -9,7 +7,7 @@ document.querySelector("#appActividad").innerHTML = template(``);
 const miJuego = new Juego()
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-miJuego.listaBloquesAGenerar = [
+const listaBloquesAGenerar = [
   "arriba",
   "abajo",
   "izquierda",
@@ -18,8 +16,7 @@ miJuego.listaBloquesAGenerar = [
 ];
 
 // TERCERO: usar las funciones de instancia para renderizar los bloques
-generarListaBloquesDisponibles(miJuego,miJuego.listaBloquesAGenerar)
-
+miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar)
 
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const tablero = [
@@ -31,4 +28,4 @@ const tablero = [
 ];
 
 // QUINTO: usar funcion de instancia para renderizar el tablero
-generarEscenario( miJuego, tablero )
+miJuego.generarEscenario(tablero,55,"red")
