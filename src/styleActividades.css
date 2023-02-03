@@ -1,80 +1,16 @@
 #appActividad {
-  height:100%;
+  height: 100%;
   width: 100%;
   background-color: var(--color-blanco);
   display: grid;
   grid-template-columns: 1.5fr 2fr 2.5fr;
+  gap: 0.5em;
 }
-
-i{
-  margin-left: 8%;
-}
-
-ul {
-  list-style: none;
-}
-#dhs-lista-instrucciones {
-  min-height: 40vh;
-  padding-left: 0%;
-}
-
 h4 {
   font-size: 1.3rem;
 }
-
-.panel-izquierdo {
-  color: var(--color-negro);
-  grid-column: 1/2;
-  display: flex;
-  flex-direction: column;
-}
-
-#dhs-lista-bloques-disponibles {
-  width: 100%;
-  padding: 0;
-}
-.panel-central {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: var(--color-primario);
-  color: var(--color-negro);
-  grid-column: 2/3;
-}
-
-.panel-derecho {
-  display: flex;
-  flex-direction: column;
-  color: var(--color-negro);
-  grid-column: 3/4;
-}
-#dhs-laberinto {
-  width: 390px; /* de que son estas medidas*/
-  height: 350px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  place-items: center;
-  border: 2px solid var(--color-terciario);
-  margin: 1rem auto 5rem auto;
-}
-#dhs-laberinto > div {
-  width: 100%;
-  min-height: 7.1rem;
-  display: grid;
-  place-items: center;
-  border: 2px solid var(--color-terciario);
-  margin: 0;
-  padding: 0;
-}
-
-#dhs-btn-ejecutar {
-  border: none;
-  border-radius: 6px;
-  background-color: var(--color-cuarto);
-  width: 10rem;
-  height: 4rem;
-  font-size: 20px;
-  color: var(--color-blanco);
+ul {
+  list-style: none;
 }
 li {
   list-style: none;
@@ -98,7 +34,23 @@ li img {
 span {
   text-decoration: none;
 }
-
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+#dhs-lista-bloques-disponibles {
+  width: 100%;
+  padding: 0em 0.2em;
+}
+.panel-central {
+  justify-content: space-between;
+  background-color: var(--color-primario);
+  color: var(--color-negro);
+}
+#dhs-lista-instrucciones {
+  min-height: 40vh;
+  padding-left: 0%;
+}
 .dhs-basura {
   color: var(--color-gris-turquesa);
   height: 12vh;
@@ -110,11 +62,10 @@ span {
   z-index: 99;
   position: fixed;
   font-size: 3rem;
-  margin-left:0%;
+  margin-left: 0%;
 }
-
-.dhs-basura i:hover{
-    transform: scale(1.2);
+.dhs-basura i:hover {
+  transform: scale(1.2);
 }
 .dhs-basura-lista {
   height: 100%;
@@ -123,79 +74,122 @@ span {
 #dhs-basura-lista > li {
   display: none;
 }
+i {
+  margin-left: 8%;
+}
+/* .panel-derecho {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-negro);
+  grid-column: 3/4;
+} */
+#panel-juego{
+  justify-content: center;
+  align-items: center;
+}
+#elemento-escenario{
+  margin:0 auto;
+  padding: 0 auto; 
+}
+/* #dhs-laberinto {
+  width: 390px; 
+  height: 350px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  border: 2px solid var(--color-terciario);
+  margin: 1rem auto 5rem auto;
+}
+#dhs-laberinto > div {
+  width: 100%;
+  min-height: 7.1rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--color-terciario);
+  margin: 0;
+  padding: 0;
+} */
+/*  Escenario  */
+.personaje {
+  text-align: center;
+  position: absolute !important; /* poner un important nos 
+    va a complicar la cascada buscar otra forma*/
+  z-index: 2;
+  border-radius: 5px;
+}
+
+.personaje img {
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+}
+
+
+/*Fondo Casilleros*/
+
+.casillero {
+  float: left;
+  border: 1px solid var(--color-confirmacion);
+  width: 3.2em;
+  height: 3.5em;
+  background-size: cover;
+}
+.casillero-camino {
+  background-image: url("./pages/lupe-commons/img/pasto.png");
+}
+.casillero-pared {
+  background-image: url("./pages/lupe-commons/img/arboles-pasto.png");
+}
+
+/* Btn Ejecutar*/
+/* #dhs-btn-ejecutar {
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-cuarto);
+    width: 10rem;
+    height: 4rem;
+    font-size: 20px;
+    color: var(--color-blanco);
+  } */
+#dhs-boton {
+  display: flex;
+  background-color: var(--color-confirmacion);
+  color: var(--color-blanco);
+  border-radius: 5px;
+  border: none;
+  margin: 20px auto;
+  padding: 14px 18px;
+  justify-content: center;
+  align-items: center;
+}
+#dhs-boton:hover {
+  border: 2px solid var(--acento);
+  transform: scale(1.1);
+}
+#dhs-boton:active {
+  border: 2px solid var(--acento);
+  background-color: var(--color-terciario);
+  font-weight: bold;
+}
 
 /* SORTABLE */
 
 .sortable-chosen {
-    box-shadow: 0 0 10px 5px var(--);
-    animation: chauDespacito 3s ease-out;
-  }
-  
-  .sortable-drag {
-    opacity: 1;
-    box-shadow: 0 0 10px 5px var(--gris_claro);
-  }
-  
-  .sortable-ghost {
-    visibility: hidden;
-  }
+  box-shadow: 0 0 10px 5px var(--);
+  animation: chauDespacito 3s ease-out;
+}
 
-  /* SwAl */
-  .swal2-container{
-    position:absolute;
-    z-index: 99;
-  }
+.sortable-drag {
+  opacity: 1;
+  box-shadow: 0 0 10px 5px var(--gris_claro);
+}
 
-  /*  Escenario  */
-  .personaje {
-    text-align: center;
-    position: absolute !important; /* poner un important nos 
-    va a complicar la cascada buscar otra forma*/
-    z-index: 2;
-    border-radius: 5px;
-  }
-  
-  .personaje img {
-    width: 100%;
-    height: 100%;
-    padding: 2px;
-  }
-  
-  #elemento-escenario {
-    position: relative;
-    margin: 20px auto;
-    z-index: 1;
-  }
-  
+.sortable-ghost {
+  visibility: hidden;
+}
 
-  /*Fondo Casilleros*/
-
-  .casillero {
-    float:left;
-    background-size: cover;
-  }
-  .casillero-camino{
-   
-    background-image: url("./pages/lupe-commons/img/pasto.png");
-  }
-  .casillero-pared{
-     background-image:url("./pages/lupe-commons/img/arboles-pasto.png") ;
-  }
-  
-  /* Btn Ejecutar*/
-  #dhs-boton {
-    display:flex;
-    background-color: var(--color-confirmacion);
-    color: var(--color-blanco);
-    border-radius: 5px;
-    border:none;
-    margin: 20px auto;
-    padding: 14px 18px;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  #dhs-boton:active {
-    border: 1px solid var(--acento);
-  }
-  
+/* SwAl */
+.swal2-container {
+  position: absolute;
+  z-index: 99;
+}

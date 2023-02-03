@@ -16,7 +16,13 @@ const listaBloquesAGenerar = [
 ];
 
 // TERCERO: usar las funciones de instancia para renderizar los bloques
+
 miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar)
+
+
+//que vaya como método de Juego
+
+
 
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const tablero = [
