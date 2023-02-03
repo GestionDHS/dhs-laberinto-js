@@ -83,7 +83,7 @@ i {
   color: var(--color-negro);
   grid-column: 3/4;
 } */
-#panel-juego{
+.panel-juego{
   justify-content: center;
   align-items: center;
 }

@@ -33,7 +33,7 @@ export function template(element) {
       <!-- seccion derecha -->
   
       <section class="panel-derecho flex-col">
-      <div id="panel-juego">
+      <div class="panel-juego flex-col">
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
          <button id="dhs-boton">

@@ -22,8 +22,8 @@ export class Escenario {
     const reglaCasilleros = document.createElement("STYLE");
     reglaCasilleros.innerHTML = `
       .casillero{
-        width: ${this.unidadAnchoDeseada}px;
-        height: ${this.unidadAnchoDeseada}px;
+        width: ${this.unidadAnchoDeseada}em;
+        height: ${this.unidadAnchoDeseada}em;
         border: 1px solid ${this.colorBordes};
       }
       `
@@ -37,15 +37,10 @@ export class Escenario {
   }
 
   renderizarLaberinto() {
-    this.anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
-    this.altoTotal = this.unidadAnchoDeseada * this.tablero.length;
-    // this.elementoHTML.style.width = this.anchoTotal + "px";
-    // this.elementoHTML.style.height = this.altoTotal + "px";
-    
-    //cantidad de filas x 3.5 + "em"
-    //cantidad de colimnas x 3.5 + em
-    this.elementoHTML.style.width =  "20em";
-    this.elementoHTML.style.height = "18em";
+    let anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
+    let altoTotal = this.unidadAnchoDeseada * this.tablero.length;
+    this.elementoHTML.style.width =  (anchoTotal+((this.tablero[0].length)*2)*0.16) + "em" ;
+    this.elementoHTML.style.height = (altoTotal) + "em";
   }
 }
 

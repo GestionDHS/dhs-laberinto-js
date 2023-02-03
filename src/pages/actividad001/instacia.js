@@ -34,4 +34,4 @@ const tablero = [
 ];
 
 // QUINTO: usar funcion de instancia para renderizar el tablero
-miJuego.generarEscenario(tablero,55,"red")
+miJuego.generarEscenario(tablero,3.4,"red")
