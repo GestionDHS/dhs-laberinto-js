@@ -127,19 +127,8 @@ i {
 
 /*Fondo Casilleros*/
 
-.casillero {
-  float: left;
-  border: 1px solid var(--color-confirmacion);
-  width: 3.2em;
-  height: 3.5em;
-  background-size: cover;
-}
-.casillero-camino {
-  background-image: url("./pages/lupe-commons/img/pasto.png");
-}
-.casillero-pared {
-  background-image: url("./pages/lupe-commons/img/arboles-pasto.png");
-}
+
+
 
 /* Btn Ejecutar*/
 /* #dhs-btn-ejecutar {

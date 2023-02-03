@@ -1,5 +1,8 @@
+import { DHS_Gallery } from "./Dhs-galeria";
+
 export class Escenario {
   constructor(tablero, unidadAnchoDeseada, elementoHTML,colorBordes,nombreImagenCamino,nombreImagenPared) {
+    this.galeria= new DHS_Gallery()
     this.tablero = tablero;
     this.unidadAnchoDeseada = unidadAnchoDeseada;
     this.elementoHTML = elementoHTML;
@@ -13,7 +16,7 @@ export class Escenario {
       let nuevaFila = [];
       for (let columna = 0; columna < this.tablero[fila].length; columna++) {
         let nuevoCasillero;
-        nuevoCasillero = this.tablero[fila][columna] == 1 ? this.crearCasilleroTipo("pared", fila, columna):this.crearCasilleroTipo("camino", fila, columna);
+        nuevoCasillero = this.tablero[fila][columna] == 1 ? this.crearCasilleroTipo("pared", this.nombreImagenPared):this.crearCasilleroTipo("camino", this.nombreImagenCamino);
         nuevaFila.push(nuevoCasillero);
         this.elementoHTML.appendChild(nuevoCasillero.casilla);
       }
@@ -22,9 +25,18 @@ export class Escenario {
     const reglaCasilleros = document.createElement("STYLE");
     reglaCasilleros.innerHTML = `
       .casillero{
+        float:left;
+        background-size: cover;
         width: ${this.unidadAnchoDeseada}em;
         height: ${this.unidadAnchoDeseada}em;
         border: 1px solid ${this.colorBordes};
+      }
+      .casillero-pared{
+        background-image: url(${this.galeria.obtenerUrlDe(this.nombreImagenPared)})
+      }
+
+      .casillero-camino{
+        background-image: url(${this.galeria.obtenerUrlDe(this.nombreImagenCamino)})
       }
       `
     document.querySelector("head").appendChild(reglaCasilleros)
@@ -32,8 +44,8 @@ export class Escenario {
     console.log(this.tablero)
   }
 
-  crearCasilleroTipo(caminoOPared, fila, columna) {
-    return new Casillero(caminoOPared, fila, columna);
+  crearCasilleroTipo(caminoOPared,imagen) {
+    return new Casillero(caminoOPared, imagen);
   }
 
   renderizarLaberinto() {
@@ -45,12 +57,10 @@ export class Escenario {
 }
 
 class Casillero {
-  constructor(caminoOPared, fila, columna) {
+  constructor(caminoOPared) {
     this.casilla = document.createElement("DIV");
     this.casilla.classList.add(`casillero-${caminoOPared}`);
     this.casilla.classList.add(`casillero`);
-    this.idElemento = "cas-" + fila + "-" + columna;
-    this.casilla.setAttribute("id", this.idElemento);
     this.tipo = caminoOPared;
   }
 }

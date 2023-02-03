@@ -33,6 +33,21 @@ export function template(element) {
       <!-- seccion derecha -->
   
       <section class="panel-derecho flex-col">
+         <h4 id="dhs-encabezado-desafio">Laberinto</h4>
+         <div id="elemento-escenario"></div>
+         <button id="dhs-boton">
+         <span>EJECUTAR</span>
+         <i> ${play} </i>
+         </button>
+      </section>
+    `;
+}
+
+/**<img src="${dh}" style="background:black"> */
+
+/* dejo aca comentado como estaba saco la clase panel-juego del template porque no se usa ahora ... si despues
+ la precisamos queda aca
+     <section class="panel-derecho flex-col">
       <div class="panel-juego flex-col">
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
@@ -43,6 +58,4 @@ export function template(element) {
        </div>
       </section>
     `;
-}
-
-/**<img src="${dh}" style="background:black"> */
+    */

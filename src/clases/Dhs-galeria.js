@@ -4,11 +4,11 @@ export class DHS_Gallery {
   }
 
   //lo pido por clave , o sea arriba,abajo,lupe,etc
-  obtenerImagenes(imagenesJuego) {
-    return imagenesJuego.forEach((unElemento) => {
-      this.imageLib[unElemento];
-    });
-  }
+  // obtenerImagenes(imagenesJuego) {
+  //   return imagenesJuego.forEach((unElemento) => {
+  //     this.imageLib[unElemento];
+  //   });
+  // }
 
   obtenerUrlDe(unObjeto) {
     return this.imageLib[unObjeto].url;

@@ -1,11 +1,9 @@
-
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
 document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego
-const miJuego = new Juego()
-
+const miJuego = new Juego();
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
   "arriba",
@@ -14,16 +12,9 @@ const listaBloquesAGenerar = [
   "derecha",
   "llave",
 ];
-
-// TERCERO: usar las funciones de instancia para renderizar los bloques
-
-miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar)
-
-
-//que vaya como método de Juego
-
-
-
+// TERCERO: pasarle la lista a la funcion correspondiente del archivo Juego.js para saber
+// en que lista debe renderizar
+miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar);
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const tablero = [
   [1, 1, 1, 1, 1, 1],
@@ -32,6 +23,7 @@ const tablero = [
   [1, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1],
 ];
-
-// QUINTO: usar funcion de instancia para renderizar el tablero
-miJuego.generarEscenario(tablero,3.4,"red")
+// QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
+//(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
+// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
+miJuego.generarEscenario(tablero, 3, "white", "arboles", "pasto");
