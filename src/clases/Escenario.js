@@ -16,7 +16,7 @@ export class Escenario {
       let nuevaFila = [];
       for (let columna = 0; columna < this.tablero[fila].length; columna++) {
         let nuevoCasillero;
-        nuevoCasillero = this.tablero[fila][columna] == 1 ? this.crearCasilleroTipo("pared", this.nombreImagenPared):this.crearCasilleroTipo("camino", this.nombreImagenCamino);
+        nuevoCasillero = this.tablero[fila][columna] == 1 ? this.crearCasilleroTipo("pared", this.nombreImagenPared, fila, columna):this.crearCasilleroTipo("camino", this.nombreImagenCamino,  fila, columna);
         nuevaFila.push(nuevoCasillero);
         this.elementoHTML.appendChild(nuevoCasillero.casilla);
       }
@@ -41,11 +41,11 @@ export class Escenario {
       `
     document.querySelector("head").appendChild(reglaCasilleros)
     this.renderizarLaberinto();
-    console.log(this.tablero)
+  
   }
 
-  crearCasilleroTipo(caminoOPared,imagen) {
-    return new Casillero(caminoOPared, imagen);
+  crearCasilleroTipo(caminoOPared,imagen, fila, columna) {
+    return new Casillero(caminoOPared, imagen, fila, columna);
   }
 
   renderizarLaberinto() {
@@ -56,8 +56,10 @@ export class Escenario {
   }
 }
 
-class Casillero {
-  constructor(caminoOPared) {
+export class Casillero {
+  constructor(caminoOPared, fila, columna) {
+    this.fila=fila;
+    this.columna=columna;
     this.casilla = document.createElement("DIV");
     this.casilla.classList.add(`casillero-${caminoOPared}`);
     this.casilla.classList.add(`casillero`);

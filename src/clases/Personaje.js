@@ -1,9 +1,21 @@
-class Personaje {
-  constructor(id, nombre, vidas) {
-    this.idPersonaje = id;
+import { DHS_Gallery } from "./Dhs-galeria";
+
+export class Personaje {
+  constructor(escenario, nombre, filaInicial, columnaInicial, estadoInicial) {
+    this.escenario = escenario;
+    this.galeria= new DHS_Gallery()
+    this.imagen= this.galeria.obtenerUrlDe(nombre)
     this.nombre = nombre;
+    this.filaInicial = filaInicial;
+    this.columnaInicial = columnaInicial;
+    this.filaActual = filaInicial ;
+    this.columnaActual = columnaInicial;
+    this.estadoInicial = estadoInicial;
     this.vivo = true;
-    this.vidas = vidas;
-    this.vidasRestantes = vidas; // van a tener más de una vida?
+  }
+
+  crearPersonaje(){
+    this.filaActual = this.filaInicial
+    this.columnaActual = this.columnaActual
   }
 }

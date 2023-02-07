@@ -1,10 +1,12 @@
 import { ControladorDeBloques } from "./ControladorDeBloques";
+import { ControladorGraficoPersonaje } from "./ControladorGraficoPersonaje";
 import { VisualizadorDebugger } from "./VisualizadorDebugger";
 import { Escenario } from "./Escenario";
 
 export class Juego {
   constructor(listaBloquesAGenerar) {
     this.controlador = new ControladorDeBloques();
+    this.controladorGraficoPersonaje= new ControladorGraficoPersonaje()
     this.vizualizador = new VisualizadorDebugger();
     this.listaBloquesAGenerar = listaBloquesAGenerar;
     this.listaBloquesDisponibles = document.getElementById(
@@ -47,4 +49,8 @@ export class Juego {
     this.escenario.crearEscenario()
   }
   
+  generarPersonajes(arrayDePersonajes){
+    // crear el personaje logicamente
+    this.controladorGraficoPersonaje.renderizarPersonajes(this.escenario,arrayDePersonajes)
+  }
 }

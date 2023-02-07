@@ -12,8 +12,7 @@ const listaBloquesAGenerar = [
   "derecha",
   "llave",
 ];
-// TERCERO: pasarle la lista a la funcion correspondiente del archivo Juego.js para saber
-// en que lista debe renderizar
+
 miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar);
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const tablero = [
@@ -27,3 +26,23 @@ const tablero = [
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(tablero, 3, "white", "arboles", "pasto");
+
+// const arrayDePersonajes= [
+//   {
+//     nombre: "lupe",
+//     filaInicial: ,
+//     columnaInicial:  ,
+//     estadoInicial:  ,
+//   }
+// ]
+
+const arrayDePersonajes= [
+  {
+    nombre: "lupe",
+    filaInicial: 2 ,
+    columnaInicial: 2 ,
+    estadoInicial: true ,
+  }
+]
+// sexto : instancio personajes
+miJuego.generarPersonajes(arrayDePersonajes)

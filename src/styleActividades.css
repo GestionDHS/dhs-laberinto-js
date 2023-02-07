@@ -88,6 +88,7 @@ i {
   align-items: center;
 }
 #elemento-escenario{
+  position: relative;
   margin:0 auto;
   padding: 0 auto; 
 }
@@ -112,9 +113,8 @@ i {
 /*  Escenario  */
 .personaje {
   text-align: center;
-  position: absolute !important; /* poner un important nos 
-    va a complicar la cascada buscar otra forma*/
-  z-index: 2;
+  position: absolute;
+  z-index: 99;
   border-radius: 5px;
 }
 
@@ -125,7 +125,8 @@ i {
 }
 
 
-/*Fondo Casilleros*/
+/*.casilleros   .casillero-pared  .casillero-camino 
+se crean dinamicamente en js en el archivo Escenario.js*/
 
 
 
