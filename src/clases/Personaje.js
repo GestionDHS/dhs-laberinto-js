@@ -1,63 +1,54 @@
 export class Personaje {
-  constructor(persConfigObj, juego) {
-    this.idHTML = persConfigObj.idUsarHTML;
-    this.juego = juego;
-    // TIPOS [JUGABLE, FUEGOS, COFRES, MONEDAS, ENTRADA, SALIDA]
-    this.tipoPersonaje = persConfigObj.tipoPersonaje; // STRING CON EL TIPO DE PERSONAJE
-    this.statuses = persConfigObj.statuses; // OBJETOS DE OBJETOS DE POSIBLES ESTADOS  {clave{nombre:"", imageURL:""}}
-    this.initialStatus = persConfigObj.initialStatus; // STRING CON CLAVE DEL ESTADO INICIAL DEL PERSONAJE
-    this.initial_y = persConfigObj.initial_y; // ENTERO CON LA POSICION INICIAL
-    this.initial_x = persConfigObj.initial_x; // ENTERO CON LA POSICION INICIAL
-    this.direccionInicial = persConfigObj.direccionInicial
-      ? persConfigObj.direccionInicial
-      : 0; // ENTERO 0-360 con grados de orientación inicial.
-    this.collisions = []; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
-    this.controladorDOM = new controladorPersonajeDOM(
-      persConfigObj.tieneTooltip,
-      this.juego,
-      persConfigObj.idUsarHTML,
-      persConfigObj.zIndex,
-      persConfigObj.paddingImagen
-    );
-    this.initialize();
+  constructor(objetoConfiguracionPersonaje, juego) {
+      this.idHTML = objetoConfiguracionPersonaje.idUsarHTML;
+      this.juego = juego;
+      // TIPOS [JUGABLE, FUEGOS, COFRES, MONEDAS, ENTRADA, SALIDA]
+      this.tipoPersonaje = objetoConfiguracionPersonaje.tipoPersonaje; // STRING CON EL TIPO DE PERSONAJE
+      this.status = objetoConfiguracionPersonaje.status; // OBJETOS DE OBJETOS DE POSIBLES ESTADOS  {clave{nombre:"", imageURL:""}}
+      this.statusInicial = objetoConfiguracionPersonaje.statusInicial; // STRING CON CLAVE DEL ESTADO INICIAL DEL PERSONAJE
+      this.posicionInicialY = objetoConfiguracionPersonaje.posicionInicialY; // ENTERO CON LA POSICION INICIAL
+      this.posicionInicialX = objetoConfiguracionPersonaje.posicionInicialX; // ENTERO CON LA POSICION INICIAL
+      this.direccionInicial = objetoConfiguracionPersonaje.direccionInicial ? objetoConfiguracionPersonaje.direccionInicial : 0; // ENTERO 0-360 con grados de orientación inicial.
+      this.colisiones = []; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
+      this.controladorDOM = new controladorPersonajeDOM(objetoConfiguracionPersonaje.tieneTooltip,this.juego,objetoConfiguracionPersonaje.A,objetoConfiguracionPersonaje.zIndex,objetoConfiguracionPersonaje.paddingImagen);
+      this.inicializar();
   }
 
-  initialize() {
-    this.alive = true;
-    this.juntadosCount = 0;
-    this.callar();
-    this.setStatus(this.initialStatus);
-    this.actualizarCasillerosJuego(this.initial_y, this.initial_x, true);
+  inicializar() {
+    this.estaVivo = true;
+    this.juntadosCount = 0;//¿ seria la cantidad de personajes juntos?
+    this.removerTooltip();
+    this.setearStatus(this.statusInicial);
+    this.actualizarCasillerosJuego(this.posicionInicialY, this.posicionInicialX, true);
     this.direccion = this.direccionInicial;
     // UBICAR
     this.controladorDOM.rotarPersonaje(this.direccion);
-    this.controladorDOM.moverPersonajeHTML(
-      this.initial_y * this.juego.escenario.unidadAnchoDeseada,
-      this.initial_x * this.juego.escenario.unidadAnchoDeseada
-    );
+    this.controladorDOM.renderizarPersonajeEnHtml(
+      this.posicionInicialY * this.juego.escenario.unidadAnchoDeseada,
+      this.posicionInicialX * this.juego.escenario.unidadAnchoDeseada
+    )
   }
 
-  setStatus(stat) {
-    this.currentStatus = stat;
+  setearStatus(nuevoEstatus) {
+    this.currentStatus = nuevoEstatus;
     if (this.juego.modo != "prerun") {
-      this.controladorDOM.setImage(this.statuses[stat].imageUrl);
+      this.controladorDOM.setearImagen(this.status[nuevoEstatus].imageUrl)
     }
   }
 
   actualizarCasillerosJuego(nuevaY, nuevaX, isFirstStep = false) {
-    // if (!isFirstStep) {
-    //     const indice = this.casilleroActual.ocupantes.indexOf(this);
-    //     if (indice > -1) {
-    //         this.casilleroActual.ocupantes.splice(indice, 1);
-    //     }
-    // }
-    this.cas_y_actual = nuevaY;
-    this.cas_x_actual = nuevaX;
-    this.casilleroActual =
-      this.juego.escenario.objetosCasilleros[nuevaY][nuevaX];
-    // this.casilleroActual.ocupantes.push(this);
+      // if (!isFirstStep) {
+      //     const indice = this.casilleroActual.ocupantes.indexOf(this);
+      //     if (indice > -1) {
+      //         this.casilleroActual.ocupantes.splice(indice, 1);
+      //     }
+      // }
+      this.cas_y_actual = nuevaY;//no se usa
+      this.cas_x_actual = nuevaX;//no se usa
+      this.casilleroActual = this.juego.escenario.objetosCasilleros[nuevaY][nuevaX];
+      // this.casilleroActual.ocupantes.push(this);
   }
-  _forceDecir(texto, milisegundos = 3000) {
+  visibilizarTooltip(texto, milisegundos = 3000) {
     if (this.controladorDOM.hasTooltips && this.juego.modo != "prerun") {
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
@@ -66,61 +57,60 @@ export class Personaje {
       }, milisegundos);
     }
   }
-  _decir(texto, milisegundos = 3000) {
-    if (!this.alive) {
-      return false;
-    } else this._forceDecir(texto, milisegundos);
+  verificarQueEsteVivoYDecir(texto, milisegundos = 3000) {
+    !this.estaVivo? false : this.visibilizarTooltip(texto, milisegundos);
   }
+  
   decir(texto, milisegundos = 3000) {
-    this._decir(texto, milisegundos);
-    // Y LOGGEARLO!!
+      this.verificarQueEsteVivoYDecir(texto, milisegundos);
+      // Y LOGGEARLO!!
   }
 
-  callar() {
-    this.controladorDOM.elementoHTML.classList.remove("tooltipVisible");
+  removerTooltip() {
+      this.controladorDOM.elementoHTML.classList.remove("tooltipVisible")
   }
 
-  terminate() {
-    this.alive = false;
+  terminar() {
+      this.estaVivo = false;
   }
 }
 
 class controladorPersonajeDOM {
   // constructor(interfazConfigObj) {
-  constructor(tieneTooltip, juego, idUsarHTML, zindex, paddingImagen = "0") {
-    this.juego = juego;
-    this.elementoHTML = document.createElement("DIV");
-    this.elementoHTML.id = idUsarHTML;
-    this.juego.escenario.elementoHTML.appendChild(this.elementoHTML);
-    this.elementoHTML.classList.add("personaje");
-    this.elementoHTML.style.zIndex = zindex;
-    if (tieneTooltip) {
-      this.elementoHTML.classList.add("tooltip");
-      this.elementoTextoTooltip = document.createElement("DIV");
-      this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp"; // OJO ACA
-      this.elementoTextoTooltip.classList.add("tooltiptext");
-      this.elementoTextoTooltip.innerText = "...";
-      this.elementoHTML.appendChild(this.elementoTextoTooltip);
-    }
-    this.imagenAnidada = document.createElement("IMG");
-    this.imagenAnidada.style.padding = paddingImagen;
-    this.elementoHTML.appendChild(this.imagenAnidada);
-    this.setSpeed(this.juego.speedMiliseconds);
+  constructor(tieneTooltip, juego, idHtml, zindex, paddingImagen="0") {
+      this.juego = juego;
+      this.elementoHTML = document.createElement("DIV");
+      this.elementoHTML.id = idHtml;
+      this.juego.escenario.elementoHTML.appendChild(this.elementoHTML);
+      this.elementoHTML.classList.add("personaje");
+      this.elementoHTML.style.zIndex = zindex;  
+      if (tieneTooltip) {
+          this.elementoHTML.classList.add("tooltip");
+          this.elementoTextoTooltip = document.createElement("DIV");
+          this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp"; // OJO ACA
+          this.elementoTextoTooltip.classList.add("tooltiptext");
+          this.elementoTextoTooltip.innerText = "...";
+          this.elementoHTML.appendChild(this.elementoTextoTooltip);
+      }
+      this.imagenAnidada = document.createElement("IMG");
+      this.imagenAnidada.style.padding = paddingImagen;
+      this.elementoHTML.appendChild(this.imagenAnidada);
+      this.setearVelocidad(this.juego.speedMiliseconds)
   }
-  setImage(url) {
-    this.imagenAnidada.setAttribute("src", url);
+  setearImagen(url) {
+      this.imagenAnidada.setAttribute("src", url)
   }
-  setSpeed(milisegundos) {
-    this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s";
-    this.imagenAnidada.style.transition = "all " + milisegundos / 1000 + "s";
+  setearVelocidad(milisegundos) {
+      this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s"
+      this.imagenAnidada.style.transition = "all " + milisegundos / 1000 + "s"
   }
-  moverPersonajeHTML(posY, posX) {
-    if (this.juego.modo != "prerun") {
-      this.elementoHTML.style.left = posX + "em";
-      this.elementoHTML.style.top = posY + "em";
-    }
+  renderizarPersonajeEnHtml(posY, posX) {
+      if (this.juego.modo != "prerun") {
+           this.elementoHTML.style.left = posX + "em";
+           this.elementoHTML.style.top = posY + "em";
+      }
   }
-  rotarPersonaje(grados) {
-    this.imagenAnidada.style.transform = `rotate(${grados}deg)`;
+  rotarPersonaje(grados){
+    this.imagenAnidada.style.transform = `rotate(${grados}deg)`
   }
 }

@@ -1,7 +1,7 @@
 import { GeneradorDeBloque } from "./GeneradorDeBloque";
 import Sortable from "sortablejs";
 
-export class ControladorDeBloques {
+export class ControladorDeBloque {
   constructor() {
     this.generadorDeBloque = new GeneradorDeBloque();
   }

@@ -1,6 +1,6 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
-import { Personaje } from "../../clases/Personaje";
+
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
@@ -40,39 +40,38 @@ miJuego.generarEscenario(tablero, 3, "white", "arboles", "pasto");
 const arrayDePersonajes = [{
   idUsarHTML: "lupe",
   tipoPersonaje: "probando",
-  statuses: {
+  status: {
     normal: { name: "normal", imageUrl: "../lupe-commons/img/robotlupe.png" },
   },
-  initialStatus: "normal",
-  initial_y : 1,
-  initial_x :1,
+  statusInicial: "normal",
+  posicionInicialY : 1,
+  posicionInicialX :1,
   direccionInicial: 0, 
 },
 {
   idUsarHTML: "lodo",
   tipoPersonaje: "probando",
-  statuses: {
+  status: {
     normal: { name: "normal", imageUrl: "../lupe-commons/img/lodo.png" },
   },
-  initialStatus: "normal",
-  initial_y : 1,
-  initial_x :3,
+  statusInicial: "normal",
+  posicionInicialY : 1,
+  posicionInicialX :3,
   direccionInicial: 0, 
 },
 {
   idUsarHTML: "lupe",
   tipoPersonaje: "probando",
-  statuses: {
+  status: {
     normal: { name: "normal", imageUrl: "../lupe-commons/img/cofrecerrado.png" },
   },
-  initialStatus: "normal",
-  initial_y : 3,
-  initial_x :4,
+  statusInicial: "normal",
+  posicionInicialY : 3,
+  posicionInicialX :4,
   direccionInicial: 0, 
 },];
 
-// const pepito = new Personaje(objeto,miJuego);
-// sexto : instancio personajes
-// miJuego.generarPersonajes(arrayDePersonajes);
+
 
 miJuego.generarPersonajes(arrayDePersonajes);
+
