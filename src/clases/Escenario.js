@@ -38,6 +38,11 @@ export class Escenario {
       .casillero-camino{
         background-image: url(${this.galeria.obtenerUrlDe(this.nombreImagenCamino)})
       }
+      .personaje{
+        width: ${this.unidadAnchoDeseada}em;
+        height: ${this.unidadAnchoDeseada}em;
+        position: absolute;
+      }
       `
     document.querySelector("head").appendChild(reglaCasilleros)
     this.renderizarLaberinto();
