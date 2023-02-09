@@ -69,5 +69,6 @@ export class Casillero {
     this.casilla.classList.add(`casillero-${caminoOPared}`);
     this.casilla.classList.add(`casillero`);
     this.tipo = caminoOPared;
+    this.ocupantes=[];
   }
 }

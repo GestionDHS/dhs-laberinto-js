@@ -35,7 +35,7 @@ export function template(element) {
       <section class="panel-derecho flex-col">
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
-         <button id="dhs-boton">
+         <button id="dhs-boton" >
          <span>EJECUTAR</span>
          <i> ${play} </i>
          </button>

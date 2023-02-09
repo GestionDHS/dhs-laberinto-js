@@ -6,6 +6,10 @@ document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego
 const miJuego = new Juego();
+
+function global_ejecutar(){
+  miJuego.ejecutar();
+}
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
   "arriba",
@@ -41,7 +45,7 @@ const arrayDePersonajes = [{
   idUsarHTML: "lupe",
   tipoPersonaje: "probando",
   status: {
-    normal: { name: "normal", imageUrl: "../lupe-commons/img/robotlupe.png" },
+    normal: { name: "normal", imageUrl: "lupe" },
   },
   statusInicial: "normal",
   posicionInicialY : 1,
@@ -52,7 +56,7 @@ const arrayDePersonajes = [{
   idUsarHTML: "lodo",
   tipoPersonaje: "probando",
   status: {
-    normal: { name: "normal", imageUrl: "../lupe-commons/img/lodo.png" },
+    normal: { name: "normal", imageUrl: "lodo" },
   },
   statusInicial: "normal",
   posicionInicialY : 1,
@@ -60,10 +64,10 @@ const arrayDePersonajes = [{
   direccionInicial: 0, 
 },
 {
-  idUsarHTML: "lupe",
+  idUsarHTML: "cofre",
   tipoPersonaje: "probando",
   status: {
-    normal: { name: "normal", imageUrl: "../lupe-commons/img/cofrecerrado.png" },
+    normal: { name: "normal", imageUrl: "cofre" },
   },
   statusInicial: "normal",
   posicionInicialY : 3,

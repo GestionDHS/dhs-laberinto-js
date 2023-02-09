@@ -98,7 +98,7 @@ export class DHS_Gallery {
     // for theme lupe-commons
     lupe: {
       themes: ["lupe"],
-      url: "../pages/lupe-commons/img/robotlupe.png",
+      url: "../lupe-commons/img/robotlupe.png",
       nombre: "Lupe",
       parrafoLicencia:
         '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/robot" title="robot icons">Robot icons created by Freepik - Flaticon</a></p>',

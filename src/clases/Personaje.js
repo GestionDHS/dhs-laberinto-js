@@ -1,7 +1,10 @@
+import { DHS_Gallery } from "./Dhs-galeria";
+
 export class Personaje {
   constructor(objetoConfiguracionPersonaje, juego) {
       this.idHTML = objetoConfiguracionPersonaje.idUsarHTML;
       this.juego = juego;
+      this.galeria= new DHS_Gallery()
       // TIPOS [JUGABLE, FUEGOS, COFRES, MONEDAS, ENTRADA, SALIDA]
       this.tipoPersonaje = objetoConfiguracionPersonaje.tipoPersonaje; // STRING CON EL TIPO DE PERSONAJE
       this.status = objetoConfiguracionPersonaje.status; // OBJETOS DE OBJETOS DE POSIBLES ESTADOS  {clave{nombre:"", imageURL:""}}
@@ -16,24 +19,27 @@ export class Personaje {
 
   inicializar() {
     this.estaVivo = true;
-    this.juntadosCount = 0;//¿ seria la cantidad de personajes juntos?
+    this.juntadosCount = 0;//contador de cuanta mugre levanta...
     this.removerTooltip();
     this.setearStatus(this.statusInicial);
     this.actualizarCasillerosJuego(this.posicionInicialY, this.posicionInicialX, true);
     this.direccion = this.direccionInicial;
-    // UBICAR
     this.controladorDOM.rotarPersonaje(this.direccion);
-    this.controladorDOM.renderizarPersonajeEnHtml(
+    this.controladorDOM.posicionarPersonajeEnHtml(
       this.posicionInicialY * this.juego.escenario.unidadAnchoDeseada,
       this.posicionInicialX * this.juego.escenario.unidadAnchoDeseada
     )
   }
 
-  setearStatus(nuevoEstatus) {
-    this.currentStatus = nuevoEstatus;
+  setearStatus(nuevoStatus) {
+    this.currentStatus = nuevoStatus;
     if (this.juego.modo != "prerun") {
-      this.controladorDOM.setearImagen(this.status[nuevoEstatus].imageUrl)
+      this.controladorDOM.setearImagen(this.obtenerImagenSegunEstado(nuevoStatus))
     }
+  }
+
+  obtenerImagenSegunEstado(nuevoStatus){
+   return this.galeria.obtenerUrlDe(this.status[nuevoStatus].imageUrl)
   }
 
   actualizarCasillerosJuego(nuevaY, nuevaX, isFirstStep = false) {
@@ -43,11 +49,12 @@ export class Personaje {
       //         this.casilleroActual.ocupantes.splice(indice, 1);
       //     }
       // }
-      this.cas_y_actual = nuevaY;//no se usa
-      this.cas_x_actual = nuevaX;//no se usa
+      this.posicionActualY = nuevaY;
+      this.posicionActualX = nuevaX;
       this.casilleroActual = this.juego.escenario.objetosCasilleros[nuevaY][nuevaX];
       // this.casilleroActual.ocupantes.push(this);
   }
+  
   visibilizarTooltip(texto, milisegundos = 3000) {
     if (this.controladorDOM.hasTooltips && this.juego.modo != "prerun") {
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
@@ -104,7 +111,7 @@ class controladorPersonajeDOM {
       this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s"
       this.imagenAnidada.style.transition = "all " + milisegundos / 1000 + "s"
   }
-  renderizarPersonajeEnHtml(posY, posX) {
+  posicionarPersonajeEnHtml(posY, posX) {
       if (this.juego.modo != "prerun") {
            this.elementoHTML.style.left = posX + "em";
            this.elementoHTML.style.top = posY + "em";
