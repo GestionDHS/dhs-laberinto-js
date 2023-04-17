@@ -2,12 +2,12 @@ import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
 
 
-
 document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego
- window.miJuego = new Juego();
 
+
+ window.miJuego = new Juego();
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
@@ -40,42 +40,41 @@ miJuego.generarEscenario(tablero, 3, "white", "arboles", "pasto");
 //     estadoInicial:  ,
 //   }
 // ]
-const arrayDePersonajes = [{
-  idUsarHTML: "lupe",
-  tipoPersonaje: "probando",
-  status: {
-    normal: { name: "normal", imageUrl: "lupe" },
+const arrayDePersonajes = [
+  {
+    idUsarHTML: "lupe",
+    tipoPersonaje: "probando",
+    status: {
+      normal: { name: "normal", imageUrl: "lupe" },
+    },
+    statusInicial: "normal",
+    posicionInicialY: 1,
+    posicionInicialX: 1,
+    direccionInicial: 0,
   },
-  statusInicial: "normal",
-  posicionInicialY : 1,
-  posicionInicialX :1,
-  direccionInicial: 0, 
-},
-{
-  idUsarHTML: "lodo",
-  tipoPersonaje: "probando",
-  status: {
-    normal: { name: "normal", imageUrl: "lodo" },
+  {
+    idUsarHTML: "lodo",
+    tipoPersonaje: "probando",
+    status: {
+      normal: { name: "normal", imageUrl: "lodo" },
+    },
+    statusInicial: "normal",
+    posicionInicialY: 1,
+    posicionInicialX: 3,
+    direccionInicial: 0,
   },
-  statusInicial: "normal",
-  posicionInicialY : 1,
-  posicionInicialX :3,
-  direccionInicial: 0, 
-},
-{
-  idUsarHTML: "cofre",
-  tipoPersonaje: "probando",
-  status: {
-    normal: { name: "normal", imageUrl: "cofre" },
+  {
+    idUsarHTML: "cofre",
+    tipoPersonaje: "probando",
+    status: {
+      normal: { name: "normal", imageUrl: "cofre" },
+    },
+    statusInicial: "normal",
+    posicionInicialY: 3,
+    posicionInicialX: 4,
+    direccionInicial: 0,
   },
-  statusInicial: "normal",
-  posicionInicialY : 3,
-  posicionInicialX :4,
-  direccionInicial: 0, 
-},];
-
-
+];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-
 
