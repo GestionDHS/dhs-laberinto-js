@@ -29,6 +29,7 @@ export class Personaje {
       this.posicionInicialY * this.juego.escenario.unidadAnchoDeseada,
       this.posicionInicialX * this.juego.escenario.unidadAnchoDeseada
     )
+    this.setearVelocidad(this.juego.duracionIntervalos)
   }
 
   setearStatus(nuevoStatus) {
@@ -55,6 +56,7 @@ export class Personaje {
       // this.casilleroActual.ocupantes.push(this);
   }
   
+  //OJO PROBAR!!!!!!
   visibilizarTooltip(texto, milisegundos = 3000) {
     if (this.controladorDOM.hasTooltips && this.juego.modo != "prerun") {
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
@@ -64,6 +66,11 @@ export class Personaje {
       }, milisegundos);
     }
   }
+
+  setearVelocidad(nuevaVelocidad){
+    this.controladorDOM.setearVelocidad(nuevaVelocidad)
+  }
+
   verificarQueEsteVivoYDecir(texto, milisegundos = 3000) {
     !this.estaVivo? false : this.visibilizarTooltip(texto, milisegundos);
   }
@@ -102,11 +109,12 @@ class controladorPersonajeDOM {
       this.imagenAnidada = document.createElement("IMG");
       this.imagenAnidada.style.padding = paddingImagen;
       this.elementoHTML.appendChild(this.imagenAnidada);
-      this.setearVelocidad(this.juego.speedMiliseconds)
+      
   }
   setearImagen(url) {
       this.imagenAnidada.setAttribute("src", url)
   }
+
   setearVelocidad(milisegundos) {
       this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s"
       this.imagenAnidada.style.transition = "all " + milisegundos / 1000 + "s"

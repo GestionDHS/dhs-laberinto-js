@@ -3,11 +3,13 @@ import { VisualizadorDebugger } from "./VisualizadorDebugger";
 import { Escenario } from "./Escenario";
 import { Personaje } from "./Personaje";
 
+
 export class Juego {
-  constructor(listaBloquesAGenerar) {
-    this.botonEjecutar = document.getElementById("#dhs-boton");
+  constructor(listaBloquesAGenerar, duracionIntervalos = 1000) {
+    this.botonEjecutar = document.getElementById("dhs-boton");
     this.controlador = new ControladorDeBloque();
     this.vizualizador = new VisualizadorDebugger();
+    this.duracionIntervalos = duracionIntervalos;
     this.listaBloquesAGenerar = listaBloquesAGenerar;
     this.listaBloquesDisponibles = document.getElementById(
       "dhs-lista-bloques-disponibles"
@@ -18,6 +20,7 @@ export class Juego {
     this.controlador.borrarTodo();
     this.escenario = {};
     this.listaDePersonajes = [];
+    this.habilitar()
   }
 
   /* PARA GENERAR LOS BLOQUES EN PANTALLA EN CADA UNA DE LAS LISTAS */
@@ -74,15 +77,22 @@ export class Juego {
     });
   }
 
+  setearVelocidad(nuevaVelocidad) {
+    this.duracionIntervalos = nuevaVelocidad;
+    this.listaDePersonajes.forEach(personaje => personaje.setearVelocidad(nuevaVelocidad))
+  }
+
   habilitarEjecucion() {
-    this.botonEjecutar.setAttribute("onclick", "global_ejecutar()");
+     this.botonEjecutar.addEventListener("click", (e) => {
+      this.ejecutar();
+    });
     this.botonEjecutar.disabled = false;
   }
   deshabilitarEjecucion() {
     this.botonEjecutar.setAttribute("onclick", "");
     this.botonEjecutar.disabled = true;
   }
-  
+
   habilitar() {
     this.habilitarEjecucion();
     //falta el booleano para controlar el sort en el controlador
@@ -94,6 +104,7 @@ export class Juego {
   }
 
   ejecutar() {
+    console.log("hola lucho ")
     this.deshabilitar();
     this.reiniciar();
     this.modo = "prerun";

@@ -4,12 +4,10 @@ import { template } from "../../clases/Template";
 document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego
-const miJuego = new Juego();
-window.miJuego;
 
-function global_ejecutar() {
-  miJuego.ejecutar();
-}
+
+ window.miJuego = new Juego();
+
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
   "arriba",
