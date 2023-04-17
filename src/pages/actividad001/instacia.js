@@ -2,6 +2,7 @@ import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
 
 
+
 document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego
@@ -76,4 +77,5 @@ const arrayDePersonajes = [{
 
 
 miJuego.generarPersonajes(arrayDePersonajes);
+
 
