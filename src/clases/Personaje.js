@@ -103,11 +103,21 @@ export class Personaje {
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
     //verificar Validez movimiento
-    this.actualizarCasillerosJuego(nuevaY, nuevaX)
-    this.controladorDOM.posicionarPersonajeEnHtml(
-      nuevaY * this.juego.escenario.unidadAnchoDeseada,
-      nuevaX * this.juego.escenario.unidadAnchoDeseada
-    );
+    const casilleroDestino = this.juego.escenario.obtenerCasillero(nuevaY, nuevaX)
+    
+    let esValido=casilleroDestino.esPisable()
+    if (esValido){
+      let factorDeAvance=1
+      this.actualizarCasillerosJuego(nuevaY, nuevaX)
+      this.controladorDOM.posicionarPersonajeEnHtml(
+        nuevaY * this.juego.escenario.unidadAnchoDeseada,
+        nuevaX * this.juego.escenario.unidadAnchoDeseada
+      ); 
+    }
+    else{
+
+    }
+   
   }
 
   moverArriba(){

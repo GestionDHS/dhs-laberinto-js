@@ -59,6 +59,9 @@ export class Escenario {
     this.elementoHTML.style.width =  (anchoTotal+((this.tablero[0].length)*2)*0.16) + "em" ;
     this.elementoHTML.style.height = (altoTotal) + "em";
   }
+  obtenerCasillero(posicionY,posicionX){
+    return this.objetosCasilleros[posicionY][posicionX]
+  }
 }
 
 export class Casillero {
@@ -71,4 +74,9 @@ export class Casillero {
     this.tipo = caminoOPared;
     this.ocupantes=[];
   }
+
+  esPisable(){
+      return this.tipo =="camino"
+  }
+
 }
