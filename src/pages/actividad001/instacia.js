@@ -51,6 +51,14 @@ const arrayDePersonajes = [
     posicionInicialY: 1,
     posicionInicialX: 1,
     direccionInicial: 0,
+    zIndex:3,
+    colisiones:{
+      con:"lodo", 
+      factorDeAvance: 0.7, 
+      seMuere:true, 
+      autoMensaje: "terminate", 
+      mensaje:"¡OH NO! Me atasqué en el lodo.",
+}
   },
   {
     idUsarHTML: "lodo",
@@ -62,6 +70,7 @@ const arrayDePersonajes = [
     posicionInicialY: 1,
     posicionInicialX: 3,
     direccionInicial: 0,
+    zIndex:1,
   },
   {
     idUsarHTML: "cofre",
@@ -73,6 +82,7 @@ const arrayDePersonajes = [
     posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,
+    zIndex:1,
   },
 ];
 

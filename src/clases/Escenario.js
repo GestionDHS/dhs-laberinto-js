@@ -1,4 +1,5 @@
 import { DHS_Gallery } from "./Dhs-galeria";
+import { Personaje } from "./Personaje";
 
 export class Escenario {
   constructor(tablero, unidadAnchoDeseada, elementoHTML,colorBordes,nombreImagenCamino,nombreImagenPared) {
@@ -62,6 +63,7 @@ export class Escenario {
   obtenerCasillero(posicionY,posicionX){
     return this.objetosCasilleros[posicionY][posicionX]
   }
+  
 }
 
 export class Casillero {
@@ -79,4 +81,15 @@ export class Casillero {
       return this.tipo =="camino"
   }
 
+ hayColisionCon(colisiones){
+     colisiones.forEach(o => { 
+    if(verSiExisteEnArray(o)) {
+      return  o.factorDeAvance
+    }
+     });
+     return 1
+  }
+  verSiExisteEnArray(object){
+  return this.ocupantes.includes(o=>{o.idHTML == object.con})
+  }
 }
