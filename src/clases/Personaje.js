@@ -13,10 +13,11 @@ export class Personaje {
     this.direccionInicial = objetoConfiguracionPersonaje.direccionInicial
       ? objetoConfiguracionPersonaje.direccionInicial
       : 0; // ENTERO 0-360 con grados de orientación inicial.
-    this.colisiones = objetoConfiguracionPersonaje.colisiones; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
+    this.colisiones = [objetoConfiguracionPersonaje.colisiones]; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
     this.controladorDOM = new controladorPersonajeDOM(
       objetoConfiguracionPersonaje.tieneTooltip,
-      this.juego.escenario, this.juego.modo,
+      this.juego.escenario,
+      this.juego.modo,
       objetoConfiguracionPersonaje.A,
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
@@ -37,8 +38,8 @@ export class Personaje {
     this.direccion = this.direccionInicial;
     this.controladorDOM.rotarPersonaje(this.direccion);
     this.controladorDOM.posicionarPersonajeEnHtml(
-      this.posicionInicialY, 
-      this.posicionInicialX, 
+      this.posicionInicialY,
+      this.posicionInicialX
     );
     this.setearVelocidad(this.juego.duracionIntervalos);
   }
@@ -57,28 +58,31 @@ export class Personaje {
   }
 
   //recibe un objeto de tipo colision que tiene (con , seMuere, autoMensaje, mensaje)
-  agregarColision(unaColision){
-    this.colisiones.push(unaColision)
+  agregarColision(unaColision) {
+    this.colisiones.push(unaColision);
   }
 
   actualizarCasillerosJuego(nuevaY, nuevaX) {
     this.posicionActualY = nuevaY;
-    this.posicionActualX = nuevaX; 
-    this.controladorDOM.setearObjetosCasilleros(nuevaY,nuevaX)
-    this.casilleroActual = this.controladorDOM.obtenerCasilleroActual(nuevaY,nuevaX)
+    this.posicionActualX = nuevaX;
+    this.controladorDOM.setearObjetosCasilleros(nuevaY, nuevaX);
+    this.casilleroActual = this.controladorDOM.obtenerCasilleroActual(
+      nuevaY,
+      nuevaX
+    );
     this.casilleroActual.ocupantes.push(this);
   }
 
   //OJO PROBAR!!!!!!
-   visibilizarTooltip(texto, milisegundos = 3000) {
-     if (this.controladorDOM.hasTooltips && this.juego.modo != "prerun") {
-       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
-       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
-       setTimeout(() => {
-         this.controladorDOM.elementoHTML.classList.remove("tooltipVisible");
-       }, milisegundos);
-     }
-   }
+  visibilizarTooltip(texto, milisegundos = 3000) {
+    if (this.controladorDOM.hasTooltips && this.juego.modo != "prerun") {
+      this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
+      this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
+      setTimeout(() => {
+        this.controladorDOM.elementoHTML.classList.remove("tooltipVisible");
+      }, milisegundos);
+    }
+  }
 
   setearVelocidad(nuevaVelocidad) {
     this.controladorDOM.setearVelocidad(nuevaVelocidad);
@@ -93,76 +97,75 @@ export class Personaje {
     // Y LOGGEARLO!!
   }
 
-   removerTooltip() {
-     this.controladorDOM.elementoHTML.classList.remove("tooltipVisible");
-   }
+  removerTooltip() {
+    this.controladorDOM.elementoHTML.classList.remove("tooltipVisible");
+  }
 
   terminar() {
     this.estaVivo = false;
   }
 
-  
   moverse(vectorY, vectorX) {
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
     //verificar Validez movimiento
-    const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(nuevaY, nuevaX)
-   
-    let factorDeAvance=this.obtenerFactorAvance(casilleroDestino)
-   
-    console.log(factorDeAvance)
-  
-      // this.casilleroActual.ocupantes.pop()
-      this.actualizarCasillerosJuego(nuevaY, nuevaX)
-   
-      // this.factorDeAvance=colisiones[0].factorDeAvance
-    
+    const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
+      nuevaY,
+      nuevaX
+    );
+
+    let factorDeAvance = this.obtenerFactorAvance(casilleroDestino);
+
+    console.log(factorDeAvance);
+
+    // this.casilleroActual.ocupantes.pop()
+    this.actualizarCasillerosJuego(nuevaY, nuevaX);
+
+    // this.factorDeAvance=colisiones[0].factorDeAvance
+
     this.controladorDOM.posicionarPersonajeEnHtml(
-      nuevaY*factorDeAvance ,
-      nuevaX*factorDeAvance
-    ); 
-   
+      nuevaY * factorDeAvance,
+      nuevaX * factorDeAvance
+    );
   }
 
- obtenerFactorAvance(casilleroDestino){
- 
-   let esValido=casilleroDestino.esPisable()
-   return esValido?this.verificarColision(casilleroDestino):0
- }
-
- verificarColision(casilleroDestino){
-  const factorAux=casilleroDestino.hayColisionCon(this.colisiones) 
-  return factorAux
- }
-
-
-
-  moverArriba(){
-    
-    this.moverse(-1,0)
-    
+  obtenerFactorAvance(casilleroDestino) {
+    let esValido = casilleroDestino.esPisable();
+    return esValido ? this.verificarColision(casilleroDestino) : 0;
   }
-  moverDerecha(){
-   
-    this.moverse(0,1)
+
+  verificarColision(casilleroDestino) {
+    // retorna el factor de Avance
+    const factorAva = casilleroDestino.hayColisionCon(this.colisiones);
+    return factorAva;
   }
-  moverAbajo(){
-   
-    this.moverse(1,0)
+
+  moverArriba() {
+    this.moverse(-1, 0);
   }
-  moverIzquierda(){
-    
-    this.moverse(0,-1)
+  moverDerecha() {
+    this.moverse(0, 1);
   }
-  
- 
+  moverAbajo() {
+    this.moverse(1, 0);
+  }
+  moverIzquierda() {
+    this.moverse(0, -1);
+  }
 }
 
 class controladorPersonajeDOM {
   // constructor(interfazConfigObj) {
-  constructor(tieneTooltip, escenario, modo, idHtml, zIndex, paddingImagen = "0") {
+  constructor(
+    tieneTooltip,
+    escenario,
+    modo,
+    idHtml,
+    zIndex,
+    paddingImagen = "0"
+  ) {
     this.modo = modo;
-    this.escenario=escenario;
+    this.escenario = escenario;
     this.elementoHTML = document.createElement("DIV");
     this.elementoHTML.id = idHtml;
     this.escenario.elementoHTML.appendChild(this.elementoHTML);
@@ -183,16 +186,16 @@ class controladorPersonajeDOM {
   setearImagen(url) {
     this.imagenAnidada.setAttribute("src", url);
   }
-  setearObjetosCasilleros(nuevaY,nuevaX){
+  setearObjetosCasilleros(nuevaY, nuevaX) {
     this.escenario.objetosCasilleros[nuevaY][nuevaX];
   }
- 
-  obtenerCasilleroActual(nuevaY,nuevaX){
-    return this.escenario.objetosCasilleros[nuevaY][nuevaX]
+
+  obtenerCasilleroActual(nuevaY, nuevaX) {
+    return this.escenario.objetosCasilleros[nuevaY][nuevaX];
   }
 
-  obtenerCasilleroDestino(nuevaY, nuevaX){
-    return this.escenario.obtenerCasillero(nuevaY,nuevaX)
+  obtenerCasilleroDestino(nuevaY, nuevaX) {
+    return this.escenario.obtenerCasillero(nuevaY, nuevaX);
   }
 
   setearVelocidad(milisegundos) {
@@ -201,9 +204,10 @@ class controladorPersonajeDOM {
   }
   posicionarPersonajeEnHtml(posY, posX) {
     if (this.modo != "prerun") {
-      this.elementoHTML.style.left = posX * this.escenario.unidadAnchoDeseada + "em";
-      this.elementoHTML.style.top = posY * this.escenario.unidadAnchoDeseada + "em";
-
+      this.elementoHTML.style.left =
+        posX * this.escenario.unidadAnchoDeseada + "em";
+      this.elementoHTML.style.top =
+        posY * this.escenario.unidadAnchoDeseada + "em";
     }
   }
   rotarPersonaje(grados) {

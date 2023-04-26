@@ -81,15 +81,17 @@ export class Casillero {
       return this.tipo =="camino"
   }
 
- hayColisionCon(colisiones){
+ hayColisionCon(colisiones){ 
+ let obj = {factorDeAvance:1}
      colisiones.forEach(o => { 
-    if(verSiExisteEnArray(o)) {
-      return  o.factorDeAvance
+    if(this.verSiExisteEnArray(o)) {
+      obj = o
     }
      });
-     return 1
+     return obj.factorDeAvance
   }
-  verSiExisteEnArray(object){
-  return this.ocupantes.includes(o=>{o.idHTML == object.con})
+  verSiExisteEnArray(object){ 
+    let objEncontrado= this.ocupantes.find(o=>o.idHTML == object.con)
+  return objEncontrado
   }
 }
