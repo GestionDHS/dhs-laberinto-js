@@ -66,6 +66,8 @@ export class Personaje {
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
     this.controladorDOM.setearObjetosCasilleros(nuevaY, nuevaX);
+    //aca hay que ver que si se muere no se actualice
+
     this.casilleroActual = this.controladorDOM.obtenerCasilleroActual(
       nuevaY,
       nuevaX
@@ -118,15 +120,15 @@ export class Personaje {
 
     console.log(factorDeAvance);
 
-    // this.casilleroActual.ocupantes.pop()
-    this.actualizarCasillerosJuego(nuevaY, nuevaX);
-
+    this.casilleroActual.ocupantes.pop()
+    
     // this.factorDeAvance=colisiones[0].factorDeAvance
-
+    
     this.controladorDOM.posicionarPersonajeEnHtml(
-      nuevaY * factorDeAvance,
-      nuevaX * factorDeAvance
-    );
+      this.posicionActualY + vectorY * factorDeAvance,
+      this.posicionActualX + vectorX * factorDeAvance 
+      );
+      this.actualizarCasillerosJuego(nuevaY, nuevaX);
   }
 
   obtenerFactorAvance(casilleroDestino) {

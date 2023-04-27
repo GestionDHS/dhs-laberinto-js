@@ -67,9 +67,10 @@ export class Escenario {
 }
 
 export class Casillero {
-  constructor(caminoOPared, fila, columna) {
+  constructor(caminoOPared,imagen, fila, columna) {
     this.fila=fila;
     this.columna=columna;
+    this.imagen=imagen;
     this.casilla = document.createElement("DIV");
     this.casilla.classList.add(`casillero-${caminoOPared}`);
     this.casilla.classList.add(`casillero`);
