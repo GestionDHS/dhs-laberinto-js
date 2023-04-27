@@ -14,8 +14,15 @@ export class Personaje {
       ? objetoConfiguracionPersonaje.direccionInicial
       : 0; // ENTERO 0-360 con grados de orientación inicial.
     this.colisiones = [objetoConfiguracionPersonaje.colisiones]; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
+    // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
+    if(objetoConfiguracionPersonaje.colisiones){
+      this.mensaje = objetoConfiguracionPersonaje.colisiones.mensaje
+    }else{
+      this.mensaje = " bla bla bla" 
+    } 
     this.controladorDOM = new controladorPersonajeDOM(
-      objetoConfiguracionPersonaje.tieneTooltip,
+      this.hasTooltips(),
+      // objetoConfiguracionPersonaje.tieneTooltip,
       this.juego.escenario,
       this.juego.modo,
       objetoConfiguracionPersonaje.A,
@@ -77,7 +84,9 @@ export class Personaje {
 
   //OJO PROBAR!!!!!!
   visibilizarTooltip(texto, milisegundos = 3000) {
-    if (this.controladorDOM.hasTooltips && this.juego.modo != "prerun") {
+    console.log("llamó al visibTooltip");
+    if (this.hasTooltips && this.juego.modo != "prerun") {
+      //Pia
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
       setTimeout(() => {
@@ -85,7 +94,10 @@ export class Personaje {
       }, milisegundos);
     }
   }
-
+  hasTooltips() {
+    //Pia
+    return this.colisiones.length !== 0;
+  }
   setearVelocidad(nuevaVelocidad) {
     this.controladorDOM.setearVelocidad(nuevaVelocidad);
   }
@@ -119,16 +131,23 @@ export class Personaje {
     let factorDeAvance = this.obtenerFactorAvance(casilleroDestino);
 
     console.log(factorDeAvance);
+    //si el factor de avance es menor a 1, es que hay un ocupante que genera algo en lupe, entonces no deberíamos
+    // sacarla del array de ocupantes
+    if (factorDeAvance < 1) {
+      const obj = this.obtenerObjetoDeColision(casilleroDestino)
+      console.log(obj)
+      this.visibilizarTooltip(obj.mensaje);
+    } else {
+      this.casilleroActual.ocupantes.pop();
+    }
 
-    this.casilleroActual.ocupantes.pop()
-    
     // this.factorDeAvance=colisiones[0].factorDeAvance
-    
+
     this.controladorDOM.posicionarPersonajeEnHtml(
       this.posicionActualY + vectorY * factorDeAvance,
-      this.posicionActualX + vectorX * factorDeAvance 
-      );
-      this.actualizarCasillerosJuego(nuevaY, nuevaX);
+      this.posicionActualX + vectorX * factorDeAvance
+    );
+    this.actualizarCasillerosJuego(nuevaY, nuevaX);
   }
 
   obtenerFactorAvance(casilleroDestino) {
@@ -140,6 +159,13 @@ export class Personaje {
     // retorna el factor de Avance
     const factorAva = casilleroDestino.hayColisionCon(this.colisiones);
     return factorAva;
+  }
+  obtenerObjetoDeColision(casilleroDestino) {//Pia
+    let obj = {};
+    this.colisiones.forEach(oColli =>{
+      obj = casilleroDestino.arrayDeOcupantes().find(o=>oColli.con == o.idHTML)
+    })
+    return obj
   }
 
   moverArriba() {
@@ -178,7 +204,7 @@ class controladorPersonajeDOM {
       this.elementoTextoTooltip = document.createElement("DIV");
       this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp"; // OJO ACA
       this.elementoTextoTooltip.classList.add("tooltiptext");
-      this.elementoTextoTooltip.innerText = "...";
+      this.elementoTextoTooltip.innerText = "holaaaa";
       this.elementoHTML.appendChild(this.elementoTextoTooltip);
     }
     this.imagenAnidada = document.createElement("IMG");

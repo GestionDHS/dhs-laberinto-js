@@ -134,6 +134,7 @@ i {
 }
 
 .tooltip .tooltiptext {
+  border:2px solid red;
   visibility: hidden;
   width: 140px;
   font-family: monospace;
@@ -148,7 +149,7 @@ i {
   right: 110%;
 }
 
-.tooltip .tooltiptext::after {
+/* .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -157,7 +158,7 @@ i {
   border-width: 7px;
   border-style: solid;
   border-color: transparent transparent transparent var(--gris_claro);
-}
+} */
 
 .tooltipVisible .tooltiptext {
   visibility: visible;

@@ -79,7 +79,7 @@ export class Casillero {
   }
 
   esPisable(){
-      return this.tipo =="camino"
+      return this.tipo == "camino"
   }
 
  hayColisionCon(colisiones){ 
@@ -94,5 +94,8 @@ export class Casillero {
   verSiExisteEnArray(object){ 
     let objEncontrado= this.ocupantes.find(o=>o.idHTML == object.con)
   return objEncontrado
+  }
+  arrayDeOcupantes(){ //Pia
+    return this.ocupantes
   }
 }
