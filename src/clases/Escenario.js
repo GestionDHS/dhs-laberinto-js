@@ -89,13 +89,11 @@ export class Casillero {
       obj = o
     }
      });
-     return obj.factorDeAvance
+     return obj
   }
   verSiExisteEnArray(object){ 
     let objEncontrado= this.ocupantes.find(o=>o.idHTML == object.con)
   return objEncontrado
   }
-  arrayDeOcupantes(){ //Pia
-    return this.ocupantes
-  }
+
 }

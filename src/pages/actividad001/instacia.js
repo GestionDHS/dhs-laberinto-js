@@ -71,6 +71,7 @@ const arrayDePersonajes = [
     posicionInicialX: 3,
     direccionInicial: 0,
     zIndex:1,
+    colisiones:{}
   },
   {
     idUsarHTML: "cofre",
@@ -83,6 +84,7 @@ const arrayDePersonajes = [
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex:1,
+    colisiones:{}
   },
 ];
 
