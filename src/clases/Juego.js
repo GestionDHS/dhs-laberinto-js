@@ -6,6 +6,7 @@ import { Personaje } from "./Personaje";
 
 export class Juego {
   constructor(listaBloquesAGenerar, duracionIntervalos = 1000) {
+    this.modo="inicio"
     this.botonEjecutar = document.getElementById("dhs-boton");
     this.controlador = new ControladorDeBloque();
     this.vizualizador = new VisualizadorDebugger();
@@ -55,8 +56,8 @@ export class Juego {
     tablero,
     unidadAnchoDeseada,
     colorBordes,
-    nombreImagenPared,
-    nombreImagenCamino
+    objetoPared,
+    objetoCamino
   ) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
@@ -64,8 +65,8 @@ export class Juego {
       unidadAnchoDeseada,
       elementoHTMLLaberinto,
       colorBordes,
-      nombreImagenCamino,
-      nombreImagenPared
+      objetoCamino,
+      objetoPared
     );
     this.escenario.crearEscenario();
   }

@@ -2,14 +2,15 @@ import { DHS_Gallery } from "./Dhs-galeria";
 import { Personaje } from "./Personaje";
 
 export class Escenario {
-  constructor(tablero, unidadAnchoDeseada, elementoHTML,colorBordes,nombreImagenCamino,nombreImagenPared) {
+  constructor(tablero, unidadAnchoDeseada, elementoHTML,colorBordes,objetoCamino,objetoPared) {
     this.galeria= new DHS_Gallery()
     this.tablero = tablero;
     this.unidadAnchoDeseada = unidadAnchoDeseada;
     this.elementoHTML = elementoHTML;
     this.colorBordes=colorBordes;
-    this.nombreImagenCamino=nombreImagenCamino;
-    this.nombreImagenPared=nombreImagenPared;
+    this.objetoCamino=objetoCamino;
+    this.objetoPared=objetoPared;
+    
     this.objetosCasilleros = []; // La matriz de objetos Casilleros
   }
   crearEscenario() {
@@ -17,7 +18,7 @@ export class Escenario {
       let nuevaFila = [];
       for (let columna = 0; columna < this.tablero[fila].length; columna++) {
         let nuevoCasillero;
-        nuevoCasillero = this.tablero[fila][columna] == 1 ? this.crearCasilleroTipo("pared", this.nombreImagenPared, fila, columna):this.crearCasilleroTipo("camino", this.nombreImagenCamino,  fila, columna);
+        nuevoCasillero = this.tablero[fila][columna] == 1 ? this.crearCasilleroTipo("pared",this.objetoPared, fila, columna):this.crearCasilleroTipo("camino", this.objetoCamino,  fila, columna);
         nuevaFila.push(nuevoCasillero);
         this.elementoHTML.appendChild(nuevoCasillero.casilla);
       }
@@ -33,11 +34,11 @@ export class Escenario {
         border: 1px solid ${this.colorBordes};
       }
       .casillero-pared{
-        background-image: url(${this.galeria.obtenerUrlDe(this.nombreImagenPared)})
+        background-image: url(${this.galeria.obtenerUrlDe(this.objetoPared.status.normal.imageUrl)})
       }
 
       .casillero-camino{
-        background-image: url(${this.galeria.obtenerUrlDe(this.nombreImagenCamino)})
+        background-image: url(${this.galeria.obtenerUrlDe(this.objetoCamino.status.normal.imageUrl)})
       }
       .personaje{
         width: ${this.unidadAnchoDeseada}em;
@@ -50,8 +51,8 @@ export class Escenario {
   
   }
 
-  crearCasilleroTipo(caminoOPared,imagen, fila, columna) {
-    return new Casillero(caminoOPared, imagen, fila, columna);
+  crearCasilleroTipo(caminoOPared,objetoParedOCamino, fila, columna) {
+    return new Casillero(caminoOPared, objetoParedOCamino, fila, columna);
   }
 
   renderizarLaberinto() {
@@ -67,15 +68,15 @@ export class Escenario {
 }
 
 export class Casillero {
-  constructor(caminoOPared,imagen, fila, columna) {
+  constructor(caminoOPared,objetoParedOCamino, fila, columna) {
     this.fila=fila;
     this.columna=columna;
-    this.imagen=imagen;
+    this.objetoPared=objetoPared;
     this.casilla = document.createElement("DIV");
-    this.casilla.classList.add(`casillero-${caminoOPared}`);
+    this.casilla.classList.add(`casillero-${objetoParedOCamino}`);
     this.casilla.classList.add(`casillero`);
     this.tipo = caminoOPared;
-    this.ocupantes=[];
+    this.ocupantes=[objetoParedOCamino];
   }
 
   esPisable(){

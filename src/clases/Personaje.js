@@ -13,7 +13,7 @@ export class Personaje {
     this.direccionInicial = objetoConfiguracionPersonaje.direccionInicial
       ? objetoConfiguracionPersonaje.direccionInicial
       : 0; // ENTERO 0-360 con grados de orientación inicial.
-    this.colisiones = [objetoConfiguracionPersonaje.colisiones]; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
+    this.colisiones = objetoConfiguracionPersonaje.colisiones; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     
    
@@ -83,7 +83,10 @@ export class Personaje {
  
   visibilizarTooltip(texto, milisegundos = 3000) {
     console.log("llamó al visibTooltip");
-    if (this.hasTooltips && this.juego.modo != "prerun") {
+    console.log(this.hasTooltips())
+    console.log(this.juego.modo!="prerun")
+    if (this.hasTooltips() && this.juego.modo !== "prerun") {
+      console.log("entre al if que queria verificar pia")
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
       setTimeout(() => {
@@ -123,10 +126,12 @@ export class Personaje {
       nuevaX
     );
     if(this.estaVivo){
-      let objetoAux = this.obtenerFactorAvance(casilleroDestino);
+      let objetoAux = this.verificarColision(casilleroDestino);
       console.log(objetoAux);
-      objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
-      objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
+      //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
+      // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
+      objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje)
+      objetoAux.callback &&  objetoAux.callback(this)
       this.casilleroActual.ocupantes.pop();
       this.controladorDOM.posicionarPersonajeEnHtml(
       this.posicionActualY + vectorY * objetoAux.factorDeAvance,
@@ -139,6 +144,7 @@ export class Personaje {
    
   }
 
+
   obtenerFactorAvance(casilleroDestino) {
     let esValido = casilleroDestino.esPisable();
     return esValido ? this.verificarColision(casilleroDestino) : 0;
@@ -147,6 +153,7 @@ export class Personaje {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
+    console.log(objetoColision)
     return objetoColision;
   }
 
