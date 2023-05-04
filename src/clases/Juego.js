@@ -53,6 +53,7 @@ export class Juego {
   // La funcion recibe la matriz tablero la unidad de ancho, el color de bordes, nombre imagen pared, nombre imagen camino
 
   generarEscenario(
+    dimensiones,
     tablero,
     unidadAnchoDeseada,
     colorBordes,
@@ -61,6 +62,7 @@ export class Juego {
   ) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
+      dimensiones,
       tablero,
       unidadAnchoDeseada,
       elementoHTMLLaberinto,

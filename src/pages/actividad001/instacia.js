@@ -21,6 +21,7 @@ const listaBloquesAGenerar = [
 
 miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar);
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
+const dimensiones = [5,6] //fila, columna
 const tablero = [
   [1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 1],
@@ -31,7 +32,7 @@ const tablero = [
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(tablero, 3, "white", objetosComunes.arbol, objetosComunes.pasto);
+miJuego.generarEscenario(dimensiones,tablero, 3, "white", objetosComunes.arbol, objetosComunes.pasto);
 
 // const arrayDePersonajes= [
 //   {
