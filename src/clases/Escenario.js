@@ -64,7 +64,7 @@ export class Escenario {
   crearCasillero( fila, columna) {
     return new Casillero(fila, columna);
   }
-
+  
   renderizarLaberinto() {
     let anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
     let altoTotal = this.unidadAnchoDeseada * this.tablero.length;
@@ -82,6 +82,7 @@ export class Casillero {
     this.fila=fila;
     this.columna=columna;
     this.casilla = document.createElement("DIV");
+    this.ocupantes=[]
   }
 
   esPisable(){

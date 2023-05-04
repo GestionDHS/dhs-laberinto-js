@@ -74,12 +74,16 @@ export class Juego {
   }
 
   generarPersonajes(arrayDePersonajes) {
+    console.log(arrayDePersonajes)
     arrayDePersonajes.forEach((personaje) => {
       const unPersonaje = new Personaje(personaje, this);
       this.listaDePersonajes.push(unPersonaje);
     });
   }
+  renderizarPersonajes(tablero){
+    //1 = árboles - 0 = camino
 
+  }
   setearVelocidad(nuevaVelocidad) {
     this.duracionIntervalos = nuevaVelocidad;
     this.listaDePersonajes.forEach(personaje => personaje.setearVelocidad(nuevaVelocidad))

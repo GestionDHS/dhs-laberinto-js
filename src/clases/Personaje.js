@@ -23,7 +23,7 @@ export class Personaje {
       // objetoConfiguracionPersonaje.tieneTooltip,
       this.juego.escenario,
       this.juego.modo,
-      objetoConfiguracionPersonaje.A,
+      objetoConfiguracionPersonaje.A,//que es esa A??
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
     );
@@ -71,12 +71,11 @@ export class Personaje {
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
     this.controladorDOM.setearObjetosCasilleros(nuevaY, nuevaX);
-    
-
     this.casilleroActual = this.controladorDOM.obtenerCasilleroActual(
       nuevaY,
       nuevaX
     );
+    console.log(this.casilleroActual.ocupantes)
     this.casilleroActual.ocupantes.push(this);
   }
 
@@ -95,7 +94,7 @@ export class Personaje {
     }
   }
   hasTooltips() {
-    return this.colisiones.length !== 0;
+    return this.colisiones?.length !== 0;
   }
   setearVelocidad(nuevaVelocidad) {
     this.controladorDOM.setearVelocidad(nuevaVelocidad);
