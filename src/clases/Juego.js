@@ -72,6 +72,22 @@ export class Juego {
     );
     this.escenario.crearEscenario();
   }
+  generarCaminoYpared(dimensiones,tablero,pared,camino){
+    for(let fila = 0; fila < dimensiones[0]; fila++){
+      for(let col = 0;col < dimensiones[1]; col++){
+        if(tablero[fila][col]==1){
+          pared.posicionInicialX=col
+          pared.posicionInicialY=fila
+          this.generarPersonajes([pared])
+        }
+        else{
+          camino.posicionInicialX=col
+          camino.posicionInicialY=fila
+          this.generarPersonajes([camino])
+        }
+      }
+    } 
+  }
 
   generarPersonajes(arrayDePersonajes) {
     console.log(arrayDePersonajes)

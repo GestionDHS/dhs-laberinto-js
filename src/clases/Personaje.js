@@ -23,7 +23,7 @@ export class Personaje {
       // objetoConfiguracionPersonaje.tieneTooltip,
       this.juego.escenario,
       this.juego.modo,
-      objetoConfiguracionPersonaje.A,//que es esa A??
+      //objetoConfiguracionPersonaje.A,//que es esa A??
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
     );

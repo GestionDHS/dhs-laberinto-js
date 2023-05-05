@@ -29,6 +29,31 @@ const tablero = [
   [1, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1],
 ];
+
+const arbol={
+  idUsarHTML: "arbol",
+  tipoPersonaje: "probando",
+  status: {
+    normal: { name: "normal", imageUrl: "arboles" },
+  },
+  statusInicial: "normal",
+  zIndex:1, 
+  posicionInicialY: 0,
+  posicionInicialX: 0,
+  direccionInicial: 0,
+}
+ const pasto={
+      idUsarHTML: "camino",
+      tipoPersonaje: "probando",
+      status: {
+        normal: { name: "normal", imageUrl: "pasto" },
+      },
+      statusInicial: "normal",
+      zIndex:1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+    }
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
@@ -37,10 +62,11 @@ miJuego.generarEscenario(
   tablero,
   3,
   "white",
-  objetosComunes.arbol,
-  objetosComunes.pasto
+  arbol,
+  pasto,
 );
 
+miJuego.generarCaminoYpared(dimensiones,tablero,arbol,pasto)
 // const arrayDePersonajes= [
 //   {
 //     nombre: "lupe",

@@ -32,7 +32,6 @@ export class Escenario {
     //     nuevaFila.push(nuevoCasillero);
     //     this.elementoHTML.appendChild(nuevoCasillero.casilla);
     //   }}
-      
     
     const reglaCasilleros = document.createElement("STYLE");
     reglaCasilleros.innerHTML = `
@@ -60,6 +59,7 @@ export class Escenario {
     this.renderizarLaberinto();
   
   }
+
 
   crearCasillero( fila, columna) {
     return new Casillero(fila, columna);
