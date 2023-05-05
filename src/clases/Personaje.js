@@ -204,6 +204,7 @@ class controladorPersonajeDOM {
     this.imagenAnidada.setAttribute("src", url);
   }
   setearObjetosCasilleros(nuevaY, nuevaX) {
+    console.log(nuevaY, nuevaX)
     this.escenario.objetosCasilleros[nuevaY][nuevaX];
   }
 

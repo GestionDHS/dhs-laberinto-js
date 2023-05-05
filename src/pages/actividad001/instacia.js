@@ -142,16 +142,6 @@ const arrayDePersonajes = [
     zIndex: 1,
     colisiones: []
   },
-  {
-    idUsarHTML: "arbol",
-    tipoPersonaje: "probando",
-    status: {
-      normal: { name: "normal", imageUrl: "arboles" },
-    },
-    statusInicial: "normal",
-    zIndex: 1,
-    colisiones: []
-  },
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
