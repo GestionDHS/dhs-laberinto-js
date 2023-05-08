@@ -90,7 +90,7 @@ export class Juego {
   }
 
   generarPersonajes(arrayDePersonajes) {
-    console.log(arrayDePersonajes)
+    //console.log(arrayDePersonajes)
     arrayDePersonajes.forEach((personaje) => {
       const unPersonaje = new Personaje(personaje, this);
       this.listaDePersonajes.push(unPersonaje);

@@ -75,17 +75,16 @@ export class Personaje {
       nuevaY,
       nuevaX
     );
-    console.log(this.casilleroActual.ocupantes)
+    //console.log(this.casilleroActual.ocupantes)
     this.casilleroActual.ocupantes.push(this);
   }
 
  
-  visibilizarTooltip(texto, milisegundos = 3000) {
-    console.log("llamó al visibTooltip");
-    console.log(this.hasTooltips())
-    console.log(this.juego.modo!="prerun")
+  visibilizarTooltip(texto, milisegundos = 4000) {
+    // console.log("llamó al visibTooltip");
+    // console.log(this.hasTooltips())
+    // console.log(this.juego.modo!="prerun")
     if (this.hasTooltips() && this.juego.modo !== "prerun") {
-      console.log("entre al if que queria verificar pia")
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
       setTimeout(() => {
@@ -204,7 +203,7 @@ class controladorPersonajeDOM {
     this.imagenAnidada.setAttribute("src", url);
   }
   setearObjetosCasilleros(nuevaY, nuevaX) {
-    console.log(nuevaY, nuevaX)
+    //console.log(nuevaY, nuevaX)
     this.escenario.objetosCasilleros[nuevaY][nuevaX];
   }
 

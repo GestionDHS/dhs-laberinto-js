@@ -98,7 +98,7 @@ const arrayDePersonajes = [
       },
       {
         con: "arbol",
-        factorDeAvance: 0,
+        factorDeAvance: 0.2,
         callback: (x) => {
           x.terminar();
         },

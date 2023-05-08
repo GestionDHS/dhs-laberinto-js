@@ -138,8 +138,8 @@ i {
   visibility: hidden;
   width: 140px;
   font-family: monospace;
-  background-color: var(--gris_claro);
-  color: var(--blanco);
+  background-color: var(--color-gris-claro);
+  color: var(--color-blanco);
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
@@ -157,7 +157,7 @@ i {
   margin-top: -10px;
   border-width: 7px;
   border-style: solid;
-  border-color: transparent transparent transparent var(--gris_claro);
+  border-color: transparent transparent transparent var(--gris-claro);
 } */
 
 .tooltipVisible .tooltiptext {
