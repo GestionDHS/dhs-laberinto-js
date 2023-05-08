@@ -134,7 +134,7 @@ i {
 }
 
 .tooltip .tooltiptext {
-  border:2px solid red;
+  /*border:2px solid var(--color-cuarto);*/
   visibility: hidden;
   width: 140px;
   font-family: monospace;

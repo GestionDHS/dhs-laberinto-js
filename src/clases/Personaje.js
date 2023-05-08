@@ -23,7 +23,7 @@ export class Personaje {
       // objetoConfiguracionPersonaje.tieneTooltip,
       this.juego.escenario,
       this.juego.modo,
-      //objetoConfiguracionPersonaje.A,//que es esa A??
+      objetoConfiguracionPersonaje.idUsarHTML,
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
     );
@@ -190,9 +190,9 @@ class controladorPersonajeDOM {
     if (tieneTooltip) {
       this.elementoHTML.classList.add("tooltip");
       this.elementoTextoTooltip = document.createElement("DIV");
-      this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp"; // OJO ACA
+      this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp"; 
       this.elementoTextoTooltip.classList.add("tooltiptext");
-      this.elementoTextoTooltip.innerText = "holaaaa";
+      //this.elementoTextoTooltip.innerText = "Soy un objeto";
       this.elementoHTML.appendChild(this.elementoTextoTooltip);
     }
     this.imagenAnidada = document.createElement("IMG");
