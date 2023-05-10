@@ -83,8 +83,8 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     statusInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 1,
+    posicionInicialY: 3,//1
+    posicionInicialX: 3,//1
     direccionInicial: 0,
     zIndex: 3,
     colisiones: [
@@ -113,6 +113,14 @@ const arrayDePersonajes = [
         },
         mensaje: "¡OH NO! me caí del mapa. ",
       },
+      {
+        con: "cofre",
+        factorDeAvance: 1,
+        callback: (x) => {
+          x.abrir("cofre");
+        },
+        mensaje: "¡We are the Champions!",
+      },
     ],
   },
 
@@ -134,12 +142,13 @@ const arrayDePersonajes = [
     tipoPersonaje: "probando",
     status: {
       normal: { name: "normal", imageUrl: "cofre" },
+      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     statusInicial: "normal",
     posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,
-    zIndex: 1,
+    zIndex: 10,
     colisiones: []
   },
 ];

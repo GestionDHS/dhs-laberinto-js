@@ -115,7 +115,15 @@ export class Personaje {
   terminar() {
     this.estaVivo = false;
   }
-
+  abrir(nameObj){
+    //tengo que buscar en Personajes el cofre, y cambiarle es status this.status="abierto"
+    //renderizar la imagen para que el cofre se abra y ocupe todo el tablero
+    const objAAbrir = this.juego.listaDePersonajes.find((obj)=>obj.idHTML == nameObj)
+    objAAbrir.status = "abierto"
+    //hay que renderizar el objAAbrir así cambia la imagen del cofre a "abierto" y estaria bueno que escale
+    console.log(objAAbrir)
+    console.log("se abre el cofre!")
+  }
   moverse(vectorY, vectorX) {
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
