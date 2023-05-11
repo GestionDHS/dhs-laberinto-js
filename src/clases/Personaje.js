@@ -15,9 +15,7 @@ export class Personaje {
       : 0; // ENTERO 0-360 con grados de orientación inicial.
     this.colisiones = objetoConfiguracionPersonaje.colisiones; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
-    
-   
-    
+
     this.controladorDOM = new controladorPersonajeDOM(
       this.hasTooltips(),
       // objetoConfiguracionPersonaje.tieneTooltip,
@@ -79,7 +77,6 @@ export class Personaje {
     this.casilleroActual.ocupantes.push(this);
   }
 
- 
   visibilizarTooltip(texto, milisegundos = 4000) {
     // console.log("llamó al visibTooltip");
     // console.log(this.hasTooltips())
@@ -115,41 +112,35 @@ export class Personaje {
   terminar() {
     this.estaVivo = false;
   }
-  abrir(nameObj){
-    //tengo que buscar en Personajes el cofre, y cambiarle es status this.status="abierto"
-    //renderizar la imagen para que el cofre se abra y ocupe todo el tablero
-    const objAAbrir = this.juego.listaDePersonajes.find((obj)=>obj.idHTML == nameObj)
-    objAAbrir.status = "abierto"
-    //hay que renderizar el objAAbrir así cambia la imagen del cofre a "abierto" y estaria bueno que escale
-    console.log(objAAbrir)
-    console.log("se abre el cofre!")
+  abrir(nameObj) {
+    const objAAbrir = this.juego.listaDePersonajes.find(
+      (obj) => obj.idHTML == nameObj
+    );
+    objAAbrir.setearStatus("abierto");
   }
   moverse(vectorY, vectorX) {
+    //deberiamos corroborar que no se caida del tablero "limiteDelUniverso"
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
     const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
       nuevaY,
       nuevaX
     );
-    if(this.estaVivo){
+    if (this.estaVivo) {
       let objetoAux = this.verificarColision(casilleroDestino);
       console.log(objetoAux);
       //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
       // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
-      objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje)
-      objetoAux.callback &&  objetoAux.callback(this)
+      objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
+      objetoAux.callback && objetoAux.callback(this);
       this.casilleroActual.ocupantes.pop();
       this.controladorDOM.posicionarPersonajeEnHtml(
-      this.posicionActualY + vectorY * objetoAux.factorDeAvance,
-      this.posicionActualX + vectorX * objetoAux.factorDeAvance
+        this.posicionActualY + vectorY * objetoAux.factorDeAvance,
+        this.posicionActualX + vectorX * objetoAux.factorDeAvance
       );
       this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);
-
     }
-    
-   
   }
-
 
   obtenerFactorAvance(casilleroDestino) {
     let esValido = casilleroDestino.esPisable();
@@ -159,10 +150,9 @@ export class Personaje {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-    console.log(objetoColision)
+    console.log(objetoColision);
     return objetoColision;
   }
-
 
   moverArriba() {
     this.moverse(-1, 0);
@@ -198,7 +188,7 @@ class controladorPersonajeDOM {
     if (tieneTooltip) {
       this.elementoHTML.classList.add("tooltip");
       this.elementoTextoTooltip = document.createElement("DIV");
-      this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp"; 
+      this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp";
       this.elementoTextoTooltip.classList.add("tooltiptext");
       //this.elementoTextoTooltip.innerText = "Soy un objeto";
       this.elementoHTML.appendChild(this.elementoTextoTooltip);

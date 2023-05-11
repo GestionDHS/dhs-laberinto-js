@@ -30,43 +30,36 @@ const tablero = [
   [1, 1, 1, 1, 1, 1],
 ];
 
-const arbol={
+const arbol = {
   idUsarHTML: "arbol",
   tipoPersonaje: "probando",
   status: {
     normal: { name: "normal", imageUrl: "arboles" },
   },
   statusInicial: "normal",
-  zIndex:1, 
+  zIndex: 1,
   posicionInicialY: 0,
   posicionInicialX: 0,
   direccionInicial: 0,
-}
- const pasto={
-      idUsarHTML: "camino",
-      tipoPersonaje: "probando",
-      status: {
-        normal: { name: "normal", imageUrl: "pasto" },
-      },
-      statusInicial: "normal",
-      zIndex:1,
-      posicionInicialY: 0,
-      posicionInicialX: 0,
-      direccionInicial: 0,
-    }
+};
+const pasto = {
+  idUsarHTML: "camino",
+  tipoPersonaje: "probando",
+  status: {
+    normal: { name: "normal", imageUrl: "pasto" },
+  },
+  statusInicial: "normal",
+  zIndex: 1,
+  posicionInicialY: 0,
+  posicionInicialX: 0,
+  direccionInicial: 0,
+};
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(
-  dimensiones,
-  tablero,
-  3,
-  "white",
-  arbol,
-  pasto,
-);
+miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
 
-miJuego.generarCaminoYpared(dimensiones,tablero,arbol,pasto)
+miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 // const arrayDePersonajes= [
 //   {
 //     nombre: "lupe",
@@ -83,8 +76,8 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     statusInicial: "normal",
-    posicionInicialY: 3,//1
-    posicionInicialX: 3,//1
+    posicionInicialY: 3, //1
+    posicionInicialX: 3, //1
     direccionInicial: 0,
     zIndex: 3,
     colisiones: [
@@ -113,14 +106,15 @@ const arrayDePersonajes = [
         },
         mensaje: "¡OH NO! me caí del mapa. ",
       },
-      {
-        con: "cofre",
-        factorDeAvance: 1,
-        callback: (x) => {
-          x.abrir("cofre");
-        },
-        mensaje: "¡We are the Champions!",
-      },
+      // {
+      //   con: "cofre",
+      //   factorDeAvance: 1,
+      //   callback: (x) => {
+      //     //depende si tengo el bloque Abrir Cofre
+      //       x.abrir("cofre");
+      //   },
+      //   mensaje: "¡We are the Champions!",
+      // },
     ],
   },
 
@@ -135,7 +129,7 @@ const arrayDePersonajes = [
     posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 1,
-    colisiones: []
+    colisiones: [],
   },
   {
     idUsarHTML: "cofre",
@@ -149,7 +143,7 @@ const arrayDePersonajes = [
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 10,
-    colisiones: []
+    colisiones: [],
   },
 ];
 
