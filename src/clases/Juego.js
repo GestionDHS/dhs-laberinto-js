@@ -3,10 +3,9 @@ import { VisualizadorDebugger } from "./VisualizadorDebugger";
 import { Escenario } from "./Escenario";
 import { Personaje } from "./Personaje";
 
-
 export class Juego {
   constructor(listaBloquesAGenerar, duracionIntervalos = 1000) {
-    this.modo="inicio"
+    this.modo = "inicio";
     this.botonEjecutar = document.getElementById("dhs-boton");
     this.controlador = new ControladorDeBloque();
     this.vizualizador = new VisualizadorDebugger();
@@ -21,7 +20,7 @@ export class Juego {
     this.controlador.borrarTodo();
     this.escenario = {};
     this.listaDePersonajes = [];
-    this.habilitar()
+    this.habilitar();
   }
 
   /* PARA GENERAR LOS BLOQUES EN PANTALLA EN CADA UNA DE LAS LISTAS */
@@ -58,7 +57,8 @@ export class Juego {
     unidadAnchoDeseada,
     colorBordes,
     objetoPared,
-    objetoCamino
+    objetoCamino,
+    datosModal
   ) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
@@ -68,25 +68,25 @@ export class Juego {
       elementoHTMLLaberinto,
       colorBordes,
       objetoCamino,
-      objetoPared
+      objetoPared,
+      datosModal
     );
     this.escenario.crearEscenario();
   }
-  generarCaminoYpared(dimensiones,tablero,pared,camino){
-    for(let fila = 0; fila < dimensiones[0]; fila++){
-      for(let col = 0;col < dimensiones[1]; col++){
-        if(tablero[fila][col]==1){
-          pared.posicionInicialX=col
-          pared.posicionInicialY=fila
-          this.generarPersonajes([pared])
-        }
-        else{
-          camino.posicionInicialX=col
-          camino.posicionInicialY=fila
-          this.generarPersonajes([camino])
+  generarCaminoYpared(dimensiones, tablero, pared, camino) {
+    for (let fila = 0; fila < dimensiones[0]; fila++) {
+      for (let col = 0; col < dimensiones[1]; col++) {
+        if (tablero[fila][col] == 1) {
+          pared.posicionInicialX = col;
+          pared.posicionInicialY = fila;
+          this.generarPersonajes([pared]);
+        } else {
+          camino.posicionInicialX = col;
+          camino.posicionInicialY = fila;
+          this.generarPersonajes([camino]);
         }
       }
-    } 
+    }
   }
 
   generarPersonajes(arrayDePersonajes) {
@@ -96,17 +96,18 @@ export class Juego {
       this.listaDePersonajes.push(unPersonaje);
     });
   }
-  renderizarPersonajes(tablero){
+  renderizarPersonajes(tablero) {
     //1 = árboles - 0 = camino
-
   }
   setearVelocidad(nuevaVelocidad) {
     this.duracionIntervalos = nuevaVelocidad;
-    this.listaDePersonajes.forEach(personaje => personaje.setearVelocidad(nuevaVelocidad))
+    this.listaDePersonajes.forEach((personaje) =>
+      personaje.setearVelocidad(nuevaVelocidad)
+    );
   }
 
   habilitarEjecucion() {
-     this.botonEjecutar.addEventListener("click", (e) => {
+    this.botonEjecutar.addEventListener("click", (e) => {
       this.ejecutar();
     });
     this.botonEjecutar.disabled = false;
@@ -127,7 +128,7 @@ export class Juego {
   }
 
   ejecutar() {
-    console.log("hola lucho ")
+    console.log("hola lucho ");
     this.deshabilitar();
     this.reiniciar();
     this.modo = "prerun";

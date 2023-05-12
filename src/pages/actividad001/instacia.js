@@ -54,10 +54,17 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
 };
+
+const datosModal = {
+  titulo: "¡BUEN TRABAJO!",
+  imagen: "monedas",
+  texto: "Encontramos 180 monedas de oro.",
+  oculto: true,
+};
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto, datosModal);
 
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 // const arrayDePersonajes= [

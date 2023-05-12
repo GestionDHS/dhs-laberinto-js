@@ -1,4 +1,5 @@
 import { DHS_Gallery } from "./Dhs-galeria";
+import { Modal } from "./Modal";
 export class Personaje {
   constructor(objetoConfiguracionPersonaje, juego) {
     this.idHTML = objetoConfiguracionPersonaje.idUsarHTML;
@@ -117,6 +118,7 @@ export class Personaje {
       (obj) => obj.idHTML == nameObj
     );
     objAAbrir.setearStatus("abierto");
+    //Tengo que agregar el modal al juego
   }
   moverse(vectorY, vectorX) {
     //deberiamos corroborar que no se caida del tablero "limiteDelUniverso"

@@ -223,3 +223,51 @@ se crean dinamicamente en js en el archivo Escenario.js*/
   position: absolute;
   z-index: 99;
 }
+
+/* Modal Panel Abrir Cofre*/
+div.dhs-modal-pannel {
+  position: absolute;
+  overflow: hidden;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background: var(--verde_claro_transparente);
+  border: 1px solid var(--negro);
+  z-index: 20;
+  text-align: center;
+  transition: all .35s;
+  font-size: 25px;
+  border: 3px solid var(--amarillo_fuerte);
+  opacity: 98%;
+}
+
+div.dhs-modal-pannel-hidden {
+  visibility: hidden;
+  opacity: 20%;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  font-size: 0px;
+}
+
+div.dhs-modal-pannel p.dhs-modal-pannel-title {
+  padding: 5%;
+  background: var(--negro_transparente);
+  color: var(--blanco);
+  font-size: 100%;
+  font-weight: bold;
+}
+
+div.dhs-modal-pannel img.dhs-modal-pannel-image {
+  width: 40%;
+  height: 40%;
+  margin: 5%;
+  border-radius: 20px;
+}
+
+div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
+  font-weight: bold;
+  font-size: 80%;
+}
