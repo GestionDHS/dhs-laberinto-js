@@ -4,7 +4,7 @@ export class Modal {
     this.escenario = escenario;
     this.oculto = modalPannelObj.oculto;
     this.titulo = modalPannelObj.titulo;
-    this.galeria = new DHS_Gallery
+    this.galeria = new DHS_Gallery();
     this.imageUrl = this.galeria.obtenerUrlDe(modalPannelObj.imagen);
     this.texto = modalPannelObj.texto;
 
@@ -22,9 +22,11 @@ export class Modal {
     this.elementoPannel.appendChild(this.imageElement);
     this.elementoPannel.appendChild(this.mainTextElement);
 
+    this.juego.escenario.elementoHTML.appendChild(this.elementoPannel);
+
     this.initialize();
-    this.escenario.elementoHTML.appendChild(this.elementoPannel);
   }
+
   initialize() {
     if (this.oculto) {
       this.ocultar();
