@@ -65,7 +65,7 @@ const datosModal = {
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
-miJuego.agregarModal(datosModal)
+miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 // const arrayDePersonajes= [
 //   {
@@ -105,7 +105,7 @@ const arrayDePersonajes = [
         mensaje:
           "¡OH NO! tus ojos son dos luceros que iluminan mi camino, ayer los cerraste y me hice mierda contra un pino.",
       },
-     
+
       // {
       //   con: "cofre",
       //   factorDeAvance: 1,
@@ -148,3 +148,19 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
+
+//TODO:
+/**
+ * Mje de Lupe al usuario cuando quiere abrir el cofre y el cofre no está
+ * CSS: Arreglar el Modal with, que dependa del tablero
+ * Colisión con la bandera : "Ganar" igual que con el cofre
+ * Conectar Blockly con éste motor de juego
+ * Lupe: Debe tener un atributo "cantidadElementosJuntados" como si fuera una mochila donde va juntando: basura, manzanas, etc
+ 
+ * Tema Girar:
+    * 1: Por Grados 
+    * 2: Derecha - Izq : es una abstracción de girar en grados.
+    
+    * Factor de Rotación no cambia por mas q el carpincho rote, si cambia "Avanzar", porque va a depender de la direccion q apunte
+ 
+ */
