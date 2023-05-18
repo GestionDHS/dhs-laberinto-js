@@ -26,7 +26,7 @@ const tablero = [
   [1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 1],
   [1, 1, 0, 1, 0, 1],
-  [1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1],
 ];
 
@@ -105,14 +105,7 @@ const arrayDePersonajes = [
         mensaje:
           "¡OH NO! tus ojos son dos luceros que iluminan mi camino, ayer los cerraste y me hice mierda contra un pino.",
       },
-      {
-        con: "limitesDelUniverso",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! me caí del mapa. ",
-      },
+     
       // {
       //   con: "cofre",
       //   factorDeAvance: 1,

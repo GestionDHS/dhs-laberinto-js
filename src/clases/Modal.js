@@ -4,17 +4,16 @@ export class Modal {
     this.juego = juego;
     this.oculto = modalPannelObj.oculto;
     this.titulo = modalPannelObj.titulo;
-    this.galeria = new DHS_Gallery
+    this.galeria = new DHS_Gallery();
     this.imageUrl = this.galeria.obtenerUrlDe(modalPannelObj.imagen);
     this.texto = modalPannelObj.texto;
-
     this.elementoPannel = document.createElement("DIV");
     this.elementoPannel.classList.add("dhs-modal-pannel");
-
     this.titleElement = document.createElement("P");
     this.titleElement.classList.add("dhs-modal-pannel-title");
     this.imageElement = document.createElement("IMG");
     this.imageElement.classList.add("dhs-modal-pannel-image");
+    
     this.mainTextElement = document.createElement("P");
     this.mainTextElement.classList.add("dhs-modal-pannel-main-text");
 
@@ -28,6 +27,7 @@ export class Modal {
     this.juego.escenario.elementoHTML.appendChild(this.elementoPannel)
     
   }
+
   initialize() {
     if (this.oculto) {
       this.ocultar();

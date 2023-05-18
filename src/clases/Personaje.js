@@ -132,13 +132,29 @@ export class Personaje {
       this.juego.modalPannel.ocultar();
     }
   moverse(vectorY, vectorX) {
-    //deberiamos corroborar que no se caida del tablero "limiteDelUniverso"
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
     const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
       nuevaY,
       nuevaX
     );
+
+    if(!casilleroDestino) {
+      const limite =  {
+        con: "limitesDelUniverso",
+        factorDeAvance: 0.2,
+        callback: (x) => {
+          x.terminar();
+        },
+        mensaje: "¡OH NO! me caí del mapa. ",
+      }
+     
+      this.visibilizarTooltip(limite.mensaje);
+      limite.callback(this);
+    
+    }
+    
+    
     if (this.estaVivo) {
       let objetoAux = this.verificarColision(casilleroDestino);
       console.log(objetoAux);
@@ -154,7 +170,8 @@ export class Personaje {
       this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);
     }
   }
-
+  
+  
   obtenerFactorAvance(casilleroDestino) {
     let esValido = casilleroDestino.esPisable();
     return esValido ? this.verificarColision(casilleroDestino) : 0;
@@ -241,4 +258,5 @@ class controladorPersonajeDOM {
   rotarPersonaje(grados) {
     this.imagenAnidada.style.transform = `rotate(${grados}deg)`;
   }
+ 
 }

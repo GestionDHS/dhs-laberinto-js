@@ -10,8 +10,7 @@ export class Escenario {
     elementoHTML,
     colorBordes,
     objetoCamino,
-    objetoPared,
- 
+    objetoPared
   ) {
     this.galeria = new DHS_Gallery();
     this.dimensiones = dimensiones;
@@ -22,7 +21,6 @@ export class Escenario {
     this.objetoCamino = objetoCamino;
     this.objetoPared = objetoPared;
     this.objetosCasilleros = []; // La matriz de objetos Casillero
-   
   }
   crearEscenario() {
     for (let fila = 0; fila < this.dimensiones[0]; fila++) {
@@ -63,7 +61,6 @@ export class Escenario {
       `;
     document.querySelector("head").appendChild(reglaCasilleros);
     this.renderizarLaberinto();
-   
   }
 
   crearCasillero(fila, columna) {
@@ -81,6 +78,7 @@ export class Escenario {
     console.log(this.objetosCasilleros[posicionY][posicionX]);
     return this.objetosCasilleros[posicionY][posicionX];
   }
+  
 }
 
 export class Casillero {
