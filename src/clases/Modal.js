@@ -24,9 +24,9 @@ export class Modal {
 
    
     
+    this.initialize();
     this.juego.escenario.elementoHTML.appendChild(this.elementoPannel)
     
-    this.initialize();
   }
   initialize() {
     if (this.oculto) {

@@ -144,7 +144,7 @@ export class Juego {
 
     agregarModal(datosModal){
       this.datosModal = new Modal(datosModal, this);
-    return this.datosModal
+      return this.datosModal
     }
   
  
