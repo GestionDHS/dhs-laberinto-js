@@ -22,8 +22,11 @@ export class Modal {
     this.elementoPannel.appendChild(this.imageElement);
     this.elementoPannel.appendChild(this.mainTextElement);
 
+   
+    
+    this.juego.escenario.elementoHTML.appendChild(this.elementoPannel)
+    
     this.initialize();
-    juego.escenario.elementoHTML.appendChild(this.elementoPannel);
   }
   initialize() {
     if (this.oculto) {

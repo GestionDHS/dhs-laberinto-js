@@ -117,9 +117,20 @@ export class Personaje {
     const objAAbrir = this.juego.listaDePersonajes.find(
       (obj) => obj.idHTML == nameObj
     );
-    objAAbrir.setearStatus("abierto");
-    //Tengo que agregar el modal al juego
-  }
+    this.currentStatus="open";
+    (this.posicionActualX==objAAbrir.posicionActualX && this.posicionActualY==objAAbrir.posicionActualY)?this.abrirYMostrarModal(objAAbrir.nameObj):true
+    } 
+    
+  
+    abrirYMostrarModal() {
+      
+      this.juego.datosModal.mostrar();
+    }
+   
+    cerrar() {
+      this.setearStatus("cerrar");
+      this.juego.modalPannel.ocultar();
+    }
   moverse(vectorY, vectorX) {
     //deberiamos corroborar que no se caida del tablero "limiteDelUniverso"
     let nuevaY = this.posicionActualY + vectorY;

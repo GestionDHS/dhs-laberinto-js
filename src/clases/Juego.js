@@ -2,6 +2,7 @@ import { ControladorDeBloque } from "./ControladorDeBloque";
 import { VisualizadorDebugger } from "./VisualizadorDebugger";
 import { Escenario } from "./Escenario";
 import { Personaje } from "./Personaje";
+import { Modal } from "./Modal";
 
 export class Juego {
   constructor(listaBloquesAGenerar, duracionIntervalos = 1000) {
@@ -58,7 +59,7 @@ export class Juego {
     colorBordes,
     objetoPared,
     objetoCamino,
-    datosModal
+    
   ) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
@@ -69,8 +70,8 @@ export class Juego {
       colorBordes,
       objetoCamino,
       objetoPared,
-      datosModal
     );
+    console.log(this.escenario)
     this.escenario.crearEscenario();
   }
   generarCaminoYpared(dimensiones, tablero, pared, camino) {
@@ -140,4 +141,14 @@ export class Juego {
       personaje.inicializar();
     });
   }
+
+    agregarModal(datosModal){
+      this.datosModal = new Modal(datosModal, this);
+    return this.datosModal
+    }
+  
+ 
+ 
+
+
 }

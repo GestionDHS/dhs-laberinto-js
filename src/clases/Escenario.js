@@ -11,7 +11,7 @@ export class Escenario {
     colorBordes,
     objetoCamino,
     objetoPared,
-    datosModal
+ 
   ) {
     this.galeria = new DHS_Gallery();
     this.dimensiones = dimensiones;
@@ -22,7 +22,7 @@ export class Escenario {
     this.objetoCamino = objetoCamino;
     this.objetoPared = objetoPared;
     this.objetosCasilleros = []; // La matriz de objetos Casillero
-    this.datosModal=datosModal;
+   
   }
   crearEscenario() {
     for (let fila = 0; fila < this.dimensiones[0]; fila++) {
@@ -63,8 +63,7 @@ export class Escenario {
       `;
     document.querySelector("head").appendChild(reglaCasilleros);
     this.renderizarLaberinto();
-    //Creo el Modal para cuando finalice el juego- de quien es la responsabilida de crearlo??
-    this.modal = new Modal(this.datosModal, this.juego);
+   
   }
 
   crearCasillero(fila, columna) {
