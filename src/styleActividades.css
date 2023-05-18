@@ -228,6 +228,9 @@ se crean dinamicamente en js en el archivo Escenario.js*/
 div.dhs-modal-pannel {
   position: absolute;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px auto 50px;
   top: 0%;
   left: 0%;
   width: 100%;
@@ -253,21 +256,22 @@ div.dhs-modal-pannel-hidden {
 }
 
 div.dhs-modal-pannel p.dhs-modal-pannel-title {
-  padding: 5%;
+  padding: 10px;
+  margin: 0;
   color: var(--blanco);
   font-size: 100%;
   font-weight: bold;
 }
 
 div.dhs-modal-pannel img.dhs-modal-pannel-image {
-  width: 40%;
-  height: 40%;
-  margin: 5%;
+  width: 30%;
+  margin: auto;
   border-radius: 20px;
 }
 
 div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
   font-weight: bold;
-  font-size: 80%;
- 
+  font-size: 70%;
+  margin: 0;
+  padding: 10px;
 }
