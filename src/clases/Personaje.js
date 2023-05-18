@@ -114,14 +114,10 @@ export class Personaje {
     this.estaVivo = false;
   }
   abrir(nameObj) {
-    const objAAbrir = this.juego.listaDePersonajes.find(
+    const objAAbrir = this.casilleroActual.ocupantes.find(
       (obj) => obj.idHTML == nameObj
     );
-    this.currentStatus = "open";
-    this.posicionActualX == objAAbrir.posicionActualX &&
-    this.posicionActualY == objAAbrir.posicionActualY
-      ? this.abrirYMostrarModal(objAAbrir.nameObj)
-      : true;
+    objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): "morir por falta de cofre"
   }
 
   abrirYMostrarModal() {
