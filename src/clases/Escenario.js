@@ -64,7 +64,7 @@ export class Escenario {
     document.querySelector("head").appendChild(reglaCasilleros);
     this.renderizarLaberinto();
     //Creo el Modal para cuando finalice el juego- de quien es la responsabilida de crearlo??
-    this.modal = new Modal(this.datosModal, this.juego);
+    this.modal = new Modal(this.datosModal, this);
   }
 
   crearCasillero(fila, columna) {
