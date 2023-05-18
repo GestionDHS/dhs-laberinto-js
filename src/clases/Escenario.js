@@ -78,9 +78,7 @@ export class Escenario {
     console.log(this.objetosCasilleros[posicionY][posicionX]);
     return this.objetosCasilleros[posicionY][posicionX];
   }
-  verificarNoDesborde(nuevaY, nuevaX) {
-    return nuevaY <= this.dimensiones[0] && nuevaX >= this.dimensiones[1]
-  }
+  
 }
 
 export class Casillero {

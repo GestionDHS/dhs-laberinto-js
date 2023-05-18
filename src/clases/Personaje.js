@@ -132,9 +132,26 @@ export class Personaje {
       this.juego.modalPannel.ocultar();
     }
   moverse(vectorY, vectorX) {
-    //deberiamos corroborar que no se caida del tablero "limiteDelUniverso"
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
+    if(this.controladorDOM.verificarDesbordamiento(nuevaY, nuevaX)) {
+      const limite = {
+        idUsarHTML: "limitesDelUniverso",
+        tipoPersonaje: "limite",
+        status: {
+          normal: { name: "termino", imageUrl: "lupeMuerta" },//fijarse en las img
+        },
+        statusInicial: "normal",
+        zIndex: 1,
+        posicionInicialY: 0,
+        posicionInicialX: 0,
+        direccionInicial: 0,
+      };
+      console.log(this.casilleroDestino.ocupantes)
+      this.casilleroDestino.ocupantes.add(limite)
+      console.log(this.casilleroDestino.ocupantes)
+    }
+    console.log(this.estaVivo + " linea 138")
     const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
       nuevaY,
       nuevaX
@@ -154,7 +171,11 @@ export class Personaje {
       this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);
     }
   }
+  desbordo(nuevaY,nuevaX) {
+    if(this.juego.escenario.verificarNoDesborde(nuevaY,nuevaX)) {
 
+    }
+  }
   obtenerFactorAvance(casilleroDestino) {
     let esValido = casilleroDestino.esPisable();
     return esValido ? this.verificarColision(casilleroDestino) : 0;
@@ -240,5 +261,8 @@ class controladorPersonajeDOM {
   }
   rotarPersonaje(grados) {
     this.imagenAnidada.style.transform = `rotate(${grados}deg)`;
+  }
+  verificarDesbordamiento(nuevaY, nuevaX) {
+    return nuevaY >= this.escenario.dimensiones[0] && nuevaX >= this.escenario.dimensiones[1]
   }
 }
