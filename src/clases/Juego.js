@@ -140,6 +140,7 @@ export class Juego {
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
+    this.datosModal.ocultar()
   }
 
     agregarModal(datosModal){

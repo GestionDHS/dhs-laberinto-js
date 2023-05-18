@@ -117,61 +117,61 @@ export class Personaje {
     const objAAbrir = this.juego.listaDePersonajes.find(
       (obj) => obj.idHTML == nameObj
     );
-    this.currentStatus="open";
-    (this.posicionActualX==objAAbrir.posicionActualX && this.posicionActualY==objAAbrir.posicionActualY)?this.abrirYMostrarModal(objAAbrir.nameObj):true
-    } 
-    
-  
-    abrirYMostrarModal() {
-      
-      this.juego.datosModal.mostrar();
-    }
-   
-    cerrar() {
-      this.setearStatus("cerrar");
-      this.juego.modalPannel.ocultar();
-    }
+    this.currentStatus = "open";
+    this.posicionActualX == objAAbrir.posicionActualX &&
+    this.posicionActualY == objAAbrir.posicionActualY
+      ? this.abrirYMostrarModal(objAAbrir.nameObj)
+      : true;
+  }
+
+  abrirYMostrarModal() {
+    this.juego.datosModal.mostrar();
+  }
+
+  cerrar() {
+    this.setearStatus("cerrar");
+    this.juego.modalPannel.ocultar();
+  }
   moverse(vectorY, vectorX) {
+    if (!this.estaVivo) {
+      return false;
+    }
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
     const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
       nuevaY,
       nuevaX
     );
-
-    if(!casilleroDestino) {
-      const limite =  {
+    if (!casilleroDestino) {
+      const limite = {
         con: "limitesDelUniverso",
-        factorDeAvance: 0.2,
+        factorDeAvance: 0.35,
         callback: (x) => {
           x.terminar();
         },
         mensaje: "¡OH NO! me caí del mapa. ",
-      }
-     
+      };
+
       this.visibilizarTooltip(limite.mensaje);
       limite.callback(this);
-    
-    }
-    
-    
-    if (this.estaVivo) {
-      let objetoAux = this.verificarColision(casilleroDestino);
-      console.log(objetoAux);
-      //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
-      // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
-      objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
-      objetoAux.callback && objetoAux.callback(this);
-      this.casilleroActual.ocupantes.pop();
       this.controladorDOM.posicionarPersonajeEnHtml(
-        this.posicionActualY + vectorY * objetoAux.factorDeAvance,
-        this.posicionActualX + vectorX * objetoAux.factorDeAvance
+        this.posicionActualY + vectorY * limite.factorDeAvance,
+        this.posicionActualX + vectorX * limite.factorDeAvance
+        );
+    }else{
+    let objetoAux = this.verificarColision(casilleroDestino);
+    console.log(objetoAux);
+    //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
+    // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
+    objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
+    objetoAux.callback && objetoAux.callback(this);
+    this.casilleroActual.ocupantes.pop();
+    this.controladorDOM.posicionarPersonajeEnHtml(
+      this.posicionActualY + vectorY * objetoAux.factorDeAvance,
+      this.posicionActualX + vectorX * objetoAux.factorDeAvance
       );
-      this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);
-    }
+      this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);}
   }
-  
-  
   obtenerFactorAvance(casilleroDestino) {
     let esValido = casilleroDestino.esPisable();
     return esValido ? this.verificarColision(casilleroDestino) : 0;
@@ -258,5 +258,4 @@ class controladorPersonajeDOM {
   rotarPersonaje(grados) {
     this.imagenAnidada.style.transform = `rotate(${grados}deg)`;
   }
- 
 }

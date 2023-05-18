@@ -26,7 +26,7 @@ const tablero = [
   [1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 1],
   [1, 1, 0, 1, 0, 1],
-  [1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1],
 ];
 
@@ -142,7 +142,7 @@ const arrayDePersonajes = [
     posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,
-    zIndex: 10,
+    zIndex: 2,
     colisiones: [],
   },
 ];
