@@ -61,11 +61,18 @@ const datosModal = {
   texto: "Encontramos 180 monedas de oro.",
   oculto: true,
 };
+const datosModalError = {
+  titulo: "¡Ohh Nooww!",
+  imagen: "viod",
+  texto: "No habia un cofre acá :(",
+  oculto: true,
+};
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
 miJuego.agregarModal(datosModal);
+miJuego.agregarModalError(datosModalError); // pia
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 // const arrayDePersonajes= [
 //   {
@@ -151,8 +158,8 @@ miJuego.generarPersonajes(arrayDePersonajes);
 
 //TODO:
 /**
- * Mje de Lupe al usuario cuando quiere abrir el cofre y el cofre no está
- * CSS: Arreglar el Modal with, que dependa del tablero
+ * Mje de Lupe al usuario cuando quiere abrir el cofre y el cofre no está (Pía - fala agregar la foto void)
+ * CSS: Arreglar el Modal with, que dependa del tablero (Pía - done)
  * Colisión con la bandera : "Ganar" igual que con el cofre
  * Conectar Blockly con éste motor de juego
  * Lupe: Debe tener un atributo "cantidadElementosJuntados" como si fuera una mochila donde va juntando: basura, manzanas, etc
