@@ -16,7 +16,8 @@ export class Personaje {
       : 0; // ENTERO 0-360 con grados de orientación inicial.
     this.colisiones = objetoConfiguracionPersonaje.colisiones; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
-
+    this.rotable = objetoConfiguracionPersonaje.rotable || false
+    this.mochila = []
     this.controladorDOM = new controladorPersonajeDOM(
       this.hasTooltips(),
       // objetoConfiguracionPersonaje.tieneTooltip,
@@ -191,6 +192,9 @@ export class Personaje {
   }
   moverIzquierda() {
     this.moverse(0, -1);
+  }
+  girar(grados, direccion){
+
   }
 }
 

@@ -41,6 +41,7 @@ const arbol = {
   posicionInicialY: 0,
   posicionInicialX: 0,
   direccionInicial: 0,
+  rotable: false,
 };
 const pasto = {
   idUsarHTML: "camino",
@@ -53,6 +54,7 @@ const pasto = {
   posicionInicialY: 0,
   posicionInicialX: 0,
   direccionInicial: 0,
+  rotable: false,
 };
 
 const datosModal = {
@@ -87,6 +89,7 @@ const arrayDePersonajes = [
     posicionInicialX: 3, //1
     direccionInicial: 0,
     zIndex: 3,
+    rotable: true,
     colisiones: [
       {
         con: "lodo",
@@ -129,6 +132,7 @@ const arrayDePersonajes = [
     posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 1,
+    rotable:false,
     colisiones: [],
   },
   {
@@ -143,6 +147,7 @@ const arrayDePersonajes = [
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
+    rotable:false,
     colisiones: [],
   },
 ];
@@ -152,7 +157,7 @@ miJuego.generarPersonajes(arrayDePersonajes);
 //TODO:
 /**
  * Mje de Lupe al usuario cuando quiere abrir el cofre y el cofre no está
- * CSS: Arreglar el Modal with, que dependa del tablero
+ * CSS: Arreglar el Modal with, que dependa del tablero (Pía)
  * Colisión con la bandera : "Ganar" igual que con el cofre
  * Conectar Blockly con éste motor de juego
  * Lupe: Debe tener un atributo "cantidadElementosJuntados" como si fuera una mochila donde va juntando: basura, manzanas, etc
