@@ -147,9 +147,9 @@ export class Juego {
       this.datosModal = new Modal(datosModal, this);
       return this.datosModal
     }
-  
- 
- 
-
+    agregarModalError(datosModalError){ //pia
+      this.datosModalError = new Modal(datosModalError, this);
+      return this.datosModalError
+    }
 
 }

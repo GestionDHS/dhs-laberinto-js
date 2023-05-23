@@ -118,13 +118,15 @@ export class Personaje {
     const objAAbrir = this.casilleroActual.ocupantes.find(
       (obj) => obj.idHTML == nameObj
     );
-    objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): "morir por falta de cofre"
+    objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): this.abrirModalFalloApertura() //pia
   }
 
-  abrirYMostrarModal() {
+  abrirYMostrarModal(nombreObj) {
     this.juego.datosModal.mostrar();
   }
-
+  abrirModalFalloApertura(){ //pia
+    this.juego.datosModalError.mostrar()
+  }
   cerrar() {
     this.setearStatus("cerrar");
     this.juego.modalPannel.ocultar();

@@ -233,7 +233,7 @@ div.dhs-modal-pannel {
   grid-template-rows: 50px auto 50px;
   top: 0%;
   left: 0%;
-  width: 100%;
+  width: 92%;
   height: 100%;
   background: var(--color-confirmacion);
   border: 1px solid var(--negro);
@@ -271,7 +271,7 @@ div.dhs-modal-pannel img.dhs-modal-pannel-image {
 
 div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
   font-weight: bold;
-  font-size: 70%;
+  font-size: 65%;
   margin: 0;
-  padding: 10px;
+  padding: 5px;
 }
