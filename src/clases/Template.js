@@ -2,9 +2,46 @@
 import "../style.css";
 import "../styleActividades.css";
 import { tacho,play } from "./Iconos";
+
 export function template(element) {
   return `
-  <!-- seccion izquierda -->
+      <div id="blocklyDiv" style="height: 580px; width: 700px;"></div>
+  
+      <!-- seccion derecha -->
+  
+      <section class="panel-derecho flex-col">
+      <div id="textarea"></div>
+         <h4 id="dhs-encabezado-desafio">Laberinto</h4>
+         <div id="elemento-escenario"></div>
+         <button id="dhs-boton" >
+         <span>EJECUTAR</span>
+         <i> ${play} </i>
+         </button>
+      </section>
+    `;
+}
+
+/** 
+ * <img src="${dh}" style="background:black"> */
+
+/* dejo aca comentado como estaba saco la clase panel-juego del template porque no se usa ahora ... si despues
+ la precisamos queda aca
+     <section class="panel-derecho flex-col">
+      <div class="panel-juego flex-col">
+         <h4 id="dhs-encabezado-desafio">Laberinto</h4>
+         <div id="elemento-escenario"></div>
+         <button id="dhs-boton">
+         <span>EJECUTAR</span>
+         <i> ${play} </i>
+         </button>
+       </div>
+      </section>
+    `;
+    */
+
+
+/** Sustituimos Todo ésto por Blockly
+<!-- seccion izquierda -->
       <section class="panel-izquierdo">
        <div id="lista-bloques-disponibles">
          <h4>Bloques Disponibles</h4>
@@ -29,33 +66,4 @@ export function template(element) {
       <i id="basura" > ${tacho} </i>
       </div>
       </section>
-  
-      <!-- seccion derecha -->
-  
-      <section class="panel-derecho flex-col">
-         <h4 id="dhs-encabezado-desafio">Laberinto</h4>
-         <div id="elemento-escenario"></div>
-         <button id="dhs-boton" >
-         <span>EJECUTAR</span>
-         <i> ${play} </i>
-         </button>
-      </section>
-    `;
-}
-
-/**<img src="${dh}" style="background:black"> */
-
-/* dejo aca comentado como estaba saco la clase panel-juego del template porque no se usa ahora ... si despues
- la precisamos queda aca
-     <section class="panel-derecho flex-col">
-      <div class="panel-juego flex-col">
-         <h4 id="dhs-encabezado-desafio">Laberinto</h4>
-         <div id="elemento-escenario"></div>
-         <button id="dhs-boton">
-         <span>EJECUTAR</span>
-         <i> ${play} </i>
-         </button>
-       </div>
-      </section>
-    `;
-    */
+ */

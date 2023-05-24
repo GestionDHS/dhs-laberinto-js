@@ -1,4 +1,4 @@
-import { ControladorDeBloque } from "./ControladorDeBloque";
+//import { ControladorDeBloque } from "./ControladorDeBloque";
 import { VisualizadorDebugger } from "./VisualizadorDebugger";
 import { Escenario } from "./Escenario";
 import { Personaje } from "./Personaje";
@@ -8,7 +8,7 @@ export class Juego {
   constructor(listaBloquesAGenerar, duracionIntervalos = 1000) {
     this.modo = "inicio";
     this.botonEjecutar = document.getElementById("dhs-boton");
-    this.controlador = new ControladorDeBloque();
+    //this.controlador = new ControladorDeBloque();
     this.vizualizador = new VisualizadorDebugger();
     this.duracionIntervalos = duracionIntervalos;
     this.listaBloquesAGenerar = listaBloquesAGenerar;
@@ -18,7 +18,7 @@ export class Juego {
     this.listaBloquesInstrucciones = document.getElementById(
       "dhs-lista-instrucciones"
     );
-    this.controlador.borrarTodo();
+    //this.controlador.borrarTodo();
     this.escenario = {};
     this.listaDePersonajes = [];
     this.habilitar();
@@ -27,27 +27,27 @@ export class Juego {
   /* PARA GENERAR LOS BLOQUES EN PANTALLA EN CADA UNA DE LAS LISTAS */
 
   // DEBE RECIBIR LA INSTANCIA DEL JUEGO Y LA LISTA DE BLOQUES QUE NECESITO CREAR
-  renderizarBloquesDisponibles(listaAGenerar) {
-    let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);
-    listaDeObjetos.forEach((unBloque) =>
-      this.listaBloquesDisponibles.appendChild(unBloque)
-    );
-    this.controlador.hacerloSortable(
-      this.listaBloquesDisponibles,
-      this.listaBloquesInstrucciones
-    );
-  }
+  // renderizarBloquesDisponibles(listaAGenerar) {
+  //   let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);
+  //   listaDeObjetos.forEach((unBloque) =>
+  //     this.listaBloquesDisponibles.appendChild(unBloque)
+  //   );
+  //   this.controlador.hacerloSortable(
+  //     this.listaBloquesDisponibles,
+  //     this.listaBloquesInstrucciones
+  //   );
+  // }
 
-  renderizarBloquesPrecargados(listaAGenerar) {
-    let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);
-    listaDeObjetos.forEach((unBloque) =>
-      this.listaBloquesInstrucciones.appendChild(unBloque)
-    );
-    this.controlador.hacerloSortable(
-      this.listaBloquesDisponibles,
-      this.listaBloquesInstrucciones
-    );
-  }
+  // renderizarBloquesPrecargados(listaAGenerar) {
+  //   let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);
+  //   listaDeObjetos.forEach((unBloque) =>
+  //     this.listaBloquesInstrucciones.appendChild(unBloque)
+  //   );
+  //   this.controlador.hacerloSortable(
+  //     this.listaBloquesDisponibles,
+  //     this.listaBloquesInstrucciones
+  //   );
+  // }
 
   /*PARA RENDERIZAR ESCENARIO*/
   // La funcion recibe la matriz tablero la unidad de ancho, el color de bordes, nombre imagen pared, nombre imagen camino
@@ -58,8 +58,7 @@ export class Juego {
     unidadAnchoDeseada,
     colorBordes,
     objetoPared,
-    objetoCamino,
-    
+    objetoCamino
   ) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
@@ -69,7 +68,7 @@ export class Juego {
       elementoHTMLLaberinto,
       colorBordes,
       objetoCamino,
-      objetoPared,
+      objetoPared
     );
     //console.log(this.escenario)
     this.escenario.crearEscenario();
@@ -140,16 +139,16 @@ export class Juego {
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
-    this.datosModal.ocultar()
+    this.datosModal.ocultar();
   }
 
-    agregarModal(datosModal){
-      this.datosModal = new Modal(datosModal, this);
-      return this.datosModal
-    }
-    agregarModalError(datosModalError){ //pia
-      this.datosModalError = new Modal(datosModalError, this);
-      return this.datosModalError
-    }
-
+  agregarModal(datosModal) {
+    this.datosModal = new Modal(datosModal, this);
+    return this.datosModal;
+  }
+  agregarModalError(datosModalError) {
+    //pia
+    this.datosModalError = new Modal(datosModalError, this);
+    return this.datosModalError;
+  }
 }

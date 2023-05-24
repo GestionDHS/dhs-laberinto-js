@@ -1,9 +1,67 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
-import { objetosComunes } from "../../clases/ObjetosComunes";
+import Blockly from 'blockly'; //agregar a cada instancia - pia
+import {javascriptGenerator} from 'blockly/javascript'; //generador de codigo js
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
+//A partir de acá agregó Pía
+var toolbox = {
+  "kind": "flyoutToolbox",
+  "contents": [
+    {
+      "kind": "block",
+      "type": "controls_if"
+    },
+    {
+      "kind": "block",
+      "type": "controls_repeat_ext"
+    },
+    {
+      "kind": "block",
+      "type": "logic_compare"
+    },
+    {
+      "kind": "block",
+      "type": "math_number"
+    },
+    {
+      "kind": "block",
+      "type": "math_arithmetic"
+    },
+    {
+      "kind": "block",
+      "type": "text"
+    },
+    {
+      "kind": "block",
+      "type": "text_print"
+    },
+  ]
+}
+
+const workspace = Blockly.inject('blocklyDiv', { 
+  //toolbox: document.getElementById('toolbox'),
+  toolbox
+});
+
+//const jsCode = javascriptGenerator.workspaceToCode(workspace);
+
+function updateCode(event) {
+  //console.log(event)
+  const code = javascriptGenerator.workspaceToCode(workspace);
+  //console.log(code)
+  document.getElementById('textarea').innerHTML = code;
+}
+workspace.addChangeListener(updateCode);
+
+/**
+ * Pia modificó:
+ * En el Template.js saque las 2 secciones de bloques.
+ * Comenté todo el flujo de instanciacion de GenreradorDeBloques.js
+ * Agregué línea 8, blocklyDiv y un div conid texarea, en Template.js
+ * Agregué todo el codigo que esta arriba de éste comentario
+ */
 // PRIMERO: instanciar el juego
 
 window.miJuego = new Juego();
@@ -17,7 +75,7 @@ const listaBloquesAGenerar = [
   "llave",
 ];
 
-miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar);
+//miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar);
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [5, 6]; //fila, columna
 
@@ -166,7 +224,7 @@ miJuego.generarPersonajes(arrayDePersonajes);
 
  * Mje de Lupe al usuario cuando quiere abrir el cofre y el cofre no está (Pía - fala agregar la foto void)
  * CSS: Arreglar el Modal with, que dependa del tablero (Pía - done)
- * Colisión con la bandera : "Ganar" igual que con el cofre
+ * Colisión con la bandera : "Ganar" igual que con el cofre. "Es un colback de Ganaste"
  * Conectar Blockly con éste motor de juego
  * Lupe: Debe tener un atributo "cantidadElementosJuntados" como si fuera una mochila donde va juntando: basura, manzanas, etc
  
