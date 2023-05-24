@@ -71,7 +71,7 @@ export class Juego {
       objetoCamino,
       objetoPared,
     );
-    console.log(this.escenario)
+    //console.log(this.escenario)
     this.escenario.crearEscenario();
   }
   generarCaminoYpared(dimensiones, tablero, pared, camino) {

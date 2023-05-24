@@ -26,7 +26,7 @@ const tablero = [
   [1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 1],
   [1, 1, 0, 1, 0, 1],
-  [0, 0, 0, 0, 0, 0],
+  [1, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1],
 ];
 
@@ -65,7 +65,7 @@ const datosModal = {
 };
 const datosModalError = {
   titulo: "¡Ohh Nooww!",
-  imagen: "viod",
+  imagen: "monedas",
   texto: "No habia un cofre acá :(",
   oculto: true,
 };
@@ -92,8 +92,8 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     statusInicial: "normal",
-    posicionInicialY: 3, //1
-    posicionInicialX: 3, //1
+    posicionInicialY: 1, 
+    posicionInicialX: 1, 
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
