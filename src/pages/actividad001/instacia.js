@@ -1,9 +1,27 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
-import Blockly from 'blockly'; //agregar a cada instancia - pia
-import {javascriptGenerator} from 'blockly/javascript'; //generador de codigo js
+import Blockly, { config } from 'blockly'; //agregar a cada instancia - pia
+//import { javascriptGenerator } from 'blockly/javascript'; //generador de codigo js
+import { generador } from "../../clases/gblockly/generador"
+import  Bloque  from "../../clases/gblockly/nuevoBloque"
 
 document.querySelector("#appActividad").innerHTML = template(``);
+
+const config1 = {
+    type: "moverArriba",
+    message0: "mover arriba",
+    previousStatement: null,
+    nextStatement: null,
+    args0: null, //va un array para aclarar en caso de recibir parametros u otros bloques
+    extensions: null, //para agregar una validacion. Recibe un array con el nombre de la funcion validadora.
+}
+// let bloques = [];
+// for (const config of configs) {
+//   bloques.push(JSON.stringify(new Bloque(config)))
+// }
+
+
+let bloqueA = new Bloque(config1).bloque;
 
 //A partir de acá agregó Pía
 var toolbox = {
@@ -11,32 +29,32 @@ var toolbox = {
   "contents": [
     {
       "kind": "block",
-      "type": "controls_if"
+      "type": "moverArriba"
     },
-    {
-      "kind": "block",
-      "type": "controls_repeat_ext"
-    },
-    {
-      "kind": "block",
-      "type": "logic_compare"
-    },
-    {
-      "kind": "block",
-      "type": "math_number"
-    },
-    {
-      "kind": "block",
-      "type": "math_arithmetic"
-    },
-    {
-      "kind": "block",
-      "type": "text"
-    },
-    {
-      "kind": "block",
-      "type": "text_print"
-    },
+    // {
+    //   "kind": "block",
+    //   "type": "controls_repeat_ext"
+    // },
+    // {
+    //   "kind": "block",
+    //   "type": "logic_compare"
+    // },
+    // {
+    //   "kind": "block",
+    //   "type": "math_number"
+    // },
+    // {
+    //   "kind": "block",
+    //   "type": "math_arithmetic"
+    // },
+    // {
+    //   "kind": "block",
+    //   "type": "text"
+    // },
+    // {
+    //   "kind": "block",
+    //   "type": "text_print"
+    // },
   ]
 }
 
@@ -49,7 +67,9 @@ const workspace = Blockly.inject('blocklyDiv', {
 
 function updateCode(event) {
   //console.log(event)
-  const code = javascriptGenerator.workspaceToCode(workspace);
+  const code = generador.workspaceToCode(workspace);
+  // const code = javascriptGenerator.workspaceToCode(workspace);
+  //console.log(code);
   //console.log(code)
   document.getElementById('textarea').innerHTML = code;
 }
