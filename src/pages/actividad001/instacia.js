@@ -1,36 +1,54 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
-import Blockly, { config } from 'blockly'; //agregar a cada instancia - pia
-//import { javascriptGenerator } from 'blockly/javascript'; //generador de codigo js
-import { generador } from "../../clases/gblockly/generador"
-import  Bloque  from "../../clases/gblockly/nuevoBloque"
+import Blockly, { config } from "blockly"; //agregar a cada instancia - pia
+import { javascriptGenerator } from 'blockly/javascript'; //generador de codigo js
+import { generador } from "../../clases/gblockly/generador";
+import Bloque from "../../clases/gblockly/nuevoBloque";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
-const config1 = {
-    type: "moverArriba",
-    message0: "mover arriba",
-    previousStatement: null,
-    nextStatement: null,
-    args0: null, //va un array para aclarar en caso de recibir parametros u otros bloques
-    extensions: null, //para agregar una validacion. Recibe un array con el nombre de la funcion validadora.
-}
+const config1 = [{
+  type: "moverArriba",
+  message0: "mover arriba",
+  previousStatement: null,
+  nextStatement: null,
+  args0: null, //va un array para aclarar en caso de recibir parametros u otros bloques
+  extensions: null, //para agregar una validacion. Recibe un array con el nombre de la funcion validadora.
+  colour: 160,
+},{
+  type: "moverAbajo",
+  message0: "mover abajo",
+  previousStatement: null,
+  nextStatement: null,
+  args0: null, //va un array para aclarar en caso de recibir parametros u otros bloques
+  extensions: null, //para agregar una validacion. Recibe un array con el nombre de la funcion validadora.
+  colour: 160,
+}];
 // let bloques = [];
 // for (const config of configs) {
 //   bloques.push(JSON.stringify(new Bloque(config)))
 // }
 
+//let bloqueA = new Bloque(config1).bloque;
+let bloqueA = new Bloque(config1); // pia
+//bloqueA.armar()
+console.log(bloqueA)
 
-let bloqueA = new Bloque(config1).bloque;
-
-//A partir de acá agregó Pía
 var toolbox = {
-  "kind": "flyoutToolbox",
-  "contents": [
+  kind: "flyoutToolbox",
+  contents: [
     {
-      "kind": "block",
-      "type": "moverArriba"
+      kind: "block",
+      type: "moverArriba",
     },
+    {
+      kind: "block",
+      type: "moverAbajo",
+    },
+    // {
+    //   kind: "block",
+    //   type: "moverAbajo",
+    // },
     // {
     //   "kind": "block",
     //   "type": "controls_repeat_ext"
@@ -55,28 +73,36 @@ var toolbox = {
     //   "kind": "block",
     //   "type": "text_print"
     // },
-  ]
-}
+  ],
+};
 
-const workspace = Blockly.inject('blocklyDiv', { 
+const workspace = Blockly.inject("blocklyDiv", {
   //toolbox: document.getElementById('toolbox'),
-  toolbox
+  toolbox,
+  trashcan: true,//pia
 });
 
 //const jsCode = javascriptGenerator.workspaceToCode(workspace);
 
 function updateCode(event) {
+  //se esta generando 4 veces por clic ???
   //console.log(event)
-  const code = generador.workspaceToCode(workspace);
-  // const code = javascriptGenerator.workspaceToCode(workspace);
+  const code = generador.workspaceToCode();
+  //const code = javascriptGenerator.workspaceToCode(workspace);
   //console.log(code);
-  //console.log(code)
-  document.getElementById('textarea').innerHTML = code;
+  console.log(code);
+  document.getElementById("textarea").innerHTML = code;
 }
 workspace.addChangeListener(updateCode);
+//Pia
+ // Add backpacks
+//  const backpack = new NotificationBackpack(workspace);
+//  backpack.init();
 
-/**
- * Pia modificó:
+/**  Pia modificó:
+ * 29/05:
+ * Agregué el tacho de basura
+ * 24/05:
  * En el Template.js saque las 2 secciones de bloques.
  * Comenté todo el flujo de instanciacion de GenreradorDeBloques.js
  * Agregué línea 8, blocklyDiv y un div conid texarea, en Template.js
@@ -170,8 +196,8 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     statusInicial: "normal",
-    posicionInicialY: 1, 
-    posicionInicialX: 1, 
+    posicionInicialY: 1,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
@@ -217,7 +243,7 @@ const arrayDePersonajes = [
     posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 1,
-    rotable:false,
+    rotable: false,
     colisiones: [],
   },
   {
@@ -232,7 +258,7 @@ const arrayDePersonajes = [
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
-    rotable:false,
+    rotable: false,
     colisiones: [],
   },
 ];
