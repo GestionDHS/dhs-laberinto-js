@@ -50,14 +50,15 @@ export class Juego {
 
     function getAllConnectedCode(block) {
       let code = "";
+      if(block!==undefined){
       let currentBlock = block.getNextBlock();
 
 
-      while (currentBlock){
+      while (currentBlock) {
         code += Blockly.JavaScript[currentBlock.type](currentBlock) + "\n";
         currentBlock = currentBlock.getNextBlock();
       }
-
+    }
       return code;
     }
     
