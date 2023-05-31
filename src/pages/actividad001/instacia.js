@@ -1,99 +1,38 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
-import Blockly, { config } from "blockly"; //agregar a cada instancia - pia
-import { javascriptGenerator } from 'blockly/javascript'; //generador de codigo js
-import { generador } from "../../clases/gblockly/generador";
-import Bloque from "../../clases/gblockly/nuevoBloque";
+
+
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
-const config1 = [{
-  type: "moverArriba",
-  message0: "mover arriba",
-  previousStatement: null,
-  nextStatement: null,
-  args0: null, //va un array para aclarar en caso de recibir parametros u otros bloques
-  extensions: null, //para agregar una validacion. Recibe un array con el nombre de la funcion validadora.
-  colour: 160,
-},{
-  type: "moverAbajo",
-  message0: "mover abajo",
-  previousStatement: null,
-  nextStatement: null,
-  args0: null, //va un array para aclarar en caso de recibir parametros u otros bloques
-  extensions: null, //para agregar una validacion. Recibe un array con el nombre de la funcion validadora.
-  colour: 160,
-}];
-// let bloques = [];
-// for (const config of configs) {
-//   bloques.push(JSON.stringify(new Bloque(config)))
-// }
+const toolbox = {
+  "kind": "categoryToolbox",
+  "contents": [
+       {
+      "kind": "category",
+      "name": "Sin params",
+      "categorystyle": "variable_category",
+      "contents": [
+        {
+          "type": "move_up_simple",
+          "kind": "block",
+        },
+        {
+          "type": "move_down_simple",
+          "kind": "block",
+        },
+        {
+          "type": "move_left_simple",
+          "kind": "block",
+        },
+        {
+          "type": "move_right_simple",
+          "kind": "block",
+        },]
+    },]}
 
-//let bloqueA = new Bloque(config1).bloque;
-let bloqueA = new Bloque(config1); // pia
-//bloqueA.armar()
-console.log(bloqueA)
 
-var toolbox = {
-  kind: "flyoutToolbox",
-  contents: [
-    {
-      kind: "block",
-      type: "moverArriba",
-    },
-    {
-      kind: "block",
-      type: "moverAbajo",
-    },
-    // {
-    //   kind: "block",
-    //   type: "moverAbajo",
-    // },
-    // {
-    //   "kind": "block",
-    //   "type": "controls_repeat_ext"
-    // },
-    // {
-    //   "kind": "block",
-    //   "type": "logic_compare"
-    // },
-    // {
-    //   "kind": "block",
-    //   "type": "math_number"
-    // },
-    // {
-    //   "kind": "block",
-    //   "type": "math_arithmetic"
-    // },
-    // {
-    //   "kind": "block",
-    //   "type": "text"
-    // },
-    // {
-    //   "kind": "block",
-    //   "type": "text_print"
-    // },
-  ],
-};
 
-const workspace = Blockly.inject("blocklyDiv", {
-  //toolbox: document.getElementById('toolbox'),
-  toolbox,
-  trashcan: true,//pia
-});
-
-//const jsCode = javascriptGenerator.workspaceToCode(workspace);
-
-function updateCode(event) {
-  //se esta generando 4 veces por clic ???
-  //console.log(event)
-  const code = generador.workspaceToCode();
-  //const code = javascriptGenerator.workspaceToCode(workspace);
-  //console.log(code);
-  console.log(code);
-  document.getElementById("textarea").innerHTML = code;
-}
-workspace.addChangeListener(updateCode);
 //Pia
  // Add backpacks
 //  const backpack = new NotificationBackpack(workspace);
@@ -121,7 +60,8 @@ const listaBloquesAGenerar = [
   "llave",
 ];
 
-//miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar);
+
+
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [5, 6]; //fila, columna
 
@@ -177,6 +117,7 @@ const datosModalError = {
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
+miJuego.generarWorkspace(toolbox)
 miJuego.agregarModal(datosModal);
 miJuego.agregarModalError(datosModalError); // pia
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
