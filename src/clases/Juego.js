@@ -6,13 +6,12 @@ import { Modal } from "./Modal";
 import * as Blockly from "blockly";
 
 export class Juego {
-  constructor(listaBloquesAGenerar, duracionIntervalos = 1000) {
+  constructor(toolbox, duracionIntervalos = 1000 ) {
     this.modo = "inicio";
     this.botonEjecutar = document.getElementById("dhs-boton");
     //this.controlador = new ControladorDeBloque();
     this.vizualizador = new VisualizadorDebugger();
     this.duracionIntervalos = duracionIntervalos;
-    this.listaBloquesAGenerar = listaBloquesAGenerar;
     this.listaBloquesDisponibles = document.getElementById(
       "dhs-lista-bloques-disponibles"
     ); //es el ul
@@ -23,6 +22,12 @@ export class Juego {
     this.escenario = {};
     this.listaDePersonajes = [];
     this.habilitar();
+    this.workspace=Blockly.inject("blocklyDiv", {
+      //toolbox: document.getElementById('toolbox'),
+      toolbox: toolbox,
+      trashcan: true,
+    });
+    console.log(this.workspace)
   }
 
   /* PARA GENERAR LOS BLOQUES EN PANTALLA EN CADA UNA DE LAS LISTAS */
@@ -39,36 +44,29 @@ export class Juego {
   //   );
   // }
 
-  generarWorkspace(toolbox) {
-    let workspace = Blockly.inject("blocklyDiv", {
-      //toolbox: document.getElementById('toolbox'),
-      toolbox: toolbox,
-      trashcan: true,
-    });
-    workspace.addChangeListener(updateCode);
-    // Función para actualizar el código
+  generarWorkspace() {
+    this.workspace.addChangeListener((e)=>this.updateCode());   
+  }
 
-    function getAllConnectedCode(block) {
-      let code = "";
-      if(block!==undefined){
-      let currentBlock = block.getNextBlock();
-
-
-      while (currentBlock) {
-        code += Blockly.JavaScript[currentBlock.type](currentBlock) + "\n";
-        currentBlock = currentBlock.getNextBlock();
-      }
-    }
-      return code;
-    }
-    
-    function updateCode() {
-      const code = Blockly.JavaScript.workspaceToCode(workspace);
-      const connectedCode = getAllConnectedCode(workspace.getTopBlocks()[0]);
-      const finalCode = code + "\n" + connectedCode;
-      document.getElementById("textarea").value = finalCode;
+  getAllConnectedCode(block) {
+    let code = "";
+    if(block!==undefined){
+    let currentBlock = block.getNextBlock();
+    while (currentBlock) {
+      code += Blockly.JavaScript[currentBlock.type](currentBlock) + "\n";
+      currentBlock = currentBlock.getNextBlock();
     }
   }
+    return code;
+  }
+
+  updateCode() {
+    const code = Blockly.JavaScript.workspaceToCode(this.workspace);
+    const connectedCode = this.getAllConnectedCode(this.workspace.getTopBlocks()[0]);
+    const finalCode = code + "\n" + connectedCode;
+    document.getElementById("textarea").value = code;
+  }
+
   // renderizarBloquesPrecargados(listaAGenerar) {
   //   let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);
   //   listaDeObjetos.forEach((unBloque) =>

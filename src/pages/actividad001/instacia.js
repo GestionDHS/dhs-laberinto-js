@@ -49,7 +49,7 @@ const toolbox = {
  */
 // PRIMERO: instanciar el juego
 
-window.miJuego = new Juego();
+window.miJuego = new Juego(toolbox);
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
@@ -117,7 +117,7 @@ const datosModalError = {
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
-miJuego.generarWorkspace(toolbox)
+miJuego.generarWorkspace()
 miJuego.agregarModal(datosModal);
 miJuego.agregarModalError(datosModalError); // pia
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
