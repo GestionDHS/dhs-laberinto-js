@@ -53,7 +53,7 @@ export class Juego {
     if(block!==undefined){
     let currentBlock = block.getNextBlock();
     while (currentBlock) {
-      code += Blockly.JavaScript[currentBlock.type](currentBlock) + "\n";
+      code += Blockly.JavaScript[currentBlock.type](currentBlock);
       currentBlock = currentBlock.getNextBlock();
     }
   }
@@ -63,7 +63,7 @@ export class Juego {
   updateCode() {
     const code = Blockly.JavaScript.workspaceToCode(this.workspace);
     const connectedCode = this.getAllConnectedCode(this.workspace.getTopBlocks()[0]);
-    const finalCode = code + "\n" + connectedCode;
+    const finalCode = code + connectedCode;
     document.getElementById("textarea").value = code;
   }
 
