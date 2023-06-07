@@ -75,7 +75,7 @@ export class Escenario {
     this.elementoHTML.style.height = altoTotal + "em";
   }
   obtenerCasillero(posicionY, posicionX) {
-    console.log(this.objetosCasilleros[posicionY][posicionX]);
+    //console.log(this.objetosCasilleros[posicionY][posicionX]);
     return this.objetosCasilleros[posicionY][posicionX];
   }
   

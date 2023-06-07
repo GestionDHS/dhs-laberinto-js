@@ -6,7 +6,7 @@ import { Modal } from "./Modal";
 import * as Blockly from "blockly";
 
 export class Juego {
-  constructor(toolbox, duracionIntervalos = 1000 ) {
+  constructor(toolbox, duracionIntervalos = 1000) {
     this.modo = "inicio";
     this.botonEjecutar = document.getElementById("dhs-boton");
     //this.controlador = new ControladorDeBloque();
@@ -21,13 +21,11 @@ export class Juego {
     //this.controlador.borrarTodo();
     this.escenario = {};
     this.listaDePersonajes = [];
-    this.habilitar();
-    this.workspace=Blockly.inject("blocklyDiv", {
-      //toolbox: document.getElementById('toolbox'),
+    //this.habilitar();
+    this.workspace = Blockly.inject("blocklyDiv", {
       toolbox: toolbox,
       trashcan: true,
     });
-    console.log(this.workspace)
   }
 
   /* PARA GENERAR LOS BLOQUES EN PANTALLA EN CADA UNA DE LAS LISTAS */
@@ -45,26 +43,67 @@ export class Juego {
   // }
 
   generarWorkspace() {
-    this.workspace.addChangeListener((e)=>this.updateCode());   
-  }
+    this.workspace.addChangeListener((e) => {
+      //e.preventDefault();
+      //Blockly.Events.disableOrphans(e);
+      // if (e.type === Blockly.Events.BLOCK_CHANGE) {
+      // Evitar la propagación del evento
 
-  getAllConnectedCode(block) {
-    let code = "";
-    if(block!==undefined){
-    let currentBlock = block.getNextBlock();
-    while (currentBlock) {
-      code += Blockly.JavaScript[currentBlock.type](currentBlock);
-      currentBlock = currentBlock.getNextBlock();
+      // e.stopPropagation();
+      // if (e.type === Blockly.Events.BLOCK_CHANGE && !e.isUiEvent) {
+      console.log(e);
+      this.updateCode();
+      //}
+      //}
+    });
+  }
+  updateCode2() {
+    const workspace = Blockly.getMainWorkspace();
+    const topBlocks = workspace.getTopBlocks(true);
+    console.log(topBlocks)
+    for (let i = 0; i < topBlocks.length; i++) {
+      let block = topBlocks[i];
+      console.log(block.getTooltip())
+      if (block.nextConnection && block.nextConnection.targetConnection) {
+        let nextBlock = block;
+        while (nextBlock) {
+          //const code = Blockly.JavaScript.blockToCode(nextBlock);
+          let code;
+          code += Blockly.JavaScript[nextBlock.type](nextBlock);
+          console.log(code); 
+          nextBlock = nextBlock.getNextBlock();
+        }
+        console.log("El bloque tiene bloques subsiguientes hacia abajo");
+      } else {
+        console.log("El bloque no tiene bloques subsiguientes hacia abajo");
+      }
     }
   }
-    return code;
-  }
-
   updateCode() {
+    console.log("entra a updateCode");
     const code = Blockly.JavaScript.workspaceToCode(this.workspace);
-    const connectedCode = this.getAllConnectedCode(this.workspace.getTopBlocks()[0]);
+    const connectedCode = this.getAllConnectedCode(
+      this.workspace.getTopBlocks()[0]
+    );
+    //console.log(connectedCode);
     const finalCode = code + connectedCode;
-    document.getElementById("textarea").value = code;
+    console.log(finalCode.length); //me renderiza la palabra como si fuera un array
+    document.getElementById("textarea").value = finalCode;
+  }
+  getAllConnectedCode(block) {
+    let code = "";
+    //for (let block of blocks) {
+      if (block !== undefined) {
+        let currentBlock = block.getNextBlock();
+        //while (currentBlock) {
+        console.log(block);
+        code += Blockly.JavaScript[currentBlock.type](currentBlock);
+        currentBlock = currentBlock.getNextBlock();
+        //}
+      }
+    //}
+
+    return code;
   }
 
   // renderizarBloquesPrecargados(listaAGenerar) {
@@ -157,10 +196,21 @@ export class Juego {
   }
 
   ejecutar() {
-    console.log("hola lucho ");
-    this.deshabilitar();
-    this.reiniciar();
+    console.log("hola btn ejecutar");
+    //this.deshabilitar();
+    //this.reiniciar();
     this.modo = "prerun";
+    //obtengo todo el workspace
+    // const workspaceblock = Blockly.getMainWorkspace();
+    // //obtengo solo blockes que fueron arrastrados al workspace
+    // // const bloqueTop = workspaceblock.getTopBlocks[0]()
+    // // console.log(bloqueTop)
+    // const blocks = workspaceblock.getAllBlocks();
+    // blocks.forEach((block) => {
+    //   //console.log(block.type); //acá viene el move_down_simple
+    //   console.log(block.getTooltip());
+    // });
+    this.updateCode2();
   }
 
   reiniciar() {

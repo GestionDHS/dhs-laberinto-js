@@ -1,40 +1,39 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
 
-
-
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const toolbox = {
-  "kind": "categoryToolbox",
-  "contents": [
-       {
-      "kind": "category",
-      "name": "Sin params",
-      "categorystyle": "variable_category",
-      "contents": [
+  kind: "categoryToolbox",
+  contents: [
+    {
+      kind: "category",
+      name: "Sin params",
+      categorystyle: "variable_category",
+      contents: [
         {
-          "type": "move_up_simple",
-          "kind": "block",
+          type: "move_up_simple",
+          kind: "block",
         },
         {
-          "type": "move_down_simple",
-          "kind": "block",
+          type: "move_down_simple",
+          kind: "block",
         },
         {
-          "type": "move_left_simple",
-          "kind": "block",
+          type: "move_left_simple",
+          kind: "block",
         },
         {
-          "type": "move_right_simple",
-          "kind": "block",
-        },]
-    },]}
-
-
+          type: "move_right_simple",
+          kind: "block",
+        },
+      ],
+    },
+  ],
+};
 
 //Pia
- // Add backpacks
+// Add backpacks
 //  const backpack = new NotificationBackpack(workspace);
 //  backpack.init();
 
@@ -59,8 +58,6 @@ const listaBloquesAGenerar = [
   "derecha",
   "llave",
 ];
-
-
 
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [5, 6]; //fila, columna
@@ -117,10 +114,14 @@ const datosModalError = {
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
-miJuego.generarWorkspace()
 miJuego.agregarModal(datosModal);
-miJuego.agregarModalError(datosModalError); // pia
+miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
+//miJuego.generarWorkspace()
+document.getElementById("dhs-boton").addEventListener("click", function (e) {
+  e.preventDefault()
+  miJuego.ejecutar();
+});
 // const arrayDePersonajes= [
 //   {
 //     nombre: "lupe",

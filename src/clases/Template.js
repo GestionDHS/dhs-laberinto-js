@@ -1,7 +1,7 @@
 //es responsabilidad del juego rellenarlo
 import "../style.css";
 import "../styleActividades.css";
-import { tacho,play } from "./Iconos";
+import { tacho, play } from "./Iconos";
 
 export function template(element) {
   return `
@@ -13,7 +13,7 @@ export function template(element) {
       <textarea id="textarea"></textarea>
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
-         <button id="dhs-boton" >
+         <button id="dhs-boton">
          <span>EJECUTAR</span>
          <i> ${play} </i>
          </button>
@@ -21,7 +21,7 @@ export function template(element) {
     `;
 }
 
-/** 
+/**
  * <img src="${dh}" style="background:black"> */
 
 /* dejo aca comentado como estaba saco la clase panel-juego del template porque no se usa ahora ... si despues
@@ -38,7 +38,6 @@ export function template(element) {
       </section>
     `;
     */
-
 
 /** Sustituimos Todo ésto por Blockly
 <!-- seccion izquierda -->
