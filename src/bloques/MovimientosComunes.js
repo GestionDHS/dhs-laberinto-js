@@ -52,13 +52,12 @@ Blockly.common.defineBlocksWithJsonArray([
 
 // Define how to generate JavaScript from the custom block.
 Blockly.JavaScript["move_down_simple"] = function (block) {
-  miJuego.listaDePersonajes[30].moverAbajo();
+  //miJuego.listaDePersonajes[30].moverAbajo();
   const code = "moverAbajo();";
   // return code;
-  console.log("estoy en mover abajo")
-  console.log(miJuego.listaDePersonajes[30])
- 
-  
+  console.log("estoy en mover abajo");
+  //console.log(miJuego.listaDePersonajes[30]);
+
   return code;
 };
 
@@ -158,21 +157,27 @@ Blockly.JavaScript["move_right_param"] = function (block) {
 // Use Blockly's custom block JSON API to define a new block type.
 Blockly.common.defineBlocksWithJsonArray([
   {
-    type: "move_right_simple",
-    message0: "mover a la derecha",
-    previousStatement: null,
-    nextStatement: null,
-    style: "list_blocks",
-    tooltip: "moverDerecha()",
+    "type": "move_right_simple",
+    "message0": "mover a la derecha",
+    "previousStatement": null,
+    "nextStatement": null,
+    "style": "list_blocks",
+    "tooltip": "moverDerecha()",
+    "args1": [
+      {
+        "type": "input_statement",
+        "name": "MOVERDERECHA",
+      },
+    ],
   },
 ]);
 
 // Define how to generate JavaScript from the custom block.
 Blockly.JavaScript["move_right_simple"] = function (block) {
-  miJuego.listaDePersonajes[30].moverDerecha();
-  console.log(miJuego.listaDePersonajes[30])
-  const code = "moverDerecha();"
-  console.log("estoy en mover derecha")
+  //miJuego.listaDePersonajes[30].moverDerecha();
+  // console.log(miJuego.listaDePersonajes[30]);
+  console.log("estoy en mover derecha- moverDerecha()");
+  const code = "moverDerecha()";
   return code;
 };
 

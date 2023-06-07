@@ -1,4 +1,4 @@
-var Interpreter = function(code, opt_initFunc) {
+const Interpreter = function(code, opt_initFunc) {
   if (typeof code === 'string') {
     code = this.parse_(code, 'code');
   }
@@ -4503,3 +4503,4 @@ Interpreter.prototype['getGlobalScope'] = Interpreter.prototype.getGlobalScope;
 Interpreter.prototype['getStateStack'] = Interpreter.prototype.getStateStack;
 Interpreter.prototype['setStateStack'] = Interpreter.prototype.setStateStack;
 Interpreter['VALUE_IN_DESCRIPTOR'] = Interpreter.VALUE_IN_DESCRIPTOR;
+
