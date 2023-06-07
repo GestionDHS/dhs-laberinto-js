@@ -29,6 +29,17 @@ const toolbox = {
         },
       ],
     },
+    {
+      kind: "category",
+      name: "JS",
+      categorystyle: "text_category",
+      contents: [
+        {
+          type: "controls_if",
+          kind: "block",
+        },
+      ],
+    },
   ],
 };
 

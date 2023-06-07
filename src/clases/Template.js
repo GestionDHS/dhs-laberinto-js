@@ -10,7 +10,7 @@ export function template(element) {
       <!-- seccion derecha -->
   
       <section class="panel-derecho flex-col">
-      <textarea id="textarea"></textarea>
+      <textarea id="textarea" rows="20"></textarea>
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
          <button id="dhs-boton">

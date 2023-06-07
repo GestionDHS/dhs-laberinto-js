@@ -6,6 +6,7 @@ import { Modal } from "./Modal";
 import * as Blockly from "blockly";
 import { javascriptGenerator } from "blockly/javascript";
 import * as acorn from "acorn";
+import Interpreter from "js-interpreter"
 
 export class Juego {
   constructor(toolbox, duracionIntervalos = 1000) {
@@ -73,7 +74,7 @@ export class Juego {
       "MOVERDERECHA"
     );
     console.log(cadena);
-
+    }
     // for (let i = 0; i < topBlocks.length; i++) {
     //   let block = topBlocks[i];
     //   console.log(block.type);
@@ -101,7 +102,7 @@ export class Juego {
     //     console.log("El bloque no tiene bloques subsiguientes hacia abajo");
     //   }
     // }
-  }
+
   updateCode() {
     console.log("entra a updateCode");
     const code = Blockly.JavaScript.workspaceToCode(this.workspace);
