@@ -1,6 +1,7 @@
 import Blockly from "blockly";
+import { javascriptGenerator } from "blockly/javascript";
 
-Blockly.JavaScript = new Blockly.Generator("JavaScript");
+// Blockly.JavaScript = new Blockly.Generator("JavaScript");
 // bloque mover abajo
 Blockly.common.defineBlocksWithJsonArray([
   {
@@ -33,7 +34,7 @@ Blockly.Extensions.register("move_down_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_down_param"] = function (block) {
+javascriptGenerator["move_down_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverAbajo(" + casillas + ");\n";
   return code;
@@ -41,19 +42,19 @@ Blockly.JavaScript["move_down_param"] = function (block) {
 // ---------------------------------
 Blockly.common.defineBlocksWithJsonArray([
   {
-    type: "move_down_simple",
-    message0: "mover abajo",
-    previousStatement: null,
-    nextStatement: null,
-    style: "list_blocks",
-    tooltip: "moverAbajo()",
+    "type": "move_down_simple",
+    "message0": "mover abajo",
+    "previousStatement": null,
+    "nextStatement": null,
+    "style": "list_blocks",
+    //tooltip: "moverAbajo()",
   },
 ]);
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_down_simple"] = function (block) {
-  //miJuego.listaDePersonajes[30].moverAbajo();
-  const code = "moverAbajo();";
+javascriptGenerator["move_down_simple"] = function (block) {
+  miJuego.listaDePersonajes[30].moverAbajo();
+  const code = "moverAbajo();\n";
   // return code;
   console.log("estoy en mover abajo");
   //console.log(miJuego.listaDePersonajes[30]);
@@ -93,7 +94,7 @@ Blockly.Extensions.register("move_up_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_up_param"] = function (block) {
+javascriptGenerator["move_up_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverArriba(" + casillas + ");\n";
   return code;
@@ -110,9 +111,9 @@ Blockly.common.defineBlocksWithJsonArray([
 ]);
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_up_simple"] = function (block) {
-  //const code = "moverArriba();\n"
-  const code = miJuego.listaDePersonajes[30].moverArriba();
+javascriptGenerator["move_up_simple"] = function (block) {
+  const code = "moverArriba();\n"
+  miJuego.listaDePersonajes[30].moverArriba();
   return code;
 };
 
@@ -148,7 +149,7 @@ Blockly.Extensions.register("move_right_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_right_param"] = function (block) {
+javascriptGenerator["move_right_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverDerecha(" + casillas + ");\n";
   return code;
@@ -163,21 +164,21 @@ Blockly.common.defineBlocksWithJsonArray([
     "nextStatement": null,
     "style": "list_blocks",
     "tooltip": "moverDerecha()",
-    "args1": [
-      {
-        "type": "input_statement",
-        "name": "MOVERDERECHA",
-      },
-    ],
+    // "args1": [
+    //   {
+    //     "type": "input_statement",
+    //     "name": "MOVERDERECHA",
+    //   },
+    // ],
   },
 ]);
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_right_simple"] = function (block) {
-  //miJuego.listaDePersonajes[30].moverDerecha();
+javascriptGenerator["move_right_simple"] = function (block) {
+  miJuego.listaDePersonajes[30].moverDerecha();
   // console.log(miJuego.listaDePersonajes[30]);
   console.log("estoy en mover derecha- moverDerecha()");
-  const code = "moverDerecha()";
+  const code = "moverDerecha();\n";
   return code;
 };
 
@@ -213,7 +214,7 @@ Blockly.Extensions.register("move_left_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_left_param"] = function (block) {
+javascriptGenerator["move_left_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverIzquierda(" + casillas + ");\n";
   return code;
@@ -232,9 +233,9 @@ Blockly.common.defineBlocksWithJsonArray([
 ]);
 
 // Define how to generate JavaScript from the custom block.
-Blockly.JavaScript["move_left_simple"] = function (block) {
-  // const code = "moverIzquierda();\n"
+javascriptGenerator["move_left_simple"] = function (block) {
+  const code = "moverIzquierda();\n"
   // return code
-  const code = miJuego.listaDePersonajes[30].moverIzquierda();
+  miJuego.listaDePersonajes[30].moverIzquierda();
   return code;
 };

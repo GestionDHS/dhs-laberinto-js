@@ -6,6 +6,7 @@ import { Modal } from "./Modal";
 import * as Blockly from "blockly";
 import { javascriptGenerator } from "blockly/javascript";
 import * as acorn from "acorn";
+import Interpreter from "js-interpreter"
 
 export class Juego {
   constructor(toolbox, duracionIntervalos = 1000) {
@@ -60,44 +61,28 @@ export class Juego {
     });
   }
   updateCode2() {
-    const workspace = Blockly.getMainWorkspace();
-    javascriptGenerator.init(workspace);
-    const allBlocks = workspace.getAllBlocks();
-    //console.log(allBlocks[0].getFieldValue());
-    //const code = Blockly.JavaScript.blockToCode(allBlocks[0]);
-    const cadena = javascriptGenerator.statementToCode(
-      allBlocks[0],
-     "MOVERDERECHA"
-    );
-    console.log(cadena);
+    //Codigo lo genera
+    javascriptGenerator.init(this.workspace);
+    const allBlocks = this.workspace.getAllBlocks();
 
-    // for (let i = 0; i < topBlocks.length; i++) {
-    //   let block = topBlocks[i];
-    //   console.log(block.type);
-    //   if (block.nextConnection && block.nextConnection.targetConnection) {
-    //     let nextBlock = block;
-    //     let code;
-    //     while (nextBlock) {
-    //       //const code = Blockly.JavaScript.blockToCode(nextBlock);
-    //       code += Blockly.JavaScript[nextBlock.type](nextBlock);
-    //       console.log(code);
-    //       nextBlock = nextBlock.getNextBlock();
-    //     }
-    //     //const Interpreter = acorn.Interpreter;
-    //     function fun(interpreter){
-    //     let wrapper = this.listaDePersonajes[30].moverDerecha
-    //     interpreter.setProperty(this, 'moverDerecha', interpreter.createNativeFunction(wrapper));
-    //     }
-    //     const int = Interpreter(code, fun);
-    //     //int.setProperty(this, "moverDerecha",  int.createNativeFunction(this.listaDePersonajes[30].moverDerecha()))
-    //     //int.setProperty(this, "moverDerecha",  int.createNativeFunction(console.log("pepe")))
-
-    //     int.run();
-    //     console.log("El bloque tiene bloques subsiguientes hacia abajo");
-    //   } else {
-    //     console.log("El bloque no tiene bloques subsiguientes hacia abajo");
-    //   }
-    // }
+    for (let i = 0; i < allBlocks.length; i++) {
+      let block = allBlocks[i];
+      if (block.nextConnection && block.nextConnection.targetConnection) {
+        let nextBlock = block;
+        let code;
+        while (nextBlock) {
+          code += javascriptGenerator[nextBlock.type](nextBlock);
+          nextBlock = nextBlock.getNextBlock();
+        }
+        
+        //console.log("El bloque tiene bloques subsiguientes hacia abajo");
+        document.getElementById('textarea').value = code;
+      }
+      // } else {
+      //   console.log("El bloque no tiene bloques subsiguientes hacia abajo");
+      // }
+      
+    }
   }
   updateCode() {
     console.log("entra a updateCode");
