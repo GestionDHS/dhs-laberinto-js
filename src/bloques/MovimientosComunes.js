@@ -177,6 +177,7 @@ Blockly.JavaScript["move_right_simple"] = function (block) {
   //miJuego.listaDePersonajes[30].moverDerecha();
   // console.log(miJuego.listaDePersonajes[30]);
   console.log("estoy en mover derecha- moverDerecha()");
+  //Blockly.Tooltip.setCustomTooltip()
   const code = "moverDerecha()";
   return code;
 };

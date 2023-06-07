@@ -27,6 +27,9 @@ export class Juego {
     this.workspace = Blockly.inject("blocklyDiv", {
       toolbox: toolbox,
       trashcan: true,
+      plugins: {
+        metricManager: this,
+      },
     });
   }
 
@@ -67,7 +70,7 @@ export class Juego {
     //const code = Blockly.JavaScript.blockToCode(allBlocks[0]);
     const cadena = javascriptGenerator.statementToCode(
       allBlocks[0],
-     "MOVERDERECHA"
+      "MOVERDERECHA"
     );
     console.log(cadena);
 
