@@ -28,6 +28,9 @@ export class Juego {
     this.workspace = Blockly.inject("blocklyDiv", {
       toolbox: toolbox,
       trashcan: true,
+      plugins: {
+        metricManager: this,
+      },
     });
   }
 
@@ -94,7 +97,21 @@ export class Juego {
       //   console.log("El bloque no tiene bloques subsiguientes hacia abajo");
       // }
       
+
+      // const workspace = Blockly.getMainWorkspace();
+      // javascriptGenerator.init(workspace);
+      // const allBlocks = workspace.getAllBlocks();
+      // //console.log(allBlocks[0].getFieldValue());
+      // //const code = Blockly.JavaScript.blockToCode(allBlocks[0]);
+      // const cadena = javascriptGenerator.statementToCode(
+      //   allBlocks[0],
+      //   "MOVERDERECHA"
+      // );
+      // console.log(cadena);
+
     }
+
+
   }
   updateCode() {
     console.log("entra a updateCode");
