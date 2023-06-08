@@ -179,7 +179,7 @@ javascriptGenerator["move_right_simple"] = function (block) {
   // console.log(miJuego.listaDePersonajes[30]);
   console.log("estoy en mover derecha- moverDerecha()");
   //Blockly.Tooltip.setCustomTooltip()
-  const code = "moverDerecha()";
+  const code = "moverDerecha();\n";
 
   return code;
 };
@@ -239,5 +239,48 @@ javascriptGenerator["move_left_simple"] = function (block) {
   const code = "moverIzquierda();\n"
   // return code
   miJuego.listaDePersonajes[30].moverIzquierda();
+  return code;
+};
+
+
+//------------probando evento
+Blockly.common.defineBlocksWithJsonArray([
+  {
+    'type': 'event_onclick',
+    "message0": "Al ejecutar %1 %2",
+    "args0": [
+        {
+            "type": "input_dummy",
+        },
+        {
+            "type": "input_statement",
+            "name": "EVENT"
+        }
+    ], 
+    "inputsInline": false,
+    "colour": 230,
+    "tooltip": "Triggered when the flag is clicked",
+    "helpUrl": "",
+    "hat": "rounded",
+    'extensions': [
+        'event_onclick_validation',
+    ],
+  },
+]);
+
+Blockly.Extensions.register('event_onclick_validation', function() {
+  // this.setOnChange(function(event) {
+  //   const casillas = this.getFieldValue('CASILLAS');
+  //     const valid = (casillas >= 1);
+  //   this.setWarningText(valid
+  //     ? null
+  //     : `El número de casillas (${casillas}) no puede ser menor a 1.`);
+  // });
+});
+
+// Define how to generate JavaScript from the custom block.
+javascriptGenerator['event_onclick'] = function (block) {
+  let code = javascriptGenerator.statementToCode(block, 'EVENT');
+  console.log(code);
   return code;
 };

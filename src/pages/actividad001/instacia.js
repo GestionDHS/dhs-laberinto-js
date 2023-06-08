@@ -12,8 +12,8 @@ const toolbox = {
       categorystyle: "procedure_category",
       contents: [
         {
-          type: "start",
-          kind: "block"
+          type: "event_onclick",
+          kind: "block",
         }
       ]
     },

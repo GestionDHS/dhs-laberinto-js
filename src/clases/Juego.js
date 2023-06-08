@@ -69,76 +69,16 @@ export class Juego {
   //     window.setTimeout(nextStep, 0);
   //   }
   // }
-  updateCode2() {
+  updateCode() {
     //Codigo lo genera
     javascriptGenerator.init(this.workspace);
-    const allBlocks = this.workspace.getAllBlocks();
-
-    for (let i = 0; i < allBlocks.length; i++) {
-      let block = allBlocks[i];
-      if (block.nextConnection && block.nextConnection.targetConnection) {
-        let nextBlock = block;
-        //let underCode;
-        let code;
-        while (nextBlock) {
-          code += javascriptGenerator[nextBlock.type](nextBlock).code;
-          // underCode += `${javascriptGenerator[nextBlock.type](nextBlock).underCode}()`;
-          nextBlock = nextBlock.getNextBlock();
-        }
-        
-        //console.log("El bloque tiene bloques subsiguientes hacia abajo");
-        document.getElementById('textarea').value = code;
-        let myInterpreter = new Interpreter(underCode);
-        myInterpreter.run();
-        
-      }
-      
-      // } else {
-      //   console.log("El bloque no tiene bloques subsiguientes hacia abajo");
-      // }
-      
-
-      // const workspace = Blockly.getMainWorkspace();
-      // javascriptGenerator.init(workspace);
-      // const allBlocks = workspace.getAllBlocks();
-      // //console.log(allBlocks[0].getFieldValue());
-      // //const code = Blockly.JavaScript.blockToCode(allBlocks[0]);
-      // const cadena = javascriptGenerator.statementToCode(
-      //   allBlocks[0],
-      //   "MOVERDERECHA"
-      // );
-      // console.log(cadena);
-
-    }
-
-
+    let block = this.workspace.getBlocksByType('event_onclick')[0];
+    let code = javascriptGenerator['event_onclick'](block)
+    document.getElementById('textarea').value = code;
+    // let myInterpreter = new Interpreter(underCode);
+    // myInterpreter.run();
   }
-  updateCode() {
-    console.log("entra a updateCode");
-    const code = Blockly.JavaScript.workspaceToCode(this.workspace);
-    const connectedCode = this.getAllConnectedCode(
-      this.workspace.getTopBlocks()[0]
-    );
-    //console.log(connectedCode);
-    const finalCode = code + connectedCode;
-    console.log(finalCode.length); //me renderiza la palabra como si fuera un array
-    document.getElementById("textarea").value = finalCode;
-  }
-  getAllConnectedCode(block) {
-    let code = "";
-    //for (let block of blocks) {
-    if (block !== undefined) {
-      let currentBlock = block.getNextBlock();
-      //while (currentBlock) {
-      console.log(block);
-      code += Blockly.JavaScript[currentBlock.type](currentBlock);
-      currentBlock = currentBlock.getNextBlock();
-      //}
-    }
-    //}
 
-    return code;
-  }
 
   // renderizarBloquesPrecargados(listaAGenerar) {
   //   let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);
@@ -244,7 +184,7 @@ export class Juego {
     //   //console.log(block.type); //acá viene el move_down_simple
     //   console.log(block.getTooltip());
     // });
-    this.updateCode2();
+    this.updateCode();
   }
 
   reiniciar() {
