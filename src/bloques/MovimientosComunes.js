@@ -113,7 +113,7 @@ Blockly.common.defineBlocksWithJsonArray([
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator["move_up_simple"] = function (block) {
   const code = "moverArriba();\n"
-  miJuego.listaDePersonajes[30].moverArriba();
+  //miJuego.listaDePersonajes[30].moverArriba();
   return code;
 };
 

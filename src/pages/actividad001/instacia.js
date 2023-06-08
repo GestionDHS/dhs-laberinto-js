@@ -8,6 +8,17 @@ const toolbox = {
   contents: [
     {
       kind: "category",
+      name: "Eventos",
+      categorystyle: "procedure_category",
+      contents: [
+        {
+          type: "start",
+          kind: "block"
+        }
+      ]
+    },
+    {
+      kind: "category",
       name: "Sin params",
       categorystyle: "variable_category",
       contents: [

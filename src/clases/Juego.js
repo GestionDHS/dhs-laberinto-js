@@ -60,6 +60,12 @@ export class Juego {
       //}
     });
   }
+  
+  // nextStep() {
+  //   if (myInterpreter.step()) {
+  //     window.setTimeout(nextStep, 0);
+  //   }
+  // }
   updateCode2() {
     //Codigo lo genera
     javascriptGenerator.init(this.workspace);
@@ -69,15 +75,21 @@ export class Juego {
       let block = allBlocks[i];
       if (block.nextConnection && block.nextConnection.targetConnection) {
         let nextBlock = block;
+        //let underCode;
         let code;
         while (nextBlock) {
-          code += javascriptGenerator[nextBlock.type](nextBlock);
+          code += javascriptGenerator[nextBlock.type](nextBlock).code;
+          // underCode += `${javascriptGenerator[nextBlock.type](nextBlock).underCode}()`;
           nextBlock = nextBlock.getNextBlock();
         }
         
         //console.log("El bloque tiene bloques subsiguientes hacia abajo");
         document.getElementById('textarea').value = code;
+        let myInterpreter = new Interpreter(underCode);
+        myInterpreter.run();
+        
       }
+      
       // } else {
       //   console.log("El bloque no tiene bloques subsiguientes hacia abajo");
       // }
