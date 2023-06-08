@@ -53,12 +53,7 @@ Blockly.common.defineBlocksWithJsonArray([
 
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator["move_down_simple"] = function (block) {
-  miJuego.listaDePersonajes[30].moverAbajo();
   const code = "moverAbajo();\n";
-  // return code;
-  console.log("estoy en mover abajo");
-  //console.log(miJuego.listaDePersonajes[30]);
-
   return code;
 };
 
@@ -113,7 +108,6 @@ Blockly.common.defineBlocksWithJsonArray([
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator["move_up_simple"] = function (block) {
   const code = "moverArriba();\n"
-  //miJuego.listaDePersonajes[30].moverArriba();
   return code;
 };
 
@@ -175,12 +169,7 @@ Blockly.common.defineBlocksWithJsonArray([
 
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator["move_right_simple"] = function (block) {
-  miJuego.listaDePersonajes[30].moverDerecha();
-  // console.log(miJuego.listaDePersonajes[30]);
-  console.log("estoy en mover derecha- moverDerecha()");
-  //Blockly.Tooltip.setCustomTooltip()
   const code = "moverDerecha();\n";
-
   return code;
 };
 
@@ -237,8 +226,6 @@ Blockly.common.defineBlocksWithJsonArray([
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator["move_left_simple"] = function (block) {
   const code = "moverIzquierda();\n"
-  // return code
-  miJuego.listaDePersonajes[30].moverIzquierda();
   return code;
 };
 
@@ -281,6 +268,5 @@ Blockly.Extensions.register('event_onclick_validation', function() {
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator['event_onclick'] = function (block) {
   let code = javascriptGenerator.statementToCode(block, 'EVENT');
-  console.log(code);
   return code;
 };

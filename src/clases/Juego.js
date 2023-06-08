@@ -64,19 +64,37 @@ export class Juego {
     });
   }
   
-  // nextStep() {
-  //   if (myInterpreter.step()) {
-  //     window.setTimeout(nextStep, 0);
-  //   }
-  // }
+  
   updateCode() {
     //Codigo lo genera
     javascriptGenerator.init(this.workspace);
     let block = this.workspace.getBlocksByType('event_onclick')[0];
     let code = javascriptGenerator['event_onclick'](block)
     document.getElementById('textarea').value = code;
-    // let myInterpreter = new Interpreter(underCode);
-    // myInterpreter.run();
+    let initFunc = (interpreter, globalObject) => {
+      interpreter.setProperty(globalObject, 'moverDerecha', interpreter.createNativeFunction(function moverDerecha() {
+        miJuego.listaDePersonajes[30].moverDerecha();
+      }));
+      interpreter.setProperty(globalObject, 'moverAbajo',interpreter.createNativeFunction(function moverAbajo() {
+        miJuego.listaDePersonajes[30].moverAbajo();
+      }));
+      interpreter.setProperty(globalObject, 'moverArriba',interpreter.createNativeFunction(function moverArriba() {
+        miJuego.listaDePersonajes[30].moverArriba();
+      }));
+      interpreter.setProperty(globalObject, 'moverIzquierda',interpreter.createNativeFunction(function moverIzquierda() {
+        miJuego.listaDePersonajes[30].moverIzquierda();
+      }));
+      interpreter.setProperty(globalObject, 'highlightBlock', interpreter.createNativeFunction(function(id) {
+        return workspace.highlightBlock(id);
+      }));
+    }
+    let myInterpreter = new Interpreter(code, initFunc); 
+    function nextStep() {
+      if (myInterpreter.step()) {
+        window.setTimeout(nextStep, 150);
+      }
+    }
+    nextStep();
   }
 
 
@@ -170,7 +188,7 @@ export class Juego {
   }
 
   ejecutar() {
-    console.log("hola btn ejecutar");
+    // console.log("hola btn ejecutar");
     //this.deshabilitar();
     //this.reiniciar();
     this.modo = "prerun";
