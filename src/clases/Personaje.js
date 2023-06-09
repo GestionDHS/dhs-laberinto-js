@@ -132,6 +132,7 @@ export class Personaje {
     this.juego.modalPannel.ocultar();
   }
   moverse(vectorY, vectorX) {
+    // console.log("step");
     if (!this.estaVivo) {
       return false;
     }
@@ -159,7 +160,7 @@ export class Personaje {
         );
     }else{
     let objetoAux = this.verificarColision(casilleroDestino);
-    console.log(objetoAux);
+    // console.log(objetoAux);
     //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
     // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
     objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
@@ -179,7 +180,7 @@ export class Personaje {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-    console.log(objetoColision);
+    // console.log(objetoColision);
     return objetoColision;
   }
 

@@ -63,38 +63,76 @@ export class Juego {
       //}
     });
   }
+
+  initFunc = (interpreter, globalObject) => {
+    interpreter.setProperty(globalObject, 'moverDerecha', interpreter.createNativeFunction(function moverDerecha() {
+      miJuego.listaDePersonajes[30].moverDerecha();
+    }));
+    interpreter.setProperty(globalObject, 'moverAbajo',interpreter.createNativeFunction(function moverAbajo() {
+      miJuego.listaDePersonajes[30].moverAbajo();
+    }));
+    interpreter.setProperty(globalObject, 'moverArriba',interpreter.createNativeFunction(function moverArriba() {
+      miJuego.listaDePersonajes[30].moverArriba();
+    }));
+    interpreter.setProperty(globalObject, 'moverIzquierda',interpreter.createNativeFunction(function moverIzquierda() {
+      miJuego.listaDePersonajes[30].moverIzquierda();
+    }));
+    interpreter.setProperty(globalObject, 'highlightBlock', interpreter.createNativeFunction(function(id) {
+      id = String(id || '');
+      return highlightBlock(id);
+    }));
+    
+  }
+  myInterpreter = null;
+  highlightPause = false;
+  
+  iniciarEspacio() {
+    javascriptGenerator.init(this.workspace);
+    let block = this.workspace.getBlocksByType('event_onclick')[0];
+    this.code = javascriptGenerator['event_onclick'](block);
+    javascriptGenerator.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    javascriptGenerator.addReservedWords('highlightBlock');
+  }
+  
+  // highlightBlock(id) {
+  //   this.workspace.highlightBlock(id);
+  //   this.highlightPause = true;
+  // }
+    
+  nextStep() {
+    if (!this.myInterpreter) {
+      this.myInterpreter = new Interpreter(this.code, this.initFunc);
+    }
+    let hasMoreCode;
+    hasMoreCode = this.myInterpreter.step();
+    
+    console.log(hasMoreCode);
+    // console.log();
+    if (hasMoreCode) {
+    setTimeout(() => {
+        // this.highlightPause = true;
+        this.nextStep();
+      }, 200)
+    }
+      return;
+  };
+  
   
   
   updateCode() {
+    this.reiniciar();
+    this.iniciarEspacio();
     //Codigo lo genera
-    javascriptGenerator.init(this.workspace);
-    let block = this.workspace.getBlocksByType('event_onclick')[0];
-    let code = javascriptGenerator['event_onclick'](block)
-    document.getElementById('textarea').value = code;
-    let initFunc = (interpreter, globalObject) => {
-      interpreter.setProperty(globalObject, 'moverDerecha', interpreter.createNativeFunction(function moverDerecha() {
-        miJuego.listaDePersonajes[30].moverDerecha();
-      }));
-      interpreter.setProperty(globalObject, 'moverAbajo',interpreter.createNativeFunction(function moverAbajo() {
-        miJuego.listaDePersonajes[30].moverAbajo();
-      }));
-      interpreter.setProperty(globalObject, 'moverArriba',interpreter.createNativeFunction(function moverArriba() {
-        miJuego.listaDePersonajes[30].moverArriba();
-      }));
-      interpreter.setProperty(globalObject, 'moverIzquierda',interpreter.createNativeFunction(function moverIzquierda() {
-        miJuego.listaDePersonajes[30].moverIzquierda();
-      }));
-      interpreter.setProperty(globalObject, 'highlightBlock', interpreter.createNativeFunction(function(id) {
-        return workspace.highlightBlock(id);
-      }));
-    }
-    let myInterpreter = new Interpreter(code, initFunc); 
-    function nextStep() {
-      if (myInterpreter.step()) {
-        window.setTimeout(nextStep, 150);
-      }
-    }
-    nextStep();
+    
+    // let block = this.workspace.getBlocksByType('event_onclick')[0];
+    // let code = javascriptGenerator['event_onclick'](block);
+    document.getElementById('textarea').value = this.code;
+    
+    this.nextStep()
+    // let currentNode = myInterpreter.stateStack[myInterpreter.stateStack.length - 1].node;
+    // let blockId = currentNode.id;
+
+    // myInterpreter.run()
   }
 
 
@@ -203,6 +241,7 @@ export class Juego {
     //   console.log(block.getTooltip());
     // });
     this.updateCode();
+    // this.nextStep();
   }
 
   reiniciar() {

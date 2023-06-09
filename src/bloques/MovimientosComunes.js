@@ -268,5 +268,6 @@ Blockly.Extensions.register('event_onclick_validation', function() {
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator['event_onclick'] = function (block) {
   let code = javascriptGenerator.statementToCode(block, 'EVENT');
+  // console.log(code);
   return code;
 };
