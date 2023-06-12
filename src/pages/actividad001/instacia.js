@@ -14,8 +14,9 @@ const toolbox = {
         {
           type: "event_onclick",
           kind: "block",
-        }
-      ]
+          id: "blockAlEjecutar",
+        },
+      ],
     },
     {
       kind: "category",
@@ -139,11 +140,11 @@ miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
 miJuego.agregarModal(datosModal);
 miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
-//miJuego.generarWorkspace()
 document.getElementById("dhs-boton").addEventListener("click", function (e) {
-  e.preventDefault()
+  e.preventDefault();
   miJuego.ejecutar();
 });
+
 // const arrayDePersonajes= [
 //   {
 //     nombre: "lupe",
@@ -228,7 +229,7 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-
+miJuego.generarWorkspace()
 //TODO:
 /**
 

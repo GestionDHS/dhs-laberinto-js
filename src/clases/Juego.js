@@ -6,7 +6,7 @@ import { Modal } from "./Modal";
 import * as Blockly from "blockly";
 import { javascriptGenerator } from "blockly/javascript";
 import * as acorn from "acorn";
-import Interpreter from "js-interpreter"
+import Interpreter from "js-interpreter";
 
 export class Juego {
   constructor(toolbox, duracionIntervalos = 1000) {
@@ -49,54 +49,113 @@ export class Juego {
   // }
 
   generarWorkspace() {
-    this.workspace.addChangeListener((e) => {
-      //e.preventDefault();
-      //Blockly.Events.disableOrphans(e);
-      // if (e.type === Blockly.Events.BLOCK_CHANGE) {
-      // Evitar la propagación del evento
+    // const blockAlEjecutar =  {
+    //   "type": "event_onclick",
+    //   "kind": "block",
+    //   "id": "blockAlEjecutar"
+    // };
+    //Blockly.Xml.domToWorkspace(Blockly.Xml.textToDomDocument(Blockly.utils.toolbox.convertToolboxDefToJson(blockAlEjecutar)), this.workspace);
+    const xmlText ='<xml xmlns="https://developers.google.com/blockly/xml"><category name="Eventos" categorystyle="procedure_category"><block type="event_onclick" id="blockAlEjecutar"></block></category></xml>';
+    const xmlDom = Blockly.utils.xml.textToDom(xmlText);
+    Blockly.Xml.domToWorkspace(xmlDom, this.workspace);
+    Blockly.Blocks["event_onclick"] = {
+      init: function () {
+        this.jsonInit({
+          kind: "category",
+          name: "Eventos",
+          categorystyle: "procedure_category",
+          contents: [
+            {
+              type: "event_onclick",
+              kind: "block",
+              id: "blockAlEjecutar",
+            },
+          ],
+        });
+      },
+    };
+    const blockAlEjecutar = this.workspace.newBlock("event_onclick");
+    this.workspace.getFlyout().hide(); // Ocultar el flyout (panel lateral)
+    this.workspace.clear(); // Limpiar el área principal
+    //blockAlEjecutar.moveBy(100, 100);
+    //this.workspace.addBlock(blockAlEjecutar);
+    const offsetX = 100;
+    const offsetY = 100;
+    blockAlEjecutar.moveBy(offsetX, offsetY);
 
-      // e.stopPropagation();
-      // if (e.type === Blockly.Events.BLOCK_CHANGE && !e.isUiEvent) {
-      console.log(e);
-      this.updateCode();
-      //}
-      //}
-    });
+    //     this.workspace.addChangeListener((e) => {
+    //       //e.preventDefault();
+    //       //Blockly.Events.disableOrphans(e);
+    //       // if (e.type === Blockly.Events.BLOCK_CHANGE) {
+    //         // Evitar la propagación del evento
+
+    //         // e.stopPropagation();
+    //         // if (e.type === Blockly.Events.BLOCK_CHANGE && !e.isUiEvent) {
+    //           console.log(e);
+    //          // this.updateCode();
+    //           //}
+    //   //}
+    // });
   }
-  
-  
+
   updateCode() {
     //Codigo lo genera
     javascriptGenerator.init(this.workspace);
-    let block = this.workspace.getBlocksByType('event_onclick')[0];
-    let code = javascriptGenerator['event_onclick'](block)
-    document.getElementById('textarea').value = code;
+    let block = this.workspace.getBlocksByType("event_onclick")[0];
+    let code = javascriptGenerator["event_onclick"](block);
+    document.getElementById("textarea").value = code;
     let initFunc = (interpreter, globalObject) => {
-      interpreter.setProperty(globalObject, 'moverDerecha', interpreter.createNativeFunction(function moverDerecha() {
-        miJuego.listaDePersonajes[30].moverDerecha();
-      }));
-      interpreter.setProperty(globalObject, 'moverAbajo',interpreter.createNativeFunction(function moverAbajo() {
-        miJuego.listaDePersonajes[30].moverAbajo();
-      }));
-      interpreter.setProperty(globalObject, 'moverArriba',interpreter.createNativeFunction(function moverArriba() {
-        miJuego.listaDePersonajes[30].moverArriba();
-      }));
-      interpreter.setProperty(globalObject, 'moverIzquierda',interpreter.createNativeFunction(function moverIzquierda() {
-        miJuego.listaDePersonajes[30].moverIzquierda();
-      }));
-      interpreter.setProperty(globalObject, 'highlightBlock', interpreter.createNativeFunction(function(id) {
-        return workspace.highlightBlock(id);
-      }));
-    }
-    let myInterpreter = new Interpreter(code, initFunc); 
-    function nextStep() {
+      interpreter.setProperty(
+        globalObject,
+        "moverDerecha",
+        interpreter.createNativeFunction(function moverDerecha() {
+          miJuego.listaDePersonajes[30].moverDerecha();
+        })
+      );
+      interpreter.setProperty(
+        globalObject,
+        "moverAbajo",
+        interpreter.createNativeFunction(function moverAbajo() {
+          miJuego.listaDePersonajes[30].moverAbajo();
+        })
+      );
+      interpreter.setProperty(
+        globalObject,
+        "moverArriba",
+        interpreter.createNativeFunction(function moverArriba() {
+          miJuego.listaDePersonajes[30].moverArriba();
+        })
+      );
+      interpreter.setProperty(
+        globalObject,
+        "moverIzquierda",
+        interpreter.createNativeFunction(function moverIzquierda() {
+          miJuego.listaDePersonajes[30].moverIzquierda();
+        })
+      );
+      interpreter.setProperty(
+        globalObject,
+        "highlightBlockByType",
+        interpreter.createNativeFunction(function (type) {
+          var blocks = workspace.getBlocksByType(type);
+          if (blocks.length > 0) {
+            workspace.highlightBlock(blocks[0].id);
+          }
+        })
+      );
+    };
+    let myInterpreter = new Interpreter(code, initFunc);
+    function nextStep(block) {
+      console.log(myInterpreter)
       if (myInterpreter.step()) {
         window.setTimeout(nextStep, 150);
       }
+      //let block = myInterpreter.getCurrentBlock()
+      //this.workspace.highlightBlock(block.id);
+     // console.log(block.getDescendants().length);
     }
-    nextStep();
+    nextStep(block);
   }
-
 
   // renderizarBloquesPrecargados(listaAGenerar) {
   //   let listaDeObjetos = this.controlador.crearBloques(listaAGenerar);

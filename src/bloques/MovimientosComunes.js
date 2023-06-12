@@ -3,6 +3,8 @@ import { javascriptGenerator } from "blockly/javascript";
 
 // Blockly.JavaScript = new Blockly.Generator("JavaScript");
 // bloque mover abajo
+
+
 Blockly.common.defineBlocksWithJsonArray([
   {
     type: "move_down_param",
@@ -54,6 +56,7 @@ Blockly.common.defineBlocksWithJsonArray([
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator["move_down_simple"] = function (block) {
   const code = "moverAbajo();\n";
+ 
   return code;
 };
 
@@ -170,6 +173,7 @@ Blockly.common.defineBlocksWithJsonArray([
 // Define how to generate JavaScript from the custom block.
 javascriptGenerator["move_right_simple"] = function (block) {
   const code = "moverDerecha();\n";
+  this.workspace.highlightBlock(block.id);
   return code;
 };
 
@@ -270,3 +274,9 @@ javascriptGenerator['event_onclick'] = function (block) {
   let code = javascriptGenerator.statementToCode(block, 'EVENT');
   return code;
 };
+
+
+
+
+
+
