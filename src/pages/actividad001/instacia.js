@@ -1,5 +1,6 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
+//import {Controlador} from "../../../bloques/Controlador";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
@@ -70,7 +71,7 @@ const toolbox = {
  */
 // PRIMERO: instanciar el juego
 
-window.miJuego = new Juego(toolbox);
+window.miJuego = new Juego();
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
@@ -140,10 +141,10 @@ miJuego.agregarModal(datosModal);
 miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 //miJuego.generarWorkspace()
-document.getElementById("dhs-boton").addEventListener("click", function (e) {
-  e.preventDefault()
-  miJuego.ejecutar();
-});
+// document.getElementById("dhs-boton").addEventListener("click", function (e) {
+//   e.preventDefault()
+//   miJuego.ejecutar();
+// });
 // const arrayDePersonajes= [
 //   {
 //     nombre: "lupe",

@@ -1,22 +1,29 @@
 //es responsabilidad del juego rellenarlo
 import "../style.css";
 import "../styleActividades.css";
-import { tacho, play } from "./Iconos";
+//import { tacho, play } from "./Iconos";
 
 export function template(element) {
   return `
-      <div id="blocklyDiv" style="height: 580px; width: 700px;"></div>
-  
+  <div>
+  <button id="dhs-boton-ejecutar">Ejecutar</button>
+  <button id="dhs-boton-detener">Detener</button>
+  <button id="dhs-boton-reiniciar">Reiniciar Juego</button>
+  <span>Setear velocidad</span><input id="dhs-input-acelerador" type="range" min="0" max="2400" step="200">
+  <span>Desactivar bloques sueltos al mover</span><input id="dhs-input-bloques-sueltos" type="checkbox">
+  <br>
+  <textarea id="dhs-text-area-codigo-generado" value="" disabled></textarea>
+  <textarea id="dhs-text-area-output-generado" value="" disabled></textarea>
+
+  <div id='dhs-blockly-div' style='display: inline-block; height: 480px; width: 58%'></div>
+  </div>
       <!-- seccion derecha -->
   
       <section class="panel-derecho flex-col">
-      <textarea id="textarea" rows="20"></textarea>
+  
          <h4 id="dhs-encabezado-desafio">Laberinto</h4>
          <div id="elemento-escenario"></div>
-         <button id="dhs-boton">
-         <span>EJECUTAR</span>
-         <i> ${play} </i>
-         </button>
+        
       </section>
     `;
 }
