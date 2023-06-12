@@ -1,12 +1,76 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
-import { objetosComunes } from "../../clases/ObjetosComunes";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
+const toolbox = {
+  kind: "categoryToolbox",
+  contents: [
+    {
+      kind: "category",
+      name: "Eventos",
+      categorystyle: "procedure_category",
+      contents: [
+        {
+          type: "event_onclick",
+          kind: "block",
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "Sin params",
+      categorystyle: "variable_category",
+      contents: [
+        {
+          type: "move_up_simple",
+          kind: "block",
+        },
+        {
+          type: "move_down_simple",
+          kind: "block",
+        },
+        {
+          type: "move_left_simple",
+          kind: "block",
+        },
+        {
+          type: "move_right_simple",
+          kind: "block",
+        },
+      ],
+    },
+    {
+      kind: "category",
+      name: "JS",
+      categorystyle: "text_category",
+      contents: [
+        {
+          type: "controls_if",
+          kind: "block",
+        },
+      ],
+    },
+  ],
+};
+
+//Pia
+// Add backpacks
+//  const backpack = new NotificationBackpack(workspace);
+//  backpack.init();
+
+/**  Pia modificó:
+ * 29/05:
+ * Agregué el tacho de basura
+ * 24/05:
+ * En el Template.js saque las 2 secciones de bloques.
+ * Comenté todo el flujo de instanciacion de GenreradorDeBloques.js
+ * Agregué línea 8, blocklyDiv y un div conid texarea, en Template.js
+ * Agregué todo el codigo que esta arriba de éste comentario
+ */
 // PRIMERO: instanciar el juego
 
-window.miJuego = new Juego();
+window.miJuego = new Juego(toolbox);
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
@@ -17,7 +81,6 @@ const listaBloquesAGenerar = [
   "llave",
 ];
 
-miJuego.renderizarBloquesDisponibles(listaBloquesAGenerar);
 // CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [5, 6]; //fila, columna
 
@@ -74,8 +137,13 @@ const datosModalError = {
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
 miJuego.agregarModal(datosModal);
-miJuego.agregarModalError(datosModalError); // pia
+miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
+//miJuego.generarWorkspace()
+document.getElementById("dhs-boton").addEventListener("click", function (e) {
+  e.preventDefault()
+  miJuego.ejecutar();
+});
 // const arrayDePersonajes= [
 //   {
 //     nombre: "lupe",
@@ -92,8 +160,8 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     statusInicial: "normal",
-    posicionInicialY: 1, 
-    posicionInicialX: 1, 
+    posicionInicialY: 1,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
@@ -139,7 +207,7 @@ const arrayDePersonajes = [
     posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 1,
-    rotable:false,
+    rotable: false,
     colisiones: [],
   },
   {
@@ -154,7 +222,7 @@ const arrayDePersonajes = [
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
-    rotable:false,
+    rotable: false,
     colisiones: [],
   },
 ];
@@ -166,7 +234,7 @@ miJuego.generarPersonajes(arrayDePersonajes);
 
  * Mje de Lupe al usuario cuando quiere abrir el cofre y el cofre no está (Pía - fala agregar la foto void)
  * CSS: Arreglar el Modal with, que dependa del tablero (Pía - done)
- * Colisión con la bandera : "Ganar" igual que con el cofre
+ * Colisión con la bandera : "Ganar" igual que con el cofre. "Es un colback de Ganaste"
  * Conectar Blockly con éste motor de juego
  * Lupe: Debe tener un atributo "cantidadElementosJuntados" como si fuera una mochila donde va juntando: basura, manzanas, etc
  
