@@ -1,3 +1,8 @@
+import * as Blockly from "blockly";
+import * as acorn from "acorn";
+import Interpreter from "js-interpreter";
+// import { javascriptGenerator } from "blockly/javascript";
+
 class Controlador {
     constructor(
         juego,
