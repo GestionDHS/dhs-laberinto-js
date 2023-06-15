@@ -1,19 +1,18 @@
 //import * as Blockly from "blockly"
-import * as acorn from "acorn";
-import Interpreter from "js-interpreter";
-//import { javascriptGenerator } from "blockly/javascript";
-//import Blockly from 'blockly/javascript';
-//import {Blockly.JavaScript} from 'blockly/javaScript';
-// import 'blockly/blocks_compressed';
-// import 'blockly/javascript_compressed';
-// import 'blockly/msg/en';
-
+//import * as acorn from "acorn";
+//import Interpreter from "js-interpreter";
+// import { javascriptGenerator } from "blockly/javascript";
+// import Blockly from "blockly";
+// import "blockly/blocks_compressed";
+// import "blockly/javascript_compressed";
+// import "blockly/msg/en";
 
 class Controlador {
     constructor(
         juego,
-        veolocidadMilisegundos = 1000,
-        workspace,
+        veolocidadMilisegundos = 6000,
+        blocklyDivId,
+        miToolboxJSON,
         botonEjecutar,
         botonDetener = false,
         botonReiniciar = false,
@@ -27,7 +26,7 @@ class Controlador {
         // ELEMENTOS IMPORTANTES
         this.velocidad = veolocidadMilisegundos;
         this.juego = juego;
-        this.workspace = workspace;
+        this.workspace = Blockly.inject('dhs-blockly-div', {toolbox: JSON.parse(miToolboxJSON) });
         this.cuadroOutput = cuadroOutput;
         this.interpreteIterativo = null;
         this.callbackInterprete = null;
@@ -37,11 +36,12 @@ class Controlador {
         this.botonEjecutar = botonEjecutar;
         if (this.botonEjecutar) {
             this.botonEjecutar.addEventListener("click", () => {
+                console.log("clic en Ejecutar")
                 this.deshabilitarBotonEjecutar();
                 this.deshabilitarBotonReinicio();
                 this.rehabilitarBotonDetener();
                 this.recorrerPasos(false); // bool: sincronico.
-          true  });
+            });
         }
         this.botonDetener = botonDetener;
         if (this.botonDetener) {
@@ -68,6 +68,7 @@ class Controlador {
         if (this.inputAcelerador) {
             this.inputAcelerador?.addEventListener("input", () => {
                 let valor = parseInt(this.inputAcelerador.value);
+                console.log(valor)
                 let velocidad = 2500 - valor;
                 this.setearVelocidad(velocidad);
             })
@@ -123,6 +124,10 @@ class Controlador {
 
     // METODOS PARA EL WORKSPACE - SERIALIZACION
 
+    crearInyectarWorkspace(idElemento, objetoConfig){
+        Blockly.inject(idElemento, objetoConfig)
+    }
+
     limpiarWorkspace() {
         return this.workspace.clear()
     }
@@ -132,7 +137,6 @@ class Controlador {
         }
     }
     cargarBloquesSerializados(bloquesSerializados) {
-        console.log("cargando")
         return Blockly.serialization.workspaces.load(bloquesSerializados, this.workspace);
         // --load hace el clear previo--
     }
@@ -173,8 +177,8 @@ class Controlador {
     }
 
     setearPrefijoBloques(prefijo) {
-        //console.log(Blockly)
         Blockly.JavaScript.STATEMENT_PREFIX = prefijo;
+        console.log("setearPrefijoBloques: "+Blockly.JavaScript.STATEMENT_PREFIX)
     }
     setearSufijoBloques(sufijo) {
         Blockly.JavaScript.STATEMENT_SUFFIX = sufijo;
@@ -183,7 +187,8 @@ class Controlador {
         Blockly.JavaScript.addReservedWords(palabra);
     }
 
-    generarCodigoPrefijado(prefijo = this.prefijo, sufijo = this.sufijo) {
+    generarCodigoPrefijado(prefijo = this.prefijo, sufijo = this.prefijo) {
+        console.log("generarCodigoPrefijado: " +this.prefijo +" "+this.prefijo)
         this.setearPrefijoBloques(prefijo);
         this.setearSufijoBloques(sufijo);
         // ojo que falta re-chequear palabras reservadas.
@@ -231,6 +236,7 @@ class Controlador {
         let bloquecitoNumerico = inputVeces?.connection?.targetBlock();
         let valor = bloquecitoNumerico?.getFieldValue("NUM");
         let duracionDeLaPausa = 1;
+        console.log(valor)
         duracionDeLaPausa = valor ? valor * this.velocidad : this.velocidad;
         // IR AL PRÓXIMO
         setTimeout(() => {
@@ -254,7 +260,7 @@ class Controlador {
         }
         let codigoActual = sincronico? codigoActualCrudo : this.generarCodigoPrefijado();
         this.interpreteIterativo = this.crearInterprete(codigoActual, callback);
-
+        console.log(this.interpreteIterativo)
         this.hayCodigoPendiente = true; // ojo, deberíamos chequearlo.
         this.hacerPausaResaltar = false;
         this.hacerPausaQuitarResaltado = false;
@@ -281,6 +287,7 @@ class Controlador {
         ) {
             try {
                 this.hayCodigoPendiente = this.interpreteIterativo.step();
+                console.log("hayCodigoPendiente: " + this.hayCodigoPendiente)
                 if(this.juego && !this.juego.puedeDebeContinuar){this.debeDetenerEjecucion=true}
             } catch (e) {
                 console.log(e.message)
@@ -376,10 +383,16 @@ class Controlador {
 }
 
 export default class ControladorStandard extends Controlador {
-    constructor(juego, veolocidadMilisegundos, workspace, bloquesPreCargados=false) {
+    constructor(
+        juego,
+        veolocidadMilisegundos,
+        blocklyDivId,
+        blocklyWorkspaceConfig, 
+        bloquesPreCargados=false
+        ) {
         let elementoOutput = document.getElementById('dhs-text-area-output-generado');
         super(
-            juego, veolocidadMilisegundos, workspace,
+            juego, veolocidadMilisegundos, blocklyDivId, blocklyWorkspaceConfig,
             document.getElementById("dhs-boton-ejecutar"),
             document.getElementById("dhs-boton-detener"),
             document.getElementById("dhs-boton-reiniciar"),
@@ -389,7 +402,7 @@ export default class ControladorStandard extends Controlador {
             elementoOutput ? new MostradorOutput(elementoOutput) : false
         )
         if(bloquesPreCargados){
-            this.cargarBloquesSerializados(bloquesPreCargados);
+            this.cargarBloquesSerializados(JSON.parse(bloquesPreCargados));
         }
         setTimeout(()=>{
             document.getElementById("dhs-input-bloques-sueltos")?.setAttribute("checked",true);

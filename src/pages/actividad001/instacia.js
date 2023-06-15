@@ -1,80 +1,16 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
 import ControladorStandard from "../../bloques/Controlador";
-// import Blockly from 'blockly/blockly_compressed';
-// import 'blockly/blocks_compressed';
-// import 'blockly/javascript_compressed';
-// import 'blockly/msg/en';
-document.querySelector("#appActividad").innerHTML = template(``);
-import miToolboxJSON from "../../bloques/toolboxJsIO";
+//import Blockly from 'blockly';
+//import 'blockly/blocks_compressed';
+//import 'blockly/javascript_compressed';
+//import 'blockly/msg/en';
+
+//import miToolboxJSON from "../../bloques/toolboxJsIO";
 //import bloquesPrecargadosJSON from "./bloquesPrecargados";
-const toolbox = {
-  kind: "categoryToolbox",
-  contents: [
-    {
-      kind: "category",
-      name: "Eventos",
-      categorystyle: "procedure_category",
-      contents: [
-        {
-          type: "event_onclick",
-          kind: "block",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Sin params",
-      categorystyle: "variable_category",
-      contents: [
-        {
-          type: "move_up_simple",
-          kind: "block",
-        },
-        {
-          type: "move_down_simple",
-          kind: "block",
-        },
-        {
-          type: "move_left_simple",
-          kind: "block",
-        },
-        {
-          type: "move_right_simple",
-          kind: "block",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "JS",
-      categorystyle: "text_category",
-      contents: [
-        {
-          type: "controls_if",
-          kind: "block",
-        },
-      ],
-    },
-  ],
-};
 
-//Pia
-// Add backpacks
-//  const backpack = new NotificationBackpack(workspace);
-//  backpack.init();
-
-/**  Pia modificó:
- * 29/05:
- * Agregué el tacho de basura
- * 24/05:
- * En el Template.js saque las 2 secciones de bloques.
- * Comenté todo el flujo de instanciacion de GenreradorDeBloques.js
- * Agregué línea 8, blocklyDiv y un div conid texarea, en Template.js
- * Agregué todo el codigo que esta arriba de éste comentario
- */
+document.querySelector("#appActividad").innerHTML = template(``);
 // PRIMERO: instanciar el juego
-
 const miJuego = new Juego();
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
@@ -234,17 +170,15 @@ const arrayDePersonajes = [
 
 miJuego.generarPersonajes(arrayDePersonajes);
 const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"procedures_defnoreturn","id":"8BH1s@hcrZu{-_0H6OGt","x":144,"y":78,"icons":{"comment":{"text":"Describe this function...","pinned":false,"height":80,"width":160}},"fields":{"NAME":"saludar"},"inputs":{"STACK":{"block":{"type":"text_print","id":"-TL1e7.rx8dCX6w+d]jF","inputs":{"TEXT":{"shadow":{"type":"text","id":"^uT,ZfpH?$RJnbmF4.Bg","fields":{"TEXT":"Hola Lucho!"}}}},"next":{"block":{"type":"text_print","id":"O_YOmWt(h2Ds]`b?g{fq","inputs":{"TEXT":{"shadow":{"type":"text","id":"VP8D(SE=bm$Q/ZvX*F;s","fields":{"TEXT":"Bienvenido!"}}}},"next":{"block":{"type":"variables_set","id":"cr,`^`:!-nck0K^bij[P","fields":{"VAR":{"id":"n"}},"inputs":{"VALUE":{"block":{"type":"text_prompt_ext","id":"}EDaTBpvRz]h$th.To)g","extraState":"<mutation type=\\"TEXT\\"></mutation>","fields":{"TYPE":"TEXT"},"inputs":{"TEXT":{"shadow":{"type":"text","id":"FAptfzX@5aGQlTj%ooQe","fields":{"TEXT":"¿Cual es tu apellido?"}}}}}}},"next":{"block":{"type":"text_print","id":"yW`l=BPlv/qVG3%LKYvE","inputs":{"TEXT":{"shadow":{"type":"text","id":"4%WtpMAU#$i*{A_hn#0I","fields":{"TEXT":"Genial entonces"}}}},"next":{"block":{"type":"text_print","id":"EyMm??F$vBFV=H(L6e1|","inputs":{"TEXT":{"shadow":{"type":"text","id":"WqE)a%lwrr@ASVoL(zpG","fields":{"TEXT":"abc"}},"block":{"type":"variables_get","id":"H-HVcgmemxmrd8Pi^~Qs","fields":{"VAR":{"id":"n"}}}}}}}}}}}}}}}}},{"type":"procedures_callnoreturn","id":"tcuK1r4oW[*Vt41){mV|","x":45,"y":51,"extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"Pm^DF#|HQS!NC?l7[Jq9","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"ZRPIXDp?@,izj.1+K%g]","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"Lh,UzXrItT$LSG_Oy-|)","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"ex*AeN^hv9^/F)Y5f5!R","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"_YwKOnFm$d[(Dlf0[f)^","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"e!bY!^1uz;lm7#HNfo$B","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"C@mt)vy)`FQr*rIMI]rx","extraState":{"name":"saludar"}}}}}}}}}}}}}}}}]},"variables":[{"name":"apellido","id":"n"}]}';
+const miToolboxJSON = '{"contents":[{"kind":"CATEGORY","name":"Logic","colour":"%{BKY_LOGIC_HUE}","contents":[{"kind":"BLOCK","type":"controls_if"},{"kind":"BLOCK","type":"logic_compare"},{"kind":"BLOCK","type":"logic_operation"},{"kind":"BLOCK","type":"logic_negate"},{"kind":"BLOCK","type":"logic_boolean"}]},{"kind":"CATEGORY","name":"Loops","colour":"%{BKY_LOOPS_HUE}","contents":[{"kind":"BLOCK","type":"controls_repeat_ext","inputs":{"TIMES":{"shadow":{"type":"math_number","fields":{"NUM":10}}}}},{"kind":"BLOCK","type":"controls_whileUntil"}]},{"kind":"CATEGORY","name":"Math","colour":"%{BKY_MATH_HUE}","contents":[{"kind":"BLOCK","type":"math_number"},{"kind":"BLOCK","type":"math_arithmetic","inputs":{"A":{"shadow":{"type":"math_number","fields":{"NUM":1}}},"B":{"shadow":{"type":"math_number","fields":{"NUM":1}}}}},{"kind":"BLOCK","type":"math_single","inputs":{"NUM":{"shadow":{"type":"math_number","fields":{"NUM":9}}}}}]},{"kind":"CATEGORY","name":"Text","colour":"%{BKY_TEXTS_HUE}","contents":[{"kind":"BLOCK","type":"text"},{"kind":"BLOCK","type":"text_length","inputs":{"VALUE":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}},{"kind":"BLOCK","type":"text_print","inputs":{"TEXT":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}},{"kind":"BLOCK","type":"text_prompt_ext","inputs":{"TEXT":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}}]},{"kind":"SEP"},{"kind":"CATEGORY","name":"Variables","custom":"VARIABLE","colour":"%{BKY_VARIABLES_HUE}"},{"kind":"CATEGORY","name":"Functions","custom":"PROCEDURE","colour":"%{BKY_PROCEDURES_HUE}"}]}';
 
 //Generamos el workspace
-window.miControlador = new ControladorStandard(
+const miControlador = new ControladorStandard(
   miJuego,
-  1000,
-  Blockly.inject("dhs-blockly-div", {
-    //media: "./node_modules/blockly/media/",
-    toolbox: miToolboxJSON,
-    trashcan: true,
-  }),
-  JSON.parse(bloquesPrecargadosJSON)
+  5000,
+  'dhs-blockly-div', 
+  miToolboxJSON,
+  bloquesPrecargadosJSON
 );
 miControlador.crearFuncionesGlobalesStandard();
 miControlador.setearCallbackInterprete(

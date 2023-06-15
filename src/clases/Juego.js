@@ -24,6 +24,7 @@ export class Juego {
     //this.controlador.borrarTodo();
     this.escenario = {};
     this.listaDePersonajes = [];
+    this.puedeDebeContinuar = true;
     //this.habilitar();
     // this.workspace = Blockly.inject("blocklyDiv", {
     //   toolbox: toolbox,
