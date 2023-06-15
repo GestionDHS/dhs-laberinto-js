@@ -1,231 +1,125 @@
+/* MOBILE */
 *{
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #appActividad {
   height: 100%;
   width: 100%;
   background-color: var(--color-blanco);
-  /* display: grid;
-  grid-template-columns: 1.5fr 2fr 2.5fr;
-  gap: 0.5em; */
 }
-h4 {
-  font-size: 1.3rem;
-}
-ul {
-  list-style: none;
-}
-li {
-  list-style: none;
-  border: 1px solid var(--color-gris-claro);
-  background-color: var(--acento);
-  color: var(--blanco);
-  width: 160px;
-  text-align: center;
-  font-size: 15px;
-  border-radius: 3px;
-  cursor: grab;
-  margin: 10px auto;
+
+/* Header: donde estan los botones para reproducir y configurar  */
+
+header{
   display: grid;
-  grid-template-columns: 30px auto;
+  gap: 10px;
+  background-color: var(--color-gris-oscuro);
+}
+
+header > div h1{
+  color: var(--acento);
+  padding: 20px;
+  margin: 0;
+}
+header section.barra{
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 0.5fr;
   align-items: center;
-  padding: 3px;
+  justify-content: space-evenly;
+  padding: 10px 0;
+  
 }
-li img {
-  width: 100%;
-}
-span {
-  text-decoration: none;
-}
-.flex-col {
+
+header section.barra div.botones{
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
 }
-#dhs-lista-bloques-disponibles {
-  width: 100%;
-  padding: 0em 0.2em;
-}
-.panel-central {
-  justify-content: space-between;
-  background-color: var(--color-primario);
-  color: var(--color-negro);
-}
-#dhs-lista-instrucciones {
-  min-height: 40vh;
-  padding-left: 0%;
-}
-.dhs-basura {
-  color: var(--color-gris-turquesa);
-  height: 12vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.dhs-basura i {
-  z-index: 99;
-  position: fixed;
-  font-size: 3rem;
-  margin-left: 0%;
-}
-.dhs-basura i:hover {
-  transform: scale(1.2);
-}
-.dhs-basura-lista {
-  height: 100%;
-  width: 100%;
-}
-#dhs-basura-lista > li {
+
+header section.barra div.desactivarSueltos{
   display: none;
 }
-i {
-  margin-left: 8%;
+
+header section.barra div.botones button{
+  border: 0;
+  background: none;
 }
-/* .panel-derecho {
-  display: flex;
-  flex-direction: column;
-  color: var(--color-negro);
-  grid-column: 3/4;
-} */
-.panel-juego{
-  justify-content: center;
+
+header section.barra i{
+  font-size: 15px;
+  color: var(--color-blanco);
+}
+
+header section.barra div.rango{
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
   align-items: center;
 }
-#elemento-escenario{
-  position: relative;
-  margin:0 auto;
-  padding: 0 auto; 
-}
-/* #dhs-laberinto {
-  width: 390px; 
-  height: 350px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  place-items: center;
-  border: 2px solid var(--color-terciario);
-  margin: 1rem auto 5rem auto;
-}
-#dhs-laberinto > div {
-  width: 100%;
-  min-height: 7.1rem;
-  display: grid;
-  place-items: center;
-  border: 2px solid var(--color-terciario);
-  margin: 0;
-  padding: 0;
-} */
-/*  Escenario  */
-.personaje {
-  text-align: center;
-  position: absolute;
-  border-radius: 5px;
+
+header section.barra div.mostrar{
+  display: none;
+  /* display: grid; */
+  grid-template-columns: auto auto;
+  /* justify-items: end; */
 }
 
-.personaje img {
-  width: 100%;
-  height: 100%;
-  padding: 2px;
+header section.barra div.mostrar div{
+  display: grid;
+  justify-content: center;
 }
 
-/*TOOLTIPS JUEGO*/
-.tooltip {
-  position: relative;
+header section.barra div.mostrar div input{
+  width: 30px;
+}
+
+header section.barra div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
+  background: var(--color-blanco);
+  border-radius: 10px;
+  border: 1px solid;
+}
+
+header section.barra div.mostrar div input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  background: red;
+  transition: .2s ease-in-out;
+}
+
+
+
+/* Main: donde esta el workspace, el juego y los bloques para mostrar codigo y output */
+
+main{
+  padding: 15px;
+  display: grid;
+  align-items: center;
+}
+
+main div.espacioBloques{
+  width: 100%;
+  height: 480px;
   display: inline-block;
 }
 
-.tooltip .tooltiptext {
-  /*border:2px solid var(--color-cuarto);*/
-  visibility: hidden;
-  width: 140px;
-  font-family: monospace;
-  background-color: var(--color-gris-claro);
-  color: var(--color-blanco);
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 5;
-  top: -2px;
-  right: 110%;
+main div.juego-escenario textarea.esconder{
+  display: none;
 }
 
-/* .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -10px;
-  border-width: 7px;
-  border-style: solid;
-  border-color: transparent transparent transparent var(--gris-claro);
-} */
-
-.tooltipVisible .tooltiptext {
-  visibility: visible;
-}
-
-
-/*.casilleros   .casillero-pared  .casillero-camino 
-se crean dinamicamente en js en el archivo Escenario.js*/
-
-
-
-
-/* Btn Ejecutar*/
-/* #dhs-btn-ejecutar {
-    border: none;
-    border-radius: 6px;
-    background-color: var(--color-cuarto);
-    width: 10rem;
-    height: 4rem;
-    font-size: 20px;
-    color: var(--color-blanco);
-  } */
-#dhs-boton {
-  display: flex;
-  background-color: var(--color-confirmacion);
-  color: var(--color-blanco);
-  border-radius: 5px;
-  border: none;
-  margin: 20px auto;
-  padding: 14px 18px;
-  justify-content: center;
+main div.juego-escenario div.juego {
+  display: grid;
   align-items: center;
-}
-#dhs-boton:hover {
-  border: 2px solid var(--acento);
-  transform: scale(1.1);
-}
-#dhs-boton:active {
-  border: 2px solid var(--acento);
-  background-color: var(--color-terciario);
-  font-weight: bold;
+  justify-content: center;
+  padding: 10px;
 }
 
-/* SORTABLE */
-
-.sortable-chosen {
-  box-shadow: 0 0 10px 5px var(--);
-  animation: chauDespacito 3s ease-out;
-}
-
-.sortable-drag {
-  opacity: 1;
-  box-shadow: 0 0 10px 5px var(--gris_claro);
-}
-
-.sortable-ghost {
-  visibility: hidden;
-}
-
-/* SwAl */
-.swal2-container {
-  position: absolute;
-  z-index: 99;
+main div.juego-escenario div.juego div.escenario{
+  position: relative;
+  margin-left: 30px;
 }
 
 /* Modal Panel Abrir Cofre*/
-div.dhs-modal-pannel {
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel {
   position: absolute;
   overflow: hidden;
   display: grid;
@@ -245,7 +139,7 @@ div.dhs-modal-pannel {
   opacity: 85%;
 }
 
-div.dhs-modal-pannel-hidden {
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel-hidden {
   visibility: hidden;
   opacity: 20%;
   top: 50%;
@@ -255,7 +149,7 @@ div.dhs-modal-pannel-hidden {
   font-size: 0px;
 }
 
-div.dhs-modal-pannel p.dhs-modal-pannel-title {
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-modal-pannel-title {
   padding: 10px;
   margin: 0;
   color: var(--blanco);
@@ -263,18 +157,75 @@ div.dhs-modal-pannel p.dhs-modal-pannel-title {
   font-weight: bold;
 }
 
-div.dhs-modal-pannel img.dhs-modal-pannel-image {
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel img.dhs-modal-pannel-image {
   width: 30%;
   margin: auto;
   border-radius: 20px;
 }
 
-div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
   font-weight: bold;
   font-size: 65%;
   margin: 0;
   padding: 5px;
 }
-#dhs-blockly-div{
-  width: 1000px;
+
+/*  Escenario  */
+.personaje {
+  text-align: center;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.personaje img {
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+}
+
+/*TOOLTIPS JUEGO*/
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+  /* border:2px solid var(--color-cuarto); */
+  visibility: hidden;
+  width: 140px;
+  font-family: monospace;
+  background-color: var(--color-gris-claro);
+  color: var(--color-blanco);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0px;
+  position: absolute;
+  z-index: 5;
+  top: -2px;
+  right: 110%;
+}
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -10px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+}
+
+.tooltipVisible .tooltiptext , .tooltip:hover .tooltiptext{
+  visibility: visible;
+}
+
+/* TABLET y PC */
+@media (min-width: 768px) {
+  header{
+    grid-template-columns: 1fr 2fr;
+  }
+
+  main{
+    grid-template-columns: 2fr 1fr;
+  }
 }
