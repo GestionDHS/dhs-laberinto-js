@@ -9,7 +9,7 @@
   --color-gris-turquesa:#0e7d96;
   --color-gris-claro:rgba(160, 160, 160, 0.59);
   --color-confirmacion:#007a4c;
-  
+  --color-gris-oscuro: #3f3f3fff;
 }
 #app{
   width: 100%;
