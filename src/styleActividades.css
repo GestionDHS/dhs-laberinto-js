@@ -6,9 +6,9 @@
   height: 100%;
   width: 100%;
   background-color: var(--color-blanco);
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1.5fr 2fr 2.5fr;
-  gap: 0.5em;
+  gap: 0.5em; */
 }
 h4 {
   font-size: 1.3rem;
@@ -274,4 +274,7 @@ div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
   font-size: 65%;
   margin: 0;
   padding: 5px;
+}
+#dhs-blockly-div{
+  width: 1000px;
 }

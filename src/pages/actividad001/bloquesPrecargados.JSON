@@ -63,7 +63,7 @@
                                                     "block": {
                                                         "type": "text_prompt_ext",
                                                         "id": "}EDaTBpvRz]h$th.To)g",
-                                                        "extraState": "<mutation type=`TEXT`></mutation>",
+                                                        "extraState": "<mutation type='TEXT'></mutation>",
                                                         "fields": {
                                                             "TYPE": "TEXT"
                                                         },

@@ -1,9 +1,13 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../clases/Template";
-//import {Controlador} from "../../../bloques/Controlador";
-
+import ControladorStandard from "../../bloques/Controlador";
+// import Blockly from 'blockly/blockly_compressed';
+// import 'blockly/blocks_compressed';
+// import 'blockly/javascript_compressed';
+// import 'blockly/msg/en';
 document.querySelector("#appActividad").innerHTML = template(``);
-
+import miToolboxJSON from "../../bloques/toolboxJsIO";
+//import bloquesPrecargadosJSON from "./bloquesPrecargados";
 const toolbox = {
   kind: "categoryToolbox",
   contents: [
@@ -15,8 +19,8 @@ const toolbox = {
         {
           type: "event_onclick",
           kind: "block",
-        }
-      ]
+        },
+      ],
     },
     {
       kind: "category",
@@ -71,7 +75,7 @@ const toolbox = {
  */
 // PRIMERO: instanciar el juego
 
-window.miJuego = new Juego();
+const miJuego = new Juego();
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
@@ -229,7 +233,27 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
+const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"procedures_defnoreturn","id":"8BH1s@hcrZu{-_0H6OGt","x":144,"y":78,"icons":{"comment":{"text":"Describe this function...","pinned":false,"height":80,"width":160}},"fields":{"NAME":"saludar"},"inputs":{"STACK":{"block":{"type":"text_print","id":"-TL1e7.rx8dCX6w+d]jF","inputs":{"TEXT":{"shadow":{"type":"text","id":"^uT,ZfpH?$RJnbmF4.Bg","fields":{"TEXT":"Hola Lucho!"}}}},"next":{"block":{"type":"text_print","id":"O_YOmWt(h2Ds]`b?g{fq","inputs":{"TEXT":{"shadow":{"type":"text","id":"VP8D(SE=bm$Q/ZvX*F;s","fields":{"TEXT":"Bienvenido!"}}}},"next":{"block":{"type":"variables_set","id":"cr,`^`:!-nck0K^bij[P","fields":{"VAR":{"id":"n"}},"inputs":{"VALUE":{"block":{"type":"text_prompt_ext","id":"}EDaTBpvRz]h$th.To)g","extraState":"<mutation type=\\"TEXT\\"></mutation>","fields":{"TYPE":"TEXT"},"inputs":{"TEXT":{"shadow":{"type":"text","id":"FAptfzX@5aGQlTj%ooQe","fields":{"TEXT":"¿Cual es tu apellido?"}}}}}}},"next":{"block":{"type":"text_print","id":"yW`l=BPlv/qVG3%LKYvE","inputs":{"TEXT":{"shadow":{"type":"text","id":"4%WtpMAU#$i*{A_hn#0I","fields":{"TEXT":"Genial entonces"}}}},"next":{"block":{"type":"text_print","id":"EyMm??F$vBFV=H(L6e1|","inputs":{"TEXT":{"shadow":{"type":"text","id":"WqE)a%lwrr@ASVoL(zpG","fields":{"TEXT":"abc"}},"block":{"type":"variables_get","id":"H-HVcgmemxmrd8Pi^~Qs","fields":{"VAR":{"id":"n"}}}}}}}}}}}}}}}}},{"type":"procedures_callnoreturn","id":"tcuK1r4oW[*Vt41){mV|","x":45,"y":51,"extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"Pm^DF#|HQS!NC?l7[Jq9","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"ZRPIXDp?@,izj.1+K%g]","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"Lh,UzXrItT$LSG_Oy-|)","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"ex*AeN^hv9^/F)Y5f5!R","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"_YwKOnFm$d[(Dlf0[f)^","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"e!bY!^1uz;lm7#HNfo$B","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"C@mt)vy)`FQr*rIMI]rx","extraState":{"name":"saludar"}}}}}}}}}}}}}}}}]},"variables":[{"name":"apellido","id":"n"}]}';
 
+//Generamos el workspace
+window.miControlador = new ControladorStandard(
+  miJuego,
+  1000,
+  Blockly.inject("dhs-blockly-div", {
+    //media: "./node_modules/blockly/media/",
+    toolbox: miToolboxJSON,
+    trashcan: true,
+  }),
+  JSON.parse(bloquesPrecargadosJSON)
+);
+miControlador.crearFuncionesGlobalesStandard();
+miControlador.setearCallbackInterprete(
+  (interpreter, globalObject) => {
+      miControlador.callbackInterpreteStandard(interpreter, globalObject);
+      //miControlador.juego.callbackInterpreteStandard(interpreter, globalObject);
+      //callbackExtras(interpreter, globalObject);
+  }
+);
 //TODO:
 /**
 

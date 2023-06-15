@@ -3,7 +3,7 @@
 import { Escenario } from "./Escenario";
 import { Personaje } from "./Personaje";
 import { Modal } from "./Modal";
-// import * as Blockly from "blockly";
+
 // import { javascriptGenerator } from "blockly/javascript";
 // import * as acorn from "acorn";
 // import Interpreter from "js-interpreter";

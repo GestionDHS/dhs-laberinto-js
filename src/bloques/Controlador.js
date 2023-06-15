@@ -1,7 +1,13 @@
-import * as Blockly from "blockly";
+//import * as Blockly from "blockly"
 import * as acorn from "acorn";
 import Interpreter from "js-interpreter";
-// import { javascriptGenerator } from "blockly/javascript";
+//import { javascriptGenerator } from "blockly/javascript";
+//import Blockly from 'blockly/javascript';
+//import {Blockly.JavaScript} from 'blockly/javaScript';
+// import 'blockly/blocks_compressed';
+// import 'blockly/javascript_compressed';
+// import 'blockly/msg/en';
+
 
 class Controlador {
     constructor(
@@ -126,6 +132,7 @@ class Controlador {
         }
     }
     cargarBloquesSerializados(bloquesSerializados) {
+        console.log("cargando")
         return Blockly.serialization.workspaces.load(bloquesSerializados, this.workspace);
         // --load hace el clear previo--
     }
@@ -166,6 +173,7 @@ class Controlador {
     }
 
     setearPrefijoBloques(prefijo) {
+        //console.log(Blockly)
         Blockly.JavaScript.STATEMENT_PREFIX = prefijo;
     }
     setearSufijoBloques(sufijo) {
@@ -367,7 +375,7 @@ class Controlador {
     }
 }
 
-class ControladorStandard extends Controlador {
+export default class ControladorStandard extends Controlador {
     constructor(juego, veolocidadMilisegundos, workspace, bloquesPreCargados=false) {
         let elementoOutput = document.getElementById('dhs-text-area-output-generado');
         super(
@@ -447,4 +455,4 @@ class MostradorOutput {
         this.elemento.value += "\n\n\nPROGRAMA TERMINADO";
     }
 }
-export default {Controlador, ControladorStandard, MostradorOutput}
+//export default {Controlador, ControladorStandard, MostradorOutput}
