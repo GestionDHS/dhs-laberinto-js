@@ -215,7 +215,7 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   border-color: transparent transparent transparent transparent;
 }
 
-.tooltipVisible .tooltiptext , .tooltip:hover .tooltiptext{
+.tooltipVisible .tooltiptext , .botonera:hover .tooltiptext{
   visibility: visible;
 }
 

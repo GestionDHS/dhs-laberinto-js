@@ -11,21 +11,21 @@ export function template(element) {
   </div>
   <section class="barra">
     <div class="botones">
-      <button class="tooltip" id="dhs-boton-ejecutar"><i> ${play} </i><span class="tooltiptext">Ejecutar bloques</span></button>
-      <button class="tooltip" id="dhs-boton-detener"><i> ${stop} </i><span class="tooltiptext">Detener ejecución</span></button>
-      <button class="tooltip" id="dhs-boton-reiniciar"><i> ${restart} </i><span class="tooltiptext">Reiniciar juego</span></button>
-      <button class="tooltip" id="dhs-boton-borrar"><i> ${trash} </i><span class="tooltiptext">Borrar todos los bloques</span></button>
+      <button class="tooltip botonera" id="dhs-boton-ejecutar"><i> ${play} </i><span class="tooltiptext">Ejecutar bloques</span></button>
+      <button class="tooltip botonera" id="dhs-boton-detener"><i> ${stop} </i><span class="tooltiptext">Detener ejecución</span></button>
+      <button class="tooltip botonera" id="dhs-boton-reiniciar"><i> ${restart} </i><span class="tooltiptext">Reiniciar juego</span></button>
+      <button class="tooltip botonera" id="dhs-boton-borrar"><i> ${trash} </i><span class="tooltiptext">Borrar todos los bloques</span></button>
     </div>
     <div class="rango">
-      <i class="tooltip"> ${standingPerson} <span class="tooltiptext">Más lento</span></i><input id="dhs-input-acelerador" type="range" min="0" max="2400" step="200"><i class="tooltip"> ${runningPerson} <span class="tooltiptext">Más rápido</span></i>
+      <i class="tooltip botonera"> ${standingPerson} <span class="tooltiptext">Más lento</span></i><input id="dhs-input-acelerador" type="range" min="0" max="2400" step="200"><i class="tooltip botonera"> ${runningPerson} <span class="tooltiptext">Más rápido</span></i>
     </div>
     <div class="mostrar">
       <div>
-        <i class="tooltip">${code}<span class="tooltiptext">Mostrar código</span></i>
+        <i class="tooltip botonera">${code}<span class="tooltiptext">Mostrar código</span></i>
         <input type="range" value="0" min="0" max="1">
       </div>
       <div>
-        <i class="tooltip">${comment}<span class="tooltiptext">Mostrar resultado</span></i>
+        <i class="tooltip botonera">${comment}<span class="tooltiptext">Mostrar resultado</span></i>
         <input type="range" value="0" min="0" max="1">
       </div>
     </div>
