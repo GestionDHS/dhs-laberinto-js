@@ -1,33 +1,231 @@
-body{
-    background-color: var(--color-blanco);
-    display:grid;
-    grid-template-columns: 1.3fr 2fr 2fr; 
-}
-.panel-izquierdo{
-    height: 100vh;
-    color: var(--color-negro);
-    grid-column: 1/2;
-}
-.panel-central{
-    height: 100vh;
-    background-color: var(--color-primario);
-    color: var(--color-negro);
-    grid-column: 2/3;
+/* MOBILE */
+*{
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.panel-derecho{
-    height: 100vh;
-    color: var(--color-negro);
-    grid-column: 3/4;
+#appActividad {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-blanco);
 }
 
-ul{
-    list-style: none;
+/* Header: donde estan los botones para reproducir y configurar  */
+
+header{
+  display: grid;
+  gap: 10px;
+  background-color: var(--color-gris-oscuro);
 }
 
-.bloques-fruta{
-    height:30px;
-    width: 80px;
-    background-color: var(--acento);
-    margin-top: 2px;
+header > div h1{
+  color: var(--acento);
+  padding: 20px;
+  margin: 0;
+}
+header section.barra{
+  display: grid;
+  grid-template-columns: 0.7fr 1fr 0.5fr;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 0;
+  
+}
+
+header section.barra div.botones{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+header section.barra div.desactivarSueltos{
+  display: none;
+}
+
+header section.barra div.botones button{
+  border: 0;
+  background: none;
+}
+
+header section.barra i{
+  font-size: 15px;
+  color: var(--color-blanco);
+}
+
+header section.barra div.rango{
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  align-items: center;
+}
+
+header section.barra div.mostrar{
+  display: none;
+  /* display: grid; */
+  grid-template-columns: auto auto;
+  /* justify-items: end; */
+}
+
+header section.barra div.mostrar div{
+  display: grid;
+  justify-content: center;
+}
+
+header section.barra div.mostrar div input{
+  width: 30px;
+}
+
+header section.barra div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
+  background: var(--color-blanco);
+  border-radius: 10px;
+  border: 1px solid;
+}
+
+header section.barra div.mostrar div input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  background: red;
+  transition: .2s ease-in-out;
+}
+
+
+
+/* Main: donde esta el workspace, el juego y los bloques para mostrar codigo y output */
+
+main{
+  padding: 15px;
+  display: grid;
+  align-items: center;
+}
+
+main div.espacioBloques{
+  width: 100%;
+  height: 480px;
+  display: inline-block;
+}
+
+main div.juego-escenario textarea.esconder{
+  display: none;
+}
+
+main div.juego-escenario div.juego {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+main div.juego-escenario div.juego div.escenario{
+  position: relative;
+  margin-left: 30px;
+}
+
+/* Modal Panel Abrir Cofre*/
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel {
+  position: absolute;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px auto 50px;
+  top: 0%;
+  left: 0%;
+  width: 92%;
+  height: 100%;
+  background: var(--color-confirmacion);
+  border: 1px solid var(--negro);
+  z-index: 20;
+  text-align: center;
+  transition: all .35s;
+  font-size: 25px;
+  border: 3px solid var(--color-primario);
+  opacity: 85%;
+}
+
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel-hidden {
+  visibility: hidden;
+  opacity: 20%;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  font-size: 0px;
+}
+
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-modal-pannel-title {
+  padding: 10px;
+  margin: 0;
+  color: var(--blanco);
+  font-size: 100%;
+  font-weight: bold;
+}
+
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel img.dhs-modal-pannel-image {
+  width: 30%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
+  font-weight: bold;
+  font-size: 65%;
+  margin: 0;
+  padding: 5px;
+}
+
+/*  Escenario  */
+.personaje {
+  text-align: center;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.personaje img {
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+}
+
+/*TOOLTIPS JUEGO*/
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+  /* border:2px solid var(--color-cuarto); */
+  visibility: hidden;
+  width: 140px;
+  font-family: monospace;
+  background-color: var(--color-gris-claro);
+  color: var(--color-blanco);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0px;
+  position: absolute;
+  z-index: 5;
+  top: -2px;
+  right: 110%;
+}
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -10px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+}
+
+.tooltipVisible .tooltiptext , .botonera:hover .tooltiptext{
+  visibility: visible;
+}
+
+/* TABLET y PC */
+@media (min-width: 768px) {
+  header{
+    grid-template-columns: 1fr 2fr;
+  }
+
+  main{
+    grid-template-columns: 2fr 1fr;
+  }
 }

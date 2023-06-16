@@ -1,53 +1,109 @@
-export class Escenario{
-    constructor(matriz,elementoHTML,unidadAnchoDeseada,colorBordes = "white"){
-        this.matriz=matriz
-        this.colorBordes = colorBordes;
-        this.renderizarLaberinto(elementoHTML, unidadAnchoDeseada);
-        this.objetosCasilleros = []; // La matriz de objetos Casilleros
-        //entiendo la facilidad pero le buscaria la vuelta para que sea todo orientado a objetos
-      for (let f = 0; f < matrizCruda.length; f++) {
-        let newRow = [];
-        for (let c = 0; c < matrizCruda[f].length; c++) {
-          let newCas;
-          if (matrizCruda[f][c] == 1) {
-            newCas = new Casillero("wall", f, c, unidadAnchoDeseada, this.colorBordes);
-          } else if (matrizCruda[f][c] == 0) {
-            newCas = new Casillero("path", f, c, unidadAnchoDeseada, this.colorBordes);
-          } else {
-            console.log("ERROR EN CASILLEROS");
-          }
-          newRow.push(newCas);
-          this.elementoHTML.appendChild(newCas.elementoHTML);
-        }
-        this.objetosCasilleros.push(newRow);
-      }
-    }
-    
+import { DHS_Gallery } from "./Dhs-galeria";
+import { Personaje } from "./Personaje";
+import { Modal } from "./Modal";
 
-    renderizarLaberinto(elementoHTML, unidadAnchoDeseada) {
-        this.unidadAncho = unidadAnchoDeseada;
-        this.anchoTotal = this.unidadAncho * this.matrizCruda[0].length;
-        this.altoTotal = this.unidadAncho * this.matrizCruda.length;
-        this.elementoHTML = elementoHTML;
-        this.elementoHTML.style.width = this.anchoTotal + "px";
-        this.elementoHTML.style.height = this.altoTotal + "px";
-      }
-    }
-
-    
-class Casillero {
-    constructor(type, fila, columna) {
-      this.elementoHTML = document.createElement("DIV");
-      this.elementoHTML.classList.add("casillero");
-      this.idElemento = "cas-" + fila + "-" + columna;
-      this.elementoHTML.setAttribute("id", this.idElemento);
-  
-      this.occupants = [];
-      this.setear(type)
-    }
-    setear(tipo) {
-      this.type = tipo;
-      this.walkable = tipo == "path";
-      this.elementoHTML.setAttribute("class", "casillero " + tipo);
-    }
+export class Escenario {
+  constructor(
+    dimensiones,
+    tablero,
+    unidadAnchoDeseada,
+    elementoHTML,
+    colorBordes,
+    objetoCamino,
+    objetoPared
+  ) {
+    this.galeria = new DHS_Gallery();
+    this.dimensiones = dimensiones;
+    this.tablero = tablero;
+    this.unidadAnchoDeseada = unidadAnchoDeseada;
+    this.elementoHTML = elementoHTML;
+    this.colorBordes = colorBordes;
+    this.objetoCamino = objetoCamino;
+    this.objetoPared = objetoPared;
+    this.objetosCasilleros = []; // La matriz de objetos Casillero
   }
+  crearEscenario() {
+    for (let fila = 0; fila < this.dimensiones[0]; fila++) {
+      let nuevaFila = [];
+      for (let col = 0; col < this.dimensiones[1]; col++) {
+        let nuevoCasillero = this.crearCasillero(fila, col);
+        nuevaFila.push(nuevoCasillero);
+        this.elementoHTML.appendChild(nuevoCasillero.casilla);
+      }
+      this.objetosCasilleros.push(nuevaFila);
+    }
+
+    const reglaCasilleros = document.createElement("STYLE");
+    reglaCasilleros.innerHTML = `
+      .casillero{
+        float:left;
+        background-size: cover;
+        width: ${this.unidadAnchoDeseada}em;
+        height: ${this.unidadAnchoDeseada}em;
+        border: 1px solid ${this.colorBordes};
+      }
+      .casillero-arbol{
+        background-image: url(${this.galeria.obtenerUrlDe(
+          this.objetoPared.status.normal.imageUrl
+        )})
+      }
+
+      .casillero-camino{
+        background-image: url(${this.galeria.obtenerUrlDe(
+          this.objetoCamino.status.normal.imageUrl
+        )})
+      }
+      .personaje{
+        width: ${this.unidadAnchoDeseada}em;
+        height: ${this.unidadAnchoDeseada}em;
+        position: absolute;
+      }
+      `;
+    document.querySelector("head").appendChild(reglaCasilleros);
+    this.renderizarLaberinto();
+  }
+
+  crearCasillero(fila, columna) {
+    return new Casillero(fila, columna);
+  }
+
+  renderizarLaberinto() {
+    let anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
+    let altoTotal = this.unidadAnchoDeseada * this.tablero.length;
+    this.elementoHTML.style.width =
+      anchoTotal + this.tablero[0].length * 2 * 0.16 + "em";
+    this.elementoHTML.style.height = altoTotal + "em";
+  }
+  obtenerCasillero(posicionY, posicionX) {
+    //console.log(this.objetosCasilleros[posicionY][posicionX]);
+    return this.objetosCasilleros[posicionY][posicionX];
+  }
+  
+}
+
+export class Casillero {
+  constructor(fila, columna) {
+    this.fila = fila;
+    this.columna = columna;
+    this.casilla = document.createElement("DIV");
+    this.ocupantes = [];
+  }
+
+  esPisable() {
+    return this.tipo == "camino";
+  }
+
+  hayColisionCon(colisiones) {
+    let obj = { factorDeAvance: 1 };
+    colisiones.forEach((o) => {
+      if (this.verSiExisteEnArray(o)) {
+        obj = o;
+      }
+    });
+    return obj;
+  }
+  verSiExisteEnArray(object) {
+    let objEncontrado = this.ocupantes.find((o) => o.idHTML == object.con);
+    return objEncontrado;
+  }
+}
