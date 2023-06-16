@@ -1,6 +1,7 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
+// import { toolbox } from 'blockly/core/utils';
 
 
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -31,7 +32,7 @@ const tablero = [
 
 const arbol = {
   idUsarHTML: "arbol",
-  tipoPersonaje: "probando",
+  tipoPersonaje: "arbol",
   status: {
     normal: { name: "normal", imageUrl: "arboles" },
   },
@@ -44,7 +45,7 @@ const arbol = {
 };
 const pasto = {
   idUsarHTML: "camino",
-  tipoPersonaje: "probando",
+  tipoPersonaje: "camino",
   status: {
     normal: { name: "normal", imageUrl: "pasto" },
   },
@@ -91,7 +92,7 @@ miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
-    tipoPersonaje: "probando",
+    tipoPersonaje: "lupe",
     status: {
       normal: { name: "normal", imageUrl: "lupe" },
     },
@@ -134,7 +135,7 @@ const arrayDePersonajes = [
 
   {
     idUsarHTML: "lodo",
-    tipoPersonaje: "probando",
+    tipoPersonaje: "lodo",
     status: {
       normal: { name: "normal", imageUrl: "lodo" },
     },
@@ -148,7 +149,7 @@ const arrayDePersonajes = [
   },
   {
     idUsarHTML: "cofre",
-    tipoPersonaje: "probando",
+    tipoPersonaje: "cofre",
     status: {
       normal: { name: "normal", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
@@ -167,263 +168,61 @@ miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30])
 
 //Generamos el workspace
+const bloquesPrecargadosJSON= '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'
 
 
-//const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"procedures_defnoreturn","id":"8BH1s@hcrZu{-_0H6OGt","x":144,"y":78,"icons":{"comment":{"text":"Describe this function...","pinned":false,"height":80,"width":160}},"fields":{"NAME":"saludar"},"inputs":{"STACK":{"block":{"type":"text_print","id":"-TL1e7.rx8dCX6w+d]jF","inputs":{"TEXT":{"shadow":{"type":"text","id":"^uT,ZfpH?$RJnbmF4.Bg","fields":{"TEXT":"Hola Lucho!"}}}},"next":{"block":{"type":"text_print","id":"O_YOmWt(h2Ds]`b?g{fq","inputs":{"TEXT":{"shadow":{"type":"text","id":"VP8D(SE=bm$Q/ZvX*F;s","fields":{"TEXT":"Bienvenido!"}}}},"next":{"block":{"type":"variables_set","id":"cr,`^`:!-nck0K^bij[P","fields":{"VAR":{"id":"n"}},"inputs":{"VALUE":{"block":{"type":"text_prompt_ext","id":"}EDaTBpvRz]h$th.To)g","extraState":"<mutation type=\\"TEXT\\"></mutation>","fields":{"TYPE":"TEXT"},"inputs":{"TEXT":{"shadow":{"type":"text","id":"FAptfzX@5aGQlTj%ooQe","fields":{"TEXT":"¿Cual es tu apellido?"}}}}}}},"next":{"block":{"type":"text_print","id":"yW`l=BPlv/qVG3%LKYvE","inputs":{"TEXT":{"shadow":{"type":"text","id":"4%WtpMAU#$i*{A_hn#0I","fields":{"TEXT":"Genial entonces"}}}},"next":{"block":{"type":"text_print","id":"EyMm??F$vBFV=H(L6e1|","inputs":{"TEXT":{"shadow":{"type":"text","id":"WqE)a%lwrr@ASVoL(zpG","fields":{"TEXT":"abc"}},"block":{"type":"variables_get","id":"H-HVcgmemxmrd8Pi^~Qs","fields":{"VAR":{"id":"n"}}}}}}}}}}}}}}}}},{"type":"procedures_callnoreturn","id":"tcuK1r4oW[*Vt41){mV|","x":45,"y":51,"extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"Pm^DF#|HQS!NC?l7[Jq9","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"ZRPIXDp?@,izj.1+K%g]","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"Lh,UzXrItT$LSG_Oy-|)","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"ex*AeN^hv9^/F)Y5f5!R","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"_YwKOnFm$d[(Dlf0[f)^","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"e!bY!^1uz;lm7#HNfo$B","extraState":{"name":"saludar"},"next":{"block":{"type":"procedures_callnoreturn","id":"C@mt)vy)`FQr*rIMI]rx","extraState":{"name":"saludar"}}}}}}}}}}}}}}}}]},"variables":[{"name":"apellido","id":"n"}]}';
-//const miToolboxJSON = '{"contents":[{"kind":"CATEGORY","name":"Logic","colour":"%{BKY_LOGIC_HUE}","contents":[{"kind":"BLOCK","type":"controls_if"},{"kind":"BLOCK","type":"logic_compare"},{"kind":"BLOCK","type":"logic_operation"},{"kind":"BLOCK","type":"logic_negate"},{"kind":"BLOCK","type":"logic_boolean"}]},{"kind":"CATEGORY","name":"Loops","colour":"%{BKY_LOOPS_HUE}","contents":[{"kind":"BLOCK","type":"controls_repeat_ext","inputs":{"TIMES":{"shadow":{"type":"math_number","fields":{"NUM":10}}}}},{"kind":"BLOCK","type":"controls_whileUntil"}]},{"kind":"CATEGORY","name":"Math","colour":"%{BKY_MATH_HUE}","contents":[{"kind":"BLOCK","type":"math_number"},{"kind":"BLOCK","type":"math_arithmetic","inputs":{"A":{"shadow":{"type":"math_number","fields":{"NUM":1}}},"B":{"shadow":{"type":"math_number","fields":{"NUM":1}}}}},{"kind":"BLOCK","type":"math_single","inputs":{"NUM":{"shadow":{"type":"math_number","fields":{"NUM":9}}}}}]},{"kind":"CATEGORY","name":"Text","colour":"%{BKY_TEXTS_HUE}","contents":[{"kind":"BLOCK","type":"text"},{"kind":"BLOCK","type":"text_length","inputs":{"VALUE":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}},{"kind":"BLOCK","type":"text_print","inputs":{"TEXT":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}},{"kind":"BLOCK","type":"text_prompt_ext","inputs":{"TEXT":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}}]},{"kind":"SEP"},{"kind":"CATEGORY","name":"Variables","custom":"VARIABLE","colour":"%{BKY_VARIABLES_HUE}"},{"kind":"CATEGORY","name":"Functions","custom":"PROCEDURE","colour":"%{BKY_PROCEDURES_HUE}"}]}';
-const bloquesPrecargadosJSON= '{"blocks":{"languageVersion":0,"blocks":[{"type":"event_onclick","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'
-const toolbox = {
-  kind: "categoryToolbox",
-  contents: [
-    {
-      kind: "category",
-      name: "Eventos",
-      categorystyle: "procedure_category",
-      contents: [
-        {
-          type: "event_onclick",
-          kind: "block",
-        }
-      ]
-    },
-    {
-      kind: "category",
-      name: "Sin params",
-      categorystyle: "variable_category",
-      contents: [
-        {
-          type: "move_up_simple",
-          kind: "block",
-        },
-        {
-          type: "move_down_simple",
-          kind: "block",
-        },
-        {
-          type: "move_left_simple",
-          kind: "block",
-        },
-        {
-          type: "move_right_simple",
-          kind: "block",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "JS",
-      categorystyle: "text_category",
-      contents: [
-        {
-          type: "controls_if",
-          kind: "block",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "Con params",
-      categorystyle: "variable_category",
-      contents: [
-        {
-          type: "move_up_param",
-          kind: "block",
-        },
-        {
-          type: "move_down_param",
-          kind: "block",
-        },
-        {
-          type: "move_left_param",
-          kind: "block",
-        },
-        {
-          type: "move_right_param",
-          kind: "block",
-        },
-      ],
-    },
-    {
-      kind: "CATEGORY",
-      name: "Logic",
-      colour: "%{BKY_LOGIC_HUE}",
-      contents: [
-        {
-          kind: "BLOCK",
-          type: "controls_if",
-        },
-        {
-          kind: "BLOCK",
-          type: "logic_compare",
-        },
-        {
-          kind: "BLOCK",
-          type: "logic_operation",
-        },
-        {
-          kind: "BLOCK",
-          type: "logic_negate",
-        },
-        {
-          kind: "BLOCK",
-          type: "logic_boolean",
-        },
-      ],
-    },
-    {
-      kind: "CATEGORY",
-      name: "Loops",
-      colour: "%{BKY_LOOPS_HUE}",
-      contents: [
-        {
-          kind: "BLOCK",
-          type: "controls_repeat_ext",
-          inputs: {
-            TIMES: {
-              shadow: {
-                type: "math_number",
-                fields: {
-                  NUM: 10,
-                },
-              },
-            },
-          },
-        },
-        {
-          kind: "BLOCK",
-          type: "controls_whileUntil",
-        },
-      ],
-    },
-    {
-      kind: "CATEGORY",
-      name: "Math",
-      colour: "%{BKY_MATH_HUE}",
-      contents: [
-        {
-          kind: "BLOCK",
-          type: "math_number",
-        },
-        {
-          kind: "BLOCK",
-          type: "math_arithmetic",
-          inputs: {
-            A: {
-              shadow: {
-                type: "math_number",
-                fields: {
-                  NUM: 1,
-                },
-              },
-            },
-            B: {
-              shadow: {
-                type: "math_number",
-                fields: {
-                  NUM: 1,
-                },
-              },
-            },
-          },
-        },
-        {
-          kind: "BLOCK",
-          type: "math_single",
-          inputs: {
-            NUM: {
-              shadow: {
-                type: "math_number",
-                fields: {
-                  NUM: 9,
-                },
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      kind: "CATEGORY",
-      name: "Text",
-      colour: "%{BKY_TEXTS_HUE}",
-      contents: [
-        {
-          kind: "BLOCK",
-          type: "text",
-        },
-        {
-          kind: "BLOCK",
-          type: "text_length",
-          inputs: {
-            VALUE: {
-              shadow: {
-                type: "text",
-                fields: {
-                  TEXT: "abc",
-                },
-              },
-            },
-          },
-        },
-        {
-          kind: "BLOCK",
-          type: "text_print",
-          inputs: {
-            TEXT: {
-              shadow: {
-                type: "text",
-                fields: {
-                  TEXT: "abc",
-                },
-              },
-            },
-          },
-        },
-        {
-          kind: "BLOCK",
-          type: "text_prompt_ext",
-          inputs: {
-            TEXT: {
-              shadow: {
-                type: "text",
-                fields: {
-                  TEXT: "abc",
-                },
-              },
-            },
-          },
-        },
-      ],
-    },
-    {
-      kind: "SEP",
-    },
-    {
-      kind: "CATEGORY",
-      name: "Variables",
-      custom: "VARIABLE",
-      colour: "%{BKY_VARIABLES_HUE}",
-    },
-    {
-      kind: "CATEGORY",
-      name: "Functions",
-      custom: "PROCEDURE",
-      colour: "%{BKY_PROCEDURES_HUE}",
-    },
-  ],
-};
-window.miControlador = new ControladorStandard(
+const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial,
-  'dhs-blockly-div', 
-  JSON.stringify(toolbox),
-  bloquesPrecargadosJSON
+  // 'dhs-blockly-div', 
+  // JSON.stringify(toolbox),
+  // bloquesPrecargadosJSON
 );
+
+const categoriasDeseadas = [
+  {
+      name: "Eventos",
+      categorystyle: "procedure_category",
+  },
+  {
+      name: "Movimientos",
+      categorystyle: "variable_category"
+  },
+  {
+      name: "Lápiz",
+      categorystyle: "variable_category"
+  },
+  {
+    name: "Acciones",
+    categorystyle: "variable_category"
+}
+]
+categoriasDeseadas.forEach(cat => miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat));
+
+const bloquesCustomStandardDesados = [
+  // [nombreBloque, categoriaDestino]
+  // [grupoBloques, categoriaDestino]
+  ["on_execute", "Eventos"],
+  ["move_classic_simple", "Movimientos"],
+  // ["move_classic_param", "Movimientos"],
+  ["abrirCofre", "Acciones"],
+  ["lapiz", "Lápiz"]
+];
+
+bloquesCustomStandardDesados.forEach(bl => {
+  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl)
+})
+
+miControlador.crearInyectarWorkspace("dhs-blockly-div", {toolbox: miControlador.ConfiguradorBloques.toolbox})
+miControlador.cargarBloquesSerializados(JSON.parse(bloquesPrecargadosJSON));
+miControlador.setearEventoCambioWorkspaceStandard();
+miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
 miControlador.juego.agregarGlobalConCallback("moverDerecha");
 miControlador.juego.agregarGlobalConCallback("moverAbajo");
 miControlador.juego.agregarGlobalConCallback("moverArriba");
 miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+miControlador.juego.agregarGlobalConCallback("abrirCofre");
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete(
   (interpreter, globalObject) => {

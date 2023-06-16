@@ -1,9 +1,10 @@
+import ConfiguradorBloques from './ConfiguradorBloques';
 class Controlador {
   constructor(
     juego,
     veolocidadMilisegundos = 1000,
-    blocklyDivId,
-    miToolboxJSON,
+    // blocklyDivId,
+    // miToolboxJSON,
     botonEjecutar,
     botonDetener = false,
     botonReiniciar = false,
@@ -18,11 +19,12 @@ class Controlador {
     palabrasReservadas = ["resaltarBloque", "quitarResaltadoBloqueLuegoAvanzar"]
   ) {
     // ELEMENTOS IMPORTANTES
+    this.ConfiguradorBloques = new ConfiguradorBloques();
     this.velocidad = veolocidadMilisegundos;
     this.juego = juego;
-    this.workspace = Blockly.inject(blocklyDivId, {
-      toolbox: JSON.parse(miToolboxJSON),
-    });
+    // this.workspace = Blockly.inject(blocklyDivId, {
+    //   toolbox: JSON.parse(miToolboxJSON),
+    // });
     this.cuadroOutput = cuadroOutput;
     this.interpreteIterativo = null;
     this.callbackInterprete = null;
@@ -32,7 +34,7 @@ class Controlador {
     this.botonEjecutar = botonEjecutar;
     if (this.botonEjecutar) {
       this.botonEjecutar.addEventListener("click", () => {
-        console.log("clic en Ejecutar");
+        // console.log("clic en Ejecutar");
         this.deshabilitarBotonEjecutar();
         this.deshabilitarBotonReinicio();
         this.rehabilitarBotonDetener();
@@ -114,13 +116,14 @@ class Controlador {
       }
     };
     this.eventoCambioWorkspaceActual = null;
-    this.setearEventoCambioWorkspaceStandard();
+    // this.setearEventoCambioWorkspaceStandard();
   } // FIN CONSTRUCTOR
 
   // METODOS PARA EL WORKSPACE - SERIALIZACION
 
   crearInyectarWorkspace(idElemento, objetoConfig) {
-    Blockly.inject(idElemento, objetoConfig);
+    // console.log(objetoConfig);
+    this.workspace = Blockly.inject(idElemento, objetoConfig);
   }
 
   limpiarWorkspace() {
@@ -273,7 +276,7 @@ class Controlador {
     } else {
       setTimeout(() => {
         this.hacerPasosHastaBandera();
-      }, 5); // En este set time out deberíamos dar más tiempo para que vuelvan los personajes a su posición inicial.
+      }, this.velocidad + 100); // En este set time out deberíamos dar más tiempo para que vuelvan los personajes a su posición inicial.
     }
   }
 
@@ -293,7 +296,7 @@ class Controlador {
     ) {
       try {
         this.hayCodigoPendiente = this.interpreteIterativo.step();
-        console.log("hayCodigoPendiente: " + this.hayCodigoPendiente);
+        // console.log("hayCodigoPendiente: " + this.hayCodigoPendiente);
         if (this.juego && !this.juego.puedeDebeContinuar) {
           this.debeDetenerEjecucion = true;
         }
@@ -409,9 +412,9 @@ export default class ControladorStandard extends Controlador {
   constructor(
     juego,
     veolocidadMilisegundos,
-    blocklyDivId,
-    blocklyWorkspaceConfig,
-    bloquesPreCargados = false
+    // blocklyDivId,
+    // blocklyWorkspaceConfig,
+    // bloquesPreCargados = false
   ) {
     let elementoOutput = document.getElementById(
       "dhs-text-area-output-generado"
@@ -419,8 +422,8 @@ export default class ControladorStandard extends Controlador {
     super(
       juego,
       veolocidadMilisegundos,
-      blocklyDivId,
-      blocklyWorkspaceConfig,
+      // blocklyDivId,
+      // blocklyWorkspaceConfig,
       document.getElementById("dhs-boton-ejecutar"),
       document.getElementById("dhs-boton-detener"),
       document.getElementById("dhs-boton-reiniciar"),
@@ -429,15 +432,13 @@ export default class ControladorStandard extends Controlador {
       document.getElementById("dhs-text-area-codigo-generado"),
       elementoOutput ? new MostradorOutput(elementoOutput) : false
     );
-    if (bloquesPreCargados) {
-      this.cargarBloquesSerializados(JSON.parse(bloquesPreCargados));
-    }
+    // if (bloquesPreCargados) {
+    //   this.cargarBloquesSerializados(JSON.parse(bloquesPreCargados));
+    // }
     setTimeout(() => {
-      document
-        .getElementById("dhs-input-bloques-sueltos")
-        ?.setAttribute("checked", true);
-      this.habilitarDesactivarHuerfanos(), 1;
-    });
+      document.getElementById("dhs-input-bloques-sueltos")?.setAttribute("checked", true);
+      // this.habilitarDesactivarHuerfanos(), 1;
+    }, 1);
     this.callbackInterpreteStandard = (interpreter, globalObject) => {
       // const wrapperAlert = function alert(text) {
       //     window.globalAlertMock(text);

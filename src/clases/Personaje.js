@@ -102,7 +102,7 @@ export class Personaje {
     !this.estaVivo ? false : this.visibilizarTooltip(texto, milisegundos);
   }
 
-  decir(texto, milisegundos = 3000) {
+  decir(texto, milisegundos = 3500) {
     this.verificarQueEsteVivoYDecir(texto, milisegundos);
     // Y LOGGEARLO!!
   }
@@ -113,12 +113,29 @@ export class Personaje {
 
   terminar() {
     this.estaVivo = false;
+    this.juego.puedeDebeContinuar = false;
   }
   abrir(nameObj) {
     const objAAbrir = this.casilleroActual.ocupantes.find(
-      (obj) => obj.idHTML == nameObj
+      (obj) => obj.tipoPersonaje == nameObj
     );
-    objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): this.abrirModalFalloApertura() //pia
+    // objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): this.abrirModalFalloApertura() 
+    objAAbrir ? objAAbrir.abrirse() : this.decirTerminar("Oh! Aquí no hay nada para abrir.");
+    
+  }
+
+  abrirCofre() {
+    this.abrir("cofre");
+  }
+
+  decirTerminar(ultimasPalabras) {
+    this.decir(ultimasPalabras);
+    this.terminar();
+  }
+
+  abrirse() {
+    this.setearStatus("abierto");
+    this.abrirYMostrarModal();
   }
 
   abrirYMostrarModal(nombreObj) {
