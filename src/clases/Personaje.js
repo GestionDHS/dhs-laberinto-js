@@ -201,18 +201,73 @@ export class Personaje {
     return objetoColision;
   }
 
-  moverArriba() {
+  // moverArriba() {
+  //   this.moverse(-1, 0);
+  // }
+
+  moverArriba(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverArriba() solo acepta números enteros positivos como parámetros.');
+    }
     this.moverse(-1, 0);
-  }
-  moverDerecha() {
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverArriba(veces - 1);
+      } else {
+        setTimeout(() => { this.moverArriba(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+  moverDerecha(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverDerecha() solo acepta números enteros positivos como parámetros.');
+    }
     this.moverse(0, 1);
-  }
-  moverAbajo() {
-    this.moverse(1, 0);
-  }
-  moverIzquierda() {
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverDerecha(veces - 1);
+      } else {
+        setTimeout(() => { this.moverDerecha(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+
+  moverIzquierda(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverIzquierda() solo acepta números enteros positivos como parámetros.');
+    }
     this.moverse(0, -1);
-  }
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverIzquierda(veces - 1);
+      } else {
+        setTimeout(() => { this.moverIzquierda(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+
+  moverAbajo(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverAbajo() solo acepta números enteros positivos como parámetros.');
+    }
+    this.moverse(1, 0);
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverAbajo(veces - 1);
+      } else {
+        setTimeout(() => { this.moverAbajo(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+  // moverDerecha() {
+  //   this.moverse(0, 1);
+  // }
+  // moverAbajo() {
+  //   this.moverse(1, 0);
+  // }
+  // moverIzquierda() {
+  //   this.moverse(0, -1);
+  // }
   girar(grados, direccion){
 
   }

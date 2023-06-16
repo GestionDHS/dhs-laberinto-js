@@ -195,7 +195,7 @@ const categoriasDeseadas = [
   {
     name: "Acciones",
     categorystyle: "variable_category"
-}
+  }
 ]
 categoriasDeseadas.forEach(cat => miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat));
 
@@ -204,7 +204,7 @@ const bloquesCustomStandardDesados = [
   // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
-  // ["move_classic_param", "Movimientos"],
+  ["move_classic_param", "Movimientos"],
   ["abrirCofre", "Acciones"],
   ["lapiz", "Lápiz"]
 ];

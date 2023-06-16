@@ -8,6 +8,7 @@ class Controlador {
     botonEjecutar,
     botonDetener = false,
     botonReiniciar = false,
+    botonLimpiarWorkspace = false,
     inputAcelerador = false,
     inputBloquesSueltos = false,
     panelCodigoGenerado = false,
@@ -61,6 +62,13 @@ class Controlador {
           this.rehabilitarBotonReinicio();
         }, 700);
       });
+    }
+    this.botonLimpiarWorkspace = botonLimpiarWorkspace;
+    if (this.botonLimpiarWorkspace) {
+      this.botonLimpiarWorkspace.addEventListener("click", () => {
+        this.limpiarWorkspace();
+        this.cargarBloquesSerializados(JSON.parse('{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'))
+      })
     }
     this.inputAcelerador = inputAcelerador;
     if (this.inputAcelerador) {
@@ -233,17 +241,12 @@ class Controlador {
     this.hacerPausaResaltar = false;
     this.hacerPausaQuitarResaltado = true;
     let miBloque = this.workspace.getBlockById(id);
-    let inputVeces = miBloque?.getInput("TIMES"); // ADAPTAR A LO NUESTRO - caso adhoc ridículo
-    let bloquecitoNumerico = inputVeces?.connection?.targetBlock();
-    let valor = bloquecitoNumerico?.getFieldValue("NUM");
+    let valor = miBloque?.getFieldValue("CASILLAS");
     let duracionDeLaPausa = 1;
-    // console.log(valor);
     duracionDeLaPausa = valor ? valor * this.velocidad : this.velocidad;
     // IR AL PRÓXIMO
     setTimeout(() => {
-      // miBloque.setHighlighted(false); // Método de "Block object"
       this.quitarResaltadoBloque(miBloque);
-      // miBloque.setHighlighted(false);
       this.hacerPausaQuitarResaltado = false;
       this.hacerPasosHastaBandera();
     }, duracionDeLaPausa);
@@ -427,6 +430,7 @@ export default class ControladorStandard extends Controlador {
       document.getElementById("dhs-boton-ejecutar"),
       document.getElementById("dhs-boton-detener"),
       document.getElementById("dhs-boton-reiniciar"),
+      document.getElementById("dhs-boton-borrar"),
       document.getElementById("dhs-input-acelerador"),
       document.getElementById("dhs-input-bloques-sueltos"),
       document.getElementById("dhs-text-area-codigo-generado"),
