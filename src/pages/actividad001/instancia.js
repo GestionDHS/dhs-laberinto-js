@@ -1,76 +1,13 @@
 import { Juego } from "../../clases/Juego";
-import { template } from "../../clases/Template";
+import { template } from "../../recursosPaginas/Template";
+import ControladorStandard from "../../bloques/Controlador";
+// import { toolbox } from 'blockly/core/utils';
+
 
 document.querySelector("#appActividad").innerHTML = template(``);
-
-const toolbox = {
-  kind: "categoryToolbox",
-  contents: [
-    {
-      kind: "category",
-      name: "Eventos",
-      categorystyle: "procedure_category",
-      contents: [
-        {
-          type: "event_onclick",
-          kind: "block",
-        }
-      ]
-    },
-    {
-      kind: "category",
-      name: "Sin params",
-      categorystyle: "variable_category",
-      contents: [
-        {
-          type: "move_up_simple",
-          kind: "block",
-        },
-        {
-          type: "move_down_simple",
-          kind: "block",
-        },
-        {
-          type: "move_left_simple",
-          kind: "block",
-        },
-        {
-          type: "move_right_simple",
-          kind: "block",
-        },
-      ],
-    },
-    {
-      kind: "category",
-      name: "JS",
-      categorystyle: "text_category",
-      contents: [
-        {
-          type: "controls_if",
-          kind: "block",
-        },
-      ],
-    },
-  ],
-};
-
-//Pia
-// Add backpacks
-//  const backpack = new NotificationBackpack(workspace);
-//  backpack.init();
-
-/**  Pia modificó:
- * 29/05:
- * Agregué el tacho de basura
- * 24/05:
- * En el Template.js saque las 2 secciones de bloques.
- * Comenté todo el flujo de instanciacion de GenreradorDeBloques.js
- * Agregué línea 8, blocklyDiv y un div conid texarea, en Template.js
- * Agregué todo el codigo que esta arriba de éste comentario
- */
 // PRIMERO: instanciar el juego
-
-window.miJuego = new Juego(toolbox);
+const velocidadInicial = 1000
+const miJuego = new Juego(velocidadInicial);
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
@@ -95,7 +32,7 @@ const tablero = [
 
 const arbol = {
   idUsarHTML: "arbol",
-  tipoPersonaje: "probando",
+  tipoPersonaje: "arbol",
   status: {
     normal: { name: "normal", imageUrl: "arboles" },
   },
@@ -108,7 +45,7 @@ const arbol = {
 };
 const pasto = {
   idUsarHTML: "camino",
-  tipoPersonaje: "probando",
+  tipoPersonaje: "camino",
   status: {
     normal: { name: "normal", imageUrl: "pasto" },
   },
@@ -140,10 +77,10 @@ miJuego.agregarModal(datosModal);
 miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 //miJuego.generarWorkspace()
-document.getElementById("dhs-boton").addEventListener("click", function (e) {
-  e.preventDefault()
-  miJuego.ejecutar();
-});
+// document.getElementById("dhs-boton").addEventListener("click", function (e) {
+//   e.preventDefault()
+//   miJuego.ejecutar();
+// });
 // const arrayDePersonajes= [
 //   {
 //     nombre: "lupe",
@@ -155,7 +92,7 @@ document.getElementById("dhs-boton").addEventListener("click", function (e) {
 const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
-    tipoPersonaje: "probando",
+    tipoPersonaje: "lupe",
     status: {
       normal: { name: "normal", imageUrl: "lupe" },
     },
@@ -198,7 +135,7 @@ const arrayDePersonajes = [
 
   {
     idUsarHTML: "lodo",
-    tipoPersonaje: "probando",
+    tipoPersonaje: "lodo",
     status: {
       normal: { name: "normal", imageUrl: "lodo" },
     },
@@ -212,7 +149,7 @@ const arrayDePersonajes = [
   },
   {
     idUsarHTML: "cofre",
-    tipoPersonaje: "probando",
+    tipoPersonaje: "cofre",
     status: {
       normal: { name: "normal", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
@@ -228,7 +165,72 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30])
 
+//Generamos el workspace
+const bloquesPrecargadosJSON= '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'
+
+
+const miControlador = new ControladorStandard(
+  miJuego,
+  velocidadInicial,
+  // 'dhs-blockly-div', 
+  // JSON.stringify(toolbox),
+  // bloquesPrecargadosJSON
+);
+
+const categoriasDeseadas = [
+  {
+      name: "Eventos",
+      categorystyle: "procedure_category",
+  },
+  {
+      name: "Movimientos",
+      categorystyle: "variable_category"
+  },
+  {
+      name: "Lápiz",
+      categorystyle: "variable_category"
+  },
+  {
+    name: "Acciones",
+    categorystyle: "variable_category"
+  }
+]
+categoriasDeseadas.forEach(cat => miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat));
+
+const bloquesCustomStandardDesados = [
+  // [nombreBloque, categoriaDestino]
+  // [grupoBloques, categoriaDestino]
+  ["on_execute", "Eventos"],
+  ["move_classic_simple", "Movimientos"],
+  ["move_classic_param", "Movimientos"],
+  ["abrirCofre", "Acciones"],
+  ["lapiz", "Lápiz"]
+];
+
+bloquesCustomStandardDesados.forEach(bl => {
+  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl)
+})
+
+miControlador.crearInyectarWorkspace("dhs-blockly-div", {toolbox: miControlador.ConfiguradorBloques.toolbox})
+miControlador.cargarBloquesSerializados(JSON.parse(bloquesPrecargadosJSON));
+miControlador.setearEventoCambioWorkspaceStandard();
+miControlador.habilitarDesactivarHuerfanos();
+miControlador.crearFuncionesGlobalesStandard();
+miControlador.juego.agregarGlobalConCallback("moverDerecha");
+miControlador.juego.agregarGlobalConCallback("moverAbajo");
+miControlador.juego.agregarGlobalConCallback("moverArriba");
+miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+miControlador.juego.agregarGlobalConCallback("abrirCofre");
+const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
+miControlador.setearCallbackInterprete(
+  (interpreter, globalObject) => {
+      miControlador.callbackInterpreteStandard(interpreter, globalObject);
+      callBackJuego(interpreter,globalObject)
+      //callbackExtras(interpreter, globalObject);
+  }
+);
 //TODO:
 /**
 

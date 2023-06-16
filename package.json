@@ -17,7 +17,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "acorn": "^8.8.2",
     "blockly": "^9.3.3",
-    "i": "^0.3.7",
     "js-interpreter": "^4.0.0",
     "sortablejs": "^1.15.0",
     "sweetalert2": "^11.7.1"
