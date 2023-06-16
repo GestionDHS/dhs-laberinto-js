@@ -1,23 +1,12 @@
 import { Juego } from "../../clases/Juego";
-import { template } from "../../clases/Template";
+import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
-//import Blockly from 'blockly';
-//import 'blockly/blocks_compressed';
-//import 'blockly/javascript_compressed';
-//import 'blockly/msg/en';
 
-//import miToolboxJSON from "../../bloques/toolboxJsIO";
-//import bloquesPrecargadosJSON from "./bloquesPrecargados";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 // PRIMERO: instanciar el juego
 const velocidadInicial = 1000
 const miJuego = new Juego(velocidadInicial);
-
-//toolBox
-
-
-
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 const listaBloquesAGenerar = [
@@ -175,7 +164,7 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.personajePrincipal=miJuego.listaDePersonajes[30]
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30])
 
 //Generamos el workspace
 
@@ -241,11 +230,15 @@ window.miControlador = new ControladorStandard(
   bloquesPrecargadosJSON
 );
 miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.crearFuncionesGlobalesStandard();
+miControlador.juego.agregarGlobalConCallback("moverDerecha");
+miControlador.juego.agregarGlobalConCallback("moverAbajo");
+miControlador.juego.agregarGlobalConCallback("moverArriba");
+miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete(
   (interpreter, globalObject) => {
       miControlador.callbackInterpreteStandard(interpreter, globalObject);
-      miControlador.juego.callbackInterpreteStandard(interpreter, globalObject);
+      callBackJuego(interpreter,globalObject)
       //callbackExtras(interpreter, globalObject);
   }
 );

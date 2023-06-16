@@ -1,4 +1,3 @@
-
 class Controlador {
   constructor(
     juego,
@@ -235,7 +234,7 @@ class Controlador {
     let bloquecitoNumerico = inputVeces?.connection?.targetBlock();
     let valor = bloquecitoNumerico?.getFieldValue("NUM");
     let duracionDeLaPausa = 1;
-    console.log(valor);
+    // console.log(valor);
     duracionDeLaPausa = valor ? valor * this.velocidad : this.velocidad;
     // IR AL PRÓXIMO
     setTimeout(() => {
@@ -249,7 +248,7 @@ class Controlador {
 
   recorrerPasos(sincronico = true, callback = this.callbackInterprete) {
     this.juego?.reiniciar();
-    //console.log(sincronico)
+    this.juego?.setearSincronicidad(sincronico);
     this.anularInterpreteIterativo();
     this.quitarTodosLosResaltados();
     this.cuadroOutput?.blanquearTodo();
@@ -264,7 +263,7 @@ class Controlador {
     this.interpreteIterativo = this.crearInterprete(codigoActual, callback);
    // console.log(this.interpreteIterativo);
     this.hayCodigoPendiente = true; // ojo, deberíamos chequearlo.
-    console.log(codigoActual);
+    // console.log(codigoActual);
     this.hacerPausaResaltar = false;
     this.hacerPausaQuitarResaltado = false;
     this.debeDetenerEjecucion = false;
