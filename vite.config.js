@@ -16,7 +16,9 @@ export default defineConfig({
       input: {
         main: resolve(root, "index.html"),
         pages: resolve(root, "pages", "actividad001", "act1.html"),
+        
       },
     },
+    assetsDir: "img"
   },
 });
