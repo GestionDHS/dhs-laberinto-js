@@ -1,5 +1,5 @@
-import Blockly from "blockly";
-import { javascriptGenerator } from "blockly/javascript";
+//import Blockly from "blockly";
+//import { javascriptGenerator } from "blockly/javascript";
 
 // Blockly.JavaScript = new Blockly.Generator("JavaScript");
 // bloque mover abajo
@@ -36,7 +36,8 @@ Blockly.Extensions.register("move_down_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_down_param"] = function (block) {
+//cambié javascriptGenerator por  Blockly.JavaScript
+Blockly.JavaScript["move_down_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverAbajo(" + casillas + ");\n";
   return code;
@@ -54,7 +55,7 @@ Blockly.common.defineBlocksWithJsonArray([
 ]);
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_down_simple"] = function (block) {
+Blockly.JavaScript["move_down_simple"] = function (block) {
   const code = "moverAbajo();\n";
  
   return code;
@@ -92,7 +93,7 @@ Blockly.Extensions.register("move_up_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_up_param"] = function (block) {
+Blockly.JavaScript["move_up_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverArriba(" + casillas + ");\n";
   return code;
@@ -109,7 +110,7 @@ Blockly.common.defineBlocksWithJsonArray([
 ]);
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_up_simple"] = function (block) {
+Blockly.JavaScript["move_up_simple"] = function (block) {
   const code = "moverArriba();\n"
   return code;
 };
@@ -146,7 +147,7 @@ Blockly.Extensions.register("move_right_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_right_param"] = function (block) {
+Blockly.JavaScript["move_right_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverDerecha(" + casillas + ");\n";
   return code;
@@ -171,7 +172,7 @@ Blockly.common.defineBlocksWithJsonArray([
 ]);
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_right_simple"] = function (block) {
+Blockly.JavaScript["move_right_simple"] = function (block) {
   const code = "moverDerecha();\n";
   this.workspace.highlightBlock(block.id);
   return code;
@@ -209,7 +210,7 @@ Blockly.Extensions.register("move_left_param_validation", function () {
 });
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_left_param"] = function (block) {
+Blockly.JavaScript["move_left_param"] = function (block) {
   const casillas = this.getFieldValue("CASILLAS");
   const code = "moverIzquierda(" + casillas + ");\n";
   return code;
@@ -228,7 +229,7 @@ Blockly.common.defineBlocksWithJsonArray([
 ]);
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator["move_left_simple"] = function (block) {
+Blockly.JavaScript["move_left_simple"] = function (block) {
   const code = "moverIzquierda();\n"
   return code;
 };
@@ -270,8 +271,9 @@ Blockly.Extensions.register('event_onclick_validation', function() {
 });
 
 // Define how to generate JavaScript from the custom block.
-javascriptGenerator['event_onclick'] = function (block) {
-  let code = javascriptGenerator.statementToCode(block, 'EVENT');
+Blockly.JavaScript['event_onclick'] = function (block) {
+  let code =  Blockly.JavaScript.statementToCode(block, 'EVENT');
+  // console.log(code);
   return code;
 };
 

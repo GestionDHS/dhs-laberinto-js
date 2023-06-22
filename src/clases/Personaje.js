@@ -102,7 +102,7 @@ export class Personaje {
     !this.estaVivo ? false : this.visibilizarTooltip(texto, milisegundos);
   }
 
-  decir(texto, milisegundos = 3000) {
+  decir(texto, milisegundos = 3500) {
     this.verificarQueEsteVivoYDecir(texto, milisegundos);
     // Y LOGGEARLO!!
   }
@@ -113,12 +113,29 @@ export class Personaje {
 
   terminar() {
     this.estaVivo = false;
+    this.juego.puedeDebeContinuar = false;
   }
   abrir(nameObj) {
     const objAAbrir = this.casilleroActual.ocupantes.find(
-      (obj) => obj.idHTML == nameObj
+      (obj) => obj.tipoPersonaje == nameObj
     );
-    objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): this.abrirModalFalloApertura() //pia
+    // objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): this.abrirModalFalloApertura() 
+    objAAbrir ? objAAbrir.abrirse() : this.decirTerminar("Oh! Aquí no hay nada para abrir.");
+    
+  }
+
+  abrirCofre() {
+    this.abrir("cofre");
+  }
+
+  decirTerminar(ultimasPalabras) {
+    this.decir(ultimasPalabras);
+    this.terminar();
+  }
+
+  abrirse() {
+    this.setearStatus("abierto");
+    this.abrirYMostrarModal();
   }
 
   abrirYMostrarModal(nombreObj) {
@@ -132,6 +149,7 @@ export class Personaje {
     this.juego.modalPannel.ocultar();
   }
   moverse(vectorY, vectorX) {
+    // console.log("step");
     if (!this.estaVivo) {
       return false;
     }
@@ -159,7 +177,7 @@ export class Personaje {
         );
     }else{
     let objetoAux = this.verificarColision(casilleroDestino);
-    console.log(objetoAux);
+    // console.log(objetoAux);
     //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
     // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
     objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
@@ -179,22 +197,77 @@ export class Personaje {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-    console.log(objetoColision);
+    // console.log(objetoColision);
     return objetoColision;
   }
 
-  moverArriba() {
+  // moverArriba() {
+  //   this.moverse(-1, 0);
+  // }
+
+  moverArriba(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverArriba() solo acepta números enteros positivos como parámetros.');
+    }
     this.moverse(-1, 0);
-  }
-  moverDerecha() {
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverArriba(veces - 1);
+      } else {
+        setTimeout(() => { this.moverArriba(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+  moverDerecha(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverDerecha() solo acepta números enteros positivos como parámetros.');
+    }
     this.moverse(0, 1);
-  }
-  moverAbajo() {
-    this.moverse(1, 0);
-  }
-  moverIzquierda() {
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverDerecha(veces - 1);
+      } else {
+        setTimeout(() => { this.moverDerecha(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+
+  moverIzquierda(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverIzquierda() solo acepta números enteros positivos como parámetros.');
+    }
     this.moverse(0, -1);
-  }
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverIzquierda(veces - 1);
+      } else {
+        setTimeout(() => { this.moverIzquierda(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+
+  moverAbajo(veces = 1) {
+    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
+        throw new Error('¡Cuidado! - La función moverAbajo() solo acepta números enteros positivos como parámetros.');
+    }
+    this.moverse(1, 0);
+    if (veces > 1) {
+      if (this.juego.sincronico) { 
+        this.moverAbajo(veces - 1);
+      } else {
+        setTimeout(() => { this.moverAbajo(veces - 1) }, this.juego.duracionIntervalos);
+      }
+    }
+  };
+  // moverDerecha() {
+  //   this.moverse(0, 1);
+  // }
+  // moverAbajo() {
+  //   this.moverse(1, 0);
+  // }
+  // moverIzquierda() {
+  //   this.moverse(0, -1);
+  // }
   girar(grados, direccion){
 
   }

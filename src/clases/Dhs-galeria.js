@@ -1,3 +1,11 @@
+import robotlupe from "../img/robotlupe.png"
+import lodoPasto from "../img/lodoPasto.png"
+import cofrecerradoPasto from "../img/cofrecerradoPasto.png"
+import cofreAbierto from "../img/cofreAbierto.png"
+import arbolesPasto from "../img/arbolesPasto.png"
+import muchasmonedas from "../img/muchasmonedas.png"
+import pasto from "../img/pasto.png"
+
 export class DHS_Gallery {
   constructor() {
     this.ready = true;
@@ -98,7 +106,7 @@ export class DHS_Gallery {
     // for theme lupe-commons
     lupe: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/robotlupe.png",
+      url: robotlupe,
       nombre: "Lupe",
       parrafoLicencia:
         '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/robot" title="robot icons">Robot icons created by Freepik - Flaticon</a></p>',
@@ -106,7 +114,7 @@ export class DHS_Gallery {
     },
     arboles: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/arboles-pasto.png",
+      url: arbolesPasto,
       nombre: "Árboles",
       parrafoLicencia:
         '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
@@ -114,13 +122,13 @@ export class DHS_Gallery {
     },
     pasto: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/pasto.png",
+      url: pasto,
       nombre: "Pasto",
       parrafoLicencia: "<p>Digital House</p>",
     },
     cofre: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/cofrecerrado-pasto.png",
+      url: cofrecerradoPasto,
       nombre: "Cofre Cerrado",
       parrafoLicencia:
         '<p>Licencia imagen:<a target="_blank" href="https://www.flaticon.com/free-img/chest" title="chest icons">Chest icons created by Smashicons - Flaticon</a></p>',
@@ -128,7 +136,7 @@ export class DHS_Gallery {
     },
     cofreAbierto: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/cofreabierto.png",
+      url: cofreAbierto,
       nombre: "Cofre Abierto",
       parrafoLicencia:
         '<p>Licencia imagen:<a target="_blank" href="https://www.flaticon.com/free-img/chest" title="chest icons">Chest icons created by Smashicons - Flaticon</a></p>',
@@ -136,7 +144,7 @@ export class DHS_Gallery {
     },
     monedas: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/monedas-09.png",
+      url: muchasmonedas,
       nombre: "Monedas",
       parrafoLicencia:
         '<p>Licencia: <a href="https://www.flaticon.es/iconos-gratis/monedas" title="monedas iconos">Monedas iconos creados por turkkub - Flaticon</a></p>',
@@ -144,7 +152,7 @@ export class DHS_Gallery {
     },
     lodo: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/lodo-pasto.png",
+      url: lodoPasto,
       nombre: "Lodo",
       parrafoLicencia:
         '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tropical" title="tropical icons">Tropical icons created by Marz Gallery - Flaticon</a></p>',

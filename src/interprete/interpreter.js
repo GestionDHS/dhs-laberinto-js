@@ -1,3 +1,5 @@
+
+
 const Interpreter = function(code, opt_initFunc) {
   if (typeof code === 'string') {
     code = this.parse_(code, 'code');
