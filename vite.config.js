@@ -16,7 +16,10 @@ export default defineConfig({
       input: {
         main: resolve(root, "index.html"),
         pages: resolve(root, "pages", "actividad001", "act1.html"),
+        
       },
     },
   },
+  assetsDir: "img",
+  assetsInclude: ["./interprete/acorn.js", "./interprete/interpreter.js","**/*.css?type=text/css"],
 });
