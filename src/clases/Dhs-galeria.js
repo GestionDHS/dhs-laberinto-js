@@ -3,7 +3,7 @@ import lodoPasto from "../img/lodoPasto.png"
 import cofrecerradoPasto from "../img/cofrecerradoPasto.png"
 import cofreAbierto from "../img/cofreabierto.png"
 import arbolesPasto from "../img/arbolesPasto.png"
-import muchasmonedas from "../img/muchasmonedas.png"
+import muchasmonedas from "../img/muchasMonedas.png"
 import pasto from "../img/pasto.png"
 
 export class DHS_Gallery {
