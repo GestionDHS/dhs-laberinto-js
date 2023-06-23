@@ -19,6 +19,6 @@ export default defineConfig({
         
       },
     },
-    assetsDir: "img"
   },
+  assetsInclude: ["./interprete/acorn.js", "./interprete/interpreter.js","**/*.css?type=text/css"],
 });
