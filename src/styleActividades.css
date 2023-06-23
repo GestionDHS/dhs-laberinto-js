@@ -13,73 +13,67 @@
 /* Header: donde estan los botones para reproducir y configurar  */
 
 header{
+  background-color: var(--color-gris-oscuro);
   display: grid;
   gap: 10px;
-  background-color: var(--color-gris-oscuro);
-}
-
-header > div h1{
-  color: var(--acento);
-  padding: 20px;
-  margin: 0;
-}
-header section.barra{
-  display: grid;
-  grid-template-columns: 0.7fr 1fr 0.5fr;
+  grid-template-columns: 0.6fr 1fr ;
   align-items: center;
   justify-content: space-evenly;
-  padding: 10px 0;
-  
+  padding: 10px 5px;
 }
 
-header section.barra div.botones{
+header div.botones{
   display: flex;
   justify-content: space-evenly;
 }
 
-header section.barra div.desactivarSueltos{
+#dhs-boton-ejecutar i{
+  font-size: 25px;
+}
+
+header div.desactivarSueltos{
   display: none;
 }
 
-header section.barra div.botones button{
+header div.botones button{
   border: 0;
   background: none;
 }
 
-header section.barra i{
-  font-size: 15px;
+header i{
+  font-size: 18px;
   color: var(--color-blanco);
 }
 
-header section.barra div.rango{
+header div.rango{
   display: grid;
   grid-template-columns: 10% 80% 10%;
   align-items: center;
 }
 
-header section.barra div.mostrar{
+header div.mostrar{
   display: none;
   /* display: grid; */
   grid-template-columns: auto auto;
   /* justify-items: end; */
 }
 
-header section.barra div.mostrar div{
+header div.mostrar div{
   display: grid;
   justify-content: center;
 }
 
-header section.barra div.mostrar div input{
+header div.mostrar div input{
   width: 30px;
 }
 
-header section.barra div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
+header div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
   background: var(--color-blanco);
   border-radius: 10px;
   border: 1px solid;
 }
 
-header section.barra div.mostrar div input[type="range"]::-webkit-slider-thumb{
+header div.mostrar div input[type="range"]::-webkit-slider-thumb{
   -webkit-appearance: none;
   appearance: none;
   background: red;
@@ -184,9 +178,14 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
 }
 
 /*TOOLTIPS JUEGO*/
-.tooltip {
+.tooltip, .botonera {
   position: relative;
   display: inline-block;
+}
+
+.botonera .tooltiptext{
+  top: -13px;
+  right: 100%;
 }
 
 .tooltiptext {
@@ -221,9 +220,6 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
 
 /* TABLET y PC */
 @media (min-width: 768px) {
-  header{
-    grid-template-columns: 1fr 2fr;
-  }
 
   main{
     grid-template-columns: 2fr 1fr;
