@@ -207,8 +207,10 @@ const bloquesCustomStandardDesados = [
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
   ["move_classic_param", "Movimientos"],
-  ["abrirCofre", "Acciones"],
-  ["lapiz", "Lápiz"]
+  ["avanzar_param", "Movimientos"],
+  ["girar_clasico", "Movimientos"],
+  ["abrir_cofre", "Acciones"],
+  ["lapiz", "Lápiz"],
 ];
 
 bloquesCustomStandardDesados.forEach(bl => {

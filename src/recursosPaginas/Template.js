@@ -6,18 +6,23 @@ import { trash, play, stop, restart,standingPerson, runningPerson, code, comment
 export function template(element) {
   return `
   <header>
-  <div>
-    <h1>Titu de la act</h1>
-  </div>
-  <section class="barra">
     <div class="botones">
       <button class="tooltip botonera" id="dhs-boton-ejecutar"><i> ${play} </i><span class="tooltiptext">Ejecutar bloques</span></button>
       <button class="tooltip botonera" id="dhs-boton-detener"><i> ${stop} </i><span class="tooltiptext">Detener ejecución</span></button>
-      <button class="tooltip botonera" id="dhs-boton-reiniciar"><i> ${restart} </i><span class="tooltiptext">Reiniciar juego</span></button>
+      <button class="tooltip botonera" id="dhs-boton-reiniciar">
+      <i> ${restart} </i><span class="tooltiptext">Reiniciar juego</span></button>
       <button class="tooltip botonera" id="dhs-boton-borrar"><i> ${trash} </i><span class="tooltiptext">Borrar todos los bloques</span></button>
     </div>
     <div class="rango">
-      <i class="tooltip botonera"> ${standingPerson} <span class="tooltiptext">Más lento</span></i><input id="dhs-input-acelerador" type="range" min="0" max="2400" step="200"><i class="tooltip botonera"> ${runningPerson} <span class="tooltiptext">Más rápido</span></i>
+      <button class="tooltip botonera" disabled style="background:none; border:0">
+        <i class="tooltip botonera"> ${standingPerson} </i>
+        <span class="tooltiptext">Más lento</span>
+      </button>
+      <input id="dhs-input-acelerador" type="range" min="0" max="2400" step="200">
+      <button class="tooltip botonera" disabled style="background:none; border:0">
+        <i class="tooltip botonera"> ${runningPerson} </i> 
+        <span class="tooltiptext">Más rápido</span>
+      </button>
     </div>
     <div class="mostrar">
       <div>
@@ -32,7 +37,6 @@ export function template(element) {
     <div class="desactivarSueltos">
       <span>Desactivar bloques sueltos</span><input id="dhs-input-bloques-sueltos" type="checkbox">
     </div>
-  </section>
   </header>
   <main>
     <div id='dhs-blockly-div' class="espacioBloques"></div>
