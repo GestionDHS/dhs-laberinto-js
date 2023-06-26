@@ -33,10 +33,10 @@ const tablero = [
 const arbol = {
   idUsarHTML: "arbol",
   tipoPersonaje: "arbol",
-  status: {
+  estadosPosibles: {
     normal: { name: "normal", imageUrl: "arboles" },
   },
-  statusInicial: "normal",
+  estadoInicial: "normal",
   zIndex: 1,
   posicionInicialY: 0,
   posicionInicialX: 0,
@@ -46,10 +46,10 @@ const arbol = {
 const pasto = {
   idUsarHTML: "camino",
   tipoPersonaje: "camino",
-  status: {
+  estadosPosibles: {
     normal: { name: "normal", imageUrl: "pasto" },
   },
-  statusInicial: "normal",
+  estadoInicial: "normal",
   zIndex: 1,
   posicionInicialY: 0,
   posicionInicialX: 0,
@@ -65,9 +65,10 @@ const datosModal = {
 };
 const datosModalError = {
   titulo: "¡Ohh Nooww!",
-  imagen: "monedas",
-  texto: "No habia un cofre acá :(",
+  imagen: "monedas", //sacar las monedas - simbolo de prohibido
+  texto: "Oh! Aquí no hay cofre.",
   oculto: true,
+  color:"red",
 };
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
@@ -94,12 +95,12 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
     tipoPersonaje: "lupe",
-    status: {
+    estadosPosibles: {
       normal: { name: "normal", imageUrl: "lupe" },
     },
-    statusInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 1,
+    estadoInicial: "normal",
+    posicionInicialY: 3,
+    posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
@@ -137,10 +138,10 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "lodo",
     tipoPersonaje: "lodo",
-    status: {
+    estadosPosibles: {
       normal: { name: "normal", imageUrl: "lodo" },
     },
-    statusInicial: "normal",
+    estadoInicial: "normal",
     posicionInicialY: 1,
     posicionInicialX: 3,
     direccionInicial: 0,
@@ -151,11 +152,11 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "cofre",
     tipoPersonaje: "cofre",
-    status: {
+    estadosPosibles: {
       normal: { name: "normal", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    statusInicial: "normal",
+    estadoInicial: "normal", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,

@@ -5,7 +5,7 @@ import { Modal } from "./Modal";
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
-    this.modo = "inicio"; //Este atributo va a volar someday
+    //this.modo = "inicio"; //Este atributo va a volar someday
     this.sincronico = true;
     this.duracionIntervalos = duracionIntervalos;
     this.escenario = {};
@@ -84,7 +84,7 @@ export class Juego {
 
   reiniciar() {
     this.puedeDebeContinuar = true;
-    this.modo = "inicio";
+    
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
@@ -96,7 +96,6 @@ export class Juego {
     return this.datosModal;
   }
   agregarModalError(datosModalError) {
-    //pia
     this.datosModalError = new Modal(datosModalError, this);
     return this.datosModalError;
   }

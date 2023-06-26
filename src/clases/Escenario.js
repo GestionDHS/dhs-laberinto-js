@@ -44,13 +44,13 @@ export class Escenario {
       }
       .casillero-arbol{
         background-image: url(${this.galeria.obtenerUrlDe(
-          this.objetoPared.status.normal.imageUrl
+          this.objetoPared.estadosPosibles.normal.imageUrl
         )})
       }
 
       .casillero-camino{
         background-image: url(${this.galeria.obtenerUrlDe(
-          this.objetoCamino.status.normal.imageUrl
+          this.objetoCamino.estadosPosibles.normal.imageUrl
         )})
       }
       .personaje{
