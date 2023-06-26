@@ -95,10 +95,10 @@ export class Juego {
     this.datosModal = new Modal(datosModal, this);
     return this.datosModal;
   }
-  agregarModalError(datosModalError) {
-    this.datosModalError = new Modal(datosModalError, this);
-    return this.datosModalError;
-  }
+  // agregarModalError(datosModalError) {
+  //   this.datosModalError = new Modal(datosModalError, this);
+  //   return this.datosModalError;
+  // }
 
   habilitarFuncionGlobal(nombre, bindearCon = this.personajePrincipal){
     window[nombre] = bindearCon[nombre].bind(bindearCon);

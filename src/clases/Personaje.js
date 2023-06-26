@@ -33,7 +33,7 @@ export class Personaje {
     this.estaVivo = true;
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
-    this.setearStatus(this.estadoInicial);
+    this.setearEstado(this.estadoInicial);
     this.actualizarCasillerosJuego(
       this.posicionInicialY,
       this.posicionInicialX,
@@ -48,7 +48,7 @@ export class Personaje {
     this.setearVelocidad(this.juego.duracionIntervalos);
   }
 
-  setearStatus(nuevoStatus) {
+  setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
     this.controladorDOM.setearImagen(
       //pia
@@ -115,7 +115,7 @@ export class Personaje {
   realizarAccionSobre(elemento, accion, params = false) {
     const parametros = params ? params : [];
     const acto = elemento[accion](...parametros); // tiene que devolver exito true/false y premio
-    acto.premio && this.mochila.push(acto.premio);
+    acto && acto.premio && this.mochila.push(acto.premio);
     return acto;
   }
   buscarParaRealizarAccion(nameObj, accion, params = false) {
@@ -131,28 +131,34 @@ export class Personaje {
       premio: acto && acto.exito ? acto.premio : null,
     };
   }
-  abrirCofre() {
-    const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
-    if (!intento.objetoEncontrado) {
-      //this.decirTerminar("Oh! Aquí no hay cofre.");
-      this.abrirModalFalloApertura();
-    } else if (!this.exito) {
-      this.abrirYMostrarModal();
-      //this.decirTerminar("Oh! Este cofre ya estaba abierto.");
-    }
-    return intento;
-  }
+  // abrirCofre() {
+  //   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+
+  //   if (!intento.objetoEncontrado) {
+  //     this.decirTerminar("Oh! Aquí no hay cofre.");
+  //     //this.abrirModalFalloApertura();
+  //   } else if (!intento.exito) {
+  //     //this.abrirYMostrarModal();
+  //     this.decirTerminar("Oh! Este cofre ya estaba abierto.");
+  //   }
+  //   return intento;
+  // }
   abrirse() {
-    if (this.estadoActual === "normal") { //"cerrado"
-      this.setearStatus = "abierto";
+    if (this.estadoActual === "cerrado") {
+      this.setearEstado("abierto");
       return { exito: true, premio: { tipo: "monedas", cantidad: 20 } };
     } else {
       return { exito: false, premio: null };
     }
   }
-  cerrar() {
-    this.setearStatus("cerrar");
-    this.juego.modalPannel.ocultar();
+  //para juntar la basura
+  serJuntado() {
+    if (this.estadoActual === "normal") {
+      this.setearEstado("juntado");
+      return { exito: true, premio: { tipo: "basura", cantidad: 1 } };
+    } else {
+      return { exito: false, premio: null };
+    }
   }
   decirTerminar(ultimasPalabras) {
     this.decir(ultimasPalabras);
@@ -172,17 +178,17 @@ export class Personaje {
   // }
 
   // abrirse() {
-  //   this.setearStatus("abierto");
+  //   this.setearEstado("abierto");
   //   this.abrirYMostrarModal();
   // }
 
-  abrirYMostrarModal(nombreObj) {
+  abrirYMostrarModal() {
     this.juego.datosModal.mostrar();
   }
-  abrirModalFalloApertura() {
-    this.juego.datosModalError.mostrar();
-  }
- 
+  // abrirModalFalloApertura() {
+  //   this.juego.datosModalError.mostrar();
+  // }
+
   moverse(vectorY, vectorX) {
     if (!this.estaVivo) {
       return false;
@@ -324,13 +330,7 @@ export class Personaje {
 
 class controladorPersonajeDOM {
   // constructor(interfazConfigObj) {
-  constructor(
-    tieneTooltip,
-    escenario,
-    idHtml,
-    zIndex,
-    paddingImagen = "0"
-  ) {
+  constructor(tieneTooltip, escenario, idHtml, zIndex, paddingImagen = "0") {
     //this.modo = modo;
     this.escenario = escenario;
     this.elementoHTML = document.createElement("DIV");
@@ -372,10 +372,10 @@ class controladorPersonajeDOM {
   }
   posicionarPersonajeEnHtml(posY, posX) {
     // if (this.modo != "prerun") {
-      this.elementoHTML.style.left =
-        posX * this.escenario.unidadAnchoDeseada + "em";
-      this.elementoHTML.style.top =
-        posY * this.escenario.unidadAnchoDeseada + "em";
+    this.elementoHTML.style.left =
+      posX * this.escenario.unidadAnchoDeseada + "em";
+    this.elementoHTML.style.top =
+      posY * this.escenario.unidadAnchoDeseada + "em";
     //}
   }
   rotarPersonaje(grados) {
