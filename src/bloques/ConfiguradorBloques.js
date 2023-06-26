@@ -63,8 +63,15 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 'type': 'on_execute',
-                "message0": "Al ejecutar %1 %2",
+                "message0": "%1 Al ejecutar %2 %3",
                 "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_play_circle_filled_white_48px-512.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
                     {
                         "type": "input_dummy",
                     },
@@ -109,7 +116,16 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "move_down_simple",
-                "message0": "mover abajo",
+                "message0": "%1 mover abajo",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964784790508314.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
                 "previousStatement": null,
                 "nextStatement": null,
                 "style": "list_blocks",
@@ -133,7 +149,16 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "move_up_simple",
-                message0: "mover arriba",
+                message0: "%1 mover arriba",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
                 previousStatement: null,
                 nextStatement: null,
                 style: "list_blocks",
@@ -156,7 +181,16 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "move_right_simple",
-                "message0": "mover a la derecha",
+                "message0": "%1 mover a la derecha",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964784973444275.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
                 "previousStatement": null,
                 "nextStatement": null,
                 "style": "list_blocks",
@@ -186,8 +220,16 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "move_left_simple",
-                message0: "mover a la izquierda",
-
+                message0: "%1 mover a la izquierda",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964784886798044.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
                 previousStatement: null,
                 nextStatement: null,
                 style: "list_blocks",
@@ -220,12 +262,19 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "move_down_param",
-                message0: "mover abajo %1 casillas",
+                message0: "%2 mover abajo %1 casillas",
                 args0: [
                     {
                         type: "field_number",
                         name: "CASILLAS",
                         value: 1,
+                    },
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964784790508314.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
                     },
                 ],
                 previousStatement: null,
@@ -264,12 +313,19 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "move_up_param",
-                message0: "mover arriba %1 casillas",
+                message0: "%2 mover arriba %1 casillas",
                 args0: [
                     {
                         type: "field_number",
                         name: "CASILLAS",
                         value: 1,
+                    },
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
                     },
                 ],
                 previousStatement: null,
@@ -306,12 +362,19 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "move_right_param",
-                message0: "mover a la derecha %1 casillas",
+                message0: "%2 mover a la derecha %1 casillas",
                 args0: [
                     {
                         type: "field_number",
                         name: "CASILLAS",
                         value: 1,
+                    },
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964784973444275.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
                     },
                 ],
                 previousStatement: null,
@@ -349,12 +412,19 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "move_left_param",
-                message0: "mover a la izquierda %1 casillas",
+                message0: "%2 mover a la izquierda %1 casillas",
                 args0: [
                     {
                         type: "field_number",
                         name: "CASILLAS",
                         value: 1,
+                    },
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964784886798044.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
                     },
                 ],
                 previousStatement: null,
@@ -400,21 +470,126 @@ export default class ConfiguradorBloques {
 
     // MOVIMIENTO POR AVANCE 
     // no existe versión sin parámetros.
-    go_forward_param() {
-        // avanzar(casillas) "Avanzar" (parametro casillas)
+    avanzar_param() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "avanzar_param",
+                message0: "%2 avanzar %1 casillas",
+                args0: [
+                    {
+                        type: "field_number",
+                        name: "CASILLAS",
+                        value: 1,
+                    },
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/forward+icon-1320166878041096316.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                      }
+                ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "list_blocks",
+                extensions: ["avanzar_param_validation"],
+            },
+        ]);
+
+        Blockly.Extensions.register("avanzar_param_validation", function () {
+            this.setOnChange(function (event) {
+                const casillas = this.getFieldValue("CASILLAS");
+                const valid = casillas >= 1;
+                this.setWarningText(
+                    valid
+                        ? null
+                        : `El número de casillas (${casillas}) no puede ser menor a 1.`
+                );
+            });
+        });
+
+        // Define how to generate JavaScript from the custom block.
+        Blockly.JavaScript["avanzar_param"] = function (block) {
+            const casillas = this.getFieldValue("CASILLAS");
+            const code = "avanzar(" + casillas + ");\n";
+            return code;
+        };
+
+        return {
+            type: "avanzar_param",
+            kind: "block",
+        }
     }
 
     // GIRO IZQUIERDA DERECHA
-    turn_right() {
-        // girarDerecha() "Girar a la derecha" (sin parametro)
+    girar_derecha() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "girar_derecha",
+                "message0": "%1 girar derecha",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/33/33811.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "list_blocks",
+            },
+        ]);
+
+        // Define how to generate JavaScript from the custom block.
+        Blockly.JavaScript["girar_derecha"] = function (block) {
+            const code = "girarDerecha();\n";
+            return code;
+        };
+
+        return {
+            type: "girar_derecha",
+            kind: "block",
+        }
     }
-    turn_left() {
-        // girarIzquierda() "Girar a la izquierda" (sin parametro)
+    girar_izquierda() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "girar_izquierda",
+                "message0": "%1 girar izquierda",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/32/32418.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "list_blocks",
+            },
+        ]);
+
+        // Define how to generate JavaScript from the custom block.
+        Blockly.JavaScript["girar_izquierda"] = function (block) {
+            const code = "girarIzquierda();\n";
+            return code;
+        };
+
+        return {
+            type: "girar_izquierda",
+            kind: "block",
+        }
     }
     // macro
-    turn_classic() {
-        this.turn_right();
-        this.turn_left();
+    girar_clasico() {
+        return [
+            this.girar_derecha(),
+            this.girar_izquierda()
+        ]
     }
 
 
@@ -437,11 +612,20 @@ export default class ConfiguradorBloques {
     // ---------------
     // ACCIONES
     // ---------------
-    abrirCofre() {
+    abrir_cofre() {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "abrir_cofre",
-                message0: "Abrir cofre",
+                message0: "%1 abrir cofre",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
                 previousStatement: null,
                 nextStatement: null,
                 style: "list_blocks",
@@ -458,60 +642,102 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
-    juntarBasura() {
+    juntar_basura() {
 
     }
     // Lapiz
-    bajarLapiz(){
+    bajar_lapiz(){
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "bajarLapiz",
-                message0: "bajar lápiz",
+                type: "bajar_lapiz",
+                message0: "%1 bajar lápiz",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://images.emojiterra.com/twitter/v14.0/512px/270f.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
                 previousStatement: null,
                 nextStatement: null,
                 style: "list_blocks",
             },
         ]);
 
-        Blockly.JavaScript["bajarLapiz"] = function (block) {
+        Blockly.JavaScript["bajar_lapiz"] = function (block) {
             const code = "bajarLapiz();\n"
             return code;
         };
 
         return {
-            type: "bajarLapiz",
+            type: "bajar_lapiz",
             kind: "block",
         }
     }
-    subirLapiz(){
+    subir_lapiz(){
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "subirLapiz",
-                message0: "subir lápiz",
+                type: "subir_lapiz",
+                message0: "%1 subir lápiz",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://images.emojiterra.com/twitter/v14.0/512px/270f.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
                 previousStatement: null,
                 nextStatement: null,
                 style: "list_blocks",
             },
         ]);
 
-        Blockly.JavaScript["subirLapiz"] = function (block) {
+        Blockly.JavaScript["subir_lapiz"] = function (block) {
             const code = "subirLapiz();\n"
             return code;
         };
 
         return {
-            type: "subirLapiz",
+            type: "subir_lapiz",
             kind: "block",
         }
     }
-    setearColor(){
+    setear_color() {
+        // Blockly.common.defineBlocksWithJsonArray([
+        //     {
+        //         "type": "color_picker",
+        //         "message0": "Pick Color %1",
+        //         "args0": [
+        //             {
+        //                 "type": "field_colour",
+        //                 "name": "COLOR",
+        //                 "colour": "#ff0000"
+        //             }
+        //         ],
+        //         "output": "Colour",
+        //         "colour": 230
+        //     }
+        // ])
+        // Blockly.JavaScript["color_picker"] = function (block) {
+        //     const code = "setearColor();\n"
+        //     return code;
+        // };
 
+        // return {
+        //     type: "color_picker",
+        //     kind: "block",
+        // }
+          
     }
     // macro
     lapiz(){
         return[
-            this.bajarLapiz(),
-            this.subirLapiz(),
+            this.bajar_lapiz(),
+            this.subir_lapiz(),
             // this.setearColor()
         ]
     }
