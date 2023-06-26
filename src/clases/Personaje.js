@@ -22,7 +22,6 @@ export class Personaje {
       this.hasTooltips(),
       // objetoConfiguracionPersonaje.tieneTooltip,
       this.juego.escenario,
-      this.juego.modo,
       objetoConfiguracionPersonaje.idUsarHTML,
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
@@ -80,7 +79,7 @@ export class Personaje {
   }
 
   visibilizarTooltip(texto, milisegundos = 4000) {
-    if (this.hasTooltips() && this.juego.modo !== "prerun") {
+    if (this.hasTooltips()) {
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
       setTimeout(() => {
@@ -328,7 +327,6 @@ class controladorPersonajeDOM {
   constructor(
     tieneTooltip,
     escenario,
-    modo,
     idHtml,
     zIndex,
     paddingImagen = "0"
