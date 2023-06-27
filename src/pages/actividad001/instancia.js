@@ -298,6 +298,12 @@ miControlador.juego.agregarGlobalConCallback("moverArriba");
 miControlador.juego.agregarGlobalConCallback("moverIzquierda");
 miControlador.juego.agregarGlobalConCallback("abrirCofre");
 miControlador.juego.agregarGlobalConCallback("juntarBasura");
+miControlador.juego.agregarGlobalConCallback("avanzar")
+miControlador.juego.agregarGlobalConCallback("girarIzquierda");
+miControlador.juego.agregarGlobalConCallback("girarDerecha");
+miControlador.juego.agregarGlobalConCallback("girarGrados");
+miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
+
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
   miControlador.callbackInterpreteStandard(interpreter, globalObject);

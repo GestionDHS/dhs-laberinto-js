@@ -608,11 +608,11 @@ export default class ConfiguradorBloques {
                         "options": [
                             [
                                 "+90°",
-                                "sumaNov"
+                                "90"
                             ],
                             [
                                 "-90°",
-                                "restaNov"
+                                "-90"
                             ]
                         ]
                     },
@@ -635,7 +635,7 @@ export default class ConfiguradorBloques {
         
         Blockly.JavaScript["girar_grados"] = function (block) {
             const grados = this.getFieldValue("grados");
-                const code = "girar("+ grados +");\n";
+                const code = "girarGrados("+ grados +");\n";
                 return code;
             };
     
@@ -659,19 +659,19 @@ export default class ConfiguradorBloques {
                         "options": [
                             [
                                 "0°",
-                                "cero"
+                                "0"
                             ],
                             [
                                 "90°",
-                                "noventa"
+                                 "90"
                             ],
                             [
                                 "180°",
-                                "cientoOchenta"
+                                "180"
                             ],
                             [
                                 "270°",
-                                "dosSetenta"
+                                "270"
                             ]
                         ]
                     },
@@ -694,7 +694,7 @@ export default class ConfiguradorBloques {
         
         Blockly.JavaScript["apuntar_hacia"] = function (block) {
             const grados = this.getFieldValue("grados");
-                const code = "apuntarHacia("+ grados +");\n";
+                const code = "apuntarEnDireccion("+ grados +");\n";
                 return code;
             };
     
