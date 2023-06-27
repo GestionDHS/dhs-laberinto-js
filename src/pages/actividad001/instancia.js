@@ -1,6 +1,9 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
+import { CustomRenderer } from "../../bloques/CustomRender";
+import customTheme from "../../bloques/CustomTheme";
+// import { CustomCategory } from '../../bloques/CustomToolbox';
 // import { toolbox } from 'blockly/core/utils';
 
 
@@ -195,6 +198,10 @@ const categoriasDeseadas = [
   {
     name: "Acciones",
     categorystyle: "variable_category"
+  },
+  {
+    name: "Condicionales",
+    categorystyle: "logic_category"
   }
 ]
 categoriasDeseadas.forEach(cat => miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat));
@@ -207,15 +214,35 @@ const bloquesCustomStandardDesados = [
   ["move_classic_param", "Movimientos"],
   ["avanzar_param", "Movimientos"],
   ["girar_clasico", "Movimientos"],
+  ["girar_grados", "Movimientos"],
+  ["apuntar_hacia", "Movimientos"],
   ["abrir_cofre", "Acciones"],
   ["lapiz", "Lápiz"],
+  ["if", "Condicionales"]
 ];
 
 bloquesCustomStandardDesados.forEach(bl => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl)
 })
 
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {toolbox: miControlador.ConfiguradorBloques.toolbox})
+//pruebas render y theme 
+// render.makeConstants_()
+// const customCategory = new CustomCategory()
+// customCategory.setear();
+// const theme = customTheme.theme;
+const render = new CustomRenderer()
+render.registrarRender("renderDHS")
+miControlador.crearInyectarWorkspace("dhs-blockly-div",
+  {
+    toolbox: miControlador.ConfiguradorBloques.toolbox,
+    theme: "themeDH",
+    renderer: "renderDHS",
+    zoom: {
+      controls: true,
+      wheel: true,
+      pinch: true,
+    },
+  })
 miControlador.cargarBloquesSerializados(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();

@@ -1,7 +1,7 @@
 /* MOBILE */
 *{
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 #appActividad {
@@ -19,7 +19,9 @@ header{
   grid-template-columns: 0.6fr 1fr ;
   align-items: center;
   justify-content: space-evenly;
-  padding: 10px 5px;
+  /* padding: 15px 5px; */
+  height: 6%;
+  /* padding-top: 15px; */
 }
 
 header div.botones{
@@ -29,6 +31,7 @@ header div.botones{
 
 #dhs-boton-ejecutar i{
   font-size: 25px;
+  color: var(--acento);
 }
 
 header div.desactivarSueltos{
@@ -85,14 +88,16 @@ header div.mostrar div input[type="range"]::-webkit-slider-thumb{
 /* Main: donde esta el workspace, el juego y los bloques para mostrar codigo y output */
 
 main{
-  padding: 15px;
+  /* padding: 15px; */
+  /* padding-top: 10px; */
   display: grid;
-  align-items: center;
+  /* align-items: center; */
+  height: 90%;
 }
 
 main div.espacioBloques{
   width: 100%;
-  height: 480px;
+  height: 100%;
   display: inline-block;
 }
 
@@ -100,12 +105,19 @@ main div.juego-escenario textarea.esconder{
   display: none;
 }
 
-main div.juego-escenario div.juego {
+main div.juego-escenario{
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+/* main div.juego-escenario div.juego {
   display: grid;
   align-items: center;
   justify-content: center;
   padding: 10px;
-}
+} */
 
 main div.juego-escenario div.juego div.escenario{
   position: relative;
@@ -184,8 +196,8 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
 }
 
 .botonera .tooltiptext{
-  top: -13px;
-  right: 100%;
+  right: -48px;
+  top: 40px;
 }
 
 .tooltiptext {
@@ -194,7 +206,7 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   width: 140px;
   font-family: monospace;
   background-color: var(--color-gris-claro);
-  color: var(--color-blanco);
+  color: var(--color-gris-oscuro);
   text-align: center;
   border-radius: 6px;
   padding: 5px 0px;
@@ -202,6 +214,7 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   z-index: 5;
   top: -2px;
   right: 110%;
+  font-weight:bold;
 }
 .tooltiptext::after {
   content: "";
@@ -218,8 +231,39 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   visibility: visible;
 }
 
+/* Workspace, Toolbox y bloques */
+/* Makes our label white. */
+/* .blocklyTreeLabel {
+  padding-bottom: 10px;
+} */
+/* Adds padding around the group of categories and separators. */
+/* .blocklyToolboxContents {
+  padding: 0.5em;
+} */
+/* Adds space between the categories, rounds the corners and adds space around the label. */
+.blocklyTreeRow {
+  display: grid;
+  text-align: left;
+  align-content: center;
+  height: 30px;
+  margin-bottom: 0.5em;
+  border-radius: 4px;
+}
+
+/* .blocklyToolboxCategory{
+} */
+
+.blocklyToolboxDiv{
+  padding: 10px;
+}
+
+.blocklyTreeLabel{
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
 /* TABLET y PC */
-@media (min-width: 768px) {
+@media (min-width: 425px) {
 
   main{
     grid-template-columns: 2fr 1fr;
