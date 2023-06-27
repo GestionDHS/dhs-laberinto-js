@@ -743,7 +743,34 @@ export default class ConfiguradorBloques {
         }
     }
     juntar_basura() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "juntar_basura",
+                message0: "%1 juntar basura",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "list_blocks",
+            },
+        ]);
 
+        Blockly.JavaScript["juntar_basura"] = function (block) {
+            const code = "juntarBasura();\n"
+            return code;
+        };
+
+        return {
+            type: "juntar_basura",
+            kind: "block",
+        }
     }
     // Lapiz
     bajar_lapiz(){
