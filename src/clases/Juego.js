@@ -2,9 +2,10 @@ import { Escenario } from "./Escenario";
 import { Personaje } from "./Personaje";
 import { Modal } from "./Modal";
 
+
 export class Juego {
   constructor(duracionIntervalos = 1000) {
-    this.modo = "inicio"; //Este atributo va a volar someday
+    //this.modo = "inicio"; //Este atributo va a volar someday
     this.sincronico = true;
     this.duracionIntervalos = duracionIntervalos;
     this.escenario = {};
@@ -13,6 +14,7 @@ export class Juego {
     this.puedeDebeContinuar = true;
     this.funcionesPublicadas = [];
   }
+
 
   /*PARA RENDERIZAR ESCENARIO*/
   // La funcion recibe la matriz tablero la unidad de ancho, el color de bordes, nombre imagen pared, nombre imagen camino
@@ -82,7 +84,7 @@ export class Juego {
 
   reiniciar() {
     this.puedeDebeContinuar = true;
-    this.modo = "inicio";
+    
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
@@ -93,11 +95,10 @@ export class Juego {
     this.datosModal = new Modal(datosModal, this);
     return this.datosModal;
   }
-  agregarModalError(datosModalError) {
-    //pia
-    this.datosModalError = new Modal(datosModalError, this);
-    return this.datosModalError;
-  }
+  // agregarModalError(datosModalError) {
+  //   this.datosModalError = new Modal(datosModalError, this);
+  //   return this.datosModalError;
+  // }
 
   habilitarFuncionGlobal(nombre, bindearCon = this.personajePrincipal){
     window[nombre] = bindearCon[nombre].bind(bindearCon);

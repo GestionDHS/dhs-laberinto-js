@@ -5,6 +5,7 @@ import cofreAbierto from "../img/cofreabierto.png"
 import arbolesPasto from "../img/arbolesPasto.png"
 import muchasmonedas from "../img/muchasMonedas.png"
 import pasto from "../img/pasto.png"
+import basura from "../img/basura.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -29,82 +30,15 @@ export class DHS_Gallery {
     return this.imageLib[dir].nombre;
   }
   imageLib = {
-    // for theme absolute-movements
-    arriba: {
-      themes: ["absolute-movements"],
-      url: "../../img/bloques/arriba-blanco.png",
-      nombre: "Mover Arriba",
+    basura: {
+      themes: ["lupe"],
+      url: basura,
+      nombre: "basura",
       parrafoLicencia:
-        '<p> Iconos diseñados por <a target="_blank" href="" title="Tempo_doloe"> Tempo_doloe </a> from <a target="_blank" href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+        '<p><a href="https://www.flaticon.com/free-icons/garbage" title="garbage icons">Garbage icons created by Smashicons - Flaticon</a></p>',
       showLicense: true,
     },
-    abajo: {
-      themes: ["absolute-movements"],
-      url: "../../img/bloques/abajo-blanco.png",
-      nombre: "Mover Abajo",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a target="_blank" href="" title="Tempo_doloe"> Tempo_doloe </a> from <a target="_blank" href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    izquierda: {
-      themes: ["absolute-movements"],
-      url: "../../img/bloques/izquierda-blanco.png",
-      nombre: "Mover Izquierda",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a target="_blank" href="" title="Tempo_doloe"> Tempo_doloe </a> from <a target="_blank" href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    derecha: {
-      themes: ["absolute-movements"],
-      url: "../../img/bloques/derecha-blanco.png",
-      nombre: "Mover Derecha",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a target="_blank" href="" title="Tempo_doloe"> Tempo_doloe </a> from <a target="_blank" href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    // for theme relative-movements
-    avanzar: {
-      themes: ["relative-movements"],
-      url: "../../img/bloques/avanzar-round-blanco.png",
-      nombre: "Avanzar",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a href="" title="Tempo_doloe"> Tempo_doloe </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: true,
-    },
-    girarIzquierda: {
-      themes: ["relative-movements"],
-      url: "../../img/bloques/girar-izquierda-blanco.png",
-      nombre: "Girar Izquierda",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a href="" title="Tempo_doloe"> Tempo_doloe </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    girarDerecha: {
-      themes: ["relative-movements"],
-      url: "../../img/bloques/girar-derecha-blanco.png",
-      nombre: "Girar Derecha",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a href="" title="Tempo_doloe"> Tempo_doloe </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    girarGrados: {
-      themes: ["relative-movements"],
-      url: "../../img/bloques/girar-derecha-blanco.png",
-      nombre: "Girar",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a href="" title="Tempo_doloe"> Tempo_doloe </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    apuntar: {
-      themes: ["relative-movements"],
-      url: "../../img/bloques/direccion-blanco.png",
-      nombre: "Apuntar dirección",
-      parrafoLicencia:
-        '<p> Iconos diseñados por <a href="" title="Tempo_doloe"> Tempo_doloe </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    // for theme lupe-commons
-    lupe: {
+     lupe: {
       themes: ["lupe"],
       url: robotlupe,
       nombre: "Lupe",

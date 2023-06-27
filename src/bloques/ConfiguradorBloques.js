@@ -81,7 +81,8 @@ export default class ConfiguradorBloques {
                     }
                 ],
                 "inputsInline": false,
-                "colour": 230,
+                // "colour": 230,
+                "style": "procedure_blocks",
                 "tooltip": "Triggered when the flag is clicked",
                 "helpUrl": "",
                 "hat": "rounded",
@@ -595,13 +596,112 @@ export default class ConfiguradorBloques {
 
     // MOVIMIENTOS POR GRADOS
 
-    turn_degrees() {
-        // girar(grados) "Girar ____ grados" (elegir entre 2 opciones: -90 o +90)
+    girar_grados() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "girar_grados",
+                "message0": "%2 girar %1",
+                "args0": [
+                    {
+                        "type": "field_dropdown",
+                        "name": "grados",
+                        "options": [
+                            [
+                                "+90°",
+                                "90"
+                            ],
+                            [
+                                "-90°",
+                                "-90"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "field_image",
+                        "src": "https://cdn.icon-icons.com/icons2/317/PNG/512/compass-icon_34461.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                      },
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                // "colour": 230,
+                "tooltip": "",
+                "helpUrl": "",
+                "style": "list_blocks",
+                // "extensions": ["turn_degrees_validation"],
+            }]);
+        
+        Blockly.JavaScript["girar_grados"] = function (block) {
+            const grados = this.getFieldValue("grados");
+                const code = "girarGrados("+ grados +");\n";
+                return code;
+            };
+    
+        return {
+            type: "girar_grados",
+            kind: "block",
+        }
+        
     }
 
     // APUNTAR POR COORDENADA GRADOS
-    point_degrees_coordinate() {
-        // apuntar(grados) -- > "apuntar a " (elegir entre 0 90 180 270)
+    apuntar_hacia() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "apuntar_hacia",
+                "message0": "%2 apuntar a %1",
+                "args0": [
+                    {
+                        "type": "field_dropdown",
+                        "name": "grados",
+                        "options": [
+                            [
+                                "0°",
+                                "0"
+                            ],
+                            [
+                                "90°",
+                                 "90"
+                            ],
+                            [
+                                "180°",
+                                "180"
+                            ],
+                            [
+                                "270°",
+                                "270"
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "field_image",
+                        "src": "https://cdn.icon-icons.com/icons2/317/PNG/512/compass-icon_34461.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                // "colour": 230,
+                "tooltip": "",
+                "helpUrl": "",
+                "style": "list_blocks",
+                // "extensions": ["turn_degrees_validation"],
+            }]);
+        
+        Blockly.JavaScript["apuntar_hacia"] = function (block) {
+            const grados = this.getFieldValue("grados");
+                const code = "apuntarEnDireccion("+ grados +");\n";
+                return code;
+            };
+    
+        return {
+            type: "apuntar_hacia",
+            kind: "block",
+        }
     }
 
     // ---------------
@@ -643,7 +743,34 @@ export default class ConfiguradorBloques {
         }
     }
     juntar_basura() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "juntar_basura",
+                message0: "%1 juntar basura",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "list_blocks",
+            },
+        ]);
 
+        Blockly.JavaScript["juntar_basura"] = function (block) {
+            const code = "juntarBasura();\n"
+            return code;
+        };
+
+        return {
+            type: "juntar_basura",
+            kind: "block",
+        }
     }
     // Lapiz
     bajar_lapiz(){
@@ -742,6 +869,12 @@ export default class ConfiguradorBloques {
         ]
     }
     
+    if() {
+        return {
+            type: "controls_if",
+            kind: "block",
+        } 
+    }
     // BLOQUES PROGRAMACIÓN
     // Repetir, condicionales, etc, etc, etc, (son MUCHISIMOS)
 

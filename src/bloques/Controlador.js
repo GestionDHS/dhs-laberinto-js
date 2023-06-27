@@ -66,6 +66,7 @@ class Controlador {
     this.botonLimpiarWorkspace = botonLimpiarWorkspace;
     if (this.botonLimpiarWorkspace) {
       this.botonLimpiarWorkspace.addEventListener("click", () => {
+        this.detenerEjecucion();
         this.limpiarWorkspace();
         this.cargarBloquesSerializados(JSON.parse('{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'))
       })
