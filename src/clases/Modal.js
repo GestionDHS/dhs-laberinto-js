@@ -7,6 +7,7 @@ export class Modal {
     this.galeria = new DHS_Gallery();
     this.imageUrl = this.galeria.obtenerUrlDe(modalPannelObj.imagen);
     this.texto = modalPannelObj.texto;
+    //this.color = modalPannelObj.color || "green"
     this.elementoPannel = document.createElement("DIV");
     this.elementoPannel.classList.add("dhs-modal-pannel");
     this.titleElement = document.createElement("P");
@@ -39,9 +40,7 @@ export class Modal {
     this.mainTextElement.innerHTML = this.texto;
   }
   mostrar() {
-    if (this.juego.modo != "prerun") {
       this.elementoPannel.classList.remove("dhs-modal-pannel-hidden");
-    }
   }
   ocultar() {
     this.elementoPannel.classList.add("dhs-modal-pannel-hidden");

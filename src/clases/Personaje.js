@@ -7,8 +7,8 @@ export class Personaje {
     this.galeria = new DHS_Gallery();
     // TIPOS [JUGABLE, FUEGOS, COFRES, MONEDAS, ENTRADA, SALIDA]
     this.tipoPersonaje = objetoConfiguracionPersonaje.tipoPersonaje; // STRING CON EL TIPO DE PERSONAJE
-    this.status = objetoConfiguracionPersonaje.status; // OBJETOS DE OBJETOS DE POSIBLES ESTADOS  {clave{nombre:"", imageURL:""}}
-    this.statusInicial = objetoConfiguracionPersonaje.statusInicial; // STRING CON CLAVE DEL ESTADO INICIAL DEL PERSONAJE
+    this.estadosPosibles = objetoConfiguracionPersonaje.estadosPosibles; // OBJETOS DE OBJETOS DE POSIBLES ESTADOS  {clave{nombre:"", imageURL:""}}
+    this.estadoInicial = objetoConfiguracionPersonaje.estadoInicial; // STRING CON CLAVE DEL ESTADO INICIAL DEL PERSONAJE
     this.posicionInicialY = objetoConfiguracionPersonaje.posicionInicialY; // ENTERO CON LA POSICION INICIAL
     this.posicionInicialX = objetoConfiguracionPersonaje.posicionInicialX; // ENTERO CON LA POSICION INICIAL
     this.direccionInicial = objetoConfiguracionPersonaje.direccionInicial
@@ -16,13 +16,12 @@ export class Personaje {
       : 0; // ENTERO 0-360 con grados de orientación inicial.
     this.colisiones = objetoConfiguracionPersonaje.colisiones; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
-    this.rotable = objetoConfiguracionPersonaje.rotable || false
-    this.mochila = []
+    this.rotable = objetoConfiguracionPersonaje.rotable || false;
+    this.mochila = [];
     this.controladorDOM = new controladorPersonajeDOM(
       this.hasTooltips(),
       // objetoConfiguracionPersonaje.tieneTooltip,
       this.juego.escenario,
-      this.juego.modo,
       objetoConfiguracionPersonaje.idUsarHTML,
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
@@ -34,7 +33,7 @@ export class Personaje {
     this.estaVivo = true;
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
-    this.setearStatus(this.statusInicial);
+    this.setearEstado(this.estadoInicial);
     this.actualizarCasillerosJuego(
       this.posicionInicialY,
       this.posicionInicialX,
@@ -49,18 +48,18 @@ export class Personaje {
     this.setearVelocidad(this.juego.duracionIntervalos);
   }
 
-  setearStatus(nuevoStatus) {
-    this.currentStatus = nuevoStatus;
-    if (this.juego.modo != "prerun") {
-      this.controladorDOM.setearImagen(
-        this.obtenerImagenSegunEstado(nuevoStatus)
-      );
-    }
+  setearEstado(nuevoStatus) {
+    this.estadoActual = nuevoStatus;
+    this.controladorDOM.setearImagen(
+      //pia
+      //this.obtenerImagenSegunEstado(nuevoStatus)
+      this.galeria.obtenerUrlDe(this.estadosPosibles[nuevoStatus].imageUrl)
+    );
   }
 
-  obtenerImagenSegunEstado(nuevoStatus) {
-    return this.galeria.obtenerUrlDe(this.status[nuevoStatus].imageUrl);
-  }
+  // obtenerImagenSegunEstado(nuevoStatus) { // pia
+  //   return this.galeria.obtenerUrlDe(this.status[nuevoStatus].imageUrl);
+  // }
 
   //recibe un objeto de tipo colision que tiene (con , seMuere, autoMensaje, mensaje)
   agregarColision(unaColision) {
@@ -80,10 +79,7 @@ export class Personaje {
   }
 
   visibilizarTooltip(texto, milisegundos = 4000) {
-    // console.log("llamó al visibTooltip");
-    // console.log(this.hasTooltips())
-    // console.log(this.juego.modo!="prerun")
-    if (this.hasTooltips() && this.juego.modo !== "prerun") {
+    if (this.hasTooltips()) {
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
       setTimeout(() => {
@@ -115,41 +111,85 @@ export class Personaje {
     this.estaVivo = false;
     this.juego.puedeDebeContinuar = false;
   }
-  abrir(nameObj) {
-    const objAAbrir = this.casilleroActual.ocupantes.find(
+
+  realizarAccionSobre(elemento, accion, params = false) {
+    const parametros = params ? params : [];
+    const acto = elemento[accion](...parametros); // tiene que devolver exito true/false y premio
+    acto && acto.premio && this.mochila.push(acto.premio);
+    return acto;
+  }
+  buscarParaRealizarAccion(nameObj, accion, params = false) {
+    const objetoPaciente = this.casilleroActual.ocupantes.find(
       (obj) => obj.tipoPersonaje == nameObj
     );
-    // objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): this.abrirModalFalloApertura() 
-    objAAbrir ? objAAbrir.abrirse() : this.decirTerminar("Oh! Aquí no hay nada para abrir.");
-    
+    const acto = objetoPaciente
+      ? this.realizarAccionSobre(objetoPaciente, accion, params)
+      : false;
+    return {
+      objetoEncontrado: objetoPaciente ? true : false,
+      exito: acto && acto.exito,
+      premio: acto && acto.exito ? acto.premio : null,
+    };
   }
+  // abrirCofre() {
+  //   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
-  abrirCofre() {
-    this.abrir("cofre");
+  //   if (!intento.objetoEncontrado) {
+  //     this.decirTerminar("Oh! Aquí no hay cofre.");
+  //     //this.abrirModalFalloApertura();
+  //   } else if (!intento.exito) {
+  //     //this.abrirYMostrarModal();
+  //     this.decirTerminar("Oh! Este cofre ya estaba abierto.");
+  //   }
+  //   return intento;
+  // }
+  abrirse() {
+    if (this.estadoActual === "cerrado") {
+      this.setearEstado("abierto");
+      return { exito: true, premio: { tipo: "monedas", cantidad: 20 } };
+    } else {
+      return { exito: false, premio: null };
+    }
   }
-
+  //para juntar la basura
+  serJuntado() {
+    if (this.estadoActual === "normal") {
+      this.setearEstado("juntado");
+      return { exito: true, premio: { tipo: "basura", cantidad: 1 } };
+    } else {
+      return { exito: false, premio: null };
+    }
+  }
   decirTerminar(ultimasPalabras) {
     this.decir(ultimasPalabras);
     this.terminar();
   }
+  // abrir(nameObj) {
+  //   const objAAbrir = this.casilleroActual.ocupantes.find(
+  //     (obj) => obj.tipoPersonaje == nameObj
+  //   );
+  //   // objAAbrir?this.abrirYMostrarModal(objAAbrir.nameObj): this.abrirModalFalloApertura()
+  //   objAAbrir ? objAAbrir.abrirse() : this.decirTerminar("Oh! Aquí no hay nada para abrir.");
 
-  abrirse() {
-    this.setearStatus("abierto");
-    this.abrirYMostrarModal();
-  }
+  // }
 
-  abrirYMostrarModal(nombreObj) {
+  // abrirCofre() {
+  //   this.abrir("cofre");
+  // }
+
+  // abrirse() {
+  //   this.setearEstado("abierto");
+  //   this.abrirYMostrarModal();
+  // }
+
+  abrirYMostrarModal() {
     this.juego.datosModal.mostrar();
   }
-  abrirModalFalloApertura(){ //pia
-    this.juego.datosModalError.mostrar()
-  }
-  cerrar() {
-    this.setearStatus("cerrar");
-    this.juego.modalPannel.ocultar();
-  }
+  // abrirModalFalloApertura() {
+  //   this.juego.datosModalError.mostrar();
+  // }
+
   moverse(vectorY, vectorX) {
-    // console.log("step");
     if (!this.estaVivo) {
       return false;
     }
@@ -174,20 +214,21 @@ export class Personaje {
       this.controladorDOM.posicionarPersonajeEnHtml(
         this.posicionActualY + vectorY * limite.factorDeAvance,
         this.posicionActualX + vectorX * limite.factorDeAvance
-        );
-    }else{
-    let objetoAux = this.verificarColision(casilleroDestino);
-    // console.log(objetoAux);
-    //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
-    // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
-    objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
-    objetoAux.callback && objetoAux.callback(this);
-    this.casilleroActual.ocupantes.pop();
-    this.controladorDOM.posicionarPersonajeEnHtml(
-      this.posicionActualY + vectorY * objetoAux.factorDeAvance,
-      this.posicionActualX + vectorX * objetoAux.factorDeAvance
       );
-      this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);}
+    } else {
+      let objetoAux = this.verificarColision(casilleroDestino);
+      // console.log(objetoAux);
+      //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
+      // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
+      objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
+      objetoAux.callback && objetoAux.callback(this);
+      this.casilleroActual.ocupantes.pop();
+      this.controladorDOM.posicionarPersonajeEnHtml(
+        this.posicionActualY + vectorY * objetoAux.factorDeAvance,
+        this.posicionActualX + vectorX * objetoAux.factorDeAvance
+      );
+      this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);
+    }
   }
   obtenerFactorAvance(casilleroDestino) {
     let esValido = casilleroDestino.esPisable();
@@ -207,58 +248,74 @@ export class Personaje {
 
   moverArriba(veces = 1) {
     if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-        throw new Error('¡Cuidado! - La función moverArriba() solo acepta números enteros positivos como parámetros.');
+      throw new Error(
+        "¡Cuidado! - La función moverArriba() solo acepta números enteros positivos como parámetros."
+      );
     }
     this.moverse(-1, 0);
     if (veces > 1) {
-      if (this.juego.sincronico) { 
+      if (this.juego.sincronico) {
         this.moverArriba(veces - 1);
       } else {
-        setTimeout(() => { this.moverArriba(veces - 1) }, this.juego.duracionIntervalos);
+        setTimeout(() => {
+          this.moverArriba(veces - 1);
+        }, this.juego.duracionIntervalos);
       }
     }
-  };
+  }
   moverDerecha(veces = 1) {
     if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-        throw new Error('¡Cuidado! - La función moverDerecha() solo acepta números enteros positivos como parámetros.');
+      throw new Error(
+        "¡Cuidado! - La función moverDerecha() solo acepta números enteros positivos como parámetros."
+      );
     }
     this.moverse(0, 1);
     if (veces > 1) {
-      if (this.juego.sincronico) { 
+      if (this.juego.sincronico) {
         this.moverDerecha(veces - 1);
       } else {
-        setTimeout(() => { this.moverDerecha(veces - 1) }, this.juego.duracionIntervalos);
+        setTimeout(() => {
+          this.moverDerecha(veces - 1);
+        }, this.juego.duracionIntervalos);
       }
     }
-  };
+  }
 
   moverIzquierda(veces = 1) {
     if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-        throw new Error('¡Cuidado! - La función moverIzquierda() solo acepta números enteros positivos como parámetros.');
+      throw new Error(
+        "¡Cuidado! - La función moverIzquierda() solo acepta números enteros positivos como parámetros."
+      );
     }
     this.moverse(0, -1);
     if (veces > 1) {
-      if (this.juego.sincronico) { 
+      if (this.juego.sincronico) {
         this.moverIzquierda(veces - 1);
       } else {
-        setTimeout(() => { this.moverIzquierda(veces - 1) }, this.juego.duracionIntervalos);
+        setTimeout(() => {
+          this.moverIzquierda(veces - 1);
+        }, this.juego.duracionIntervalos);
       }
     }
-  };
+  }
 
   moverAbajo(veces = 1) {
     if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-        throw new Error('¡Cuidado! - La función moverAbajo() solo acepta números enteros positivos como parámetros.');
+      throw new Error(
+        "¡Cuidado! - La función moverAbajo() solo acepta números enteros positivos como parámetros."
+      );
     }
     this.moverse(1, 0);
     if (veces > 1) {
-      if (this.juego.sincronico) { 
+      if (this.juego.sincronico) {
         this.moverAbajo(veces - 1);
       } else {
-        setTimeout(() => { this.moverAbajo(veces - 1) }, this.juego.duracionIntervalos);
+        setTimeout(() => {
+          this.moverAbajo(veces - 1);
+        }, this.juego.duracionIntervalos);
       }
     }
-  };
+  }
   // moverDerecha() {
   //   this.moverse(0, 1);
   // }
@@ -268,22 +325,13 @@ export class Personaje {
   // moverIzquierda() {
   //   this.moverse(0, -1);
   // }
-  girar(grados, direccion){
-
-  }
+  girar(grados, direccion) {}
 }
 
 class controladorPersonajeDOM {
   // constructor(interfazConfigObj) {
-  constructor(
-    tieneTooltip,
-    escenario,
-    modo,
-    idHtml,
-    zIndex,
-    paddingImagen = "0"
-  ) {
-    this.modo = modo;
+  constructor(tieneTooltip, escenario, idHtml, zIndex, paddingImagen = "0") {
+    //this.modo = modo;
     this.escenario = escenario;
     this.elementoHTML = document.createElement("DIV");
     this.elementoHTML.id = idHtml;
@@ -323,12 +371,12 @@ class controladorPersonajeDOM {
     this.imagenAnidada.style.transition = "all " + milisegundos / 1000 + "s";
   }
   posicionarPersonajeEnHtml(posY, posX) {
-    if (this.modo != "prerun") {
-      this.elementoHTML.style.left =
-        posX * this.escenario.unidadAnchoDeseada + "em";
-      this.elementoHTML.style.top =
-        posY * this.escenario.unidadAnchoDeseada + "em";
-    }
+    // if (this.modo != "prerun") {
+    this.elementoHTML.style.left =
+      posX * this.escenario.unidadAnchoDeseada + "em";
+    this.elementoHTML.style.top =
+      posY * this.escenario.unidadAnchoDeseada + "em";
+    //}
   }
   rotarPersonaje(grados) {
     this.imagenAnidada.style.transform = `rotate(${grados}deg)`;
