@@ -1,6 +1,5 @@
 import { DHS_Gallery } from "./Dhs-galeria";
-import { Personaje } from "./Personaje";
-import { Modal } from "./Modal";
+
 
 export class Escenario {
   constructor(

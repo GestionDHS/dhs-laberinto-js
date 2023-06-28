@@ -189,6 +189,13 @@ export class Personaje {
   //   this.juego.datosModalError.mostrar();
   // }
 
+  verificarColision(casilleroDestino) {
+    // retorna el factor de Avance
+    const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
+    // console.log(objetoColision);
+    return objetoColision;
+  }
+
   moverse(vectorY, vectorX) {
     if (!this.estaVivo) {
       return false;
@@ -230,102 +237,95 @@ export class Personaje {
       this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);
     }
   }
-  obtenerFactorAvance(casilleroDestino) {
-    let esValido = casilleroDestino.esPisable();
-    return esValido ? this.verificarColision(casilleroDestino) : 0;
-  }
-
-  verificarColision(casilleroDestino) {
-    // retorna el factor de Avance
-    const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-    // console.log(objetoColision);
-    return objetoColision;
-  }
-
-  // moverArriba() {
-  //   this.moverse(-1, 0);
+  // obtenerFactorAvance(casilleroDestino) {
+  //   let esValido = casilleroDestino.esPisable();
+  //   return esValido ? this.verificarColision(casilleroDestino) : 0;
   // }
 
-  moverArriba(veces = 1) {
-    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-      throw new Error(
-        "¡Cuidado! - La función moverArriba() solo acepta números enteros positivos como parámetros."
-      );
-    }
-    this.moverse(-1, 0);
-    if (veces > 1) {
-      if (this.juego.sincronico) {
-        this.moverArriba(veces - 1);
-      } else {
-        setTimeout(() => {
-          this.moverArriba(veces - 1);
-        }, this.juego.duracionIntervalos);
-      }
-    }
-  }
-  moverDerecha(veces = 1) {
-    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-      throw new Error(
-        "¡Cuidado! - La función moverDerecha() solo acepta números enteros positivos como parámetros."
-      );
-    }
-    this.moverse(0, 1);
-    if (veces > 1) {
-      if (this.juego.sincronico) {
-        this.moverDerecha(veces - 1);
-      } else {
-        setTimeout(() => {
-          this.moverDerecha(veces - 1);
-        }, this.juego.duracionIntervalos);
-      }
-    }
-  }
 
-  moverIzquierda(veces = 1) {
-    if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-      throw new Error(
-        "¡Cuidado! - La función moverIzquierda() solo acepta números enteros positivos como parámetros."
-      );
-    }
-    this.moverse(0, -1);
-    if (veces > 1) {
-      if (this.juego.sincronico) {
-        this.moverIzquierda(veces - 1);
-      } else {
-        setTimeout(() => {
-          this.moverIzquierda(veces - 1);
-        }, this.juego.duracionIntervalos);
-      }
-    }
-  }
 
-  moverAbajo(veces = 1) {
+  apuntarEnDireccion(nuevaDireccion) {
+    if (!this.estaVivo) { return false }
+    this.direccion = parseInt(nuevaDireccion);
+    this.controladorDOM.rotarPersonaje(this.direccion);
+}
+
+girarGrados(grados) {
+    const nuevaDireccion = this.direccion + parseInt(grados);
+    return this.apuntarEnDireccion(nuevaDireccion)
+}
+
+girarIzquierda(grados=90) {
+    return this.girarGrados(-parseInt(grados))
+}
+
+girarDerecha(grados=90) {
+    return this.girarGrados(parseInt(grados))
+}
+
+// AVANCES
+avanzar(veces = 1) {
+    const vector = this.obtenerVectorAvance(this.direccion);
+    return this.iterarVectorMovimiento(veces, vector);
+}
+moverArriba(veces = 1) {
+    return this.iterarVectorMovimiento(veces, [-1, 0]);
+}
+moverAbajo(veces = 1) {
+    return this.iterarVectorMovimiento(veces, [+1, 0]);
+}
+moverIzquierda(veces = 1) {
+    return this.iterarVectorMovimiento(veces, [0, -1]);
+}
+moverDerecha(veces = 1) {
+    return this.iterarVectorMovimiento(veces, [0, +1]);
+}
+
+// ACCESORIOS PARA MOVIMIENTOS
+
+obtenerVectorAvance(direccion) {
+    const moduloDireccion360 =  direccion%360; // 0 || +/-90 || +/-180 || +/-270
+    const moduloDireccion360Positivo = moduloDireccion360 < 0 ? 360+moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270 
+    const puntoCardinal = moduloDireccion360Positivo/90; // 0 || 1 || 2 || 3
+    if(Number.isInteger(puntoCardinal) && puntoCardinal >= 0 && puntoCardinal <= 3){
+        const vectores = [[-1,0],[0, +1],[+1, 0],[0,-1]];
+        const vectorUsar = vectores[puntoCardinal];
+        return vectorUsar
+    }else{
+        throw new Error("Ocurrió un problema al intentar avanzar() en una dirección no permitida: " + direccion);
+    }
+}
+iterarVectorMovimiento(veces, vector) {
+    if (!this.estaVivo) { return false }
     if (typeof veces !== "number" || !Number.isInteger(veces) || veces < 1) {
-      throw new Error(
-        "¡Cuidado! - La función moverAbajo() solo acepta números enteros positivos como parámetros."
-      );
+        throw new Error('¡Cuidado! - Esta función de movimiento solo acepta números enteros positivos como parámetros.');
     }
-    this.moverse(1, 0);
-    if (veces > 1) {
-      if (this.juego.sincronico) {
-        this.moverAbajo(veces - 1);
-      } else {
+    if (this.juego.sincronico) {
+        return this.iterarVectorMovimientoSincronicamente(veces, vector);
+    } else {
+        return this.iterarVectorMovimientoAsincronicamente(veces, vector);
+    }
+}
+iterarVectorMovimientoSincronicamente(veces, vector) {
+    let i = 0;
+    while (i < veces && this.estaVivo) {
+        this.moverse(vector[0],vector[1]);
+        i++;
+    }
+    return this.estaVivo;
+}
+iterarVectorMovimientoAsincronicamente(veces, vector) {
+    this.moverse(vector[0],vector[1])
+    if (veces > 1 && this.estaVivo) {
         setTimeout(() => {
-          this.moverAbajo(veces - 1);
-        }, this.juego.duracionIntervalos);
-      }
+            this.iterarVectorMovimientoAsincronicamente(veces - 1,vector);
+        }, this.juego.duracionIntervalos)
+    } else {
+        return this.estaVivo;
     }
-  }
-  // moverDerecha() {
-  //   this.moverse(0, 1);
-  // }
-  // moverAbajo() {
-  //   this.moverse(1, 0);
-  // }
-  // moverIzquierda() {
-  //   this.moverse(0, -1);
-  // }
-  girar(grados, direccion) {}
+}
+
+ 
 }
 
 class controladorPersonajeDOM {
