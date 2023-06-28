@@ -12,18 +12,12 @@ const velocidadInicial = 1000;
 const miJuego = new Juego(velocidadInicial);
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-const listaBloquesAGenerar = [
-  "arriba",
-  "abajo",
-  "izquierda",
-  "derecha",
-  "llave",
-];
+//Blockly
 
-// CUARTO : CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
+//CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [5, 6]; //fila, columna
 
-//aca hay que pasarle el tablero y pedirle que rellene árbol y pasto
+//tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 1],
@@ -48,6 +42,7 @@ const arbol = {
 const pasto = {
   idUsarHTML: "camino",
   tipoPersonaje: "camino",
+  pintable:true,
   estadosPosibles: {
     normal: { name: "normal", imageUrl: "pasto" },
   },
@@ -80,23 +75,12 @@ miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-//miJuego.generarWorkspace()
-// document.getElementById("dhs-boton").addEventListener("click", function (e) {
-//   e.preventDefault()
-//   miJuego.ejecutar();
-// });
-// const arrayDePersonajes= [
-//   {
-//     nombre: "lupe",
-//     filaInicial: ,
-//     columnaInicial:  ,
-//     estadoInicial:  ,
-//   }
-// ]
+//tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
     tipoPersonaje: "lupe",
+    clasePersonaje:"PersonajeDibujante",
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "lupe" },
     },
@@ -136,7 +120,6 @@ const arrayDePersonajes = [
       // },
     ],
   },
-
   {
     idUsarHTML: "lodo",
     tipoPersonaje: "lodo",
@@ -187,6 +170,7 @@ miJuego.generarPersonajes(arrayDePersonajes);
 
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
+//Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
@@ -202,7 +186,6 @@ miJuego.personajePrincipal.abrirCofre = function () {
 };
 
 //Método para Juntar Basura
-
 miJuego.personajePrincipal.juntarBasura = function () {
   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
   if (!intento.objetoEncontrado) {
@@ -213,16 +196,25 @@ miJuego.personajePrincipal.juntarBasura = function () {
   return intento;
 };
 
-//Generamos el workspace
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+//Seteo del Dibujo a realizar - Verificación
+// const EJEMPLO_DIBUJO_DESEADO = [
+//   [null, null, null, null, null],
+//   [null, "#000000", null, "#000000", null],
+//   [null, "#000000", null, "#000000", null],
+//   [null, null, null, null, null],
+// ]
+// miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
+
+//Inicializamos todos los personajes
+
+
+//Generamos el WORKSPACE
 
 const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
   // 'dhs-blockly-div',
   // JSON.stringify(toolbox),
-  // bloquesPrecargadosJSON
 );
 
 const categoriasDeseadas = [
@@ -240,14 +232,16 @@ const categoriasDeseadas = [
   },
   {
     name: "Acciones",
-    categorystyle: "variable_category"
+    categorystyle: "variable_category",
   },
   {
     name: "Condicionales",
-    categorystyle: "logic_category"
-  }
-]
-categoriasDeseadas.forEach(cat => miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat));
+    categorystyle: "logic_category",
+  },
+];
+categoriasDeseadas.forEach((cat) =>
+  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
+);
 
 const bloquesCustomStandardDesados = [
   // [nombreBloque, categoriaDestino]
@@ -262,47 +256,52 @@ const bloquesCustomStandardDesados = [
   ["abrir_cofre", "Acciones"],
   ["juntar_basura", "Acciones"],
   ["lapiz", "Lápiz"],
-  ["if", "Condicionales"]
+  ["if", "Condicionales"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
-//pruebas render y theme 
+//pruebas render y theme
 // render.makeConstants_()
 // const customCategory = new CustomCategory()
 // customCategory.setear();
 // const theme = customTheme.theme;
-const render = new CustomRenderer()
-render.registrarRender("renderDHS")
-miControlador.crearInyectarWorkspace("dhs-blockly-div",
-  {
-    toolbox: miControlador.ConfiguradorBloques.toolbox,
-    theme: "themeDH",
-    renderer: "renderDHS",
-    zoom: {
-      controls: true,
-      wheel: true,
-      pinch: true,
-    },
-  })
+const render = new CustomRenderer();
+render.registrarRender("renderDHS");
+miControlador.crearInyectarWorkspace("dhs-blockly-div", {
+  toolbox: miControlador.ConfiguradorBloques.toolbox,
+  theme: "themeDH",
+  renderer: "renderDHS",
+  zoom: {
+    controls: true,
+    wheel: true,
+    pinch: true,
+  },
+});
+
+const bloquesPrecargadosJSON =
+  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 
 miControlador.cargarBloquesSerializados(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+//miControlador.juego.agregarGlobalConCallback("moverDerecha");
+//miControlador.juego.agregarGlobalConCallback("moverAbajo");
+//miControlador.juego.agregarGlobalConCallback("moverArriba");
+//miControlador.juego.agregarGlobalConCallback("moverIzquierda");
 miControlador.juego.agregarGlobalConCallback("abrirCofre");
 miControlador.juego.agregarGlobalConCallback("juntarBasura");
-miControlador.juego.agregarGlobalConCallback("avanzar")
+miControlador.juego.agregarGlobalConCallback("avanzar");
 miControlador.juego.agregarGlobalConCallback("girarIzquierda");
 miControlador.juego.agregarGlobalConCallback("girarDerecha");
 miControlador.juego.agregarGlobalConCallback("girarGrados");
 miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
+miControlador.juego.agregarGlobalConCallback("bajarLapiz");
+miControlador.juego.agregarGlobalConCallback("subirLapiz");
+miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
@@ -310,20 +309,3 @@ miControlador.setearCallbackInterprete((interpreter, globalObject) => {
   callBackJuego(interpreter, globalObject);
   //callbackExtras(interpreter, globalObject);
 });
-
-//TODO:
-/**
-
- * Mje de Lupe al usuario cuando quiere abrir el cofre y el cofre no está (Pía - fala agregar la foto void)
- * CSS: Arreglar el Modal with, que dependa del tablero (Pía - done)
- * Colisión con la bandera : "Ganar" igual que con el cofre. "Es un colback de Ganaste"
- * Conectar Blockly con éste motor de juego
- * Lupe: Debe tener un atributo "cantidadElementosJuntados" como si fuera una mochila donde va juntando: basura, manzanas, etc
- 
- * Tema Girar:
-    * 1: Por Grados 
-    * 2: Derecha - Izq : es una abstracción de girar en grados.
-    
-    * Factor de Rotación no cambia por mas q el carpincho rote, si cambia "Avanzar", porque va a depender de la direccion q apunte
- 
- */

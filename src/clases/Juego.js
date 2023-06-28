@@ -1,7 +1,6 @@
 import { Escenario } from "./Escenario";
-import { Personaje } from "./Personaje";
+import { PersonajeBasico, PersonajeDibujante } from "./Personaje";
 import { Modal } from "./Modal";
-
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
@@ -13,8 +12,11 @@ export class Juego {
     this.personajePrincipal = null;
     this.puedeDebeContinuar = true;
     this.funcionesPublicadas = [];
+    this.clasesPersonajesPosibles = {
+      PersonajeBasico: PersonajeBasico,
+      PersonajeDibujante: PersonajeDibujante,
+    };
   }
-
 
   /*PARA RENDERIZAR ESCENARIO*/
   // La funcion recibe la matriz tablero la unidad de ancho, el color de bordes, nombre imagen pared, nombre imagen camino
@@ -57,10 +59,17 @@ export class Juego {
   }
 
   generarPersonajes(arrayDePersonajes) {
-    //console.log(arrayDePersonajes)
     arrayDePersonajes.forEach((personaje) => {
-      const unPersonaje = new Personaje(personaje, this);
+      //console.log(personaje.tipoPersonaje);
+      const clasePersonaje = personaje.clasePersonaje;
+      let unPersonaje;
+      if (clasePersonaje) {
+        unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](personaje, this);
+      } else {
+        unPersonaje = new PersonajeBasico(personaje, this);
+      }
       this.listaDePersonajes.push(unPersonaje);
+      unPersonaje.inicializar();
     });
   }
 
@@ -77,14 +86,14 @@ export class Juego {
       personaje.setearVelocidad(nuevaVelocidad)
     );
   }
-  
+
   setearSincronicidad(boolean) {
     this.sincronico = boolean;
   }
 
   reiniciar() {
     this.puedeDebeContinuar = true;
-    
+
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
@@ -100,23 +109,26 @@ export class Juego {
   //   return this.datosModalError;
   // }
 
-  habilitarFuncionGlobal(nombre, bindearCon = this.personajePrincipal){
+  habilitarFuncionGlobal(nombre, bindearCon = this.personajePrincipal) {
     window[nombre] = bindearCon[nombre].bind(bindearCon);
   }
 
-  agregarGlobalConCallback(nombre, bindearCon = this.personajePrincipal){
+  agregarGlobalConCallback(nombre, bindearCon = this.personajePrincipal) {
     this.habilitarFuncionGlobal(nombre, bindearCon);
-    this.funcionesPublicadas.push(nombre)   
+    this.funcionesPublicadas.push(nombre);
   } // llamar en instancia para cada movimiento deseado
 
-  generarCallbackParaInterprete(){
+  generarCallbackParaInterprete() {
     const lista = this.funcionesPublicadas;
-    return function(interpreter, globalObject){
-      lista.forEach(nombreFuncion=>{
-        interpreter.setProperty(globalObject, nombreFuncion,
-          interpreter.createNativeFunction(window[nombreFuncion]));              
-      })
-    }
+    return function (interpreter, globalObject) {
+      lista.forEach((nombreFuncion) => {
+        interpreter.setProperty(
+          globalObject,
+          nombreFuncion,
+          interpreter.createNativeFunction(window[nombreFuncion])
+        );
+      });
+    };
   }
 
   // crearFuncionesGlobalesStandard() {
