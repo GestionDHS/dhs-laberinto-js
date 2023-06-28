@@ -287,9 +287,7 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div",
       pinch: true,
     },
   })
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-});
+
 miControlador.cargarBloquesSerializados(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
