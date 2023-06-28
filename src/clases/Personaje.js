@@ -51,11 +51,12 @@ export class PersonajeBasico {
 
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
-    this.controladorDOM.setearImagen(
-      //pia
-      //this.obtenerImagenSegunEstado(nuevoStatus)
-      this.galeria.obtenerUrlDe(this.estadosPosibles[nuevoStatus].imageUrl)
-    );
+    const imagenDeseada = this.estadosPosibles[nuevoStatus].imageUrl;
+    if (imagenDeseada) {
+      this.controladorDOM.setearImagen(
+        this.galeria.obtenerUrlDe(imagenDeseada)
+      );
+    }
   }
 
   // obtenerImagenSegunEstado(nuevoStatus) { // pia
@@ -189,11 +190,13 @@ class controladorPersonajeDOM {
       this.elementoHTML.appendChild(this.elementoTextoTooltip);
     }
     this.imagenAnidada = document.createElement("IMG");
-    this.imagenAnidada ? this.imagenAnidada.style.padding = paddingImagen : null
+    this.imagenAnidada
+      ? (this.imagenAnidada.style.padding = paddingImagen)
+      : null;
     this.elementoHTML.appendChild(this.imagenAnidada);
   }
   setearImagen(url) {
-    this.imagenAnidada ? this.imagenAnidada.setAttribute("src", url) : null
+    this.imagenAnidada ? this.imagenAnidada.setAttribute("src", url) : null;
   }
   setearObjetosCasilleros(nuevaY, nuevaX) {
     //console.log(nuevaY, nuevaX)
@@ -210,7 +213,10 @@ class controladorPersonajeDOM {
 
   setearVelocidad(milisegundos) {
     this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s";
-    this.imagenAnidada ? this.imagenAnidada.style.transition = "all " + milisegundos / 1000 + "s" : null
+    this.imagenAnidada
+      ? (this.imagenAnidada.style.transition =
+          "all " + milisegundos / 1000 + "s")
+      : null;
   }
   posicionarPersonajeEnHtml(posY, posX) {
     // if (this.modo != "prerun") {
@@ -221,7 +227,9 @@ class controladorPersonajeDOM {
     //}
   }
   rotarPersonaje(grados) {
-    this.imagenAnidada ? this.imagenAnidada.style.transform = `rotate(${grados}deg)`: null
+    this.imagenAnidada
+      ? (this.imagenAnidada.style.transform = `rotate(${grados}deg)`)
+      : null;
   }
   setearColorDeFondo(color) {
     this.elementoHTML.style.backgroundColor = color;
@@ -394,15 +402,15 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       [null, "#000000", null, "#000000", null],
       [null, null, null, null, null],
     ];
-    this.agregarColision({
-      con: "recuadro-pintable",
-      factorDeAvance: 1,
-      callback: function (x) {
-        // como function para que bindee el this
-        x.pintarRecuadroSiLapizBajado(this.objetoColisionante); // el objetoColisionante se lo tiene que setear Casillero.hayColisionCon. // Esto nos va a servir para otros casos tmb (imaginar Pacman comiendo bolitas).
-      },
-      // mensaje: "Estoy pintando :)", // sin mensaje
-    });
+    // this.agregarColision({
+    //   con: "recuadro-pintable",
+    //   factorDeAvance: 1,
+    //   callback: function (x) {
+    //     // como function para que bindee el this
+    //     x.pintarRecuadroSiLapizBajado(this.objetoColisionante); // el objetoColisionante se lo tiene que setear Casillero.hayColisionCon. // Esto nos va a servir para otros casos tmb (imaginar Pacman comiendo bolitas).
+    //   },
+    //   // mensaje: "Estoy pintando :)", // sin mensaje
+    // });
   }
 
   inicializar() {
@@ -417,11 +425,10 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
   bajarLapiz() {
     console.log("bajo el lapiz");
     this.lapizBajado = true;
-    console.log(super.juego.escenario.objetoColision.length);
-    //const objetoPintableAqui = this.casilleroActual.ocupantes.find(o=>o.tipoPersonaje==="recuadro_pintable");
     const objetoPintableAqui = this.casilleroActual.ocupantes.find(
-      (o) => o.pintable
+      (o) => o.tipoPersonaje === "recuadro_pintable"
     );
+    console.log(objetoPintableAqui);
     objetoPintableAqui && this.pintarRecuadro(objetoPintableAqui);
   }
   subirLapiz() {
@@ -433,6 +440,7 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
   }
 
   pintarRecuadro(recuadro) {
+    console.log("entro a pintarRecuadro");
     recuadro.pintarse(this.colorPintura);
     this.dibujoActual[this.posicionActualY][this.posicionActualX] =
       this.colorPintura;

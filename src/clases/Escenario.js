@@ -41,23 +41,24 @@ export class Escenario {
         height: ${this.unidadAnchoDeseada}em;
         border: 1px solid ${this.colorBordes};
       }
-      .casillero-arbol{
-        background-image: url(${this.galeria.obtenerUrlDe(
-          this.objetoPared.estadosPosibles.normal.imageUrl
-        )})
-      }
-
-      .casillero-camino{
-        background-image: url(${this.galeria.obtenerUrlDe(
-          this.objetoCamino.estadosPosibles.normal.imageUrl
-        )})
-      }
+     
       .personaje{
         width: ${this.unidadAnchoDeseada}em;
         height: ${this.unidadAnchoDeseada}em;
         position: absolute;
       }
       `;
+      // .casillero-arbol{
+      //   background-image: url(${this.galeria.obtenerUrlDe(
+      //     this.objetoPared.estadosPosibles.normal.imageUrl
+      //   )})
+      // }
+
+      // .casillero-camino{
+      //   background-image: url(${this.galeria.obtenerUrlDe(
+      //     this.objetoCamino.estadosPosibles.normal.imageUrl
+      //   )})
+      //}
     document.querySelector("head").appendChild(reglaCasilleros);
     this.renderizarLaberinto();
   }
