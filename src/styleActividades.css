@@ -215,6 +215,10 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   display: inline-block;
 }
 
+.rango button.botonera:last-child .tooltiptext{
+  right: 0px;
+}
+
 .botonera .tooltiptext{
   right: -48px;
   top: 40px;
