@@ -35,6 +35,7 @@ export class PersonajeBasico {
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
     this.setearEstado(this.estadoInicial);
+    this.pintarse("")
     this.actualizarCasillerosJuego(
       this.posicionInicialY,
       this.posicionInicialX,
@@ -150,6 +151,9 @@ export class PersonajeBasico {
     } else {
       return { exito: false, premio: null };
     }
+  }
+  pintarse(color) {
+    this.controladorDOM.setearColorDeFondo(color);
   }
   decirTerminar(ultimasPalabras) {
     this.decir(ultimasPalabras);
@@ -402,15 +406,15 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       [null, "#000000", null, "#000000", null],
       [null, null, null, null, null],
     ];
-    // this.agregarColision({
-    //   con: "recuadro-pintable",
-    //   factorDeAvance: 1,
-    //   callback: function (x) {
-    //     // como function para que bindee el this
-    //     x.pintarRecuadroSiLapizBajado(this.objetoColisionante); // el objetoColisionante se lo tiene que setear Casillero.hayColisionCon. // Esto nos va a servir para otros casos tmb (imaginar Pacman comiendo bolitas).
-    //   },
-    //   // mensaje: "Estoy pintando :)", // sin mensaje
-    // });
+    this.agregarColision({
+      con: "recuadro-pintable",
+      factorDeAvance: 1,
+      callback: function (x) {
+        // como function para que bindee el this
+        x.pintarRecuadroSiLapizBajado(this.objetoColisionante); // el objetoColisionante se lo tiene que setear Casillero.hayColisionCon. // Esto nos va a servir para otros casos tmb (imaginar Pacman comiendo bolitas).
+      },
+      // mensaje: "Estoy pintando :)", // sin mensaje
+    });
   }
 
   inicializar() {
@@ -420,19 +424,17 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       Array.from(row, () => false)
     );
     this.lapizBajado = false;
+    
   }
 
   bajarLapiz() {
-    console.log("bajo el lapiz");
     this.lapizBajado = true;
     const objetoPintableAqui = this.casilleroActual.ocupantes.find(
-      (o) => o.tipoPersonaje === "recuadro_pintable"
+      (o) => o.tipoPersonaje === "recuadro-pintable"
     );
-    console.log(objetoPintableAqui);
     objetoPintableAqui && this.pintarRecuadro(objetoPintableAqui);
   }
   subirLapiz() {
-    console.log("subió el lapiz");
     this.lapizBajado = false;
   }
   setearColor(codigoColor) {
@@ -440,7 +442,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
   }
 
   pintarRecuadro(recuadro) {
-    console.log("entro a pintarRecuadro");
     recuadro.pintarse(this.colorPintura);
     this.dibujoActual[this.posicionActualY][this.posicionActualX] =
       this.colorPintura;

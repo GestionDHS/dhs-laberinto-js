@@ -96,14 +96,16 @@ export class Casillero {
   hayColisionCon(colisiones) {
     let obj = { factorDeAvance: 1 };
     colisiones.forEach((o) => {
-      if (this.verSiExisteEnArray(o)) {
+      let objetoColisionante = this.verSiExisteEnArray(o)
+      if (objetoColisionante) {
         obj = o;
+        obj.objetoColisionante = objetoColisionante
       }
     });
     return obj;
   }
   verSiExisteEnArray(object) {
-    let objEncontrado = this.ocupantes.find((o) => o.idHTML == object.con);
+    let objEncontrado = this.ocupantes.find((o) => o.tipoPersonaje === object.con);
     return objEncontrado;
   }
 }

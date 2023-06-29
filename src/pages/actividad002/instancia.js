@@ -9,7 +9,7 @@ import customTheme from "../../bloques/CustomTheme";
 document.querySelector("#appActividad").innerHTML = template(``);
 // PRIMERO: instanciar el juego
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
+window.miJuego = new Juego(velocidadInicial);
 
 // SEGUNDO: crear la lista de bloques disponibles y precargados a generar
 //Blockly
@@ -27,8 +27,8 @@ const tablero = [
 ];
 
 const recuadroPintable = {
-  idUsarHTML: "recuadro_pintable",
-  tipoPersonaje: "recuadro_pintable",
+  idUsarHTML: "recuadro-pintable",
+  tipoPersonaje: "recuadro-pintable",
   estadosPosibles: {
     normal: { name: "normal", imageUrl: null },
   },
