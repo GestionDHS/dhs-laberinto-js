@@ -94,7 +94,7 @@ class Controlador {
               title:'¡Borrado!',
               text:'Los bloques fueron borrados.',
               icon: 'success',
-              timer: 1000,
+              timer: 1200,
               timerProgressBar: true,
               showConfirmButton: false,
               willClose: () => {
@@ -111,7 +111,7 @@ class Controlador {
               title:'Acción cancelada',
               text: 'Tus bloques están a salvo.',
               icon: 'error',
-              timer: 1000,
+              timer: 1200,
               timerProgressBar: true,
               showConfirmButton: false,
               willClose: () => {
