@@ -1,4 +1,5 @@
 import ConfiguradorBloques from './ConfiguradorBloques';
+import Swal from 'sweetalert2';
 class Controlador {
   constructor(
     juego,
@@ -66,10 +67,62 @@ class Controlador {
     this.botonLimpiarWorkspace = botonLimpiarWorkspace;
     if (this.botonLimpiarWorkspace) {
       this.botonLimpiarWorkspace.addEventListener("click", () => {
-        this.detenerEjecucion();
-        this.limpiarWorkspace();
-        this.cargarBloquesSerializados(JSON.parse('{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'))
+        // Confirm en SweetAlert
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          // buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: '¿Borrar todo?',
+          text: 'Esta acción eliminará todos los bloques que colocaste.',
+          icon: 'warning',
+          iconColor: '#FFD148',
+          showCancelButton: true,
+          confirmButtonText: 'Si, borrar todo.',
+          cancelButtonText: 'No, cancelar.',
+          // reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.detenerEjecucion();
+            this.limpiarWorkspace();
+            this.cargarBloquesSerializados(JSON.parse('{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'))
+            let timerInterval
+            swalWithBootstrapButtons.fire({
+              title:'¡Borrado!',
+              text:'Los bloques fueron borrados.',
+              icon: 'success',
+              timer: 1200,
+              timerProgressBar: true,
+              showConfirmButton: false,
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }
+            )
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            let timerInterval
+            swalWithBootstrapButtons.fire({
+              title:'Acción cancelada',
+              text: 'Tus bloques están a salvo.',
+              icon: 'error',
+              timer: 1200,
+              timerProgressBar: true,
+              showConfirmButton: false,
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            })
+            }
+          }
+        )
       })
+      // Fin confirm
     }
     this.inputAcelerador = inputAcelerador;
     if (this.inputAcelerador) {

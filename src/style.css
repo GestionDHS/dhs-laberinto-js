@@ -7,7 +7,7 @@
   --color-negro: black;
   --color-blanco:white;
   --color-gris-turquesa:#0e7d96;
-  --color-gris-claro:#a0a0a096;
+  --color-gris-claro:#a0a0a0;
   --color-gris-oscuro: #3f3f3fff;
   --color-confirmacion:#007a4c;
   --color-gris-oscuro: #3f3f3fff;
@@ -21,13 +21,15 @@
 }
 
 body{
+  height:100vh;
+  margin:0%;
+}
+
+body.bodyInicial{
   display:flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: sans-serif;
-  height:100vh;
-  margin:0%;
 }
 
 a{

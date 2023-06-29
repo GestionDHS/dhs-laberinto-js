@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-// import { CustomCategory } from '../../bloques/CustomToolbox';
+import { CustomCategory } from '../../bloques/CustomToolbox';
 // import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -228,23 +228,27 @@ const miControlador = new ControladorStandard(
 const categoriasDeseadas = [
   {
     name: "Eventos",
-    categorystyle: "procedure_category",
+    categorystyle: "execute",
   },
   {
     name: "Movimientos",
-    categorystyle: "variable_category",
+    categorystyle: "movement",
   },
   {
     name: "Lápiz",
-    categorystyle: "variable_category",
+    categorystyle: "pencil",
   },
   {
     name: "Acciones",
-    categorystyle: "variable_category"
+    categorystyle: "action"
   },
   {
     name: "Condicionales",
     categorystyle: "logic_category"
+  },
+  {
+    name: "Repeticiones",
+    categorystyle: "loop_category"
   }
 ]
 categoriasDeseadas.forEach(cat => miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat));
@@ -262,7 +266,8 @@ const bloquesCustomStandardDesados = [
   ["abrir_cofre", "Acciones"],
   ["juntar_basura", "Acciones"],
   ["lapiz", "Lápiz"],
-  ["if", "Condicionales"]
+  ["if", "Condicionales"],
+  ["controls", "Repeticiones"]
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {

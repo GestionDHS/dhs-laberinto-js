@@ -82,8 +82,8 @@ export default class ConfiguradorBloques {
                 ],
                 "inputsInline": false,
                 // "colour": 230,
-                "style": "procedure_blocks",
-                "tooltip": "Triggered when the flag is clicked",
+                "style": "execute_blocks",
+                "tooltip": "Al presionar 'play', se ejecutarán los bloques que contenga",
                 "helpUrl": "",
                 "hat": "rounded",
                 'extensions': [
@@ -129,7 +129,7 @@ export default class ConfiguradorBloques {
                 ],
                 "previousStatement": null,
                 "nextStatement": null,
-                "style": "list_blocks",
+                "style": "movement_blocks",
                 //tooltip: "moverAbajo()",
             },
         ]);
@@ -149,8 +149,8 @@ export default class ConfiguradorBloques {
     move_up_simple() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "move_up_simple",
-                message0: "%1 mover arriba",
+                "type": "move_up_simple",
+                "message0": "%1 mover arriba",
                 "args0": [
                     {
                         "type": "field_image",
@@ -160,9 +160,9 @@ export default class ConfiguradorBloques {
                         "alt": "*"
                     },
                 ],
-                previousStatement: null,
-                nextStatement: null,
-                style: "list_blocks",
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
             },
         ]);
 
@@ -194,14 +194,8 @@ export default class ConfiguradorBloques {
                 ],
                 "previousStatement": null,
                 "nextStatement": null,
-                "style": "list_blocks",
+                "style": "movement_blocks",
                 "tooltip": "moverDerecha()",
-                // "args1": [
-                //   {
-                //     "type": "input_statement",
-                //     "name": "MOVERDERECHA",
-                //   },
-                // ],
             },
         ]);
 
@@ -220,8 +214,8 @@ export default class ConfiguradorBloques {
     move_left_simple() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "move_left_simple",
-                message0: "%1 mover a la izquierda",
+                "type": "move_left_simple",
+                "message0": "%1 mover a la izquierda",
                 "args0": [
                     {
                         "type": "field_image",
@@ -231,9 +225,9 @@ export default class ConfiguradorBloques {
                         "alt": "*"
                     },
                 ],
-                previousStatement: null,
-                nextStatement: null,
-                style: "list_blocks",
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
             },
         ]);
 
@@ -262,13 +256,13 @@ export default class ConfiguradorBloques {
     move_down_param() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "move_down_param",
-                message0: "%2 mover abajo %1 casillas",
-                args0: [
+                "type": "move_down_param",
+                "message0": "%2 mover abajo %1 casillas",
+                "args0": [
                     {
-                        type: "field_number",
-                        name: "CASILLAS",
-                        value: 1,
+                        "type": "field_number",
+                        "name": "CASILLAS",
+                        "value": 1,
                     },
                     {
                         "type": "field_image",
@@ -278,10 +272,10 @@ export default class ConfiguradorBloques {
                         "alt": "*"
                     },
                 ],
-                previousStatement: null,
-                nextStatement: null,
-                style: "list_blocks",
-                extensions: ["move_down_param_validation"],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+                "extensions": ["move_down_param_validation"],
             },
         ]);
 
@@ -313,13 +307,13 @@ export default class ConfiguradorBloques {
     move_up_param() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "move_up_param",
-                message0: "%2 mover arriba %1 casillas",
-                args0: [
+                "type": "move_up_param",
+                "message0": "%2 mover arriba %1 casillas",
+                "args0": [
                     {
-                        type: "field_number",
-                        name: "CASILLAS",
-                        value: 1,
+                        "type": "field_number",
+                        "name": "CASILLAS",
+                        "value": 1,
                     },
                     {
                         "type": "field_image",
@@ -329,10 +323,10 @@ export default class ConfiguradorBloques {
                         "alt": "*"
                     },
                 ],
-                previousStatement: null,
-                nextStatement: null,
-                style: "list_blocks",
-                extensions: ["move_up_param_validation"],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+                "extensions": ["move_up_param_validation"],
             },
         ]);
 
@@ -362,13 +356,13 @@ export default class ConfiguradorBloques {
     move_right_param() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "move_right_param",
-                message0: "%2 mover a la derecha %1 casillas",
-                args0: [
+                "type": "move_right_param",
+                "message0": "%2 mover a la derecha %1 casillas",
+                "args0": [
                     {
-                        type: "field_number",
-                        name: "CASILLAS",
-                        value: 1,
+                        "type": "field_number",
+                        "name": "CASILLAS",
+                        "value": 1,
                     },
                     {
                         "type": "field_image",
@@ -378,10 +372,10 @@ export default class ConfiguradorBloques {
                         "alt": "*"
                     },
                 ],
-                previousStatement: null,
-                nextStatement: null,
-                style: "list_blocks",
-                extensions: ["move_right_param_validation"],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+                "extensions": ["move_right_param_validation"],
             },
         ]);
 
@@ -412,13 +406,13 @@ export default class ConfiguradorBloques {
     move_left_param() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "move_left_param",
-                message0: "%2 mover a la izquierda %1 casillas",
-                args0: [
+                "type": "move_left_param",
+                "message0": "%2 mover a la izquierda %1 casillas",
+                "args0": [
                     {
-                        type: "field_number",
-                        name: "CASILLAS",
-                        value: 1,
+                        "type": "field_number",
+                        "name": "CASILLAS",
+                        "value": 1,
                     },
                     {
                         "type": "field_image",
@@ -428,10 +422,10 @@ export default class ConfiguradorBloques {
                         "alt": "*"
                     },
                 ],
-                previousStatement: null,
-                nextStatement: null,
-                style: "list_blocks",
-                extensions: ["move_left_param_validation"],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+                "extensions": ["move_left_param_validation"],
             },
         ]);
 
@@ -474,13 +468,13 @@ export default class ConfiguradorBloques {
     avanzar_param() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "avanzar_param",
-                message0: "%2 avanzar %1 casillas",
-                args0: [
+                "type": "avanzar_param",
+                "message0": "%2 avanzar %1 casillas",
+                "args0": [
                     {
-                        type: "field_number",
-                        name: "CASILLAS",
-                        value: 1,
+                        "type": "field_number",
+                        "name": "CASILLAS",
+                        "value": 1,
                     },
                     {
                         "type": "field_image",
@@ -490,10 +484,10 @@ export default class ConfiguradorBloques {
                         "alt": "*"
                       }
                 ],
-                previousStatement: null,
-                nextStatement: null,
-                style: "list_blocks",
-                extensions: ["avanzar_param_validation"],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+                "extensions": ["avanzar_param_validation"],
             },
         ]);
 
@@ -539,7 +533,7 @@ export default class ConfiguradorBloques {
                   ],
                 "previousStatement": null,
                 "nextStatement": null,
-                "style": "list_blocks",
+                "style": "movement_blocks",
             },
         ]);
 
@@ -570,7 +564,7 @@ export default class ConfiguradorBloques {
                   ],
                 "previousStatement": null,
                 "nextStatement": null,
-                "style": "list_blocks",
+                "style": "movement_blocks",
             },
         ]);
 
@@ -626,10 +620,9 @@ export default class ConfiguradorBloques {
                 ],
                 "previousStatement": null,
                 "nextStatement": null,
-                // "colour": 230,
                 "tooltip": "",
                 "helpUrl": "",
-                "style": "list_blocks",
+                "style": "movement_blocks",
                 // "extensions": ["turn_degrees_validation"],
             }]);
         
@@ -685,10 +678,9 @@ export default class ConfiguradorBloques {
                 ],
                 "previousStatement": null,
                 "nextStatement": null,
-                // "colour": 230,
                 "tooltip": "",
                 "helpUrl": "",
-                "style": "list_blocks",
+                "style": "movement_blocks",
                 // "extensions": ["turn_degrees_validation"],
             }]);
         
@@ -728,7 +720,7 @@ export default class ConfiguradorBloques {
                   ],
                 previousStatement: null,
                 nextStatement: null,
-                style: "list_blocks",
+                style: "action_blocks",
             },
         ]);
 
@@ -750,7 +742,7 @@ export default class ConfiguradorBloques {
                 "args0": [
                     {
                       "type": "field_image",
-                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "src": "https://cdn-icons-png.flaticon.com/512/1686/1686033.png",
                       "width": 16,
                       "height": 16,
                       "alt": "*"
@@ -758,7 +750,7 @@ export default class ConfiguradorBloques {
                   ],
                 previousStatement: null,
                 nextStatement: null,
-                style: "list_blocks",
+                style: "action_blocks",
             },
         ]);
 
@@ -789,7 +781,7 @@ export default class ConfiguradorBloques {
                   ],
                 previousStatement: null,
                 nextStatement: null,
-                style: "list_blocks",
+                style: "pencil_blocks",
             },
         ]);
 
@@ -819,7 +811,7 @@ export default class ConfiguradorBloques {
                   ],
                 previousStatement: null,
                 nextStatement: null,
-                style: "list_blocks",
+                style: "pencil_blocks",
             },
         ]);
 
@@ -868,14 +860,84 @@ export default class ConfiguradorBloques {
             // this.setearColor()
         ]
     }
+    // BLOQUES PROGRAMACIÓN
+    // Repetir, condicionales, etc, etc, etc, (son MUCHISIMOS)
     
     if() {
         return {
             type: "controls_if",
             kind: "block",
         } 
+    } 
+
+    // LOOPS
+    controls_repeat() {
+        return {
+            type: "controls_repeat",
+            kind: "block",
+        } 
     }
-    // BLOQUES PROGRAMACIÓN
-    // Repetir, condicionales, etc, etc, etc, (son MUCHISIMOS)
+
+    controls_repeat_ext() {
+        return {
+            type: "controls_repeat_ext",
+            kind: "block",
+        } 
+    }
+
+    controls_whileUntil() {
+        return {
+            type: "controls_whileUntil",
+            kind: "block",
+        } 
+    }
+
+    controls_for() {
+        return {
+            type: "controls_for",
+            kind: "block",
+        } 
+    }
+
+    controls_forEach() {
+        return {
+            type: "controls_forEach",
+            kind: "block",
+        } 
+    }
+
+    controls_flow_statements() {
+        return {
+            type: "controls_flow_statements",
+            kind: "block",
+        } 
+    }
+
+    // controls_forRange() {
+    //     return {
+    //         type: "controls_forRange",
+    //         kind: "block",
+    //     } 
+    // }
+
+    controls_doWhile() {
+        return {
+            type: "controls_doWhile",
+            kind: "block",
+        } 
+    }
+
+    controls() {
+        return [
+            this.controls_repeat(),
+            this.controls_repeat_ext(),
+            this.controls_whileUntil(),
+            this.controls_for(),
+            this.controls_forEach(),
+            this.controls_flow_statements(),
+            // this.controls_forRange(),
+            // this.controls_doWhile()
+        ]
+    }
 
 }
