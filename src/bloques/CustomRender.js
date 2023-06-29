@@ -18,14 +18,13 @@ class CustomConstantProvider extends Blockly.geras.ConstantProvider {
   }
 
 export class CustomRenderer extends Blockly.geras.Renderer {
-    constructor() {
-        super();
-    }
-    makeConstants_() {
-        return new CustomConstantProvider();
-    }
-    registrarRender(nombre){
-        Blockly.blockRendering.register(nombre, CustomRenderer);
-    }
-    
+  constructor() {
+    super();
+  }
+  makeConstants_() {
+    return new CustomConstantProvider();
+  }
+  registrarRender(nombre){
+     Blockly.blockRendering.register(nombre, CustomRenderer);
+  }    
 }
