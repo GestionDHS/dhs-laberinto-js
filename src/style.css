@@ -21,13 +21,15 @@
 }
 
 body{
+  height:100vh;
+  margin:0%;
+}
+
+body.bodyInicial{
   display:flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: sans-serif;
-  height:100vh;
-  margin:0%;
 }
 
 a{
