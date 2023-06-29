@@ -35,7 +35,7 @@ export class PersonajeBasico {
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
     this.setearEstado(this.estadoInicial);
-    this.pintarse("")
+    this.pintarse("");
     this.actualizarCasillerosJuego(
       this.posicionInicialY,
       this.posicionInicialX,
@@ -401,10 +401,11 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
     super(objetoConfiguracionPersonaje, juego);
     this.colorPinturaInicial = "#000000";
     this.dibujoDeseado = [
-      [null, null, null, null, null],
-      [null, "#000000", null, "#000000", null],
-      [null, "#000000", null, "#000000", null],
-      [null, null, null, null, null],
+      [false, false, false, false, false, false],
+      [false, false, false, false, false, false],
+      [false, false, false, "#000000", false, false],
+      [false, false, false, false, false, false],
+      [false, false, false, false, false, false],
     ];
     this.agregarColision({
       con: "recuadro-pintable",
@@ -424,7 +425,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       Array.from(row, () => false)
     );
     this.lapizBajado = false;
-    
   }
 
   bajarLapiz() {
@@ -453,7 +453,7 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
   }
 
   ganarSiCompletoDibujo() {
-    this.chequearSiCompletoDibujo() && this.abriryMostrarModal();
+    this.chequearSiCompletoDibujo() && super.abrirYMostrarModal();
   }
   chequearSiCompletoDibujo() {
     // Si por error no tienen la misma dimensión, no completó.
@@ -464,6 +464,7 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
     // Retorna falso al detectar diferencias
     // Si "pasa" el bucle, retorna verdadero.
     for (let i = 0; i < this.dibujoDeseado.length; i++) {
+      
       if (this.dibujoDeseado[i].length !== this.dibujoActual[i].length) {
         return false;
       }
