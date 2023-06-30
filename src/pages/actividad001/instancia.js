@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from '../../bloques/CustomToolbox';
+import { CustomCategory } from "../../bloques/CustomToolbox";
 // import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -23,7 +23,7 @@ const tablero = [
   [1, 0, 0, 0, 0, 1],
   [1, 1, 0, 1, 0, 1],
   [1, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 0, 1, 1],
 ];
 
 const arbol = {
@@ -42,7 +42,7 @@ const arbol = {
 const pasto = {
   idUsarHTML: "camino",
   tipoPersonaje: "camino",
-  pintable:true,
+  pintable: true,
   estadosPosibles: {
     normal: { name: "normal", imageUrl: "pasto" },
   },
@@ -80,7 +80,8 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
     tipoPersonaje: "lupe",
-    clasePersonaje:"PersonajeDibujante",
+    clasePersonaje: "PersonajeDibujante",
+    tieneTooltip: true,
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "lupe" },
     },
@@ -105,8 +106,7 @@ const arrayDePersonajes = [
         callback: (x) => {
           x.terminar();
         },
-        mensaje:
-          "¡OH NO! tus ojos son dos luceros que iluminan mi camino, ayer los cerraste y me hice mierda contra un pino.",
+        mensaje: "¡OH NO! Choqué contra un árbol",
       },
 
       // {
@@ -207,7 +207,6 @@ miJuego.personajePrincipal.juntarBasura = function () {
 
 //Inicializamos todos los personajes
 
-
 //Generamos el WORKSPACE
 
 const miControlador = new ControladorStandard(
@@ -232,19 +231,20 @@ const categoriasDeseadas = [
   },
   {
     name: "Acciones",
-    categorystyle: "action"
+    categorystyle: "action",
   },
   {
     name: "Condicionales",
-    categorystyle: "logic_category"
+    categorystyle: "logic_category",
   },
   {
     name: "Repeticiones",
-    categorystyle: "loop_category"
-  }
-]
-categoriasDeseadas.forEach(cat => miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat));
-
+    categorystyle: "loop_category",
+  },
+];
+categoriasDeseadas.forEach((cat) =>
+  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
+);
 
 const bloquesCustomStandardDesados = [
   // [nombreBloque, categoriaDestino]
@@ -260,8 +260,7 @@ const bloquesCustomStandardDesados = [
   ["juntar_basura", "Acciones"],
   ["lapiz", "Lápiz"],
   ["if", "Condicionales"],
-  ["controls", "Repeticiones"]
-
+  ["controls", "Repeticiones"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {

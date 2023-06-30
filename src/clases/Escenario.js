@@ -1,6 +1,5 @@
 import { DHS_Gallery } from "./Dhs-galeria";
 
-
 export class Escenario {
   constructor(
     dimensiones,
@@ -48,17 +47,17 @@ export class Escenario {
         position: absolute;
       }
       `;
-      // .casillero-arbol{
-      //   background-image: url(${this.galeria.obtenerUrlDe(
-      //     this.objetoPared.estadosPosibles.normal.imageUrl
-      //   )})
-      // }
+    // .casillero-arbol{
+    //   background-image: url(${this.galeria.obtenerUrlDe(
+    //     this.objetoPared.estadosPosibles.normal.imageUrl
+    //   )})
+    // }
 
-      // .casillero-camino{
-      //   background-image: url(${this.galeria.obtenerUrlDe(
-      //     this.objetoCamino.estadosPosibles.normal.imageUrl
-      //   )})
-      //}
+    // .casillero-camino{
+    //   background-image: url(${this.galeria.obtenerUrlDe(
+    //     this.objetoCamino.estadosPosibles.normal.imageUrl
+    //   )})
+    //}
     document.querySelector("head").appendChild(reglaCasilleros);
     this.renderizarLaberinto();
   }
@@ -76,9 +75,10 @@ export class Escenario {
   }
   obtenerCasillero(posicionY, posicionX) {
     //console.log(this.objetosCasilleros[posicionY][posicionX]);
-    return this.objetosCasilleros[posicionY][posicionX];
+    const fila = this.objetosCasilleros[posicionY];
+    const casillero = fila ? fila[posicionX] : null;
+    return casillero;
   }
-  
 }
 
 export class Casillero {
@@ -96,16 +96,18 @@ export class Casillero {
   hayColisionCon(colisiones) {
     let obj = { factorDeAvance: 1 };
     colisiones.forEach((o) => {
-      let objetoColisionante = this.verSiExisteEnArray(o)
+      let objetoColisionante = this.verSiExisteEnArray(o);
       if (objetoColisionante) {
         obj = o;
-        obj.objetoColisionante = objetoColisionante
+        obj.objetoColisionante = objetoColisionante;
       }
     });
     return obj;
   }
   verSiExisteEnArray(object) {
-    let objEncontrado = this.ocupantes.find((o) => o.tipoPersonaje === object.con);
+    let objEncontrado = this.ocupantes.find(
+      (o) => o.tipoPersonaje === object.con
+    );
     return objEncontrado;
   }
 }

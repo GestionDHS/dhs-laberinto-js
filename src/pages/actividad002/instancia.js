@@ -76,11 +76,12 @@ miJuego.generarCaminoYpared(
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
+    idUsarHTML: "lapiz",
+    tipoPersonaje: "lapiz",
     clasePersonaje: "PersonajeDibujante",
+    tieneTooltip:true,
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
+      normal: { name: "normal", imageUrl: "lapizRojo" },
     },
     estadoInicial: "normal",
     posicionInicialY: 3,
@@ -96,31 +97,6 @@ miJuego.generarPersonajes(arrayDePersonajes);
 
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
-//Método para Abrir el Cofre
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
-
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("Oh! Aquí no hay cofre.");
-    //this.abrirModalFalloApertura();
-  } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
-    return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
-  } else {
-    return this.abrirYMostrarModal();
-  }
-};
-
-//Método para Juntar Basura
-miJuego.personajePrincipal.juntarBasura = function () {
-  const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
-  if (!intento.objetoEncontrado) {
-    this.decirTerminar("Oh! Aquí no hay basura.");
-  } else if (!intento.exito) {
-    this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
-  }
-  return intento;
-};
 
 //Seteo del Dibujo a realizar - Verificación
 // const EJEMPLO_DIBUJO_DESEADO = [
@@ -160,10 +136,10 @@ const categoriasDeseadas = [
   //   name: "Acciones",
   //   categorystyle: "variable_category",
   // },
-  {
-    name: "Condicionales",
-    categorystyle: "logic_category",
-  },
+  // {
+  //   name: "Condicionales",
+  //   categorystyle: "logic_category",
+  // },
 ];
 categoriasDeseadas.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
@@ -177,12 +153,12 @@ const bloquesCustomStandardDesados = [
   // ["move_classic_param", "Movimientos"],
   ["avanzar_param", "Movimientos"],
   ["girar_clasico", "Movimientos"],
-  ["girar_grados", "Movimientos"],
-  ["apuntar_hacia", "Movimientos"],
+  // ["girar_grados", "Movimientos"],
+  // ["apuntar_hacia", "Movimientos"],
   // ["abrir_cofre", "Acciones"],
   // ["juntar_basura", "Acciones"],
   ["lapiz", "Lápiz"],
-  ["if", "Condicionales"],
+  // ["if", "Condicionales"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {
