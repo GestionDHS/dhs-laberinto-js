@@ -20,15 +20,15 @@ const dimensiones = [7, 7]; //fila, columna
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0],
+  [0, 1, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 1, 0],
+  [0, 1, 1, 1, 1, 1, 0],
   [0, 0, 0, 0, 0, 0, 0],
 ];
 
-const recuadroPintable = {
+const recuadroPintableDeseado = {
   idUsarHTML: "recuadro-pintable",
   tipoPersonaje: "recuadro-pintable",
   estadosPosibles: {
@@ -39,8 +39,12 @@ const recuadroPintable = {
   posicionInicialY: 0,
   posicionInicialX: 0,
   direccionInicial: 0,
+  colorFondoInicial: "lightgrey",
   rotable: false,
 };
+
+const recuadroPintableNoDeseado = { ...recuadroPintableDeseado };
+recuadroPintableNoDeseado.colorFondoInicial = "white"
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -63,16 +67,16 @@ miJuego.generarEscenario(
   tablero,
   3,
   "white",
-  recuadroPintable,
-  recuadroPintable
+  recuadroPintableDeseado,
+  recuadroPintableNoDeseado
 );
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(
   dimensiones,
   tablero,
-  recuadroPintable,
-  recuadroPintable
+  recuadroPintableDeseado,
+  recuadroPintableNoDeseado
 );
 
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
@@ -86,8 +90,8 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lapizRojo" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 0,
+    posicionInicialY: 5,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
@@ -100,18 +104,16 @@ miJuego.generarPersonajes(arrayDePersonajes);
 //OJO Al personaje que apuntamos
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
+
+
+
 //Seteo del Dibujo a realizar - Verificación
 //OJO - Las dimensiones del tamblero tienen que ser igual a las dimensiones de EJEMPLO_DIBUJO_DESEADO
-const EJEMPLO_DIBUJO_DESEADO = [
-  [false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false],
-  [false, false, false, "#FA3939", false, false, false],
-  [false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false],
-  [false, false, false, false, false, false, false],
-];
-miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO;
+const miColor = "#FA3939";
+
+const dibujoDeseado = tablero.map(row => row.map(cell => cell === 0 ? false : miColor));
+
+miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
 //Inicializamos todos los personajes
 
@@ -183,7 +185,6 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   renderer: "renderDHS",
   zoom: {
     controls: true,
-    wheel: true,
     pinch: true,
   },
 });

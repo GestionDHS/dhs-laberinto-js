@@ -15,6 +15,9 @@ export class PersonajeBasico {
     this.direccionInicial = objetoConfiguracionPersonaje.direccionInicial
       ? objetoConfiguracionPersonaje.direccionInicial
       : 0; // ENTERO 0-360 con grados de orientación inicial.
+    this.colorFondoInicial = objetoConfiguracionPersonaje.colorFondoInicial
+      ? objetoConfiguracionPersonaje.colorFondoInicial
+      : "";
     this.colisiones = objetoConfiguracionPersonaje.colisiones; // ARRAY DE OBJETOS DE POSIBLES COLISIONES ((Después especificaremos cómo es cada objeto de colision))
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
@@ -35,7 +38,7 @@ export class PersonajeBasico {
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
     this.setearEstado(this.estadoInicial);
-    this.pintarse("");
+    this.pintarse(this.colorFondoInicial);
     this.actualizarCasillerosJuego(
       this.posicionInicialY,
       this.posicionInicialX,
@@ -160,7 +163,8 @@ export class PersonajeBasico {
   }
 
   abrirYMostrarModal() {
-    this.juego.datosModal.mostrar();
+    this.juego.mostrarModal();
+    return true
   }
   // abrirModalFalloApertura() {
   //   this.juego.datosModalError.mostrar();
@@ -418,6 +422,7 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       Array.from(row, () => false)
     );
     this.lapizBajado = false;
+    // console.log(this);
   }
 
   bajarLapiz() {
@@ -436,8 +441,8 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
 
   pintarRecuadro(recuadro) {
     recuadro.pintarse(this.colorPintura);
-    this.dibujoActual[this.posicionActualY][this.posicionActualX] =
-      this.colorPintura;
+    // console.log(recuadro.posicionActualY,recuadro.posicionActualX);
+    this.dibujoActual[recuadro.posicionActualY][recuadro.posicionActualX] =this.colorPintura;
     this.dibujoDeseado && this.ganarSiCompletoDibujo();
   }
 
@@ -446,9 +451,10 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
   }
 
   ganarSiCompletoDibujo() {
-    this.chequearSiCompletoDibujo() && super.abrirYMostrarModal();
+    return this.chequearSiCompletoDibujo() && super.abrirYMostrarModal();
   }
   chequearSiCompletoDibujo() {
+    // console.log(this);
     // Si por error no tienen la misma dimensión, no completó.
     if (this.dibujoDeseado.length !== this.dibujoActual.length) {
       return false;

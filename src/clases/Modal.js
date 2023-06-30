@@ -36,12 +36,16 @@ export class Modal {
     this.imageElement.src = this.imageUrl;
     this.mainTextElement.innerHTML = this.texto;
   }
-  mostrar() {
-    setTimeout(
-      () => this.elementoPannel.classList.remove("dhs-modal-pannel-hidden"),
-      1000
-    );
-    setTimeout(() => this.ocultar(), 4000);
+  mostrar(sincronico) {
+    if (sincronico) {
+      this.elementoPannel.classList.remove("dhs-modal-pannel-hidden")
+    } else {
+      setTimeout(
+        () => this.elementoPannel.classList.remove("dhs-modal-pannel-hidden"),
+        700
+      );
+      setTimeout(() => this.ocultar(), 4000);
+    }
   }
   ocultar() {
     this.elementoPannel.classList.add("dhs-modal-pannel-hidden");

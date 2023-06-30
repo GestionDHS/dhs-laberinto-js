@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from '../../bloques/CustomToolbox';
+import { CustomCategory } from "../../bloques/CustomToolbox";
 // import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -15,18 +15,20 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [5, 6]; //fila, columna
+const dimensiones = [7, 7]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0],
+  [0, 1, 0, 0, 0, 1, 0],
+  [0, 1, 1, 1, 1, 1, 0],
+  [0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
 ];
 
-const recuadroPintable = {
+const recuadroPintableDeseado = {
   idUsarHTML: "recuadro-pintable",
   tipoPersonaje: "recuadro-pintable",
   estadosPosibles: {
@@ -37,8 +39,12 @@ const recuadroPintable = {
   posicionInicialY: 0,
   posicionInicialX: 0,
   direccionInicial: 0,
+  colorFondoInicial: "lightgrey",
   rotable: false,
 };
+
+const recuadroPintableNoDeseado = { ...recuadroPintableDeseado };
+recuadroPintableNoDeseado.colorFondoInicial = "white"
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -61,16 +67,16 @@ miJuego.generarEscenario(
   tablero,
   3,
   "white",
-  recuadroPintable,
-  recuadroPintable
+  recuadroPintableDeseado,
+  recuadroPintableNoDeseado
 );
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(
   dimensiones,
   tablero,
-  recuadroPintable,
-  recuadroPintable
+  recuadroPintableDeseado,
+  recuadroPintableNoDeseado
 );
 
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
@@ -79,13 +85,13 @@ const arrayDePersonajes = [
     idUsarHTML: "lapiz",
     tipoPersonaje: "lapiz",
     clasePersonaje: "PersonajeDibujante",
-    tieneTooltip:true,
+    tieneTooltip: true,
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "lapizRojo" },
     },
     estadoInicial: "normal",
     posicionInicialY: 3,
-    posicionInicialX: 3,
+    posicionInicialX: 0,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
@@ -95,18 +101,19 @@ const arrayDePersonajes = [
 
 miJuego.generarPersonajes(arrayDePersonajes);
 
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
+//OJO Al personaje que apuntamos
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
+
+
 
 
 //Seteo del Dibujo a realizar - Verificación
-const EJEMPLO_DIBUJO_DESEADO = [
-      [false, false, false, false, false, false],
-      [false, false, false, false, false, false],
-      [false, false, false, "#000000", false, false],
-      [false, false, false, false, false, false],
-      [false, false, false, false, false, false],
-    ];
-miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
+//OJO - Las dimensiones del tamblero tienen que ser igual a las dimensiones de EJEMPLO_DIBUJO_DESEADO
+const miColor = "#FA3939";
+
+const dibujoDeseado = tablero.map(row => row.map(cell => cell === 0 ? false : miColor));
+
+miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
 //Inicializamos todos los personajes
 
@@ -178,7 +185,6 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   renderer: "renderDHS",
   zoom: {
     controls: true,
-    wheel: true,
     pinch: true,
   },
 });
