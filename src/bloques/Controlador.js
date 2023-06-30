@@ -44,9 +44,9 @@ class Controlador {
         this.deshabilitarBotonReinicio();
         this.rehabilitarBotonDetener();
         this.recorrerPasos(false); // bool: sincronico.
-        if(this.juego.personajePrincipal instanceof PersonajeDibujante){
-            this.juego.personajePrincipal.ganarSiCompletoDibujo()
-        }
+        // if(this.juego.personajePrincipal instanceof PersonajeDibujante){
+        //     // this.juego.personajePrincipal.ganarSiCompletoDibujo()
+        // }
       });
     }
     this.botonDetener = botonDetener;

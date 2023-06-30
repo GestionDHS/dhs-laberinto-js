@@ -15,8 +15,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
-        act1: resolve(root, "pages", "actividad001", "act1.html"),
-        act2: resolve(root, "pages", "actividad002", "act2.html"),
+        act1: resolve(root, "pages", "actividad001", "act.html"),
+        act2: resolve(root, "pages", "actividad002", "act.html"),
+        act3: resolve(root, "pages", "actividad003", "act.html"),
+        // act4: resolve(root, "pages", "actividad004", "act4.html"),
       },
     },
   },
