@@ -76,11 +76,12 @@ miJuego.generarCaminoYpared(
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
+    idUsarHTML: "lapiz",
+    tipoPersonaje: "lapiz",
     clasePersonaje: "PersonajeDibujante",
+    tieneTooltip:true,
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
+      normal: { name: "normal", imageUrl: "lapizRojo" },
     },
     estadoInicial: "normal",
     posicionInicialY: 3,

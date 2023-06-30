@@ -6,6 +6,7 @@ import arbolesPasto from "../img/arbolesPasto.png"
 import muchasmonedas from "../img/muchasMonedas.png"
 import pasto from "../img/pasto.png"
 import basura from "../img/basura.png"
+import lapizRojo from "../img/lapizRojo.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -29,7 +30,16 @@ export class DHS_Gallery {
   obtenerNombreCompletoDe(dir) {
     return this.imageLib[dir].nombre;
   }
+  
   imageLib = {
+    lapizRojo: {
+      themes: [""],
+      url: lapizRojo,
+      nombre: "lapizRojo",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
     basura: {
       themes: ["lupe"],
       url: basura,

@@ -19,9 +19,9 @@ export class PersonajeBasico {
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
     this.mochila = [];
+    this.tieneTooltip=objetoConfiguracionPersonaje.tieneTooltip
     this.controladorDOM = new controladorPersonajeDOM(
-      this.hasTooltips(),
-      // objetoConfiguracionPersonaje.tieneTooltip,
+     this.tieneTooltip,
       this.juego.escenario,
       objetoConfiguracionPersonaje.idUsarHTML,
       objetoConfiguracionPersonaje.zIndex,
@@ -82,7 +82,8 @@ export class PersonajeBasico {
   }
 
   visibilizarTooltip(texto, milisegundos = 4000) {
-    if (this.hasTooltips()) {
+   // if (this.hasTooltips()) {
+    if(this.tieneTooltip){
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
       setTimeout(() => {
@@ -90,9 +91,7 @@ export class PersonajeBasico {
       }, milisegundos);
     }
   }
-  hasTooltips() {
-    return this.colisiones?.length !== 0;
-  }
+ 
   setearVelocidad(nuevaVelocidad) {
     this.controladorDOM.setearVelocidad(nuevaVelocidad);
   }
