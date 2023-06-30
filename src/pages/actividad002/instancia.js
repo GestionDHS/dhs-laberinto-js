@@ -146,15 +146,15 @@ const miControlador = new ControladorStandard(
 const categoriasDeseadas = [
   {
     name: "Eventos",
-    categorystyle: "procedure_category",
+    categorystyle: "execute",
   },
   {
     name: "Movimientos",
-    categorystyle: "variable_category",
+    categorystyle: "movement",
   },
   {
     name: "Lápiz",
-    categorystyle: "variable_category",
+    categorystyle: "pencil",
   },
   // {
   //   name: "Acciones",
