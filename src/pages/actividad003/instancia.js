@@ -22,9 +22,9 @@ const tablero = [
   [0, 0, 0, 0, 0, 0, 0],
   [0, 1, 1, 1, 1, 1, 0],
   [0, 1, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 1, 0],
   [0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0],
 ];
 
@@ -90,8 +90,8 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lapizRojo" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 0,
+    posicionInicialY: 5,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,

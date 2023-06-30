@@ -104,6 +104,9 @@ export class Juego {
     this.datosModal = new Modal(datosModal, this);
     return this.datosModal;
   }
+  mostrarModal() {
+    this.datosModal.mostrar(this.sincronico)
+  }
   // agregarModalError(datosModalError) {
   //   this.datosModalError = new Modal(datosModalError, this);
   //   return this.datosModalError;
