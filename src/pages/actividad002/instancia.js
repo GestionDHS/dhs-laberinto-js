@@ -42,8 +42,8 @@ const recuadroPintable = {
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Encontramos 180 monedas de oro.",
+  imagen: "lupe",
+  texto: "Lograste realizar el dibujo",
   oculto: true,
 };
 // const datosModalError = {
@@ -124,11 +124,12 @@ miJuego.personajePrincipal.juntarBasura = function () {
 
 //Seteo del Dibujo a realizar - Verificación
 // const EJEMPLO_DIBUJO_DESEADO = [
-//   [null, null, null, null, null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, null, null, null, null],
-// ]
+    //   [false, false, false, false, false, false],
+    //   [false, false, false, false, false, false],
+    //   [false, false, false, "#000000", false, false],
+    //   [false, false, false, false, false, false],
+    //   [false, false, false, false, false, false],
+    // ];
 // miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
 
 //Inicializamos todos los personajes
@@ -155,10 +156,10 @@ const categoriasDeseadas = [
     name: "Lápiz",
     categorystyle: "variable_category",
   },
-  {
-    name: "Acciones",
-    categorystyle: "variable_category",
-  },
+  // {
+  //   name: "Acciones",
+  //   categorystyle: "variable_category",
+  // },
   {
     name: "Condicionales",
     categorystyle: "logic_category",
@@ -172,14 +173,14 @@ const bloquesCustomStandardDesados = [
   // [nombreBloque, categoriaDestino]
   // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
-  ["move_classic_param", "Movimientos"],
+  // ["move_classic_simple", "Movimientos"],
+  // ["move_classic_param", "Movimientos"],
   ["avanzar_param", "Movimientos"],
   ["girar_clasico", "Movimientos"],
   ["girar_grados", "Movimientos"],
   ["apuntar_hacia", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
-  ["juntar_basura", "Acciones"],
+  // ["abrir_cofre", "Acciones"],
+  // ["juntar_basura", "Acciones"],
   ["lapiz", "Lápiz"],
   ["if", "Condicionales"],
 ];
@@ -217,8 +218,8 @@ miControlador.crearFuncionesGlobalesStandard();
 //miControlador.juego.agregarGlobalConCallback("moverAbajo");
 //miControlador.juego.agregarGlobalConCallback("moverArriba");
 //miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
-miControlador.juego.agregarGlobalConCallback("juntarBasura");
+// miControlador.juego.agregarGlobalConCallback("abrirCofre");
+// miControlador.juego.agregarGlobalConCallback("juntarBasura");
 miControlador.juego.agregarGlobalConCallback("avanzar");
 miControlador.juego.agregarGlobalConCallback("girarIzquierda");
 miControlador.juego.agregarGlobalConCallback("girarDerecha");

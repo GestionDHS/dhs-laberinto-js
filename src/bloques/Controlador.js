@@ -40,8 +40,6 @@ class Controlador {
         this.deshabilitarBotonReinicio();
         this.rehabilitarBotonDetener();
         this.recorrerPasos(false); // bool: sincronico.
-        //si es del modo PersonajePintable... llamo al metodo de lucho
-        //es una instancia de... instance of Personaje basico
         if(this.juego.personajePrincipal instanceof PersonajeDibujante){
             this.juego.personajePrincipal.ganarSiCompletoDibujo()
         }
