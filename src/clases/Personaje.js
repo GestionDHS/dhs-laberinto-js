@@ -398,14 +398,8 @@ export class PersonajeMovibleGrados extends PersonajeMovible {
 export class PersonajeDibujante extends PersonajeMovibleGrados {
   constructor(objetoConfiguracionPersonaje, juego, dibujoDeseado) {
     super(objetoConfiguracionPersonaje, juego);
-    this.colorPinturaInicial = "#000000";
-    this.dibujoDeseado = [
-      [false, false, false, false, false, false],
-      [false, false, false, false, false, false],
-      [false, false, false, "#000000", false, false],
-      [false, false, false, false, false, false],
-      [false, false, false, false, false, false],
-    ];
+    this.colorPinturaInicial = "#FA3939";
+    this.dibujoDeseado = [];
     this.agregarColision({
       con: "recuadro-pintable",
       factorDeAvance: 1,

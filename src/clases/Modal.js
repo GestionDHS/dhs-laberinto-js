@@ -14,7 +14,7 @@ export class Modal {
     this.titleElement.classList.add("dhs-modal-pannel-title");
     this.imageElement = document.createElement("IMG");
     this.imageElement.classList.add("dhs-modal-pannel-image");
-    
+
     this.mainTextElement = document.createElement("P");
     this.mainTextElement.classList.add("dhs-modal-pannel-main-text");
 
@@ -22,11 +22,8 @@ export class Modal {
     this.elementoPannel.appendChild(this.imageElement);
     this.elementoPannel.appendChild(this.mainTextElement);
 
-   
-    
     this.initialize();
-    this.juego.escenario.elementoHTML.appendChild(this.elementoPannel)
-    
+    this.juego.escenario.elementoHTML.appendChild(this.elementoPannel);
   }
 
   initialize() {
@@ -40,7 +37,11 @@ export class Modal {
     this.mainTextElement.innerHTML = this.texto;
   }
   mostrar() {
-      this.elementoPannel.classList.remove("dhs-modal-pannel-hidden");
+    setTimeout(
+      () => this.elementoPannel.classList.remove("dhs-modal-pannel-hidden"),
+      1000
+    );
+    setTimeout(() => this.ocultar(), 4000);
   }
   ocultar() {
     this.elementoPannel.classList.add("dhs-modal-pannel-hidden");
