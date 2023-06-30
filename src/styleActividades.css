@@ -1,8 +1,9 @@
 /* MOBILE */
 *{
   box-sizing: border-box;
-  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 
 #appActividad {
   height: 100%;
@@ -20,7 +21,7 @@ header{
   align-items: center;
   justify-content: space-evenly;
   /* padding: 15px 5px; */
-  height: 6%;
+  height: 8%;
   /* padding-top: 15px; */
 }
 
@@ -29,8 +30,8 @@ header div.botones{
   justify-content: space-evenly;
 }
 
-#dhs-boton-ejecutar i{
-  font-size: 25px;
+header div.botones button:first-child i{
+  font-size: 28px;
   color: var(--acento);
 }
 
@@ -43,7 +44,18 @@ header div.botones button{
   background: none;
 }
 
-header i{
+header div.botones button:disabled i{
+  color: var(--color-gris-claro);
+  font-size: 18px;
+}
+
+header div.botones button:not(:disabled):hover i{
+  display: inline-block;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+header button.botonera i{
   font-size: 18px;
   color: var(--color-blanco);
 }
@@ -71,18 +83,25 @@ header div.mostrar div input{
 }
 
 header div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
-  background: var(--color-blanco);
+  background: red;
   border-radius: 10px;
   border: 1px solid;
 }
 
 header div.mostrar div input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance: none;
-  appearance: none;
+  /* -webkit-appearance: none;
+  appearance: none; */
   background: red;
   transition: .2s ease-in-out;
 }
 
+/* header input[type="range"]::-ms-fill-lower, 
+header input[type="range"]::-moz-range-progress,
+header input[type="range"]::-webkit-slider-runnable-track,
+header input[type="range"]{
+  background: linear-gradient(to right, red, blue);;
+  height: 6px;
+} */
 
 
 /* Main: donde esta el workspace, el juego y los bloques para mostrar codigo y output */
@@ -92,13 +111,14 @@ main{
   /* padding-top: 10px; */
   display: grid;
   /* align-items: center; */
-  height: 90%;
+  height: 80%;
 }
 
 main div.espacioBloques{
   width: 100%;
   height: 100%;
   display: inline-block;
+  z-index: 0;
 }
 
 main div.juego-escenario textarea.esconder{
@@ -195,6 +215,10 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   display: inline-block;
 }
 
+.rango button.botonera:last-child .tooltiptext{
+  right: 0px;
+}
+
 .botonera .tooltiptext{
   right: -48px;
   top: 40px;
@@ -203,18 +227,20 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
 .tooltiptext {
   /* border:2px solid var(--color-cuarto); */
   visibility: hidden;
-  width: 140px;
-  font-family: monospace;
-  background-color: var(--color-gris-claro);
+  min-width: 130px;
+  max-width: 180px;
+  background-color: var(--color-blanco);
   color: var(--color-gris-oscuro);
   text-align: center;
-  border-radius: 6px;
+  border-radius: 4px;
+  border: 1px solid var(--color-gris-oscuro);
   padding: 5px 0px;
   position: absolute;
   z-index: 5;
   top: -2px;
   right: 110%;
-  font-weight:bold;
+  font-size: 12px;
+  /* font-weight:bold; */
 }
 .tooltiptext::after {
   content: "";
@@ -225,6 +251,7 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   border-width: 7px;
   border-style: solid;
   border-color: transparent transparent transparent transparent;
+  z-index: 5;
 }
 
 .tooltipVisible .tooltiptext , .botonera:hover .tooltiptext{
@@ -232,14 +259,6 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
 }
 
 /* Workspace, Toolbox y bloques */
-/* Makes our label white. */
-/* .blocklyTreeLabel {
-  padding-bottom: 10px;
-} */
-/* Adds padding around the group of categories and separators. */
-/* .blocklyToolboxContents {
-  padding: 0.5em;
-} */
 /* Adds space between the categories, rounds the corners and adds space around the label. */
 .blocklyTreeRow {
   display: grid;
@@ -250,16 +269,13 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   border-radius: 4px;
 }
 
-/* .blocklyToolboxCategory{
-} */
-
 .blocklyToolboxDiv{
   padding: 10px;
 }
 
 .blocklyTreeLabel{
   font-family: Arial, Helvetica, sans-serif;
-
+  font-weight: bold;
 }
 
 /* TABLET y PC */
