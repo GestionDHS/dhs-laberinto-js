@@ -259,7 +259,7 @@ const bloquesCustomStandardDesados = [
   ["abrir_cofre", "Acciones"],
   ["juntar_basura", "Acciones"],
   ["lapiz", "Lápiz"],
-  ["if", "Condicionales"]
+  ["if", "Condicionales"],
   ["controls", "Repeticiones"]
 
 ];
