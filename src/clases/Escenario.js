@@ -41,23 +41,24 @@ export class Escenario {
         height: ${this.unidadAnchoDeseada}em;
         border: 1px solid ${this.colorBordes};
       }
-      .casillero-arbol{
-        background-image: url(${this.galeria.obtenerUrlDe(
-          this.objetoPared.estadosPosibles.normal.imageUrl
-        )})
-      }
-
-      .casillero-camino{
-        background-image: url(${this.galeria.obtenerUrlDe(
-          this.objetoCamino.estadosPosibles.normal.imageUrl
-        )})
-      }
+     
       .personaje{
         width: ${this.unidadAnchoDeseada}em;
         height: ${this.unidadAnchoDeseada}em;
         position: absolute;
       }
       `;
+      // .casillero-arbol{
+      //   background-image: url(${this.galeria.obtenerUrlDe(
+      //     this.objetoPared.estadosPosibles.normal.imageUrl
+      //   )})
+      // }
+
+      // .casillero-camino{
+      //   background-image: url(${this.galeria.obtenerUrlDe(
+      //     this.objetoCamino.estadosPosibles.normal.imageUrl
+      //   )})
+      //}
     document.querySelector("head").appendChild(reglaCasilleros);
     this.renderizarLaberinto();
   }
@@ -95,14 +96,16 @@ export class Casillero {
   hayColisionCon(colisiones) {
     let obj = { factorDeAvance: 1 };
     colisiones.forEach((o) => {
-      if (this.verSiExisteEnArray(o)) {
+      let objetoColisionante = this.verSiExisteEnArray(o)
+      if (objetoColisionante) {
         obj = o;
+        obj.objetoColisionante = objetoColisionante
       }
     });
     return obj;
   }
   verSiExisteEnArray(object) {
-    let objEncontrado = this.ocupantes.find((o) => o.idHTML == object.con);
+    let objEncontrado = this.ocupantes.find((o) => o.tipoPersonaje === object.con);
     return objEncontrado;
   }
 }

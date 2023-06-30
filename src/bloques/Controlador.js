@@ -1,5 +1,9 @@
 import ConfiguradorBloques from './ConfiguradorBloques';
+
+import {PersonajeDibujante} from '../clases/Personaje';
+
 import Swal from 'sweetalert2';
+
 class Controlador {
   constructor(
     juego,
@@ -36,11 +40,13 @@ class Controlador {
     this.botonEjecutar = botonEjecutar;
     if (this.botonEjecutar) {
       this.botonEjecutar.addEventListener("click", () => {
-        // console.log("clic en Ejecutar");
         this.deshabilitarBotonEjecutar();
         this.deshabilitarBotonReinicio();
         this.rehabilitarBotonDetener();
         this.recorrerPasos(false); // bool: sincronico.
+        if(this.juego.personajePrincipal instanceof PersonajeDibujante){
+            this.juego.personajePrincipal.ganarSiCompletoDibujo()
+        }
       });
     }
     this.botonDetener = botonDetener;
@@ -128,7 +134,6 @@ class Controlador {
     if (this.inputAcelerador) {
       this.inputAcelerador?.addEventListener("input", () => {
         let valor = parseInt(this.inputAcelerador.value);
-        console.log(valor);
         let velocidad = 2500 - valor;
         this.setearVelocidad(velocidad);
       });
@@ -184,7 +189,6 @@ class Controlador {
   // METODOS PARA EL WORKSPACE - SERIALIZACION
 
   crearInyectarWorkspace(idElemento, objetoConfig) {
-    // console.log(objetoConfig);
     this.workspace = Blockly.inject(idElemento, objetoConfig);
   }
 
