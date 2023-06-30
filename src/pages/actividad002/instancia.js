@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-// import { CustomCategory } from '../../bloques/CustomToolbox';
+import { CustomCategory } from '../../bloques/CustomToolbox';
 // import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
