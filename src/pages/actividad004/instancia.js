@@ -48,7 +48,7 @@ recuadroPintableNoDeseado.colorFondoInicial = "white"
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "lupe",
+  imagen: "lapizRojo",
   texto: "Lograste realizar el dibujo",
   oculto: true,
 };
@@ -119,7 +119,7 @@ miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
 //Generamos el WORKSPACE
 
-const miControlador = new ControladorStandard(
+window.miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
   // 'dhs-blockly-div',
@@ -143,10 +143,10 @@ const categoriasDeseadas = [
   //   name: "Acciones",
   //   categorystyle: "variable_category",
   // },
-  // {
-  //   name: "Condicionales",
-  //   categorystyle: "logic_category",
-  // },
+  {
+    name: "Repeticiones",
+    categorystyle: "logic_category",
+  },
 ];
 categoriasDeseadas.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
@@ -165,7 +165,7 @@ const bloquesCustomStandardDesados = [
   // ["abrir_cofre", "Acciones"],
   // ["juntar_basura", "Acciones"],
   ["lapiz", "Lápiz"],
-  // ["if", "Condicionales"],
+  ["controls", "Repeticiones"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {

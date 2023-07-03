@@ -44,7 +44,7 @@ const recuadroPintableDeseado = {
 };
 
 const recuadroPintableNoDeseado = { ...recuadroPintableDeseado };
-recuadroPintableNoDeseado.colorFondoInicial = "white"
+recuadroPintableNoDeseado.colorFondoInicial = "white";
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -65,7 +65,7 @@ const datosModal = {
 miJuego.generarEscenario(
   dimensiones,
   tablero,
-  3,
+  2.5, //anchoDeseado
   "white",
   recuadroPintableDeseado,
   recuadroPintableNoDeseado
@@ -104,14 +104,13 @@ miJuego.generarPersonajes(arrayDePersonajes);
 //OJO Al personaje que apuntamos
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
-
-
-
 //Seteo del Dibujo a realizar - Verificación
 //OJO - Las dimensiones del tamblero tienen que ser igual a las dimensiones de EJEMPLO_DIBUJO_DESEADO
 const miColor = "#FA3939";
 
-const dibujoDeseado = tablero.map(row => row.map(cell => cell === 0 ? false : miColor));
+const dibujoDeseado = tablero.map((row) =>
+  row.map((cell) => (cell === 0 ? false : miColor))
+);
 
 miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
@@ -119,7 +118,7 @@ miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
 //Generamos el WORKSPACE
 
-window.miControlador = new ControladorStandard(
+const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
   // 'dhs-blockly-div',
@@ -189,7 +188,8 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   },
 });
 
-const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+const bloquesPrecargadosJSON =
+  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
 miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
