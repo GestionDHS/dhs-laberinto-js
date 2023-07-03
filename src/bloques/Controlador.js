@@ -40,6 +40,7 @@ class Controlador {
     this.botonEjecutar = botonEjecutar;
     if (this.botonEjecutar) {
       this.botonEjecutar.addEventListener("click", () => {
+        this.deshabilitarEdicionWorkspace();
         this.deshabilitarBotonEjecutar();
         this.deshabilitarBotonReinicio();
         this.rehabilitarBotonDetener();
@@ -55,6 +56,7 @@ class Controlador {
         this.detenerEjecucion(); // deshabilitaDetener
         this.rehabilitarBotonEjecutar();
         this.rehabilitarBotonReinicio();
+        this.habilitarEdicionWorkspace()
       });
     }
     this.deshabilitarBotonDetener();
@@ -190,6 +192,14 @@ class Controlador {
 
   crearInyectarWorkspace(idElemento, objetoConfig) {
     this.workspace = Blockly.inject(idElemento, objetoConfig);
+  }
+
+  habilitarEdicionWorkspace() {
+    this.workspace.options.readOnly = false;
+  }
+
+  deshabilitarEdicionWorkspace() {
+    this.workspace.options.readOnly = true;
   }
 
   limpiarWorkspace() {
@@ -381,6 +391,7 @@ class Controlador {
       setTimeout(() => {
         this.detenerEjecucion();
       }, 500);
+      this.habilitarEdicionWorkspace();
     }
   }
 

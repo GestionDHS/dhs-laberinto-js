@@ -104,9 +104,6 @@ miJuego.generarPersonajes(arrayDePersonajes);
 //OJO Al personaje que apuntamos
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
-
-
-
 //Seteo del Dibujo a realizar - Verificación
 //OJO - Las dimensiones del tamblero tienen que ser igual a las dimensiones de EJEMPLO_DIBUJO_DESEADO
 const miColor = "#FA3939";
