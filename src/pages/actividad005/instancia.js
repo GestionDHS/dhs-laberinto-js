@@ -145,7 +145,7 @@ const categoriasDeseadas = [
   // },
   {
     name: "Repeticiones",
-    categorystyle: "logic_category",
+    categorystyle: "loop_category",
   },
 ];
 categoriasDeseadas.forEach((cat) =>

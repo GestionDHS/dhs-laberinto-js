@@ -7,6 +7,7 @@ import muchasmonedas from "../img/muchasMonedas.png"
 import pasto from "../img/pasto.png"
 import basura from "../img/basura.png"
 import lapizRojo from "../img/lapizRojo.png"
+import bandera from "../img/banderaRoja.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -120,7 +121,7 @@ export class DHS_Gallery {
     },
     bandera: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/bandera-roja.png",
+      url: bandera,
       nombre: "Bandera",
       parrafoLicencia:
         '<p>Licencia: <a href="https://www.flaticon.es/iconos-gratis/bandera-roja" title="bandera-roja iconos">Bandera-roja iconos creados por Freepik - Flaticon</a></p>',

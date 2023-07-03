@@ -1,5 +1,5 @@
 import { Escenario } from "./Escenario";
-import { PersonajeBasico, PersonajeDibujante } from "./Personaje";
+import { PersonajeBasico, PersonajeDibujante, PersonajeMovibleSimple } from "./Personaje";
 import { Modal } from "./Modal";
 
 export class Juego {
@@ -15,6 +15,7 @@ export class Juego {
     this.clasesPersonajesPosibles = {
       PersonajeBasico: PersonajeBasico,
       PersonajeDibujante: PersonajeDibujante,
+      PersonajeMovibleSimple : PersonajeMovibleSimple
     };
   }
 

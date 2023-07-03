@@ -69,8 +69,7 @@ export class Escenario {
   renderizarLaberinto() {
     let anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
     let altoTotal = this.unidadAnchoDeseada * this.tablero.length;
-    this.elementoHTML.style.width =
-      anchoTotal + this.tablero[0].length * 2 * 0.16 + "em";
+    this.elementoHTML.style.width = anchoTotal  + "em";
     this.elementoHTML.style.height = altoTotal + "em";
   }
   obtenerCasillero(posicionY, posicionX) {
@@ -86,6 +85,7 @@ export class Casillero {
     this.fila = fila;
     this.columna = columna;
     this.casilla = document.createElement("DIV");
+    this.casilla.classList.add("casillero")
     this.ocupantes = [];
   }
 
