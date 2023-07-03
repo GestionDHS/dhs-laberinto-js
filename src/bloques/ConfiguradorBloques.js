@@ -464,7 +464,37 @@ export default class ConfiguradorBloques {
     }
 
     // MOVIMIENTO POR AVANCE 
-    // no existe versión sin parámetros.
+    avanzar() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "move_up_simple",
+                "message0": "%1 mover arriba",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+            },
+        ]);
+
+        // Define how to generate JavaScript from the custom block.
+        Blockly.JavaScript["move_up_simple"] = function (block) {
+            const code = "moverArriba();\n"
+            return code;
+        };
+
+        return {
+            type: "move_up_simple",
+            kind: "block",
+        }
+    }
     avanzar_param() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -930,11 +960,11 @@ export default class ConfiguradorBloques {
     controls() {
         return [
             this.controls_repeat(),
-            this.controls_repeat_ext(),
-            this.controls_whileUntil(),
-            this.controls_for(),
-            this.controls_forEach(),
-            this.controls_flow_statements(),
+            // this.controls_repeat_ext(),
+            // this.controls_whileUntil(),
+            // this.controls_for(),
+            // this.controls_forEach(),
+            // this.controls_flow_statements(),
             // this.controls_forRange(),
             // this.controls_doWhile()
         ]
