@@ -467,12 +467,12 @@ export default class ConfiguradorBloques {
     avanzar() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                "type": "move_up_simple",
-                "message0": "%1 mover arriba",
+                "type": "avanzar",
+                "message0": "%1 avanzar",
                 "args0": [
                     {
                         "type": "field_image",
-                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/forward+icon-1320166878041096316.png",
                         "width": 16,
                         "height": 16,
                         "alt": "*"
@@ -485,13 +485,13 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_up_simple"] = function (block) {
-            const code = "moverArriba();\n"
+        Blockly.JavaScript["avanzar"] = function (block) {
+            const code = "avanzar();\n"
             return code;
         };
 
         return {
-            type: "move_up_simple",
+            type: "avanzar",
             kind: "block",
         }
     }
