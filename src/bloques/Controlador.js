@@ -318,7 +318,7 @@ class Controlador {
 
   recorrerPasos(sincronico = true, callback = this.callbackInterprete) {
     const necesitaReiniciar = this.necesitaEsperarReinicio;
-    necesitaReiniciar && this.juego?.reiniciar();
+    this.juego?.reiniciar();
     this.necesitaEsperarReinicio = true;
     this.juego?.setearSincronicidad(sincronico);
     this.anularInterpreteIterativo();
@@ -363,15 +363,17 @@ class Controlador {
       !this.hacerPausaQuitarResaltado &&
       !this.debeDetenerEjecucion
     ) {
-      try {
+      //try {
         this.hayCodigoPendiente = this.interpreteIterativo.step();
         // console.log("hayCodigoPendiente: " + this.hayCodigoPendiente);
         if (this.juego && !this.juego.puedeDebeContinuar) {
           this.debeDetenerEjecucion = true;
         }
-      } catch (e) {
-        console.log(e.message);
-      }
+        
+      // } catch (e) {
+      //   console.log(e.message);
+      // }
+      
     }
     // Si corta el while (por banderas o muerte)
     if (this.hayCodigoPendiente) {

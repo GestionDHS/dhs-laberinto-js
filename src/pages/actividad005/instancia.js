@@ -15,17 +15,18 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [7, 7]; //fila, columna
+const dimensiones = [8, 8]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 1, 1, 1, 1, 0],
-  [0, 1, 0, 0, 0, 1, 0],
-  [0, 1, 0, 0, 0, 1, 0],
-  [0, 1, 0, 0, 0, 1, 0],
-  [0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 1, 0],
+  [0, 1, 0, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 0, 1, 0],
+  [0, 1, 0, 0, 0, 0, 1, 0],
+  [0, 1, 1, 1, 1, 1, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 const recuadroPintableDeseado = {
@@ -44,7 +45,7 @@ const recuadroPintableDeseado = {
 };
 
 const recuadroPintableNoDeseado = { ...recuadroPintableDeseado };
-recuadroPintableNoDeseado.colorFondoInicial = "white"
+recuadroPintableNoDeseado.colorFondoInicial = "white";
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -65,7 +66,7 @@ const datosModal = {
 miJuego.generarEscenario(
   dimensiones,
   tablero,
-  2.5,//anchoDeseado
+  2, //anchoDeseado
   "white",
   recuadroPintableDeseado,
   recuadroPintableNoDeseado
@@ -90,7 +91,7 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lapizRojo" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 5,
+    posicionInicialY: 6,
     posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
@@ -102,16 +103,15 @@ const arrayDePersonajes = [
 miJuego.generarPersonajes(arrayDePersonajes);
 
 //OJO Al personaje que apuntamos
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
-
-
-
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[64]);
 
 //Seteo del Dibujo a realizar - Verificación
 //OJO - Las dimensiones del tamblero tienen que ser igual a las dimensiones de EJEMPLO_DIBUJO_DESEADO
 const miColor = "#FA3939";
 
-const dibujoDeseado = tablero.map(row => row.map(cell => cell === 0 ? false : miColor));
+const dibujoDeseado = tablero.map((row) =>
+  row.map((cell) => (cell === 0 ? false : miColor))
+);
 
 miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
@@ -158,7 +158,8 @@ const bloquesCustomStandardDesados = [
   ["on_execute", "Eventos"],
   // ["move_classic_simple", "Movimientos"],
   // ["move_classic_param", "Movimientos"],
-  ["avanzar_param", "Movimientos"],
+  // ["avanzar_param", "Movimientos"],
+  ["avanzar", "Movimientos"],
   ["girar_clasico", "Movimientos"],
   // ["girar_grados", "Movimientos"],
   // ["apuntar_hacia", "Movimientos"],

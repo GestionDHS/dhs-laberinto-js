@@ -444,8 +444,11 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
   pintarRecuadro(recuadro) {
     recuadro.pintarse(this.colorPintura);
     // console.log(recuadro.posicionActualY,recuadro.posicionActualX);
+   // console.log(recuadro)
+    //console.log(this)
     this.dibujoActual[recuadro.posicionActualY][recuadro.posicionActualX] =
       this.colorPintura;
+
     this.dibujoDeseado && this.ganarSiCompletoDibujo();
   }
 
