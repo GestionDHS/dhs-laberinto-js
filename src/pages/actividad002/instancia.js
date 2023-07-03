@@ -119,7 +119,7 @@ miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
 //Generamos el WORKSPACE
 
-const miControlador = new ControladorStandard(
+window.miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
   // 'dhs-blockly-div',
@@ -189,10 +189,9 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   },
 });
 
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
-
-miControlador.cargarBloquesSerializados(JSON.parse(bloquesPrecargadosJSON));
+const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+//const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
+miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();

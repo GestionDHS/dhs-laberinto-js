@@ -22,9 +22,9 @@ export class PersonajeBasico {
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
     this.mochila = [];
-    this.tieneTooltip=objetoConfiguracionPersonaje.tieneTooltip
+    this.tieneTooltip = objetoConfiguracionPersonaje.tieneTooltip;
     this.controladorDOM = new controladorPersonajeDOM(
-     this.tieneTooltip,
+      this.tieneTooltip,
       this.juego.escenario,
       objetoConfiguracionPersonaje.idUsarHTML,
       objetoConfiguracionPersonaje.zIndex,
@@ -39,7 +39,7 @@ export class PersonajeBasico {
     this.removerTooltip();
     this.setearEstado(this.estadoInicial);
     this.pintarse(this.colorFondoInicial);
-    this.actualizarCasillerosJuego(
+    this.actualizarCasillero(
       this.posicionInicialY,
       this.posicionInicialX,
       true
@@ -72,10 +72,12 @@ export class PersonajeBasico {
     this.colisiones.push(unaColision);
   }
 
-  actualizarCasillerosJuego(nuevaY, nuevaX) {
+  actualizarCasillero(nuevaY, nuevaX) {
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
-    this.controladorDOM.setearObjetosCasilleros(nuevaY, nuevaX);
+    //this.controladorDOM.setearObjetosCasilleros(nuevaY, nuevaX);
+    //this.casilleroActual = this.escenario.obtenerCasillero(nuevaY,nuevaX)
+    //Personaje debería conocer el escenario para poder reutilizar el metodo otenerCasillero
     this.casilleroActual = this.controladorDOM.obtenerCasilleroActual(
       nuevaY,
       nuevaX
@@ -85,8 +87,8 @@ export class PersonajeBasico {
   }
 
   visibilizarTooltip(texto, milisegundos = 4000) {
-   // if (this.hasTooltips()) {
-    if(this.tieneTooltip){
+    // if (this.hasTooltips()) {
+    if (this.tieneTooltip) {
       this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
       this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
       setTimeout(() => {
@@ -94,7 +96,7 @@ export class PersonajeBasico {
       }, milisegundos);
     }
   }
- 
+
   setearVelocidad(nuevaVelocidad) {
     this.controladorDOM.setearVelocidad(nuevaVelocidad);
   }
@@ -164,7 +166,7 @@ export class PersonajeBasico {
 
   abrirYMostrarModal() {
     this.juego.mostrarModal();
-    return true
+    return true;
   }
   // abrirModalFalloApertura() {
   //   this.juego.datosModalError.mostrar();
@@ -205,10 +207,10 @@ class controladorPersonajeDOM {
   setearImagen(url) {
     this.imagenAnidada ? this.imagenAnidada.setAttribute("src", url) : null;
   }
-  setearObjetosCasilleros(nuevaY, nuevaX) {
-    //console.log(nuevaY, nuevaX)
-    this.escenario.objetosCasilleros[nuevaY][nuevaX];
-  }
+  // setearObjetosCasilleros(nuevaY, nuevaX) {
+  //   //console.log(nuevaY, nuevaX)
+  //   this.escenario.objetosCasilleros[nuevaY][nuevaX];
+  // }
 
   obtenerCasilleroActual(nuevaY, nuevaX) {
     return this.escenario.objetosCasilleros[nuevaY][nuevaX];
@@ -285,7 +287,7 @@ class PersonajeMovible extends PersonajeBasico {
         this.posicionActualY + vectorY * objetoAux.factorDeAvance,
         this.posicionActualX + vectorX * objetoAux.factorDeAvance
       );
-      this.estaVivo && this.actualizarCasillerosJuego(nuevaY, nuevaX);
+      this.estaVivo && this.actualizarCasillero(nuevaY, nuevaX);
     }
   }
 
@@ -442,7 +444,8 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
   pintarRecuadro(recuadro) {
     recuadro.pintarse(this.colorPintura);
     // console.log(recuadro.posicionActualY,recuadro.posicionActualX);
-    this.dibujoActual[recuadro.posicionActualY][recuadro.posicionActualX] =this.colorPintura;
+    this.dibujoActual[recuadro.posicionActualY][recuadro.posicionActualX] =
+      this.colorPintura;
     this.dibujoDeseado && this.ganarSiCompletoDibujo();
   }
 
@@ -463,7 +466,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
     // Retorna falso al detectar diferencias
     // Si "pasa" el bucle, retorna verdadero.
     for (let i = 0; i < this.dibujoDeseado.length; i++) {
-      
       if (this.dibujoDeseado[i].length !== this.dibujoActual[i].length) {
         return false;
       }

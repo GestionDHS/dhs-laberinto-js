@@ -1,8 +1,8 @@
-import ConfiguradorBloques from './ConfiguradorBloques';
+import ConfiguradorBloques from "./ConfiguradorBloques";
 
-import {PersonajeDibujante} from '../clases/Personaje';
+import { PersonajeDibujante } from "../clases/Personaje";
 
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 class Controlador {
   constructor(
@@ -27,6 +27,7 @@ class Controlador {
     // ELEMENTOS IMPORTANTES
     this.ConfiguradorBloques = new ConfiguradorBloques();
     this.velocidad = veolocidadMilisegundos;
+    this.necesitaEsperarReinicio = false;
     this.juego = juego;
     // this.workspace = Blockly.inject(blocklyDivId, {
     //   toolbox: JSON.parse(miToolboxJSON),
@@ -76,58 +77,58 @@ class Controlador {
         // Confirm en SweetAlert
         const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
           },
           // buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-          title: '¿Borrar todo?',
-          text: 'Esta acción eliminará todos los bloques que colocaste.',
-          icon: 'warning',
-          iconColor: '#FFD148',
-          showCancelButton: true,
-          confirmButtonText: 'Si, borrar todo.',
-          cancelButtonText: 'No, cancelar.',
-          // reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.detenerEjecucion();
-            this.limpiarWorkspace();
-            this.cargarBloquesSerializados(JSON.parse('{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}'))
-            let timerInterval
-            swalWithBootstrapButtons.fire({
-              title:'¡Borrado!',
-              text:'Los bloques fueron borrados.',
-              icon: 'success',
-              timer: 1200,
-              timerProgressBar: true,
-              showConfirmButton: false,
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
+        });
+        swalWithBootstrapButtons
+          .fire({
+            title: "¿Borrar todo?",
+            text: "Esta acción eliminará todos los bloques que colocaste.",
+            icon: "warning",
+            iconColor: "#FFD148",
+            showCancelButton: true,
+            confirmButtonText: "Si, borrar todo.",
+            cancelButtonText: "No, cancelar.",
+            // reverseButtons: true
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.detenerEjecucion();
+              this.limpiarWorkspace();
+              this.cargarBloquesSerializados(this.bloquesIniciales);
+              let timerInterval;
+              swalWithBootstrapButtons.fire({
+                title: "¡Borrado!",
+                text: "Los bloques fueron borrados.",
+                icon: "success",
+                timer: 1200,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                willClose: () => {
+                  clearInterval(timerInterval);
+                },
+              });
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              let timerInterval;
+              swalWithBootstrapButtons.fire({
+                title: "Acción cancelada",
+                text: "Tus bloques están a salvo.",
+                icon: "error",
+                timer: 1200,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                willClose: () => {
+                  clearInterval(timerInterval);
+                },
+              });
             }
-            )
-          } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            let timerInterval
-            swalWithBootstrapButtons.fire({
-              title:'Acción cancelada',
-              text: 'Tus bloques están a salvo.',
-              icon: 'error',
-              timer: 1200,
-              timerProgressBar: true,
-              showConfirmButton: false,
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            })
-            }
-          }
-        )
-      })
+          });
+      });
       // Fin confirm
     }
     this.inputAcelerador = inputAcelerador;
@@ -207,6 +208,10 @@ class Controlador {
     );
     // --load hace el clear previo--
   }
+  setearYCargarBloquesIniciales(bloquesSerealizados) {
+    this.bloquesIniciales = bloquesSerealizados;
+    this.cargarBloquesSerializados(this.bloquesIniciales);
+  }
 
   // WORKSPACE - BLOQUES - RESALTADO
 
@@ -281,6 +286,7 @@ class Controlador {
   }
 
   reiniciarEjecucion() {
+    this.necesitaEsperarReinicio = false;
     this.detenerEjecucion(); // deshabilita Detener tmb
     this.cuadroOutput?.blanquearTodo();
     this.juego?.reiniciar();
@@ -311,7 +317,9 @@ class Controlador {
   }
 
   recorrerPasos(sincronico = true, callback = this.callbackInterprete) {
-    this.juego?.reiniciar();
+    const necesitaReiniciar = this.necesitaEsperarReinicio;
+    necesitaReiniciar && this.juego?.reiniciar();
+    this.necesitaEsperarReinicio = true;
     this.juego?.setearSincronicidad(sincronico);
     this.anularInterpreteIterativo();
     this.quitarTodosLosResaltados();
@@ -325,19 +333,19 @@ class Controlador {
       ? codigoActualCrudo
       : this.generarCodigoPrefijado();
     this.interpreteIterativo = this.crearInterprete(codigoActual, callback);
-   // console.log(this.interpreteIterativo);
+    // console.log(this.interpreteIterativo);
     this.hayCodigoPendiente = true; // ojo, deberíamos chequearlo.
     // console.log(codigoActual);
     this.hacerPausaResaltar = false;
     this.hacerPausaQuitarResaltado = false;
     this.debeDetenerEjecucion = false;
 
-    if (sincronico) {
+    if (sincronico || !necesitaReiniciar) {
       this.hacerPasosHastaBandera();
     } else {
       setTimeout(() => {
         this.hacerPasosHastaBandera();
-      }, this.velocidad + 100); // En este set time out deberíamos dar más tiempo para que vuelvan los personajes a su posición inicial.
+      }, this.velocidad + 10); 
     }
   }
 
@@ -472,7 +480,7 @@ class Controlador {
 export default class ControladorStandard extends Controlador {
   constructor(
     juego,
-    veolocidadMilisegundos,
+    veolocidadMilisegundos
     // blocklyDivId,
     // blocklyWorkspaceConfig,
     // bloquesPreCargados = false
@@ -498,7 +506,9 @@ export default class ControladorStandard extends Controlador {
     //   this.cargarBloquesSerializados(JSON.parse(bloquesPreCargados));
     // }
     setTimeout(() => {
-      document.getElementById("dhs-input-bloques-sueltos")?.setAttribute("checked", true);
+      document
+        .getElementById("dhs-input-bloques-sueltos")
+        ?.setAttribute("checked", true);
       // this.habilitarDesactivarHuerfanos(), 1;
     }, 1);
     this.callbackInterpreteStandard = (interpreter, globalObject) => {
