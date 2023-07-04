@@ -253,7 +253,6 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[72]);
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.juntarBasura = function () {
   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
-
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay basura...");
     //this.abrirModalFalloApertura();
