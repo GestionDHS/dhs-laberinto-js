@@ -8,6 +8,11 @@ import pasto from "../img/pasto.png"
 import basura from "../img/basura.png"
 import lapizRojo from "../img/lapizRojo.png"
 import bandera from "../img/banderaRoja.png"
+import conejo from "../img/conejo.png"
+import zanahoriaEnterrada from "../img/zanahoriaEnterrada.png"
+import zanahoriaCosechada from "../img/zanahoriaCosechada.png"
+import conejoDeArriba from "../img/conejoDeArriba.png"
+import madriguera from "../img/madriguera.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -33,6 +38,46 @@ export class DHS_Gallery {
   }
   
   imageLib = {
+    conejoDeArriba: {
+      themes: [""],
+      url: conejoDeArriba,
+      nombre: "conejoDeArriba",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    conejo: {
+      themes: [""],
+      url: conejo,
+      nombre: "conejo",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    madriguera: {
+      themes: [""],
+      url: madriguera,
+      nombre: "madriguera",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    zanahoriaEnterrada: {
+      themes: [""],
+      url: zanahoriaEnterrada,
+      nombre: "zanahoriaEnterrada",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    zanahoriaCosechada: {
+      themes: [""],
+      url: zanahoriaCosechada,
+      nombre: "zanahoriaCosechada",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
     lapizRojo: {
       themes: [""],
       url: lapizRojo,

@@ -1,5 +1,5 @@
 import { Escenario } from "./Escenario";
-import { PersonajeBasico, PersonajeDibujante, PersonajeMovibleSimple } from "./Personaje";
+import { PersonajeBasico, PersonajeDibujante, PersonajeMovibleSimple, PersonajeMovibleGrados } from "./Personaje";
 import { Modal } from "./Modal";
 
 export class Juego {
@@ -15,7 +15,8 @@ export class Juego {
     this.clasesPersonajesPosibles = {
       PersonajeBasico: PersonajeBasico,
       PersonajeDibujante: PersonajeDibujante,
-      PersonajeMovibleSimple : PersonajeMovibleSimple
+      PersonajeMovibleSimple: PersonajeMovibleSimple,
+      PersonajeMovibleGrados: PersonajeMovibleGrados
     };
   }
 
@@ -135,41 +136,5 @@ export class Juego {
     };
   }
 
-  // crearFuncionesGlobalesStandard() {
-  //   window.moverDerecha = (veces) => {
-  //     this.personajePrincipal.moverDerecha(veces);
-  //   };
-  //   window.moverIzquierda = (veces) => {
-  //     this.personajePrincipal.moverIzquierda(veces);
-  //   };
-  //   window.moverArriba = (veces) => {
-  //     this.personajePrincipal.moverArriba(veces);
-  //   };
-  //   window.moverAbajo = (veces) => {
-  //     this.personajePrincipal.moverAbajo(veces);
-  //   };
-  //   // window.globalMoverIzquierda etc
-  // }
-  // callbackInterpreteStandard(interpreter, globalObject) {
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverDerecha",
-  //     interpreter.createNativeFunction(moverDerecha)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverIzquierda",
-  //     interpreter.createNativeFunction(moverIzquierda)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverArriba",
-  //     interpreter.createNativeFunction(moverArriba)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverAbajo",
-  //     interpreter.createNativeFunction(moverAbajo)
-  //   );
-  // }
+  
 }
