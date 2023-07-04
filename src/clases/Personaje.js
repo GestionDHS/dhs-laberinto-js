@@ -130,11 +130,9 @@ export class PersonajeBasico {
     const objetoPaciente = this.casilleroActual.ocupantes.find(
       (obj) => obj.tipoPersonaje == nameObj
     );
-    // console.log(objetoPaciente)
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
       : false;
-      // console.log(acto)
     return {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
