@@ -15,13 +15,17 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [3, 8]; //fila, columna
+const dimensiones = [7, 8]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1,1],
+  [1, 1, 1, 1, 1, 1, 1,1],
+  [1, 1, 1, 1, 1, 1, 1,1],
+  [1, 0, 0, 0, 0, 0, 0,1],
+  [1, 1, 1, 1, 1, 1, 1,1],
+  [1, 1, 1, 1, 1, 1, 1,1],
+  [1, 1, 1, 1, 1, 1, 1,1],
 ];
 
 const arbol = {
@@ -71,7 +75,7 @@ const datosModal = {
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", arbol, pasto);
-miJuego.agregarModal(datosModal, dimensiones);
+miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
@@ -86,7 +90,7 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
@@ -133,7 +137,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
@@ -149,7 +153,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
@@ -165,7 +169,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 2,
@@ -181,7 +185,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 2,
     direccionInicial: 0,
     zIndex: 2,
@@ -197,7 +201,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 6,
     direccionInicial: 0,
     zIndex: 2,
@@ -239,7 +243,6 @@ miJuego.personajePrincipal.abrirCofre = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
- 
   if (this.mochila.length === 4) {
     this.abrirYMostrarModal();
   } else {

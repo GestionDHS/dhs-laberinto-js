@@ -1,5 +1,9 @@
 import { Escenario } from "./Escenario";
-import { PersonajeBasico, PersonajeDibujante, PersonajeMovibleSimple } from "./Personaje";
+import {
+  PersonajeBasico,
+  PersonajeDibujante,
+  PersonajeMovibleSimple,
+} from "./Personaje";
 import { Modal } from "./Modal";
 
 export class Juego {
@@ -15,7 +19,7 @@ export class Juego {
     this.clasesPersonajesPosibles = {
       PersonajeBasico: PersonajeBasico,
       PersonajeDibujante: PersonajeDibujante,
-      PersonajeMovibleSimple : PersonajeMovibleSimple
+      PersonajeMovibleSimple: PersonajeMovibleSimple,
     };
   }
 
@@ -65,7 +69,10 @@ export class Juego {
       const clasePersonaje = personaje.clasePersonaje;
       let unPersonaje;
       if (clasePersonaje) {
-        unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](personaje, this);
+        unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](
+          personaje,
+          this
+        );
       } else {
         unPersonaje = new PersonajeBasico(personaje, this);
       }
@@ -101,12 +108,12 @@ export class Juego {
     this.datosModal.ocultar();
   }
 
-  agregarModal(datosModal, dimensiones) {
-    this.datosModal = new Modal(datosModal, this, dimensiones);
+  agregarModal(datosModal) {
+    this.datosModal = new Modal(datosModal, this);
     return this.datosModal;
   }
   mostrarModal() {
-    this.datosModal.mostrar(this.sincronico)
+    this.datosModal.mostrar(this.sincronico);
   }
   // agregarModalError(datosModalError) {
   //   this.datosModalError = new Modal(datosModalError, this);
