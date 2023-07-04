@@ -123,8 +123,8 @@ export class PersonajeBasico {
     const parametros = params ? params : [];
     const acto = elemento[accion](...parametros); // tiene que devolver exito true/false y premio
     acto && acto.premio && this.mochila.push(acto.premio);
-    console.log(acto.premio)
-    console.log(mochila.length)
+    // console.log(acto.premio)
+    // console.log(this.mochila.length)
     return acto;
   }
   buscarParaRealizarAccion(nameObj, accion, params = false) {
