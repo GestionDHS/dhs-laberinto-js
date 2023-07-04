@@ -8,6 +8,7 @@ import pasto from "../img/pasto.png"
 import basura from "../img/basura.png"
 import lapizRojo from "../img/lapizRojo.png"
 import bandera from "../img/banderaRoja.png"
+import cerco from "../img/cercoPasto.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -61,6 +62,14 @@ export class DHS_Gallery {
       themes: ["lupe"],
       url: arbolesPasto,
       nombre: "Árboles",
+      parrafoLicencia:
+        '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    cerco: {
+      themes: ["cerco"],
+      url: cerco,
+      nombre: "Cerco",
       parrafoLicencia:
         '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
       showLicense: true,

@@ -15,17 +15,18 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [7, 8]; //fila, columna
+const dimensiones = [8, 9]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
 const arbol = {
@@ -129,7 +130,7 @@ const arrayDePersonajes = [
     zIndex: 2,
     rotable: true,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "basura",
@@ -145,7 +146,7 @@ const arrayDePersonajes = [
     zIndex: 2,
     rotable: true,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "basura",
@@ -155,13 +156,13 @@ const arrayDePersonajes = [
       juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 4,
+    posicionInicialY: 4,
+    posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
     rotable: true,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "basura",
@@ -177,23 +178,7 @@ const arrayDePersonajes = [
     zIndex: 2,
     rotable: true,
     colisiones: [],
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "basura",
-    tipoPersonaje: "basura",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "basura" },
-      juntado: { name: "juntado", imageUrl: "pasto" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 4,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "basura",
@@ -204,12 +189,12 @@ const arrayDePersonajes = [
     },
     estadoInicial: "normal",
     posicionInicialY: 5,
-    posicionInicialX: 2,
+    posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
     rotable: true,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "basura",
@@ -219,13 +204,29 @@ const arrayDePersonajes = [
       juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 2,
-    posicionInicialX: 5,
+    posicionInicialY: 6,
+    posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 2,
     rotable: true,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 3,
+    posicionInicialX: 6,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "bandera",
@@ -242,7 +243,7 @@ const arrayDePersonajes = [
     rotable: false,
     paddingImagen: "0.4em",
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
 ];
 

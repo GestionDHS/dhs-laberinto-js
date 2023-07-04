@@ -22,7 +22,7 @@ const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1, 1, 1],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -32,7 +32,7 @@ const arbol = {
   idUsarHTML: "arbol",
   tipoPersonaje: "arbol",
   estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
+    normal: { name: "normal", imageUrl: "cerco" },
   },
   estadoInicial: "normal",
   zIndex: 1,
@@ -115,20 +115,6 @@ const arrayDePersonajes = [
       },
     ],
   },
-  // {
-  //   idUsarHTML: "lodo",
-  //   tipoPersonaje: "lodo",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "lodo" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 1,
-  //   posicionInicialX: 3,
-  //   direccionInicial: 0,
-  //   zIndex: 1,
-  //   rotable: false,
-  //   colisiones: [],
-  // },
   {
     idUsarHTML: "cofre",
     tipoPersonaje: "cofre",
@@ -209,26 +195,39 @@ const arrayDePersonajes = [
     paddingImagen: "0.4em",
     colisiones: [],
   },
-  // {
-  //   idUsarHTML: "basura",
-  //   tipoPersonaje: "basura",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "basura" },
-  //     juntado: { name: "juntado", imageUrl: "pasto" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 2,
-  //   posicionInicialX: 2,
-  //   direccionInicial: 0,
-  //   zIndex: 2,
-  //   rotable: true,
-  //   colisiones: [],
-  // },
+  {
+    idUsarHTML: "arbol",
+    tipoPersonaje: "arbol",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "arboles" },
+    },
+    estadoInicial: "normal",
+    zIndex: 2,
+    posicionInicialY: 3,
+    posicionInicialX: 0,
+    direccionInicial: 0,
+    rotable: false,
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "arbol",
+    tipoPersonaje: "arbol",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "arboles" },
+    },
+    estadoInicial: "normal",
+    zIndex: 2,
+    posicionInicialY: 3,
+    posicionInicialX: 7,
+    direccionInicial: 0,
+    rotable: false,
+    paddingImagen: "1px",
+  }
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
-// window.miJuego.listaDePersonajes;
+//window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
