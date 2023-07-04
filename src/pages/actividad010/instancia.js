@@ -255,7 +255,7 @@ miJuego.personajePrincipal.juntarBasura = function () {
   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
 
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay basura.");
+    return this.decirTerminar("¡Oh! Aquí no hay basura...");
     //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
     //this.abrirYMostrarModal();
