@@ -1,8 +1,8 @@
 import { DHS_Gallery } from "./Dhs-galeria";
 export class Modal {
-  constructor(modalPannelObj, juego, dimensiones) {
+  constructor(modalPannelObj, juego) {
     this.juego = juego;
-    this.dimensiones = dimensiones;
+   // this.dimensiones = dimensiones;
     this.oculto = modalPannelObj.oculto;
     this.titulo = modalPannelObj.titulo;
     this.galeria = new DHS_Gallery();

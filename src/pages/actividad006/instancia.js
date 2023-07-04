@@ -19,13 +19,13 @@ const dimensiones = [7, 8]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1, 1,1],
-  [1, 1, 1, 1, 1, 1, 1,1],
-  [1, 1, 1, 1, 1, 1, 1,1],
-  [1, 0, 0, 0, 0, 0, 0,1],
-  [1, 1, 1, 1, 1, 1, 1,1],
-  [1, 1, 1, 1, 1, 1, 1,1],
-  [1, 1, 1, 1, 1, 1, 1,1],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 const arbol = {
@@ -40,7 +40,7 @@ const arbol = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 const pasto = {
   idUsarHTML: "camino",
@@ -55,7 +55,7 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 
 const datosModal = {
@@ -143,7 +143,7 @@ const arrayDePersonajes = [
     zIndex: 2,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "cofre",
@@ -227,7 +227,7 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[24]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
 // window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
@@ -239,16 +239,16 @@ miJuego.personajePrincipal.abrirCofre = function () {
   } else if (!intento.exito) {
     //this.abrirYMostrarModal();
     return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
-  } 
+  }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
   if (this.mochila.length === 4) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.")
+    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
   }
-}
+};
 
 //Inicializamos todos los personajes
 

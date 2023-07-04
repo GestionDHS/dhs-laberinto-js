@@ -105,7 +105,7 @@ export class Juego {
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
-    this.datosModal.ocultar();
+    //this.datosModal.ocultar(); - lo saqué de acá por que puse un setTimeout para que se oculte solo
   }
 
   agregarModal(datosModal) {
