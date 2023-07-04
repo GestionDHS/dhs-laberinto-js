@@ -248,7 +248,7 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[72]);
 // window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.juntarBasura = function () {
