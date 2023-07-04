@@ -150,7 +150,7 @@ export class PersonajeBasico {
   }
   //para juntar la basura
   serJuntado() {
-    if (this.estadoActual === "normal") {
+    if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
       return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 1 } };
     } else {
