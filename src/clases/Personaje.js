@@ -44,6 +44,7 @@ export class PersonajeBasico {
       this.posicionInicialX,
       true
     );
+    this.mochila=[]
     this.direccion = this.direccionInicial;
     this.controladorDOM.rotarPersonaje(this.direccion);
     this.controladorDOM.posicionarPersonajeEnHtml(
@@ -123,11 +124,6 @@ export class PersonajeBasico {
     const parametros = params ? params : [];
     const acto = elemento[accion](...parametros); // tiene que devolver exito true/false y premio
     acto && acto.premio && this.mochila.push(acto.premio);
-<<<<<<< HEAD
-=======
-    // console.log(acto.premio)
-    // console.log(this.mochila.length)
->>>>>>> 0dc7d6c16f0bb9d7e5c63c0ec911324050ca7bcf
     return acto;
   }
   buscarParaRealizarAccion(nameObj, accion, params = false) {

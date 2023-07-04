@@ -15,20 +15,18 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [10, 3]; //fila, columna
+const dimensiones = [7, 7]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  
 ];
 
 const arbol = {
@@ -141,7 +139,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 2,
-    posicionInicialX: 1,
+    posicionInicialX: 2,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -156,8 +154,8 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 4,
-    posicionInicialX: 1,
+    posicionInicialY: 3,
+    posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -172,8 +170,24 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 6,
-    posicionInicialX: 1,
+    posicionInicialY: 4,
+    posicionInicialX: 4,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
+    paddingImagen: "1px",
+    colisiones: [],
+  },
+  {
+    idUsarHTML: "cofre",
+    tipoPersonaje: "cofre",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "cofre" },
+      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+    },
+    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    posicionInicialY: 5,
+    posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -188,8 +202,8 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 8,
-    posicionInicialX: 1,
+    posicionInicialY: 1,
+    posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -214,7 +228,7 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 // window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
@@ -230,8 +244,8 @@ miJuego.personajePrincipal.abrirCofre = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  // console.log(mochila.length)
-  if (this.mochila.length === 3) {
+   console.log(this.mochila.length)
+  if (this.mochila.length === 4) {
     this.abrirYMostrarModal();
   } else {
     return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.")
