@@ -142,41 +142,4 @@ export class Juego {
     };
   }
 
-  // crearFuncionesGlobalesStandard() {
-  //   window.moverDerecha = (veces) => {
-  //     this.personajePrincipal.moverDerecha(veces);
-  //   };
-  //   window.moverIzquierda = (veces) => {
-  //     this.personajePrincipal.moverIzquierda(veces);
-  //   };
-  //   window.moverArriba = (veces) => {
-  //     this.personajePrincipal.moverArriba(veces);
-  //   };
-  //   window.moverAbajo = (veces) => {
-  //     this.personajePrincipal.moverAbajo(veces);
-  //   };
-  //   // window.globalMoverIzquierda etc
-  // }
-  // callbackInterpreteStandard(interpreter, globalObject) {
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverDerecha",
-  //     interpreter.createNativeFunction(moverDerecha)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverIzquierda",
-  //     interpreter.createNativeFunction(moverIzquierda)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverArriba",
-  //     interpreter.createNativeFunction(moverArriba)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverAbajo",
-  //     interpreter.createNativeFunction(moverAbajo)
-  //   );
-  // }
 }
