@@ -230,7 +230,6 @@ miJuego.personajePrincipal.abrirCofre = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  console.log(mochila.length)
   if (this.mochila.length === 3) {
     this.abrirYMostrarModal();
   } else {
