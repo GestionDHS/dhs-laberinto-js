@@ -15,20 +15,20 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [10, 3]; //fila, columna
+const dimensiones = [10, 9]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 0, 1],
-  [1, 1, 1],
+  [0, 0, 0, 1, 1, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0, 0],
+  [0, 0, 0, 1, 1, 1, 0, 0, 0],
 ];
 
 const arbol = {
@@ -43,7 +43,7 @@ const arbol = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 const pasto = {
   idUsarHTML: "camino",
@@ -58,13 +58,13 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "monedas",
-  texto: "Encontramos 180 monedas de oro.",
+  texto: "Juntaste todas las monedas de los cofres!",
   oculto: true,
 };
 // const datosModalError = {
@@ -94,7 +94,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "normal",
     posicionInicialY: 1,
-    posicionInicialX: 1,
+    posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
@@ -141,12 +141,12 @@ const arrayDePersonajes = [
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 2,
-    posicionInicialX: 1,
+    posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "cofre",
@@ -157,7 +157,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 4,
-    posicionInicialX: 1,
+    posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -173,7 +173,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 6,
-    posicionInicialX: 1,
+    posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -189,7 +189,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 8,
-    posicionInicialX: 1,
+    posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -214,7 +214,7 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
 // window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
@@ -226,16 +226,16 @@ miJuego.personajePrincipal.abrirCofre = function () {
   } else if (!intento.exito) {
     //this.abrirYMostrarModal();
     return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
-  } 
+  }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
   if (this.mochila.length === 3) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.")
+    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
   }
-}
+};
 
 //Inicializamos todos los personajes
 
