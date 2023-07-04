@@ -60,8 +60,8 @@ const pasto = {
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  // texto: "Encontramos 180 monedas de oro.",
+  imagen: "conejo",
+  texto: "Llegaste a la madriguera con todas las zanahorias.",
   oculto: true,
 };
 // const datosModalError = {
@@ -121,6 +121,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" }, 
       abierto: { name: "normal", imageUrl: "zanahoriaCosechada" }, 
+      juntado: { name: "juntado", imageUrl: "pasto" }, 
     },
     estadoInicial: "cerrado",
     posicionInicialY: 2,
@@ -136,6 +137,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 2,
@@ -152,6 +154,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 3,
@@ -168,6 +171,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 3,
@@ -183,7 +187,8 @@ const arrayDePersonajes = [
     tipoPersonaje: "zanahoria",
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
-      abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 4,
@@ -200,6 +205,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 4,
@@ -215,7 +221,8 @@ const arrayDePersonajes = [
     tipoPersonaje: "zanahoria",
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
-      abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 5,
@@ -231,7 +238,8 @@ const arrayDePersonajes = [
     tipoPersonaje: "zanahoria",
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
-      abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 5,
@@ -265,10 +273,11 @@ const arrayDePersonajes = [
 miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 // window.miJuego.listaDePersonajes;
-//Método para Abrir el Cofre
+//Método para el conejo
+
 miJuego.personajePrincipal.cosecharZanahoria = function () {
   const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
-
+  // this.setearEstado("normal");
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
     //this.abrirModalFalloApertura();
@@ -277,10 +286,22 @@ miJuego.personajePrincipal.cosecharZanahoria = function () {
     return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
   } 
 };
+miJuego.personajePrincipal.comerZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+    //this.abrirModalFalloApertura();
+  } else if (!intento.exito) {
+    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+    // this.abrirYMostrarModal();
+  } else if(!intento.exito) {
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
+  }
+};
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
   // console.log(this.mochila)
-  if (this.mochila.length === 8) {
+  if (this.mochila.length === 16) {
     this.abrirYMostrarModal();
   } else {
     return this.decirTerminar("¡Oh! Quedaron zanahorias sin cosechar.")
@@ -341,7 +362,7 @@ const bloquesCustomStandardDesados = [
   // ["apuntar_hacia", "Movimientos"],
   // ["abrir_cofre", "Acciones"],
   ["cosechar", "Acciones"],
-  // ["comer", "Acciones"],
+  ["comer", "Acciones"],
   // ["juntar_basura", "Acciones"],
   // ["lapiz", "Lápiz"],
   // ["if", "Condicionales"],
@@ -384,6 +405,7 @@ miControlador.crearFuncionesGlobalesStandard();
 // miControlador.juego.agregarGlobalConCallback("abrirCofre");
 // miControlador.juego.agregarGlobalConCallback("juntarBasura");
 miControlador.juego.agregarGlobalConCallback("cosecharZanahoria");
+miControlador.juego.agregarGlobalConCallback("comerZanahoria");
 miControlador.juego.agregarGlobalConCallback("avanzar");
 miControlador.juego.agregarGlobalConCallback("girarIzquierda");
 miControlador.juego.agregarGlobalConCallback("girarDerecha");

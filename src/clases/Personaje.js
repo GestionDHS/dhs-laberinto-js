@@ -130,11 +130,11 @@ export class PersonajeBasico {
     const objetoPaciente = this.casilleroActual.ocupantes.find(
       (obj) => obj.tipoPersonaje == nameObj
     );
-    console.log(objetoPaciente)
+    // console.log(objetoPaciente)
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
       : false;
-      console.log(acto)
+      // console.log(acto)
     return {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
@@ -152,7 +152,7 @@ export class PersonajeBasico {
   }
   //para juntar la basura
   serJuntado() {
-    if (this.estadoActual === "normal") {
+    if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
       return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 1 } };
     } else {
