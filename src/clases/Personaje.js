@@ -145,7 +145,7 @@ export class PersonajeBasico {
   abrirse() {
     if (this.estadoActual === "cerrado") {
       this.setearEstado("abierto");
-      return { exito: true, premio: { tipo: "monedas", cantidad: 20 } };
+      return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 20 } };
     } else {
       return { exito: false, premio: null };
     }
@@ -154,7 +154,7 @@ export class PersonajeBasico {
   serJuntado() {
     if (this.estadoActual === "normal") {
       this.setearEstado("juntado");
-      return { exito: true, premio: { tipo: "basura", cantidad: 1 } };
+      return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 1 } };
     } else {
       return { exito: false, premio: null };
     }

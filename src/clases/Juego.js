@@ -1,9 +1,7 @@
 import { Escenario } from "./Escenario";
-import {
-  PersonajeBasico,
-  PersonajeDibujante,
-  PersonajeMovibleSimple,
-} from "./Personaje";
+
+import { PersonajeBasico, PersonajeDibujante, PersonajeMovibleSimple, PersonajeMovibleGrados } from "./Personaje";
+
 import { Modal } from "./Modal";
 
 export class Juego {
@@ -20,6 +18,8 @@ export class Juego {
       PersonajeBasico: PersonajeBasico,
       PersonajeDibujante: PersonajeDibujante,
       PersonajeMovibleSimple: PersonajeMovibleSimple,
+      PersonajeMovibleGrados: PersonajeMovibleGrados
+
     };
   }
 
