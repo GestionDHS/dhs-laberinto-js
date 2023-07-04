@@ -44,6 +44,7 @@ export class PersonajeBasico {
       this.posicionInicialX,
       true
     );
+    this.mochila=[]
     this.direccion = this.direccionInicial;
     this.controladorDOM.rotarPersonaje(this.direccion);
     this.controladorDOM.posicionarPersonajeEnHtml(
