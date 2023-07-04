@@ -101,8 +101,8 @@ export class Juego {
     this.datosModal.ocultar();
   }
 
-  agregarModal(datosModal) {
-    this.datosModal = new Modal(datosModal, this);
+  agregarModal(datosModal, dimensiones) {
+    this.datosModal = new Modal(datosModal, this, dimensiones);
     return this.datosModal;
   }
   mostrarModal() {
