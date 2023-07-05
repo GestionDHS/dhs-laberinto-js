@@ -464,7 +464,37 @@ export default class ConfiguradorBloques {
     }
 
     // MOVIMIENTO POR AVANCE 
-    // no existe versión sin parámetros.
+    avanzar() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "avanzar",
+                "message0": "%1 avanzar",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/forward+icon-1320166878041096316.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+            },
+        ]);
+
+        // Define how to generate JavaScript from the custom block.
+        Blockly.JavaScript["avanzar"] = function (block) {
+            const code = "avanzar();\n"
+            return code;
+        };
+
+        return {
+            type: "avanzar",
+            kind: "block",
+        }
+    }
     avanzar_param() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -764,6 +794,68 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    //conejo
+    cosechar() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "cosechar",
+                message0: "%1 cosechar zanahoria",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/257/257615.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript["cosechar"] = function (block) {
+            const code = "cosecharZanahoria();\n"
+            return code;
+        };
+
+        return {
+            type: "cosechar",
+            kind: "block",
+        }
+    }
+
+    comer() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "comer",
+                message0: "%1 comer zanahoria",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/257/257615.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript["comer"] = function (block) {
+            const code = "comerZanahoria();\n"
+            return code;
+        };
+
+        return {
+            type: "comer",
+            kind: "block",
+        }
+    }
     // Lapiz
     bajar_lapiz(){
         Blockly.common.defineBlocksWithJsonArray([
@@ -930,11 +1022,11 @@ export default class ConfiguradorBloques {
     controls() {
         return [
             this.controls_repeat(),
-            this.controls_repeat_ext(),
-            this.controls_whileUntil(),
-            this.controls_for(),
-            this.controls_forEach(),
-            this.controls_flow_statements(),
+            // this.controls_repeat_ext(),
+            // this.controls_whileUntil(),
+            // this.controls_for(),
+            // this.controls_forEach(),
+            // this.controls_flow_statements(),
             // this.controls_forRange(),
             // this.controls_doWhile()
         ]

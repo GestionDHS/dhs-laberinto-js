@@ -48,7 +48,7 @@ recuadroPintableNoDeseado.colorFondoInicial = "white"
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "lupe",
+  imagen: "lapizRojo",
   texto: "Lograste realizar el dibujo",
   oculto: true,
 };
@@ -65,7 +65,7 @@ const datosModal = {
 miJuego.generarEscenario(
   dimensiones,
   tablero,
-  3,
+  2.5,//anchoDeseado
   "white",
   recuadroPintableDeseado,
   recuadroPintableNoDeseado
@@ -103,9 +103,6 @@ miJuego.generarPersonajes(arrayDePersonajes);
 
 //OJO Al personaje que apuntamos
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
-
-
-
 
 //Seteo del Dibujo a realizar - Verificación
 //OJO - Las dimensiones del tamblero tienen que ser igual a las dimensiones de EJEMPLO_DIBUJO_DESEADO
@@ -192,7 +189,7 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
 const bloquesPrecargadosJSON =
   '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 
-miControlador.cargarBloquesSerializados(JSON.parse(bloquesPrecargadosJSON));
+miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
