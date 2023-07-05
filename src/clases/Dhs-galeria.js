@@ -7,6 +7,14 @@ import muchasmonedas from "../img/muchasMonedas.png"
 import pasto from "../img/pasto.png"
 import basura from "../img/basura.png"
 import lapizRojo from "../img/lapizRojo.png"
+import bandera from "../img/banderaRoja.png"
+import cerco from "../img/cercoPasto.png"
+import conejo from "../img/conejo.png"
+import zanahoriaEnterrada from "../img/zanahoriaEnterrada.png"
+import zanahoriaCosechada from "../img/zanahoriaCosechada.png"
+import conejoDeArriba from "../img/conejoDeArriba.png"
+import madriguera from "../img/madriguera.png"
+
 
 export class DHS_Gallery {
   constructor() {
@@ -32,6 +40,46 @@ export class DHS_Gallery {
   }
   
   imageLib = {
+    conejoDeArriba: {
+      themes: [""],
+      url: conejoDeArriba,
+      nombre: "conejoDeArriba",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    conejo: {
+      themes: [""],
+      url: conejo,
+      nombre: "conejo",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    madriguera: {
+      themes: [""],
+      url: madriguera,
+      nombre: "madriguera",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    zanahoriaEnterrada: {
+      themes: [""],
+      url: zanahoriaEnterrada,
+      nombre: "zanahoriaEnterrada",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
+    zanahoriaCosechada: {
+      themes: [""],
+      url: zanahoriaCosechada,
+      nombre: "zanahoriaCosechada",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
     lapizRojo: {
       themes: [""],
       url: lapizRojo,
@@ -60,6 +108,14 @@ export class DHS_Gallery {
       themes: ["lupe"],
       url: arbolesPasto,
       nombre: "Árboles",
+      parrafoLicencia:
+        '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    cerco: {
+      themes: ["cerco"],
+      url: cerco,
+      nombre: "Cerco",
       parrafoLicencia:
         '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
@@ -120,7 +176,7 @@ export class DHS_Gallery {
     },
     bandera: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/bandera-roja.png",
+      url: bandera,
       nombre: "Bandera",
       parrafoLicencia:
         '<p>Licencia: <a href="https://www.flaticon.es/iconos-gratis/bandera-roja" title="bandera-roja iconos">Bandera-roja iconos creados por Freepik - Flaticon</a></p>',

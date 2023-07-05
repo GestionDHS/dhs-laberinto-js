@@ -1,5 +1,7 @@
 import { Escenario } from "./Escenario";
-import { PersonajeBasico, PersonajeDibujante } from "./Personaje";
+
+import { PersonajeBasico, PersonajeDibujante, PersonajeMovibleSimple, PersonajeMovibleGrados } from "./Personaje";
+
 import { Modal } from "./Modal";
 
 export class Juego {
@@ -15,6 +17,9 @@ export class Juego {
     this.clasesPersonajesPosibles = {
       PersonajeBasico: PersonajeBasico,
       PersonajeDibujante: PersonajeDibujante,
+      PersonajeMovibleSimple: PersonajeMovibleSimple,
+      PersonajeMovibleGrados: PersonajeMovibleGrados
+
     };
   }
 
@@ -64,7 +69,10 @@ export class Juego {
       const clasePersonaje = personaje.clasePersonaje;
       let unPersonaje;
       if (clasePersonaje) {
-        unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](personaje, this);
+        unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](
+          personaje,
+          this
+        );
       } else {
         unPersonaje = new PersonajeBasico(personaje, this);
       }
@@ -97,7 +105,7 @@ export class Juego {
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
-    this.datosModal.ocultar();
+    //this.datosModal.ocultar(); - lo saqué de acá por que puse un setTimeout para que se oculte solo
   }
 
   agregarModal(datosModal) {
@@ -105,7 +113,7 @@ export class Juego {
     return this.datosModal;
   }
   mostrarModal() {
-    this.datosModal.mostrar(this.sincronico)
+    this.datosModal.mostrar(this.sincronico);
   }
   // agregarModalError(datosModalError) {
   //   this.datosModalError = new Modal(datosModalError, this);
@@ -134,41 +142,4 @@ export class Juego {
     };
   }
 
-  // crearFuncionesGlobalesStandard() {
-  //   window.moverDerecha = (veces) => {
-  //     this.personajePrincipal.moverDerecha(veces);
-  //   };
-  //   window.moverIzquierda = (veces) => {
-  //     this.personajePrincipal.moverIzquierda(veces);
-  //   };
-  //   window.moverArriba = (veces) => {
-  //     this.personajePrincipal.moverArriba(veces);
-  //   };
-  //   window.moverAbajo = (veces) => {
-  //     this.personajePrincipal.moverAbajo(veces);
-  //   };
-  //   // window.globalMoverIzquierda etc
-  // }
-  // callbackInterpreteStandard(interpreter, globalObject) {
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverDerecha",
-  //     interpreter.createNativeFunction(moverDerecha)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverIzquierda",
-  //     interpreter.createNativeFunction(moverIzquierda)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverArriba",
-  //     interpreter.createNativeFunction(moverArriba)
-  //   );
-  //   interpreter.setProperty(
-  //     globalObject,
-  //     "moverAbajo",
-  //     interpreter.createNativeFunction(moverAbajo)
-  //   );
-  // }
 }

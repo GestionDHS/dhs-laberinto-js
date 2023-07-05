@@ -15,15 +15,18 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [5, 6]; //fila, columna
+const dimensiones = [8, 9]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 0, 1, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 1, 0, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
 const arbol = {
@@ -38,11 +41,12 @@ const arbol = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
+  paddingImagen: "1px",
 };
 const pasto = {
   idUsarHTML: "camino",
   tipoPersonaje: "camino",
-  pintable: true,
+  // pintable: true,
   estadosPosibles: {
     normal: { name: "normal", imageUrl: "pasto" },
   },
@@ -52,12 +56,13 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
+  paddingImagen: "1px",
 };
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Encontramos 180 monedas de oro.",
+  imagen: "basura",
+  texto: "¡Quedó todo limpito!.",
   oculto: true,
 };
 // const datosModalError = {
@@ -70,7 +75,7 @@ const datosModal = {
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", arbol, pasto);
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
@@ -80,25 +85,26 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
     tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeDibujante",
+    clasePersonaje: "PersonajeMovibleSimple",
     tieneTooltip: true,
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "lupe" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 3,
+    posicionInicialY: 1,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
+    paddingImagen: "1px",
     colisiones: [
       {
-        con: "lodo",
-        factorDeAvance: 0.7,
+        con: "bandera",
+        factorDeAvance: 1,
         callback: (x) => {
-          x.terminar();
+          x.llegarALaBandera();
         },
-        mensaje: "¡OH NO! Me atasqué en el lodo.",
+        // mensaje: "¡We are the Champions!",
       },
       {
         con: "arbol",
@@ -108,46 +114,7 @@ const arrayDePersonajes = [
         },
         mensaje: "¡OH NO! Choqué contra un árbol",
       },
-
-      // {
-      //   con: "cofre",
-      //   factorDeAvance: 1,
-      //   callback: (x) => {
-      //     //depende si tengo el bloque Abrir Cofre
-      //       x.abrir("cofre");
-      //   },
-      //   mensaje: "¡We are the Champions!",
-      // },
     ],
-  },
-  {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-  },
-  {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
   },
   {
     idUsarHTML: "basura",
@@ -158,52 +125,151 @@ const arrayDePersonajes = [
     },
     estadoInicial: "normal",
     posicionInicialY: 2,
+    posicionInicialX: 3,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 3,
     posicionInicialX: 2,
     direccionInicial: 0,
     zIndex: 2,
     rotable: true,
     colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 4,
+    posicionInicialX: 5,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 4,
+    posicionInicialX: 1,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 5,
+    posicionInicialX: 4,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 6,
+    posicionInicialX: 3,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 3,
+    posicionInicialX: 6,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "bandera",
+    tipoPersonaje: "bandera",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "bandera" },
+      abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
+    },
+    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    posicionInicialY: 1,
+    posicionInicialX: 6,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
+    paddingImagen: "0.4em",
+    colisiones: [],
+    paddingImagen: "1px",
   },
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
-
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[72]);
+// window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
-
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("Oh! Aquí no hay cofre.");
-    //this.abrirModalFalloApertura();
-  } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
-    return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
-  } else {
-    return this.abrirYMostrarModal();
-  }
-};
-
-//Método para Juntar Basura
 miJuego.personajePrincipal.juntarBasura = function () {
   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
   if (!intento.objetoEncontrado) {
-    this.decirTerminar("Oh! Aquí no hay basura.");
+    return this.decirTerminar("¡Oh! Aquí no hay basura...");
+    //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
-    this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
+    //this.abrirYMostrarModal();
+    return this.decirTerminar("¡Oh! Ya levantamos la basura de aquí.");
   }
-  return intento;
 };
 
-//Seteo del Dibujo a realizar - Verificación
-// const EJEMPLO_DIBUJO_DESEADO = [
-//   [null, null, null, null, null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, null, null, null, null],
-// ]
-// miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
+miJuego.personajePrincipal.llegarALaBandera = function () {
+  console.log(this.mochila.length);
+  if (this.mochila.length === 7) {
+    this.abrirYMostrarModal();
+  } else {
+    return this.decirTerminar("¡Oh! Quedo basura por levantar.");
+  }
+};
 
 //Inicializamos todos los personajes
 
@@ -225,18 +291,18 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  {
-    name: "Lápiz",
-    categorystyle: "pencil",
-  },
+  // {
+  //   name: "Lápiz",
+  //   categorystyle: "pencil",
+  // },
   {
     name: "Acciones",
     categorystyle: "action",
   },
-  {
-    name: "Condicionales",
-    categorystyle: "logic_category",
-  },
+  // {
+  //   name: "Condicionales",
+  //   categorystyle: "logic_category",
+  // },
   {
     name: "Repeticiones",
     categorystyle: "loop_category",
@@ -251,15 +317,15 @@ const bloquesCustomStandardDesados = [
   // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
-  ["move_classic_param", "Movimientos"],
-  ["avanzar_param", "Movimientos"],
-  ["girar_clasico", "Movimientos"],
-  ["girar_grados", "Movimientos"],
-  ["apuntar_hacia", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
+  // ["move_classic_param", "Movimientos"],
+  // ["avanzar_param", "Movimientos"],
+  // ["girar_clasico", "Movimientos"],
+  // ["girar_grados", "Movimientos"],
+  // ["apuntar_hacia", "Movimientos"],
+  //["abrir_cofre", "Acciones"],
   ["juntar_basura", "Acciones"],
-  ["lapiz", "Lápiz"],
-  ["if", "Condicionales"],
+  // ["lapiz", "Lápiz"],
+  // ["if", "Condicionales"],
   ["controls", "Repeticiones"],
 ];
 
@@ -292,20 +358,20 @@ miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-//miControlador.juego.agregarGlobalConCallback("moverDerecha");
-//miControlador.juego.agregarGlobalConCallback("moverAbajo");
-//miControlador.juego.agregarGlobalConCallback("moverArriba");
-//miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
+miControlador.juego.agregarGlobalConCallback("moverDerecha");
+miControlador.juego.agregarGlobalConCallback("moverAbajo");
+miControlador.juego.agregarGlobalConCallback("moverArriba");
+miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+//miControlador.juego.agregarGlobalConCallback("abrirCofre");
 miControlador.juego.agregarGlobalConCallback("juntarBasura");
-miControlador.juego.agregarGlobalConCallback("avanzar");
-miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-miControlador.juego.agregarGlobalConCallback("girarDerecha");
-miControlador.juego.agregarGlobalConCallback("girarGrados");
-miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-miControlador.juego.agregarGlobalConCallback("subirLapiz");
-miControlador.juego.agregarGlobalConCallback("setearColor");
+// miControlador.juego.agregarGlobalConCallback("avanzar");
+// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
+// miControlador.juego.agregarGlobalConCallback("girarDerecha");
+// miControlador.juego.agregarGlobalConCallback("girarGrados");
+// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
+// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
+// miControlador.juego.agregarGlobalConCallback("subirLapiz");
+// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
