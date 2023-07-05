@@ -60,8 +60,8 @@ const pasto = {
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  // texto: "Encontramos 180 monedas de oro.",
+  imagen: "zanahoriaCosechada",
+  texto: "Cosechaste todas las zanahorias!",
   oculto: true,
 };
 // const datosModalError = {

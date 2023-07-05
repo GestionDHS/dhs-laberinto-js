@@ -61,7 +61,7 @@ const pasto = {
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "conejo",
-  texto: "Llegaste a la madriguera con todas las zanahorias.",
+  texto: "Te comiste todas las zanahorias y llegaste a la madriguera!",
   oculto: true,
 };
 // const datosModalError = {
@@ -130,6 +130,7 @@ const arrayDePersonajes = [
     zIndex: 2,
     rotable: true,
     colisiones: [],
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "zanahoria",
@@ -146,7 +147,7 @@ const arrayDePersonajes = [
     zIndex: 2,
     rotable: false,
     colisiones: [],
-    paddingImagen: "0.5px",
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "zanahoria",
@@ -163,7 +164,7 @@ const arrayDePersonajes = [
     zIndex: 2,
     rotable: false,
     colisiones: [],
-    paddingImagen: "0.5px",
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "zanahoria",
@@ -179,7 +180,7 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    paddingImagen: "0.5px",
+    paddingImagen: "1px",
     colisiones: [],
   },
   {
@@ -196,7 +197,7 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    paddingImagen: "0.5px",
+    paddingImagen: "1px",
     colisiones: [],
   },
   {
@@ -213,7 +214,7 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    paddingImagen: "0.5px",
+    paddingImagen: "1px",
     colisiones: [],
   },
   {
@@ -230,7 +231,7 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    paddingImagen: "0.5px",
+    paddingImagen: "1px",
     colisiones: [],
   },
   {
@@ -247,7 +248,7 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    paddingImagen: "0.5px",
+    paddingImagen: "1px",
     colisiones: [],
   },
   {
@@ -263,7 +264,7 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    // paddingImagen: "",
+    paddingImagen: "1px",
     colisiones: [],
   },
 

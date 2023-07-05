@@ -48,7 +48,7 @@ recuadroPintableNoDeseado.colorFondoInicial = "white";
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "lupe",
+  imagen: "lapizRojo",
   texto: "Lograste realizar el dibujo",
   oculto: true,
 };
