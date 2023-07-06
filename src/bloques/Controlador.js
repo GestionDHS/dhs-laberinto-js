@@ -293,6 +293,7 @@ class Controlador {
     this.rehabilitarBotonEjecutar();
     this.deshabilitarBotonDetener();
     this.anularInterpreteIterativo();
+    this.habilitarEdicionWorkspace();
   }
 
   reiniciarEjecucion() {
@@ -355,7 +356,7 @@ class Controlador {
     } else {
       setTimeout(() => {
         this.hacerPasosHastaBandera();
-      }, this.velocidad + 10); 
+      }, this.velocidad + 10);
     }
   }
 
@@ -374,16 +375,15 @@ class Controlador {
       !this.debeDetenerEjecucion
     ) {
       //try {
-        this.hayCodigoPendiente = this.interpreteIterativo.step();
-        // console.log("hayCodigoPendiente: " + this.hayCodigoPendiente);
-        if (this.juego && !this.juego.puedeDebeContinuar) {
-          this.debeDetenerEjecucion = true;
-        }
-        
+      this.hayCodigoPendiente = this.interpreteIterativo.step();
+      // console.log("hayCodigoPendiente: " + this.hayCodigoPendiente);
+      if (this.juego && !this.juego.puedeDebeContinuar) {
+        this.debeDetenerEjecucion = true;
+      }
+
       // } catch (e) {
       //   console.log(e.message);
       // }
-      
     }
     // Si corta el while (por banderas o muerte)
     if (this.hayCodigoPendiente) {
@@ -440,7 +440,12 @@ class Controlador {
     this.desactivaHuerfanos = false;
     this.workspace.removeChangeListener(this.eventoHuerfanos);
   }
-
+  habilitarEdicionWorkspace() {
+    this.workspace.options.readOnly = false;
+  }
+  deshabilitarEdicionWorkspace() {
+    this.workspace.options.readOnly = true;
+  }
   // INTERPRETE
 
   setearCallbackInterprete(callback) {
