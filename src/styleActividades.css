@@ -9,6 +9,9 @@
   height: 100%;
   width: 100%;
   background-color: var(--color-blanco);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 9fr 0.5fr;
 }
 
 /* Header: donde estan los botones para reproducir y configurar  */
@@ -21,7 +24,7 @@ header{
   align-items: center;
   /* justify-content: space-evenly; */
   /* padding: 15px 5px; */
-  height: 8%;
+  /* height: 8%; */
   /* padding-top: 15px; */
 }
 
@@ -110,7 +113,23 @@ header input[type="range"]{
   background: linear-gradient(to right, red, blue);;
   height: 6px;
 } */
-
+/* #dhs-input-acelerador{
+  --webkit-appearance: none;
+}
+#dhs-input-acelerador::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, rgb(127, 239, 157), rgb(232, 232, 127), rgb(230, 45, 45));
+  border-radius: 10px;
+  height: 15px;
+}
+#dhs-input-acelerador::-moz-range-track{
+  background: linear-gradient(to right, blue, yellow, red);
+}
+#dhs-input-acelerador::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: rgb(255, 120, 0);
+  overflow: visible;
+  cursor: pointer;
+} */
 
 /* Main: donde esta el workspace, el juego y los bloques para mostrar codigo y output */
 
@@ -119,7 +138,7 @@ main{
   /* padding-top: 10px; */
   display: grid;
   /* align-items: center; */
-  height: 80%;
+  height: 100%;
 }
 
 main div.espacioBloques{
