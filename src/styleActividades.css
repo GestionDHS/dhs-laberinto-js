@@ -17,9 +17,9 @@ header{
   background-color: var(--color-gris-oscuro);
   display: grid;
   gap: 10px;
-  grid-template-columns: 0.6fr 1fr ;
+  grid-template-columns: 5fr 3fr 1fr 1fr;
   align-items: center;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   /* padding: 15px 5px; */
   height: 8%;
   /* padding-top: 15px; */
@@ -37,6 +37,10 @@ header div.botones button:first-child i{
 
 header div.desactivarSueltos{
   display: none;
+  /* display: flex; */
+  font-size: 12px;
+  text-align: center;
+  padding:1px;
 }
 
 header div.botones button{
@@ -62,20 +66,20 @@ header button.botonera i{
 
 header div.rango{
   display: grid;
-  grid-template-columns: 10% 80% 10%;
+  grid-template-columns: 1fr 4fr 1fr;
   align-items: center;
+  min-width: 300px;
 }
 
 header div.mostrar{
   display: none;
-  /* display: grid; */
-  grid-template-columns: auto auto;
-  /* justify-items: end; */
+  /* display: flex; */
+  justify-content: center;
 }
 
 header div.mostrar div{
-  display: grid;
-  justify-content: center;
+  display: flex;
+  /* justify-content: center; */
 }
 
 header div.mostrar div input{
@@ -83,7 +87,7 @@ header div.mostrar div input{
 }
 
 header div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
-  background: red;
+  /* background: red; */
   border-radius: 10px;
   border: 1px solid;
 }
@@ -94,7 +98,11 @@ header div.mostrar div input[type="range"]::-webkit-slider-thumb{
   background: red;
   transition: .2s ease-in-out;
 }
-
+/* Cuando .mostrar este visible, hay que poner en none ésta regla: header div:nth-child(2)*/
+header div:nth-child(2){
+  position:relative;
+  left:100px;
+}
 /* header input[type="range"]::-ms-fill-lower, 
 header input[type="range"]::-moz-range-progress,
 header input[type="range"]::-webkit-slider-runnable-track,
