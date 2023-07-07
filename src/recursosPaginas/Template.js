@@ -2,6 +2,8 @@
 import "../style.css";
 import "../styleActividades.css";
 import { trash, play, stop, restart,standingPerson, runningPerson, code, comment } from "./Iconos";
+import logoBlockly from "../img/logoBlockly.png";
+import logoDHS from "../img/logodhsBlack.png";
 
 export function template(element) {
   return `
@@ -48,7 +50,12 @@ export function template(element) {
       <textarea class="esconder" id="dhs-text-area-codigo-generado" value="" disabled></textarea>
       <textarea class="esconder" id="dhs-text-area-output-generado" value="" disabled></textarea>
     </div>
-  </main>`;
+  </main>
+  <footer>
+  <div></div>
+  <img src="${logoDHS}" id="logoDHS-footer" alt="logo de Digital House Schools">
+  <img src="${logoBlockly}" id="logoBlockly-footer" alt="logo de Blockly">
+  </footer>`;
 }
 
 /**

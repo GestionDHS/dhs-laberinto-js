@@ -794,6 +794,68 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    //conejo
+    cosechar() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "cosechar",
+                message0: "%1 cosechar zanahoria",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/257/257615.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript["cosechar"] = function (block) {
+            const code = "cosecharZanahoria();\n"
+            return code;
+        };
+
+        return {
+            type: "cosechar",
+            kind: "block",
+        }
+    }
+
+    comer() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "comer",
+                message0: "%1 comer zanahoria",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/257/257615.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript["comer"] = function (block) {
+            const code = "comerZanahoria();\n"
+            return code;
+        };
+
+        return {
+            type: "comer",
+            kind: "block",
+        }
+    }
     // Lapiz
     bajar_lapiz(){
         Blockly.common.defineBlocksWithJsonArray([

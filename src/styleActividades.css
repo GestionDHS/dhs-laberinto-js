@@ -9,6 +9,9 @@
   height: 100%;
   width: 100%;
   background-color: var(--color-blanco);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 9fr 0.5fr;
 }
 
 /* Header: donde estan los botones para reproducir y configurar  */
@@ -17,11 +20,11 @@ header{
   background-color: var(--color-gris-oscuro);
   display: grid;
   gap: 10px;
-  grid-template-columns: 0.6fr 1fr ;
+  grid-template-columns: 5fr 3fr 1fr 1fr;
   align-items: center;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   /* padding: 15px 5px; */
-  height: 8%;
+  /* height: 8%; */
   /* padding-top: 15px; */
 }
 
@@ -37,6 +40,10 @@ header div.botones button:first-child i{
 
 header div.desactivarSueltos{
   display: none;
+  /* display: flex; */
+  font-size: 12px;
+  text-align: center;
+  padding:1px;
 }
 
 header div.botones button{
@@ -62,20 +69,20 @@ header button.botonera i{
 
 header div.rango{
   display: grid;
-  grid-template-columns: 10% 80% 10%;
+  grid-template-columns: 1fr 4fr 1fr;
   align-items: center;
+  min-width: 300px;
 }
 
 header div.mostrar{
   display: none;
-  /* display: grid; */
-  grid-template-columns: auto auto;
-  /* justify-items: end; */
+  /* display: flex; */
+  justify-content: center;
 }
 
 header div.mostrar div{
-  display: grid;
-  justify-content: center;
+  display: flex;
+  /* justify-content: center; */
 }
 
 header div.mostrar div input{
@@ -83,7 +90,7 @@ header div.mostrar div input{
 }
 
 header div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
-  background: red;
+  /* background: red; */
   border-radius: 10px;
   border: 1px solid;
 }
@@ -94,7 +101,11 @@ header div.mostrar div input[type="range"]::-webkit-slider-thumb{
   background: red;
   transition: .2s ease-in-out;
 }
-
+/* Cuando .mostrar este visible, hay que poner en none ésta regla: header div:nth-child(2)*/
+header div:nth-child(2){
+  position:relative;
+  left:100px;
+}
 /* header input[type="range"]::-ms-fill-lower, 
 header input[type="range"]::-moz-range-progress,
 header input[type="range"]::-webkit-slider-runnable-track,
@@ -102,7 +113,23 @@ header input[type="range"]{
   background: linear-gradient(to right, red, blue);;
   height: 6px;
 } */
-
+/* #dhs-input-acelerador{
+  --webkit-appearance: none;
+}
+#dhs-input-acelerador::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, rgb(127, 239, 157), rgb(232, 232, 127), rgb(230, 45, 45));
+  border-radius: 10px;
+  height: 15px;
+}
+#dhs-input-acelerador::-moz-range-track{
+  background: linear-gradient(to right, blue, yellow, red);
+}
+#dhs-input-acelerador::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: rgb(255, 120, 0);
+  overflow: visible;
+  cursor: pointer;
+} */
 
 /* Main: donde esta el workspace, el juego y los bloques para mostrar codigo y output */
 
@@ -111,7 +138,7 @@ main{
   /* padding-top: 10px; */
   display: grid;
   /* align-items: center; */
-  height: 80%;
+  height: 100%;
 }
 
 main div.espacioBloques{
@@ -153,7 +180,7 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel {
   grid-template-rows: 50px auto 50px;
   top: 0%;
   left: 0%;
-  width: 92%;
+  width: 100%;
   height: 100%;
   background: var(--color-confirmacion);
   border: 1px solid var(--negro);
@@ -167,7 +194,7 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel {
 
 main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel-hidden {
   visibility: hidden;
-  opacity: 20%;
+  opacity: 90%;
   top: 50%;
   left: 50%;
   width: 0%;

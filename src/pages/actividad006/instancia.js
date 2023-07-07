@@ -15,20 +15,24 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [3, 8]; //fila, columna
+const dimensiones = [7, 8]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 const arbol = {
   idUsarHTML: "arbol",
   tipoPersonaje: "arbol",
   estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
+    normal: { name: "normal", imageUrl: "cerco" },
   },
   estadoInicial: "normal",
   zIndex: 1,
@@ -36,7 +40,7 @@ const arbol = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 const pasto = {
   idUsarHTML: "camino",
@@ -51,13 +55,13 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "monedas",
-  texto: "Encontramos 180 monedas de oro.",
+  texto: "Juntaste todas las monedas de los cofres!",
   oculto: true,
 };
 // const datosModalError = {
@@ -86,7 +90,7 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
@@ -111,20 +115,6 @@ const arrayDePersonajes = [
       },
     ],
   },
-  // {
-  //   idUsarHTML: "lodo",
-  //   tipoPersonaje: "lodo",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "lodo" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 1,
-  //   posicionInicialX: 3,
-  //   direccionInicial: 0,
-  //   zIndex: 1,
-  //   rotable: false,
-  //   colisiones: [],
-  // },
   {
     idUsarHTML: "cofre",
     tipoPersonaje: "cofre",
@@ -133,13 +123,13 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px"
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "cofre",
@@ -149,7 +139,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
@@ -165,7 +155,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 2,
@@ -181,7 +171,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 2,
     direccionInicial: 0,
     zIndex: 2,
@@ -197,7 +187,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 1,
+    posicionInicialY: 3,
     posicionInicialX: 6,
     direccionInicial: 0,
     zIndex: 2,
@@ -205,26 +195,39 @@ const arrayDePersonajes = [
     paddingImagen: "0.4em",
     colisiones: [],
   },
-  // {
-  //   idUsarHTML: "basura",
-  //   tipoPersonaje: "basura",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "basura" },
-  //     juntado: { name: "juntado", imageUrl: "pasto" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 2,
-  //   posicionInicialX: 2,
-  //   direccionInicial: 0,
-  //   zIndex: 2,
-  //   rotable: true,
-  //   colisiones: [],
-  // },
+  {
+    idUsarHTML: "arbol",
+    tipoPersonaje: "arbol",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "arboles" },
+    },
+    estadoInicial: "normal",
+    zIndex: 2,
+    posicionInicialY: 3,
+    posicionInicialX: 0,
+    direccionInicial: 0,
+    rotable: false,
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "arbol",
+    tipoPersonaje: "arbol",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "arboles" },
+    },
+    estadoInicial: "normal",
+    zIndex: 2,
+    posicionInicialY: 3,
+    posicionInicialX: 7,
+    direccionInicial: 0,
+    rotable: false,
+    paddingImagen: "1px",
+  }
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[24]);
-// window.miJuego.listaDePersonajes;
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
+//window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
@@ -235,17 +238,16 @@ miJuego.personajePrincipal.abrirCofre = function () {
   } else if (!intento.exito) {
     //this.abrirYMostrarModal();
     return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
-  } 
+  }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
- 
   if (this.mochila.length === 4) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.")
+    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
   }
-}
+};
 
 //Inicializamos todos los personajes
 

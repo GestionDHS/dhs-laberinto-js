@@ -15,20 +15,18 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [10, 9]; //fila, columna
+const dimensiones = [8, 9]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
 const arbol = {
@@ -63,8 +61,8 @@ const pasto = {
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Juntaste todas las monedas de los cofres!",
+  imagen: "basura",
+  texto: "¡Quedó todo limpito!.",
   oculto: true,
 };
 // const datosModalError = {
@@ -94,7 +92,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "normal",
     posicionInicialY: 1,
-    posicionInicialX: 4,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
@@ -118,67 +116,117 @@ const arrayDePersonajes = [
       },
     ],
   },
-  // {
-  //   idUsarHTML: "lodo",
-  //   tipoPersonaje: "lodo",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "lodo" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 1,
-  //   posicionInicialX: 3,
-  //   direccionInicial: 0,
-  //   zIndex: 1,
-  //   rotable: false,
-  //   colisiones: [],
-  // },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "normal",
     posicionInicialY: 2,
-    posicionInicialX: 4,
+    posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 2,
-    rotable: false,
+    rotable: true,
     colisiones: [],
     paddingImagen: "1px",
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "normal",
+    posicionInicialY: 3,
+    posicionInicialX: 2,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
     posicionInicialY: 4,
-    posicionInicialX: 4,
+    posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
-    rotable: false,
+    rotable: true,
     colisiones: [],
     paddingImagen: "1px",
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 6,
+    estadoInicial: "normal",
+    posicionInicialY: 4,
+    posicionInicialX: 1,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 5,
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
-    rotable: false,
-    paddingImagen: "1px",
+    rotable: true,
     colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 6,
+    posicionInicialX: 3,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "basura",
+    tipoPersonaje: "basura",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "basura" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 3,
+    posicionInicialX: 6,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
   },
   {
     idUsarHTML: "bandera",
@@ -188,52 +236,38 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 8,
-    posicionInicialX: 4,
+    posicionInicialY: 1,
+    posicionInicialX: 6,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
     paddingImagen: "0.4em",
     colisiones: [],
+    paddingImagen: "1px",
   },
-  // {
-  //   idUsarHTML: "basura",
-  //   tipoPersonaje: "basura",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "basura" },
-  //     juntado: { name: "juntado", imageUrl: "pasto" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 2,
-  //   posicionInicialX: 2,
-  //   direccionInicial: 0,
-  //   zIndex: 2,
-  //   rotable: true,
-  //   colisiones: [],
-  // },
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[72]);
 // window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
-
+miJuego.personajePrincipal.juntarBasura = function () {
+  const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay cofre.");
+    return this.decirTerminar("¡Oh! Aquí no hay basura...");
     //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
     //this.abrirYMostrarModal();
-    return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
+    return this.decirTerminar("¡Oh! Ya levantamos la basura de aquí.");
   }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  if (this.mochila.length === 3) {
+  console.log(this.mochila.length);
+  if (this.mochila.length === 7) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
+    return this.decirTerminar("¡Oh! Quedo basura por levantar.");
   }
 };
 
@@ -288,8 +322,8 @@ const bloquesCustomStandardDesados = [
   // ["girar_clasico", "Movimientos"],
   // ["girar_grados", "Movimientos"],
   // ["apuntar_hacia", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
-  // ["juntar_basura", "Acciones"],
+  //["abrir_cofre", "Acciones"],
+  ["juntar_basura", "Acciones"],
   // ["lapiz", "Lápiz"],
   // ["if", "Condicionales"],
   ["controls", "Repeticiones"],
@@ -328,8 +362,8 @@ miControlador.juego.agregarGlobalConCallback("moverDerecha");
 miControlador.juego.agregarGlobalConCallback("moverAbajo");
 miControlador.juego.agregarGlobalConCallback("moverArriba");
 miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
-// miControlador.juego.agregarGlobalConCallback("juntarBasura");
+//miControlador.juego.agregarGlobalConCallback("abrirCofre");
+miControlador.juego.agregarGlobalConCallback("juntarBasura");
 // miControlador.juego.agregarGlobalConCallback("avanzar");
 // miControlador.juego.agregarGlobalConCallback("girarIzquierda");
 // miControlador.juego.agregarGlobalConCallback("girarDerecha");

@@ -15,20 +15,17 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [10, 9]; //fila, columna
+const dimensiones = [7, 7]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1],
 ];
 
 const arbol = {
@@ -43,7 +40,7 @@ const arbol = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px",
+  paddingImagen: "1px"
 };
 const pasto = {
   idUsarHTML: "camino",
@@ -58,13 +55,13 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px",
+  paddingImagen: "1px"
 };
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Juntaste todas las monedas de los cofres!",
+  imagen: "conejo",
+  texto: "Te comiste todas las zanahorias y llegaste a la madriguera!",
   oculto: true,
 };
 // const datosModalError = {
@@ -77,7 +74,7 @@ const datosModal = {
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 2.7, "#9ca64e", arbol, pasto);
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
@@ -85,23 +82,23 @@ miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeMovibleSimple",
+    idUsarHTML: "conejo",
+    tipoPersonaje: "conejo",
+    clasePersonaje: "PersonajeMovibleGrados",
     tieneTooltip: true,
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
+      normal: { name: "normal", imageUrl: "conejoDeArriba" },
     },
     estadoInicial: "normal",
     posicionInicialY: 1,
-    posicionInicialX: 4,
-    direccionInicial: 0,
+    posicionInicialX: 1,
+    direccionInicial: 180,
     zIndex: 3,
     rotable: true,
-    paddingImagen: "1px",
+    paddingImagen: "0.3px",
     colisiones: [
       {
-        con: "bandera",
+        con: "madriguera",
         factorDeAvance: 1,
         callback: (x) => {
           x.llegarALaBandera();
@@ -118,30 +115,34 @@ const arrayDePersonajes = [
       },
     ],
   },
-  // {
-  //   idUsarHTML: "lodo",
-  //   tipoPersonaje: "lodo",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "lodo" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 1,
-  //   posicionInicialX: 3,
-  //   direccionInicial: 0,
-  //   zIndex: 1,
-  //   rotable: false,
-  //   colisiones: [],
-  // },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" }, 
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" }, 
+      juntado: { name: "juntado", imageUrl: "pasto" }, 
+    },
+    estadoInicial: "cerrado",
+    posicionInicialY: 2,
+    posicionInicialX: 1,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: true,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 2,
-    posicionInicialX: 4,
+    posicionInicialX: 2,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
@@ -149,11 +150,63 @@ const arrayDePersonajes = [
     paddingImagen: "1px",
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
+    },
+    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    posicionInicialY: 3,
+    posicionInicialX: 2,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
+    },
+    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    posicionInicialY: 3,
+    posicionInicialX: 3,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
+    paddingImagen: "1px",
+    colisiones: [],
+  },
+  {
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
+    },
+    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    posicionInicialY: 4,
+    posicionInicialX: 3,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
+    paddingImagen: "1px",
+    colisiones: [],
+  },
+  {
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 4,
@@ -161,18 +214,19 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    colisiones: [],
     paddingImagen: "1px",
+    colisiones: [],
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 6,
+    posicionInicialY: 5,
     posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
@@ -181,61 +235,79 @@ const arrayDePersonajes = [
     colisiones: [],
   },
   {
-    idUsarHTML: "bandera",
-    tipoPersonaje: "bandera",
+    idUsarHTML: "zanahoria",
+    tipoPersonaje: "zanahoria",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" }
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 8,
-    posicionInicialX: 4,
+    posicionInicialY: 5,
+    posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    paddingImagen: "0.4em",
+    paddingImagen: "1px",
     colisiones: [],
   },
-  // {
-  //   idUsarHTML: "basura",
-  //   tipoPersonaje: "basura",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "basura" },
-  //     juntado: { name: "juntado", imageUrl: "pasto" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 2,
-  //   posicionInicialX: 2,
-  //   direccionInicial: 0,
-  //   zIndex: 2,
-  //   rotable: true,
-  //   colisiones: [],
-  // },
+  {
+    idUsarHTML: "madriguera",
+    tipoPersonaje: "madriguera",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "madriguera" },
+      abierto: { name: "abierto", imageUrl: "madriguera" }, //baja a alta? cambiar de color?
+    },
+    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    posicionInicialY: 2,
+    posicionInicialX: 5,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
+    paddingImagen: "1px",
+    colisiones: [],
+  },
+
+  
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 // window.miJuego.listaDePersonajes;
-//Método para Abrir el Cofre
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+//Método para el conejo
 
+miJuego.personajePrincipal.cosecharZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
+  // this.setearEstado("normal");
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay cofre.");
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
     //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
     //this.abrirYMostrarModal();
-    return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
+  } 
+};
+miJuego.personajePrincipal.comerZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+    //this.abrirModalFalloApertura();
+  } else if (!intento.exito) {
+    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+    // this.abrirYMostrarModal();
+  } else if(!intento.exito) {
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
   }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  if (this.mochila.length === 3) {
+  // console.log(this.mochila)
+  if (this.mochila.length === 16) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
+    return this.decirTerminar("¡Oh! Quedaron zanahorias sin cosechar.")
   }
-};
+}
 
 //Inicializamos todos los personajes
 
@@ -282,13 +354,16 @@ const bloquesCustomStandardDesados = [
   // [nombreBloque, categoriaDestino]
   // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
+  // ["move_classic_simple", "Movimientos"],
   // ["move_classic_param", "Movimientos"],
   // ["avanzar_param", "Movimientos"],
-  // ["girar_clasico", "Movimientos"],
+  ["avanzar", "Movimientos"],
+  ["girar_clasico", "Movimientos"],
   // ["girar_grados", "Movimientos"],
   // ["apuntar_hacia", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
+  // ["abrir_cofre", "Acciones"],
+  ["cosechar", "Acciones"],
+  ["comer", "Acciones"],
   // ["juntar_basura", "Acciones"],
   // ["lapiz", "Lápiz"],
   // ["if", "Condicionales"],
@@ -324,15 +399,17 @@ miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
+// miControlador.juego.agregarGlobalConCallback("moverDerecha");
+// miControlador.juego.agregarGlobalConCallback("moverAbajo");
+// miControlador.juego.agregarGlobalConCallback("moverArriba");
+// miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+// miControlador.juego.agregarGlobalConCallback("abrirCofre");
 // miControlador.juego.agregarGlobalConCallback("juntarBasura");
-// miControlador.juego.agregarGlobalConCallback("avanzar");
-// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-// miControlador.juego.agregarGlobalConCallback("girarDerecha");
+miControlador.juego.agregarGlobalConCallback("cosecharZanahoria");
+miControlador.juego.agregarGlobalConCallback("comerZanahoria");
+miControlador.juego.agregarGlobalConCallback("avanzar");
+miControlador.juego.agregarGlobalConCallback("girarIzquierda");
+miControlador.juego.agregarGlobalConCallback("girarDerecha");
 // miControlador.juego.agregarGlobalConCallback("girarGrados");
 // miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
 // miControlador.juego.agregarGlobalConCallback("bajarLapiz");
