@@ -244,7 +244,6 @@ miJuego.personajePrincipal.abrirCofre = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-   console.log(this.mochila.length)
   if (this.mochila.length === 4) {
     this.abrirYMostrarModal();
   } else {
