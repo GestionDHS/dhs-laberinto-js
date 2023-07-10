@@ -126,6 +126,7 @@ export class PersonajeBasico {
     acto && acto.premio && this.mochila.push(acto.premio);
     return acto;
   }
+  
   buscarParaRealizarAccion(nameObj, accion, params = false) {
     const objetoPaciente = this.casilleroActual.ocupantes.find(
       (obj) => obj.tipoPersonaje == nameObj
