@@ -15,18 +15,19 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [8, 9]; //fila, columna
+const dimensiones = [9, 10]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
 const arbol = {
@@ -91,7 +92,7 @@ const arrayDePersonajes = [
       normal: { name: "normal", imageUrl: "lupe" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 1,
+    posicionInicialY: 7,
     posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 3,
@@ -156,7 +157,7 @@ const arrayDePersonajes = [
       juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 4,
+    posicionInicialY: 5,
     posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 2,
@@ -188,8 +189,8 @@ const arrayDePersonajes = [
       juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 5,
-    posicionInicialX: 4,
+    posicionInicialY: 4,
+    posicionInicialX: 6,
     direccionInicial: 0,
     zIndex: 2,
     rotable: true,
@@ -205,7 +206,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "normal",
     posicionInicialY: 6,
-    posicionInicialX: 3,
+    posicionInicialX: 4,
     direccionInicial: 0,
     zIndex: 2,
     rotable: true,
@@ -221,7 +222,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "normal",
     posicionInicialY: 3,
-    posicionInicialX: 6,
+    posicionInicialX: 7,
     direccionInicial: 0,
     zIndex: 2,
     rotable: true,
