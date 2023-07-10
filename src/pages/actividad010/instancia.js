@@ -238,7 +238,7 @@ const arrayDePersonajes = [
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 1,
-    posicionInicialX: 6,
+    posicionInicialX: 7,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
