@@ -28,9 +28,9 @@ const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-const arbol = {
-  idUsarHTML: "arbol",
-  tipoPersonaje: "arbol",
+const cerco = {
+  idUsarHTML: "cerco",
+  tipoPersonaje: "cerco",
   estadosPosibles: {
     normal: { name: "normal", imageUrl: "cerco" },
   },
@@ -74,10 +74,10 @@ const datosModal = {
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", cerco, pasto);
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
-miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
+miJuego.generarCaminoYpared(dimensiones, tablero, cerco, pasto);
 
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
@@ -112,6 +112,14 @@ const arrayDePersonajes = [
           x.terminar();
         },
         mensaje: "¡OH NO! Choqué contra un árbol",
+      },
+      {
+        con: "cerco",
+        factorDeAvance: 0.2,
+        callback: (x) => {
+          x.terminar();
+        },
+        mensaje: "¡OH NO! Choqué contra un cerco",
       },
     ],
   },
