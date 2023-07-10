@@ -15,41 +15,51 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [7, 7]; //fila, columna
+const dimensiones = [4, 5]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 1, 0, 1, 0, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1],
+  [1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1],
+  
 ];
 
-const recuadroPintableDeseado = {
-  idUsarHTML: "recuadro-pintable",
-  tipoPersonaje: "recuadro-pintable",
+const arbol = {
+  idUsarHTML: "arbol",
+  tipoPersonaje: "arbol",
   estadosPosibles: {
-    normal: { name: "normal", imageUrl: null },
+    normal: { name: "normal", imageUrl: "arboles" },
   },
   estadoInicial: "normal",
   zIndex: 1,
   posicionInicialY: 0,
   posicionInicialX: 0,
   direccionInicial: 0,
-  colorFondoInicial: "lightgrey",
   rotable: false,
+  paddingImagen: "1px"
 };
-
-const recuadroPintableNoDeseado = { ...recuadroPintableDeseado };
-recuadroPintableNoDeseado.colorFondoInicial = "white";
+const pasto = {
+  idUsarHTML: "camino",
+  tipoPersonaje: "camino",
+  // pintable: true,
+  estadosPosibles: {
+    normal: { name: "normal", imageUrl: "pasto" },
+  },
+  estadoInicial: "normal",
+  zIndex: 1,
+  posicionInicialY: 0,
+  posicionInicialX: 0,
+  direccionInicial: 0,
+  rotable: false,
+  paddingImagen: "1px"
+};
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "lapizRojo",
-  texto: "Lograste realizar el dibujo",
+  imagen: "monedas",
+  texto: "Abriste el cofre!",
   oculto: true,
 };
 // const datosModalError = {
@@ -62,63 +72,101 @@ const datosModal = {
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(
-  dimensiones,
-  tablero,
-  2.5, //anchoDeseado
-  "white",
-  recuadroPintableDeseado,
-  recuadroPintableNoDeseado
-);
+miJuego.generarEscenario(dimensiones, tablero, 4, "#9ca64e", arbol, pasto);
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
-miJuego.generarCaminoYpared(
-  dimensiones,
-  tablero,
-  recuadroPintableDeseado,
-  recuadroPintableNoDeseado
-);
+miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
-    idUsarHTML: "lapiz",
-    tipoPersonaje: "lapiz",
-    clasePersonaje: "PersonajeDibujante",
+    idUsarHTML: "lupe",
+    tipoPersonaje: "lupe",
+    clasePersonaje: "PersonajeMovibleSimple",
     tieneTooltip: true,
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lapizRojo" },
+      normal: { name: "normal", imageUrl: "lupe" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 0,
+    posicionInicialY: 1,
+    posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
+    paddingImagen: "1px",
+    colisiones: [
+      {
+        con: "bandera",
+        factorDeAvance: 1,
+        callback: (x) => {
+          x.llegarALaBandera();
+        },
+        // mensaje: "¡We are the Champions!",
+      },
+      {
+        con: "arbol",
+        factorDeAvance: 0.2,
+        callback: (x) => {
+          x.terminar();
+        },
+        mensaje: "¡OH NO! Choqué contra un árbol",
+      },
+    ],
+  },
+  {
+    idUsarHTML: "cofre",
+    tipoPersonaje: "cofre",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "cofre" },
+      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+    },
+    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    posicionInicialY: 1,
+    posicionInicialX: 1,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
     colisiones: [],
+    paddingImagen: "1px"
   },
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[20]);
+// window.miJuego.listaDePersonajes;
+//Método para Abrir el Cofre
+miJuego.personajePrincipal.abrirCofre = function () {
+  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
-//OJO Al personaje que apuntamos
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay cofre.");
+    //this.abrirModalFalloApertura();
+  } else if (!intento.exito) {
+    //this.abrirYMostrarModal();
+    return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
+  } 
+  //como hay un cofre solo, validamos la mochila acá
+  if (this.mochila.length === 1) {
+    this.abrirYMostrarModal();
+  } else {
+    return this.decirTerminar("¡Oh! El cofre está sin abrir.")
+  }
+};
 
-//Seteo del Dibujo a realizar - Verificación
-//OJO - Las dimensiones del tamblero tienen que ser igual a las dimensiones de EJEMPLO_DIBUJO_DESEADO
-const miColor = "#FA3939";
-
-const dibujoDeseado = tablero.map((row) =>
-  row.map((cell) => (cell === 0 ? false : miColor))
-);
-
-miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
+// miJuego.personajePrincipal.llegarALaBandera = function () {
+//    console.log(this.mochila.length)
+//   if (this.mochila.length === 1) {
+//     this.abrirYMostrarModal();
+//   } else {
+//     return this.decirTerminar("¡Oh! El cofre está sin abrir.")
+//   }
+// }
 
 //Inicializamos todos los personajes
 
 //Generamos el WORKSPACE
 
-window.miControlador = new ControladorStandard(
+const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
   // 'dhs-blockly-div',
@@ -134,18 +182,22 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  {
-    name: "Lápiz",
-    categorystyle: "pencil",
-  },
   // {
-  //   name: "Acciones",
-  //   categorystyle: "variable_category",
+  //   name: "Lápiz",
+  //   categorystyle: "pencil",
   // },
   {
-    name: "Repeticiones",
-    categorystyle: "loop_category",
+    name: "Acciones",
+    categorystyle: "action",
   },
+  // {
+  //   name: "Condicionales",
+  //   categorystyle: "logic_category",
+  // },
+  // {
+  //   name: "Repeticiones",
+  //   categorystyle: "loop_category",
+  // },
 ];
 categoriasDeseadas.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
@@ -155,16 +207,17 @@ const bloquesCustomStandardDesados = [
   // [nombreBloque, categoriaDestino]
   // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
-  // ["move_classic_simple", "Movimientos"],
+  ["move_classic_simple", "Movimientos"],
   // ["move_classic_param", "Movimientos"],
-  ["avanzar_param", "Movimientos"],
-  ["girar_clasico", "Movimientos"],
+  // ["avanzar_param", "Movimientos"],
+  // ["girar_clasico", "Movimientos"],
   // ["girar_grados", "Movimientos"],
   // ["apuntar_hacia", "Movimientos"],
-  // ["abrir_cofre", "Acciones"],
+  ["abrir_cofre", "Acciones"],
   // ["juntar_basura", "Acciones"],
-  ["lapiz", "Lápiz"],
-  ["controls", "Repeticiones"],
+  // ["lapiz", "Lápiz"],
+  // ["if", "Condicionales"],
+  // ["controls", "Repeticiones"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {
@@ -184,6 +237,7 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   renderer: "renderDHS",
   zoom: {
     controls: true,
+    wheel: true,
     pinch: true,
   },
 });
@@ -195,20 +249,20 @@ miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-//miControlador.juego.agregarGlobalConCallback("moverDerecha");
-//miControlador.juego.agregarGlobalConCallback("moverAbajo");
-//miControlador.juego.agregarGlobalConCallback("moverArriba");
-//miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-// miControlador.juego.agregarGlobalConCallback("abrirCofre");
+miControlador.juego.agregarGlobalConCallback("moverDerecha");
+miControlador.juego.agregarGlobalConCallback("moverAbajo");
+miControlador.juego.agregarGlobalConCallback("moverArriba");
+miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+miControlador.juego.agregarGlobalConCallback("abrirCofre");
 // miControlador.juego.agregarGlobalConCallback("juntarBasura");
-miControlador.juego.agregarGlobalConCallback("avanzar");
-miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-miControlador.juego.agregarGlobalConCallback("girarDerecha");
-miControlador.juego.agregarGlobalConCallback("girarGrados");
-miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-miControlador.juego.agregarGlobalConCallback("subirLapiz");
-miControlador.juego.agregarGlobalConCallback("setearColor");
+// miControlador.juego.agregarGlobalConCallback("avanzar");
+// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
+// miControlador.juego.agregarGlobalConCallback("girarDerecha");
+// miControlador.juego.agregarGlobalConCallback("girarGrados");
+// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
+// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
+// miControlador.juego.agregarGlobalConCallback("subirLapiz");
+// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
