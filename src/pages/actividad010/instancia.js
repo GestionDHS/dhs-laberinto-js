@@ -242,7 +242,6 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
-    paddingImagen: "0.4em",
     colisiones: [],
     paddingImagen: "1px",
   },
