@@ -58,7 +58,7 @@ const pasto = {
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
+  imagen: "brujula",
   texto: "Encontramos una brújula antigua!",
   oculto: true,
 };

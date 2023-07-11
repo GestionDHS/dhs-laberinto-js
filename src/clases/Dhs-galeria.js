@@ -24,6 +24,7 @@ import arbolesSendero from "../img/arbolesSendero.png"
 import calle from "../img/calle.png"
 import pastoSendero from "../img/pastoSendero.png"
 import ciclista from "../img/ciclista.png"
+import brujula from "../img/brujula.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -247,7 +248,7 @@ export class DHS_Gallery {
     },
     brujula: {
       themes: ["lupe"],
-      url: "../lupe-commons/img/brujula.png",
+      url: brujula,
       nombre: "Brújula",
       parrafoLicencia:
         '<p>Licencia: <a href="https://www.flaticon.es/iconos-gratis/brujula" title="brújula iconos">Brújula iconos creados por Freepik - Flaticon</a></p>',
