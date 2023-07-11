@@ -1,4 +1,4 @@
-//actividad01 de Programando Robots
+//actividad02 de Programando Robots
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
