@@ -25,16 +25,16 @@ const tablero = [
   [1, 0, 1, 0, 1, 0, 1],
   [0, 0, 0, 0, 0, 0, 0],
   [1, 0, 1, 0, 1, 1, 1],
-  [1, 0, 1, 1, 0, 0, 0],
+  [1, 0, 0, 0, 0, 0, 0],
   [1, 0, 0, 0, 1, 1, 1],  
 ];
 
-const calle = {
-  idUsarHTML: "calle",
-  tipoPersonaje: "calle",
+const agua = {
+  idUsarHTML: "agua",
+  tipoPersonaje: "agua",
   // pintable: true,
   estadosPosibles: {
-    normal: { name: "normal", imageUrl: "calle" },
+    normal: { name: "normal", imageUrl: "agua" },
   },
   estadoInicial: "normal",
   zIndex: 1,
@@ -45,28 +45,12 @@ const calle = {
   paddingImagen: "1px"
 };
 
-const escuelaSendero = {
-  idUsarHTML: "escuelaSendero",
-  tipoPersonaje: "escuelaSendero",
+const juncoPastoDelta = {
+  idUsarHTML: "juncoPastoDelta",
+  tipoPersonaje: "juncoPastoDelta",
   // pintable: true,
   estadosPosibles: {
-    normal: { name: "normal", imageUrl: "escuelaSendero" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px"
-};
-
-const edificiosSendero = {
-  idUsarHTML: "edificiosSendero",
-  tipoPersonaje: "edificiosSendero",
-  // pintable: true,
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "edificiosSendero" },
+    normal: { name: "normal", imageUrl: "juncoPastoDelta" },
   },
   estadoInicial: "normal",
   zIndex: 1,
@@ -79,8 +63,8 @@ const edificiosSendero = {
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "ciclista",
-  texto: "¡Pedro llegó a la escuela a tiempo para su clase de inglés!",
+  imagen: "lancha",
+  texto: "¡La lancha recogió todo el plastico del río!",
   oculto: true,
 };
 // const datosModalError = {
@@ -93,532 +77,106 @@ const datosModal = {
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#a0a0a0", edificiosSendero, calle);
+miJuego.generarEscenario(dimensiones, tablero, 2.7, "#007a4c", juncoPastoDelta, agua);
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
-miJuego.generarCaminoYpared(dimensiones, tablero, edificiosSendero, calle);
+miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
 //tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
-    idUsarHTML: "ciclista",
-    tipoPersonaje: "ciclista",
-    clasePersonaje: "PersonajeMovibleSimple",
+    idUsarHTML: "lancha",
+    tipoPersonaje: "lancha",
+    clasePersonaje: "PersonajeMovibleGrados",
     tieneTooltip: true,
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "ciclista" },
+      normal: { name: "normal", imageUrl: "lancha" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 7,
-    posicionInicialX: 1,
-    direccionInicial: 0,
+    posicionInicialY: 0,
+    posicionInicialX: 5,
+    direccionInicial: 90,
     zIndex: 3,
     rotable: true,
     paddingImagen: "1px",
     colisiones: [
       {
-        con: "pastoSendero",
-        factorDeAvance: 1,
-        // callback: (x) => {
-        //   x.pasearPor();
-        // },
-        mensaje: "¡Qué lindo ir por el parque!",
-      },
-      {
-        con: "escuelaSendero",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.llegarEscuela();
-        },
-        mensaje: "¡Llegué justo para mi clase de inglés!",
-      },
-      {
-        con: "arbolesSendero",
+        con: "juncoPastoDelta",
         factorDeAvance: 0.4,
         callback: (x) => {
           x.terminar();
         },
-        mensaje: "¡OH NO! Choqué contra un árbol.",
+        mensaje: "¡OH NO! Choqué contra los juncos.",
       },
       {
-        con: "edificiosSendero",
+        con: "plantaReciclajePastoDelta",
         factorDeAvance: 0.4,
         callback: (x) => {
-          x.terminar();
+          x.llegarPlanta();
         },
-        mensaje: "¡OH NO! Choqué contra un edificio.",
-      },
-      {
-        con: "barrera",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra una barrera.",
-      },
-      {
-        con: "autoEmbotelladoDer",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un auto.",
-      },
-      {
-        con: "autoEmbotelladoIzq",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un auto.",
-      },
-      {
-        con: "casaSendero",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra mi casa.",
+        // mensaje: "¡OH NO! Choqué contra los juncos.",
       },
     ],
   },
   {
-    idUsarHTML: "barrera",
-    tipoPersonaje: "barrera",
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
     // pintable: true,
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "barrera" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 2,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "casaSendero",
-    tipoPersonaje: "casaSendero",
-    // pintable: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "casaSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 8,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "pastoSendero",
-    tipoPersonaje: "pastoSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoSendero" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 7,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoSendero",
-    tipoPersonaje: "pastoSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoSendero" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 7,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoSendero",
-    tipoPersonaje: "pastoSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoSendero" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 7,
-    posicionInicialX: 7,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoSendero",
-    tipoPersonaje: "pastoSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoSendero" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 6,
-    posicionInicialX: 7,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoSendero",
-    tipoPersonaje: "pastoSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoSendero" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 5,
-    posicionInicialX: 7,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 8,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  }, 
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 8,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 8,
-    posicionInicialX: 7,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 8,
-    posicionInicialX: 8,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 7,
-    posicionInicialX: 8,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 6,
-    posicionInicialX: 8,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 8,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 6,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 6,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "arbolesSendero",
-    tipoPersonaje: "arbolesSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arbolesSendero" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoIzq",
-    tipoPersonaje: "autoEmbotelladoIzq",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoIzq" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 0,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoIzq",
-    tipoPersonaje: "autoEmbotelladoIzq",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoIzq" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 2,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoIzq",
-    tipoPersonaje: "autoEmbotelladoIzq",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoIzq" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoIzq",
-    tipoPersonaje: "autoEmbotelladoIzq",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoIzq" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoIzq",
-    tipoPersonaje: "autoEmbotelladoIzq",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoIzq" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoIzq",
-    tipoPersonaje: "autoEmbotelladoIzq",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoIzq" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 8,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoDer",
-    tipoPersonaje: "autoEmbotelladoDer",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoDer" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 4,
-    posicionInicialX: 8,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoDer",
-    tipoPersonaje: "autoEmbotelladoDer",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoDer" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 4,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoDer",
-    tipoPersonaje: "autoEmbotelladoDer",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoDer" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 4,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoDer",
-    tipoPersonaje: "autoEmbotelladoDer",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoDer" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 4,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoDer",
-    tipoPersonaje: "autoEmbotelladoDer",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoDer" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 4,
-    posicionInicialX: 2,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoEmbotelladoDer",
-    tipoPersonaje: "autoEmbotelladoDer",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoEmbotelladoDer" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 4,
-    posicionInicialX: 0,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "escuelaSendero",
-    tipoPersonaje: "escuelaSendero",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "escuelaSendero" },
+      normal: { name: "normal", imageUrl: "plastico" },
+      juntado: { name: "juntado", imageUrl: "agua" }
     },
     estadoInicial: "normal",
     zIndex: 1,
     posicionInicialY: 0,
-    posicionInicialX: 3,
+    posicionInicialX: 1,
+    direccionInicial: 0,
+    rotable: false,
+    paddingImagen: "1px"
+  },
+  {
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
+    // pintable: true,
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "plastico" },
+      juntado: { name: "juntado", imageUrl: "agua" }
+    },
+    estadoInicial: "normal",
+    zIndex: 1,
+    posicionInicialY: 3,
+    posicionInicialX: 1,
+    direccionInicial: 0,
+    rotable: false,
+    paddingImagen: "1px"
+  },
+  {
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
+    // pintable: true,
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "plastico" },
+      juntado: { name: "juntado", imageUrl: "agua" }
+    },
+    estadoInicial: "normal",
+    zIndex: 1,
+    posicionInicialY: 5,
+    posicionInicialX: 6,
+    direccionInicial: 0,
+    rotable: false,
+    paddingImagen: "1px"
+  },
+  {
+    idUsarHTML: "plantaReciclajePastoDelta",
+    tipoPersonaje: "plantaReciclajePastoDelta",
+    // pintable: true,
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "plantaReciclajePastoDelta" },
+    },
+    estadoInicial: "normal",
+    zIndex: 1,
+    posicionInicialY: 6,
+    posicionInicialX: 1,
     direccionInicial: 0,
     rotable: false,
     paddingImagen: "1px"
@@ -626,13 +184,27 @@ const arrayDePersonajes = [
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[81]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 // window.miJuego.listaDePersonajes;
 
-miJuego.personajePrincipal.llegarEscuela = function () {
+miJuego.personajePrincipal.llegarPlanta = function () {
   //  console.log(this.mochila.length)
+  if (this.mochila.length === 3) {
     this.abrirYMostrarModal();
+  } else if(!this.intento) {
+    return this.decirTerminar("¡Oh! Quedó basura por levantar.")
+  }
 }
+
+miJuego.personajePrincipal.juntarBasura = function () {
+  const intento = this.buscarParaRealizarAccion("plastico", "serJuntado");
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay plástico.");
+    //this.abrirModalFalloApertura();
+  } else if(!intento.exito) {
+    return this.decirTerminar("El plástico ya fue levantado.");
+  }
+};
 
 //Inicializamos todos los personajes
 
@@ -658,10 +230,10 @@ const categoriasDeseadas = [
   //   name: "Lápiz",
   //   categorystyle: "pencil",
   // },
-  // {
-  //   name: "Acciones",
-  //   categorystyle: "action",
-  // },
+  {
+    name: "Acciones",
+    categorystyle: "action",
+  },
   // {
   //   name: "Condicionales",
   //   categorystyle: "logic_category",
@@ -680,13 +252,13 @@ const bloquesCustomStandardDesados = [
   // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
   // ["move_classic_simple", "Movimientos"],
-  ["move_classic_param", "Movimientos"],
-  // ["avanzar_param", "Movimientos"],
+  // ["move_classic_param", "Movimientos"],
+  ["avanzar_param", "Movimientos"],
   // ["girar_clasico", "Movimientos"],
   // ["girar_grados", "Movimientos"],
-  // ["apuntar_hacia", "Movimientos"],
+  ["apuntar_hacia", "Movimientos"],
   // ["abrir_cofre", "Acciones"],
-  // ["juntar_basura", "Acciones"],
+  ["juntar_basura", "Acciones"],
   // ["lapiz", "Lápiz"],
   // ["if", "Condicionales"],
   // ["controls", "Repeticiones"],
@@ -721,17 +293,17 @@ miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+// miControlador.juego.agregarGlobalConCallback("moverDerecha");
+// miControlador.juego.agregarGlobalConCallback("moverAbajo");
+// miControlador.juego.agregarGlobalConCallback("moverArriba");
+// miControlador.juego.agregarGlobalConCallback("moverIzquierda");
 // miControlador.juego.agregarGlobalConCallback("abrirCofre");
-// miControlador.juego.agregarGlobalConCallback("juntarBasura");
-// miControlador.juego.agregarGlobalConCallback("avanzar");
+miControlador.juego.agregarGlobalConCallback("juntarBasura");
+miControlador.juego.agregarGlobalConCallback("avanzar");
 // miControlador.juego.agregarGlobalConCallback("girarIzquierda");
 // miControlador.juego.agregarGlobalConCallback("girarDerecha");
 // miControlador.juego.agregarGlobalConCallback("girarGrados");
-// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
+miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
 // miControlador.juego.agregarGlobalConCallback("bajarLapiz");
 // miControlador.juego.agregarGlobalConCallback("subirLapiz");
 // miControlador.juego.agregarGlobalConCallback("setearColor");
