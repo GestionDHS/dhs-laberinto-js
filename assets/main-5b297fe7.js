@@ -1,4 +1,4 @@
-import"./style-adc72463.js";const s="/dhs-laberinto-js/assets/logodhs-a2154629.png";document.querySelector("#app").innerHTML=`
+import"./style-a84a8ce8.js";const s="/dhs-laberinto-js/assets/logodhs-a2154629.png";document.querySelector("#app").innerHTML=`
   <div>
   <a href="https://www.digitalhouse.com/ar/productos/escuelas">
   <h1>Actividades Especiales</h1>
