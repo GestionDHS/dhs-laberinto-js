@@ -1,3 +1,4 @@
+//actividad05 de Programando Robots
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
@@ -165,15 +166,14 @@ miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[64]);
 // window.miJuego.listaDePersonajes;
 
-
 miJuego.personajePrincipal.abrirCofre = function () {
-    const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
-    if (!intento.objetoEncontrado) {
-      return this.decirTerminar("Oh! Aquí no hay cofre.");
-      //this.abrirModalFalloApertura();
-    } else {
-      return this.abrirYMostrarModal();
-    }
+  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("Oh! Aquí no hay cofre.");
+    //this.abrirModalFalloApertura();
+  } else {
+    return this.abrirYMostrarModal();
+  }
 };
 
 //Inicializamos todos los personajes
@@ -208,10 +208,10 @@ const categoriasDeseadas = [
   //   name: "Condicionales",
   //   categorystyle: "logic_category",
   // },
- //{
- //  name: "Repeticiones",
- //  categorystyle: "loop_category",
- //},
+  //{
+  //  name: "Repeticiones",
+  //  categorystyle: "loop_category",
+  //},
 ];
 categoriasDeseadas.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
@@ -228,7 +228,7 @@ const bloquesCustomStandardDesados = [
   // ["girar_grados", "Movimientos"],
   // ["apuntar_hacia", "Movimientos"],
   ["abrir_cofre", "Acciones"],
- // ["juntar_basura", "Acciones"],
+  // ["juntar_basura", "Acciones"],
   // ["lapiz", "Lápiz"],
   // ["if", "Condicionales"],
   //  ["controls", "Repeticiones"],

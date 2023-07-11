@@ -1,3 +1,4 @@
+//actividad04 de Programando Robots
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
@@ -59,7 +60,7 @@ const pasto = {
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "bandera",
-  texto: "¡Llegaste a la bandera!.",
+  texto: "¡Llegaste a la bandera!",
   oculto: true,
 };
 // const datosModalError = {
@@ -72,7 +73,7 @@ const datosModal = {
 // QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 3.5, "#9ca64e", arbol, pasto);
 miJuego.agregarModal(datosModal);
 //miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
@@ -142,7 +143,23 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[25]);
 miJuego.personajePrincipal.llegarALaBandera = function () {
       this.abrirYMostrarModal();
 };
+miJuego.personajePrincipal.abrirCofre = function () {
+  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay cofre.");
+    //this.abrirModalFalloApertura();
+  } else if (!intento.exito) {
+    //this.abrirYMostrarModal();
+    return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
+  }
+  //como hay un cofre solo, validamos la muchila acá
+  if (this.mochila.length === 1) {
+    this.abrirYMostrarModal();
+  } else {
+    return this.decirTerminar("¡Oh! El cofre está sin abrir.");
+  }
+};
 //Inicializamos todos los personajes
 
 //Generamos el WORKSPACE
@@ -234,7 +251,7 @@ miControlador.juego.agregarGlobalConCallback("moverDerecha");
 miControlador.juego.agregarGlobalConCallback("moverAbajo");
 miControlador.juego.agregarGlobalConCallback("moverArriba");
 miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-//miControlador.juego.agregarGlobalConCallback("abrirCofre");
+miControlador.juego.agregarGlobalConCallback("abrirCofre");
 
 // miControlador.juego.agregarGlobalConCallback("avanzar");
 // miControlador.juego.agregarGlobalConCallback("girarIzquierda");
