@@ -60,7 +60,7 @@ const pasto = {
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "monedas",
-  texto: "Juntaste todas las monedas del cofre!",
+  texto: "Encontramos 180 monedas de oro!",
   oculto: true,
 };
 // const datosModalError = {
