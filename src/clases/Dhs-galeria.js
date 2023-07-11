@@ -14,7 +14,16 @@ import zanahoriaEnterrada from "../img/zanahoriaEnterrada.png"
 import zanahoriaCosechada from "../img/zanahoriaCosechada.png"
 import conejoDeArriba from "../img/conejoDeArriba.png"
 import madriguera from "../img/madriguera.png"
-
+import autoEmbotelladoIzq from "../img/autoEmbotelladoIzq.png"
+import autoEmbotelladoDer from "../img/autoEmbotelladoDer.png"
+import barrera from "../img/barrera.png"
+import casaSendero from "../img/casaSendero.png"
+import escuelaSendero from "../img/escuelaSendero.png"
+import edificiosSendero from "../img/edificiosSendero.png"
+import arbolesSendero from "../img/arbolesSendero.png"
+import calle from "../img/calle.png"
+import pastoSendero from "../img/pastoSendero.png"
+import ciclista from "../img/ciclista.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -40,6 +49,76 @@ export class DHS_Gallery {
   }
   
   imageLib = {
+    ciclista: {
+      themes: [""],
+      url: ciclista,
+      nombre: "ciclista",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    pastoSendero: {
+      themes: [""],
+      url: pastoSendero,
+      nombre: "pastoSendero",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    calle: {
+      themes: [""],
+      url: calle,
+      nombre: "calle",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    escuelaSendero: {
+      themes: [""],
+      url: escuelaSendero,
+      nombre: "escuelaSendero",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    edificiosSendero: {
+      themes: [""],
+      url: edificiosSendero,
+      nombre: "edificiosSendero",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/building" title="building icons">Building icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    casaSendero: {
+      themes: [""],
+      url: casaSendero,
+      nombre: "casaSendero",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/home" title="home icons">Home icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    barrera: {
+      themes: [""],
+      url: barrera,
+      nombre: "barrera",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/barrier" title="barrier icons">Barrier icons created by nawicon - Flaticon</a></p>',
+      showLicense: true,
+    },
+    autoEmbotelladoIzq: {
+      themes: [""],
+      url: autoEmbotelladoIzq,
+      nombre: "autoEmbotelladoIzq",
+      parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+      showLicense: true,
+    },
+    autoEmbotelladoDer: {
+      themes: [""],
+      url: autoEmbotelladoDer,
+      nombre: "autoEmbotelladoDer",
+      parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+      showLicense: true,
+    },
+    arbolesSendero: {
+      themes: [""],
+      url: arbolesSendero,
+      nombre: "arbolesSendero",
+      parrafoLicencia: '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
     conejoDeArriba: {
       themes: [""],
       url: conejoDeArriba,
@@ -188,93 +267,6 @@ export class DHS_Gallery {
       nombre: "Perlas",
       parrafoLicencia:
         '<p>Licencia: <a href="https://www.flaticon.es/iconos-gratis/perla" title="perla iconos">Perla iconos creados por Freepik - Flaticon</a></p>',
-      showLicense: true,
-    },
-    // for theme city
-    arbolesSendero: {
-      themes: ["city"],
-      url: "../city-commons/img/arboles-sendero.png",
-      nombre: "Árboles",
-      parrafoLicencia:
-        '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
-      showLicense: true,
-    },
-    edificios: {
-      themes: ["city"],
-      url: "../city-commons/img/edificios-pasto.png",
-      nombre: "Edificios",
-      parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/building" title="building icons">Building icons created by Freepik - Flaticon</a></p>',
-      showLicense: true,
-    },
-    pastoSendero: {
-      themes: ["city"],
-      url: "../city-commons/img/pasto-sendero.png",
-      nombre: "Sendero en el Pasto",
-      parrafoLicencia: "<p>Digital House</p>",
-    },
-    barrera: {
-      themes: ["city"],
-      url: "../city-commons/img/barrera.png",
-      nombre: "Barrera",
-      parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/barrier" title="barrier icons">Barrier icons created by nawicon - Flaticon</a></p>',
-      showLicense: true,
-    },
-    escuela: {
-      themes: ["city"],
-      url: "../city-commons/img/escuela-pasto.png",
-      nombre: "Escuela",
-      parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
-      showLicense: true,
-    },
-    autos03: {
-      themes: ["city"],
-      url: "../city-commons/img/autos-03.png",
-      nombre: "Autos",
-      parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/fleet" title="fleet icons">Fleet icons created by Freepik - Flaticon</a></p>',
-      showLicense: true,
-    },
-    ciclista: {
-      themes: ["city"],
-      url: "../city-commons/img/ciclista.png",
-      nombre: "Ciclista",
-      parrafoLicencia:
-        '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/monkik" title="monkik"> monkik </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: true,
-    },
-    autoEmbotellado: {
-      themes: ["city"],
-      url: "../city-commons/img/auto-embotellado.png",
-      nombre: "Auto",
-      parrafoLicencia:
-        '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: true,
-    },
-    autoEmbotelladoRight: {
-      themes: ["city"],
-      url: "../city-commons/img/auto-embotellado-right.png",
-      nombre: "Auto",
-      parrafoLicencia:
-        '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
-      showLicense: false,
-    },
-    autoArriba: {
-      themes: ["city"],
-      url: "../city-commons/img/auto-arriba.png",
-      nombre: "Auto",
-      parrafoLicencia:
-        '<p> Icons made by <a href="https://www.flaticon.com/authors/mynamepong" title="mynamepong"> mynamepong </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>',
-      showLicense: false,
-    },
-    casaSendero: {
-      themes: ["city"],
-      url: "../city-commons/img/casa-sendero.png",
-      nombre: "Casa",
-      parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/home" title="home icons">Home icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     void: {
