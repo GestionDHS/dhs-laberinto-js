@@ -128,7 +128,7 @@ const arrayDePersonajes = [
       },
       {
         con: "escuelaSendero",
-        factorDeAvance: 0.2,
+        factorDeAvance: 0.4,
         callback: (x) => {
           x.llegarEscuela();
         },

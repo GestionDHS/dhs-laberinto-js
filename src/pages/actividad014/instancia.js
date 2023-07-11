@@ -16,15 +16,14 @@ window.miJuego = new Juego(velocidadInicial);
 //Blockly
 
 //CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
-const dimensiones = [5, 6]; //fila, columna
+const dimensiones = [4, 5]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 0, 1, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1],
+  [1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1],
 ];
 
 const arbol = {
@@ -90,20 +89,20 @@ const arrayDePersonajes = [
     },
     estadoInicial: "normal",
     posicionInicialY: 1,
-    posicionInicialX: 1,
+    posicionInicialX: 3,
     direccionInicial: 0,
     zIndex: 3,
     rotable: true,
     paddingImagen: "1px",
     colisiones: [
-      // {
-      //   con: "bandera",
-      //   factorDeAvance: 1,
-      //   callback: (x) => {
-      //     x.llegarALaBandera();
-      //   },
-      //   // mensaje: "¡We are the Champions!",
-      // },
+      {
+        con: "bandera",
+        factorDeAvance: 1,
+        callback: (x) => {
+          x.llegarALaBandera();
+        },
+        // mensaje: "¡We are the Champions!",
+      },
       {
         con: "arbol",
         factorDeAvance: 0.2,
@@ -111,14 +110,6 @@ const arrayDePersonajes = [
           x.terminar();
         },
         mensaje: "¡OH NO! Choqué contra un árbol",
-      },
-      {
-        con: "lodo",
-        factorDeAvance: 0.7,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Me atasqué en el lodo.",
       },
     ],
   },
@@ -130,32 +121,18 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 4,
+    posicionInicialY: 1,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 2,
     rotable: false,
     colisiones: [],
     paddingImagen: "1px",
   },
-  {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-  },
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[20]);
 // window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
