@@ -28,6 +28,7 @@ export default defineConfig({
         act11: resolve(root, "pages", "actividad011", "act.html"),
         act12: resolve(root, "pages", "actividad012", "act.html"),
         act13: resolve(root, "pages", "actividad013", "act.html"),
+        act18: resolve(root, "pages", "actividad018", "act.html"),
       },
     },
   },
