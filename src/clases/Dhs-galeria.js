@@ -34,6 +34,7 @@ import lancha from "../img/lancha.png"
 import plantaReciclajePastoDelta from "../img/plantaReciclajePastoDelta.png"
 import plastico from "../img/plasticoAgua.png"
 import familiaPato from "../img/familiaPato.png"
+import rioParana from "../img/rioParana.png"
 
 
 export class DHS_Gallery {
@@ -60,6 +61,13 @@ export class DHS_Gallery {
   }
   
   imageLib = {
+    rioParana: {
+      themes: [""],
+      url: rioParana,
+      nombre: "rioParana",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
     ciclista: {
       themes: [""],
       url: ciclista,
