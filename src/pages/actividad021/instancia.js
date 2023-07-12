@@ -64,7 +64,7 @@ const juncoPastoDelta = {
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "ecobrick",
-  texto: "¡La lancha recogió todo el plastico del río!",
+  texto: "En esta planta recicladora transformamos los residuos plásticos en LADRILLOS ECOLÓGICOS.",
   oculto: true,
 };
 // const datosModalError = {
