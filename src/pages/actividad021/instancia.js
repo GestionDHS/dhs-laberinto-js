@@ -63,7 +63,7 @@ const juncoPastoDelta = {
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "lancha",
+  imagen: "ecobrick",
   texto: "¡La lancha recogió todo el plastico del río!",
   oculto: true,
 };
