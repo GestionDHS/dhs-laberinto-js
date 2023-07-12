@@ -35,6 +35,8 @@ import plantaReciclajePastoDelta from "../img/plantaReciclajePastoDelta.png"
 import plastico from "../img/plasticoAgua.png"
 import familiaPato from "../img/familiaPato.png"
 import rioParana from "../img/rioParana.png"
+import autoArriba from "../img/autoArriba.png"
+import carpinchoReal from "../img/carpinchoReal.png"
 
 
 export class DHS_Gallery {
@@ -128,6 +130,13 @@ export class DHS_Gallery {
       themes: [""],
       url: autoEmbotelladoDer,
       nombre: "autoEmbotelladoDer",
+      parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+      showLicense: true,
+    },
+    autoArriba: {
+      themes: [""],
+      url: autoArriba,
+      nombre: "autoArriba",
       parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
       showLicense: true,
     },
@@ -343,6 +352,13 @@ export class DHS_Gallery {
       themes: ["delta"],
       url: carpincho,
       nombre: "carpincho",
+      parrafoLicencia: "<p>Digital House</p>",
+      showLicense: false,
+    },
+    carpinchoReal: {
+      themes: ["delta"],
+      url: carpinchoReal,
+      nombre: "carpinchoReal",
       parrafoLicencia: "<p>Digital House</p>",
       showLicense: false,
     },
