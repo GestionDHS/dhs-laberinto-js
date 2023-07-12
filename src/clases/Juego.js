@@ -101,7 +101,6 @@ export class Juego {
 
   reiniciar() {
     this.puedeDebeContinuar = true;
-
     this.listaDePersonajes.forEach((personaje) => {
       personaje.inicializar();
     });
