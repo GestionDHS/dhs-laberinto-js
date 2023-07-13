@@ -32,27 +32,38 @@ export class PersonajeBasico {
     );
     //this.inicializar();
   }
-
-  inicializar() {
+  
+  reinicioComun(){
     this.estaVivo = true;
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
     this.setearEstado(this.estadoInicial);
     this.pintarse(this.colorFondoInicial);
-    this.actualizarCasillero(
-      this.posicionInicialY,
-      this.posicionInicialX,
-      true
-    );
-    this.mochila=[]
     this.direccion = this.direccionInicial;
     this.controladorDOM.rotarPersonaje(this.direccion);
     this.controladorDOM.posicionarPersonajeEnHtml(
       this.posicionInicialY,
       this.posicionInicialX
-    );
-    this.setearVelocidad(this.juego.duracionIntervalos);
+      );
+      this.setearVelocidad(this.juego.duracionIntervalos);
   }
+  
+  inicializar() {
+      this.reinicioComun()
+      this.actualizarCasillero(
+      this.posicionInicialY,
+      this.posicionInicialX,
+      true
+      );
+  }
+
+  reiniciar(){
+        this.reinicioComun()
+        this.mochila=[]
+        this.posicionActualX=this.posicionInicialX
+        this.posicionActualY=this.posicionInicialY
+    }
+  
 
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;

@@ -112,5 +112,8 @@ export class Casillero {
     return objEncontrado;
   }
 
+  vaciarCasillas(){
+    this.ocupantes=[]
+  }
  
 }
