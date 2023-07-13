@@ -1,24 +1,15 @@
-//actividad06 de Programando Robots
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomToolbox";
-// import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
-// PRIMERO: instanciar el juego
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
-
-// SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-//Blockly
-
-//CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [7, 7]; //fila, columna
 
-//tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [1, 0, 1, 0, 1, 0, 1],
   [0, 0, 1, 0, 0, 0, 0],
@@ -32,7 +23,6 @@ const tablero = [
 const agua = {
   idUsarHTML: "agua",
   tipoPersonaje: "agua",
-  // pintable: true,
   estadosPosibles: {
     normal: { name: "normal", imageUrl: "agua" },
   },
@@ -48,7 +38,6 @@ const agua = {
 const juncoPastoDelta = {
   idUsarHTML: "juncoPastoDelta",
   tipoPersonaje: "juncoPastoDelta",
-  // pintable: true,
   estadosPosibles: {
     normal: { name: "normal", imageUrl: "juncoPastoDelta" },
   },
@@ -67,22 +56,11 @@ const datosModal = {
   texto: "En esta planta recicladora transformamos los residuos plásticos en LADRILLOS ECOLÓGICOS.",
   oculto: true,
 };
-// const datosModalError = {
-//   titulo: "¡Ohh Nooww!",
-//   imagen: "monedas", //sacar las monedas - simbolo de prohibido
-//   texto: "Oh! Aquí no hay cofre.",
-//   oculto: true,
-//   color: "red",
-// };
-// QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
-// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
+
 miJuego.generarEscenario(dimensiones, tablero, 2.7, "#007a4c", juncoPastoDelta, agua);
 miJuego.agregarModal(datosModal);
-//miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
-//tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
     idUsarHTML: "lancha",
@@ -114,14 +92,12 @@ const arrayDePersonajes = [
         callback: (x) => {
           x.llegarPlanta();
         },
-        // mensaje: "¡OH NO! Choqué contra los juncos.",
       },
     ],
   },
   {
     idUsarHTML: "plastico",
     tipoPersonaje: "plastico",
-    // pintable: true,
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "plastico" },
       juntado: { name: "juntado", imageUrl: "agua" }
@@ -137,7 +113,6 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "plastico",
     tipoPersonaje: "plastico",
-    // pintable: true,
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "plastico" },
       juntado: { name: "juntado", imageUrl: "agua" }
@@ -153,7 +128,6 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "plastico",
     tipoPersonaje: "plastico",
-    // pintable: true,
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "plastico" },
       juntado: { name: "juntado", imageUrl: "agua" }
@@ -169,7 +143,6 @@ const arrayDePersonajes = [
   {
     idUsarHTML: "plantaReciclajePastoDelta",
     tipoPersonaje: "plantaReciclajePastoDelta",
-    // pintable: true,
     estadosPosibles: {
       normal: { name: "normal", imageUrl: "plantaReciclajePastoDelta" },
     },
@@ -185,10 +158,8 @@ const arrayDePersonajes = [
 
 miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
-// window.miJuego.listaDePersonajes;
 
 miJuego.personajePrincipal.llegarPlanta = function () {
-  //  console.log(this.mochila.length)
   if (this.mochila.length === 3) {
     this.abrirYMostrarModal();
   } else if(!this.intento) {
@@ -200,15 +171,12 @@ miJuego.personajePrincipal.juntarBasura = function () {
   const intento = this.buscarParaRealizarAccion("plastico", "serJuntado");
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay plástico.");
-    //this.abrirModalFalloApertura();
   } else if(!intento.exito) {
     return this.decirTerminar("El plástico ya fue levantado.");
   }
 };
 
-//Inicializamos todos los personajes
 
-//Generamos el WORKSPACE
 
 const miControlador = new ControladorStandard(
   miJuego,
