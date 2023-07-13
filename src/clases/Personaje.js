@@ -134,10 +134,12 @@ export class PersonajeBasico {
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
       : false;
+      console.log(acto.estado)
     return {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
       premio: acto && acto.exito ? acto.premio : null,
+      estado: acto.estado
     };
   }
 
@@ -153,9 +155,11 @@ export class PersonajeBasico {
   serJuntado() {
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
-      return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 1 } };
+      console.log("entró a normal - abierto")
+      return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 1 }, estado:"juntado"};
     } else {
-      return { exito: false, premio: null };
+      console.log("entró al else de normal - abierto")
+      return { exito: false, premio: null, estado:null };
     }
   }
   pintarse(color) {
