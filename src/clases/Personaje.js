@@ -139,11 +139,7 @@ export class PersonajeBasico {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
       premio: acto && acto.exito ? acto.premio : null,
-<<<<<<< HEAD
-      estado: acto.estado
-=======
       estado: acto && acto.estado
->>>>>>> e256892c36a5eb5d6be8a57e8bc6fc0f6c17f222
     };
   }
 
