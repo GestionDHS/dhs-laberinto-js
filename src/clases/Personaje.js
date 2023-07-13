@@ -32,8 +32,8 @@ export class PersonajeBasico {
     );
     //this.inicializar();
   }
-  
-  reinicioComun(){
+
+  reinicioComun() {
     this.estaVivo = true;
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
@@ -44,26 +44,25 @@ export class PersonajeBasico {
     this.controladorDOM.posicionarPersonajeEnHtml(
       this.posicionInicialY,
       this.posicionInicialX
-      );
-      this.setearVelocidad(this.juego.duracionIntervalos);
+    );
+    this.setearVelocidad(this.juego.duracionIntervalos);
   }
-  
+
   inicializar() {
-      this.reinicioComun()
-      this.actualizarCasillero(
+    this.reinicioComun();
+    this.actualizarCasillero(
       this.posicionInicialY,
       this.posicionInicialX,
       true
-      );
+    );
   }
 
-  reiniciar(){
-        this.reinicioComun()
-        this.mochila=[]
-        this.posicionActualX=this.posicionInicialX
-        this.posicionActualY=this.posicionInicialY
-    }
-  
+  reiniciar() {
+    this.reinicioComun();
+    this.mochila = [];
+    this.posicionActualX = this.posicionInicialX;
+    this.posicionActualY = this.posicionInicialY;
+  }
 
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
@@ -137,7 +136,7 @@ export class PersonajeBasico {
     acto && acto.premio && this.mochila.push(acto.premio);
     return acto;
   }
-  
+
   buscarParaRealizarAccion(nameObj, accion, params = false) {
     const objetoPaciente = this.casilleroActual.ocupantes.find(
       (obj) => obj.tipoPersonaje == nameObj
@@ -149,24 +148,31 @@ export class PersonajeBasico {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
       premio: acto && acto.exito ? acto.premio : null,
-      estado: acto && acto.estado
+      estado: acto && acto.estado,
     };
   }
-
+  //para abrir cofre y cosechar zanahorias
   abrirse() {
     if (this.estadoActual === "cerrado") {
       this.setearEstado("abierto");
-      return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 20 } };
+      return {
+        exito: true,
+        premio: { tipo: this.tipoPersonaje, cantidad: 20 },
+      };
     } else {
       return { exito: false, premio: null };
     }
   }
-  //para juntar la basura
+  //para juntar la basura y también para comer
   serJuntado() {
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
-      console.log(this.estadoActual)
-      return { exito: true, premio: { tipo: this.tipoPersonaje, cantidad: 1 }, estado: this.estadoActual };
+
+      return {
+        exito: true,
+        premio: { tipo: this.tipoPersonaje, cantidad: 1 },
+        estado: this.estadoActual,
+      };
     } else {
       return { exito: false, premio: null, estado: this.estadoActual };
     }
@@ -190,7 +196,7 @@ export class PersonajeBasico {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-    // console.log(objetoColision);
+
     return objetoColision;
   }
 }
@@ -458,9 +464,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
 
   pintarRecuadro(recuadro) {
     recuadro.pintarse(this.colorPintura);
-    // console.log(recuadro.posicionActualY,recuadro.posicionActualX);
-   // console.log(recuadro)
-    //console.log(this)
     this.dibujoActual[recuadro.posicionActualY][recuadro.posicionActualX] =
       this.colorPintura;
 
@@ -475,7 +478,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
     return this.chequearSiCompletoDibujo() && super.abrirYMostrarModal();
   }
   chequearSiCompletoDibujo() {
-    // console.log(this);
     // Si por error no tienen la misma dimensión, no completó.
     if (this.dibujoDeseado.length !== this.dibujoActual.length) {
       return false;
