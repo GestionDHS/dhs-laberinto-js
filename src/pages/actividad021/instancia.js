@@ -176,8 +176,6 @@ miJuego.personajePrincipal.juntarBasura = function () {
   }
 };
 
-
-
 const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
@@ -194,53 +192,26 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  // {
-  //   name: "Lápiz",
-  //   categorystyle: "pencil",
-  // },
   {
     name: "Acciones",
     categorystyle: "action",
   },
-  // {
-  //   name: "Condicionales",
-  //   categorystyle: "logic_category",
-  // },
-  // {
-  //   name: "Repeticiones",
-  //   categorystyle: "loop_category",
-  // },
 ];
 categoriasDeseadas.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
 );
 
 const bloquesCustomStandardDesados = [
-  // [nombreBloque, categoriaDestino]
-  // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
-  // ["move_classic_simple", "Movimientos"],
-  // ["move_classic_param", "Movimientos"],
   ["avanzar_param", "Movimientos"],
-  // ["girar_clasico", "Movimientos"],
-  // ["girar_grados", "Movimientos"],
   ["apuntar_hacia", "Movimientos"],
-  // ["abrir_cofre", "Acciones"],
   ["juntar_basura", "Acciones"],
-  // ["lapiz", "Lápiz"],
-  // ["if", "Condicionales"],
-  // ["controls", "Repeticiones"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
-//pruebas render y theme
-// render.makeConstants_()
-// const customCategory = new CustomCategory()
-// customCategory.setear();
-// const theme = customTheme.theme;
 const render = new CustomRenderer();
 render.registrarRender("renderDHS");
 miControlador.crearInyectarWorkspace("dhs-blockly-div", {
@@ -261,24 +232,12 @@ miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-// miControlador.juego.agregarGlobalConCallback("moverDerecha");
-// miControlador.juego.agregarGlobalConCallback("moverAbajo");
-// miControlador.juego.agregarGlobalConCallback("moverArriba");
-// miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-// miControlador.juego.agregarGlobalConCallback("abrirCofre");
 miControlador.juego.agregarGlobalConCallback("juntarBasura");
 miControlador.juego.agregarGlobalConCallback("avanzar");
-// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-// miControlador.juego.agregarGlobalConCallback("girarDerecha");
-// miControlador.juego.agregarGlobalConCallback("girarGrados");
 miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-// miControlador.juego.agregarGlobalConCallback("subirLapiz");
-// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
   miControlador.callbackInterpreteStandard(interpreter, globalObject);
   callBackJuego(interpreter, globalObject);
-  //callbackExtras(interpreter, globalObject);
 });

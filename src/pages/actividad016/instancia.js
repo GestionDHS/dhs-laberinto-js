@@ -1,24 +1,16 @@
-//actividad04 de Programando Robots
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomToolbox";
-// import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
-// PRIMERO: instanciar el juego
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-// SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-//Blockly
-
-//CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [5, 5]; //fila, columna
 
-//tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [1, 1, 1, 1, 1],
   [1, 0, 1, 1, 1],
@@ -44,7 +36,6 @@ const arbol = {
 const pasto = {
   idUsarHTML: "camino",
   tipoPersonaje: "camino",
-  // pintable: true,
   estadosPosibles: {
     normal: { name: "normal", imageUrl: "pasto" },
   },
@@ -63,22 +54,11 @@ const datosModal = {
   texto: "¡Llegaste a la bandera!",
   oculto: true,
 };
-// const datosModalError = {
-//   titulo: "¡Ohh Nooww!",
-//   imagen: "monedas", //sacar las monedas - simbolo de prohibido
-//   texto: "Oh! Aquí no hay cofre.",
-//   oculto: true,
-//   color: "red",
-// };
-// QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
-// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
+
 miJuego.generarEscenario(dimensiones, tablero, 3.5, "#9ca64e", arbol, pasto);
 miJuego.agregarModal(datosModal);
-//miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-//tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
@@ -102,7 +82,6 @@ const arrayDePersonajes = [
         callback: (x) => {
           x.llegarALaBandera();
         },
-        // mensaje: "¡We are the Champions!",
       },
       {
         con: "arbol",
@@ -114,16 +93,14 @@ const arrayDePersonajes = [
       },
     ],
   },
-  
-  
   {
     idUsarHTML: "bandera",
     tipoPersonaje: "bandera",
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
+      abierto: { name: "abierto", imageUrl: "bandera" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado", 
     posicionInicialY: 1,
     posicionInicialX: 1,
     direccionInicial: 0,
@@ -137,8 +114,6 @@ const arrayDePersonajes = [
 
 miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[25]);
-// window.miJuego.listaDePersonajes;
-
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
       this.abrirYMostrarModal();
@@ -148,27 +123,19 @@ miJuego.personajePrincipal.abrirCofre = function () {
 
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay cofre.");
-    //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
     return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
   }
-  //como hay un cofre solo, validamos la muchila acá
   if (this.mochila.length === 1) {
     this.abrirYMostrarModal();
   } else {
     return this.decirTerminar("¡Oh! El cofre está sin abrir.");
   }
 };
-//Inicializamos todos los personajes
-
-//Generamos el WORKSPACE
 
 const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
-  // 'dhs-blockly-div',
-  // JSON.stringify(toolbox),
 );
 
 const categoriasDeseadas = [
@@ -180,53 +147,25 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  // {
-  //   name: "Lápiz",
-  //   categorystyle: "pencil",
-  // },
   {
     name: "Acciones",
     categorystyle: "action",
   },
-  // {
-  //   name: "Condicionales",
-  //   categorystyle: "logic_category",
-  // },
- //{
- //  name: "Repeticiones",
- //  categorystyle: "loop_category",
- //},
 ];
 categoriasDeseadas.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
 );
 
 const bloquesCustomStandardDesados = [
-  // [nombreBloque, categoriaDestino]
-  // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
-  // ["move_classic_param", "Movimientos"],
-  // ["avanzar_param", "Movimientos"],
-  // ["girar_clasico", "Movimientos"],
-  // ["girar_grados", "Movimientos"],
-  // ["apuntar_hacia", "Movimientos"],
   ["abrir_cofre", "Acciones"],
- // ["juntar_basura", "Acciones"],
-  // ["lapiz", "Lápiz"],
-  // ["if", "Condicionales"],
-  //  ["controls", "Repeticiones"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
-//pruebas render y theme
-// render.makeConstants_()
-// const customCategory = new CustomCategory()
-// customCategory.setear();
-// const theme = customTheme.theme;
 const render = new CustomRenderer();
 render.registrarRender("renderDHS");
 miControlador.crearInyectarWorkspace("dhs-blockly-div", {
@@ -252,15 +191,6 @@ miControlador.juego.agregarGlobalConCallback("moverAbajo");
 miControlador.juego.agregarGlobalConCallback("moverArriba");
 miControlador.juego.agregarGlobalConCallback("moverIzquierda");
 miControlador.juego.agregarGlobalConCallback("abrirCofre");
-
-// miControlador.juego.agregarGlobalConCallback("avanzar");
-// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-// miControlador.juego.agregarGlobalConCallback("girarDerecha");
-// miControlador.juego.agregarGlobalConCallback("girarGrados");
-// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-// miControlador.juego.agregarGlobalConCallback("subirLapiz");
-// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {

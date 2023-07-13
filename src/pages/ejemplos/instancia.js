@@ -159,8 +159,9 @@ const arrayDePersonajes = [
   },
 ];
 
-//SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciónes
+//SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciones
 miJuego.generarPersonajes(arrayDePersonajes);
+// Se debe mirar el arrayDePersonajes para saber en que posición esta el personaje principal
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
 //Método para Abrir el Cofre
@@ -188,6 +189,20 @@ miJuego.personajePrincipal.juntarBasura = function () {
   }
   return intento;
 };
+
+// Lancha
+miJuego.personajePrincipal.llegarPlanta = function () {
+  if (this.mochila.length === 3) {
+    this.abrirYMostrarModal();
+  } else if(!this.intento) {
+    return this.decirTerminar("¡Oh! Quedó basura por levantar.")
+  }
+}
+
+// Pedro - Lupe
+miJuego.personajePrincipal.llegarEscuela = function () {
+  this.abrirYMostrarModal();
+}
 
 //Seteo del Dibujo a realizar - Verificación. Para los ejercicios que tienen PersonajesDibujables
 // const EJEMPLO_DIBUJO_DESEADO = [
