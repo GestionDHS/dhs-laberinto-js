@@ -37,7 +37,7 @@ import familiaPato from "../img/familiaPato.png"
 import rioParana from "../img/rioParana.png"
 import autoArriba from "../img/autoArriba.png"
 import carpinchoReal from "../img/carpinchoReal.png"
-
+import ecobrick from "../img/ecobrick.jpg"
 
 export class DHS_Gallery {
   constructor() {
@@ -63,6 +63,13 @@ export class DHS_Gallery {
   }
   
   imageLib = {
+    ecobrick: {
+      themes: [""],
+      url: ecobrick,
+      nombre: "ecobrick",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
     rioParana: {
       themes: [""],
       url: rioParana,
