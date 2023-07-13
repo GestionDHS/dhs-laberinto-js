@@ -204,6 +204,28 @@ miJuego.personajePrincipal.llegarEscuela = function () {
   this.abrirYMostrarModal();
 }
 
+//Conejo - Nelson
+miJuego.personajePrincipal.cosecharZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+  } else if (!intento.exito) {
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
+  } 
+};
+
+miJuego.personajePrincipal.comerZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
+ 
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+  } else if( intento.estado == "juntado") {
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
+  } else if (!intento.exito ) {
+    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+  } 
+};
+
 //Seteo del Dibujo a realizar - Verificación. Para los ejercicios que tienen PersonajesDibujables
 // const EJEMPLO_DIBUJO_DESEADO = [
 //   [null, null, null, null, null],
