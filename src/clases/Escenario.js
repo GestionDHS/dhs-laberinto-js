@@ -111,4 +111,6 @@ export class Casillero {
     );
     return objEncontrado;
   }
+
+ 
 }

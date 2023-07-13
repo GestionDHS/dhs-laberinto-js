@@ -287,20 +287,19 @@ miJuego.personajePrincipal.cosecharZanahoria = function () {
     return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
   } 
 };
+
 miJuego.personajePrincipal.comerZanahoria = function () {
   const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
-  console.log(intento.objetoEncontrado)
-  console.log(intento.exito)
-  console.log(intento.premio)
-  console.log(intento.estado)
-  console.log(this)
+ 
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-  } else if(intento.exito && intento.estado == null) {
+    //this.abrirModalFalloApertura();
+  } else if( intento.estado == "juntado") {
     return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
-  }else if(intento.estado === "juntado") {
+    // this.abrirYMostrarModal();
+  } else if (!intento.exito ) {
     return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
-  }
+  } 
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
