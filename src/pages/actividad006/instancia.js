@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from "../../bloques/CustomToolbox";
+import { CustomCategory } from "../../bloques/CustomCategory";
 // import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -218,7 +218,7 @@ const arrayDePersonajes = [
     direccionInicial: 0,
     rotable: false,
     paddingImagen: "1px",
-  }
+  },
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
@@ -243,11 +243,7 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
   }
 };
 
-
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-);
+const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 const categoriasDeseadas = [
   {
