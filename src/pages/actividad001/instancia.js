@@ -3,8 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from "../../bloques/CustomToolbox";
-
+import { CustomCategory } from "../../bloques/CustomCategory";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
@@ -12,7 +11,6 @@ const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [5, 6]; //fila, columna
-
 
 const tablero = [
   [1, 1, 1, 1, 1, 1],
@@ -92,7 +90,6 @@ const arrayDePersonajes = [
         },
         mensaje: "¡OH NO! Choqué contra un árbol",
       },
-
     ],
   },
   {
@@ -116,7 +113,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", 
+    estadoInicial: "cerrado",
     posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,
@@ -169,11 +166,7 @@ miJuego.personajePrincipal.juntarBasura = function () {
   return intento;
 };
 
-
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-);
+const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 const categoriasDeseadas = [
   {
