@@ -64,22 +64,10 @@ const datosModal = {
   texto: "Juntaste todas las monedas de los cofres!",
   oculto: true,
 };
-// const datosModalError = {
-//   titulo: "¡Ohh Nooww!",
-//   imagen: "monedas", //sacar las monedas - simbolo de prohibido
-//   texto: "Oh! Aquí no hay cofre.",
-//   oculto: true,
-//   color: "red",
-// };
-// QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
-// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", cerco, pasto);
 miJuego.agregarModal(datosModal);
-//miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, cerco, pasto);
 
-//tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
@@ -242,9 +230,7 @@ miJuego.personajePrincipal.abrirCofre = function () {
 
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay cofre.");
-    //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
     return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
   }
 };
@@ -257,15 +243,10 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
   }
 };
 
-//Inicializamos todos los personajes
-
-//Generamos el WORKSPACE
 
 const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
-  // 'dhs-blockly-div',
-  // JSON.stringify(toolbox),
 );
 
 const categoriasDeseadas = [
@@ -277,18 +258,10 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  // {
-  //   name: "Lápiz",
-  //   categorystyle: "pencil",
-  // },
   {
     name: "Acciones",
     categorystyle: "action",
   },
-  // {
-  //   name: "Condicionales",
-  //   categorystyle: "logic_category",
-  // },
   {
     name: "Repeticiones",
     categorystyle: "loop_category",
@@ -299,19 +272,9 @@ categoriasDeseadas.forEach((cat) =>
 );
 
 const bloquesCustomStandardDesados = [
-  // [nombreBloque, categoriaDestino]
-  // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
-  // ["move_classic_param", "Movimientos"],
-  // ["avanzar_param", "Movimientos"],
-  // ["girar_clasico", "Movimientos"],
-  // ["girar_grados", "Movimientos"],
-  // ["apuntar_hacia", "Movimientos"],
   ["abrir_cofre", "Acciones"],
-  // ["juntar_basura", "Acciones"],
-  // ["lapiz", "Lápiz"],
-  // ["if", "Condicionales"],
   ["controls", "Repeticiones"],
 ];
 
@@ -319,11 +282,6 @@ bloquesCustomStandardDesados.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
-//pruebas render y theme
-// render.makeConstants_()
-// const customCategory = new CustomCategory()
-// customCategory.setear();
-// const theme = customTheme.theme;
 const render = new CustomRenderer();
 render.registrarRender("renderDHS");
 miControlador.crearInyectarWorkspace("dhs-blockly-div", {
@@ -349,19 +307,9 @@ miControlador.juego.agregarGlobalConCallback("moverAbajo");
 miControlador.juego.agregarGlobalConCallback("moverArriba");
 miControlador.juego.agregarGlobalConCallback("moverIzquierda");
 miControlador.juego.agregarGlobalConCallback("abrirCofre");
-// miControlador.juego.agregarGlobalConCallback("juntarBasura");
-// miControlador.juego.agregarGlobalConCallback("avanzar");
-// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-// miControlador.juego.agregarGlobalConCallback("girarDerecha");
-// miControlador.juego.agregarGlobalConCallback("girarGrados");
-// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-// miControlador.juego.agregarGlobalConCallback("subirLapiz");
-// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
   miControlador.callbackInterpreteStandard(interpreter, globalObject);
   callBackJuego(interpreter, globalObject);
-  //callbackExtras(interpreter, globalObject);
 });
