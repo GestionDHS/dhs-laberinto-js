@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from "../../bloques/CustomToolbox";
+import { CustomCategory } from "../../bloques/CustomCategory";
 import carpincho from '../../img/carpinchoArriba.png';
 import pastoDelta from '../../img/pastoDelta.png';
 import juncoPastoDelta from '../../img/juncoPastoDelta.png';
