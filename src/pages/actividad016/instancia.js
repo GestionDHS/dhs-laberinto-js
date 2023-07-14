@@ -179,8 +179,9 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   },
 });
 
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+// const bloquesPrecargadosJSON =
+//   '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"move_up_simple","id":"O3D2ssLiw9sNeIgC=}WA","next":{"block":{"type":"move_left_simple","id":")(gyoL0f4@2j%EUBh8at","next":{"block":{"type":"move_left_simple","id":"R}Ozqz_r81QkU`6tl~WG","next":{"block":{"type":"move_up_simple","id":"{DU^E4g#3sJys|pZhuHk","next":{"block":{"type":"abrir_cofre","id":"PpjmU)WC2X$S:}l!!n[Z"}}}}}}}}}}}}]}}'
 
 miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();

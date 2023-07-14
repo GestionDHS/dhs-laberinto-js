@@ -4,20 +4,14 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomToolbox";
-// import { toolbox } from 'blockly/core/utils';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 // PRIMERO: instanciar el juego
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-// SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-//Blockly
-
-//CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [7, 7]; //fila, columna
 
-//tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 0, 1],
@@ -65,22 +59,11 @@ const datosModal = {
   texto: "Juntaste todas las monedas de los cofres!",
   oculto: true,
 };
-// const datosModalError = {
-//   titulo: "¡Ohh Nooww!",
-//   imagen: "monedas", //sacar las monedas - simbolo de prohibido
-//   texto: "Oh! Aquí no hay cofre.",
-//   oculto: true,
-//   color: "red",
-// };
-// QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
-// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
+
 miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", arbol, pasto);
 miJuego.agregarModal(datosModal);
-//miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-//tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
@@ -115,21 +98,7 @@ const arrayDePersonajes = [
         mensaje: "¡OH NO! Choqué contra un árbol",
       },
     ],
-  },
-  // {
-  //   idUsarHTML: "lodo",
-  //   tipoPersonaje: "lodo",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "lodo" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 1,
-  //   posicionInicialX: 3,
-  //   direccionInicial: 0,
-  //   zIndex: 1,
-  //   rotable: false,
-  //   colisiones: [],
-  // },
+  }, 
   {
     idUsarHTML: "cofre",
     tipoPersonaje: "cofre",
@@ -137,7 +106,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado", 
     posicionInicialY: 2,
     posicionInicialX: 2,
     direccionInicial: 0,
@@ -153,7 +122,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado", 
     posicionInicialY: 3,
     posicionInicialX: 3,
     direccionInicial: 0,
@@ -169,7 +138,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado", 
     posicionInicialY: 4,
     posicionInicialX: 4,
     direccionInicial: 0,
@@ -185,7 +154,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado", 
     posicionInicialY: 5,
     posicionInicialX: 5,
     direccionInicial: 0,
@@ -199,9 +168,9 @@ const arrayDePersonajes = [
     tipoPersonaje: "bandera",
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
+      abierto: { name: "abierto", imageUrl: "bandera" }, 
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado", 
     posicionInicialY: 1,
     posicionInicialX: 5,
     direccionInicial: 0,
@@ -210,35 +179,16 @@ const arrayDePersonajes = [
     paddingImagen: "0.4em",
     colisiones: [],
   },
-  // {
-  //   idUsarHTML: "basura",
-  //   tipoPersonaje: "basura",
-  //   estadosPosibles: {
-  //     normal: { name: "normal", imageUrl: "basura" },
-  //     juntado: { name: "juntado", imageUrl: "pasto" },
-  //   },
-  //   estadoInicial: "normal",
-  //   posicionInicialY: 2,
-  //   posicionInicialX: 2,
-  //   direccionInicial: 0,
-  //   zIndex: 2,
-  //   rotable: true,
-  //   colisiones: [],
-  // },
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
-// window.miJuego.listaDePersonajes;
-//Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay cofre.");
-    //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
     return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
   } 
 };
@@ -251,15 +201,10 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
   }
 }
 
-//Inicializamos todos los personajes
-
-//Generamos el WORKSPACE
 
 const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
-  // 'dhs-blockly-div',
-  // JSON.stringify(toolbox),
 );
 
 const categoriasDeseadas = [
@@ -271,18 +216,10 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  // {
-  //   name: "Lápiz",
-  //   categorystyle: "pencil",
-  // },
   {
     name: "Acciones",
     categorystyle: "action",
   },
-  // {
-  //   name: "Condicionales",
-  //   categorystyle: "logic_category",
-  // },
   {
     name: "Repeticiones",
     categorystyle: "loop_category",
@@ -293,19 +230,9 @@ categoriasDeseadas.forEach((cat) =>
 );
 
 const bloquesCustomStandardDesados = [
-  // [nombreBloque, categoriaDestino]
-  // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
-  // ["move_classic_param", "Movimientos"],
-  // ["avanzar_param", "Movimientos"],
-  // ["girar_clasico", "Movimientos"],
-  // ["girar_grados", "Movimientos"],
-  // ["apuntar_hacia", "Movimientos"],
   ["abrir_cofre", "Acciones"],
-  // ["juntar_basura", "Acciones"],
-  // ["lapiz", "Lápiz"],
-  // ["if", "Condicionales"],
   ["controls", "Repeticiones"],
 ];
 
@@ -313,11 +240,6 @@ bloquesCustomStandardDesados.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
-//pruebas render y theme
-// render.makeConstants_()
-// const customCategory = new CustomCategory()
-// customCategory.setear();
-// const theme = customTheme.theme;
 const render = new CustomRenderer();
 render.registrarRender("renderDHS");
 miControlador.crearInyectarWorkspace("dhs-blockly-div", {
@@ -343,19 +265,9 @@ miControlador.juego.agregarGlobalConCallback("moverAbajo");
 miControlador.juego.agregarGlobalConCallback("moverArriba");
 miControlador.juego.agregarGlobalConCallback("moverIzquierda");
 miControlador.juego.agregarGlobalConCallback("abrirCofre");
-// miControlador.juego.agregarGlobalConCallback("juntarBasura");
-// miControlador.juego.agregarGlobalConCallback("avanzar");
-// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-// miControlador.juego.agregarGlobalConCallback("girarDerecha");
-// miControlador.juego.agregarGlobalConCallback("girarGrados");
-// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-// miControlador.juego.agregarGlobalConCallback("subirLapiz");
-// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
   miControlador.callbackInterpreteStandard(interpreter, globalObject);
   callBackJuego(interpreter, globalObject);
-  //callbackExtras(interpreter, globalObject);
 });
