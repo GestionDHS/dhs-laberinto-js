@@ -238,8 +238,16 @@ miJuego.personajePrincipal.comerZanahoria = function () {
 //******************************************************* */
 //    BLOCKLY
 //****************************************************** */
+
 //OCTAVO: Creamos una instancia del controlador, argumentos: el juego, velocidad inicial
 
+//****Si necesitamos que el Workspace tenga bloques precargados, lo que hacemos, para obtener el JSON para setearlo es
+//****lo siguiente: 
+//****1- hacemos global a miControlador "window.miControlador"
+//****2 - En el Navegador, cargamos los bloques que necesitamos ya estén preCargados
+//****3 - Ponemos en consola éste linea: JSON.stringify(miControlador.obtenerBloquesSerializados()) para Obtener bloques precargados
+//****4 - Nos copiamos el string que nos devuelve, y se lo colocamos a la variable "bloquesPrecargadosJSON"
+//****5 - Volvemos a poner "miControlador" como const
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 //NOVENO: Dejamos habilitadas las categorías que vamos a usar

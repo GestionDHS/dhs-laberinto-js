@@ -116,10 +116,7 @@ export class Juego {
   mostrarModal() {
     this.datosModal.mostrar(this.sincronico);
   }
-  // agregarModalError(datosModalError) {
-  //   this.datosModalError = new Modal(datosModalError, this);
-  //   return this.datosModalError;
-  // }
+
 
   habilitarFuncionGlobal(nombre, bindearCon = this.personajePrincipal) {
     window[nombre] = bindearCon[nombre].bind(bindearCon);
