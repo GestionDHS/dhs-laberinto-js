@@ -56,8 +56,8 @@ const datosModal = {
   texto: "¿Sabías que el río Paraná tiene 4880 kilómetros de largo?",
   oculto: true,
 };
-
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", juncoPastoDelta, agua);
+//2d6ca3
+miJuego.generarEscenario(dimensiones, tablero, 2.5, "#357fbf", juncoPastoDelta, agua);
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
@@ -119,6 +119,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -133,6 +134,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -147,6 +149,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -161,6 +164,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -175,6 +179,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "familiaPato",
@@ -189,6 +194,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
+    paddingImagen: "1px"
   },
 ];
 
