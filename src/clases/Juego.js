@@ -21,8 +21,9 @@ export class Juego {
       PersonajeMovibleGrados: PersonajeMovibleGrados
 
     };
+    
   }
-
+  
   /*PARA RENDERIZAR ESCENARIO*/
   // La funcion recibe la matriz tablero la unidad de ancho, el color de bordes, nombre imagen pared, nombre imagen camino
 
@@ -79,6 +80,7 @@ export class Juego {
       this.listaDePersonajes.push(unPersonaje);
       unPersonaje.inicializar();
     });
+   
   }
 
   setearPersonajePrincipal(personaje) {
@@ -101,9 +103,8 @@ export class Juego {
 
   reiniciar() {
     this.puedeDebeContinuar = true;
-
     this.listaDePersonajes.forEach((personaje) => {
-      personaje.inicializar();
+      personaje.reiniciar();
     });
     //this.datosModal.ocultar(); - lo saqué de acá por que puse un setTimeout para que se oculte solo
   }
@@ -115,10 +116,7 @@ export class Juego {
   mostrarModal() {
     this.datosModal.mostrar(this.sincronico);
   }
-  // agregarModalError(datosModalError) {
-  //   this.datosModalError = new Modal(datosModalError, this);
-  //   return this.datosModalError;
-  // }
+
 
   habilitarFuncionGlobal(nombre, bindearCon = this.personajePrincipal) {
     window[nombre] = bindearCon[nombre].bind(bindearCon);

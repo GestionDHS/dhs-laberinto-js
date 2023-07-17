@@ -9,24 +9,23 @@ document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-const dimensiones = [8, 8]; //fila, columna
+const dimensiones = [7, 7]; //fila, columna
 
 const tablero = [
-  [1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 1, 1, 0, 1],
-  [1, 1, 1, 0, 1, 1, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 1, 0, 1, 1, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 0, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0],
+  [1, 0, 1, 0, 1, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 0, 1],
 ];
 
-const arbol = {
-  idUsarHTML: "arbol",
-  tipoPersonaje: "arbol",
+const juncoPastoDelta = {
+  idUsarHTML: "juncoPastoDelta",
+  tipoPersonaje: "juncoPastoDelta",
   estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
+    normal: { name: "normal", imageUrl: "juncoPastoDelta" },
   },
   estadoInicial: "normal",
   zIndex: 1,
@@ -36,11 +35,11 @@ const arbol = {
   rotable: false,
   paddingImagen: "1px",
 };
-const pasto = {
-  idUsarHTML: "camino",
-  tipoPersonaje: "camino",
+const agua = {
+  idUsarHTML: "agua",
+  tipoPersonaje: "agua",
   estadosPosibles: {
-    normal: { name: "normal", imageUrl: "pasto" },
+    normal: { name: "normal", imageUrl: "agua" },
   },
   estadoInicial: "normal",
   zIndex: 1,
@@ -52,89 +51,140 @@ const pasto = {
 };
 
 const datosModal = {
-  titulo: "¡BUEN TRABAJO!",
-  imagen: "cofreAbierto",
-  texto: "¡Juntaste todas las monedas del cofre!.",
+  titulo: "¡LLEGAMOS!",
+  imagen: "rioParana",
+  texto: "¿Sabías que el río Paraná tiene 4880 kilómetros de largo?",
   oculto: true,
 };
 
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", juncoPastoDelta, agua);
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
+miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
 const arrayDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeMovibleSimple",
+    idUsarHTML: "pato",
+    tipoPersonaje: "pato",
+    clasePersonaje: "PersonajeMovibleGrados",
     tieneTooltip: true,
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
+      normal: { name: "normal", imageUrl: "pato" },
     },
     estadoInicial: "normal",
     posicionInicialY: 6,
-    posicionInicialX: 4,
-    direccionInicial: 0,
+    posicionInicialX: 1,
+    direccionInicial: 90,
     zIndex: 3,
     rotable: true,
     paddingImagen: "1px",
     colisiones: [
       {
-        con: "lodo",
+        con: "juncoPastoDelta",
         factorDeAvance: 0.7,
         callback: (x) => {
           x.terminar();
         },
-        mensaje: "¡OH NO! Me atasqué en el lodo.",
+        mensaje: "¡OH NO! Por aquí no puedo nadar.",
       },
       {
-        con: "arbol",
+        con: "plastico",
         factorDeAvance: 0.2,
         callback: (x) => {
           x.terminar();
         },
-        mensaje: "¡OH NO! Choqué contra un árbol",
+        mensaje: "¡CUACK, NO! Hay demasiada basura",
       },
+
+      {
+        con: "familiaPato",
+        factorDeAvance: 0.2,
+        callback: (x) => {
+          x.llegarALaFamilia();
+            },
+      },
+      
     ],
   },
+ 
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", 
-    posicionInicialY: 3,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
-  },
-  {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
+      normal: { name: "normal", imageUrl: "plastico" },
     },
     estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 6,
+    posicionInicialY: 2,
+    posicionInicialX: 1,
     direccionInicial: 0,
     zIndex: 1,
     rotable: false,
     colisiones: [],
   },
   {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
     estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
+      normal: { name: "normal", imageUrl: "plastico" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 3,
+    posicionInicialX: 2,
+    direccionInicial: 0,
+    zIndex: 1,
+    rotable: false,
+    colisiones: [],
+  },
+  {
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "plastico" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 1,
+    posicionInicialX: 4,
+    direccionInicial: 0,
+    zIndex: 1,
+    rotable: false,
+    colisiones: [],
+  },
+  {
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "plastico" },
     },
     estadoInicial: "normal",
     posicionInicialY: 4,
-    posicionInicialX: 3,
+    posicionInicialX: 4,
+    direccionInicial: 0,
+    zIndex: 1,
+    rotable: false,
+    colisiones: [],
+  },
+  {
+    idUsarHTML: "plastico",
+    tipoPersonaje: "plastico",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "plastico" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 6,
+    posicionInicialX: 5,
+    direccionInicial: 0,
+    zIndex: 1,
+    rotable: false,
+    colisiones: [],
+  },
+  {
+    idUsarHTML: "familiaPato",
+    tipoPersonaje: "familiaPato",
+    estadosPosibles: {
+      normal: { name: "normal", imageUrl: "familiaPato" },
+    },
+    estadoInicial: "normal",
+    posicionInicialY: 1,
+    posicionInicialX: 5,
     direccionInicial: 0,
     zIndex: 1,
     rotable: false,
@@ -142,16 +192,13 @@ const arrayDePersonajes = [
   },
 ];
 
-miJuego.generarPersonajes(arrayDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[64]);
 
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("Oh! Aquí no hay cofre.");
-  } else {
-    return this.abrirYMostrarModal();
-  }
+miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
+
+
+miJuego.personajePrincipal.llegarALaFamilia = function () {
+  this.abrirYMostrarModal();
 };
 
 const miControlador = new ControladorStandard(
@@ -168,19 +215,15 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  {
-    name: "Acciones",
-    categorystyle: "action",
-  },
 ];
 categoriasDeseadas.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
 );
 
 const bloquesCustomStandardDesados = [
-  ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
+ ["on_execute", "Eventos"],
+    ["avanzar_param", "Movimientos"],
+   ["girar_clasico", "Movimientos"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {
@@ -207,11 +250,9 @@ miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
+ miControlador.juego.agregarGlobalConCallback("avanzar");
+ miControlador.juego.agregarGlobalConCallback("girarIzquierda");
+ miControlador.juego.agregarGlobalConCallback("girarDerecha");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {

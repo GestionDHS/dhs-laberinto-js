@@ -25,6 +25,19 @@ import calle from "../img/calle.png"
 import pastoSendero from "../img/pastoSendero.png"
 import ciclista from "../img/ciclista.png"
 import brujula from "../img/brujula.png"
+import agua from "../img/agua.png"
+import pastoDelta from "../img/pastoDelta.png"
+import juncoPastoDelta from "../img/juncoPastoDelta.png"
+import carpincho from "../img/carpinchoArriba.png"
+import pato from "../img/patoArriba.png"
+import lancha from "../img/lancha.png"
+import plantaReciclajePastoDelta from "../img/plantaReciclajePastoDelta.png"
+import plastico from "../img/plasticoAgua.png"
+import familiaPato from "../img/familiaPato.png"
+import rioParana from "../img/rioParana.png"
+import autoArriba from "../img/autoArriba.png"
+import carpinchoReal from "../img/carpinchoReal.png"
+import ecobrick from "../img/ecobrick.jpg"
 
 export class DHS_Gallery {
   constructor() {
@@ -50,6 +63,20 @@ export class DHS_Gallery {
   }
   
   imageLib = {
+    ecobrick: {
+      themes: [""],
+      url: ecobrick,
+      nombre: "ecobrick",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    rioParana: {
+      themes: [""],
+      url: rioParana,
+      nombre: "rioParana",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
     ciclista: {
       themes: [""],
       url: ciclista,
@@ -110,6 +137,13 @@ export class DHS_Gallery {
       themes: [""],
       url: autoEmbotelladoDer,
       nombre: "autoEmbotelladoDer",
+      parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+      showLicense: true,
+    },
+    autoArriba: {
+      themes: [""],
+      url: autoArriba,
+      nombre: "autoArriba",
       parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
       showLicense: true,
     },
@@ -301,52 +335,59 @@ export class DHS_Gallery {
     // for theme delta
     agua: {
       themes: ["delta"],
-      url: "../delta-commons/img/agua.png",
-      nombre: "Agua",
+      url: agua,
+      nombre: "agua",
       parrafoLicencia: "<p>Digital House</p>",
       showLicense: false,
     },
     pastoDelta: {
       themes: ["delta"],
-      url: "../delta-commons/img/pasto-delta.png",
-      nombre: "Pasto Delta",
+      url: pastoDelta,
+      nombre: "pastoDelta",
       parrafoLicencia: "<p>Digital House</p>",
       showLicense: false,
     },
     juncoPastoDelta: {
       themes: ["delta"],
-      url: "../delta-commons/img/junco-pasto-delta.png",
-      nombre: "Juncos",
+      url: juncoPastoDelta,
+      nombre: "juncoPastoDelta",
       parrafoLicencia:
         '<p> Iconos diseñados por <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
       showLicense: true,
     },
     carpincho: {
       themes: ["delta"],
-      url: "../delta-commons/img/carpincho-arriba.png",
-      nombre: "Martín el Carpincho",
+      url: carpincho,
+      nombre: "carpincho",
+      parrafoLicencia: "<p>Digital House</p>",
+      showLicense: false,
+    },
+    carpinchoReal: {
+      themes: ["delta"],
+      url: carpinchoReal,
+      nombre: "carpinchoReal",
       parrafoLicencia: "<p>Digital House</p>",
       showLicense: false,
     },
     pato: {
       themes: ["delta"],
-      url: "../delta-commons/img/pato-arriba.png",
-      nombre: "Pato Miguel",
+      url: pato,
+      nombre: "pato",
       parrafoLicencia:
         '<p> Iconos diseñados por <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
       showLicense: false,
     },
     lancha: {
       themes: ["delta"],
-      url: "../delta-commons/img/lancha.png",
-      nombre: "Lancha",
+      url: lancha,
+      nombre: "lancha",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },
     plantaReciclajePastoDelta: {
       themes: ["delta"],
-      url: "../delta-commons/img/planta-reciclaje-pasto-delta.png",
-      nombre: "Planta Reciclaje",
+      url: plantaReciclajePastoDelta,
+      nombre: "plantaReciclajePastoDelta",
       parrafoLicencia:
         '<p><a href="https://www.flaticon.com/free-icons/recycling-plant" title="recycling plant icons">Recycling plant icons created by surang - Flaticon</a></p>',
       showLicense: true,
@@ -361,37 +402,16 @@ export class DHS_Gallery {
     },
     plastico: {
       themes: ["delta"],
-      url: "../delta-commons/img/plastico-agua.png",
-      nombre: "Plástico",
+      url: plastico,
+      nombre: "plastico",
       parrafoLicencia:
         '<p> Icons made by <a href="https://www.flaticon.com/authors/wanicon" title="wanicon"> wanicon </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>',
       showLicense: true,
     },
-    ecobrick: {
-      themes: ["delta"],
-      url: "../delta-commons/img/ecobrick.jpg",
-      nombre: "Ecobrick",
-      parrafoLicencia: "unknown",
-      showLicense: false,
-    },
-    realCarpincho: {
-      themes: ["delta"],
-      url: "../delta-commons/img/real-carpincho.png",
-      nombre: "Carpincho Real",
-      parrafoLicencia: "unknown",
-      showLicense: false,
-    },
-    rioParana: {
-      themes: ["delta"],
-      url: "../delta-commons/img/rio-parana.png",
-      nombre: "Río Paraná",
-      parrafoLicencia: "unknown",
-      showLicense: false,
-    },
     familiaPato: {
       themes: ["delta"],
-      url: "../delta-commons/img/familia-pato.png",
-      nombre: "Familia Patorutti",
+      url: familiaPato,
+      nombre: "familiaPato",
       parrafoLicencia: "Digital House",
       showLicense: false,
     },

@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 class Controlador {
   constructor(
     juego,
-    veolocidadMilisegundos = 1000,
+    velocidadMilisegundos = 1000,
     // blocklyDivId,
     // miToolboxJSON,
     botonEjecutar,
@@ -26,7 +26,7 @@ class Controlador {
   ) {
     // ELEMENTOS IMPORTANTES
     this.ConfiguradorBloques = new ConfiguradorBloques();
-    this.velocidad = veolocidadMilisegundos;
+    this.velocidad = velocidadMilisegundos;
     this.necesitaEsperarReinicio = false;
     this.juego = juego;
     // this.workspace = Blockly.inject(blocklyDivId, {
@@ -206,6 +206,7 @@ class Controlador {
   limpiarWorkspace() {
     return this.workspace.clear();
   }
+  //JSON.stringify(miControlador.obtenerBloquesSerializados()) para Obtener bloques precargados
   obtenerBloquesSerializados(todoElWorskpace = true) {
     if (todoElWorskpace) {
       return Blockly.serialization.workspaces.save(this.workspace);
@@ -498,7 +499,7 @@ class Controlador {
 export default class ControladorStandard extends Controlador {
   constructor(
     juego,
-    veolocidadMilisegundos
+    velocidadMilisegundos
     // blocklyDivId,
     // blocklyWorkspaceConfig,
     // bloquesPreCargados = false
@@ -508,7 +509,7 @@ export default class ControladorStandard extends Controlador {
     );
     super(
       juego,
-      veolocidadMilisegundos,
+      velocidadMilisegundos,
       // blocklyDivId,
       // blocklyWorkspaceConfig,
       document.getElementById("dhs-boton-ejecutar"),

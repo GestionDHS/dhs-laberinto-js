@@ -3,21 +3,14 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from "../../bloques/CustomToolbox";
-// import { toolbox } from 'blockly/core/utils';
+import { CustomCategory } from "../../bloques/CustomCategory";
 
 document.querySelector("#appActividad").innerHTML = template(``);
-// PRIMERO: instanciar el juego
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-// SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-//Blockly
-
-//CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [7, 7]; //fila, columna
 
-//tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 0, 1],
@@ -64,22 +57,11 @@ const datosModal = {
   texto: "Te comiste todas las zanahorias y llegaste a la madriguera!",
   oculto: true,
 };
-// const datosModalError = {
-//   titulo: "¡Ohh Nooww!",
-//   imagen: "monedas", //sacar las monedas - simbolo de prohibido
-//   texto: "Oh! Aquí no hay cofre.",
-//   oculto: true,
-//   color: "red",
-// };
-// QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
-// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
+
 miJuego.generarEscenario(dimensiones, tablero, 2.7, "#9ca64e", arbol, pasto);
 miJuego.agregarModal(datosModal);
-//miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-//tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
     idUsarHTML: "conejo",
@@ -157,7 +139,7 @@ const arrayDePersonajes = [
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
       juntado: { name: "juntado", imageUrl: "pasto" }
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado", 
     posicionInicialY: 3,
     posicionInicialX: 2,
     direccionInicial: 0,
@@ -273,35 +255,30 @@ const arrayDePersonajes = [
 
 miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
-// window.miJuego.listaDePersonajes;
-//Método para el conejo
+
 
 miJuego.personajePrincipal.cosecharZanahoria = function () {
   const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
-  // this.setearEstado("normal");
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-    //this.abrirModalFalloApertura();
   } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
     return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
   } 
 };
+
 miJuego.personajePrincipal.comerZanahoria = function () {
   const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
+ 
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-    //this.abrirModalFalloApertura();
-  } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
-    // this.abrirYMostrarModal();
-  } else if(!intento.exito) {
+  } else if( intento.estado == "juntado") {
     return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
-  }
+  } else if (!intento.exito ) {
+    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+  } 
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  // console.log(this.mochila)
   if (this.mochila.length === 16) {
     this.abrirYMostrarModal();
   } else {
@@ -309,15 +286,10 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
   }
 }
 
-//Inicializamos todos los personajes
-
-//Generamos el WORKSPACE
 
 const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
-  // 'dhs-blockly-div',
-  // JSON.stringify(toolbox),
 );
 
 const categoriasDeseadas = [
@@ -329,18 +301,10 @@ const categoriasDeseadas = [
     name: "Movimientos",
     categorystyle: "movement",
   },
-  // {
-  //   name: "Lápiz",
-  //   categorystyle: "pencil",
-  // },
   {
     name: "Acciones",
     categorystyle: "action",
   },
-  // {
-  //   name: "Condicionales",
-  //   categorystyle: "logic_category",
-  // },
   {
     name: "Repeticiones",
     categorystyle: "loop_category",
@@ -351,22 +315,11 @@ categoriasDeseadas.forEach((cat) =>
 );
 
 const bloquesCustomStandardDesados = [
-  // [nombreBloque, categoriaDestino]
-  // [grupoBloques, categoriaDestino]
   ["on_execute", "Eventos"],
-  // ["move_classic_simple", "Movimientos"],
-  // ["move_classic_param", "Movimientos"],
-  // ["avanzar_param", "Movimientos"],
   ["avanzar", "Movimientos"],
   ["girar_clasico", "Movimientos"],
-  // ["girar_grados", "Movimientos"],
-  // ["apuntar_hacia", "Movimientos"],
-  // ["abrir_cofre", "Acciones"],
   ["cosechar", "Acciones"],
   ["comer", "Acciones"],
-  // ["juntar_basura", "Acciones"],
-  // ["lapiz", "Lápiz"],
-  // ["if", "Condicionales"],
   ["controls", "Repeticiones"],
 ];
 
@@ -374,11 +327,6 @@ bloquesCustomStandardDesados.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
-//pruebas render y theme
-// render.makeConstants_()
-// const customCategory = new CustomCategory()
-// customCategory.setear();
-// const theme = customTheme.theme;
 const render = new CustomRenderer();
 render.registrarRender("renderDHS");
 miControlador.crearInyectarWorkspace("dhs-blockly-div", {
@@ -399,26 +347,14 @@ miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();
 miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
-// miControlador.juego.agregarGlobalConCallback("moverDerecha");
-// miControlador.juego.agregarGlobalConCallback("moverAbajo");
-// miControlador.juego.agregarGlobalConCallback("moverArriba");
-// miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-// miControlador.juego.agregarGlobalConCallback("abrirCofre");
-// miControlador.juego.agregarGlobalConCallback("juntarBasura");
 miControlador.juego.agregarGlobalConCallback("cosecharZanahoria");
 miControlador.juego.agregarGlobalConCallback("comerZanahoria");
 miControlador.juego.agregarGlobalConCallback("avanzar");
 miControlador.juego.agregarGlobalConCallback("girarIzquierda");
 miControlador.juego.agregarGlobalConCallback("girarDerecha");
-// miControlador.juego.agregarGlobalConCallback("girarGrados");
-// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-// miControlador.juego.agregarGlobalConCallback("subirLapiz");
-// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
   miControlador.callbackInterpreteStandard(interpreter, globalObject);
   callBackJuego(interpreter, globalObject);
-  //callbackExtras(interpreter, globalObject);
 });
