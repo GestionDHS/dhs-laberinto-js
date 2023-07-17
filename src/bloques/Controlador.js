@@ -206,6 +206,7 @@ class Controlador {
   limpiarWorkspace() {
     return this.workspace.clear();
   }
+  //JSON.stringify(miControlador.obtenerBloquesSerializados()) para Obtener bloques precargados
   obtenerBloquesSerializados(todoElWorskpace = true) {
     if (todoElWorskpace) {
       return Blockly.serialization.workspaces.save(this.workspace);

@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from "../../bloques/CustomToolbox";
+import { CustomCategory } from "../../bloques/CustomCategory";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
@@ -204,6 +204,28 @@ miJuego.personajePrincipal.llegarEscuela = function () {
   this.abrirYMostrarModal();
 }
 
+//Conejo - Nelson
+miJuego.personajePrincipal.cosecharZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+  } else if (!intento.exito) {
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
+  } 
+};
+
+miJuego.personajePrincipal.comerZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
+ 
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+  } else if( intento.estado == "juntado") {
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
+  } else if (!intento.exito ) {
+    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+  } 
+};
+
 //Seteo del Dibujo a realizar - Verificación. Para los ejercicios que tienen PersonajesDibujables
 // const EJEMPLO_DIBUJO_DESEADO = [
 //   [null, null, null, null, null],
@@ -216,8 +238,16 @@ miJuego.personajePrincipal.llegarEscuela = function () {
 //******************************************************* */
 //    BLOCKLY
 //****************************************************** */
+
 //OCTAVO: Creamos una instancia del controlador, argumentos: el juego, velocidad inicial
 
+//****Si necesitamos que el Workspace tenga bloques precargados, lo que hacemos, para obtener el JSON para setearlo es
+//****lo siguiente: 
+//****1- hacemos global a miControlador "window.miControlador"
+//****2 - En el Navegador, cargamos los bloques que necesitamos ya estén preCargados
+//****3 - Ponemos en consola éste linea: JSON.stringify(miControlador.obtenerBloquesSerializados()) para Obtener bloques precargados
+//****4 - Nos copiamos el string que nos devuelve, y se lo colocamos a la variable "bloquesPrecargadosJSON"
+//****5 - Volvemos a poner "miControlador" como const
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 //NOVENO: Dejamos habilitadas las categorías que vamos a usar

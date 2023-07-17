@@ -3,7 +3,7 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from "../../bloques/CustomToolbox";
+import { CustomCategory } from "../../bloques/CustomCategory";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
@@ -189,8 +189,9 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   },
 });
 
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+// const bloquesPrecargadosJSON =
+//   '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"move_right_simple","id":",utl5dM,eQs2#5CCH,l=","next":{"block":{"type":"move_down_simple","id":")[,NyXcPkR=KGIxk.S3z","next":{"block":{"type":"move_down_simple","id":"HljvKTFU9*^-`/3FW3.G","next":{"block":{"type":"move_right_simple","id":"fv:usvDjsXkbs]_d?t(q","next":{"block":{"type":"move_right_simple","id":"*u|?hH7NZH%!cCOWlM})","next":{"block":{"type":"abrir_cofre","id":"qQ:TpvUJt`1n=NL7nR-|"}}}}}}}}}}}}}}]}}'
 
 miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 miControlador.setearEventoCambioWorkspaceStandard();

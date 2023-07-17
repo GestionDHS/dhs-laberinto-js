@@ -3,21 +3,15 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
-import { CustomCategory } from "../../bloques/CustomToolbox";
-// import { toolbox } from 'blockly/core/utils';
+import { CustomCategory } from "../../bloques/CustomCategory";
 
 document.querySelector("#appActividad").innerHTML = template(``);
-// PRIMERO: instanciar el juego
+
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-// SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-//Blockly
-
-//CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [5, 6]; //fila, columna
 
-//tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 1],
@@ -60,22 +54,10 @@ const datosModal = {
   texto: "Encontramos 180 monedas de oro.",
   oculto: true,
 };
-// const datosModalError = {
-//   titulo: "¡Ohh Nooww!",
-//   imagen: "monedas", //sacar las monedas - simbolo de prohibido
-//   texto: "Oh! Aquí no hay cofre.",
-//   oculto: true,
-//   color: "red",
-// };
-// QUINTO:Para generar el escenario recibe como parametros el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa) el color de borde y las imagenes de pared y camino...(para los nombres de paredes
-// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
 miJuego.agregarModal(datosModal);
-//miJuego.agregarModalError(datosModalError);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-//tipoPersonaje : Personaje / PersonajeDibujante / PersonajeMovible
 const arrayDePersonajes = [
   {
     idUsarHTML: "lupe",
@@ -108,16 +90,6 @@ const arrayDePersonajes = [
         },
         mensaje: "¡OH NO! Choqué contra un árbol",
       },
-
-      // {
-      //   con: "cofre",
-      //   factorDeAvance: 1,
-      //   callback: (x) => {
-      //     //depende si tengo el bloque Abrir Cofre
-      //       x.abrir("cofre");
-      //   },
-      //   mensaje: "¡We are the Champions!",
-      // },
     ],
   },
   {
@@ -141,7 +113,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
+    estadoInicial: "cerrado",
     posicionInicialY: 3,
     posicionInicialX: 4,
     direccionInicial: 0,
@@ -170,7 +142,6 @@ miJuego.generarPersonajes(arrayDePersonajes);
 
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
-//Método para Abrir el Cofre
 miJuego.personajePrincipal.abrirCofre = function () {
   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
@@ -185,7 +156,6 @@ miJuego.personajePrincipal.abrirCofre = function () {
   }
 };
 
-//Método para Juntar Basura
 miJuego.personajePrincipal.juntarBasura = function () {
   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
   if (!intento.objetoEncontrado) {
@@ -196,25 +166,7 @@ miJuego.personajePrincipal.juntarBasura = function () {
   return intento;
 };
 
-//Seteo del Dibujo a realizar - Verificación
-// const EJEMPLO_DIBUJO_DESEADO = [
-//   [null, null, null, null, null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, null, null, null, null],
-// ]
-// miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
-
-//Inicializamos todos los personajes
-
-//Generamos el WORKSPACE
-
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-  // 'dhs-blockly-div',
-  // JSON.stringify(toolbox),
-);
+const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 const categoriasDeseadas = [
   {
@@ -267,11 +219,6 @@ bloquesCustomStandardDesados.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
-//pruebas render y theme
-// render.makeConstants_()
-// const customCategory = new CustomCategory()
-// customCategory.setear();
-// const theme = customTheme.theme;
 const render = new CustomRenderer();
 render.registrarRender("renderDHS");
 miControlador.crearInyectarWorkspace("dhs-blockly-div", {
@@ -311,5 +258,4 @@ const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
   miControlador.callbackInterpreteStandard(interpreter, globalObject);
   callBackJuego(interpreter, globalObject);
-  //callbackExtras(interpreter, globalObject);
 });
