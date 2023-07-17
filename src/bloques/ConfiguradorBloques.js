@@ -260,9 +260,50 @@ export default class ConfiguradorBloques {
                 "message0": "%2 mover abajo %1 casillas",
                 "args0": [
                     {
-                        "type": "field_number",
+                        "type": "field_dropdown",
                         "name": "CASILLAS",
-                        "value": 1,
+                        "options": [
+                            [
+                                "1",
+                                "1"
+                            ],
+                            [
+                                "2",
+                                "2"
+                            ],
+                            [
+                                "3",
+                                "3"
+                            ],
+                            [
+                                "4",
+                                "4"
+                            ],
+                            [
+                                "5",
+                                "5"
+                            ],
+                            [
+                                "6",
+                                "6"
+                            ],
+                            [
+                                "7",
+                                "7"
+                            ],
+                            [
+                                "8",
+                                "8"
+                            ],
+                            [
+                                "9",
+                                "9"
+                            ],
+                            [
+                                "10",
+                                "10"
+                            ],
+                        ]
                     },
                     {
                         "type": "field_image",
@@ -311,9 +352,50 @@ export default class ConfiguradorBloques {
                 "message0": "%2 mover arriba %1 casillas",
                 "args0": [
                     {
-                        "type": "field_number",
+                        "type": "field_dropdown",
                         "name": "CASILLAS",
-                        "value": 1,
+                        "options": [
+                            [
+                                "1",
+                                "1"
+                            ],
+                            [
+                                "2",
+                                "2"
+                            ],
+                            [
+                                "3",
+                                "3"
+                            ],
+                            [
+                                "4",
+                                "4"
+                            ],
+                            [
+                                "5",
+                                "5"
+                            ],
+                            [
+                                "6",
+                                "6"
+                            ],
+                            [
+                                "7",
+                                "7"
+                            ],
+                            [
+                                "8",
+                                "8"
+                            ],
+                            [
+                                "9",
+                                "9"
+                            ],
+                            [
+                                "10",
+                                "10"
+                            ],
+                        ]
                     },
                     {
                         "type": "field_image",
@@ -360,9 +442,50 @@ export default class ConfiguradorBloques {
                 "message0": "%2 mover a la derecha %1 casillas",
                 "args0": [
                     {
-                        "type": "field_number",
+                        "type": "field_dropdown",
                         "name": "CASILLAS",
-                        "value": 1,
+                        "options": [
+                            [
+                                "1",
+                                "1"
+                            ],
+                            [
+                                "2",
+                                "2"
+                            ],
+                            [
+                                "3",
+                                "3"
+                            ],
+                            [
+                                "4",
+                                "4"
+                            ],
+                            [
+                                "5",
+                                "5"
+                            ],
+                            [
+                                "6",
+                                "6"
+                            ],
+                            [
+                                "7",
+                                "7"
+                            ],
+                            [
+                                "8",
+                                "8"
+                            ],
+                            [
+                                "9",
+                                "9"
+                            ],
+                            [
+                                "10",
+                                "10"
+                            ],
+                        ]
                     },
                     {
                         "type": "field_image",
@@ -410,9 +533,50 @@ export default class ConfiguradorBloques {
                 "message0": "%2 mover a la izquierda %1 casillas",
                 "args0": [
                     {
-                        "type": "field_number",
+                        "type": "field_dropdown",
                         "name": "CASILLAS",
-                        "value": 1,
+                        "options": [
+                            [
+                                "1",
+                                "1"
+                            ],
+                            [
+                                "2",
+                                "2"
+                            ],
+                            [
+                                "3",
+                                "3"
+                            ],
+                            [
+                                "4",
+                                "4"
+                            ],
+                            [
+                                "5",
+                                "5"
+                            ],
+                            [
+                                "6",
+                                "6"
+                            ],
+                            [
+                                "7",
+                                "7"
+                            ],
+                            [
+                                "8",
+                                "8"
+                            ],
+                            [
+                                "9",
+                                "9"
+                            ],
+                            [
+                                "10",
+                                "10"
+                            ],
+                        ]
                     },
                     {
                         "type": "field_image",
@@ -502,9 +666,50 @@ export default class ConfiguradorBloques {
                 "message0": "%2 avanzar %1 casillas",
                 "args0": [
                     {
-                        "type": "field_number",
+                        "type": "field_dropdown",
                         "name": "CASILLAS",
-                        "value": 1,
+                        "options": [
+                            [
+                                "1",
+                                "1"
+                            ],
+                            [
+                                "2",
+                                "2"
+                            ],
+                            [
+                                "3",
+                                "3"
+                            ],
+                            [
+                                "4",
+                                "4"
+                            ],
+                            [
+                                "5",
+                                "5"
+                            ],
+                            [
+                                "6",
+                                "6"
+                            ],
+                            [
+                                "7",
+                                "7"
+                            ],
+                            [
+                                "8",
+                                "8"
+                            ],
+                            [
+                                "9",
+                                "9"
+                            ],
+                            [
+                                "10",
+                                "10"
+                            ],
+                        ]
                     },
                     {
                         "type": "field_image",
