@@ -146,7 +146,7 @@ class Controlador {
     if (this.inputBloquesSueltos) {
       inputBloquesSueltos.addEventListener("change", () => {
         if (this.desactivaHuerfanos) {
-          this.inahilitarDesactivarHuerfanos();
+          this.inhabilitarDesactivarHuerfanos();
         } else {
           this.habilitarDesactivarHuerfanos();
         }
@@ -436,7 +436,7 @@ class Controlador {
     );
   }
 
-  inahilitarDesactivarHuerfanos() {
+  inhabilitarDesactivarHuerfanos() {
     this.desactivaHuerfanos = false;
     this.workspace.removeChangeListener(this.eventoHuerfanos);
   }
