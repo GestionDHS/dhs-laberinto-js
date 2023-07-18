@@ -1,6 +1,11 @@
 import { Escenario } from "./Escenario";
 
-import { PersonajeBasico, PersonajeDibujante, PersonajeMovibleSimple, PersonajeMovibleGrados } from "./Personaje";
+import {
+  PersonajeBasico,
+  PersonajeDibujante,
+  PersonajeMovibleSimple,
+  PersonajeMovibleGrados,
+} from "./Personaje";
 
 import { Modal } from "./Modal";
 
@@ -18,12 +23,10 @@ export class Juego {
       PersonajeBasico: PersonajeBasico,
       PersonajeDibujante: PersonajeDibujante,
       PersonajeMovibleSimple: PersonajeMovibleSimple,
-      PersonajeMovibleGrados: PersonajeMovibleGrados
-
+      PersonajeMovibleGrados: PersonajeMovibleGrados,
     };
-    
   }
-  
+
   /*PARA RENDERIZAR ESCENARIO*/
   // La funcion recibe la matriz tablero la unidad de ancho, el color de bordes, nombre imagen pared, nombre imagen camino
 
@@ -80,7 +83,6 @@ export class Juego {
       this.listaDePersonajes.push(unPersonaje);
       unPersonaje.inicializar();
     });
-   
   }
 
   setearPersonajePrincipal(personaje) {
@@ -104,7 +106,8 @@ export class Juego {
   reiniciar() {
     this.puedeDebeContinuar = true;
     this.listaDePersonajes.forEach((personaje) => {
-      personaje.reiniciar();
+      //personaje.reiniciar();
+      personaje.inicializar();
     });
     //this.datosModal.ocultar(); - lo saqué de acá por que puse un setTimeout para que se oculte solo
   }
@@ -116,7 +119,6 @@ export class Juego {
   mostrarModal() {
     this.datosModal.mostrar(this.sincronico);
   }
-
 
   habilitarFuncionGlobal(nombre, bindearCon = this.personajePrincipal) {
     window[nombre] = bindearCon[nombre].bind(bindearCon);
@@ -139,5 +141,4 @@ export class Juego {
       });
     };
   }
-
 }

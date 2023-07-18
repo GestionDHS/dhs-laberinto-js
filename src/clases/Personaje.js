@@ -33,7 +33,29 @@ export class PersonajeBasico {
     //this.inicializar();
   }
 
-  reinicioComun() {
+  // reinicioComun() {
+  //   this.estaVivo = true;
+  //   this.juntadosCount = 0; //contador de cuanta mugre levanta...
+  //   this.removerTooltip();
+  //   this.setearEstado(this.estadoInicial);
+  //   this.pintarse(this.colorFondoInicial);
+  //   this.direccion = this.direccionInicial;
+  //   this.controladorDOM.rotarPersonaje(this.direccion);
+  //   this.controladorDOM.posicionarPersonajeEnHtml(
+  //     this.posicionInicialY,
+  //     this.posicionInicialX
+  //   );
+  //   this.setearVelocidad(this.juego.duracionIntervalos);
+  // }
+
+  inicializar() {
+    //this.reinicioComun();
+    this.actualizarCasillero(
+      this.posicionInicialY,
+      this.posicionInicialX,
+      true
+    );
+    this.mochila = [];
     this.estaVivo = true;
     this.juntadosCount = 0; //contador de cuanta mugre levanta...
     this.removerTooltip();
@@ -48,20 +70,11 @@ export class PersonajeBasico {
     this.setearVelocidad(this.juego.duracionIntervalos);
   }
 
-  inicializar() {
-    this.reinicioComun();
-    this.actualizarCasillero(
-      this.posicionInicialY,
-      this.posicionInicialX,
-      true
-    );
-  }
-
   reiniciar() {
-    this.reinicioComun();
-    this.mochila = [];
-    this.posicionActualX = this.posicionInicialX;
-    this.posicionActualY = this.posicionInicialY;
+    // this.reinicioComun();
+    // this.mochila = [];
+    // this.posicionActualX = this.posicionInicialX;
+    // this.posicionActualY = this.posicionInicialY;
   }
 
   setearEstado(nuevoStatus) {
@@ -84,6 +97,11 @@ export class PersonajeBasico {
   }
 
   actualizarCasillero(nuevaY, nuevaX) {
+    this.casilleroActual?.ocupantes.splice(
+      this.casilleroActual?.ocupantes.indexOf(this),
+      1
+    );
+    //console.log(this.casilleroActual.ocupante.indexOf(this))
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
     //this.controladorDOM.setearObjetosCasilleros(nuevaY, nuevaX);
@@ -94,6 +112,7 @@ export class PersonajeBasico {
       nuevaX
     );
     //console.log(this.casilleroActual.ocupantes)
+
     this.casilleroActual.ocupantes.push(this);
   }
 
@@ -148,7 +167,8 @@ export class PersonajeBasico {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
       premio: acto && acto.exito ? acto.premio : null,
-      estado: acto && acto.estado,
+      estadoPosterior: acto && acto.estadoPosterior,
+      estadoPrevio: acto && acto.estadoPrevio,
     };
   }
   //para abrir cofre y cosechar zanahorias
@@ -165,16 +185,24 @@ export class PersonajeBasico {
   }
   //para juntar la basura y también para comer
   serJuntado() {
+    const estadoPrevio = this.estadoActual;
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
+      
       this.setearEstado("juntado");
 
       return {
         exito: true,
         premio: { tipo: this.tipoPersonaje, cantidad: 1 },
-        estado: this.estadoActual,
+        estadoPosterior: this.estadoActual,
+        estadoPrevio: estadoPrevio,
       };
     } else {
-      return { exito: false, premio: null, estado: this.estadoActual };
+      return {
+        exito: false,
+        premio: null,
+        estadoPosterior: this.estadoActual,
+        estadoPrevio: estadoPrevio,
+      };
     }
   }
   pintarse(color) {
@@ -303,7 +331,7 @@ class PersonajeMovible extends PersonajeBasico {
       // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
       objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
       objetoAux.callback && objetoAux.callback(this);
-      this.casilleroActual.ocupantes.pop();
+      //this.casilleroActual.ocupantes.pop();
       this.controladorDOM.posicionarPersonajeEnHtml(
         this.posicionActualY + vectorY * objetoAux.factorDeAvance,
         this.posicionActualX + vectorX * objetoAux.factorDeAvance
