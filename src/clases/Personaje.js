@@ -169,6 +169,7 @@ export class PersonajeBasico {
   }
 
   abrirYMostrarModal() {
+    this.terminar();
     this.juego.mostrarModal();
     return true;
   }
