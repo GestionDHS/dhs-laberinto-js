@@ -76,10 +76,7 @@ export class PersonajeBasico {
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
     //Personaje debería conocer el escenario para poder reutilizar el metodo otenerCasillero
-    this.casilleroActual = this.controladorDOM.obtenerCasilleroActual(
-      nuevaY,
-      nuevaX
-    );
+    this.casilleroActual = this.obtenerCasillero(this.posicionActualY,this.posicionActualX);
     this.casilleroActual.ocupantes.push(this);
   }
 
@@ -182,6 +179,11 @@ export class PersonajeBasico {
 
     return objetoColision;
   }
+
+  //ex obtenerCasilleroDestino/ hace lo mismo que el ex obtenerCasilleroActual
+  obtenerCasillero(y, x) {
+    return this.juego.escenario.obtenerCasillero(y, x);
+  }
 }
 
 class controladorPersonajeDOM {
@@ -211,14 +213,6 @@ class controladorPersonajeDOM {
   }
   setearImagen(url) {
     this.imagenAnidada ? this.imagenAnidada.setAttribute("src", url) : null;
-  }
-
-  obtenerCasilleroActual(nuevaY, nuevaX) {
-    return this.escenario.objetosCasilleros[nuevaY][nuevaX];
-  }
-
-  obtenerCasilleroDestino(nuevaY, nuevaX) {
-    return this.escenario.obtenerCasillero(nuevaY, nuevaX);
   }
 
   setearVelocidad(milisegundos) {
@@ -269,7 +263,7 @@ class PersonajeMovible extends PersonajeBasico {
     }
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
-    const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
+    const casilleroDestino = this.obtenerCasillero(
       nuevaY,
       nuevaX
     );
