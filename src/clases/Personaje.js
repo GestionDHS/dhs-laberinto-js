@@ -30,26 +30,11 @@ export class PersonajeBasico {
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
     );
-    //this.inicializar();
   }
 
-  // reinicioComun() {
-  //   this.estaVivo = true;
-  //   this.juntadosCount = 0; //contador de cuanta mugre levanta...
-  //   this.removerTooltip();
-  //   this.setearEstado(this.estadoInicial);
-  //   this.pintarse(this.colorFondoInicial);
-  //   this.direccion = this.direccionInicial;
-  //   this.controladorDOM.rotarPersonaje(this.direccion);
-  //   this.controladorDOM.posicionarPersonajeEnHtml(
-  //     this.posicionInicialY,
-  //     this.posicionInicialX
-  //   );
-  //   this.setearVelocidad(this.juego.duracionIntervalos);
-  // }
+
 
   inicializar() {
-    //this.reinicioComun();
     this.actualizarCasillero(
       this.posicionInicialY,
       this.posicionInicialX,
@@ -68,13 +53,6 @@ export class PersonajeBasico {
       this.posicionInicialX
     );
     this.setearVelocidad(this.juego.duracionIntervalos);
-  }
-
-  reiniciar() {
-    // this.reinicioComun();
-    // this.mochila = [];
-    // this.posicionActualX = this.posicionInicialX;
-    // this.posicionActualY = this.posicionInicialY;
   }
 
   setearEstado(nuevoStatus) {
@@ -227,6 +205,10 @@ export class PersonajeBasico {
 
     return objetoColision;
   }
+
+  obtenerCasillero(y, x) {
+    return this.juego.escenario.obtenerCasillero(y, x);
+  }
 }
 
 class controladorPersonajeDOM {
@@ -265,10 +247,6 @@ class controladorPersonajeDOM {
     return this.escenario.objetosCasilleros[nuevaY][nuevaX];
   }
 
-  obtenerCasilleroDestino(nuevaY, nuevaX) {
-    return this.escenario.obtenerCasillero(nuevaY, nuevaX);
-  }
-
   setearVelocidad(milisegundos) {
     this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s";
     this.imagenAnidada
@@ -304,7 +282,7 @@ class PersonajeMovible extends PersonajeBasico {
     }
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
-    const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
+    const casilleroDestino = this.obtenerCasillero(
       nuevaY,
       nuevaX
     );
