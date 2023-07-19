@@ -76,7 +76,7 @@ const datosModal = {
   oculto: true,
 };
 
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#a0a0a0", edificiosSendero, calle);
+miJuego.generarEscenario(dimensiones, tablero, 2.5, "#a0a0a0");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, edificiosSendero, calle);
 

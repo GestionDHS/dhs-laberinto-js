@@ -45,8 +45,6 @@ export class Juego {
       unidadAnchoDeseada,
       elementoHTMLLaberinto,
       colorBordes,
-      objetoCamino,
-      objetoPared
     );
     //console.log(this.escenario)
     this.escenario.crearEscenario();

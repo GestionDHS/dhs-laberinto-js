@@ -50,8 +50,6 @@ miJuego.generarEscenario(
   tablero,
   2.5,
   "white",
-  recuadroPintableDeseado,
-  recuadroPintableNoDeseado
 );
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(
