@@ -33,7 +33,7 @@ const arbol = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 const pasto = {
   idUsarHTML: "camino",
@@ -48,7 +48,7 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 
 const datosModal = {
@@ -58,7 +58,7 @@ const datosModal = {
   oculto: true,
 };
 
-miJuego.generarEscenario(dimensiones, tablero, 2.7, "#9ca64e", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 2.7, "#9ca64e");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
@@ -101,9 +101,9 @@ const arrayDePersonajes = [
     idUsarHTML: "zanahoria",
     tipoPersonaje: "zanahoria",
     estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" }, 
-      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" }, 
-      juntado: { name: "juntado", imageUrl: "pasto" }, 
+      cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
+      abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "cerrado",
     posicionInicialY: 2,
@@ -120,7 +120,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
-      juntado: { name: "juntado", imageUrl: "pasto" }
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 2,
@@ -137,9 +137,9 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
-      juntado: { name: "juntado", imageUrl: "pasto" }
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
-    estadoInicial: "cerrado", 
+    estadoInicial: "cerrado",
     posicionInicialY: 3,
     posicionInicialX: 2,
     direccionInicial: 0,
@@ -154,7 +154,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
-      juntado: { name: "juntado", imageUrl: "pasto" }
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 3,
@@ -171,7 +171,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
-      juntado: { name: "juntado", imageUrl: "pasto" }
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 4,
@@ -188,7 +188,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "abierto", imageUrl: "zanahoriaCosechada" },
-      juntado: { name: "juntado", imageUrl: "pasto" }
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 4,
@@ -205,7 +205,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
-      juntado: { name: "juntado", imageUrl: "pasto" }
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 5,
@@ -222,7 +222,7 @@ const arrayDePersonajes = [
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" },
       abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
-      juntado: { name: "juntado", imageUrl: "pasto" }
+      juntado: { name: "juntado", imageUrl: "pasto" },
     },
     estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
     posicionInicialY: 5,
@@ -249,13 +249,10 @@ const arrayDePersonajes = [
     paddingImagen: "1px",
     colisiones: [],
   },
-
-  
 ];
 
 miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
-
 
 miJuego.personajePrincipal.cosecharZanahoria = function () {
   const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
@@ -263,34 +260,32 @@ miJuego.personajePrincipal.cosecharZanahoria = function () {
     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
-  } 
+  }
 };
 
 miJuego.personajePrincipal.comerZanahoria = function () {
   const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
- 
+
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-  } else if( intento.estado == "juntado") {
-    return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
-  } else if (!intento.exito ) {
-    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
-  } 
+  } else if (!intento.exito) {
+    if (intento.estadoPrevio == "juntado") {
+      return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
+    } else if (intento.estadoPrevio == "cerrado") {
+      return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+    }
+  }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
   if (this.mochila.length === 16) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron zanahorias sin cosechar.")
+    return this.decirTerminar("¡Oh! Quedaron zanahorias sin cosechar.");
   }
-}
+};
 
-
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-);
+const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 const categoriasDeseadas = [
   {

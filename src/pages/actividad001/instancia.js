@@ -54,7 +54,7 @@ const datosModal = {
   texto: "Encontramos 180 monedas de oro.",
   oculto: true,
 };
-miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 3, "white");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 

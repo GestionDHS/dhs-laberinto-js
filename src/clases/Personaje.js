@@ -6,7 +6,7 @@ export class PersonajeBasico {
     this.idHTML = objetoConfiguracionPersonaje.idUsarHTML;
     this.juego = juego;
     this.galeria = new DHS_Gallery();
-    // TIPOS [JUGABLE, FUEGOS, COFRES, MONEDAS, ENTRADA, SALIDA] -> [Personaje, PersonajeDibujante, PersonajeMovible]
+    // TIPOS [JUGABLE, FUEGOS, COFRES, MONEDAS, ENTRADA, SALIDA] -> [PersonajeBasico, PersonajeDibujante, PersonajeMovible]
     this.tipoPersonaje = objetoConfiguracionPersonaje.tipoPersonaje; // STRING CON EL TIPO DE PERSONAJE
     this.estadosPosibles = objetoConfiguracionPersonaje.estadosPosibles; // OBJETOS DE OBJETOS DE POSIBLES ESTADOS  {clave{nombre:"", imageURL:""}}
     this.estadoInicial = objetoConfiguracionPersonaje.estadoInicial; // STRING CON CLAVE DEL ESTADO INICIAL DEL PERSONAJE
@@ -30,13 +30,18 @@ export class PersonajeBasico {
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
     );
-    //this.inicializar();
   }
 
-  reinicioComun() {
+  inicializar() {
+    this.actualizarCasillero(
+      this.posicionInicialY,
+      this.posicionInicialX,
+      true
+    );
+    this.mochila = [];
     this.estaVivo = true;
-    this.juntadosCount = 0; //contador de cuanta mugre levanta...
-    this.removerTooltip();
+    this.juntadosCount = 0; //contador de cuanta basura/zanahorias/monedas levanta...
+    this.ocultarTooltip();
     this.setearEstado(this.estadoInicial);
     this.pintarse(this.colorFondoInicial);
     this.direccion = this.direccionInicial;
@@ -46,22 +51,6 @@ export class PersonajeBasico {
       this.posicionInicialX
     );
     this.setearVelocidad(this.juego.duracionIntervalos);
-  }
-
-  inicializar() {
-    this.reinicioComun();
-    this.actualizarCasillero(
-      this.posicionInicialY,
-      this.posicionInicialX,
-      true
-    );
-  }
-
-  reiniciar() {
-    this.reinicioComun();
-    this.mochila = [];
-    this.posicionActualX = this.posicionInicialX;
-    this.posicionActualY = this.posicionInicialY;
   }
 
   setearEstado(nuevoStatus) {
@@ -74,38 +63,25 @@ export class PersonajeBasico {
     }
   }
 
-  // obtenerImagenSegunEstado(nuevoStatus) { // pia
-  //   return this.galeria.obtenerUrlDe(this.status[nuevoStatus].imageUrl);
-  // }
-
   //recibe un objeto de tipo colision que tiene (con , seMuere, autoMensaje, mensaje)
   agregarColision(unaColision) {
     this.colisiones.push(unaColision);
   }
 
   actualizarCasillero(nuevaY, nuevaX) {
+    this.casilleroActual?.ocupantes.splice(
+      this.casilleroActual?.ocupantes.indexOf(this),
+      1
+    );
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
-    //this.controladorDOM.setearObjetosCasilleros(nuevaY, nuevaX);
-    //this.casilleroActual = this.escenario.obtenerCasillero(nuevaY,nuevaX)
     //Personaje debería conocer el escenario para poder reutilizar el metodo otenerCasillero
-    this.casilleroActual = this.controladorDOM.obtenerCasilleroActual(
-      nuevaY,
-      nuevaX
-    );
-    //console.log(this.casilleroActual.ocupantes)
+    this.casilleroActual = this.obtenerCasillero(this.posicionActualY,this.posicionActualX);
     this.casilleroActual.ocupantes.push(this);
   }
 
-  visibilizarTooltip(texto, milisegundos = 4000) {
-    // if (this.hasTooltips()) {
-    if (this.tieneTooltip) {
-      this.controladorDOM.elementoTextoTooltip.innerHTML = texto;
-      this.controladorDOM.elementoHTML.classList.add("tooltipVisible");
-      setTimeout(() => {
-        this.controladorDOM.elementoHTML.classList.remove("tooltipVisible");
-      }, milisegundos);
-    }
+  exponerTooltip(texto, milisegundos = 4000) {
+    this.controladorDOM.visibilizarTooltip(texto,milisegundos)
   }
 
   setearVelocidad(nuevaVelocidad) {
@@ -113,16 +89,15 @@ export class PersonajeBasico {
   }
 
   verificarQueEsteVivoYDecir(texto, milisegundos = 3000) {
-    !this.estaVivo ? false : this.visibilizarTooltip(texto, milisegundos);
+    !this.estaVivo ? false : this.exponerTooltip(texto, milisegundos);
   }
 
   decir(texto, milisegundos = 3500) {
     this.verificarQueEsteVivoYDecir(texto, milisegundos);
     // Y LOGGEARLO!!
   }
-
-  removerTooltip() {
-    this.controladorDOM.elementoHTML.classList.remove("tooltipVisible");
+  ocultarTooltip() {
+    this.controladorDOM.removerTooltip();
   }
 
   terminar() {
@@ -148,7 +123,8 @@ export class PersonajeBasico {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
       premio: acto && acto.exito ? acto.premio : null,
-      estado: acto && acto.estado,
+      estadoPosterior: acto && acto.estadoPosterior,
+      estadoPrevio: acto && acto.estadoPrevio,
     };
   }
   //para abrir cofre y cosechar zanahorias
@@ -165,16 +141,23 @@ export class PersonajeBasico {
   }
   //para juntar la basura y también para comer
   serJuntado() {
+    const estadoPrevio = this.estadoActual;
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
 
       return {
         exito: true,
         premio: { tipo: this.tipoPersonaje, cantidad: 1 },
-        estado: this.estadoActual,
+        estadoPosterior: this.estadoActual,
+        estadoPrevio: estadoPrevio,
       };
     } else {
-      return { exito: false, premio: null, estado: this.estadoActual };
+      return {
+        exito: false,
+        premio: null,
+        estadoPosterior: this.estadoActual,
+        estadoPrevio: estadoPrevio,
+      };
     }
   }
   pintarse(color) {
@@ -186,18 +169,21 @@ export class PersonajeBasico {
   }
 
   abrirYMostrarModal() {
+    this.terminar();
     this.juego.mostrarModal();
     return true;
   }
-  // abrirModalFalloApertura() {
-  //   this.juego.datosModalError.mostrar();
-  // }
 
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
 
     return objetoColision;
+  }
+
+  //ex obtenerCasilleroDestino/ hace lo mismo que el ex obtenerCasilleroActual
+  obtenerCasillero(y, x) {
+    return this.juego.escenario.obtenerCasillero(y, x);
   }
 }
 
@@ -211,7 +197,8 @@ class controladorPersonajeDOM {
     this.escenario.elementoHTML.appendChild(this.elementoHTML);
     this.elementoHTML.classList.add("personaje");
     this.elementoHTML.style.zIndex = zIndex;
-    if (tieneTooltip) {
+    this.tieneTooltip = tieneTooltip;
+    if (this.tieneTooltip) {
       this.elementoHTML.classList.add("tooltip");
       this.elementoTextoTooltip = document.createElement("DIV");
       this.elementoTextoTooltip.id = this.elementoHTML.id + "-txtTltp";
@@ -227,18 +214,6 @@ class controladorPersonajeDOM {
   }
   setearImagen(url) {
     this.imagenAnidada ? this.imagenAnidada.setAttribute("src", url) : null;
-  }
-  // setearObjetosCasilleros(nuevaY, nuevaX) {
-  //   //console.log(nuevaY, nuevaX)
-  //   this.escenario.objetosCasilleros[nuevaY][nuevaX];
-  // }
-
-  obtenerCasilleroActual(nuevaY, nuevaX) {
-    return this.escenario.objetosCasilleros[nuevaY][nuevaX];
-  }
-
-  obtenerCasilleroDestino(nuevaY, nuevaX) {
-    return this.escenario.obtenerCasillero(nuevaY, nuevaX);
   }
 
   setearVelocidad(milisegundos) {
@@ -264,6 +239,19 @@ class controladorPersonajeDOM {
   setearColorDeFondo(color) {
     this.elementoHTML.style.backgroundColor = color;
   }
+
+  visibilizarTooltip(texto, milisegundos = 4000) {
+    if (this.tieneTooltip) {
+      this.elementoTextoTooltip.innerHTML = texto;
+      this.elementoHTML.classList.add("tooltipVisible");
+      setTimeout(() => {
+        this.elementoHTML.classList.remove("tooltipVisible");
+      }, milisegundos);
+    }
+  }
+  removerTooltip() {
+    this.elementoHTML.classList.remove("tooltipVisible");
+  }
 }
 
 class PersonajeMovible extends PersonajeBasico {
@@ -276,7 +264,7 @@ class PersonajeMovible extends PersonajeBasico {
     }
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
-    const casilleroDestino = this.controladorDOM.obtenerCasilleroDestino(
+    const casilleroDestino = this.obtenerCasillero(
       nuevaY,
       nuevaX
     );
@@ -290,7 +278,7 @@ class PersonajeMovible extends PersonajeBasico {
         mensaje: "¡OH NO! me caí del mapa. ",
       };
 
-      this.visibilizarTooltip(limite.mensaje);
+      this.exponerTooltip(limite.mensaje);
       limite.callback(this);
       this.controladorDOM.posicionarPersonajeEnHtml(
         this.posicionActualY + vectorY * limite.factorDeAvance,
@@ -298,12 +286,9 @@ class PersonajeMovible extends PersonajeBasico {
       );
     } else {
       let objetoAux = this.verificarColision(casilleroDestino);
-      // console.log(objetoAux);
-      //objetoAux.factorDeAvance<1 && this.visibilizarTooltip(objetoAux.mensaje)
-      // objetoAux.factorDeAvance<1 && objetoAux.seMuere && this.terminar()
-      objetoAux.mensaje && this.visibilizarTooltip(objetoAux.mensaje);
+      objetoAux.mensaje && this.exponerTooltip(objetoAux.mensaje);
       objetoAux.callback && objetoAux.callback(this);
-      this.casilleroActual.ocupantes.pop();
+      //this.casilleroActual.ocupantes.pop();
       this.controladorDOM.posicionarPersonajeEnHtml(
         this.posicionActualY + vectorY * objetoAux.factorDeAvance,
         this.posicionActualX + vectorX * objetoAux.factorDeAvance

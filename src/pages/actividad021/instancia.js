@@ -57,7 +57,7 @@ const datosModal = {
   oculto: true,
 };
 
-miJuego.generarEscenario(dimensiones, tablero, 2.7, "#007a4c", juncoPastoDelta, agua);
+miJuego.generarEscenario(dimensiones, tablero, 2.7, "#357fbf");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 

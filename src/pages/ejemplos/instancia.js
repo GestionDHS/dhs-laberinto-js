@@ -61,9 +61,9 @@ const datosModal = {
 };
 
 // QUINTO:Para generar el escenario recibe como parametros: dimensiones, el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa "em") el color de borde y las imagenes de pared y camino...(para los nombres de paredes
+//(ojo esta en medida relativa "em") el color de borde ...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, tablero, 3, "white", arbol, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 3, "white");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 

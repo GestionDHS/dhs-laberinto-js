@@ -64,7 +64,7 @@ const datosModal = {
   texto: "Juntaste todas las monedas de los cofres!",
   oculto: true,
 };
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e", cerco, pasto);
+miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, cerco, pasto);
 
