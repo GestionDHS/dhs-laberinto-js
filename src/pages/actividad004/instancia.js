@@ -47,12 +47,7 @@ const datosModal = {
 };
 miJuego.generarEscenario(
   dimensiones,
-<<<<<<< HEAD
   2.5,
-=======
-  tablero,
-  2.5,//anchoDeseado
->>>>>>> develop
   "white"
 );
 miJuego.agregarModal(datosModal);
