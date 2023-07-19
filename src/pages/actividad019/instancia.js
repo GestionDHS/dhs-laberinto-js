@@ -119,7 +119,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px",
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -134,7 +134,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px",
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -149,7 +149,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px",
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -164,7 +164,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px",
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "plastico",
@@ -179,7 +179,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px",
+    paddingImagen: "1px"
   },
   {
     idUsarHTML: "familiaPato",
@@ -194,7 +194,7 @@ const arrayDePersonajes = [
     zIndex: 1,
     rotable: false,
     colisiones: [],
-    paddingImagen: "1px",
+    paddingImagen: "1px"
   },
 ];
 
