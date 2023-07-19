@@ -29,21 +29,15 @@ export class Juego {
 
   generarEscenario(
     dimensiones,
-    tablero,
     unidadAnchoDeseada,
-    colorBordes,
-    objetoPared,
-    objetoCamino
+    colorBordes
   ) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
       dimensiones,
-      tablero,
       unidadAnchoDeseada,
       elementoHTMLLaberinto,
-      colorBordes,
-      objetoCamino,
-      objetoPared
+      colorBordes
     );
     //console.log(this.escenario)
     this.escenario.crearEscenario();

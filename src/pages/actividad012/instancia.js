@@ -45,7 +45,7 @@ const datosModal = {
   texto: "Lograste realizar el dibujo",
   oculto: true,
 };
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "white", recuadroPintableDeseado,  recuadroPintableNoDeseado);
+miJuego.generarEscenario(dimensiones, 2.5, "white");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, recuadroPintableDeseado, recuadroPintableNoDeseado);
 

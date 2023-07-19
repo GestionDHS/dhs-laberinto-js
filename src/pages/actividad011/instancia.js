@@ -58,7 +58,7 @@ const datosModal = {
   oculto: true,
 };
 
-miJuego.generarEscenario(dimensiones, tablero, 2.7, "#9ca64e", arbol, pasto);
+miJuego.generarEscenario(dimensiones, 2.7, "#9ca64e");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 

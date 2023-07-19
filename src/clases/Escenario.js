@@ -3,21 +3,15 @@ import { DHS_Gallery } from "./Dhs-galeria";
 export class Escenario {
   constructor(
     dimensiones,
-    tablero,
     unidadAnchoDeseada,
     elementoHTML,
-    colorBordes,
-    objetoCamino,
-    objetoPared
+    colorBordes
   ) {
     this.galeria = new DHS_Gallery();
     this.dimensiones = dimensiones;
-    this.tablero = tablero;
     this.unidadAnchoDeseada = unidadAnchoDeseada;
     this.elementoHTML = elementoHTML;
     this.colorBordes = colorBordes;
-    this.objetoCamino = objetoCamino;
-    this.objetoPared = objetoPared;
     this.objetosCasilleros = []; // La matriz de objetos Casillero
   }
   crearEscenario() {
@@ -47,17 +41,6 @@ export class Escenario {
         position: absolute;
       }
       `;
-    // .casillero-arbol{
-    //   background-image: url(${this.galeria.obtenerUrlDe(
-    //     this.objetoPared.estadosPosibles.normal.imageUrl
-    //   )})
-    // }
-
-    // .casillero-camino{
-    //   background-image: url(${this.galeria.obtenerUrlDe(
-    //     this.objetoCamino.estadosPosibles.normal.imageUrl
-    //   )})
-    //}
     document.querySelector("head").appendChild(reglaCasilleros);
     this.renderizarLaberinto();
   }
@@ -67,14 +50,12 @@ export class Escenario {
   }
 
   renderizarLaberinto() {
-    let anchoTotal = this.unidadAnchoDeseada * this.tablero[0].length;
-    let altoTotal = this.unidadAnchoDeseada * this.tablero.length;
+    let anchoTotal = this.unidadAnchoDeseada * this.dimensiones[1];
+    let altoTotal = this.unidadAnchoDeseada * this.dimensiones[0];
     this.elementoHTML.style.width = anchoTotal + "em";
     this.elementoHTML.style.height = altoTotal + "em";
-    //return [anchoTotal,altoTotal]
   }
   obtenerCasillero(posicionY, posicionX) {
-    //console.log(this.objetosCasilleros[posicionY][posicionX]);
     const fila = this.objetosCasilleros[posicionY];
     const casillero = fila ? fila[posicionX] : null;
     return casillero;
@@ -96,10 +77,10 @@ export class Casillero {
 
   hayColisionCon(colisiones) {
     let obj = { factorDeAvance: 1 };
-    colisiones.forEach((o) => {
-      let objetoColisionante = this.verSiExisteEnArray(o);
+    colisiones.forEach((objeto) => {
+      let objetoColisionante = this.verSiExisteEnArray(objeto);
       if (objetoColisionante) {
-        obj = o;
+        obj = objeto;
         obj.objetoColisionante = objetoColisionante;
       }
     });
@@ -107,7 +88,7 @@ export class Casillero {
   }
   verSiExisteEnArray(object) {
     let objEncontrado = this.ocupantes.find(
-      (o) => o.tipoPersonaje === object.con
+      (ocupante) => ocupante.tipoPersonaje === object.con
     );
     return objEncontrado;
   }

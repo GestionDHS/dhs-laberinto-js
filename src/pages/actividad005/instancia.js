@@ -49,11 +49,8 @@ const datosModal = {
 }; "red",
 miJuego.generarEscenario(
   dimensiones,
-  tablero,
-  2, //anchoDeseado
-  "white",
-  recuadroPintableDeseado,
-  recuadroPintableNoDeseado
+  2,
+  "white"
 );
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(
