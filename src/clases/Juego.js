@@ -35,8 +35,6 @@ export class Juego {
     tablero,
     unidadAnchoDeseada,
     colorBordes,
-    objetoPared,
-    objetoCamino
   ) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
