@@ -63,8 +63,8 @@ const datosModal = {
   texto: "¿Sabías que los carpinchos son un tipo de ROEDOR?¡Como los ratones!",
   oculto: true,
 };
-//787878
-miJuego.generarEscenario(dimensiones, tablero, 3, "#787878");
+// "#787878"
+miJuego.generarEscenario(dimensiones, 3, "#a0a0a0");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, edificiosSendero, calle);
 

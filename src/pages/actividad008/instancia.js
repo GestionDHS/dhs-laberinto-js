@@ -20,7 +20,6 @@ const tablero = [
   [1, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1, 1],
-  
 ];
 
 const arbol = {
@@ -35,7 +34,7 @@ const arbol = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 const pasto = {
   idUsarHTML: "camino",
@@ -50,7 +49,7 @@ const pasto = {
   posicionInicialX: 0,
   direccionInicial: 0,
   rotable: false,
-  paddingImagen: "1px"
+  paddingImagen: "1px",
 };
 
 const datosModal = {
@@ -60,7 +59,7 @@ const datosModal = {
   oculto: true,
 };
 
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#9ca64e");
+miJuego.generarEscenario(dimensiones, 2.5, "#9ca64e");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
@@ -98,22 +97,6 @@ const arrayDePersonajes = [
         mensaje: "¡OH NO! Choqué contra un árbol",
       },
     ],
-  }, 
-  {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", 
-    posicionInicialY: 2,
-    posicionInicialX: 2,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px"
   },
   {
     idUsarHTML: "cofre",
@@ -122,7 +105,23 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", 
+    estadoInicial: "cerrado",
+    posicionInicialY: 2,
+    posicionInicialX: 2,
+    direccionInicial: 0,
+    zIndex: 2,
+    rotable: false,
+    colisiones: [],
+    paddingImagen: "1px",
+  },
+  {
+    idUsarHTML: "cofre",
+    tipoPersonaje: "cofre",
+    estadosPosibles: {
+      cerrado: { name: "cerrado", imageUrl: "cofre" },
+      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
+    },
+    estadoInicial: "cerrado",
     posicionInicialY: 3,
     posicionInicialX: 3,
     direccionInicial: 0,
@@ -138,7 +137,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", 
+    estadoInicial: "cerrado",
     posicionInicialY: 4,
     posicionInicialX: 4,
     direccionInicial: 0,
@@ -154,7 +153,7 @@ const arrayDePersonajes = [
       cerrado: { name: "cerrado", imageUrl: "cofre" },
       abierto: { name: "abierto", imageUrl: "cofreAbierto" },
     },
-    estadoInicial: "cerrado", 
+    estadoInicial: "cerrado",
     posicionInicialY: 5,
     posicionInicialX: 5,
     direccionInicial: 0,
@@ -168,9 +167,9 @@ const arrayDePersonajes = [
     tipoPersonaje: "bandera",
     estadosPosibles: {
       cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" }, 
+      abierto: { name: "abierto", imageUrl: "bandera" },
     },
-    estadoInicial: "cerrado", 
+    estadoInicial: "cerrado",
     posicionInicialY: 1,
     posicionInicialX: 5,
     direccionInicial: 0,
@@ -190,22 +189,18 @@ miJuego.personajePrincipal.abrirCofre = function () {
     return this.decirTerminar("¡Oh! Aquí no hay cofre.");
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
-  } 
+  }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
   if (this.mochila.length === 4) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.")
+    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
   }
-}
+};
 
-
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-);
+const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 const categoriasDeseadas = [
   {
