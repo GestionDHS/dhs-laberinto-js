@@ -56,8 +56,8 @@ const datosModal = {
   texto: "¿Sabías que el río Paraná tiene 4880 kilómetros de largo?",
   oculto: true,
 };
-//2d6ca3
-miJuego.generarEscenario(dimensiones, tablero, 2.5, "#357fbf");
+
+miJuego.generarEscenario(dimensiones, 2.5, "#357fbf");
 miJuego.agregarModal(datosModal);
 miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
