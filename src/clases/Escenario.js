@@ -7,8 +7,6 @@ export class Escenario {
     unidadAnchoDeseada,
     elementoHTML,
     colorBordes,
-    objetoCamino,
-    objetoPared
   ) {
     this.galeria = new DHS_Gallery();
     this.dimensiones = dimensiones;
@@ -16,8 +14,6 @@ export class Escenario {
     this.unidadAnchoDeseada = unidadAnchoDeseada;
     this.elementoHTML = elementoHTML;
     this.colorBordes = colorBordes;
-    this.objetoCamino = objetoCamino;
-    this.objetoPared = objetoPared;
     this.objetosCasilleros = []; // La matriz de objetos Casillero
   }
   crearEscenario() {
