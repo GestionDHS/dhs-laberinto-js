@@ -97,7 +97,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript['on_execute'] = function (block) {
+        Blockly.JavaScript.forBlock['on_execute'] = function (block) {
             let code = Blockly.JavaScript.statementToCode(block, 'EVENT');
             // console.log(code);
             return code;
@@ -135,7 +135,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_down_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_down_simple"] = function (block) {
             const code = "moverAbajo();\n";
             return code;
         };
@@ -167,7 +167,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_up_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_up_simple"] = function (block) {
             const code = "moverArriba();\n"
             return code;
         };
@@ -200,7 +200,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_right_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_right_simple"] = function (block) {
             const code = "moverDerecha();\n";
             return code;
         };
@@ -232,7 +232,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_left_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_left_simple"] = function (block) {
             const code = "moverIzquierda();\n"
             return code;
         };
@@ -334,7 +334,7 @@ export default class ConfiguradorBloques {
 
         // Define how to generate JavaScript from the custom block.
         //cambié javascriptGenerator por  Blockly.JavaScript
-        Blockly.JavaScript["move_down_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_down_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverAbajo(" + casillas + ");\n";
             return code;
@@ -425,7 +425,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_up_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_up_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverArriba(" + casillas + ");\n";
             return code;
@@ -515,7 +515,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_right_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_right_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverDerecha(" + casillas + ");\n";
             return code;
@@ -606,7 +606,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_left_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_left_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverIzquierda(" + casillas + ");\n";
             return code;
@@ -739,7 +739,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["avanzar_param"] = function (block) {
+        Blockly.JavaScript.forBlock["avanzar_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "avanzar(" + casillas + ");\n";
             return code;
@@ -773,7 +773,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["girar_derecha"] = function (block) {
+        Blockly.JavaScript.forBlock["girar_derecha"] = function (block) {
             const code = "girarDerecha();\n";
             return code;
         };
@@ -804,7 +804,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["girar_izquierda"] = function (block) {
+        Blockly.JavaScript.forBlock["girar_izquierda"] = function (block) {
             const code = "girarIzquierda();\n";
             return code;
         };
@@ -861,7 +861,7 @@ export default class ConfiguradorBloques {
                 // "extensions": ["turn_degrees_validation"],
             }]);
         
-        Blockly.JavaScript["girar_grados"] = function (block) {
+        Blockly.JavaScript.forBlock["girar_grados"] = function (block) {
             const grados = this.getFieldValue("grados");
                 const code = "girarGrados("+ grados +");\n";
                 return code;
@@ -919,7 +919,7 @@ export default class ConfiguradorBloques {
                 // "extensions": ["turn_degrees_validation"],
             }]);
         
-        Blockly.JavaScript["apuntar_hacia"] = function (block) {
+        Blockly.JavaScript.forBlock["apuntar_hacia"] = function (block) {
             const grados = this.getFieldValue("grados");
                 const code = "apuntarEnDireccion("+ grados +");\n";
                 return code;
@@ -959,7 +959,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["abrir_cofre"] = function (block) {
+        Blockly.JavaScript.forBlock["abrir_cofre"] = function (block) {
             const code = "abrirCofre();\n"
             return code;
         };
@@ -989,7 +989,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["juntar_basura"] = function (block) {
+        Blockly.JavaScript.forBlock["juntar_basura"] = function (block) {
             const code = "juntarBasura();\n"
             return code;
         };
@@ -1020,7 +1020,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["cosechar"] = function (block) {
+        Blockly.JavaScript.forBlock["cosechar"] = function (block) {
             const code = "cosecharZanahoria();\n"
             return code;
         };
@@ -1051,7 +1051,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["comer"] = function (block) {
+        Blockly.JavaScript.forBlock["comer"] = function (block) {
             const code = "comerZanahoria();\n"
             return code;
         };
@@ -1082,7 +1082,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["bajar_lapiz"] = function (block) {
+        Blockly.JavaScript.forBlock["bajar_lapiz"] = function (block) {
             const code = "bajarLapiz();\n"
             return code;
         };
@@ -1112,7 +1112,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["subir_lapiz"] = function (block) {
+        Blockly.JavaScript.forBlock["subir_lapiz"] = function (block) {
             const code = "subirLapiz();\n"
             return code;
         };
