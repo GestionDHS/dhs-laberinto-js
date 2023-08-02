@@ -22,6 +22,7 @@ export class PersonajeBasico {
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
     this.mochila = [];
+    this.eliminarAlReiniciar=objetoConfiguracionPersonaje.eliminarAlReiniciar;
     this.tieneTooltip = objetoConfiguracionPersonaje.tieneTooltip;
     this.controladorDOM = new controladorPersonajeDOM(
       this.tieneTooltip,
@@ -30,6 +31,7 @@ export class PersonajeBasico {
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
     );
+    // this.excluyente = false
   }
 
   inicializar() {
@@ -51,6 +53,9 @@ export class PersonajeBasico {
       this.posicionInicialX
     );
     this.setearVelocidad(this.juego.duracionIntervalos);
+    // if(this.aleatoreo){
+    //   this.setearVelocidad(0);
+    //   }
   }
 
   setearEstado(nuevoStatus) {
@@ -67,21 +72,26 @@ export class PersonajeBasico {
   agregarColision(unaColision) {
     this.colisiones.push(unaColision);
   }
-
-  actualizarCasillero(nuevaY, nuevaX) {
+  salirDelCasilleroActual() {
     this.casilleroActual?.ocupantes.splice(
       this.casilleroActual?.ocupantes.indexOf(this),
       1
     );
+  }
+  actualizarCasillero(nuevaY, nuevaX) {
+    this.salirDelCasilleroActual();
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
     //Personaje debería conocer el escenario para poder reutilizar el metodo otenerCasillero
-    this.casilleroActual = this.obtenerCasillero(this.posicionActualY,this.posicionActualX);
-    this.casilleroActual.ocupantes.push(this);
+    this.casilleroActual = this.obtenerCasillero(
+      this.posicionActualY,
+      this.posicionActualX
+    );
+    this.casilleroActual?.ocupantes.push(this);
   }
 
   exponerTooltip(texto, milisegundos = 4000) {
-    this.controladorDOM.visibilizarTooltip(texto,milisegundos)
+    this.controladorDOM.visibilizarTooltip(texto, milisegundos);
   }
 
   setearVelocidad(nuevaVelocidad) {
@@ -144,7 +154,7 @@ export class PersonajeBasico {
     const estadoPrevio = this.estadoActual;
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
-
+      this.salirDelCasilleroActual();
       return {
         exito: true,
         premio: { tipo: this.tipoPersonaje, cantidad: 1 },
@@ -252,6 +262,9 @@ class controladorPersonajeDOM {
   removerTooltip() {
     this.elementoHTML.classList.remove("tooltipVisible");
   }
+  removerDivDelDOM(){
+    this.elementoHTML.remove()
+  }
 }
 
 class PersonajeMovible extends PersonajeBasico {
@@ -264,10 +277,7 @@ class PersonajeMovible extends PersonajeBasico {
     }
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
-    const casilleroDestino = this.obtenerCasillero(
-      nuevaY,
-      nuevaX
-    );
+    const casilleroDestino = this.obtenerCasillero(nuevaY, nuevaX);
     if (!casilleroDestino) {
       const limite = {
         con: "limitesDelUniverso",
@@ -482,4 +492,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
     }
     return true;
   }
+
+ 
 }

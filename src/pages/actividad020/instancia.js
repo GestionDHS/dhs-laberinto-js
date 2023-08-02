@@ -12,7 +12,7 @@ import carpinchoReal from '../../img/carpinchoReal.png';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 7]; //fila, columna
 

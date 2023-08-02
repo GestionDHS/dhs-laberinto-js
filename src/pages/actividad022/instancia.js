@@ -9,7 +9,7 @@ document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego y setear velocidad
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 //SEGUNDO: CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO, se crea la variable dimensiónes.
 const dimensiones = [5, 6]; //fila, columna
@@ -165,66 +165,64 @@ miJuego.generarPersonajes(arrayDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
 //Método para Abrir el Cofre
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+// miJuego.personajePrincipal.abrirCofre = function () {
+//   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("Oh! Aquí no hay cofre.");
-    //this.abrirModalFalloApertura();
-  } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
-    return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
-  } else {
-    return this.abrirYMostrarModal();
-  }
-};
+//   if (!intento.objetoEncontrado) {
+//     return this.decirTerminar("Oh! Aquí no hay cofre.");
+//   } else if (!intento.exito) {
+//     return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
+//   } else {
+//     return this.abrirYMostrarModal();
+//   }
+// };
 
-//Método para Juntar Basura
-miJuego.personajePrincipal.juntarBasura = function () {
-  const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
-  if (!intento.objetoEncontrado) {
-    this.decirTerminar("Oh! Aquí no hay basura.");
-  } else if (!intento.exito) {
-    this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
-  }
-  return intento;
-};
+// //Método para Juntar Basura
+// miJuego.personajePrincipal.juntarBasura = function () {
+//   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
+//   if (!intento.objetoEncontrado) {
+//     this.decirTerminar("Oh! Aquí no hay basura.");
+//   } else if (!intento.exito) {
+//     this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
+//   }
+//   return intento;
+// };
 
-// Lancha
-miJuego.personajePrincipal.llegarPlanta = function () {
-  if (this.mochila.length === 3) {
-    this.abrirYMostrarModal();
-  } else if(!this.intento) {
-    return this.decirTerminar("¡Oh! Quedó basura por levantar.")
-  }
-}
+// // Lancha
+// miJuego.personajePrincipal.llegarPlanta = function () {
+//   if (this.mochila.length === 3) {
+//     this.abrirYMostrarModal();
+//   } else if(!this.intento) {
+//     return this.decirTerminar("¡Oh! Quedó basura por levantar.")
+//   }
+// }
 
-// Pedro - Lupe
-miJuego.personajePrincipal.llegarEscuela = function () {
-  this.abrirYMostrarModal();
-}
+// // Pedro - Lupe
+// miJuego.personajePrincipal.llegarEscuela = function () {
+//   this.abrirYMostrarModal();
+// }
 
-//Conejo - Nelson
-miJuego.personajePrincipal.cosecharZanahoria = function () {
-  const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-  } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
-  } 
-};
+// //Conejo - Nelson
+// miJuego.personajePrincipal.cosecharZanahoria = function () {
+//   const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
+//   if (!intento.objetoEncontrado) {
+//     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+//   } else if (!intento.exito) {
+//     return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
+//   } 
+// };
 
-miJuego.personajePrincipal.comerZanahoria = function () {
-  const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
+// miJuego.personajePrincipal.comerZanahoria = function () {
+//   const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
  
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-  } else if( intento.estado == "juntado") {
-    return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
-  } else if (!intento.exito ) {
-    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
-  } 
-};
+//   if (!intento.objetoEncontrado) {
+//     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+//   } else if( intento.estado == "juntado") {
+//     return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
+//   } else if (!intento.exito ) {
+//     return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+//   } 
+// };
 
 //Seteo del Dibujo a realizar - Verificación. Para los ejercicios que tienen PersonajesDibujables
 // const EJEMPLO_DIBUJO_DESEADO = [
@@ -328,20 +326,20 @@ miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
 
 //TRECEAVO: Exponemos globalmente las funciones de los bloques, borrar las que no usmos en cada ejercicio.
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
-miControlador.juego.agregarGlobalConCallback("juntarBasura");
-miControlador.juego.agregarGlobalConCallback("avanzar");
-miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-miControlador.juego.agregarGlobalConCallback("girarDerecha");
-miControlador.juego.agregarGlobalConCallback("girarGrados");
-miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-miControlador.juego.agregarGlobalConCallback("subirLapiz");
-miControlador.juego.agregarGlobalConCallback("setearColor");
+// miControlador.juego.agregarGlobalConCallback("moverDerecha");
+// miControlador.juego.agregarGlobalConCallback("moverAbajo");
+// miControlador.juego.agregarGlobalConCallback("moverArriba");
+// miControlador.juego.agregarGlobalConCallback("moverIzquierda");
+// miControlador.juego.agregarGlobalConCallback("abrirCofre");
+// miControlador.juego.agregarGlobalConCallback("juntarBasura");
+// miControlador.juego.agregarGlobalConCallback("avanzar");
+// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
+// miControlador.juego.agregarGlobalConCallback("girarDerecha");
+// miControlador.juego.agregarGlobalConCallback("girarGrados");
+// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
+// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
+// miControlador.juego.agregarGlobalConCallback("subirLapiz");
+// miControlador.juego.agregarGlobalConCallback("setearColor");
 
 //Le enviamos las funciones customizadas al interpreter  (No cambia nunca- No se toca)
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();

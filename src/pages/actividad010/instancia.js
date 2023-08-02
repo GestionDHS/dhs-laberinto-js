@@ -8,7 +8,7 @@ import { CustomCategory } from "../../bloques/CustomCategory";
 document.querySelector("#appActividad").innerHTML = template(``);
 // PRIMERO: instanciar el juego
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [9, 11]; //fila, columna
 
