@@ -25,8 +25,7 @@ export function posicionValida(escenario) {
 
 // Funcion para generar coordenadas del tablero
 export function generarCoordenadas(tablero) {
-	let coordenadasPared = [],
-	coordenadasCamino = [];
+	let coordenadasPared = [],coordenadasCamino = [];
 
 	for (let y = 0; y < tablero.length; y++) {
 		for (let x = 0; x < tablero[y].length; x++) {
