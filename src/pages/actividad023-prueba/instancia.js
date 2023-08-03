@@ -105,20 +105,20 @@ let conjuntosDePersonajes = [
   //   aliasConjunto: "azarFijos",
   //   desapareceAlReiniciar: true,
   // },
-  //   {
-  //    estrategia: "azarCantTotalFija",
-  //   personajes: [basura,lodo],
-  //   cantidadTotal: 2,
-  //   aliasConjunto: "azarCantTotalFija",
-  //   desapareceAlReiniciar: true,
-  // },
-  {
-    estrategia: "azarExcluyente",
-   personajes: [basura],
-   posiciones: [[2, 1],[1, 2]],
-   aliasConjunto: "azarExcluyente",
-   desapareceAlReiniciar: true,
- },
+    {
+     estrategia: "azarCantTotalFija",
+    personajes: [basura,lodo],
+    cantidadTotal: 2,
+    aliasConjunto: "azarCantTotalFija",
+    desapareceAlReiniciar: true,
+  },
+//   {
+//     estrategia: "azarExcluyente",
+//    personajes: [lodo,cofre],
+//    posiciones: [[2, 1],[1, 2]],
+//    aliasConjunto: "azarExcluyente",
+//    desapareceAlReiniciar: true,
+//  },
 ];
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
@@ -287,10 +287,10 @@ miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
 
 //TRECEAVO: Exponemos globalmente las funciones de los bloques, borrar las que no usmos en cada ejercicio.
-// miControlador.juego.agregarGlobalConCallback('moverDerecha');
-// miControlador.juego.agregarGlobalConCallback('moverAbajo');
-// miControlador.juego.agregarGlobalConCallback('moverArriba');
-// miControlador.juego.agregarGlobalConCallback('moverIzquierda');
+miControlador.juego.agregarGlobalConCallback('moverDerecha');
+miControlador.juego.agregarGlobalConCallback('moverAbajo');
+miControlador.juego.agregarGlobalConCallback('moverArriba');
+miControlador.juego.agregarGlobalConCallback('moverIzquierda');
 // miControlador.juego.agregarGlobalConCallback("abrirCofre");
 // miControlador.juego.agregarGlobalConCallback("juntarBasura");
 // miControlador.juego.agregarGlobalConCallback("avanzar");

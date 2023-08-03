@@ -72,13 +72,6 @@ export class Juego {
   reiniciar() {
     this.puedeDebeContinuar = true;
     this.limpiarTablero();
-    // console.log(personajes);
-    // personajes.forEach((unPersonaje) => {
-    //   this.generarPersonaje(unPersonaje);
-    // }
-    // nunca guardamos nada en listaDeAleatoreos
-    // console.log();
-    // this.crearPersonajes(this.tipoCreacionPersonajes.crearPersonajes(this.listaDeAleatoreos, this.escenario), true)
     this.crearPersonajes(this.listaDeAleatoreos, true);
   }
 
@@ -195,7 +188,6 @@ export class Juego {
         (p) => p.desapareceAlReiniciar == true
       );
     }
-    // console.log(this.listaDeAleatoreos);
     this.generarConjuntoDePersonajes(conjuntosDePersonajes);
   }
 }

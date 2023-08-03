@@ -123,6 +123,21 @@ export class Dhs_personajes {
             posicionInicialX: 0,
             direccionInicial: 0,
             rotable: false,
+          },
+          lapiz : {
+            idUsarHTML: "lapiz",
+            tipoPersonaje: "lapiz",
+            clasePersonaje: "PersonajeDibujante",
+            tieneTooltip: true,
+            estadosPosibles: {
+              normal: { name: "normal", imageUrl: "lapizRojo" },
+            },
+            estadoInicial: "normal",
+            zIndex: 3,
+            posicionInicialX: 0,
+            direccionInicial: 0,
+            direccionInicial: 0,
+            rotable: true,
           }
     };
 }

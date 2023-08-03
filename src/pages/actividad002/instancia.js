@@ -4,6 +4,8 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import {Dhs_personajes} from '../../clases/Dhs-personajes';
+import {generarCoordenadas} from '../../Utils/Funciones';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
@@ -20,6 +22,10 @@ const tablero = [
   [0, 0, 0, 1, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0],
 ];
+
+const personajesGaleria = new Dhs_personajes();
+const pared = personajesGaleria.obtenerPersonaje("");
+const camino = personajesGaleria.obtenerPersonaje("");
 
 const recuadroPintableDeseado = {
   idUsarHTML: "recuadro-pintable",
@@ -51,34 +57,52 @@ miJuego.generarEscenario(
   "white"
 );
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(
-  dimensiones,
-  tablero,
-  recuadroPintableDeseado,
-  recuadroPintableNoDeseado
-);
+let coordenadasCaminoPared = generarCoordenadas(tablero);
 
-const arrayDePersonajes = [
+const lapiz = { ...personajesGaleria.obtenerPersonaje("lapiz") };
+let conjuntosDePersonajes = [
   {
-    idUsarHTML: "lapiz",
-    tipoPersonaje: "lapiz",
-    clasePersonaje: "PersonajeDibujante",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lapizRojo" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 0,
-    direccionInicial: 0,
-    zIndex: 3,
-    rotable: true,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [pared],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
-];
+  {
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [lapiz],
+    posiciones: [[1, 1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+]
+// const arrayDePersonajes = [
+//   {
+//     idUsarHTML: "lapiz",
+//     tipoPersonaje: "lapiz",
+//     clasePersonaje: "PersonajeDibujante",
+//     tieneTooltip: true,
+//     estadosPosibles: {
+//       normal: { name: "normal", imageUrl: "lapizRojo" },
+//     },
+//     estadoInicial: "normal",
+//     posicionInicialY: 3,
+//     posicionInicialX: 0,
+//     direccionInicial: 0,
+//     zIndex: 3,
+//     rotable: true,
+//     colisiones: [],
+//   },
+// ];
 
-miJuego.generarPersonajes(arrayDePersonajes);
-
+miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 const miColor = "#FA3939";
 
