@@ -96,9 +96,7 @@ export function PersonajesAlAzarExcluyente() {
 		return personajes[random];
 	};
 	this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
-		var personajeACrear = elegirPersonajeRandom(
-			conjuntoPersonajes.personajes
-		);
+		var personajeACrear = elegirPersonajeRandom(conjuntoPersonajes.personajes);
 		personajeACrear.posicionInicialY = posiciones[0][0];
 		personajeACrear.posicionInicialX = posiciones[0][1];
 		personajeACrear.desapareceAlReiniciar =

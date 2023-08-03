@@ -165,8 +165,8 @@ export class Juego {
     const estrategias = {
       fijos: new PersonajesFijos(),
 			azarRango: new PersonajesAlAzarRango(),
-			// PersonajesAlAzarFijos: new PersonajesAlAzarFijos(),
-			// PersonajesAlAzarExcluyente: new PersonajesAlAzarExcluyente(),
+			azarFijos: new PersonajesAlAzarFijos(),
+			azarExcluyente: new PersonajesAlAzarExcluyente(),
 		};
 		conjuntosDePersonajes.forEach((unConjunto) => {
       let personajesAGenerar = [];

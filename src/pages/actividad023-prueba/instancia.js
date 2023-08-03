@@ -56,17 +56,7 @@ const lupe = { ...personajesGaleria.obtenerPersonaje('lupe') };
 const cofre = { ...personajesGaleria.obtenerPersonaje('cofre') };
 const lodo = { ...personajesGaleria.obtenerPersonaje('lodo') };
 
-//configPosicionamiento =
-// posicionesFijas: [
-//   [1, 3],
-//   [2, 2],
-// ],
-//cantidadTotal: 2,
-//cantidadMin: 3,
-//cantidadMax: 6,
-//cantidadTotalPorcentual: 10,
 //SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciones
-
 let conjuntosDePersonajes = [
 	{
 		estrategia: 'fijos',
