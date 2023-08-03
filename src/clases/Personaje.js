@@ -57,7 +57,10 @@ export class PersonajeBasico {
     //   this.setearVelocidad(0);
     //   }
   }
-
+  reiniciar(){
+    this.posicionActualY = this.posicionInicialY;
+    this.posicionActualX = this.posicionInicialX;
+  }
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
     const imagenDeseada = this.estadosPosibles[nuevoStatus].imageUrl;
@@ -122,9 +125,26 @@ export class PersonajeBasico {
     return acto;
   }
 
+  buscarObjetoAdelante(nombreObjeto) {
+    const vector = this.obtenerVectorAvance(this.direccion);
+    return this.buscarObjetoSegunVector(nombreObjeto, vector);
+  }
+
+  buscarObjetoSegunVector(nombreObjeto, vector) {
+    const casillero = this.obtenerCasilleroDestino(vector[0], vector[1]);
+    return this.buscarObjetoEnCasillero(nombreObjeto, casillero);
+  }
+
+  buscarObjetoEnCasillero(nombreObjeto, objetoCasillero) {
+    return objetoCasillero.ocupantes.find(
+      (obj) => obj.tipoPersonaje == nombreObjeto
+    );
+  }
+
   buscarParaRealizarAccion(nameObj, accion, params = false) {
-    const objetoPaciente = this.casilleroActual.ocupantes.find(
-      (obj) => obj.tipoPersonaje == nameObj
+    const objetoPaciente = this.buscarObjetoEnCasillero(
+      nameObj,
+      this.casilleroActual
     );
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
@@ -342,6 +362,31 @@ class PersonajeMovible extends PersonajeBasico {
       return this.estaVivo;
     }
   }
+  obtenerVectorAvance(direccion) {
+    const moduloDireccion360 = direccion % 360; // 0 || +/-90 || +/-180 || +/-270
+    const moduloDireccion360Positivo =
+      moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
+    const puntoCardinal = moduloDireccion360Positivo / 90; // 0 || 1 || 2 || 3
+    if (
+      Number.isInteger(puntoCardinal) &&
+      puntoCardinal >= 0 &&
+      puntoCardinal <= 3
+    ) {
+      const vectores = [
+        [-1, 0],
+        [0, +1],
+        [+1, 0],
+        [0, -1],
+      ];
+      const vectorUsar = vectores[puntoCardinal];
+      return vectorUsar;
+    } else {
+      throw new Error(
+        "Ocurrió un problema al intentar avanzar() en una dirección no permitida: " +
+          direccion
+      );
+    }
+  }
 }
 
 export class PersonajeMovibleSimple extends PersonajeMovible {
@@ -390,31 +435,6 @@ export class PersonajeMovibleGrados extends PersonajeMovible {
     const vector = this.obtenerVectorAvance(this.direccion);
     return this.iterarVectorMovimiento(veces, vector);
   }
-  obtenerVectorAvance(direccion) {
-    const moduloDireccion360 = direccion % 360; // 0 || +/-90 || +/-180 || +/-270
-    const moduloDireccion360Positivo =
-      moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
-    const puntoCardinal = moduloDireccion360Positivo / 90; // 0 || 1 || 2 || 3
-    if (
-      Number.isInteger(puntoCardinal) &&
-      puntoCardinal >= 0 &&
-      puntoCardinal <= 3
-    ) {
-      const vectores = [
-        [-1, 0],
-        [0, +1],
-        [+1, 0],
-        [0, -1],
-      ];
-      const vectorUsar = vectores[puntoCardinal];
-      return vectorUsar;
-    } else {
-      throw new Error(
-        "Ocurrió un problema al intentar avanzar() en una dirección no permitida: " +
-          direccion
-      );
-    }
-  }
 }
 
 export class PersonajeDibujante extends PersonajeMovibleGrados {
@@ -440,7 +460,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       Array.from(row, () => false)
     );
     this.lapizBajado = false;
-    // console.log(this);
   }
 
   bajarLapiz() {
