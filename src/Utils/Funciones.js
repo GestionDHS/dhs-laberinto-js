@@ -65,3 +65,14 @@ export  const obtenerCantidadAleatoria = function (configuracion) {
     ) + configuracion.cantidadMin
   );
 };
+
+//********************SETEA POSICIONES **************************/
+export const setearPosiciones= function(unPersonaje,unaPosicion){
+  unPersonaje.posicionInicialY = unaPosicion[0];
+  unPersonaje.posicionInicialX = unaPosicion[1];
+}
+//******************SETEA ALIAS PARA TEST Y BOOLEANO PARA REINICIO ********************/
+export const setearAliasYAleatorieidad=function(unPersonaje,desapareceAlReiniciar,alias){
+  unPersonaje.desapareceAlReiniciar = desapareceAlReiniciar;
+  unPersonaje.aliasConjunto = alias;
+}

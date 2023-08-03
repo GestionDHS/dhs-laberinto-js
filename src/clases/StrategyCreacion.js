@@ -1,4 +1,4 @@
-import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria} from '../Utils/Funciones';
+import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad} from '../Utils/Funciones';
 
 //Strategy creacion
 export function TipoCreacion() {
@@ -21,16 +21,13 @@ TipoCreacion.prototype = {
 //un personaje Varias posiciones fijas => el personaje en todas las posiciones fijas
 // [personaje], {posiciones: [[y,x], [y,x], [y,x]]} 
 export function PersonajesFijos() {
-  this.crearPersonajes = function (conjuntoPersonajes) {
+  this.crearPersonajes = function (conjuntoPersonajes,_escenario) {
     let personajesACrear = [];
     conjuntoPersonajes.personajes.forEach((unPersonaje) => {
       conjuntoPersonajes.posiciones.forEach((unaPosicion) => {
         let copiaPersonaje = { ...unPersonaje };
-        copiaPersonaje.posicionInicialY = unaPosicion[0];
-        copiaPersonaje.posicionInicialX = unaPosicion[1];
-        copiaPersonaje.desapareceAlReiniciar =
-          conjuntoPersonajes.desapareceAlReiniciar;
-        copiaPersonaje.aliasConjunto = conjuntoPersonajes.aliasConjunto;
+        setearPosiciones(copiaPersonaje,unaPosicion)
+        setearAliasYAleatorieidad(copiaPersonaje,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(copiaPersonaje);
       });
     });
@@ -50,11 +47,8 @@ export function PersonajesAlAzarRango() {
         conjuntoPersonajes.personajes
       );
       let copiaPersonaje = { ...personajeAlAzar };
-      copiaPersonaje.posicionInicialY = posiciones[0];
-      copiaPersonaje.posicionInicialX = posiciones[1];
-      copiaPersonaje.desapareceAlReiniciar =
-        conjuntoPersonajes.desapareceAlReiniciar;
-      copiaPersonaje.aliasConjunto = conjuntoPersonajes.aliasConjunto;
+      setearPosiciones(copiaPersonaje,posiciones)
+      setearAliasYAleatorieidad(copiaPersonaje,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
       personajesACrear.push(copiaPersonaje);
     }
     return personajesACrear;
@@ -71,11 +65,8 @@ export function PersonajesAlAzarCantTotalFijos() {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
         const posiciones = posicionValida(escenario);
         let personajeAux = { ...personajeElegido };
-        personajeAux.posicionInicialY = posiciones[0];
-        personajeAux.posicionInicialX = posiciones[1];
-        personajeAux.desapareceAlReiniciar =
-          conjuntoPersonajes.desapareceAlReiniciar;
-        personajeAux.aliasConjunto = conjuntoPersonajes.aliasConjunto;
+        setearPosiciones(personajeAux,posiciones)
+        setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(personajeAux);
       }
   
@@ -86,7 +77,7 @@ export function PersonajesAlAzarCantTotalFijos() {
 // varios personajes, varias posiciones fijas => toma 1 personaje, y toma una posicion posible para cada uno
 // [personje, personaje], posiciones:[[2,1],[1,2]]
 export function PersonajesAlAzarFijos() {
-    this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
       let personajesACrear = []
       const cantidad = conjuntoPersonajes.posiciones.length;
       for (let i = 0; i < cantidad; i++) {
@@ -94,11 +85,8 @@ export function PersonajesAlAzarFijos() {
         const numRandom = elegirPosicionRandom(conjuntoPersonajes.posiciones)
         const posiciones = conjuntoPersonajes.posiciones[numRandom]
         let personajeAux = { ...personajeElegido };
-        personajeAux.posicionInicialY = posiciones[0];
-        personajeAux.posicionInicialX = posiciones[1];
-        personajeAux.desapareceAlReiniciar =
-          conjuntoPersonajes.desapareceAlReiniciar;
-        personajeAux.aliasConjunto = conjuntoPersonajes.aliasConjunto;
+        setearPosiciones(personajeAux,posiciones)
+        setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(personajeAux);
       }
       return personajesACrear;
@@ -112,11 +100,8 @@ export function PersonajesAlAzarExcluyente() {
     let personajeACrear = elegirPersonajeRandom(conjuntoPersonajes.personajes);
     const numRandom = elegirPosicionRandom(conjuntoPersonajes.posiciones)
     const posicion = conjuntoPersonajes.posiciones[numRandom]
-    personajeACrear.posicionInicialY = posicion[0];
-    personajeACrear.posicionInicialX = posicion[1];
-    personajeACrear.desapareceAlReiniciar =
-      conjuntoPersonajes.desapareceAlReiniciar;
-    personajeACrear.aliasConjunto = conjuntoPersonajes.aliasConjunto;
+    setearPosiciones(personajeACrear,posicion)
+    setearAliasYAleatorieidad(personajeACrear,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
     return [personajeACrear];
   };
 }

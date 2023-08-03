@@ -98,7 +98,6 @@ export class Juego {
         personaje.desapareceAlReiniciar || false;
     }
     this.listaDePersonajes.push(unPersonaje);
-    // console.log(this.listaDePersonajes);
     unPersonaje.inicializar();
   }
 
