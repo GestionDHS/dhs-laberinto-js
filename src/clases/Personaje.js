@@ -22,7 +22,7 @@ export class PersonajeBasico {
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
     this.mochila = [];
-    this.eliminarAlReiniciar=objetoConfiguracionPersonaje.eliminarAlReiniciar;
+    this.desapareceAlReiniciar=false;
     this.tieneTooltip = objetoConfiguracionPersonaje.tieneTooltip;
     this.controladorDOM = new controladorPersonajeDOM(
       this.tieneTooltip,
