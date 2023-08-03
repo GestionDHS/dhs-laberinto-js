@@ -55,3 +55,13 @@ export function elegirPosicionRandom(array) {
 export function lanzarExcepcion(texto) {
   throw new Error(texto)
 }
+
+//Para obtener una cantidad aleatorea entre un Max y un Min
+export  const obtenerCantidadAleatoria = function (configuracion) {
+  return (
+    Math.floor(
+      Math.random() *
+        (configuracion.cantidadMax - configuracion.cantidadMin + 1)
+    ) + configuracion.cantidadMin
+  );
+};

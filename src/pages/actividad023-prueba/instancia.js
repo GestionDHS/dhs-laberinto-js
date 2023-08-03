@@ -1,24 +1,13 @@
-<<<<<<< HEAD
-import { Juego} from "../../clases/Juego";
+import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import { Dhs_personajes } from "../../clases/Dhs-personajes";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
-import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
-=======
-import { Juego } from '../../clases/Juego';
-import { template } from '../../recursosPaginas/Template';
-import ControladorStandard from '../../bloques/Controlador';
-import { CustomRenderer } from '../../bloques/CustomRender';
-import { Dhs_personajes } from '../../clases/Dhs-personajes';
-import customTheme from '../../bloques/CustomTheme';
-import { CustomCategory } from '../../bloques/CustomCategory';
-import { generarCoordenadas } from '../../Utils/Funciones';
->>>>>>> 95be115aa67631bd1cd9d57d60a03076f91d15d3
+import { generarCoordenadas } from "../../Utils/Funciones";
 
-document.querySelector('#appActividad').innerHTML = template(``);
+document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego y setear velocidad
 const velocidadInicial = 1000;
@@ -29,43 +18,44 @@ const dimensiones = [7, 6]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-	[1, 1, 1, 1, 1, 1],
-	[1, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 1],
-	[1, 1, 1, 0, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1],
 ];
 
 //TERCERO: Definir que objetos van a ser "pared", y cuales "camino"
 const personajesGaleria = new Dhs_personajes();
-const pared = personajesGaleria.obtenerPersonaje('arbol');
-const camino = personajesGaleria.obtenerPersonaje('pasto');
+const pared = personajesGaleria.obtenerPersonaje("arbol");
+const camino = personajesGaleria.obtenerPersonaje("pasto");
 
 //CUARTO: Setear Modal de Ganar
 const datosModal = {
-	titulo: '¡BUEN TRABAJO!',
-	imagen: 'monedas',
-	texto: 'Encontramos 180 monedas de oro.',
-	oculto: true,
+  titulo: "¡BUEN TRABAJO!",
+  imagen: "monedas",
+  texto: "Encontramos 180 monedas de oro.",
+  oculto: true,
 };
 
 // QUINTO:Para generar el escenario recibe como parametros: dimensiones, el tablero, el anchoBase de los casilleros
 //(ojo esta en medida relativa "em") el color de borde ...(para los nombres de paredes
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, 3, 'black');
+miJuego.generarEscenario(dimensiones, 3, "black");
 miJuego.agregarModal(datosModal);
-let coordenadasCaminoPared = generarCoordenadas(tablero)
+let coordenadasCaminoPared = generarCoordenadas(tablero);
 
 //SEXTO: Definir los Objetos Personajes
 //Configurar en el caso del personaje princilal la clasePersonaje : PersonajeBasico / PersonajeMovibleSimple / PersonajeMovibleGrados / PersonajeDibujante
 //instanciamos y configuramos su posicionamiento a cada personajes necesarios para el juego
 //Configurar si o si el posicionamiento
 
-const lupe = { ...personajesGaleria.obtenerPersonaje('lupe') };
-const cofre = { ...personajesGaleria.obtenerPersonaje('cofre') };
-const lodo = { ...personajesGaleria.obtenerPersonaje('lodo') };
+const lupe = { ...personajesGaleria.obtenerPersonaje("lupe") };
+const cofre = { ...personajesGaleria.obtenerPersonaje("cofre") };
+const lodo = { ...personajesGaleria.obtenerPersonaje("lodo") };
+const basura = { ...personajesGaleria.obtenerPersonaje("basura")}
 
 //configPosicionamiento =
 // posicionesFijas: [
@@ -79,35 +69,56 @@ const lodo = { ...personajesGaleria.obtenerPersonaje('lodo') };
 //SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciones
 
 let conjuntosDePersonajes = [
-	{
-		estrategia: 'fijos',
-		personajes: [pared],
+  {
+    estrategia: "fijos",
+    personajes: [pared],
     posiciones: coordenadasCaminoPared.coordenadasPared,
-		aliasConjunto: 'fijosTablero',
-		desapareceAlReiniciar: false,
-	},
-	{
-		estrategia: 'fijos',
-		personajes: [camino],
-		posiciones: coordenadasCaminoPared.coordenadasCamino,
-		aliasConjunto: 'fijosTablero',
-		desapareceAlReiniciar: false,
-	},
-	{
-		estrategia: 'fijos',
-		personajes: [lupe],
-		posiciones: [[1, 1]],
-		aliasConjunto: 'fijoPrincipal',
-		desapareceAlReiniciar: false,
-	},
-	{
-		estrategia: 'azarRango',
-		personajes: [lodo, cofre],
-    cantidadMin:1,
-    cantidadMax: 3,
-		aliasConjunto: 'azarRango',
-		desapareceAlReiniciar: true,
-	},
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [lupe],
+    posiciones: [[1, 1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  // {
+  //   estrategia: "azarRango",
+  //   personajes: [lodo, cofre],
+  //   cantidadMin: 1,
+  //   cantidadMax: 3,
+  //   aliasConjunto: "azarRango",
+  //   desapareceAlReiniciar: true,
+  // },
+  //  {
+  //   estrategia: "azarFijos",
+  //   personajes: [lodo, cofre],
+  //   posiciones: [[2, 1],[1, 2]],
+  //   aliasConjunto: "azarFijos",
+  //   desapareceAlReiniciar: true,
+  // },
+  //   {
+  //    estrategia: "azarCantTotalFija",
+  //   personajes: [basura,lodo],
+  //   cantidadTotal: 2,
+  //   aliasConjunto: "azarCantTotalFija",
+  //   desapareceAlReiniciar: true,
+  // },
+  {
+    estrategia: "azarExcluyente",
+   personajes: [basura],
+   posiciones: [[2, 1],[1, 2]],
+   aliasConjunto: "azarExcluyente",
+   desapareceAlReiniciar: true,
+ },
 ];
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
@@ -200,74 +211,74 @@ const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 //NOVENO: Dejamos habilitadas las categorías que vamos a usar
 const categoriasDeseadas = [
-	{
-		name: 'Eventos',
-		categorystyle: 'execute',
-	},
-	{
-		name: 'Movimientos',
-		categorystyle: 'movement',
-	},
-	// {
-	//   name: "Lápiz",
-	//   categorystyle: "pencil",
-	// },
-	// {
-	//   name: "Acciones",
-	//   categorystyle: "action",
-	// },
-	// {
-	//   name: "Condicionales",
-	//   categorystyle: "logic_category",
-	// },
-	// {
-	//   name: "Repeticiones",
-	//   categorystyle: "loop_category",
-	// },
+  {
+    name: "Eventos",
+    categorystyle: "execute",
+  },
+  {
+    name: "Movimientos",
+    categorystyle: "movement",
+  },
+  // {
+  //   name: "Lápiz",
+  //   categorystyle: "pencil",
+  // },
+  // {
+  //   name: "Acciones",
+  //   categorystyle: "action",
+  // },
+  // {
+  //   name: "Condicionales",
+  //   categorystyle: "logic_category",
+  // },
+  // {
+  //   name: "Repeticiones",
+  //   categorystyle: "loop_category",
+  // },
 ];
 categoriasDeseadas.forEach((cat) =>
-	miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
+  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
 );
 
 //DECIMO: Agregamos los bloques a cada categoría
 const bloquesCustomStandardDesados = [
-	// [nombreBloque, categoriaDestino]
-	// [grupoBloques, categoriaDestino]
-	['on_execute', 'Eventos'],
-	['move_classic_simple', 'Movimientos'],
-	// ["move_classic_param", "Movimientos"],
-	// ["avanzar_param", "Movimientos"],
-	// ["girar_clasico", "Movimientos"],
-	// ["girar_grados", "Movimientos"],
-	// ["apuntar_hacia", "Movimientos"],
-	// ["abrir_cofre", "Acciones"],
-	// ["juntar_basura", "Acciones"],
-	// ["lapiz", "Lápiz"],
-	// ["if", "Condicionales"],
-	// ["controls", "Repeticiones"],
+  // [nombreBloque, categoriaDestino]
+  // [grupoBloques, categoriaDestino]
+  ["on_execute", "Eventos"],
+  ["move_classic_simple", "Movimientos"],
+  // ["move_classic_param", "Movimientos"],
+  // ["avanzar_param", "Movimientos"],
+  // ["girar_clasico", "Movimientos"],
+  // ["girar_grados", "Movimientos"],
+  // ["apuntar_hacia", "Movimientos"],
+  // ["abrir_cofre", "Acciones"],
+  // ["juntar_basura", "Acciones"],
+  // ["lapiz", "Lápiz"],
+  // ["if", "Condicionales"],
+  // ["controls", "Repeticiones"],
 ];
 
 bloquesCustomStandardDesados.forEach((bl) => {
-	miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
+  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
 //ONCEAVO: Instanciamos el Render y se lo inyectamos al Worckspace
 const render = new CustomRenderer();
-render.registrarRender('renderDHS');
-miControlador.crearInyectarWorkspace('dhs-blockly-div', {
-	toolbox: miControlador.ConfiguradorBloques.toolbox,
-	theme: 'themeDH',
-	renderer: 'renderDHS',
-	zoom: {
-		controls: true,
-		wheel: true,
-		pinch: true,
-	},
+render.registrarRender("renderDHS");
+miControlador.crearInyectarWorkspace("dhs-blockly-div", {
+  toolbox: miControlador.ConfiguradorBloques.toolbox,
+  theme: "themeDH",
+  renderer: "renderDHS",
+  zoom: {
+    controls: true,
+    wheel: true,
+    pinch: true,
+  },
 });
 
 //DOCEAVO: Generamos los bloques que quedarán fijos en el worckspace.
 const bloquesPrecargadosJSON =
-	'{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
 
 //Habilitamos funciones para el manejo del workspace
@@ -294,6 +305,6 @@ miControlador.crearFuncionesGlobalesStandard();
 //Le enviamos las funciones customizadas al interpreter  (No cambia nunca- No se toca)
 const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
 miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-	miControlador.callbackInterpreteStandard(interpreter, globalObject);
-	callBackJuego(interpreter, globalObject);
+  miControlador.callbackInterpreteStandard(interpreter, globalObject);
+  callBackJuego(interpreter, globalObject);
 });
