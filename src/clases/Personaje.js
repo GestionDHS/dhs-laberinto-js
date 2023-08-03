@@ -22,7 +22,8 @@ export class PersonajeBasico {
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
     this.mochila = [];
-    this.desapareceAlReiniciar=false;
+    this.desapareceAlReiniciar=objetoConfiguracionPersonaje.desapareceAlReiniciar;
+    this.aliasConjunto=objetoConfiguracionPersonaje.aliasConjunto;
     this.tieneTooltip = objetoConfiguracionPersonaje.tieneTooltip;
     this.controladorDOM = new controladorPersonajeDOM(
       this.tieneTooltip,
@@ -57,9 +58,13 @@ export class PersonajeBasico {
     //   this.setearVelocidad(0);
     //   }
   }
-  reiniciar(){
-    this.posicionActualY = this.posicionInicialY;
-    this.posicionActualX = this.posicionInicialX;
+  
+  autodestruirse(){
+    this.salirDelCasilleroActual()
+    this.controladorDOM.removerDivDelDOM()
+  }
+  reiniciarse(){
+    this.desapareceAlReiniciar==false?this.inicializar():this.autodestruirse()
   }
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
