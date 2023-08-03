@@ -22,6 +22,7 @@ import escuelaSendero from "../img/escuelaSendero.png"
 import edificiosSendero from "../img/edificiosSendero.png"
 import arbolesSendero from "../img/arbolesSendero.png"
 import calle from "../img/calle.png"
+import calleClara from "../img/calleClara.png"
 import pastoSendero from "../img/pastoSendero.png"
 import ciclista from "../img/ciclista.png"
 import brujula from "../img/brujula.png"
@@ -52,6 +53,7 @@ export class DHS_Gallery {
   // }
 
   obtenerUrlDe(unObjeto) {
+    console.log(unObjeto)
     return this.imageLib[unObjeto].url;
   }
 
@@ -95,6 +97,13 @@ export class DHS_Gallery {
       themes: [""],
       url: calle,
       nombre: "calle",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    calleClara: {
+      themes: [""],
+      url: calleClara,
+      nombre: "calleClara",
       parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },

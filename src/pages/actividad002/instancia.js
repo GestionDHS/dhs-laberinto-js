@@ -9,7 +9,7 @@ import {generarCoordenadas} from '../../Utils/Funciones';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
+window.miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 7]; //fila, columna
 
@@ -24,8 +24,8 @@ const tablero = [
 ];
 
 const personajesGaleria = new Dhs_personajes();
-const pared = personajesGaleria.obtenerPersonaje("");
-const camino = personajesGaleria.obtenerPersonaje("");
+const pared = personajesGaleria.obtenerPersonaje("fondoGrisOscuro");
+const camino = personajesGaleria.obtenerPersonaje("fondoGrisClaro");
 
 const recuadroPintableDeseado = {
   idUsarHTML: "recuadro-pintable",
@@ -78,7 +78,7 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [lapiz],
-    posiciones: [[1, 1]],
+    posiciones: [[3, 0]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
@@ -110,6 +110,7 @@ const dibujoDeseado = tablero.map((row) =>
   row.map((cell) => (cell === 0 ? false : miColor))
 );
 
+console.log(miJuego.personajePrincipal.dibujoDeseado)
 miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 
 

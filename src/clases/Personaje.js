@@ -57,7 +57,10 @@ export class PersonajeBasico {
     //   this.setearVelocidad(0);
     //   }
   }
-
+  reiniciar(){
+    this.posicionActualY = this.posicionInicialY;
+    this.posicionActualX = this.posicionInicialX;
+  }
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
     const imagenDeseada = this.estadosPosibles[nuevoStatus].imageUrl;
@@ -440,7 +443,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       Array.from(row, () => false)
     );
     this.lapizBajado = false;
-    // console.log(this);
   }
 
   bajarLapiz() {

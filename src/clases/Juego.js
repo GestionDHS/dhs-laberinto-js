@@ -73,6 +73,7 @@ export class Juego {
     this.puedeDebeContinuar = true;
     this.limpiarTablero();
     this.crearPersonajes(this.listaDeAleatoreos, true);
+    this.personajePrincipal.reiniciar()
   }
 
   generarPersonaje(personaje) {
