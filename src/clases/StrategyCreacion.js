@@ -62,24 +62,23 @@ export function PersonajesAlAzarRango() {
 	};
 
 // varios personajes => los coloca en posicion aleatoria la cantidad que pide
+// [personje, personaje], posiciones:[[y,x],[y,x]]
 export function PersonajesAlAzarFijos() {
 	const obtenerCantidadAleatoria = function (cantidades) {
-		return cantidades.cantidadTotalFija;
+		return cantidades.cantidadTotal;
 	};
 
 	this.crearPersonajes = function (conjuntoPersonajes, escenario) {
 		var personajesACrear = [];
-		conjuntoPersonajes.arrayDePersonajes.forEach((unPersonaje) => {
-			const cantidad = obtenerCantidadAleatoria(
-				conjuntoPersonajes.arrayDePosiciones
-			);
+		conjuntoPersonajes.personajes.forEach((unPersonaje) => {
+			const cantidad = obtenerCantidadAleatoria(conjuntoPersonajes.posiciones);
 			for (let i = 0; i < cantidad; i++) {
 				const posiciones = posicionValida(escenario);
 				let personajeAux = { ...unPersonaje };
 				personajeAux.posicionInicialY = posiciones[0];
 				personajeAux.posicionInicialX = posiciones[1];
-				personajeAux.eliminarAlReiniciar =
-					conjuntoPersonajes.eliminarAlReiniciar;
+				personajeAux.desapareceAlReiniciar =
+					conjuntoPersonajes.desapareceAlReiniciar;
 				personajeAux.aliasConjunto = conjuntoPersonajes.aliasConjunto;
 				personajesACrear.push(personajeAux);
 			}
@@ -89,20 +88,21 @@ export function PersonajesAlAzarFijos() {
 }
 
 //varios personajes en un lugar => elije uno y lo renderiza
+// [personje, personaje], posiciones:[[y,x]]
 export function PersonajesAlAzarExcluyente() {
-	const elegirPersonajeRandom = function (arrayDePersonajes) {
-		const largoArray = arrayDePersonajes.length;
+	const elegirPersonajeRandom = function (personajes) {
+		const largoArray = personajes.length;
 		const random = Math.floor(Math.random() * largoArray);
-		return arrayDePersonajes[random];
+		return personajes[random];
 	};
 	this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
 		var personajeACrear = elegirPersonajeRandom(
-			conjuntoPersonajes.arrayDePersonajes
+			conjuntoPersonajes.personajes
 		);
-		personajeACrear.posicionInicialY = arrayDePosiciones[0][0];
-		personajeACrear.posicionInicialX = arrayDePosiciones[0][1];
-		personajeACrear.eliminarAlReiniciar =
-			conjuntoPersonajes.eliminarAlReiniciar;
+		personajeACrear.posicionInicialY = posiciones[0][0];
+		personajeACrear.posicionInicialX = posiciones[0][1];
+		personajeACrear.desapareceAlReiniciar =
+			conjuntoPersonajes.desapareceAlReiniciar;
 		personajeACrear.aliasConjunto = conjuntoPersonajes.aliasConjunto;
 		return [personajeACrear];
 	};
