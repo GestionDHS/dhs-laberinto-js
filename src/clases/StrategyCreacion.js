@@ -1,4 +1,4 @@
-import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria} from '../Utils/Funciones';
+import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom, obtenerCantidadAleatoria, lanzarExcepcion} from '../Utils/Funciones';
 
 //Strategy creacion
 export function TipoCreacion() {
@@ -22,6 +22,7 @@ TipoCreacion.prototype = {
 // [personaje], {posiciones: [[y,x], [y,x], [y,x]]} 
 export function PersonajesFijos() {
   this.crearPersonajes = function (conjuntoPersonajes) {
+    !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
     let personajesACrear = [];
     conjuntoPersonajes.personajes.forEach((unPersonaje) => {
       conjuntoPersonajes.posiciones.forEach((unaPosicion) => {
@@ -42,6 +43,8 @@ export function PersonajesFijos() {
 // [personaje, personaje],{cantidadMin: 1,cantidadMax: 3}
 export function PersonajesAlAzarRango() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    !conjuntoPersonajes.cantidadMin && lanzarExcepcion("Necesita un cantidadMin en la configuracion de cada objeto de conjuntosDePersonajes")
+    !conjuntoPersonajes.cantidadMax && lanzarExcepcion("Necesita un cantidadMax en la configuracion de cada objeto de conjuntosDePersonajes")
     let personajesACrear = [];
     const cantidad = obtenerCantidadAleatoria(conjuntoPersonajes);
     for (let i = 0; i < cantidad; i++) {
@@ -65,6 +68,7 @@ export function PersonajesAlAzarRango() {
 // [personje, personaje], cantidadTotal:2
 export function PersonajesAlAzarCantTotalFijos() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    !conjuntoPersonajes.cantidadTotal && lanzarExcepcion("Necesita un cantidad total en la configuracion de cada objeto de conjuntosDePersonajes")
       let personajesACrear = [];
       const cantidad = conjuntoPersonajes.cantidadTotal
       for (let i = 0; i < cantidad; i++) {
@@ -87,6 +91,7 @@ export function PersonajesAlAzarCantTotalFijos() {
 // [personje, personaje], posiciones:[[2,1],[1,2]]
 export function PersonajesAlAzarFijos() {
     this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
       let personajesACrear = []
       const cantidad = conjuntoPersonajes.posiciones.length;
       for (let i = 0; i < cantidad; i++) {
@@ -109,6 +114,7 @@ export function PersonajesAlAzarFijos() {
 // [personje, personaje], posiciones:[[y,x]]
 export function PersonajesAlAzarExcluyente() {
   this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
+    !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
     let personajeACrear = elegirPersonajeRandom(conjuntoPersonajes.personajes);
     const numRandom = elegirPosicionRandom(conjuntoPersonajes.posiciones)
     const posicion = conjuntoPersonajes.posiciones[numRandom]
