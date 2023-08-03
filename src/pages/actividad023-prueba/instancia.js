@@ -5,6 +5,7 @@ import { CustomRenderer } from "../../bloques/CustomRender";
 import { Dhs_personajes } from "../../clases/Dhs-personajes";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 
 
 
@@ -54,14 +55,13 @@ miJuego.generarCaminoYpared();
 const lupe = {...personajesGaleria.obtenerPersonaje("lupe")}
 const cofre = {...personajesGaleria.obtenerPersonaje("cofre")}
 const lodo = {...personajesGaleria.obtenerPersonaje("lodo")}
-
+const basura = {...personajesGaleria.obtenerPersonaje("basura")}
 // lodo.configPosicionamiento = { posicionesFijas:[[3,4]]}
 // console.log(lodo);
 
-
-
 const arrayDePersonajes = [lupe];
  const arrayDePersonajesAleatorios = [lodo,cofre]
+ const arrayDePersonajesAleatoriosExcluyentes = [lodo,basura]
  miJuego.listaDeAleatoreos = arrayDePersonajesAleatorios;
  const objetoPosiciones=[[3,1]]
  miJuego.objetoConfiguracionPosicion=objetoPosiciones
@@ -108,8 +108,15 @@ let listaDeConjuntosDePersonajes=[
 {
   estrategia: "azarRango",
   arrayDePersonajes: arrayDePersonajesAleatorios,
-  arrayDePosiciones:{cantidadMinimaFija: 3, cantidadMaximaFija: 6,},
+  arrayDePosiciones:{cantidadMinimaFija: 1, cantidadMaximaFija: 3},
   aliasConjunto: "azarRango",
+  eliminarAlReiniciar:true,
+},
+{
+  estrategia: "PersonajesAlAzarExcluyente",
+  arrayDePersonajes: arrayDePersonajesAleatoriosExcluyentes,
+  arrayDePosiciones:[[1,2]],
+  aliasConjunto: "PersonajesAlAzarExcluyente",
   eliminarAlReiniciar:true,
 },
 ]

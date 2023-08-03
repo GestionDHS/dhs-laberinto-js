@@ -21,6 +21,7 @@ TipoCreacion.prototype = {
 //un personaje Varias posiciones => el personaje en todas las posiciones
 export function PersonajesFijos() {
   this.crearPersonajes = function (conjuntoPersonajesACrear,_escenario) {
+    console.log("Entro a Crear PersonajeFijo")
     var personajesACrear = [];
     conjuntoPersonajesACrear.arrayDePersonajes.forEach((unPersonaje) => {
       conjuntoPersonajesACrear.arrayDePosiciones.forEach((unaPosicion) => {
@@ -51,6 +52,7 @@ export function PersonajesAlAzarRango() {
     conjuntoPersonajesACrear,
     escenario
   ) {
+    console.log("Entro a Crear PersonajesAlAzarRango")
     var personajesACrear = [];
     conjuntoPersonajesACrear.arrayDePersonajes.forEach((unPersonaje) => {
       const cantidad = obtenerCantidadAleatoria(conjuntoPersonajesACrear.arrayDePosiciones);
@@ -78,6 +80,7 @@ export function PersonajesAlAzarFijos() {
     conjuntoPersonajesACrear,
     escenario,
   ) {
+    console.log("Entro a Crear PersonajesAlAzarFijos")
     var personajesACrear = [];
     conjuntoPersonajesACrear.arrayDePersonajes.forEach((unPersonaje) => {
       const cantidad = obtenerCantidadAleatoria(conjuntoPersonajesACrear.arrayDePosiciones);
@@ -97,6 +100,7 @@ export function PersonajesAlAzarFijos() {
   //varios personajes en un lugar => elije uno y lo renderiza
   export function PersonajesAlAzarExcluyente(){
    const elegirPersonajeRandom= function(arrayDePersonajes) { 
+    console.log(arrayDePersonajes.length)
        const largoArray = arrayDePersonajes.length;
        const random = Math.floor(Math.random() * largoArray)
        return arrayDePersonajes[random]
@@ -105,9 +109,11 @@ export function PersonajesAlAzarFijos() {
     conjuntoPersonajesACrear,
     _escenario,
     ) {
-      var personajeACrear = elegirPersonajeRandom(conjuntoPersonajesACrear.arrayDePersonajes)
-      personajeACrear.posicionInicialY = arrayDePosiciones[0][0];
-      personajeACrear.posicionInicialX = arrayDePosiciones[0][1];
+      console.log("Entro a Crear PersonajesAlAzarExcluyente")
+      console.log(conjuntoPersonajesACrear.arrayDePersonajes)
+      var personajeACrear = elegirPersonajeRandom(conjuntoPersonajesACrear?.arrayDePersonajes)
+      personajeACrear.posicionInicialY = conjuntoPersonajesACrear.arrayDePosiciones[0][0];//agarra solo la primera
+      personajeACrear.posicionInicialX = conjuntoPersonajesACrear.arrayDePosiciones[0][1];
       personajeACrear.eliminarAlReiniciar=conjuntoPersonajesACrear.eliminarAlReiniciar
       personajeACrear.aliasConjunto=conjuntoPersonajesACrear.aliasConjunto
       return [personajeACrear]
