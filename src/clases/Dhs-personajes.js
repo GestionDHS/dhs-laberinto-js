@@ -85,7 +85,6 @@ export class Dhs_personajes {
       rotable: false,
     },
     arbol: {
-      idUsarHTML: "arbol",
       tipoPersonaje: "arbol",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "arboles" },
@@ -98,7 +97,6 @@ export class Dhs_personajes {
       rotable: false,
     },
     barrera: {
-      idUsarHTML: "barrera",
       tipoPersonaje: "barrera",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "barrera" },
