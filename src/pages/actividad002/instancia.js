@@ -25,7 +25,7 @@ const tablero = [
 const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje("recuadroPintableDeseado");
-const fondo = personajesGaleria.obtenerPersonaje("fondoGrisClaro");
+const fondo = personajesGaleria.obtenerPersonaje("fondo");
 const lapiz = personajesGaleria.obtenerPersonaje("lapiz");
 
 const datosModal = {
