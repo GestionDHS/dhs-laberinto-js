@@ -24,23 +24,23 @@ const tablero = [
 ];
 
 const personajesGaleria = new Dhs_personajes();
-const pared = personajesGaleria.obtenerPersonaje("fondoGrisOscuro");
-const camino = personajesGaleria.obtenerPersonaje("fondoGrisClaro");
+const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje("recuadroPintableDeseado");
+const fondo = personajesGaleria.obtenerPersonaje("fondoGrisClaro");
 
-const recuadroPintableDeseado = {
-  idUsarHTML: "recuadro-pintable",
-  tipoPersonaje: "recuadro-pintable",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: null },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  colorFondoInicial: "lightgrey",
-  rotable: false,
-};
+// const recuadroPintableDeseado = {
+//   idUsarHTML: "recuadro-pintable",
+//   tipoPersonaje: "recuadro-pintable",
+//   estadosPosibles: {
+//     normal: { name: "normal", imageUrl: null },
+//   },
+//   estadoInicial: "normal",
+//   zIndex: 1,
+//   posicionInicialY: 0,
+//   posicionInicialX: 0,
+//   direccionInicial: 0,
+//   colorFondoInicial: "lightgrey",
+//   rotable: false,
+// };
 
 const recuadroPintableNoDeseado = { ...recuadroPintableDeseado };
 recuadroPintableNoDeseado.colorFondoInicial = "white";
@@ -59,18 +59,18 @@ miJuego.generarEscenario(
 miJuego.agregarModal(datosModal);
 let coordenadasCaminoPared = generarCoordenadas(tablero);
 
-const lapiz = { ...personajesGaleria.obtenerPersonaje("lapiz") };
+const lapiz = personajesGaleria.obtenerPersonaje("lapiz");
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
-    personajes: [pared],
+    personajes: [fondo],
     posiciones: coordenadasCaminoPared.coordenadasPared,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
-    personajes: [camino],
+    personajes: [recuadroPintableDeseado],
     posiciones: coordenadasCaminoPared.coordenadasCamino,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
@@ -103,16 +103,17 @@ let conjuntosDePersonajes = [
 // ];
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
 const miColor = "#FA3939";
 
 const dibujoDeseado = tablero.map((row) =>
   row.map((cell) => (cell === 0 ? false : miColor))
 );
 
-console.log(miJuego.personajePrincipal.dibujoDeseado)
+console.log(dibujoDeseado)
+console.log(miJuego.personajePrincipal)
 miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
-
+console.log(miJuego.personajePrincipal.dibujoDeseado)
 
 
 const miControlador = new ControladorStandard(

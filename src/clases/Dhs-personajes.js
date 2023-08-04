@@ -139,32 +139,33 @@ export class Dhs_personajes {
       rotable: true,
       colisiones: [],
     },
-    fondoGrisClaro: {
-        idUsarHTML: "fondoGrisClaro",
-        tipoPersonaje: "fondoGrisClaro",
+    fondo: {
+        idUsarHTML: "fondo",
+        tipoPersonaje: "fondo",
         tieneTooltip: false,
         estadosPosibles: {
-          normal: { name: "normal", imageUrl: "calleClara" },
+          normal: { name: "normal", imageUrl: null },
         },
         estadoInicial: "normal",
         zIndex: 1,
         posicionInicialX: 0,
         direccionInicial: 0,
         direccionInicial: 0,
+        colorFondoInicial: "white",
         rotable: false,
       },
-      fondoGrisOscuro: {
-        idUsarHTML: "fondoGrisOscuro",
-        tipoPersonaje: "fondoGrisOscuro",
-        tieneTooltip: false,
+      recuadroPintableDeseado: {
+        idUsarHTML: "recuadro-pintable",
+        tipoPersonaje: "recuadro-pintable",
         estadosPosibles: {
-          normal: { name: "normal", imageUrl: "calle" },
+          normal: { name: "normal", imageUrl: null },
         },
         estadoInicial: "normal",
         zIndex: 1,
         posicionInicialX: 0,
         direccionInicial: 0,
         direccionInicial: 0,
+        colorFondoInicial: "lightgrey",
         rotable: false,
       },
   };
