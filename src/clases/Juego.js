@@ -34,7 +34,6 @@ export class Juego {
       PersonajeMovibleSimple: PersonajeMovibleSimple,
       PersonajeMovibleGrados: PersonajeMovibleGrados,
     };
-    this.configuracionInicialPersonajes = [];
     this.tipoCreacionPersonajes = {};
   }
 
@@ -49,31 +48,24 @@ export class Juego {
       elementoHTMLLaberinto,
       colorBordes
     );
-    // console.log(this.escenario)
     this.escenario.crearEscenario();
   }
 
-  limpiarTablero() {
-    // console.log(this.listaDePersonajes);
-    let soloAleatoreos = this.listaDePersonajes.filter(
-      (personaje) => personaje.desapareceAlReiniciar == true
-    );
-    // console.log(soloAleatoreos);
-    soloAleatoreos.forEach((personaje) => {
-      personaje.salirDelCasilleroActual();
-      personaje.controladorDOM.removerDivDelDOM();
+  reiniciarConjuntoPersonajes() {
+    this.listaDePersonajes.forEach((personaje) => {
+      personaje.reiniciarse()
     });
     this.listaDePersonajes = this.listaDePersonajes.filter(
       (personaje) => personaje.desapareceAlReiniciar != true
     );
-    // return soloAleatoreos
+    
   }
 
   reiniciar() {
     this.puedeDebeContinuar = true;
-    this.limpiarTablero();
-    this.crearPersonajes(this.listaDeAleatoreos, true);
-    this.personajePrincipal.reiniciar()
+    this.reiniciarConjuntoPersonajes();
+    this.generarConjuntoDePersonajes(this.listaDeAleatoreos);
+   
   }
 
   generarPersonaje(personaje) {
@@ -83,16 +75,11 @@ export class Juego {
       unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](
         personaje,
         this
-      );
-      unPersonaje.desapareceAlReiniciar =
-        personaje.desapareceAlReiniciar || false;
+      ); 
     } else {
       unPersonaje = new PersonajeBasico(personaje, this);
-      unPersonaje.desapareceAlReiniciar =
-        personaje.desapareceAlReiniciar || false;
     }
     this.listaDePersonajes.push(unPersonaje);
-    // console.log(this.listaDePersonajes);
     unPersonaje.inicializar();
   }
 
@@ -183,12 +170,12 @@ export class Juego {
     });
   }
 
-  crearPersonajes(conjuntosDePersonajes, reinicio = false) {
-    if (!reinicio) {
-      this.listaDeAleatoreos = conjuntosDePersonajes.filter(
-        (p) => p.desapareceAlReiniciar == true
-      );
-    }
-    this.generarConjuntoDePersonajes(conjuntosDePersonajes);
+  crearPersonajes(conjuntosDePersonajes) {
+    conjuntosDePersonajes.forEach((unConjunto)=>{
+      if(unConjunto.estrategia!="fijos"){
+         this.listaDeAleatoreos.push(unConjunto)
+       }
+      })
+      this.generarConjuntoDePersonajes(conjuntosDePersonajes);
   }
 }

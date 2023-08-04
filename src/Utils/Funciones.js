@@ -1,26 +1,23 @@
 //************FUNCION QUE ASIGNA POSICIONES RAMDOM DEL TABLERO*************/
 export function posicionValida(escenario) {
-  // console.log(escenario);
+ 
   const dimensionY = escenario.dimensiones[0];
   const dimensionX = escenario.dimensiones[1];
-  const maxIntentos = 15;
   let posicionProvisoriaY, posicionProvisoriaX;
-  let intentos = 0;
+ 
   do {
     posicionProvisoriaY = Math.floor(Math.random() * dimensionY);
     posicionProvisoriaX = Math.floor(Math.random() * dimensionX);
-    intentos++
-  } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario)&& intentos < maxIntentos);
-  if (intentos == maxIntentos) {
-    lanzarExcepcion("NO hay posiciones")
-  }
+   
+  } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario)) ;
+
   return [posicionProvisoriaY, posicionProvisoriaX];
 }
 
 //************FUNCION QUE VALIDA LAS POSICIONES DEL TABLERO*************/
  function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
    const casillero = escenario.objetosCasilleros[posicionProvisoriaY][posicionProvisoriaX];
-  return (casillero.ocupantes[0].tipoPersonaje == "camino" && casillero.ocupantes.length == 1)
+   return (casillero.ocupantes[0].tipoPersonaje == "camino" && casillero.ocupantes.length == 1)
 }
 
 // Funcion para generar coordenadas del tablero
@@ -65,3 +62,14 @@ export  const obtenerCantidadAleatoria = function (configuracion) {
     ) + configuracion.cantidadMin
   );
 };
+
+//********************SETEA POSICIONES **************************/
+export const setearPosiciones= function(unPersonaje,unaPosicion){
+  unPersonaje.posicionInicialY = unaPosicion[0];
+  unPersonaje.posicionInicialX = unaPosicion[1];
+}
+//******************SETEA ALIAS PARA TEST Y BOOLEANO PARA REINICIO ********************/
+export const setearAliasYAleatorieidad=function(unPersonaje,desapareceAlReiniciar,alias){
+  unPersonaje.desapareceAlReiniciar = desapareceAlReiniciar;
+  unPersonaje.aliasConjunto = alias;
+}

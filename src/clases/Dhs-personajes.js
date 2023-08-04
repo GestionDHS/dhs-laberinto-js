@@ -85,7 +85,6 @@ export class Dhs_personajes {
       rotable: false,
     },
     arbol: {
-      idUsarHTML: "arbol",
       tipoPersonaje: "arbol",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "arboles" },
@@ -98,7 +97,6 @@ export class Dhs_personajes {
       rotable: false,
     },
     barrera: {
-      idUsarHTML: "barrera",
       tipoPersonaje: "barrera",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "barrera" },
@@ -133,38 +131,39 @@ export class Dhs_personajes {
       },
       estadoInicial: "normal",
       zIndex: 3,
+      posicionInicialY: 0,
       posicionInicialX: 0,
-      direccionInicial: 0,
       direccionInicial: 0,
       rotable: true,
       colisiones: [],
     },
-    fondoGrisClaro: {
-      idUsarHTML: "fondoGrisClaro",
-      tipoPersonaje: "fondoGrisClaro",
+    fondo: {
+      idUsarHTML: "fondo",
+      tipoPersonaje: "fondo",
       tieneTooltip: false,
       estadosPosibles: {
-        normal: { name: "normal", imageUrl: "calleClara" },
+        normal: { name: "normal", imageUrl: null },
       },
       estadoInicial: "normal",
       zIndex: 1,
+      posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
-      direccionInicial: 0,
+      colorFondoInicial: "white",
       rotable: false,
     },
-    fondoGrisOscuro: {
-      idUsarHTML: "fondoGrisOscuro",
-      tipoPersonaje: "fondoGrisOscuro",
-      tieneTooltip: false,
+    recuadroPintableDeseado: {
+      idUsarHTML: "recuadro-pintable",
+      tipoPersonaje: "recuadro-pintable",
       estadosPosibles: {
-        normal: { name: "normal", imageUrl: "calle" },
+        normal: { name: "normal", imageUrl: null },
       },
       estadoInicial: "normal",
       zIndex: 1,
+      posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
-      direccionInicial: 0,
+      colorFondoInicial: "lightgrey",
       rotable: false,
     },
     agua: {
@@ -383,6 +382,8 @@ export class Dhs_personajes {
       rotable: false,
       colisiones: [],
       paddingImagen: "1px",
-    },
+    },    
   };
 }
+
+
