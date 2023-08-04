@@ -69,14 +69,14 @@ const conjuntosDePersonajes = [
     estrategia: "fijos",
     personajes: [juncoPastoDelta],
     posiciones: [[3,4],[4,4],[6,4],[6,6],[4,6]],
-    aliasConjunto: "fijoPrincipal",
+    aliasConjunto: "fijoJunco",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [pastoDelta],
     posiciones: [[3,5],[4,5],[5,5],[6,5],[5,4],[5,6],[3,6]],
-    aliasConjunto: "fijoPrincipal",
+    aliasConjunto: "fijoPastoDelta",
     desapareceAlReiniciar: false,
   },
   {
@@ -84,21 +84,19 @@ const conjuntosDePersonajes = [
     personajes: [autoArriba],
     posiciones: [[5, 0], [5, 1], [5, 2], [5, 3], [6, 3]],
     direcciones: [90,90,90,120,180],
-    aliasConjunto: "fijoPrincipal",
+    aliasConjunto: "fijoAutoArriba",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [bandera],
     posiciones: [[5,6]],
-    aliasConjunto: "fijoPrincipal",
+    aliasConjunto: "fijoBandera",
     desapareceAlReiniciar: false,
   },
 ]
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-// miJuego.listaDePersonajes[65].direccionInicial= 120;
-// console.log(miJuego.listaDePersonajes[65].direccion);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
