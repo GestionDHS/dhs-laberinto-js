@@ -68,7 +68,7 @@ export class PersonajeBasico {
   }
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
-    const imagenDeseada = this.estadosPosibles[nuevoStatus].imageUrl;
+    const imagenDeseada = this.estadosPosibles ? this.estadosPosibles[nuevoStatus].imageUrl : null;
     if (imagenDeseada) {
       this.controladorDOM.setearImagen(
         this.galeria.obtenerUrlDe(imagenDeseada)

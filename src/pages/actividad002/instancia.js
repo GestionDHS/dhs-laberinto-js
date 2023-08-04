@@ -9,41 +9,24 @@ import {generarCoordenadas} from '../../Utils/Funciones';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 7]; //fila, columna
 
 const tablero = [
-  [0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 1, 1, 1, 1, 0],
-  [0, 1, 0, 0, 0, 1, 0],
-  [0, 1, 1, 1, 1, 1, 0],
-  [0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 0, 1, 1, 1],
+  [1, 1, 1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
 ];
-
+const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje("recuadroPintableDeseado");
 const fondo = personajesGaleria.obtenerPersonaje("fondoGrisClaro");
-
-// const recuadroPintableDeseado = {
-//   idUsarHTML: "recuadro-pintable",
-//   tipoPersonaje: "recuadro-pintable",
-//   estadosPosibles: {
-//     normal: { name: "normal", imageUrl: null },
-//   },
-//   estadoInicial: "normal",
-//   zIndex: 1,
-//   posicionInicialY: 0,
-//   posicionInicialX: 0,
-//   direccionInicial: 0,
-//   colorFondoInicial: "lightgrey",
-//   rotable: false,
-// };
-
-const recuadroPintableNoDeseado = { ...recuadroPintableDeseado };
-recuadroPintableNoDeseado.colorFondoInicial = "white";
+const lapiz = personajesGaleria.obtenerPersonaje("lapiz");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -57,9 +40,7 @@ miJuego.generarEscenario(
   "white"
 );
 miJuego.agregarModal(datosModal);
-let coordenadasCaminoPared = generarCoordenadas(tablero);
 
-const lapiz = personajesGaleria.obtenerPersonaje("lapiz");
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
@@ -83,39 +64,18 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
 ]
-// const arrayDePersonajes = [
-//   {
-//     idUsarHTML: "lapiz",
-//     tipoPersonaje: "lapiz",
-//     clasePersonaje: "PersonajeDibujante",
-//     tieneTooltip: true,
-//     estadosPosibles: {
-//       normal: { name: "normal", imageUrl: "lapizRojo" },
-//     },
-//     estadoInicial: "normal",
-//     posicionInicialY: 3,
-//     posicionInicialX: 0,
-//     direccionInicial: 0,
-//     zIndex: 3,
-//     rotable: true,
-//     colisiones: [],
-//   },
-// ];
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 const miColor = "#FA3939";
-
 const dibujoDeseado = tablero.map((row) =>
-  row.map((cell) => (cell === 0 ? false : miColor))
+  row.map((cell) => (cell === 1 ? false : miColor))
 );
 
-console.log(dibujoDeseado)
-console.log(miJuego.personajePrincipal)
 miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
-console.log(miJuego.personajePrincipal.dibujoDeseado)
 
 
+// BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(
   miJuego,
   velocidadInicial
