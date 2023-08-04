@@ -53,7 +53,6 @@ export class DHS_Gallery {
   // }
 
   obtenerUrlDe(unObjeto) {
-    console.log(unObjeto)
     return this.imageLib[unObjeto].url;
   }
 

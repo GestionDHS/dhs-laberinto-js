@@ -140,32 +140,249 @@ export class Dhs_personajes {
       colisiones: [],
     },
     fondoGrisClaro: {
-        idUsarHTML: "fondoGrisClaro",
-        tipoPersonaje: "fondoGrisClaro",
-        tieneTooltip: false,
-        estadosPosibles: {
-          normal: { name: "normal", imageUrl: "calleClara" },
-        },
-        estadoInicial: "normal",
-        zIndex: 1,
-        posicionInicialX: 0,
-        direccionInicial: 0,
-        direccionInicial: 0,
-        rotable: false,
+      idUsarHTML: "fondoGrisClaro",
+      tipoPersonaje: "fondoGrisClaro",
+      tieneTooltip: false,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "calleClara" },
       },
-      fondoGrisOscuro: {
-        idUsarHTML: "fondoGrisOscuro",
-        tipoPersonaje: "fondoGrisOscuro",
-        tieneTooltip: false,
-        estadosPosibles: {
-          normal: { name: "normal", imageUrl: "calle" },
-        },
-        estadoInicial: "normal",
-        zIndex: 1,
-        posicionInicialX: 0,
-        direccionInicial: 0,
-        direccionInicial: 0,
-        rotable: false,
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      direccionInicial: 0,
+      rotable: false,
+    },
+    fondoGrisOscuro: {
+      idUsarHTML: "fondoGrisOscuro",
+      tipoPersonaje: "fondoGrisOscuro",
+      tieneTooltip: false,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "calle" },
       },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      direccionInicial: 0,
+      rotable: false,
+    },
+    agua: {
+      idUsarHTML: "agua",
+      tipoPersonaje: "agua",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "agua" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    juncoPastoDelta : {
+      idUsarHTML: "juncoPastoDelta",
+      tipoPersonaje: "juncoPastoDelta",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "juncoPastoDelta" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    lancha: {
+      idUsarHTML: "lancha",
+      tipoPersonaje: "lancha",
+      clasePersonaje: "PersonajeMovibleGrados",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "lancha" },
+      },
+      estadoInicial: "normal",
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 90,
+      zIndex: 3,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [
+        {
+          con: "juncoPastoDelta",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra los juncos.",
+        },
+        {
+          con: "plantaReciclajePastoDelta",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.llegarPlanta();
+          },
+        },
+      ],
+    },
+    plastico:{
+      idUsarHTML: "plastico",
+      tipoPersonaje: "plastico",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "plastico" },
+        juntado: { name: "juntado", imageUrl: "agua" }
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    plantaRecicladora: {
+      idUsarHTML: "plantaReciclajePastoDelta",
+      tipoPersonaje: "plantaReciclajePastoDelta",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "plantaReciclajePastoDelta" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    calle: {
+      idUsarHTML: "calle",
+      tipoPersonaje: "calle",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "calle" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    edificiosSendero: {
+      idUsarHTML: "edificiosSendero",
+      tipoPersonaje: "edificiosSendero",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "edificiosSendero" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    carpincho: {
+      idUsarHTML: "carpincho",
+      tipoPersonaje: "carpincho",
+      clasePersonaje: "PersonajeMovibleGrados",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "carpincho" },
+      },
+      estadoInicial: "normal",
+      posicionInicialY: 3,
+      posicionInicialX: 0,
+      direccionInicial: 90,
+      zIndex: 3,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [
+        {
+          con: "juncoPastoDelta",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un junco!",
+        },
+        {
+          con: "pastoDelta",
+          factorDeAvance: 1,
+          mensaje: "¡Extrañana el pasto!",
+        },
+        {
+          con: "edificiosSendero",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un edificio.",
+        },
+        {
+          con: "autoArriba",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un auto.",
+        },
+        {
+          con: "bandera",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaBandera();
+          },
+        },
+      ],
+    },
+    pastoDelta:{
+      idUsarHTML: "pastoDelta",
+      tipoPersonaje: "pastoDelta",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "pastoDelta" },
+      },
+      estadoInicial: "normal",
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      colisiones: [],
+      paddingImagen: "1px",
+    },
+    autoArriba:{
+      idUsarHTML: "autoArriba",
+      tipoPersonaje: "autoArriba",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "autoArriba" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    bandera:{
+      idUsarHTML: "bandera",
+      tipoPersonaje: "bandera",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "bandera" },
+        abierto: { name: "abierto", imageUrl: "bandera" },
+      },
+      estadoInicial: "cerrado",
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      colisiones: [],
+      paddingImagen: "1px",
+    },
   };
 }

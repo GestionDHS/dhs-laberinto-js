@@ -4,6 +4,8 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import { generarCoordenadas } from "../../Utils/Funciones";
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
@@ -20,36 +22,6 @@ const tablero = [
   [1, 0, 0, 0, 1, 1, 1],  
 ];
 
-const agua = {
-  idUsarHTML: "agua",
-  tipoPersonaje: "agua",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "agua" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px"
-};
-
-const juncoPastoDelta = {
-  idUsarHTML: "juncoPastoDelta",
-  tipoPersonaje: "juncoPastoDelta",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px"
-};
-
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "ecobrick",
@@ -57,106 +29,56 @@ const datosModal = {
   oculto: true,
 };
 
+const coordenadasCaminoPared = generarCoordenadas(tablero);
+const personajesGaleria = new Dhs_personajes();
+const agua = personajesGaleria.obtenerPersonaje("agua");
+const juncoPastoDelta = personajesGaleria.obtenerPersonaje("juncoPastoDelta");
+const lancha = personajesGaleria.obtenerPersonaje("lancha");
+const plastico = personajesGaleria.obtenerPersonaje("plastico");
+const plantaRecicladora = personajesGaleria.obtenerPersonaje("plantaRecicladora");
+
 miJuego.generarEscenario(dimensiones, 2.7, "#357fbf");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
-const arrayDePersonajes = [
+const conjuntosDePersonajes = [
   {
-    idUsarHTML: "lancha",
-    tipoPersonaje: "lancha",
-    clasePersonaje: "PersonajeMovibleGrados",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lancha" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 0,
-    posicionInicialX: 5,
-    direccionInicial: 90,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-      {
-        con: "juncoPastoDelta",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra los juncos.",
-      },
-      {
-        con: "plantaReciclajePastoDelta",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.llegarPlanta();
-        },
-      },
-    ],
+    estrategia: "fijos",
+    personajes: [juncoPastoDelta],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-      juntado: { name: "juntado", imageUrl: "agua" }
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 0,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [agua],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-      juntado: { name: "juntado", imageUrl: "agua" }
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [lancha],
+    posiciones: [[0,5]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-      juntado: { name: "juntado", imageUrl: "agua" }
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [plastico],
+    posiciones: [[0,1],[3,1],[5,6]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plantaReciclajePastoDelta",
-    tipoPersonaje: "plantaReciclajePastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plantaReciclajePastoDelta" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 6,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [plantaRecicladora],
+    posiciones: [[6,1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
-];
+]
 
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
 miJuego.personajePrincipal.llegarPlanta = function () {
