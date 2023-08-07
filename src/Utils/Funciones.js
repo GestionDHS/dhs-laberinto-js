@@ -78,7 +78,6 @@ export const setearAliasYAleatorieidad=function(unPersonaje,desapareceAlReinicia
 }
 
 export const setearDireccion = function (unPersonaje, direcciones, i) {
-  console.log(direcciones[i]);
   unPersonaje.direccionInicial = direcciones[i]
 
 }
@@ -101,6 +100,7 @@ miControlador.crearInyectarWorkspace("dhs-blockly-div", {
   renderer: "renderDHS",
   zoom: {
     controls: true,
+    wheel: true,
     pinch: true,
   },
 });

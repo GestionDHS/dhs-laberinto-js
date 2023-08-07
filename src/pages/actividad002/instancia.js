@@ -65,7 +65,7 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
 ]
-
+//Crear los personajes
 miJuego.crearPersonajes(conjuntosDePersonajes);
 //Setear el Personaje Principal
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);

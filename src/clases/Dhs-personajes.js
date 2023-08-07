@@ -681,7 +681,8 @@ export class Dhs_personajes {
               tipoPersonaje: "zanahoria",
               estadosPosibles: {
                 cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" }, 
-                abierto: { name: "normal", imageUrl: "zanahoriaCosechada" }, 
+                abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+                juntado: { name: "juntado", imageUrl: "pasto" },
               },
               estadoInicial: "cerrado",
               posicionInicialY: 0,

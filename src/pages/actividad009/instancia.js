@@ -36,6 +36,7 @@ const datosModal = {
   texto: "Cosechaste todas las zanahorias!",
   oculto: true,
 };
+
 miJuego.generarEscenario(dimensiones, 2.7, "#9ca64e");
 miJuego.agregarModal(datosModal);
 let conjuntosDePersonajes = [

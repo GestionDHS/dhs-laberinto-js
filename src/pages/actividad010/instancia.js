@@ -67,7 +67,7 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [basura],
-    posiciones: [[2, 4],[3,3],[5,6],[4,2],[4,7],[5,6],[3,8]],
+    posiciones: [[2,4],[3,3],[5,6],[4,2],[4,7],[5,6],[3,8]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
