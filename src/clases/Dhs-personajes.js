@@ -36,6 +36,14 @@ export class Dhs_personajes {
           },
           mensaje: "¡OH NO! Choqué contra un árbol",
         },
+        {
+          con: "bandera",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaBandera();
+          },
+          // mensaje: "¡We are the Champions!",
+        },
       ],
       configPosicionamiento: {},
     },
@@ -618,6 +626,18 @@ export class Dhs_personajes {
       direccionInicial: 0,
       rotable: false,
       paddingImagen: "1px"
+    },
+    cerco: {
+      tipoPersonaje: "arbol",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "cerco" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
     },
   };
 }
