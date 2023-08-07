@@ -65,7 +65,6 @@ export class Juego {
     this.puedeDebeContinuar = true;
     this.reiniciarConjuntoPersonajes();
     this.generarConjuntoDePersonajes(this.listaDeAleatoreos);
-   
   }
 
   generarPersonaje(personaje) {

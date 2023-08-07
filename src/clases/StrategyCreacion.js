@@ -1,4 +1,4 @@
-import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad} from '../Utils/Funciones';
+import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad, setearDireccion} from '../Utils/Funciones';
 
 
 //Strategy creacion
@@ -27,10 +27,13 @@ export function PersonajesFijos() {
     !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
     let personajesACrear = [];
     conjuntoPersonajes.personajes.forEach((unPersonaje) => {
-      conjuntoPersonajes.posiciones.forEach((unaPosicion) => {
+      conjuntoPersonajes.posiciones.forEach((unaPosicion, i) => {
         let copiaPersonaje = { ...unPersonaje };
         setearPosiciones(copiaPersonaje,unaPosicion)
-        setearAliasYAleatorieidad(copiaPersonaje,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
+        setearAliasYAleatorieidad(copiaPersonaje, conjuntoPersonajes.desapareceAlReiniciar, conjuntoPersonajes.aliasConjunto)
+        // console.log(conjuntoPersonajes.direcciones);
+        conjuntoPersonajes.direcciones ? setearDireccion(copiaPersonaje, conjuntoPersonajes.direcciones, i) : 0;
+        // console.log(copiaPersonaje);
         personajesACrear.push(copiaPersonaje);
       });
     });

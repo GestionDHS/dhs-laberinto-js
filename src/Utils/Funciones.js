@@ -77,6 +77,11 @@ export const setearAliasYAleatorieidad=function(unPersonaje,desapareceAlReinicia
   unPersonaje.aliasConjunto = alias;
 }
 
+export const setearDireccion = function (unPersonaje, direcciones, i) {
+  console.log(direcciones[i]);
+  unPersonaje.direccionInicial = direcciones[i]
+
+}
 //********************COMANDO QUE SETEA,RENDERIZA Y EXPONE FUNCIONES GLOBALES PARA QUE FUNCIONE EL TOOLBOX ******************/
 export const configurarYRenderizarToolbox=function(miControlador,categoriaElegida,bloquesCustomStandardDesados,bloquesPrecargadosJSON,funcionesAExporner){
  

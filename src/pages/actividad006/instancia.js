@@ -4,20 +4,15 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
-// import { toolbox } from 'blockly/core/utils';
+import {Dhs_personajes} from '../../clases/Dhs-personajes';
+import {generarCoordenadas} from '../../Utils/Funciones';
 
 document.querySelector("#appActividad").innerHTML = template(``);
-// PRIMERO: instanciar el juego
 const velocidadInicial = 1000;
 const miJuego = new Juego(velocidadInicial);
 
-// SEGUNDO: crear la lista de bloques disponibles y precargados a generar
-//Blockly
-
-//CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO
 const dimensiones = [7, 8]; //fila, columna
 
-//tablero y pedirle que rellene árbol y pasto
 const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -28,35 +23,15 @@ const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-const cerco = {
-  idUsarHTML: "cerco",
-  tipoPersonaje: "cerco",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "cerco" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
-const pasto = {
-  idUsarHTML: "camino",
-  tipoPersonaje: "camino",
-  // pintable: true,
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "pasto" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
+const coordenadasCaminoPared = generarCoordenadas(tablero);
+const personajesGaleria = new Dhs_personajes();
+const lupe = personajesGaleria.obtenerPersonaje("lupe");
+const cofre = personajesGaleria.obtenerPersonaje("cofre");
+const cerco = personajesGaleria.obtenerPersonaje("cerco");
+const pasto = personajesGaleria.obtenerPersonaje("pasto");
+const arbol = personajesGaleria.obtenerPersonaje("arbol");
+const bandera = personajesGaleria.obtenerPersonaje("bandera");
+
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -66,162 +41,101 @@ const datosModal = {
 };
 miJuego.generarEscenario(dimensiones, 2.5, "#9ca64e");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, cerco, pasto);
 
-const arrayDePersonajes = [
+let conjuntosDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeMovibleSimple",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-      {
-        con: "bandera",
-        factorDeAvance: 1,
-        callback: (x) => {
-          x.llegarALaBandera();
-        },
-        // mensaje: "¡We are the Champions!",
-      },
-      {
-        con: "arbol",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un árbol",
-      },
-      {
-        con: "cerco",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un cerco",
-      },
-    ],
+    estrategia: "fijos",
+    personajes: [cerco],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [pasto],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [lupe],
+    posiciones: [[3, 1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    paddingImagen: "1px",
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [arbol],
+    posiciones: [[3, 0],[3,7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 2,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    paddingImagen: "1px",
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [cofre],
+    posiciones: [[3, 5],[3,4],[3,3],[3,2]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "bandera",
-    tipoPersonaje: "bandera",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" }, //baja a alta? cambiar de color?
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    paddingImagen: "0.4em",
-    colisiones: [],
-  },
-  {
-    idUsarHTML: "arbol",
-    tipoPersonaje: "arbol",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arboles" },
-    },
-    estadoInicial: "normal",
-    zIndex: 2,
-    posicionInicialY: 3,
-    posicionInicialX: 0,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "arbol",
-    tipoPersonaje: "arbol",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "arboles" },
-    },
-    estadoInicial: "normal",
-    zIndex: 2,
-    posicionInicialY: 3,
-    posicionInicialX: 7,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [bandera],
+    posiciones: [[3, 6]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
 ];
+// const arrayDePersonajes = [
+//   {
+//     idUsarHTML: "lupe",
+//     tipoPersonaje: "lupe",
+//     clasePersonaje: "PersonajeMovibleSimple",
+//     tieneTooltip: true,
+//     estadosPosibles: {
+//       normal: { name: "normal", imageUrl: "lupe" },
+//     },
+//     estadoInicial: "normal",
+//     posicionInicialY: 3,
+//     posicionInicialX: 1,
+//     direccionInicial: 0,
+//     zIndex: 3,
+//     rotable: true,
+//     paddingImagen: "1px",
+//     colisiones: [
+//       {
+//         con: "bandera",
+//         factorDeAvance: 1,
+//         callback: (x) => {
+//           x.llegarALaBandera();
+//         },
+//         // mensaje: "¡We are the Champions!",
+//       },
+//       {
+//         con: "arbol",
+//         factorDeAvance: 0.2,
+//         callback: (x) => {
+//           x.terminar();
+//         },
+//         mensaje: "¡OH NO! Choqué contra un árbol",
+//       },
+//       {
+//         con: "cerco",
+//         factorDeAvance: 0.2,
+//         callback: (x) => {
+//           x.terminar();
+//         },
+//         mensaje: "¡OH NO! Choqué contra un cerco",
+//       },
+//     ],
+//   },
 
-miJuego.generarPersonajes(arrayDePersonajes);
+
+
+
+
+
+miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
 //window.miJuego.listaDePersonajes;
 //Método para Abrir el Cofre
@@ -243,6 +157,7 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
   }
 };
 
+// BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 
 const categoriasDeseadas = [
