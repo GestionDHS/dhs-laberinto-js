@@ -4,6 +4,9 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
+import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
@@ -18,35 +21,12 @@ const tablero = [
   [1, 1, 1, 0, 1],
   [1, 1, 1, 1, 1],
 ];
-
-const arbol = {
-  idUsarHTML: "arbol",
-  tipoPersonaje: "arbol",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
-const pasto = {
-  idUsarHTML: "camino",
-  tipoPersonaje: "camino",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "pasto" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
+const personajesGaleria = new Dhs_personajes();
+const coordenadasCaminoPared = generarCoordenadas(tablero)
+const pared = personajesGaleria.obtenerPersonaje("arbol");
+const camino = personajesGaleria.obtenerPersonaje("pasto");
+const lupe = personajesGaleria.obtenerPersonaje("lupe");
+const bandera = personajesGaleria.obtenerPersonaje("bandera");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -57,62 +37,39 @@ const datosModal = {
 
 miJuego.generarEscenario(dimensiones, 3.5, "#9ca64e");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-const arrayDePersonajes = [
+const conjuntosDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeMovibleSimple",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-      {
-        con: "bandera",
-        factorDeAvance: 1,
-        callback: (x) => {
-          x.llegarALaBandera();
-        },
-      },
-      {
-        con: "arbol",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un árbol",
-      },
-    ],
+    estrategia: "fijos",
+    personajes: [pared],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "bandera",
-    tipoPersonaje: "bandera",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" },
-    },
-    estadoInicial: "cerrado", 
-    posicionInicialY: 1,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    paddingImagen: "0.4em",
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [lupe],
+    posiciones: [[3,3]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bandera],
+    posiciones: [[1,1]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
 ];
 
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes)
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[25]);
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
@@ -133,69 +90,19 @@ miJuego.personajePrincipal.abrirCofre = function () {
   }
 };
 
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-);
+// BLOCKLY ------------------------------------------------------
+const miControlador = new ControladorStandard(miJuego,velocidadInicial);
+const categoria=new Dhs_Categorias()
+const categoriaElegida=categoria.obtenerCategoria("eventMovAcciones")
 
-const categoriasDeseadas = [
-  {
-    name: "Eventos",
-    categorystyle: "execute",
-  },
-  {
-    name: "Movimientos",
-    categorystyle: "movement",
-  },
-  {
-    name: "Acciones",
-    categorystyle: "action",
-  },
-];
-categoriasDeseadas.forEach((cat) =>
-  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
-);
-
-const bloquesCustomStandardDesados = [
+const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
   ["abrir_cofre", "Acciones"],
 ];
 
-bloquesCustomStandardDesados.forEach((bl) => {
-  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
-});
-
-const render = new CustomRenderer();
-render.registrarRender("renderDHS");
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-  theme: "themeDH",
-  renderer: "renderDHS",
-  zoom: {
-    controls: true,
-    wheel: true,
-    pinch: true,
-  },
-});
-
-// const bloquesPrecargadosJSON =
-//   '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"move_up_simple","id":"O3D2ssLiw9sNeIgC=}WA","next":{"block":{"type":"move_left_simple","id":")(gyoL0f4@2j%EUBh8at","next":{"block":{"type":"abrir_cofre","id":"PpjmU)WC2X$S:}l!!n[Z","next":{"block":{"type":"move_left_simple","id":"R}Ozqz_r81QkU`6tl~WG","next":{"block":{"type":"move_up_simple","id":"{DU^E4g#3sJys|pZhuHk"}}}}}}}}}}}}]}}'
+//const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
+const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre"]
 
-miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
-miControlador.setearEventoCambioWorkspaceStandard();
-miControlador.habilitarDesactivarHuerfanos();
-miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
-
-const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
-miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-  miControlador.callbackInterpreteStandard(interpreter, globalObject);
-  callBackJuego(interpreter, globalObject);
-  //callbackExtras(interpreter, globalObject);
-});
+configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

@@ -34,7 +34,6 @@ export class Juego {
       PersonajeMovibleSimple: PersonajeMovibleSimple,
       PersonajeMovibleGrados: PersonajeMovibleGrados,
     };
-    this.configuracionInicialPersonajes = [];
     this.tipoCreacionPersonajes = {};
   }
 
@@ -49,37 +48,23 @@ export class Juego {
       elementoHTMLLaberinto,
       colorBordes
     );
-    // console.log(this.escenario)
     this.escenario.crearEscenario();
   }
 
-  limpiarTablero() {
-    // console.log(this.listaDePersonajes);
-    let soloAleatoreos = this.listaDePersonajes.filter(
-      (personaje) => personaje.desapareceAlReiniciar == true
-    );
-    // console.log(soloAleatoreos);
-    soloAleatoreos.forEach((personaje) => {
-      personaje.salirDelCasilleroActual();
-      personaje.controladorDOM.removerDivDelDOM();
+  reiniciarConjuntoPersonajes() {
+    this.listaDePersonajes.forEach((personaje) => {
+      personaje.reiniciarse()
     });
     this.listaDePersonajes = this.listaDePersonajes.filter(
       (personaje) => personaje.desapareceAlReiniciar != true
     );
-    // return soloAleatoreos
+    
   }
 
   reiniciar() {
     this.puedeDebeContinuar = true;
-    this.limpiarTablero();
-    // console.log(personajes);
-    // personajes.forEach((unPersonaje) => {
-    //   this.generarPersonaje(unPersonaje);
-    // }
-    // nunca guardamos nada en listaDeAleatoreos
-    // console.log();
-    // this.crearPersonajes(this.tipoCreacionPersonajes.crearPersonajes(this.listaDeAleatoreos, this.escenario), true)
-    this.crearPersonajes(this.listaDeAleatoreos, true);
+    this.reiniciarConjuntoPersonajes();
+    this.generarConjuntoDePersonajes(this.listaDeAleatoreos);
   }
 
   generarPersonaje(personaje) {
@@ -89,16 +74,11 @@ export class Juego {
       unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](
         personaje,
         this
-      );
-      unPersonaje.desapareceAlReiniciar =
-        personaje.desapareceAlReiniciar || false;
+      ); 
     } else {
       unPersonaje = new PersonajeBasico(personaje, this);
-      unPersonaje.desapareceAlReiniciar =
-        personaje.desapareceAlReiniciar || false;
     }
     this.listaDePersonajes.push(unPersonaje);
-    // console.log(this.listaDePersonajes);
     unPersonaje.inicializar();
   }
 
@@ -147,23 +127,6 @@ export class Juego {
     };
   }
 
-  calcularCasillerosVacios() {
-    let casillerosVacios = 0;
-    this.escenario.objetosCasilleros.forEach((arrObjCasi) => {
-      arrObjCasi.forEach((casillero) => {
-        casillero.ocupantes?.forEach((ocupante) => {
-          if (
-            ocupante.tipoPersonaje == "camino" &&
-            casillero.ocupantes.length == 1
-          ) {
-            casillerosVacios++;
-          }
-        });
-      });
-    });
-    return casillerosVacios;
-  }
-
   generarConjuntoDePersonajes(conjuntosDePersonajes) {
     const estrategias = {
       fijos: new PersonajesFijos(),
@@ -189,13 +152,12 @@ export class Juego {
     });
   }
 
-  crearPersonajes(conjuntosDePersonajes, reinicio = false) {
-    if (!reinicio) {
-      this.listaDeAleatoreos = conjuntosDePersonajes.filter(
-        (p) => p.desapareceAlReiniciar == true
-      );
-    }
-    // console.log(this.listaDeAleatoreos);
-    this.generarConjuntoDePersonajes(conjuntosDePersonajes);
+  crearPersonajes(conjuntosDePersonajes) {
+    conjuntosDePersonajes.forEach((unConjunto)=>{
+      if(unConjunto.estrategia!="fijos"){
+         this.listaDeAleatoreos.push(unConjunto)
+       }
+      })
+      this.generarConjuntoDePersonajes(conjuntosDePersonajes);
   }
 }
