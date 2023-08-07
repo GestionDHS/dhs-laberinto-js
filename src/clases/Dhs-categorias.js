@@ -40,7 +40,7 @@ export class Dhs_Categorias {
           },
           ],
       },
-      lupeCofreRepeticiones:{
+      accionRepeticiones:{
         tipos : [
           {
             name: "Eventos",

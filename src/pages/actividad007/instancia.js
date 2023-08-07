@@ -69,13 +69,6 @@ let conjuntosDePersonajes = [
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
-  // {
-  //   estrategia: "fijos",
-  //   personajes: [arbol],
-  //   posiciones: [[3, 0],[3,7]],
-  //   aliasConjunto: "fijosTablero",
-  //   desapareceAlReiniciar: false,
-  // },
   {
     estrategia: "fijos",
     personajes: [cofre],
@@ -118,7 +111,7 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("lupeCofreRepeticiones")
+const categoriaElegida=categoria.obtenerCategoria("accionRepeticiones")
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
