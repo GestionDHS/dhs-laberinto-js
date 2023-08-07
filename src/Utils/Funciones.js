@@ -73,3 +73,8 @@ export const setearAliasYAleatorieidad=function(unPersonaje,desapareceAlReinicia
   unPersonaje.desapareceAlReiniciar = desapareceAlReiniciar;
   unPersonaje.aliasConjunto = alias;
 }
+
+export const setearDireccion = function (unPersonaje, direcciones, i) {
+  console.log(direcciones[i]);
+  unPersonaje.direccionInicial = direcciones[i]
+}

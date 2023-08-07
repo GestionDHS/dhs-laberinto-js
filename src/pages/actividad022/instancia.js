@@ -4,6 +4,8 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import {Dhs_personajes} from "../../clases/Dhs-personajes"
+import {generarCoordenadas} from "../../Utils/Funciones"
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
@@ -24,33 +26,9 @@ const tablero = [
 ];
 
 //TERCERO: Definir que objetos van a ser "pared", y cuales "camino"
-const arbol = {
-  idUsarHTML: "arbol",
-  tipoPersonaje: "arbol",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-};
-const pasto = {
-  idUsarHTML: "camino",
-  tipoPersonaje: "camino",
-  pintable: true,
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "pasto" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-};
+const galeriaPersonajes = new Dhs_personajes();
+const pared = galeriaPersonajes.obtenerPersonaje("arbol")
+const camino = galeriaPersonajes.obtenerPersonaje("pasto")
 
 //CUARTO: Setear Modal de Ganar
 const datosModal = {
@@ -65,102 +43,63 @@ const datosModal = {
 // y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
 miJuego.generarEscenario(dimensiones, 3, "white");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
+let coordenadasCaminoPared = generarCoordenadas(tablero);
+// miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
 //SEXTO: Definir los Objetos Personajes
 //tipoPersonaje : PersonajeBasico / PersonajeMovibleSimple / PersonajeMovibleGrados / PersonajeDibujante
-const arrayDePersonajes = [
-  {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeDibujante",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 3,
-    rotable: true,
-    colisiones: [
-      {
-        con: "lodo",
-        factorDeAvance: 0.7,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Me atasqué en el lodo.",
-      },
-      {
-        con: "arbol",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un árbol",
-      },
+const lupe = galeriaPersonajes.obtenerPersonaje("lupe")
+const cofre = galeriaPersonajes.obtenerPersonaje("cofre")
+const lodo = galeriaPersonajes.obtenerPersonaje("lodo")
+const basura = galeriaPersonajes.obtenerPersonaje("basura")
 
-      // {
-      //   con: "cofre",
-      //   factorDeAvance: 1,
-      //   callback: (x) => {
-      //     //depende si tengo el bloque Abrir Cofre
-      //       x.abrir("cofre");
-      //   },
-      //   mensaje: "¡We are the Champions!",
-      // },
-    ],
+const conjuntosDePersonajes = [
+  {
+    estrategia: "fijos",
+    personajes: [pared],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [lupe],
+    posiciones: [[3, 3]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "basura",
-    tipoPersonaje: "basura",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "basura" },
-      juntado: { name: "juntado", imageUrl: "pasto" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 2,
-    posicionInicialX: 2,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [lodo],
+    posiciones: [[1, 3]],
+    aliasConjunto: "fijoLodo",
+    desapareceAlReiniciar: false,
   },
-];
+  {
+    estrategia: "fijos",
+    personajes: [cofre],
+    posiciones: [[3, 4]],
+    aliasConjunto: "fijoCofre",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [basura],
+    posiciones: [[2, 2]],
+    aliasConjunto: "fijoBasura",
+    desapareceAlReiniciar: false,
+  },
+]
 
 //SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciones
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes);
 // Se debe mirar el arrayDePersonajes para saber en que posición esta el personaje principal
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
