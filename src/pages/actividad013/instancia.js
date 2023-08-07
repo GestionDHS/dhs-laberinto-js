@@ -4,6 +4,8 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import { generarCoordenadas } from "../../Utils/Funciones";
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
@@ -18,35 +20,13 @@ const tablero = [
   [1, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1],
 ];
-
-const arbol = {
-  idUsarHTML: "arbol",
-  tipoPersonaje: "arbol",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
-const pasto = {
-  idUsarHTML: "camino",
-  tipoPersonaje: "camino",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "pasto" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
+const personajesGaleria = new Dhs_personajes();
+const coordenadasCaminoPared = generarCoordenadas(tablero)
+const pared = personajesGaleria.obtenerPersonaje("arbol");
+const camino = personajesGaleria.obtenerPersonaje("pasto");
+const lupe = personajesGaleria.obtenerPersonaje("lupe");
+const cofre = personajesGaleria.obtenerPersonaje("cofre");
+const lodo = personajesGaleria.obtenerPersonaje("lodo");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -57,76 +37,46 @@ const datosModal = {
 
 miJuego.generarEscenario(dimensiones, 4, "#9ca64e");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-const arrayDePersonajes = [
+const conjuntosDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeMovibleSimple",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-      {
-        con: "arbol",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un árbol",
-      },
-      {
-        con: "lodo",
-        factorDeAvance: 0.7,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Me atasqué en el lodo.",
-      },
-    ],
+    estrategia: "fijos",
+    personajes: [pared],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado",
-    posicionInicialY: 3,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [lupe],
+    posiciones: [[1,1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [cofre],
+    posiciones: [[3,4]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [lodo],
+    posiciones: [[1,3]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
 ];
 
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes)
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
 miJuego.personajePrincipal.abrirCofre = function () {

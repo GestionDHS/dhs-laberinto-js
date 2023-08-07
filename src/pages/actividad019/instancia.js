@@ -4,6 +4,8 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import { generarCoordenadas } from "../../Utils/Funciones";
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
@@ -20,35 +22,13 @@ const tablero = [
   [1, 0, 1, 0, 0, 0, 1],
   [1, 0, 1, 1, 1, 0, 1],
 ];
-
-const juncoPastoDelta = {
-  idUsarHTML: "juncoPastoDelta",
-  tipoPersonaje: "juncoPastoDelta",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
-const agua = {
-  idUsarHTML: "agua",
-  tipoPersonaje: "agua",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "agua" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
+const personajesGaleria = new Dhs_personajes();
+const coordenadasCaminoPared = generarCoordenadas(tablero)
+const pared = personajesGaleria.obtenerPersonaje("juncoPastoDelta");
+const camino = personajesGaleria.obtenerPersonaje("agua");
+const pato = personajesGaleria.obtenerPersonaje("pato");
+const plastico = personajesGaleria.obtenerPersonaje("plastico");
+const familiaPato = personajesGaleria.obtenerPersonaje("familiaPato");
 
 const datosModal = {
   titulo: "¡LLEGAMOS!",
@@ -59,147 +39,49 @@ const datosModal = {
 
 miJuego.generarEscenario(dimensiones, 2.5, "#357fbf");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
-const arrayDePersonajes = [
+const conjuntosDePersonajes = [
   {
-    idUsarHTML: "pato",
-    tipoPersonaje: "pato",
-    clasePersonaje: "PersonajeMovibleGrados",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pato" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 6,
-    posicionInicialX: 1,
-    direccionInicial: 90,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-      {
-        con: "juncoPastoDelta",
-        factorDeAvance: 0.7,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Por aquí no puedo nadar.",
-      },
-      {
-        con: "plastico",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡CUACK, NO! Hay demasiada basura",
-      },
-
-      {
-        con: "familiaPato",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.llegarALaFamilia();
-            },
-      },
-      
-    ],
-  },
- 
-  {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 2,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [pared],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 2,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [pato],
+    posiciones: [[6, 1]],
+    direcciones: [90],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 4,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [plastico],
+    posiciones: [[2, 1],[3,2],[1,4],[4,4],[6,5]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 6,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [familiaPato],
+    posiciones: [[1, 5]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
-  {
-    idUsarHTML: "familiaPato",
-    tipoPersonaje: "familiaPato",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "familiaPato" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px"
-  },
+  
 ];
 
 
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes)
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
 

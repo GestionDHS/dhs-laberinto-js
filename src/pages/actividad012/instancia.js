@@ -4,6 +4,8 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import { generarCoordenadas } from "../../Utils/Funciones";
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
@@ -21,6 +23,8 @@ const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
+// fondo es el blanco
+// recuadroPintableDeseado es el dibujo en gris
 const recuadroPintableDeseado = {
   idUsarHTML: "recuadro-pintable",
   tipoPersonaje: "recuadro-pintable",
