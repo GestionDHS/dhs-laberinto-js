@@ -19,6 +19,46 @@ export class Dhs_Categorias {
               categorystyle: "pencil",
             },
           ],
+      },
+      lapizRepeticiones:{
+        tipos : [
+          {
+            name: "Eventos",
+            categorystyle: "execute",
+          },
+          {
+            name: "Movimientos",
+            categorystyle: "movement",
+          },
+          {
+            name: "Lápiz",
+            categorystyle: "pencil",
+          },
+          {
+            name: "Repeticiones",
+            categorystyle: "loop_category",
+          },
+          ],
+      },
+      lupeCofreRepeticiones:{
+        tipos : [
+          {
+            name: "Eventos",
+            categorystyle: "execute",
+          },
+          {
+            name: "Movimientos",
+            categorystyle: "movement",
+          },
+          {
+            name: "Acciones",
+            categorystyle: "action",
+          },
+          {
+            name: "Repeticiones",
+            categorystyle: "loop_category",
+          },
+          ],
       }
   }
 }

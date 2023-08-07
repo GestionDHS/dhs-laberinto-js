@@ -83,13 +83,13 @@ export const setearDireccion = function (unPersonaje, direcciones, i) {
 
 }
 //********************COMANDO QUE SETEA,RENDERIZA Y EXPONE FUNCIONES GLOBALES PARA QUE FUNCIONE EL TOOLBOX ******************/
-export const configurarYRenderizarToolbox=function(miControlador,categoriaElegida,bloquesCustomStandardDesados,bloquesPrecargadosJSON,funcionesAExporner){
+export const configurarYRenderizarToolbox=function(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExporner){
  
   categoriaElegida.tipos.forEach((cat) =>
   miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
 );
 
-bloquesCustomStandardDesados.forEach((bl) => {
+ordenJerarquicoBloques.forEach((bl) => {
   miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
 });
 
