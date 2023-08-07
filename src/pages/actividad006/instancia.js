@@ -86,54 +86,6 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
 ];
-// const arrayDePersonajes = [
-//   {
-//     idUsarHTML: "lupe",
-//     tipoPersonaje: "lupe",
-//     clasePersonaje: "PersonajeMovibleSimple",
-//     tieneTooltip: true,
-//     estadosPosibles: {
-//       normal: { name: "normal", imageUrl: "lupe" },
-//     },
-//     estadoInicial: "normal",
-//     posicionInicialY: 3,
-//     posicionInicialX: 1,
-//     direccionInicial: 0,
-//     zIndex: 3,
-//     rotable: true,
-//     paddingImagen: "1px",
-//     colisiones: [
-//       {
-//         con: "bandera",
-//         factorDeAvance: 1,
-//         callback: (x) => {
-//           x.llegarALaBandera();
-//         },
-//         // mensaje: "¡We are the Champions!",
-//       },
-//       {
-//         con: "arbol",
-//         factorDeAvance: 0.2,
-//         callback: (x) => {
-//           x.terminar();
-//         },
-//         mensaje: "¡OH NO! Choqué contra un árbol",
-//       },
-//       {
-//         con: "cerco",
-//         factorDeAvance: 0.2,
-//         callback: (x) => {
-//           x.terminar();
-//         },
-//         mensaje: "¡OH NO! Choqué contra un cerco",
-//       },
-//     ],
-//   },
-
-
-
-
-
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
