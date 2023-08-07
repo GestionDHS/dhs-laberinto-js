@@ -128,23 +128,6 @@ export class Juego {
     };
   }
 
-  calcularCasillerosVacios() {
-    let casillerosVacios = 0;
-    this.escenario.objetosCasilleros.forEach((arrObjCasi) => {
-      arrObjCasi.forEach((casillero) => {
-        casillero.ocupantes?.forEach((ocupante) => {
-          if (
-            ocupante.tipoPersonaje == "camino" &&
-            casillero.ocupantes.length == 1
-          ) {
-            casillerosVacios++;
-          }
-        });
-      });
-    });
-    return casillerosVacios;
-  }
-
   generarConjuntoDePersonajes(conjuntosDePersonajes) {
     const estrategias = {
       fijos: new PersonajesFijos(),
