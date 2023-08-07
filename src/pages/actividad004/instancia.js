@@ -23,21 +23,6 @@ const tablero = [
   [1, 1, 1, 1, 1, 1, 1],
 ];
 
-// const recuadroPintableDeseado = {
-//   idUsarHTML: "recuadro-pintable",
-//   tipoPersonaje: "recuadro-pintable",
-//   estadosPosibles: {
-//     normal: { name: "normal", imageUrl: null },
-//   },
-//   estadoInicial: "normal",
-//   zIndex: 1,
-//   posicionInicialY: 0,
-//   posicionInicialX: 0,
-//   direccionInicial: 0,
-//   colorFondoInicial: "lightgrey",
-//   rotable: false,
-// };
-
 const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje(
