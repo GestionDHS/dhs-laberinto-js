@@ -1,3 +1,6 @@
+import { CustomRenderer } from "../bloques/CustomRender";
+
+
 //************FUNCION QUE ASIGNA POSICIONES RAMDOM DEL TABLERO*************/
 export function posicionValida(escenario) {
  
@@ -77,4 +80,39 @@ export const setearAliasYAleatorieidad=function(unPersonaje,desapareceAlReinicia
 export const setearDireccion = function (unPersonaje, direcciones, i) {
   console.log(direcciones[i]);
   unPersonaje.direccionInicial = direcciones[i]
+
+}
+//********************COMANDO QUE SETEA,RENDERIZA Y EXPONE FUNCIONES GLOBALES PARA QUE FUNCIONE EL TOOLBOX ******************/
+export const configurarYRenderizarToolbox=function(miControlador,categoriaElegida,bloquesCustomStandardDesados,bloquesPrecargadosJSON,funcionesAExporner){
+ 
+  categoriaElegida.tipos.forEach((cat) =>
+  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
+);
+
+bloquesCustomStandardDesados.forEach((bl) => {
+  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
+});
+
+const render = new CustomRenderer();
+render.registrarRender("renderDHS");
+miControlador.crearInyectarWorkspace("dhs-blockly-div", {
+  toolbox: miControlador.ConfiguradorBloques.toolbox,
+  theme: "themeDH",
+  renderer: "renderDHS",
+  zoom: {
+    controls: true,
+    pinch: true,
+  },
+});
+miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
+miControlador.setearEventoCambioWorkspaceStandard();
+miControlador.habilitarDesactivarHuerfanos();
+miControlador.crearFuncionesGlobalesStandard();
+funcionesAExporner.forEach((unaFuncion)=>miControlador.juego.agregarGlobalConCallback(unaFuncion))
+
+const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
+miControlador.setearCallbackInterprete((interpreter, globalObject) => {
+  miControlador.callbackInterpreteStandard(interpreter, globalObject);
+  callBackJuego(interpreter, globalObject);
+});
 }

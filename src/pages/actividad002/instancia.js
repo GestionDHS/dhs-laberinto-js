@@ -1,18 +1,19 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
-import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
 import {Dhs_personajes} from '../../clases/Dhs-personajes';
 import {generarCoordenadas} from '../../Utils/Funciones';
+import { Dhs_Categorias } from "../../clases/Dhs-categorias";
+import {configurarYRenderizarToolbox} from "../../utils/Funciones"
 
 document.querySelector("#appActividad").innerHTML = template(``);
+//instancio juego
 const velocidadInicial = 1000;
 const miJuego = new Juego(velocidadInicial);
-
+//instancio las dimensiones y el tablero
 const dimensiones = [7, 7]; //fila, columna
-
 const tablero = [
   [1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 0, 1],
@@ -23,11 +24,6 @@ const tablero = [
   [1, 1, 1, 1, 1, 1, 1],
 ];
 const coordenadasCaminoPared = generarCoordenadas(tablero);
-const personajesGaleria = new Dhs_personajes();
-const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje("recuadroPintableDeseado");
-const fondo = personajesGaleria.obtenerPersonaje("fondo");
-const lapiz = personajesGaleria.obtenerPersonaje("lapiz");
-
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "lapizRojo",
@@ -40,7 +36,12 @@ miJuego.generarEscenario(
   "white"
 );
 miJuego.agregarModal(datosModal);
-
+//Me traigo los personajes a Utilizar
+const personajesGaleria = new Dhs_personajes();
+const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje("recuadroPintableDeseado");
+const fondo = personajesGaleria.obtenerPersonaje("fondo");
+const lapiz = personajesGaleria.obtenerPersonaje("lapiz");
+//Instancio las estrategias para crear los personajes
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
@@ -66,6 +67,7 @@ let conjuntosDePersonajes = [
 ]
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
+//Setear el Personaje Principal
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 const miColor = "#FA3939";
 const dibujoDeseado = tablero.map((row) =>
@@ -81,65 +83,20 @@ const miControlador = new ControladorStandard(
   velocidadInicial
 );
 
-const categoriasDeseadas = [
-  {
-    name: "Eventos",
-    categorystyle: "execute",
-  },
-  {
-    name: "Movimientos",
-    categorystyle: "movement",
-  },
-  {
-    name: "Lápiz",
-    categorystyle: "pencil",
-  },
-];
-categoriasDeseadas.forEach((cat) =>
-  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
-);
+const categoria=new Dhs_Categorias()
+const categoriaElegida=categoria.obtenerCategoria("lapiz")
 
-const bloquesCustomStandardDesados = [
+const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["avanzar_param", "Movimientos"],
   ["girar_clasico", "Movimientos"],
   ["lapiz", "Lápiz"],
 ];
 
-bloquesCustomStandardDesados.forEach((bl) => {
-  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
-});
-
-const render = new CustomRenderer();
-render.registrarRender("renderDHS");
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-  theme: "themeDH",
-  renderer: "renderDHS",
-  zoom: {
-    controls: true,
-    pinch: true,
-  },
-});
-
 const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+'{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
-miControlador.setearEventoCambioWorkspaceStandard();
-miControlador.habilitarDesactivarHuerfanos();
-miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("avanzar");
-miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-miControlador.juego.agregarGlobalConCallback("girarDerecha");
-miControlador.juego.agregarGlobalConCallback("girarGrados");
-miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-miControlador.juego.agregarGlobalConCallback("subirLapiz");
-miControlador.juego.agregarGlobalConCallback("setearColor");
 
-const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
-miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-  miControlador.callbackInterpreteStandard(interpreter, globalObject);
-  callBackJuego(interpreter, globalObject);
-});
+const funcionesAExponer=["avanzar","girarIzquierda","girarDerecha","girarGrados","apuntarEnDireccion","bajarLapiz","subirLapiz","setearColor"]
+
+configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)
