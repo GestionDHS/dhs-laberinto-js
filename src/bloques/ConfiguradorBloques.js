@@ -1166,6 +1166,62 @@ export default class ConfiguradorBloques {
             kind: "block",
         } 
     } 
+    logic_compare() {
+        return {
+            "kind": "block",
+            "type": "logic_compare"
+          }
+    }
+    logic_operation() {
+        return {
+            "kind": "block",
+            "type": "logic_operation"
+        }
+    }
+    logic_boolean() {
+        return {
+            "kind": "block",
+            "type": "logic_boolean"
+        }
+    }
+    condicion_cofre() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "condicion_cofre",
+                "message0": "%1 hay cofre?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "logic_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["condicion_cofre"] = function (block) {
+            const code = ""
+            return code;
+        };
+        return {
+            type: "condicion_cofre",
+            kind: "block",
+        }
+    }
+    condicionales() {
+        return [
+            this.condicion_cofre(),
+            this.if(),
+            this.logic_compare(),
+            this.logic_operation(),
+            // this.logic_boolean(),
+        ]
+    }
 
     // LOOPS
     controls_repeat() {
