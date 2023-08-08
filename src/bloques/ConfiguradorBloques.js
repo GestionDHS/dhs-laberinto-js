@@ -1164,8 +1164,8 @@ export default class ConfiguradorBloques {
         return {
             type: "controls_if",
             kind: "block",
-        } 
-    } 
+        }
+    }
     logic_compare() {
         return {
             "kind": "block",
