@@ -130,20 +130,12 @@ export class Juego {
   generarConjuntoDePersonajes(conjuntosDePersonajes) {
     const estrategias = {
       fijos: new PersonajesFijos(),
-<<<<<<< HEAD
-			azarRango: new PersonajesAlAzarRango(),
-			azarFijos: new PersonajesAlAzarFijos(),
-			azarExcluyente: new PersonajesAlAzarExcluyente(),
-		};
-		conjuntosDePersonajes.forEach((unConjunto) => {
-=======
       azarRango: new PersonajesAlAzarRango(),
       azarFijos: new PersonajesAlAzarFijos(),
       azarExcluyente: new PersonajesAlAzarExcluyente(),
       azarCantTotalFija: new PersonajesAlAzarCantTotalFijos()
     };
     conjuntosDePersonajes.forEach((unConjunto) => {
->>>>>>> 37c69ed929bb979c84021f7fe63a88f824f923cf
       let personajesAGenerar = [];
       if (this.tipoCreacionPersonajes != unConjunto.estrategia) {
         this.tipoCreacionPersonajes = estrategias[unConjunto.estrategia];
