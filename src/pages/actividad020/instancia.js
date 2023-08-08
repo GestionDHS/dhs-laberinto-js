@@ -4,15 +4,13 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
-import carpincho from '../../img/carpinchoArriba.png';
-import pastoDelta from '../../img/pastoDelta.png';
-import juncoPastoDelta from '../../img/juncoPastoDelta.png';
-import {PersonajeMovibleGrados} from '../../clases/Personaje';
-import carpinchoReal from '../../img/carpinchoReal.png';
+import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
+import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
+window.miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 7]; //fila, columna
 
@@ -26,36 +24,15 @@ const tablero = [
   [1, 0, 1, 0, 0, 0, 0],
 ];
 
-const calle = {
-  idUsarHTML: "calle",
-  tipoPersonaje: "calle",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "calle" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px"
-};
-
-
-const edificiosSendero = {
-  idUsarHTML: "edificiosSendero",
-  tipoPersonaje: "edificiosSendero",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "edificiosSendero" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px"
-};
+const personajesGaleria = new Dhs_personajes();
+const coordenadasCaminoPared = generarCoordenadas(tablero)
+const pared = personajesGaleria.obtenerPersonaje("edificiosSendero");
+const camino = personajesGaleria.obtenerPersonaje("calle");
+const juncoPastoDelta = personajesGaleria.obtenerPersonaje("juncoPastoDelta");
+const pastoDelta = personajesGaleria.obtenerPersonaje("pastoDelta");
+const autoArriba = personajesGaleria.obtenerPersonaje("autoArriba");
+const carpincho = personajesGaleria.obtenerPersonaje("carpincho");
+const bandera = personajesGaleria.obtenerPersonaje("bandera");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -66,392 +43,79 @@ const datosModal = {
 // "#787878"
 miJuego.generarEscenario(dimensiones, 3, "#a0a0a0");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, edificiosSendero, calle);
 
-const arrayDePersonajes = [
+const conjuntosDePersonajes = [
   {
-    idUsarHTML: "carpincho",
-    tipoPersonaje: "carpincho",
-    clasePersonaje: "PersonajeMovibleGrados",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "carpincho" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 0,
-    direccionInicial: 90,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-      {
-        con: "juncoPastoDelta",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un junco!",
-      },
-      {
-        con: "pastoDelta",
-        factorDeAvance: 1,
-        mensaje: "¡Extrañana el pasto!",
-      },
-      {
-        con: "edificiosSendero",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un edificio.",
-      },
-      {
-        con: "autoArriba",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un auto.",
-      },
-      {
-        con: "bandera",
-        factorDeAvance: 1,
-        callback: (x) => {
-          x.llegarALaBandera();
-        },
-      },
-    ],
+    estrategia: "fijos",
+    personajes: [pared],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "juncoPastoDelta",
-    tipoPersonaje: "juncoPastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "juncoPastoDelta",
-    tipoPersonaje: "juncoPastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 4,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [carpincho],
+    posiciones: [[3,0]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "juncoPastoDelta",
-    tipoPersonaje: "juncoPastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 6,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [juncoPastoDelta],
+    posiciones: [[3,4],[4,4],[6,4],[6,6],[4,6]],
+    aliasConjunto: "fijoJunco",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "juncoPastoDelta",
-    tipoPersonaje: "juncoPastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 6,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [pastoDelta],
+    posiciones: [[3,5],[4,5],[5,5],[6,5],[5,4],[5,6],[3,6]],
+    aliasConjunto: "fijoPastoDelta",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "juncoPastoDelta",
-    tipoPersonaje: "juncoPastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 4,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [autoArriba],
+    posiciones: [[5, 0], [5, 1], [5, 2], [5, 3], [6, 3]],
+    direcciones: [90,90,90,120,180],
+    aliasConjunto: "fijoAutoArriba",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "pastoDelta",
-    tipoPersonaje: "pastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [bandera],
+    posiciones: [[5,6]],
+    aliasConjunto: "fijoBandera",
+    desapareceAlReiniciar: false,
   },
-  {
-    idUsarHTML: "pastoDelta",
-    tipoPersonaje: "pastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 4,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoDelta",
-    tipoPersonaje: "pastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 5,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoDelta",
-    tipoPersonaje: "pastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 6,
-    posicionInicialX: 5,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoDelta",
-    tipoPersonaje: "pastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 5,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoDelta",
-    tipoPersonaje: "pastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 5,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "pastoDelta",
-    tipoPersonaje: "pastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "pastoDelta" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-  {
-    idUsarHTML: "autoArriba",
-    tipoPersonaje: "autoArriba",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoArriba" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 0,
-    direccionInicial: 90,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoArriba",
-    tipoPersonaje: "autoArriba",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoArriba" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 1,
-    direccionInicial: 90,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoArriba",
-    tipoPersonaje: "autoArriba",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoArriba" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 2,
-    direccionInicial: 90,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoArriba",
-    tipoPersonaje: "autoArriba",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoArriba" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 3,
-    direccionInicial: 120,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "autoArriba",
-    tipoPersonaje: "autoArriba",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "autoArriba" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 6,
-    posicionInicialX: 3,
-    direccionInicial: 180,
-    rotable: false,
-    paddingImagen: "1px"
-  },
-  {
-    idUsarHTML: "bandera",
-    tipoPersonaje: "bandera",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" },
-    },
-    estadoInicial: "cerrado",
-    posicionInicialY: 5,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
-    paddingImagen: "1px",
-  },
-];
+]
 
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
     this.abrirYMostrarModal();
 }
 
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-);
+// BLOCKLY ------------------------------------------------------
+const miControlador = new ControladorStandard(miJuego,velocidadInicial);
+const categoria=new Dhs_Categorias()
+const categoriaElegida=categoria.obtenerCategoria("eventosMovimientos")
 
-const categoriasDeseadas = [
-  {
-    name: "Eventos",
-    categorystyle: "execute",
-  },
-  {
-    name: "Movimientos",
-    categorystyle: "movement",
-  },
-];
-categoriasDeseadas.forEach((cat) =>
-  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
-);
-
-const bloquesCustomStandardDesados = [
+const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["avanzar_param", "Movimientos"],
   ["girar_grados", "Movimientos"],
 ];
+const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+//const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
+const funcionesAExponer=["avanzar","girarGrados"]
 
-bloquesCustomStandardDesados.forEach((bl) => {
-  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
-});
-
-const render = new CustomRenderer();
-render.registrarRender("renderDHS");
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-  theme: "themeDH",
-  renderer: "renderDHS",
-  zoom: {
-    controls: true,
-    wheel: true,
-    pinch: true,
-  },
-});
-
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
-
-miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
-miControlador.setearEventoCambioWorkspaceStandard();
-miControlador.habilitarDesactivarHuerfanos();
-miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("avanzar");
- miControlador.juego.agregarGlobalConCallback("girarGrados");
-
-const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
-miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-  miControlador.callbackInterpreteStandard(interpreter, globalObject);
-  callBackJuego(interpreter, globalObject);
-});
+configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

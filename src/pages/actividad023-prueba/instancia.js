@@ -2,10 +2,10 @@ import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
-import { Dhs_personajes } from "../../clases/Dhs-personajes";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
 import { generarCoordenadas } from "../../Utils/Funciones";
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
@@ -57,17 +57,7 @@ const cofre = { ...personajesGaleria.obtenerPersonaje("cofre") };
 const lodo = { ...personajesGaleria.obtenerPersonaje("lodo") };
 const basura = { ...personajesGaleria.obtenerPersonaje("basura")}
 
-//configPosicionamiento =
-// posicionesFijas: [
-//   [1, 3],
-//   [2, 2],
-// ],
-//cantidadTotal: 2,
-//cantidadMin: 3,
-//cantidadMax: 6,
-//cantidadTotalPorcentual: 10,
 //SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciones
-
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
@@ -105,20 +95,20 @@ let conjuntosDePersonajes = [
   //   aliasConjunto: "azarFijos",
   //   desapareceAlReiniciar: true,
   // },
-  //   {
-  //    estrategia: "azarCantTotalFija",
-  //   personajes: [basura,lodo],
-  //   cantidadTotal: 2,
-  //   aliasConjunto: "azarCantTotalFija",
-  //   desapareceAlReiniciar: true,
-  // },
-  {
-    estrategia: "azarExcluyente",
-   personajes: [basura],
-   posiciones: [[2, 1],[1, 2]],
-   aliasConjunto: "azarExcluyente",
-   desapareceAlReiniciar: true,
- },
+    {
+     estrategia: "azarCantTotalFija",
+    personajes: [basura,lodo],
+    cantidadTotal: 2,
+    aliasConjunto: "azarCantTotalFija",
+    desapareceAlReiniciar: true,
+  },
+//   {
+//     estrategia: "azarExcluyente",
+//    personajes: [lodo,cofre],
+//    posiciones: [[2, 1],[1, 2]],
+//    aliasConjunto: "azarExcluyente",
+//    desapareceAlReiniciar: true,
+//  },
 ];
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
@@ -287,10 +277,10 @@ miControlador.habilitarDesactivarHuerfanos();
 miControlador.crearFuncionesGlobalesStandard();
 
 //TRECEAVO: Exponemos globalmente las funciones de los bloques, borrar las que no usmos en cada ejercicio.
-// miControlador.juego.agregarGlobalConCallback('moverDerecha');
-// miControlador.juego.agregarGlobalConCallback('moverAbajo');
-// miControlador.juego.agregarGlobalConCallback('moverArriba');
-// miControlador.juego.agregarGlobalConCallback('moverIzquierda');
+miControlador.juego.agregarGlobalConCallback('moverDerecha');
+miControlador.juego.agregarGlobalConCallback('moverAbajo');
+miControlador.juego.agregarGlobalConCallback('moverArriba');
+miControlador.juego.agregarGlobalConCallback('moverIzquierda');
 // miControlador.juego.agregarGlobalConCallback("abrirCofre");
 // miControlador.juego.agregarGlobalConCallback("juntarBasura");
 // miControlador.juego.agregarGlobalConCallback("avanzar");
