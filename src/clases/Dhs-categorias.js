@@ -87,7 +87,7 @@ export class Dhs_Categorias {
         },
       ],
     },
-    lapizARCondicional: {
+    lapizCondicional: {
       tipos: [
         {
           name: "Eventos",
@@ -113,8 +113,35 @@ export class Dhs_Categorias {
           name: "Condicionales",
           categorystyle: "logic_category",
         },
-      
       ],
+    },
+      mineroCondicional: {
+        tipos: [
+          {
+            name: "Eventos",
+            categorystyle: "execute",
+          },
+          {
+            name: "Movimientos",
+            categorystyle: "movement",
+          },
+          {
+            name: "Acciones",
+            categorystyle: "action",
+          },
+          {
+            name: "Repeticiones",
+            categorystyle: "loop_category",
+          },
+          {
+            name: "Condicionales",
+            categorystyle: "logic_category",
+          },
+          {
+            name: "Sensores",
+            categorystyle: "sensor"
+          },
+        ],
     },
   };
 }

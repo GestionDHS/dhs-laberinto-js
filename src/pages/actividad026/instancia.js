@@ -10,20 +10,18 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
-const dimensiones = [5, 6]; //fila, columna
+window.miJuego = new Juego(velocidadInicial);
+const dimensiones = [3, 7]; //fila, columna
 
 const tablero = [
-  [1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 0, 1, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 1, 0, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1],
 ];
 let coordenadasCaminoPared = generarCoordenadas(tablero);
 const galeriaPersonajes = new Dhs_personajes();
-const pared = galeriaPersonajes.obtenerPersonaje("arbol")
-const camino = galeriaPersonajes.obtenerPersonaje("pasto")
+const pared = galeriaPersonajes.obtenerPersonaje("piedra")
+const camino = galeriaPersonajes.obtenerPersonaje("caminoCueva")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -31,13 +29,13 @@ const datosModal = {
   texto: "Encontramos 180 monedas de oro.",
   oculto: true,
 };
-miJuego.generarEscenario(dimensiones, 3, "white");
+miJuego.generarEscenario(dimensiones, 3, "#593006");
 miJuego.agregarModal(datosModal);
 
-const lupe = galeriaPersonajes.obtenerPersonaje("lupe")
-const cofre = galeriaPersonajes.obtenerPersonaje("cofre")
-const lodo = galeriaPersonajes.obtenerPersonaje("lodo")
-const basura = galeriaPersonajes.obtenerPersonaje("basura")
+const minero = galeriaPersonajes.obtenerPersonaje("minero")
+const bandera = galeriaPersonajes.obtenerPersonaje("bandera")
+const piedraDiamante = galeriaPersonajes.obtenerPersonaje("piedraDiamante")
+
 
 const conjuntosDePersonajes = [
   {
@@ -56,38 +54,32 @@ const conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [lupe],
-    posiciones: [[3, 3]],
+    personajes: [minero],
+    posiciones: [[1, 0]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
-    personajes: [lodo],
-    posiciones: [[1, 3]],
-    aliasConjunto: "fijoLodo",
+    personajes: [bandera],
+    posiciones: [[1, 6]],
+    aliasConjunto: "fijoBandera",
     desapareceAlReiniciar: false,
   },
   {
-    estrategia: "fijos",
-    personajes: [cofre],
-    posiciones: [[3, 4]],
-    aliasConjunto: "fijoCofre",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [basura],
-    posiciones: [[2, 2]],
-    aliasConjunto: "fijoBasura",
-    desapareceAlReiniciar: false,
+    estrategia: "azarFijos",
+    personajes: [piedraDiamante],
+    // cantidadTotal: 2,
+    posiciones: [[1, 1],[1, 2],[1,3],[1,4],[1,5]],
+    aliasConjunto: "azarPiedraDiamante",
+    desapareceAlReiniciar: true,
   },
 ]
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[21]);
 
 //Método para Abrir el Cofre
-// miJuego.personajePrincipal.abrirCofre = function () {
+// miJuego.personajePrincipal.picarPiedra = function () {
 //   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
 //   if (!intento.objetoEncontrado) {
@@ -172,24 +164,18 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego,velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("lapizARCondicional")
+const categoriaElegida=categoria.obtenerCategoria("mineroCondicional")
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
-  ["move_classic_param", "Movimientos"],
-  ["avanzar_param", "Movimientos"],
-  ["girar_clasico", "Movimientos"],
-  ["girar_grados", "Movimientos"],
-  ["apuntar_hacia", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
-  ["juntar_basura", "Acciones"],
-  ["lapiz", "Lápiz"],
+  ["avanzar", "Movimientos"],
+  ["juntar_diamante", "Acciones"],
   ["if", "Condicionales"],
   ["controls", "Repeticiones"],
+  ["sensor_diamante", "Sensores"],
 ];
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["juntarBasura","avanzar","abrirCofre"]
+const funcionesAExponer=[]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)
