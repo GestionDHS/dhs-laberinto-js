@@ -1192,8 +1192,8 @@ export default class ConfiguradorBloques {
     
     if() {
         return {
-            type: "controls_if",
-            kind: "block",
+            "type": "controls_if",
+            "kind": "block",
         }
     }
     logic_compare() {
@@ -1227,7 +1227,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "sensor_cofre",
-                "message0": "%1 hay cofre?",
+                "message0": "%1 ¿Hay cofre aquí?",
                 "output": null,
                 "args0": [
                     {
@@ -1244,19 +1244,20 @@ export default class ConfiguradorBloques {
             },
         ]);
         Blockly.JavaScript.forBlock["sensor_cofre"] = function (block) {
-            const code = ""
+            const code = "detectarCofre()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
             return code;
         };
         return {
-            type: "sensor_cofre",
-            kind: "block",
+            "type": "sensor_cofre",
+            "kind": "block",
         }
     }
     sensor_piedra() {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "sensor_piedra",
-                "message0": "%1 hay piedra?",
+                "message0": "%1 ¿Hay piedra adelante?",
                 "output": null,
                 "args0": [
                     {
@@ -1273,12 +1274,13 @@ export default class ConfiguradorBloques {
             },
         ]);
         Blockly.JavaScript.forBlock["sensor_piedra"] = function (block) {
-            const code = "detectarPiedra()/n"
-            return code;
+            const code = "detectarPiedra()"
+            //return [code, Blockly.JavaScript.ORDER_NONE]
+           return code;
         };
         return {
-            type: "sensor_piedra",
-            kind: "block",
+            "type": "sensor_piedra",
+            "kind": "block",
         }
     }
     

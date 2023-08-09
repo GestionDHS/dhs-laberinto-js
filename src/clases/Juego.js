@@ -13,6 +13,7 @@ import {
   PersonajesAlAzarRango,
   PersonajesAlAzarFijos,
   PersonajesAlAzarExcluyente,
+  PersonajesAlAzarCantTotal,
   PersonajesAlAzarCantTotalFijos
 } from "../clases/StrategyCreacion";
 
@@ -133,7 +134,8 @@ export class Juego {
       azarRango: new PersonajesAlAzarRango(),
       azarFijos: new PersonajesAlAzarFijos(),
       azarExcluyente: new PersonajesAlAzarExcluyente(),
-      azarCantTotalFija: new PersonajesAlAzarCantTotalFijos()
+      azarCantTotal: new PersonajesAlAzarCantTotal(),
+      azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos()
     };
     conjuntosDePersonajes.forEach((unConjunto) => {
       let personajesAGenerar = [];
