@@ -145,6 +145,9 @@ export class PersonajeBasico {
       (obj) => obj.tipoPersonaje == nombreObjeto
     );
   }
+  buscarObjetoEnCasilleroActual(nombreObjeto) {
+    return this.buscarObjetoEnCasillero(nombreObjeto, this.casilleroActual)
+  }
 
   buscarParaRealizarAccion(nameObj, accion, params = false) {
     const objetoPaciente = this.buscarObjetoEnCasillero(

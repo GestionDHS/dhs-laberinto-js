@@ -70,11 +70,12 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
   {
-    estrategia: "fijos",
+    estrategia: "azarCantidadTotalFijos",
     personajes: [cofre],
-    posiciones: [[2, 4],[4,4],[6,4]],
-    aliasConjunto: "fijosTablero",
-    desapareceAlReiniciar: false,
+    cantidadTotal:2,
+    posiciones: [[2,4],[3,4],[4,4],[5,4],[6,4]],
+    aliasConjunto: "azarFijos",
+    desapareceAlReiniciar: true,
   },
   {
     estrategia: "fijos",
@@ -90,6 +91,11 @@ let conjuntosDePersonajes = [
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
 
+//Método para Cofre
+miJuego.personajePrincipal.detectarCofre = function () {
+  // devuelve true si encuentra o false si no hay cofre
+  return this.buscarObjetoEnCasilleroActual("cofre") !== undefined
+};
 miJuego.personajePrincipal.abrirCofre = function () {
   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
@@ -101,6 +107,9 @@ miJuego.personajePrincipal.abrirCofre = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
+  //crear el strategy con cantidad de cofres
+  //calcular cuantos cofres fueron creados para hallar el .length
+  //recorrer el escenario y que no quede ningun cofre
   if (this.mochila.length === 3) {
     this.abrirYMostrarModal();
   } else {
@@ -109,18 +118,20 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
 };
 
 // BLOCKLY ------------------------------------------------------
-const miControlador = new ControladorStandard(miJuego, velocidadInicial);
+window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("accionRepeticiones")
+const categoriaElegida=categoria.obtenerCategoria("mineroCondicional")
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
   ["abrir_cofre", "Acciones"],
+  ["if", "Condicionales"],
   ["controls", "Repeticiones"],
+  ["sensor_cofre", "Sensores"],
 ];
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre"]
+const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre","detectarCofre"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

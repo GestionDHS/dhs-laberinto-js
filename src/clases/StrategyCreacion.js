@@ -1,4 +1,4 @@
-import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad, setearDireccion} from '../Utils/Funciones';
+import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad, setearDireccion,estaVacio} from '../Utils/Funciones';
 
 
 //Strategy creacion
@@ -65,7 +65,7 @@ export function PersonajesAlAzarRango() {
 
 // varios personajes => los coloca en posicion aleatoria la cantidad que pide
 // [personje, personaje], cantidadTotal:2
-export function PersonajesAlAzarCantTotalFijos() {
+export function PersonajesAlAzarCantTotal() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
     !conjuntoPersonajes.cantidadTotal && lanzarExcepcion("Necesita un cantidad total en la configuracion de cada objeto de conjuntosDePersonajes")
       let personajesACrear = [];
@@ -83,6 +83,25 @@ export function PersonajesAlAzarCantTotalFijos() {
   };
 }
 
+// [personje, personaje],[[y,x],[y,x],[y,x]] cantidadTotal:2
+export function PersonajesAlAzarCantTotalFijos() {
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    !conjuntoPersonajes.cantidadTotal && lanzarExcepcion("Necesita un cantidad total en la configuracion de cada objeto de conjuntosDePersonajes")
+      let personajesACrear = [];
+      const cantidad = conjuntoPersonajes.cantidadTotal
+      for (let i = 0; i < cantidad; i++) {
+        let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
+        const numRandom = elegirPosicionRandom(conjuntoPersonajes.posiciones)
+        const posicion = conjuntoPersonajes.posiciones[numRandom]
+        let personajeAux = { ...personajeElegido };
+        estaVacio(posicion[0],posicion[1], escenario) && setearPosiciones(personajeAux, posicion)
+        setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
+        personajesACrear.push(personajeAux);
+      }
+    return personajesACrear;
+  };
+}
+
 // varios personajes, varias posiciones fijas => toma 1 personaje, y toma una posicion posible para cada uno
 // [personje, personaje], posiciones:[[2,1],[1,2]]
 export function PersonajesAlAzarFijos() {
@@ -93,6 +112,7 @@ export function PersonajesAlAzarFijos() {
       for (let i = 0; i < cantidad; i++) {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
         const numRandom = elegirPosicionRandom(conjuntoPersonajes.posiciones)
+        conjuntoPersonajes.posiciones.splice(numRandom, 1);
         const posiciones = conjuntoPersonajes.posiciones[numRandom]
         let personajeAux = { ...personajeElegido };
         setearPosiciones(personajeAux,posiciones)

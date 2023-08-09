@@ -18,7 +18,7 @@ export function posicionValida(escenario) {
 }
 
 //************FUNCION QUE VALIDA LAS POSICIONES DEL TABLERO*************/
- function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
+ export function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
    const casillero = escenario.objetosCasilleros[posicionProvisoriaY][posicionProvisoriaX];
    return (casillero.ocupantes[0].tipoPersonaje == "camino" && casillero.ocupantes.length == 1)
 }
