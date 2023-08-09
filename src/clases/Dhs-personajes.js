@@ -149,8 +149,8 @@ export class Dhs_personajes {
       colisiones: [],
     },
     fondo: {
-      idUsarHTML: "fondo",
-      tipoPersonaje: "fondo",
+      idUsarHTML: "recuadro-pintable",
+      tipoPersonaje: "recuadro-pintable",
       tieneTooltip: false,
       estadosPosibles: {
         normal: { name: "normal", imageUrl: null },
