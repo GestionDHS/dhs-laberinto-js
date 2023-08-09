@@ -21,7 +21,7 @@ const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 1,1, 1, 1, 1, 1, 0],
+  [0, 1, 1, 1, 1, 1, 1, 1, 0],
   [0, 1, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 0, 0, 0, 0, 0, 0, 0],
 ];
@@ -101,15 +101,6 @@ miJuego.personajePrincipal.comerFruta = function () {
     return this.decirTerminar("¡Oh! Este frutilla ya no está.");
   }
 };
-
-// miJuego.personajePrincipal.llegarALaBandera = function () {
-//   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
-//   if (this.mochila.length === 2) {
-//     this.abrirYMostrarModal();
-//   } else {
-//     return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
-//   }
-// };
 
 // BLOCKLY ------------------------------------------------------
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
