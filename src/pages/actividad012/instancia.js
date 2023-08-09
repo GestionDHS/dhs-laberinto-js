@@ -89,6 +89,6 @@ const ordenJerarquicoBloques = [
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["avanzar","girarIzquierda","girarDerecha","girarGrados","apuntarEnDireccion","bajarLapiz","subirLapiz","setearColor"]
+const funcionesAExponer=["avanzar","girarIzquierda","girarDerecha","girarGrados","apuntarEnDireccion","bajarLapiz","subirLapiz","setearColor",]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)
