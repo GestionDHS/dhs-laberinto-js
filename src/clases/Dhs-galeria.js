@@ -2,6 +2,7 @@ import robotlupe from "../img/robotlupe.png"
 import lodoPasto from "../img/lodoPasto.png"
 import cofrecerradoPasto from "../img/cofrecerradoPasto.png"
 import cofreAbierto from "../img/cofreabierto.png"
+import cofreCerrado from "../img/cofrecerrado.png"
 import arbolesPasto from "../img/arbolesPasto.png"
 import muchasmonedas from "../img/muchasMonedas.png"
 import pasto from "../img/pasto.png"
@@ -39,6 +40,10 @@ import rioParana from "../img/rioParana.png"
 import autoArriba from "../img/autoArriba.png"
 import carpinchoReal from "../img/carpinchoReal.png"
 import ecobrick from "../img/ecobrick.jpg"
+import minero from "../img/minero.png"
+import piedra from "../img/piedra.png"
+import caminoCueva from "../img/caminoCueva.png"
+import piedraDiamante from "../img/piedraDiamante.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -64,6 +69,34 @@ export class DHS_Gallery {
   }
   
   imageLib = {
+    piedraDiamante: {
+      themes: [""],
+      url: piedraDiamante,
+      nombre: "piedraDiamante",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    caminoCueva: {
+      themes: [""],
+      url: caminoCueva,
+      nombre: "caminoCueva",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    piedra: {
+      themes: [""],
+      url: piedra,
+      nombre: "piedra",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
+    minero: {
+      themes: [""],
+      url: minero,
+      nombre: "minero",
+      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      showLicense: true,
+    },
     ecobrick: {
       themes: [""],
       url: ecobrick,
@@ -260,6 +293,14 @@ export class DHS_Gallery {
       themes: ["lupe"],
       url: cofreAbierto,
       nombre: "Cofre Abierto",
+      parrafoLicencia:
+        '<p>Licencia imagen:<a target="_blank" href="https://www.flaticon.com/free-img/chest" title="chest icons">Chest icons created by Smashicons - Flaticon</a></p>',
+      showLicense: true,
+    },
+    cofreCerrado: {
+      themes: ["lupe"],
+      url: cofreCerrado,
+      nombre: "Cofre Cerrado",
       parrafoLicencia:
         '<p>Licencia imagen:<a target="_blank" href="https://www.flaticon.com/free-img/chest" title="chest icons">Chest icons created by Smashicons - Flaticon</a></p>',
       showLicense: true,

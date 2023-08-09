@@ -1061,6 +1061,36 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    picar_piedra() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "picar_piedra",
+                message0: "%1 picar piedra",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/664/664112.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["picar_piedra"] = function (block) {
+            const code = "picarPiedra();\n"
+            return code;
+        };
+
+        return {
+            type: "picar_piedra",
+            kind: "block",
+        }
+    }
     // Lapiz
     bajar_lapiz(){
         Blockly.common.defineBlocksWithJsonArray([
@@ -1184,10 +1214,19 @@ export default class ConfiguradorBloques {
             "type": "logic_boolean"
         }
     }
-    condicion_cofre() {
+    condicionales() {
+        return [
+            this.if(),
+            this.logic_compare(),
+            this.logic_operation(),
+            // this.logic_boolean(),
+        ]
+    }
+    // Sensores
+    sensor_cofre() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                "type": "condicion_cofre",
+                "type": "sensor_cofre",
                 "message0": "%1 hay cofre?",
                 "output": null,
                 "args0": [
@@ -1201,27 +1240,48 @@ export default class ConfiguradorBloques {
                   ],
                 // "previousStatement": null,
                 // "nextStatement": null,
-                style: "logic_blocks",
+                style: "sensor_blocks",
             },
         ]);
-        Blockly.JavaScript.forBlock["condicion_cofre"] = function (block) {
+        Blockly.JavaScript.forBlock["sensor_cofre"] = function (block) {
             const code = ""
             return code;
         };
         return {
-            type: "condicion_cofre",
+            type: "sensor_cofre",
             kind: "block",
         }
     }
-    condicionales() {
-        return [
-            this.condicion_cofre(),
-            this.if(),
-            this.logic_compare(),
-            this.logic_operation(),
-            // this.logic_boolean(),
-        ]
+    sensor_piedra() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_piedra",
+                "message0": "%1 hay piedra?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/7996/7996138.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_piedra"] = function (block) {
+            const code = "detectarPiedra()/n"
+            return code;
+        };
+        return {
+            type: "sensor_piedra",
+            kind: "block",
+        }
     }
+    
 
     // LOOPS
     controls_repeat() {
