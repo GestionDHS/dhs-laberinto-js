@@ -14,13 +14,13 @@ const miJuego = new Juego(velocidadInicial);
 const dimensiones = [7, 7]; //fila, columna
 
 const tablero = [
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 1, 0, 1, 0, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 0, 1, 0, 1, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
 ];
 const coordenadasCaminoPared = generarCoordenadas(tablero);
 //Me traigo los personajes a Utilizar
@@ -64,7 +64,7 @@ miJuego.agregarModal(datosModal);
 //Crear los personajes
 miJuego.crearPersonajes(conjuntosDePersonajes);
 //Setear el Personaje Principal
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
 
 const miColor = "#FA3939";
 const dibujoDeseado = tablero.map((row) =>
