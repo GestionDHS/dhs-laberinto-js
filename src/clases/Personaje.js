@@ -162,7 +162,7 @@ export class PersonajeBasico {
       estadoPrevio: acto && acto.estadoPrevio,
     };
   }
-  //para abrir cofre y cosechar zanahorias
+  //para abrir cofre - cosechar zanahorias - picar piedra
   abrirse() {
     if (this.estadoActual === "cerrado") {
       this.setearEstado("abierto");

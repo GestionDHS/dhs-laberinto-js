@@ -643,70 +643,161 @@ export class Dhs_personajes {
       rotable: false,
     },
     conejo: {
-          idUsarHTML: "conejo",
-          tipoPersonaje: "conejo",
-          clasePersonaje: "PersonajeMovibleGrados",
-          tieneTooltip: true,
-          estadosPosibles: {
-            normal: { name: "normal", imageUrl: "conejoDeArriba" },
+      idUsarHTML: "conejo",
+      tipoPersonaje: "conejo",
+      clasePersonaje: "PersonajeMovibleGrados",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "conejoDeArriba" },
+      },
+      estadoInicial: "normal",
+      posicionInicialY: 1,
+      posicionInicialX: 1,
+      direccionInicial: 180,
+      zIndex: 3,
+      rotable: true,
+      paddingImagen: "0.3px",
+      colisiones: [
+        {
+          con: "madriguera",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaBandera();
           },
-          estadoInicial: "normal",
-          posicionInicialY: 1,
-          posicionInicialX: 1,
-          direccionInicial: 180,
-          zIndex: 3,
-          rotable: true,
-          paddingImagen: "0.3px",
-          colisiones: [
-            {
-              con: "madriguera",
-              factorDeAvance: 1,
-              callback: (x) => {
-                x.llegarALaBandera();
-              },
-              // mensaje: "¡We are the Champions!",
-            },
-            {
-              con: "arbol",
-              factorDeAvance: 0.2,
-              callback: (x) => {
-                x.terminar();
-              },
-              mensaje: "¡OH NO! Choqué contra un árbol",
-            },
-          ],
+          // mensaje: "¡We are the Champions!",
         },
-        zanahoria:{
-              idUsarHTML: "zanahoria",
-              tipoPersonaje: "zanahoria",
-              estadosPosibles: {
-                cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" }, 
-                abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
-                juntado: { name: "juntado", imageUrl: "pasto" },
-              },
-              estadoInicial: "cerrado",
-              posicionInicialY: 0,
-              posicionInicialX: 0,
-              direccionInicial: 0,
-              zIndex: 2,
-              rotable: true,
-              colisiones: [],
-            },
-            madriguera: {
-                  idUsarHTML: "madriguera",
-                  tipoPersonaje: "madriguera",
-                  estadosPosibles: {
-                    cerrado: { name: "cerrado", imageUrl: "madriguera" },
-                    abierto: { name: "abierto", imageUrl: "madriguera" }, 
-                  },
-                  estadoInicial: "cerrado", 
-                  posicionInicialY: 0,
-                  posicionInicialX: 0,
-                  direccionInicial: 0,
-                  zIndex: 2,
-                  rotable: false,
-                  colisiones: [],
-                },
+        {
+          con: "arbol",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un árbol",
+        },
+      ],
+    },
+    zanahoria:{
+      idUsarHTML: "zanahoria",
+      tipoPersonaje: "zanahoria",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "zanahoriaEnterrada" }, 
+        abierto: { name: "normal", imageUrl: "zanahoriaCosechada" },
+        juntado: { name: "juntado", imageUrl: "pasto" },
+      },
+      estadoInicial: "cerrado",
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      colisiones: [],
+    },
+    madriguera: {
+      idUsarHTML: "madriguera",
+      tipoPersonaje: "madriguera",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "madriguera" },
+        abierto: { name: "abierto", imageUrl: "madriguera" }, 
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      colisiones: [],
+    },
+    minero: {
+      idUsarHTML: "minero",
+      tipoPersonaje: "minero",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "minero" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 3,
+      rotable: true,
+      colisiones: [
+        {
+          con: "piedra",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra una piedra.",
+        },
+        {
+          con: "bandera",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaBandera();
+          },
+          // mensaje: "¡We are the Champions!",
+        },
+      ],
+    },
+    piedra: {
+      idUsarHTML: "piedra",
+      tipoPersonaje: "piedra",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "piedra" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    piedraDiamante: {
+      idUsarHTML: "piedraDiamante",
+      tipoPersonaje: "piedraDiamante",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "piedraDiamante" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    caminoCueva: {
+      idUsarHTML: "caminoCueva",
+      tipoPersonaje: "caminoCueva",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "caminoCueva" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 0,
+      paddingImagen: "0.5px",
+      rotable: false,
+      colisiones: [],
+    },
+    cofreCerrado: {
+      idUsarHTML: "cofreCerrado",
+      tipoPersonaje: "cofreCerrado",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "cofreCerrado" },
+      },
+      estadoInicial: "cerrado",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      colisiones: [],
+      configPosicionamiento: {
+        excluyente: false,
+      },
+    },
   };
 }
 

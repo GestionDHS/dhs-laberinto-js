@@ -12,6 +12,9 @@ export default Blockly.Theme.defineTheme('themeDH', {
         },
         'execute': {
             'colour': '#ff6392'
+        },
+        'sensor': {
+            'colour': '#375f9e'
         }
         // 'background-color': colour
     },
@@ -32,6 +35,11 @@ export default Blockly.Theme.defineTheme('themeDH', {
             "colourPrimary": "#219ebc",
             'colourTertiary':'#197a91'
         },
+        "sensor_blocks": {
+            "colourPrimary": "#375f9e",
+            'colourTertiary':'#253d63'
+        },
+
      },
     'componentStyles': {
         'toolboxForegroundColour': "white"
