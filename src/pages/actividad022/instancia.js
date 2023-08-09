@@ -107,10 +107,8 @@ miJuego.personajePrincipal.abrirCofre = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  //crear el strategy con cantidad de cofres
-  //calcular cuantos cofres fueron creados para hallar el .length
-  //recorrer el escenario y que no quede ningun cofre
-  if (this.mochila.length === 3) {
+  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
+  if (this.mochila.length === 2) {
     this.abrirYMostrarModal();
   } else {
     return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
@@ -120,7 +118,7 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
 // BLOCKLY ------------------------------------------------------
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("mineroCondicional")
+const categoriaElegida=categoria.obtenerCategoria("repCondiSensor")
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],

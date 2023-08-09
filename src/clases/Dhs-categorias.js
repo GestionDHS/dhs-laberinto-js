@@ -115,7 +115,7 @@ export class Dhs_Categorias {
         },
       ],
     },
-      mineroCondicional: {
+      repCondiSensor: {
         tipos: [
           {
             name: "Eventos",

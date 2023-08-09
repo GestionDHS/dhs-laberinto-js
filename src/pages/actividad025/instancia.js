@@ -168,7 +168,7 @@ miJuego.personajePrincipal.picarPiedra = function () {
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego,velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("mineroCondicional")
+const categoriaElegida=categoria.obtenerCategoria("repCondiSensor")
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
