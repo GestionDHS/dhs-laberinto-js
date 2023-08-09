@@ -31,9 +31,7 @@ export function PersonajesFijos() {
         let copiaPersonaje = { ...unPersonaje };
         setearPosiciones(copiaPersonaje,unaPosicion)
         setearAliasYAleatorieidad(copiaPersonaje, conjuntoPersonajes.desapareceAlReiniciar, conjuntoPersonajes.aliasConjunto)
-        // console.log(conjuntoPersonajes.direcciones);
         conjuntoPersonajes.direcciones ? setearDireccion(copiaPersonaje, conjuntoPersonajes.direcciones, i) : 0;
-        // console.log(copiaPersonaje);
         personajesACrear.push(copiaPersonaje);
       });
     });
