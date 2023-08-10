@@ -2,20 +2,12 @@ import { CustomRenderer } from "../bloques/CustomRender";
 
 //************FUNCION QUE BUSCA POSICIONES RAMDOM DEL TABLERO*************/
 export function posicionValida(escenario) {
-  const dimensionY = escenario.dimensiones[0];
-  const dimensionX = escenario.dimensiones[1];
-  let posicionProvisoriaY, posicionProvisoriaX;
-
-  do {
-    posicionProvisoriaY = Math.floor(Math.random() * dimensionY);
-    posicionProvisoriaX = Math.floor(Math.random() * dimensionX);
-  } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario));
-
-  return [posicionProvisoriaY, posicionProvisoriaX];
+  
 }
 
 //************FUNCION QUE VALIDA LAS POSICIONES DEL TABLERO*************/
 function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
+  let estaVacio = true;
   const casillero =
     escenario.objetosCasilleros[posicionProvisoriaY][posicionProvisoriaX];
   return (
@@ -23,6 +15,8 @@ function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
     casillero.ocupantes.length == 1
   );
 }
+
+
 
 // Funcion para generar coordenadas del tablero
 export function generarCoordenadas(tablero) {
@@ -50,15 +44,33 @@ export function elegirPersonajeRandom(array) {
 
 // Funcion que elige una posicion random de un array y elimina la posicion
 export function elegirPosicionRandom(arrayPosiciones, escenario) {
-  let posicionElegidaY, posicionElegidaX, random;
-  const largoArray = arrayPosiciones.length;
-  do {
-    random = Math.floor(Math.random() * largoArray);
-    posicionElegidaY = arrayPosiciones[random][0];
-    posicionElegidaX = arrayPosiciones[random][1];
-  } while (!estaVacio(posicionElegidaY, posicionElegidaX, escenario));
-  arrayPosiciones.splice(random, 1);
-  return [posicionElegidaY, posicionElegidaX];
+  let posicionProvisoriaY, posicionProvisoriaX, random;
+  let posicionesOcupadas = [];
+  if (!arrayPosiciones) {
+    const dimensionY = escenario.dimensiones[0];
+    const dimensionX = escenario.dimensiones[1];
+    do {
+      posicionProvisoriaY = Math.floor(Math.random() * dimensionY);
+      posicionProvisoriaX = Math.floor(Math.random() * dimensionX);
+      if (posicionesOcupadas.includes([posicionProvisoriaY, posicionProvisoriaX])) {
+        continue;
+      }
+    } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario));
+      posicionesOcupadas.push([posicionProvisoriaY, posicionProvisoriaX])
+      // return [posicionProvisoriaY, posicionProvisoriaX];
+  } else {
+    const largoArray = arrayPosiciones.length;
+    do {
+      random = Math.floor(Math.random() * largoArray);
+      posicionProvisoriaY = arrayPosiciones[random][0];
+      posicionProvisoriaX = arrayPosiciones[random][1];
+      if (posicionesOcupadas.includes([posicionProvisoriaY, posicionProvisoriaX])) {
+        continue;
+      }
+    } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario));
+    posicionesOcupadas.push([posicionProvisoriaY, posicionProvisoriaX])
+  }
+  return [posicionProvisoriaY, posicionProvisoriaX];
 }
 
 //Para lanzar errores en consola

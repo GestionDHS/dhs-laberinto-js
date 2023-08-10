@@ -136,7 +136,7 @@ export class PersonajeBasico {
   }
 
   buscarObjetoSegunVector(nombreObjeto, vector) {
-    const casillero = this.obtenerCasilleroDestino(vector[0], vector[1]);
+    const casillero = this.obtenerCasillero(vector[0], vector[1]);
     return this.buscarObjetoEnCasillero(nombreObjeto, casillero);
   }
 

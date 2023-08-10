@@ -68,18 +68,19 @@ export function PersonajesAlAzarRango() {
 export function PersonajesAlAzarCantTotal() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
     !conjuntoPersonajes.cantidadTotal && lanzarExcepcion("Necesita un cantidad total en la configuracion de cada objeto de conjuntosDePersonajes")
-      let personajesACrear = [];
-      const cantidad = conjuntoPersonajes.cantidadTotal
+    let personajesACrear = [];
+    const cantidad = conjuntoPersonajes.cantidadTotal
+    const posiciones = posicionValida(escenario, cantidad)
       for (let i = 0; i < cantidad; i++) {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
-        const posiciones = posicionValida(escenario);
         let personajeAux = { ...personajeElegido };
-        setearPosiciones(personajeAux,posiciones)
+        setearPosiciones(personajeAux,posiciones[i])
         setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(personajeAux);
       }
   
     return personajesACrear;
+    
   };
 }
 
@@ -87,6 +88,7 @@ export function PersonajesAlAzarCantTotal() {
 export function PersonajesAlAzarCantTotalFijos() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
     !conjuntoPersonajes.cantidadTotal && lanzarExcepcion("Necesita un cantidad total en la configuracion de cada objeto de conjuntosDePersonajes")
+    !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
       let personajesACrear = [];
       const cantidad = conjuntoPersonajes.cantidadTotal
       for (let i = 0; i < cantidad; i++) {

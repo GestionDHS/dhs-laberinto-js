@@ -1246,7 +1246,7 @@ export default class ConfiguradorBloques {
         Blockly.JavaScript.forBlock["sensor_cofre"] = function (block) {
             const code = "detectarCofre()"
             return [code, Blockly.JavaScript.ORDER_NONE]
-            return code;
+            // return code;
         };
         return {
             "type": "sensor_cofre",
@@ -1275,8 +1275,8 @@ export default class ConfiguradorBloques {
         ]);
         Blockly.JavaScript.forBlock["sensor_piedra"] = function (block) {
             const code = "detectarPiedra()"
-            //return [code, Blockly.JavaScript.ORDER_NONE]
-           return code;
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
         };
         return {
             "type": "sensor_piedra",

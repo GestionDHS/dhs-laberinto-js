@@ -74,9 +74,6 @@ export class Dhs_personajes {
       zIndex: 2,
       rotable: false,
       colisiones: [],
-      configPosicionamiento: {
-        excluyente: false,
-      },
     },
     pasto: {
       idUsarHTML: "camino",
@@ -718,7 +715,7 @@ export class Dhs_personajes {
       estadoInicial: "normal",
       direccionInicial: 0,
       zIndex: 3,
-      rotable: true,
+      rotable: false,
       colisiones: [
         {
           con: "piedra",
@@ -757,9 +754,10 @@ export class Dhs_personajes {
       idUsarHTML: "piedraDiamante",
       tipoPersonaje: "piedraDiamante",
       estadosPosibles: {
-        cerrado: { name: "cerrado", imageUrl: "piedraDiamante" },
+        abierto: { name: "abierto", imageUrl: "piedraDiamante" },
+        juntado: { name: "juntado", imageUrl: "pasto" },
       },
-      estadoInicial: "cerrado", 
+      estadoInicial: "abierto", 
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
@@ -770,11 +768,11 @@ export class Dhs_personajes {
     },
     caminoCueva: {
       idUsarHTML: "caminoCueva",
-      tipoPersonaje: "caminoCueva",
+      tipoPersonaje: "camino",
       estadosPosibles: {
-        cerrado: { name: "cerrado", imageUrl: "caminoCueva" },
+        normal: { name: "normal", imageUrl: "caminoCueva" },
       },
-      estadoInicial: "cerrado", 
+      estadoInicial: "normal", 
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
