@@ -1,8 +1,24 @@
 import { CustomRenderer } from "../bloques/CustomRender";
 
 //************FUNCION QUE BUSCA POSICIONES RAMDOM DEL TABLERO*************/
-export function posicionValida(escenario,posicionesElegidas) {
-  console.log(posicionesElegidas)
+export function posicionValida(arrayPosiciones,escenario,posicionesElegidas) {
+return arrayPosiciones?encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegidas):encontrarPosicionesParaEscenario(escenario,posicionesElegidas)
+}
+
+function encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegidas){
+const dimension=arrayPosiciones.length
+let index
+do {
+  index= Math.floor(Math.random() * dimension);
+
+  
+} while (!estaVacio(arrayPosiciones[index][0], arrayPosiciones[index][1], escenario) || posicionesElegidas?.some(element => 
+  element[0] === arrayPosiciones[index][0] && element[1] === arrayPosiciones[index][1]
+));
+return arrayPosiciones[index]
+}
+
+function encontrarPosicionesParaEscenario(escenario,posicionesElegidas){
   const dimensionY = escenario.dimensiones[0];
   const dimensionX = escenario.dimensiones[1];
   let posicionProvisoriaY, posicionProvisoriaX;
@@ -10,11 +26,12 @@ export function posicionValida(escenario,posicionesElegidas) {
     posicionProvisoriaY = Math.floor(Math.random() * dimensionY);
     posicionProvisoriaX = Math.floor(Math.random() * dimensionX);
     
-  } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) && !posicionesElegidas?.some((element)=> element === [posicionProvisoriaY,posicionProvisoriaX]));
+  } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) || posicionesElegidas?.some(element => 
+    element[0] === posicionProvisoriaY && element[1] === posicionProvisoriaX
+  ));
 
   return [posicionProvisoriaY, posicionProvisoriaX];
 }
-
 //************FUNCION QUE VALIDA LAS POSICIONES DEL TABLERO*************/
 function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
   const casillero =
