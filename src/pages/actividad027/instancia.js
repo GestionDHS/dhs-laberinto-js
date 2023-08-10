@@ -14,29 +14,26 @@ document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 const miJuego = new Juego(velocidadInicial);
 
-const dimensiones = [10, 9]; //fila, columna
+const dimensiones = [7, 9]; //fila, columna
 
 const tablero = [
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1,1, 1, 1, 1, 1, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
-const lupe = personajesGaleria.obtenerPersonaje("lupe");
-const cofre = personajesGaleria.obtenerPersonaje("cofre");
-const cerco = personajesGaleria.obtenerPersonaje("cerco");
-const pasto = personajesGaleria.obtenerPersonaje("pasto");
-const arbol = personajesGaleria.obtenerPersonaje("arbol");
-const bandera = personajesGaleria.obtenerPersonaje("bandera");
+const panda = personajesGaleria.obtenerPersonaje("panda");
+const agua = personajesGaleria.obtenerPersonaje("agua");
+const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
+const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
+const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
+const nubes = personajesGaleria.obtenerPersonaje("nubes")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -44,76 +41,75 @@ const datosModal = {
   texto: "Juntaste todas las monedas de los cofres!",
   oculto: true,
 };
-miJuego.generarEscenario(dimensiones, 2.5, "#9ca64e");
+miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
 miJuego.agregarModal(datosModal);
-
+//fijos,azarRango,azarFijos,azarExcluyente,azarCantTotal,azarCantidadTotalFijos
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
-    personajes: [arbol],
+    personajes: [bambooAncho],
     posiciones: coordenadasCaminoPared.coordenadasPared,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
-    personajes: [pasto],
+    personajes: [agua],
     posiciones: coordenadasCaminoPared.coordenadasCamino,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
-    personajes: [lupe],
-    posiciones: [[1, 4]],
+    personajes: [panda],
+    posiciones: [[3, 3]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
-    estrategia: "azarCantidadTotalFijos",
-    personajes: [cofre],
-    cantidadTotal:2,
-    posiciones: [[2,4],[3,4],[4,4],[5,4],[6,4]],
-    aliasConjunto: "azarFijos",
-    desapareceAlReiniciar: true,
-  },
-  {
     estrategia: "fijos",
-    personajes: [bandera],
-    posiciones: [[8, 4]],
+    personajes: [nubes],
+    posiciones: [[0, 1],[1, 2],[0, 3],[1, 5],[0, 7],[1, 8]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
+  },
+  { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
+    estrategia: "azarFijos",
+    personajes: [frutilla, bamboo],
+    posiciones: [[3, 6]],
+    aliasConjunto: "aleatoreosTablero",
+    desapareceAlReiniciar: true,
   },
 ];
 
 
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[63]);
 
-//Método para Cofre
-miJuego.personajePrincipal.detectarCofre = function () {
+//Método para detectar
+miJuego.personajePrincipal.detectarFrutilla = function () {
   // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("cofre") !== undefined
+  return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
 };
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+miJuego.personajePrincipal.comerFruta = function () {
+  const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
 
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay cofre.");
+    return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
   } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
+    return this.decirTerminar("¡Oh! Este frutilla ya no está.");
   }
 };
 
-miJuego.personajePrincipal.llegarALaBandera = function () {
-  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
-  if (this.mochila.length === 2) {
-    this.abrirYMostrarModal();
-  } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
-  }
-};
+// miJuego.personajePrincipal.llegarALaBandera = function () {
+//   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
+//   if (this.mochila.length === 2) {
+//     this.abrirYMostrarModal();
+//   } else {
+//     return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
+//   }
+// };
 
 // BLOCKLY ------------------------------------------------------
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
@@ -122,14 +118,14 @@ const categoriaElegida=categoria.obtenerCategoria("repCondiSensor")
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
+  ["comer_fruta", "Acciones"],
   ["if", "Condicionales"],
   ["controls", "Repeticiones"],
-  ["sensor_cofre", "Sensores"],
+  ["sensor_frutilla", "Sensores"],
 ];
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre","detectarCofre"]
+const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","comerFruta","detectarFrutilla"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

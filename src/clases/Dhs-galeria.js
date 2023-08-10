@@ -1,49 +1,54 @@
-import robotlupe from "../img/robotlupe.png"
-import lodoPasto from "../img/lodoPasto.png"
-import cofrecerradoPasto from "../img/cofrecerradoPasto.png"
-import cofreAbierto from "../img/cofreabierto.png"
-import cofreCerrado from "../img/cofrecerrado.png"
-import arbolesPasto from "../img/arbolesPasto.png"
-import muchasmonedas from "../img/muchasMonedas.png"
-import pasto from "../img/pasto.png"
-import basura from "../img/basura.png"
-import lapizRojo from "../img/lapizRojo.png"
-import bandera from "../img/banderaRoja.png"
-import cerco from "../img/cercoPasto.png"
-import conejo from "../img/conejo.png"
-import zanahoriaEnterrada from "../img/zanahoriaEnterrada.png"
-import zanahoriaCosechada from "../img/zanahoriaCosechada.png"
-import conejoDeArriba from "../img/conejoDeArriba.png"
-import madriguera from "../img/madriguera.png"
-import autoEmbotelladoIzq from "../img/autoEmbotelladoIzq.png"
-import autoEmbotelladoDer from "../img/autoEmbotelladoDer.png"
-import barrera from "../img/barrera.png"
-import casaSendero from "../img/casaSendero.png"
-import escuelaSendero from "../img/escuelaSendero.png"
-import edificiosSendero from "../img/edificiosSendero.png"
-import arbolesSendero from "../img/arbolesSendero.png"
-import calle from "../img/calle.png"
-import calleClara from "../img/calleClara.png"
-import pastoSendero from "../img/pastoSendero.png"
-import ciclista from "../img/ciclista.png"
-import brujula from "../img/brujula.png"
-import agua from "../img/agua.png"
-import pastoDelta from "../img/pastoDelta.png"
-import juncoPastoDelta from "../img/juncoPastoDelta.png"
-import carpincho from "../img/carpinchoArriba.png"
-import pato from "../img/patoArriba.png"
-import lancha from "../img/lancha.png"
-import plantaReciclajePastoDelta from "../img/plantaReciclajePastoDelta.png"
-import plastico from "../img/plasticoAgua.png"
-import familiaPato from "../img/familiaPato.png"
-import rioParana from "../img/rioParana.png"
-import autoArriba from "../img/autoArriba.png"
-import carpinchoReal from "../img/carpinchoReal.png"
-import ecobrick from "../img/ecobrick.jpg"
-import minero from "../img/minero.png"
-import piedra from "../img/piedra.png"
-import caminoCueva from "../img/caminoCueva.png"
-import piedraDiamante from "../img/piedraDiamante.png"
+import robotlupe from "../img/robotlupe.png";
+import lodoPasto from "../img/lodoPasto.png";
+import cofrecerradoPasto from "../img/cofrecerradoPasto.png";
+import cofreAbierto from "../img/cofreabierto.png";
+import cofreCerrado from "../img/cofrecerrado.png";
+import arbolesPasto from "../img/arbolesPasto.png";
+import muchasmonedas from "../img/muchasMonedas.png";
+import pasto from "../img/pasto.png";
+import basura from "../img/basura.png";
+import lapizRojo from "../img/lapizRojo.png";
+import bandera from "../img/banderaRoja.png";
+import cerco from "../img/cercoPasto.png";
+import conejo from "../img/conejo.png";
+import zanahoriaEnterrada from "../img/zanahoriaEnterrada.png";
+import zanahoriaCosechada from "../img/zanahoriaCosechada.png";
+import conejoDeArriba from "../img/conejoDeArriba.png";
+import madriguera from "../img/madriguera.png";
+import autoEmbotelladoIzq from "../img/autoEmbotelladoIzq.png";
+import autoEmbotelladoDer from "../img/autoEmbotelladoDer.png";
+import barrera from "../img/barrera.png";
+import casaSendero from "../img/casaSendero.png";
+import escuelaSendero from "../img/escuelaSendero.png";
+import edificiosSendero from "../img/edificiosSendero.png";
+import arbolesSendero from "../img/arbolesSendero.png";
+import calle from "../img/calle.png";
+import calleClara from "../img/calleClara.png";
+import pastoSendero from "../img/pastoSendero.png";
+import ciclista from "../img/ciclista.png";
+import brujula from "../img/brujula.png";
+import agua from "../img/agua.png";
+import pastoDelta from "../img/pastoDelta.png";
+import juncoPastoDelta from "../img/juncoPastoDelta.png";
+import carpincho from "../img/carpinchoArriba.png";
+import pato from "../img/patoArriba.png";
+import lancha from "../img/lancha.png";
+import plantaReciclajePastoDelta from "../img/plantaReciclajePastoDelta.png";
+import plastico from "../img/plasticoAgua.png";
+import familiaPato from "../img/familiaPato.png";
+import rioParana from "../img/rioParana.png";
+import autoArriba from "../img/autoArriba.png";
+import carpinchoReal from "../img/carpinchoReal.png";
+import ecobrick from "../img/ecobrick.jpg";
+import minero from "../img/minero.png";
+import piedra from "../img/piedra.png";
+import caminoCueva from "../img/caminoCueva.png";
+import piedraDiamante from "../img/piedraDiamante.png";
+import panda from "../img/panda.png";
+import bamboo from "../img/bamboo.png";
+import frutilla from "../img/frutilla.png";
+import nubes from "../img/nubes.png";
+import bambooAncho from "../img/bambooAncho.png";
 
 export class DHS_Gallery {
   constructor() {
@@ -67,180 +72,192 @@ export class DHS_Gallery {
   obtenerNombreCompletoDe(dir) {
     return this.imageLib[dir].nombre;
   }
-  
+
   imageLib = {
     piedraDiamante: {
       themes: [""],
       url: piedraDiamante,
       nombre: "piedraDiamante",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     caminoCueva: {
       themes: [""],
       url: caminoCueva,
       nombre: "caminoCueva",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     piedra: {
       themes: [""],
       url: piedra,
       nombre: "piedra",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     minero: {
       themes: [""],
       url: minero,
       nombre: "minero",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     ecobrick: {
       themes: [""],
       url: ecobrick,
       nombre: "ecobrick",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     rioParana: {
       themes: [""],
       url: rioParana,
       nombre: "rioParana",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     ciclista: {
       themes: [""],
       url: ciclista,
       nombre: "ciclista",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     pastoSendero: {
       themes: [""],
       url: pastoSendero,
       nombre: "pastoSendero",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     calle: {
       themes: [""],
       url: calle,
       nombre: "calle",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     calleClara: {
       themes: [""],
       url: calleClara,
       nombre: "calleClara",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     escuelaSendero: {
       themes: [""],
       url: escuelaSendero,
       nombre: "escuelaSendero",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     edificiosSendero: {
       themes: [""],
       url: edificiosSendero,
       nombre: "edificiosSendero",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/building" title="building icons">Building icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/building" title="building icons">Building icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     casaSendero: {
       themes: [""],
       url: casaSendero,
       nombre: "casaSendero",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/home" title="home icons">Home icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/home" title="home icons">Home icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     barrera: {
       themes: [""],
       url: barrera,
       nombre: "barrera",
-      parrafoLicencia: '<p><a href="https://www.flaticon.com/free-icons/barrier" title="barrier icons">Barrier icons created by nawicon - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/barrier" title="barrier icons">Barrier icons created by nawicon - Flaticon</a></p>',
       showLicense: true,
     },
     autoEmbotelladoIzq: {
       themes: [""],
       url: autoEmbotelladoIzq,
       nombre: "autoEmbotelladoIzq",
-      parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+      parrafoLicencia:
+        '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
       showLicense: true,
     },
     autoEmbotelladoDer: {
       themes: [""],
       url: autoEmbotelladoDer,
       nombre: "autoEmbotelladoDer",
-      parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+      parrafoLicencia:
+        '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
       showLicense: true,
     },
     autoArriba: {
       themes: [""],
       url: autoArriba,
       nombre: "autoArriba",
-      parrafoLicencia: '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
+      parrafoLicencia:
+        '<p>Iconos diseñados por <a href="https://www.flaticon.es/autores/konkapp" title="Konkapp"> Konkapp </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></p>',
       showLicense: true,
     },
     arbolesSendero: {
       themes: [""],
       url: arbolesSendero,
       nombre: "arbolesSendero",
-      parrafoLicencia: '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
+      parrafoLicencia:
+        '<p>Licencia imagen: <a target="_blank" href="https://www.flaticon.com/free-img/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a></p>',
       showLicense: true,
     },
     conejoDeArriba: {
       themes: [""],
       url: conejoDeArriba,
       nombre: "conejoDeArriba",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     conejo: {
       themes: [""],
       url: conejo,
       nombre: "conejo",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     madriguera: {
       themes: [""],
       url: madriguera,
       nombre: "madriguera",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     zanahoriaEnterrada: {
       themes: [""],
       url: zanahoriaEnterrada,
       nombre: "zanahoriaEnterrada",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     zanahoriaCosechada: {
       themes: [""],
       url: zanahoriaCosechada,
       nombre: "zanahoriaCosechada",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     lapizRojo: {
       themes: [""],
       url: lapizRojo,
       nombre: "lapizRojo",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     basura: {
@@ -251,7 +268,7 @@ export class DHS_Gallery {
         '<p><a href="https://www.flaticon.com/free-icons/garbage" title="garbage icons">Garbage icons created by Smashicons - Flaticon</a></p>',
       showLicense: true,
     },
-     lupe: {
+    lupe: {
       themes: ["lupe"],
       url: robotlupe,
       nombre: "Lupe",
@@ -463,6 +480,41 @@ export class DHS_Gallery {
       nombre: "familiaPato",
       parrafoLicencia: "Digital House",
       showLicense: false,
+    },
+    panda: {
+      themes: ["panda"],
+      url: panda,
+      nombre: "Panda",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    bamboo: {
+      themes: ["bamboo"],
+      url: bamboo,
+      nombre: "Bamboo",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    bambooAncho: {
+      themes: ["bambooAncho"],
+      url: bambooAncho,
+      nombre: "bambooAncho",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    frutilla: {
+      themes: ["frutilla"],
+      url: frutilla,
+      nombre: "Frutilla",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    nubes: {
+      themes: ["nubes"],
+      url: nubes,
+      nombre: "nubes",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
     },
   };
 }

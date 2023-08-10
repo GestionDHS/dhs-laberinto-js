@@ -798,6 +798,108 @@ export class Dhs_personajes {
         excluyente: false,
       },
     },
+    panda: {
+      idUsarHTML: "panda",
+      tipoPersonaje: "panda",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "panda" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 3,
+      rotable: true,
+      colisiones: [
+        {
+          con: "lodo",
+          factorDeAvance: 0.7,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Me atasqué en el lodo.",
+        },
+        {
+          con: "arbol",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un árbol",
+        },
+        {
+          con: "bandera",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaBandera();
+          },
+          // mensaje: "¡We are the Champions!",
+        },
+      ],
+      configPosicionamiento: {},
+    },
+    bamboo: {
+      idUsarHTML: "bamboo",
+      tipoPersonaje: "bamboo",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "bamboo" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    bambooAncho: {
+      idUsarHTML: "bambooAncho",
+      tipoPersonaje: "bambooAncho",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "bambooAncho" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0px",
+      colisiones: [],
+    },
+    frutilla: {
+      idUsarHTML: "frutilla",
+      tipoPersonaje: "frutilla",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "frutilla" },
+        abierto: { name: "normal", imageUrl: "agua" },
+        juntado: { name: "juntado", imageUrl: "pasto" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    nubes: {
+      idUsarHTML: "nubes",
+      tipoPersonaje: "nubes",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "nubes" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
   };
 }
 

@@ -999,6 +999,36 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    comer_fruta() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "comer_fruta",
+                message0: "%1 comer fruta",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["comer_fruta"] = function (block) {
+            const code = "comerFruta();"
+            return code;
+        };
+
+        return {
+            type: "comer_fruta",
+            kind: "block",
+        }
+    }
     //conejo
     cosechar() {
         Blockly.common.defineBlocksWithJsonArray([
@@ -1246,7 +1276,6 @@ export default class ConfiguradorBloques {
         Blockly.JavaScript.forBlock["sensor_cofre"] = function (block) {
             const code = "detectarCofre()"
             return [code, Blockly.JavaScript.ORDER_NONE]
-            return code;
         };
         return {
             "type": "sensor_cofre",
@@ -1283,7 +1312,35 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
-    
+    sensor_frutilla() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_frutilla",
+                "message0": "%1 ¿Hay frutilla aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_frutilla"] = function (block) {
+            const code = "detectarFrutilla()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_frutilla",
+            "kind": "block",
+        }
+    }
 
     // LOOPS
     controls_repeat() {
