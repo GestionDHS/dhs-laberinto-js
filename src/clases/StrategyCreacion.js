@@ -92,9 +92,9 @@ export function PersonajesAlAzarCantTotalFijos() {
       for (let i = 0; i < cantidad; i++) {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
         const numRandom = elegirPosicionRandom(conjuntoPersonajes.posiciones)
-        const posicion = conjuntoPersonajes.posiciones[numRandom]
+        const posicion = conjuntoPersonajes.posiciones[numRandom] 
         let personajeAux = { ...personajeElegido };
-        estaVacio(posicion[0],posicion[1], escenario) && setearPosiciones(personajeAux, posicion)
+        setearPosiciones(personajeAux, posicion)
         setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(personajeAux);
       }
