@@ -80,17 +80,15 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[21]);
 //Método para Piedras
 miJuego.personajePrincipal.detectarPiedra = function () {
   // devuelve true si encuentra o false si no hay piedra
-  return this.buscarObjetoAdelante("piedra") !== undefined
+  return this.buscarObjetoAdelante("piedraDiamante") !== undefined
 };
 miJuego.personajePrincipal.picarPiedra = function () {
-  const intento = this.buscarParaRealizarAccionAdelante("piedra", "serJuntado");
+  const intento = this.buscarParaRealizarAccionAdelante("piedraDiamante", "serJuntado");
 
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("Oh! Aquí no hay piedra.");
   } else if (!intento.exito) {
     return this.decirTerminar("Oh! Esta piedra ya fue picada.");
-  } else {
-    return this.abrirYMostrarModal();
   }
 };
 

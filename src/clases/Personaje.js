@@ -132,8 +132,9 @@ export class PersonajeBasico {
 
   buscarObjetoAdelante(nombreObjeto) {
     const vector = this.obtenerVectorAvance(this.direccion);
-    console.log(vector)
-    return this.buscarObjetoSegunVector(nombreObjeto, vector);
+    let vectorY = this.casilleroActual.fila + vector[0]
+    let vectorX = this.casilleroActual.columna + vector[1]
+    return this.buscarObjetoSegunVector(nombreObjeto, [vectorY,vectorX]);
   }
 
   buscarObjetoSegunVector(nombreObjeto, vector) {
@@ -170,7 +171,6 @@ export class PersonajeBasico {
 
   buscarParaRealizarAccionAdelante(nameObj, accion, params = false) {
     const objetoPaciente = this.buscarObjetoAdelante(nameObj);
-    // console.log(objetoPaciente);
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
       : false; 
@@ -384,7 +384,6 @@ class PersonajeMovible extends PersonajeBasico {
   iterarVectorMovimientoAsincronicamente(veces, vector) {
     this.moverse(vector[0], vector[1]);
     if (veces > 1 && this.estaVivo) {
-      // console.log(vectorUsar);
       setTimeout(() => {
         this.iterarVectorMovimientoAsincronicamente(veces - 1, vector);
       }, this.juego.duracionIntervalos);
