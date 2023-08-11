@@ -57,7 +57,7 @@ export function elegirPosicionRandom(arrayPosiciones, escenario) {
     posicionElegidaY = arrayPosiciones[random][0];
     posicionElegidaX = arrayPosiciones[random][1];
   } while (estaVacio(posicionElegidaY, posicionElegidaX, escenario));
-  //arrayPosiciones.splice(random, 1);
+  arrayPosiciones.splice(random, 1);
   return [posicionElegidaY, posicionElegidaX];
 }
 

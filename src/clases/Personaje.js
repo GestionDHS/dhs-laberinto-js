@@ -132,6 +132,7 @@ export class PersonajeBasico {
 
   buscarObjetoAdelante(nombreObjeto) {
     const vector = this.obtenerVectorAvance(this.direccion);
+    console.log(vector)
     return this.buscarObjetoSegunVector(nombreObjeto, vector);
   }
 
