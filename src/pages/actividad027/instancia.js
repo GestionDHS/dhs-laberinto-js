@@ -35,6 +35,7 @@ const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
 const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
+const bandera = personajesGaleria.obtenerPersonaje("bandera")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -77,9 +78,16 @@ let conjuntosDePersonajes = [
   { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
     estrategia: "azarExcluyente",
     personajes: [frutilla, bamboo],
-    posiciones: [[3, 6]],
+    posiciones: [[3, 5]],
     aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bandera],
+    posiciones: [[3, 7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
 ];
 
@@ -101,7 +109,14 @@ miJuego.personajePrincipal.comerFruta = function () {
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Este frutilla ya no está.");
   }
-  if (this.mochila.length >= 1) {
+
+};
+
+miJuego.personajePrincipal.llegarALaBandera = function () {
+  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
+  //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
+  //  y si era una frutilla y no se la comio, también viene vacia
+  if (this.mochila.length >= 1 && this.mochila[0]?.tipo) {
     this.abrirYMostrarModal();
   }
 };
