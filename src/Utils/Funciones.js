@@ -10,6 +10,7 @@ function encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegid
   let index
   do {
     index= Math.floor(Math.random() * dimension);
+    console.log(index)
   } while (!estaVacio(arrayPosiciones[index][0], arrayPosiciones[index][1], escenario) || posicionesElegidas?.some(element => 
     element[0] === arrayPosiciones[index][0] && element[1] === arrayPosiciones[index][1]
   ));

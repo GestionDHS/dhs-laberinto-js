@@ -7,6 +7,7 @@ import { CustomCategory } from "../../bloques/CustomCategory";
 import {Dhs_personajes} from '../../clases/Dhs-personajes';
 import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
 import {Dhs_Categorias} from '../../clases/Dhs-categorias';
+import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 
 
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -37,8 +38,8 @@ const nubes = personajesGaleria.obtenerPersonaje("nubes")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Juntaste todas las monedas de los cofres!",
+  imagen: "frutilla",
+  texto: "mmmmm que rica Frutilla!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
@@ -74,10 +75,10 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
   { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
-    estrategia: "azarFijos",
+    estrategia: "azarExcluyente",
     personajes: [frutilla, bamboo],
     posiciones: [[3, 6]],
-    aliasConjunto: "aleatoreosTablero",
+    aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,
   },
 ];
@@ -99,6 +100,9 @@ miJuego.personajePrincipal.comerFruta = function () {
     return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Este frutilla ya no está.");
+  }
+  if (this.mochila.length >= 1) {
+    this.abrirYMostrarModal();
   }
 };
 
