@@ -1,4 +1,4 @@
-import {posicionValida, elegirPersonajeRandom, elegirPosicionRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad, setearDireccion} from '../Utils/Funciones';
+import {posicionValida, elegirPersonajeRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad, setearDireccion} from '../Utils/Funciones';
 
 
 //Strategy creacion
@@ -46,9 +46,11 @@ export function PersonajesAlAzarRango() {
     !conjuntoPersonajes.cantidadMin && lanzarExcepcion("Necesita un cantidadMin en la configuracion de cada objeto de conjuntosDePersonajes")
     !conjuntoPersonajes.cantidadMax && lanzarExcepcion("Necesita un cantidadMax en la configuracion de cada objeto de conjuntosDePersonajes")
     let personajesACrear = [];
+    let posicionesElegidas=[];
     const cantidad = obtenerCantidadAleatoria(conjuntoPersonajes);
     for (let i = 0; i < cantidad; i++) {
-      const posiciones = posicionValida(escenario);
+      const posiciones = posicionValida(escenario,posicionesElegidas);
+      posicionesElegidas.push(posiciones)
       const personajeAlAzar = elegirPersonajeRandom(
         conjuntoPersonajes.personajes
       );
@@ -57,6 +59,7 @@ export function PersonajesAlAzarRango() {
       setearAliasYAleatorieidad(copiaPersonaje,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
       personajesACrear.push(copiaPersonaje);
     }
+    posicionesElegidas=[];
     return personajesACrear;
   };
 }
@@ -67,17 +70,20 @@ export function PersonajesAlAzarCantTotal() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
     !conjuntoPersonajes.cantidadTotal && lanzarExcepcion("Necesita un cantidad total en la configuracion de cada objeto de conjuntosDePersonajes")
       let personajesACrear = [];
+      let posicionesElegidas=[];
       const cantidad = conjuntoPersonajes.cantidadTotal
       for (let i = 0; i < cantidad; i++) {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
-        const posiciones = posicionValida(escenario);
+        const unaPosicion = posicionValida(escenario,posicionesElegidas);
+        posicionesElegidas.push(unaPosicion)
         let personajeAux = { ...personajeElegido };
-        setearPosiciones(personajeAux,posiciones)
+        setearPosiciones(personajeAux,unaPosicion)
         setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(personajeAux);
       }
-  
+      posicionesElegidas=[]
     return personajesACrear;
+    
   };
 }
 
@@ -85,16 +91,20 @@ export function PersonajesAlAzarCantTotal() {
 export function PersonajesAlAzarCantTotalFijos() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
     !conjuntoPersonajes.cantidadTotal && lanzarExcepcion("Necesita un cantidad total en la configuracion de cada objeto de conjuntosDePersonajes")
+    !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
       let personajesACrear = [];
+      let posicionesElegidas=[];
       const cantidad = conjuntoPersonajes.cantidadTotal
       for (let i = 0; i < cantidad; i++) {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
-        const unaPosicion = elegirPosicionRandom([...conjuntoPersonajes.posiciones],escenario)
+        const unaPosicion = posicionValida(conjuntoPersonajes.posiciones,escenario,posicionesElegidas)
+        posicionesElegidas.push(unaPosicion)
         let personajeAux = { ...personajeElegido };
         setearPosiciones(personajeAux, unaPosicion)
         setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(personajeAux);
       }
+      posicionesElegidas=[]
     return personajesACrear;
   };
 }
@@ -102,21 +112,24 @@ export function PersonajesAlAzarCantTotalFijos() {
 // varios personajes, varias posiciones fijas => toma 1 personaje, y toma una posicion posible para cada uno
 // [personje, personaje], posiciones:[[2,1],[1,2]]
 export function PersonajesAlAzarFijos() {
-    this.crearPersonajes = function (conjuntoPersonajes, escenario) {
-    !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
-      let personajesACrear = []
-      const cantidad = conjuntoPersonajes.posiciones.length;
-      for (let i = 0; i < cantidad; i++) {
-        let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
-        const unaPosicion = elegirPosicionRandom([...conjuntoPersonajes.posiciones],escenario)
-        let personajeAux = { ...personajeElegido };
-        setearPosiciones(personajeAux,unaPosicion)
-        setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
-        personajesACrear.push(personajeAux);
-      }
-      return personajesACrear;
-    };
-  }
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+  !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
+    let personajesACrear = []
+    let posicionesElegidas=[]
+    const cantidad = conjuntoPersonajes.posiciones.length;
+    for (let i = 0; i < cantidad; i++) {
+      let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
+      const unaPosicion = elegirPosicionRandom([...conjuntoPersonajes.posiciones],escenario)
+      posicionesElegidas.push(unaPosicion)
+      let personajeAux = { ...personajeElegido };
+      setearPosiciones(personajeAux,unaPosicion)
+      setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
+      personajesACrear.push(personajeAux);
+    }
+    posicionesElegidas=[]
+    return personajesACrear;
+  };
+}
 
 //varios personajes en un lugar => elije uno y lo renderiza
 // [personje, personaje], posiciones:[[y,x]]

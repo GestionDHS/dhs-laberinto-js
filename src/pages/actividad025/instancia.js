@@ -67,10 +67,9 @@ const conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
   {
-    estrategia: "azarFijos",
+    estrategia: "azarCantTotal",
     personajes: [piedraDiamante],
-    // cantidadTotal: 2,
-    posiciones: [[1, 1],[1, 2],[1,3],[1,4],[1,5]],
+    cantidadTotal: 2,
     aliasConjunto: "azarPiedraDiamante",
     desapareceAlReiniciar: true,
   },
@@ -81,75 +80,27 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[21]);
 //Método para Piedras
 miJuego.personajePrincipal.detectarPiedra = function () {
   // devuelve true si encuentra o false si no hay piedra
-  return this.buscarObjetoAdelante("piedraDiamante") !== undefined
+  return this.buscarObjetoAdelante("piedra") !== undefined
 };
 miJuego.personajePrincipal.picarPiedra = function () {
-  const intento = this.buscarParaRealizarAccion("piedraDiamante", "abrirse");
+  const intento = this.buscarParaRealizarAccionAdelante("piedra", "serJuntado");
 
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("Oh! Aquí no hay cofre.");
+    return this.decirTerminar("Oh! Aquí no hay piedra.");
   } else if (!intento.exito) {
-    return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
+    return this.decirTerminar("Oh! Esta piedra ya fue picada.");
   } else {
     return this.abrirYMostrarModal();
   }
 };
 
-// //Método para Juntar Basura
-// miJuego.personajePrincipal.juntarBasura = function () {
-//   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
-//   if (!intento.objetoEncontrado) {
-//     this.decirTerminar("Oh! Aquí no hay basura.");
-//   } else if (!intento.exito) {
-//     this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
-//   }
-//   return intento;
-// };
-
-// // Lancha
-// miJuego.personajePrincipal.llegarPlanta = function () {
-//   if (this.mochila.length === 3) {
-//     this.abrirYMostrarModal();
-//   } else if(!this.intento) {
-//     return this.decirTerminar("¡Oh! Quedó basura por levantar.")
-//   }
-// }
-
-// // Pedro - Lupe
-// miJuego.personajePrincipal.llegarEscuela = function () {
-//   this.abrirYMostrarModal();
-// }
-
-// //Conejo - Nelson
-// miJuego.personajePrincipal.cosecharZanahoria = function () {
-//   const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
-//   if (!intento.objetoEncontrado) {
-//     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-//   } else if (!intento.exito) {
-//     return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
-//   } 
-// };
-
-// miJuego.personajePrincipal.comerZanahoria = function () {
-//   const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
- 
-//   if (!intento.objetoEncontrado) {
-//     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-//   } else if( intento.estado == "juntado") {
-//     return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
-//   } else if (!intento.exito ) {
-//     return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
-//   } 
-// };
-
-//Seteo del Dibujo a realizar - Verificación. Para los ejercicios que tienen PersonajesDibujables
-// const EJEMPLO_DIBUJO_DESEADO = [
-//   [null, null, null, null, null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, null, null, null, null],
-// ]
-// miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
+miJuego.personajePrincipal.llegarALaBandera = function () {
+  // if (this.mochila.length === 2) {
+    this.abrirYMostrarModal();
+  // } else {
+  //   return this.decirTerminar("¡Oh! Quedaron piedras sin picar.");
+  // }
+};
 
 //******************************************************* */
 //    BLOCKLY

@@ -1,21 +1,38 @@
 import { CustomRenderer } from "../bloques/CustomRender";
 
 //************FUNCION QUE BUSCA POSICIONES RAMDOM DEL TABLERO*************/
-export function posicionValida(escenario) {
+export function posicionValida(escenario,posicionesElegidas, arrayPosiciones) {
+  return arrayPosiciones?encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegidas):encontrarPosicionesParaEscenario(escenario,posicionesElegidas)
+}
+
+function encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegidas){
+  const dimension=arrayPosiciones.length
+  let index
+  do {
+    index= Math.floor(Math.random() * dimension);
+  } while (!estaVacio(arrayPosiciones[index][0], arrayPosiciones[index][1], escenario) || posicionesElegidas?.some(element => 
+    element[0] === arrayPosiciones[index][0] && element[1] === arrayPosiciones[index][1]
+  ));
+  return arrayPosiciones[index]
+}
+
+function encontrarPosicionesParaEscenario(escenario,posicionesElegidas){
   const dimensionY = escenario.dimensiones[0];
   const dimensionX = escenario.dimensiones[1];
   let posicionProvisoriaY, posicionProvisoriaX;
-
   do {
     posicionProvisoriaY = Math.floor(Math.random() * dimensionY);
     posicionProvisoriaX = Math.floor(Math.random() * dimensionX);
-  } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario));
+    
+  } while (!estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) || posicionesElegidas?.some(element => 
+    element[0] === posicionProvisoriaY && element[1] === posicionProvisoriaX
+  ));
 
   return [posicionProvisoriaY, posicionProvisoriaX];
 }
-
 //************FUNCION QUE VALIDA LAS POSICIONES DEL TABLERO*************/
 function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
+  let estaVacio = true;
   const casillero =
     escenario.objetosCasilleros[posicionProvisoriaY][posicionProvisoriaX];
   return (
@@ -23,6 +40,8 @@ function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
     casillero.ocupantes.length == 1
   );
 }
+
+
 
 // Funcion para generar coordenadas del tablero
 export function generarCoordenadas(tablero) {
@@ -46,19 +65,6 @@ export function elegirPersonajeRandom(array) {
   const random = Math.floor(Math.random() * largoArray);
   const personajeElegido = array[random];
   return personajeElegido;
-}
-
-// Funcion que elige una posicion random de un array y elimina la posicion
-export function elegirPosicionRandom(arrayPosiciones, escenario) {
-  let posicionElegidaY, posicionElegidaX, random;
-  const largoArray = arrayPosiciones.length;
-  do {
-    random = Math.floor(Math.random() * largoArray);
-    posicionElegidaY = arrayPosiciones[random][0];
-    posicionElegidaX = arrayPosiciones[random][1];
-  } while (estaVacio(posicionElegidaY, posicionElegidaX, escenario));
-  arrayPosiciones.splice(random, 1);
-  return [posicionElegidaY, posicionElegidaX];
 }
 
 //Para lanzar errores en consola

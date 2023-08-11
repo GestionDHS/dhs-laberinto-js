@@ -137,14 +137,15 @@ export class PersonajeBasico {
   }
 
   buscarObjetoSegunVector(nombreObjeto, vector) {
-    const casillero = this.obtenerCasilleroDestino(vector[0], vector[1]);
+    const casillero = this.obtenerCasillero(vector[0], vector[1]);
     return this.buscarObjetoEnCasillero(nombreObjeto, casillero);
   }
 
   buscarObjetoEnCasillero(nombreObjeto, objetoCasillero) {
-    return objetoCasillero.ocupantes.find(
+    let objeto = objetoCasillero.ocupantes.find(
       (obj) => obj.tipoPersonaje == nombreObjeto
     );
+    return objeto
   }
   buscarObjetoEnCasilleroActual(nombreObjeto) {
     return this.buscarObjetoEnCasillero(nombreObjeto, this.casilleroActual)
@@ -158,6 +159,21 @@ export class PersonajeBasico {
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
       : false;
+    return {
+      objetoEncontrado: objetoPaciente ? true : false,
+      exito: acto && acto.exito,
+      premio: acto && acto.exito ? acto.premio : null,
+      estadoPosterior: acto && acto.estadoPosterior,
+      estadoPrevio: acto && acto.estadoPrevio,
+    };
+  }
+
+  buscarParaRealizarAccionAdelante(nameObj, accion, params = false) {
+    const objetoPaciente = this.buscarObjetoAdelante(nameObj);
+    // console.log(objetoPaciente);
+    const acto = objetoPaciente
+      ? this.realizarAccionSobre(objetoPaciente, accion, params)
+      : false; 
     return {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
@@ -183,7 +199,11 @@ export class PersonajeBasico {
     const estadoPrevio = this.estadoActual;
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
-      this.salirDelCasilleroActual();
+      this.casilleroActual?.ocupantes.splice(
+        this.casilleroActual?.ocupantes.indexOf(this),
+        1
+      );
+      // this.salirDelCasilleroActual();
       return {
         exito: true,
         premio: { tipo: this.tipoPersonaje, cantidad: 1 },
@@ -364,6 +384,7 @@ class PersonajeMovible extends PersonajeBasico {
   iterarVectorMovimientoAsincronicamente(veces, vector) {
     this.moverse(vector[0], vector[1]);
     if (veces > 1 && this.estaVivo) {
+      // console.log(vectorUsar);
       setTimeout(() => {
         this.iterarVectorMovimientoAsincronicamente(veces - 1, vector);
       }, this.juego.duracionIntervalos);
@@ -373,8 +394,7 @@ class PersonajeMovible extends PersonajeBasico {
   }
   obtenerVectorAvance(direccion) {
     const moduloDireccion360 = direccion % 360; // 0 || +/-90 || +/-180 || +/-270
-    const moduloDireccion360Positivo =
-      moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
+    const moduloDireccion360Positivo = moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
     const puntoCardinal = moduloDireccion360Positivo / 90; // 0 || 1 || 2 || 3
     if (
       Number.isInteger(puntoCardinal) &&
