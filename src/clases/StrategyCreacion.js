@@ -1,4 +1,4 @@
-import {posicionValida, elegirPersonajeRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad, setearDireccion} from '../Utils/Funciones';
+import {posicionValida, elegirPersonajeRandom,obtenerCantidadAleatoria, setearPosiciones, setearAliasYAleatorieidad, setearDireccion,lanzarExcepcion} from '../Utils/Funciones';
 
 
 //Strategy creacion
@@ -23,7 +23,7 @@ TipoCreacion.prototype = {
 // [personaje], {posiciones: [[y,x], [y,x], [y,x]]} 
 export function PersonajesFijos() {
 
-  this.crearPersonajes = function (conjuntoPersonajes,_escenario) {
+  this.crearPersonajes = function (conjuntoPersonajes,escenario) {
     !conjuntoPersonajes.posiciones && lanzarExcepcion("Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes")
     let personajesACrear = [];
     conjuntoPersonajes.personajes.forEach((unPersonaje) => {
@@ -97,7 +97,7 @@ export function PersonajesAlAzarCantTotalFijos() {
       const cantidad = conjuntoPersonajes.cantidadTotal
       for (let i = 0; i < cantidad; i++) {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
-        const unaPosicion = posicionValida(conjuntoPersonajes.posiciones,escenario,posicionesElegidas)
+        const unaPosicion = posicionValida(escenario,posicionesElegidas,conjuntoPersonajes.posiciones)
         posicionesElegidas.push(unaPosicion)
         let personajeAux = { ...personajeElegido };
         setearPosiciones(personajeAux, unaPosicion)

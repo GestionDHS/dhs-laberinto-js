@@ -12,7 +12,7 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
+window.miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [10, 9]; //fila, columna
 
@@ -33,7 +33,6 @@ const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const lupe = personajesGaleria.obtenerPersonaje("lupe");
 const cofre = personajesGaleria.obtenerPersonaje("cofre");
-const cerco = personajesGaleria.obtenerPersonaje("cerco");
 const pasto = personajesGaleria.obtenerPersonaje("pasto");
 const arbol = personajesGaleria.obtenerPersonaje("arbol");
 const bandera = personajesGaleria.obtenerPersonaje("bandera");
@@ -72,9 +71,9 @@ let conjuntosDePersonajes = [
   {
     estrategia: "azarCantidadTotalFijos",
     personajes: [cofre],
-    cantidadTotal:2,
+    cantidadTotal:3,
     posiciones: [[2,4],[3,4],[4,4],[5,4],[6,4]],
-    aliasConjunto: "azarFijos",
+    aliasConjunto: "azarCantidadTotalFijos",
     desapareceAlReiniciar: true,
   },
   {
@@ -108,7 +107,7 @@ miJuego.personajePrincipal.abrirCofre = function () {
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
-  if (this.mochila.length === 2) {
+  if (this.mochila.length >= 2) {
     this.abrirYMostrarModal();
   } else {
     return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
