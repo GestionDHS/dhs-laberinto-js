@@ -74,10 +74,10 @@ export function PersonajesAlAzarCantTotal() {
       const cantidad = conjuntoPersonajes.cantidadTotal
       for (let i = 0; i < cantidad; i++) {
         let personajeElegido = elegirPersonajeRandom(conjuntoPersonajes.personajes);
-        const posiciones = posicionValida(escenario,posicionesElegidas);
+        const unaPosicion = posicionValida(escenario,posicionesElegidas);
         posicionesElegidas.push(unaPosicion)
         let personajeAux = { ...personajeElegido };
-        setearPosiciones(personajeAux,posiciones[i])
+        setearPosiciones(personajeAux,unaPosicion)
         setearAliasYAleatorieidad(personajeAux,conjuntoPersonajes.desapareceAlReiniciar,conjuntoPersonajes.aliasConjunto)
         personajesACrear.push(personajeAux);
       }

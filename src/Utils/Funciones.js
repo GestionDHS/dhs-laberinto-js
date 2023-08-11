@@ -1,21 +1,19 @@
 import { CustomRenderer } from "../bloques/CustomRender";
 
 //************FUNCION QUE BUSCA POSICIONES RAMDOM DEL TABLERO*************/
-export function posicionValida(arrayPosiciones,escenario,posicionesElegidas) {
-return arrayPosiciones?encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegidas):encontrarPosicionesParaEscenario(escenario,posicionesElegidas)
+export function posicionValida(escenario,posicionesElegidas, arrayPosiciones) {
+  return arrayPosiciones?encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegidas):encontrarPosicionesParaEscenario(escenario,posicionesElegidas)
 }
 
 function encontrarPosicionesParaArray(arrayPosiciones,escenario,posicionesElegidas){
-const dimension=arrayPosiciones.length
-let index
-do {
-  index= Math.floor(Math.random() * dimension);
-
-  
-} while (!estaVacio(arrayPosiciones[index][0], arrayPosiciones[index][1], escenario) || posicionesElegidas?.some(element => 
-  element[0] === arrayPosiciones[index][0] && element[1] === arrayPosiciones[index][1]
-));
-return arrayPosiciones[index]
+  const dimension=arrayPosiciones.length
+  let index
+  do {
+    index= Math.floor(Math.random() * dimension);
+  } while (!estaVacio(arrayPosiciones[index][0], arrayPosiciones[index][1], escenario) || posicionesElegidas?.some(element => 
+    element[0] === arrayPosiciones[index][0] && element[1] === arrayPosiciones[index][1]
+  ));
+  return arrayPosiciones[index]
 }
 
 function encontrarPosicionesParaEscenario(escenario,posicionesElegidas){

@@ -80,10 +80,10 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[21]);
 //Método para Piedras
 miJuego.personajePrincipal.detectarPiedra = function () {
   // devuelve true si encuentra o false si no hay piedra
-  return this.buscarObjetoAdelante("piedraDiamante")
+  return this.buscarObjetoAdelante("piedra") !== undefined
 };
 miJuego.personajePrincipal.picarPiedra = function () {
-  const intento = this.buscarParaRealizarAccion("piedraDiamante", "serJuntado");
+  const intento = this.buscarParaRealizarAccionAdelante("piedra", "serJuntado");
 
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("Oh! Aquí no hay piedra.");
@@ -123,7 +123,7 @@ const categoriaElegida=categoria.obtenerCategoria("repCondiSensor")
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
+  ["avanzar", "Movimientos"],
   ["picar_piedra", "Acciones"],
   ["if", "Condicionales"],
   ["controls", "Repeticiones"],
@@ -131,6 +131,6 @@ const ordenJerarquicoBloques = [
 ];
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 
-const funcionesAExponer=["moverAbajo","moverArriba", "moverDerecha", "moverIzquierda", "detectarPiedra", "picarPiedra"]
+const funcionesAExponer=["avanzar", "detectarPiedra", "picarPiedra"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

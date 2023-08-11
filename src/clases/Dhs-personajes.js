@@ -707,13 +707,13 @@ export class Dhs_personajes {
     minero: {
       idUsarHTML: "minero",
       tipoPersonaje: "minero",
-      clasePersonaje: "PersonajeMovibleSimple",
+      clasePersonaje: "PersonajeMovibleGrados",
       tieneTooltip: true,
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "minero" },
       },
       estadoInicial: "normal",
-      direccionInicial: 0,
+      direccionInicial: 90,
       zIndex: 3,
       rotable: false,
       colisiones: [

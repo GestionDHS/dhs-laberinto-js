@@ -1112,7 +1112,7 @@ export default class ConfiguradorBloques {
         ]);
 
         Blockly.JavaScript.forBlock["picar_piedra"] = function (block) {
-            const code = "picarPiedra();\n"
+            const code = "picarPiedra();"
             return code;
         };
 
