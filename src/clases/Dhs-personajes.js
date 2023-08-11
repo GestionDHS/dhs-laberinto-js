@@ -873,7 +873,7 @@ export class Dhs_personajes {
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "frutilla" },
         abierto: { name: "normal", imageUrl: "agua" },
-        juntado: { name: "juntado", imageUrl: "pasto" },
+        juntado: { name: "juntado", imageUrl: "agua" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,
