@@ -649,7 +649,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["avanzar"] = function (block) {
+        Blockly.JavaScript.forBlock["avanzar"] = function (block) {
             const code = "avanzar();\n"
             return code;
         };

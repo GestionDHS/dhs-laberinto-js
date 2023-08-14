@@ -11,30 +11,32 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
-const dimensiones = [3, 7]; //fila, columna
+const dimensiones = [5, 7]; //fila, columna
 
 const tablero = [
   [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
   [0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1],
 ];
 let coordenadasCaminoPared = generarCoordenadas(tablero);
 const galeriaPersonajes = new Dhs_personajes();
 const pared = galeriaPersonajes.obtenerPersonaje("piedra")
 const camino = galeriaPersonajes.obtenerPersonaje("caminoCueva")
+const minero = galeriaPersonajes.obtenerPersonaje("minero")
+const bandera = galeriaPersonajes.obtenerPersonaje("bandera")
+const piedraDiamante = galeriaPersonajes.obtenerPersonaje("piedraDiamante")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Encontramos 180 monedas de oro.",
+  imagen: "piedraDiamante",
+  texto: "Llegaste al final de la cueva.",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3, "#593006");
 miJuego.agregarModal(datosModal);
 
-const minero = galeriaPersonajes.obtenerPersonaje("minero")
-const bandera = galeriaPersonajes.obtenerPersonaje("bandera")
-const piedraDiamante = galeriaPersonajes.obtenerPersonaje("piedraDiamante")
 
 
 const conjuntosDePersonajes = [
@@ -55,27 +57,27 @@ const conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [minero],
-    posiciones: [[1, 0]],
+    posiciones: [[2, 0]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [bandera],
-    posiciones: [[1, 6]],
+    posiciones: [[2, 6]],
     aliasConjunto: "fijoBandera",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "azarCantTotal",
     personajes: [piedraDiamante],
-    cantidadTotal: 2,
+    cantidadTotal: 3,
     aliasConjunto: "azarPiedraDiamante",
     desapareceAlReiniciar: true,
   },
 ]
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[21]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[35]);
 
 //Método para Piedras
 miJuego.personajePrincipal.detectarPiedra = function () {
@@ -93,11 +95,7 @@ miJuego.personajePrincipal.picarPiedra = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  // if (this.mochila.length === 2) {
     this.abrirYMostrarModal();
-  // } else {
-  //   return this.decirTerminar("¡Oh! Quedaron piedras sin picar.");
-  // }
 };
 
 //******************************************************* */

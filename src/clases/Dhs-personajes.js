@@ -727,6 +727,14 @@ export class Dhs_personajes {
           mensaje: "¡OH NO! Choqué contra una piedra.",
         },
         {
+          con: "piedraDiamante",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra una piedra.",
+        },
+        {
           con: "bandera",
           factorDeAvance: 1,
           callback: (x) => {
@@ -756,7 +764,7 @@ export class Dhs_personajes {
       tipoPersonaje: "piedraDiamante",
       estadosPosibles: {
         abierto: { name: "abierto", imageUrl: "piedraDiamante" },
-        juntado: { name: "juntado", imageUrl: "pasto" },
+        juntado: { name: "juntado", imageUrl: "caminoCueva" },
       },
       estadoInicial: "abierto", 
       posicionInicialY: 0,
