@@ -1342,6 +1342,37 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+
+    sensor_avion() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_avion",
+                "message0": "%1 ¿Hay avión adelante?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/3410/3410900.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_avion"] = function (block) {
+            const code = "detectarAvion()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_avion",
+            "kind": "block",
+        }
+    }
     sensor_diamante() {
         Blockly.common.defineBlocksWithJsonArray([
             {

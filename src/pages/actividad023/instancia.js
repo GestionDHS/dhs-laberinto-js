@@ -33,13 +33,14 @@ const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const agua = personajesGaleria.obtenerPersonaje("agua");
 const pajaro = personajesGaleria.obtenerPersonaje("pajaro");
-const nubes = personajesGaleria.obtenerPersonaje("nubes");
+const avion = personajesGaleria.obtenerPersonaje("avion");
 const nubesCielo = personajesGaleria.obtenerPersonaje("nubesCielo")
+const isla=personajesGaleria.obtenerPersonaje("isla")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Juntaste todas las monedas de los cofres!",
+  imagen: "pajaro",
+  texto: "Lograste esquivar los aviones y emigrar a tiempo!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 2.5, "#9ca64e");
@@ -68,12 +69,20 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
   {
+    estrategia: "fijos",
+    personajes: [isla],
+    posiciones: [[8,7]],
+    aliasConjunto: "fijos",
+    desapareceAlReiniciar: false,
+  },
+  {
    estrategia: "posicionExcluyente",
-   personajes: [nubes],
-   posiciones:[[1,4],[1,5]],
+   personajes: [avion],
+   posiciones:[[8,5],[6,7]],
    aliasConjunto: "posicionExcluyente",
    desapareceAlReiniciar: true,
  },
+
 ];
 
 
@@ -81,3 +90,35 @@ let conjuntosDePersonajes = [
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
 
+miJuego.personajePrincipal.llegarALaBandera = function () {
+    this.abrirYMostrarModal();
+};
+//Método para Piedras
+miJuego.personajePrincipal.detectarAvion = function () {
+  // devuelve true si encuentra o false si no hay piedra
+  return this.buscarObjetoAdelante("avion") !== undefined
+};
+
+
+miJuego.personajePrincipal.llegarALaIsla = function () {
+    this.abrirYMostrarModal();
+};
+
+// BLOCKLY ------------------------------------------------------
+const miControlador = new ControladorStandard(miJuego,velocidadInicial);
+const categoria=new Dhs_Categorias()
+const categoriaElegida=categoria.obtenerCategoria("pajaro")
+
+const ordenJerarquicoBloques = [
+  ["on_execute", "Eventos"],
+  ["avanzar_param", "Movimientos"],
+  ["girar_clasico", "Movimientos"],
+  ["controls", "Repeticiones"],
+  ["if", "Condicionales"],
+  ["sensor_avion", "Sensores"],
+];
+const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+
+const funcionesAExponer=["avanzar", "detectarAvion","girarIzquierda","girarDerecha","apuntarEnDireccion","girarGrados" ]
+
+configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

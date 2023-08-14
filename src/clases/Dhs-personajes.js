@@ -912,9 +912,9 @@ export class Dhs_personajes {
       idUsarHTML: "nubes",
       tipoPersonaje: "nubes",
       estadosPosibles: {
-        cerrado: { name: "cerrado", imageUrl: "nubes" },
+        normal: { normal: "normal", imageUrl: "nubes" },
       },
-      estadoInicial: "cerrado", 
+      estadoInicial: "normal", 
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
@@ -932,7 +932,7 @@ export class Dhs_personajes {
         normal: { name: "normal", imageUrl: "pajaro" },
       },
       estadoInicial: "normal",
-      direccionInicial: 90,
+      direccionInicial: 180,
       zIndex: 3,
       rotable: true,
       colisiones: [
@@ -953,7 +953,7 @@ export class Dhs_personajes {
           mensaje: "¡OH NO! Choqué contra un avión.",
         },
         {
-          con: "bandera",
+          con: "isla",
           factorDeAvance: 1,
           callback: (x) => {
             x.llegarALaIsla();
@@ -966,9 +966,39 @@ export class Dhs_personajes {
       idUsarHTML: "nubesCielo",
       tipoPersonaje: "nubes",
       estadosPosibles: {
-        cerrado: { name: "cerrado", imageUrl: "nubesCielo" },
+        normal: { name: "normal", imageUrl: "nubesCielo" },
       },
-      estadoInicial: "cerrado", 
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 1,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    avion: {
+      idUsarHTML: "avion",
+      tipoPersonaje: "avion",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "avion" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    isla: {
+      idUsarHTML: "isla",
+      tipoPersonaje: "isla",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "isla" },
+      },
+      estadoInicial: "normal", 
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,

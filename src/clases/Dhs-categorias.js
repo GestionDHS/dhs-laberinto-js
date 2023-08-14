@@ -143,5 +143,28 @@ export class Dhs_Categorias {
           },
         ],
     },
+    pajaro: {
+      tipos: [
+        {
+          name: "Eventos",
+          categorystyle: "execute",
+        },
+        {
+          name: "Movimientos",
+          categorystyle: "movement",
+        },
+        {
+          name: "Repeticiones",
+          categorystyle: "loop_category",
+        },
+        {
+          name: "Condicionales",
+          categorystyle: "logic_category",
+        },
+        {
+          name: "Sensores",
+          categorystyle: "sensor"
+        },
+      ],},
   };
 }

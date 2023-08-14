@@ -213,7 +213,7 @@ export function PersonajesAlAzarExcluyente() {
 }
   export function PersonajesPosicionAlAzarExcluyente() {
     this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
-      let personajeACrear = conjuntoPersonajes.personajes;
+      let personajeACrear = conjuntoPersonajes.personajes[0];
       const index = Math.floor(Math.random() * conjuntoPersonajes.posiciones.length)
       const unaPosicion=conjuntoPersonajes.posiciones[index]
      setearPosiciones(personajeACrear, unaPosicion);
