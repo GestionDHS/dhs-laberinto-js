@@ -1,4 +1,4 @@
-import {PersonajeMovibleGrados} from './Personaje';
+
 export class Dhs_personajes {
   constructor() {
     this.ready = true;
@@ -889,6 +889,60 @@ export class Dhs_personajes {
       tipoPersonaje: "nubes",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "nubes" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    pajaro: {
+      idUsarHTML: "pajaro",
+      tipoPersonaje: "pajaro",
+      clasePersonaje: "PersonajeMovibleGrados",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "pajaro" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 90,
+      zIndex: 3,
+      rotable: true,
+      colisiones: [
+        {
+          con: "nube",
+          factorDeAvance: 0.7,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! No veo nada... no puedo seguir avanzando.",
+        },
+        {
+          con: "avion",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un avión.",
+        },
+        {
+          con: "bandera",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaIsla();
+          },
+          // mensaje: "¡We are the Champions!",
+        },
+      ],
+    },
+    nubes: {
+      idUsarHTML: "nubesCielo",
+      tipoPersonaje: "nubes",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "nubesCielo" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,

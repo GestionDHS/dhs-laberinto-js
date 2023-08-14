@@ -14,7 +14,8 @@ import {
   PersonajesAlAzarFijos,
   PersonajesAlAzarExcluyente,
   PersonajesAlAzarCantTotal,
-  PersonajesAlAzarCantTotalFijos
+  PersonajesAlAzarCantTotalFijos,
+  PersonajesPosicionAlAzarExcluyente,
 } from "../clases/StrategyCreacion";
 
 import { Modal } from "./Modal";
@@ -134,6 +135,7 @@ export class Juego {
       azarRango: new PersonajesAlAzarRango(),
       azarFijos: new PersonajesAlAzarFijos(),
       azarExcluyente: new PersonajesAlAzarExcluyente(),
+      posicionExcluyente: new PersonajesPosicionAlAzarExcluyente(),
       azarCantTotal: new PersonajesAlAzarCantTotal(),
       azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos()
     };

@@ -104,7 +104,7 @@ export function PersonajesAlAzarCantTotal() {
       let personajeElegido = elegirPersonajeRandom(
         conjuntoPersonajes.personajes
       );
-      const unaPosicion = posicionValida(escenario, posicionesElegidas);
+      const unaPosicion = posicionValida(escenario, posicionesElegidas,conjuntoPersonajes.posiciones);
       posicionesElegidas.push(unaPosicion);
       let personajeAux = { ...personajeElegido };
       setearPosiciones(personajeAux, unaPosicion);
@@ -195,7 +195,7 @@ export function PersonajesAlAzarFijos() {
 //varios personajes en un lugar => elije uno y lo renderiza
 // [personje, personaje], posiciones:[[y,x]]
 export function PersonajesAlAzarExcluyente() {
-  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+  this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
     !conjuntoPersonajes.posiciones &&
       lanzarExcepcion(
         "Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes"
@@ -210,4 +210,18 @@ export function PersonajesAlAzarExcluyente() {
     );
     return [personajeACrear];
   };
+}
+  export function PersonajesPosicionAlAzarExcluyente() {
+    this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+      let personajeACrear = conjuntoPersonajes.personajes;
+      const index = Math.floor(Math.random() * conjuntoPersonajes.posiciones.length)
+      const unaPosicion=conjuntoPersonajes.posiciones[index]
+     setearPosiciones(personajeACrear, unaPosicion);
+     setearAliasYAleatorieidad(
+       personajeACrear,
+       conjuntoPersonajes.desapareceAlReiniciar,
+       conjuntoPersonajes.aliasConjunto
+     );
+      return [personajeACrear];
+    };
 }
