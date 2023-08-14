@@ -49,6 +49,7 @@ import bamboo from "../img/bamboo.png";
 import frutilla from "../img/frutilla.png";
 import nubes from "../img/nubes.png";
 import bambooAncho from "../img/bambooAncho.png";
+import diamante from "../img/diamante.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -74,12 +75,20 @@ export class DHS_Gallery {
   }
 
   imageLib = {
+    diamante: {
+      themes: [""],
+      url: diamante,
+      nombre: "diamante",
+      parrafoLicencia:
+        '<p>Imagen desarrollada por Digital House</p>',
+      showLicense: true,
+    },
     piedraDiamante: {
       themes: [""],
       url: piedraDiamante,
       nombre: "piedraDiamante",
       parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+        '<p>Imagen desarrollada por Digital House</p>',
       showLicense: true,
     },
     caminoCueva: {
@@ -87,7 +96,7 @@ export class DHS_Gallery {
       url: caminoCueva,
       nombre: "caminoCueva",
       parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+        '<p>Imagen desarrollada por Digital House</p>',
       showLicense: true,
     },
     piedra: {
@@ -95,7 +104,7 @@ export class DHS_Gallery {
       url: piedra,
       nombre: "piedra",
       parrafoLicencia:
-        '<p><a href="https://www.flaticon.com/free-icons/school" title="school icons">School icons created by Freepik - Flaticon</a></p>',
+        '<p>Imagen desarrollada por Digital House</p>',
       showLicense: true,
     },
     minero: {

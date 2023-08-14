@@ -790,6 +790,22 @@ export class Dhs_personajes {
       rotable: false,
       colisiones: [],
     },
+    diamante: {
+      idUsarHTML: "diamante",
+      tipoPersonaje: "diamante",
+      estadosPosibles: {
+        abierto: { name: "abierto", imageUrl: "diamante" },
+        juntado: { name: "juntado", imageUrl: "caminoCueva" },
+      },
+      estadoInicial: "abierto", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "7px",
+      colisiones: [],
+    },
     cofreCerrado: {
       idUsarHTML: "cofreCerrado",
       tipoPersonaje: "cofreCerrado",
