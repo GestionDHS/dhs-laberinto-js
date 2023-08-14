@@ -727,6 +727,14 @@ export class Dhs_personajes {
           mensaje: "¡OH NO! Choqué contra una piedra.",
         },
         {
+          con: "piedraDiamante",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra una piedra.",
+        },
+        {
           con: "bandera",
           factorDeAvance: 1,
           callback: (x) => {
@@ -756,7 +764,7 @@ export class Dhs_personajes {
       tipoPersonaje: "piedraDiamante",
       estadosPosibles: {
         abierto: { name: "abierto", imageUrl: "piedraDiamante" },
-        juntado: { name: "juntado", imageUrl: "pasto" },
+        juntado: { name: "juntado", imageUrl: "caminoCueva" },
       },
       estadoInicial: "abierto", 
       posicionInicialY: 0,
@@ -780,6 +788,22 @@ export class Dhs_personajes {
       zIndex: 0,
       paddingImagen: "0.5px",
       rotable: false,
+      colisiones: [],
+    },
+    diamante: {
+      idUsarHTML: "diamante",
+      tipoPersonaje: "diamante",
+      estadosPosibles: {
+        abierto: { name: "abierto", imageUrl: "diamante" },
+        juntado: { name: "juntado", imageUrl: "caminoCueva" },
+      },
+      estadoInicial: "abierto", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "7px",
       colisiones: [],
     },
     cofreCerrado: {
@@ -938,7 +962,7 @@ export class Dhs_personajes {
         },
       ],
     },
-    nubes: {
+    nubesCielo: {
       idUsarHTML: "nubesCielo",
       tipoPersonaje: "nubes",
       estadosPosibles: {

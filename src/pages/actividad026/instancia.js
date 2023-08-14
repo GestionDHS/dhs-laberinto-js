@@ -11,11 +11,13 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
-const dimensiones = [3, 7]; //fila, columna
+const dimensiones = [5, 7]; //fila, columna
 
 const tablero = [
   [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
   [0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1],
 ];
 let coordenadasCaminoPared = generarCoordenadas(tablero);
@@ -25,8 +27,8 @@ const camino = galeriaPersonajes.obtenerPersonaje("caminoCueva")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Encontramos 180 monedas de oro.",
+  imagen: "diamante",
+  texto: "El minero encontró 3 diamantes.",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3, "#593006");
@@ -34,7 +36,7 @@ miJuego.agregarModal(datosModal);
 
 const minero = galeriaPersonajes.obtenerPersonaje("minero")
 const bandera = galeriaPersonajes.obtenerPersonaje("bandera")
-const piedraDiamante = galeriaPersonajes.obtenerPersonaje("piedraDiamante")
+const diamante = galeriaPersonajes.obtenerPersonaje("diamante")
 
 
 const conjuntosDePersonajes = [
@@ -55,97 +57,51 @@ const conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [minero],
-    posiciones: [[1, 0]],
+    posiciones: [[2, 0]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [bandera],
-    posiciones: [[1, 6]],
+    posiciones: [[2, 6]],
     aliasConjunto: "fijoBandera",
     desapareceAlReiniciar: false,
   },
   {
-    estrategia: "azarFijos",
-    personajes: [piedraDiamante],
-    // cantidadTotal: 2,
-    posiciones: [[1, 1],[1, 2],[1,3],[1,4],[1,5]],
+    estrategia: "azarCantTotal",
+    personajes: [diamante],
+    cantidadTotal: 3,
     aliasConjunto: "azarPiedraDiamante",
     desapareceAlReiniciar: true,
   },
 ]
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[21]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[35]);
 
-//Método para Abrir el Cofre
-// miJuego.personajePrincipal.picarPiedra = function () {
-//   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+miJuego.personajePrincipal.detectarDiamante = function () {
+  return this.buscarObjetoEnCasilleroActual("diamante") !== undefined
+};
 
-//   if (!intento.objetoEncontrado) {
-//     return this.decirTerminar("Oh! Aquí no hay cofre.");
-//   } else if (!intento.exito) {
-//     return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
-//   } else {
-//     return this.abrirYMostrarModal();
-//   }
-// };
-
-// //Método para Juntar Basura
-// miJuego.personajePrincipal.juntarBasura = function () {
-//   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
-//   if (!intento.objetoEncontrado) {
-//     this.decirTerminar("Oh! Aquí no hay basura.");
-//   } else if (!intento.exito) {
-//     this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
-//   }
-//   return intento;
-// };
+// //Método para Juntar Diamantes
+miJuego.personajePrincipal.juntarDiamante = function () {
+  const intento = this.buscarParaRealizarAccion("diamante", "serJuntado");
+  if (!intento.objetoEncontrado) {
+    this.decirTerminar("Oh! Aquí no hay basura.");
+  } else if (!intento.exito) {
+    this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
+  }
+  return intento;
+};
 
 // // Lancha
-// miJuego.personajePrincipal.llegarPlanta = function () {
-//   if (this.mochila.length === 3) {
-//     this.abrirYMostrarModal();
-//   } else if(!this.intento) {
-//     return this.decirTerminar("¡Oh! Quedó basura por levantar.")
-//   }
-// }
-
-// // Pedro - Lupe
-// miJuego.personajePrincipal.llegarEscuela = function () {
-//   this.abrirYMostrarModal();
-// }
-
-// //Conejo - Nelson
-// miJuego.personajePrincipal.cosecharZanahoria = function () {
-//   const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
-//   if (!intento.objetoEncontrado) {
-//     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-//   } else if (!intento.exito) {
-//     return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
-//   } 
-// };
-
-// miJuego.personajePrincipal.comerZanahoria = function () {
-//   const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
- 
-//   if (!intento.objetoEncontrado) {
-//     return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-//   } else if( intento.estado == "juntado") {
-//     return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
-//   } else if (!intento.exito ) {
-//     return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
-//   } 
-// };
-
-//Seteo del Dibujo a realizar - Verificación. Para los ejercicios que tienen PersonajesDibujables
-// const EJEMPLO_DIBUJO_DESEADO = [
-//   [null, null, null, null, null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, null, null, null, null],
-// ]
-// miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
+miJuego.personajePrincipal.llegarALaBandera = function () {
+  if (this.mochila.length === 3) {
+    this.abrirYMostrarModal();
+  } else if(!this.intento) {
+    return this.decirTerminar("¡Oh! Quedaron diamantes por levantar.")
+  }
+}
 
 //******************************************************* */
 //    BLOCKLY
@@ -176,6 +132,6 @@ const ordenJerarquicoBloques = [
 ];
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=[]
+const funcionesAExponer=["avanzar", "juntarDiamante", "detectarDiamante"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

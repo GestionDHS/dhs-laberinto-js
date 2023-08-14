@@ -649,7 +649,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["avanzar"] = function (block) {
+        Blockly.JavaScript.forBlock["avanzar"] = function (block) {
             const code = "avanzar();\n"
             return code;
         };
@@ -1121,6 +1121,36 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    juntar_diamante() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "juntar_diamante",
+                message0: "%1 juntar diamante",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/599/599608.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["juntar_diamante"] = function (block) {
+            const code = "juntarDiamante();\n"
+            return code;
+        };
+
+        return {
+            type: "juntar_diamante",
+            kind: "block",
+        }
+    }
     // Lapiz
     bajar_lapiz(){
         Blockly.common.defineBlocksWithJsonArray([
@@ -1309,6 +1339,36 @@ export default class ConfiguradorBloques {
         };
         return {
             "type": "sensor_piedra",
+            "kind": "block",
+        }
+    }
+    sensor_diamante() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_diamante",
+                "message0": "%1 ¿Hay un diamante aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/599/599608.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_diamante"] = function (block) {
+            const code = "detectarDiamante()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_diamante",
             "kind": "block",
         }
     }

@@ -12,7 +12,7 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
+window.miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [10, 9]; //fila, columna
 
@@ -48,7 +48,7 @@ miJuego.agregarModal(datosModal);
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
-    personajes: [nubes],
+    personajes: [nubesCielo],
     posiciones: coordenadasCaminoPared.coordenadasPared,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
