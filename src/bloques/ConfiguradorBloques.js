@@ -252,6 +252,14 @@ export default class ConfiguradorBloques {
         ]
     }
 
+    //solo para servir los movimientos de derecha e izquierda
+    move_left_right() {
+        return [
+            this.move_left_simple(),
+            this.move_right_simple(),
+        ]
+    }
+
     // MOVIMIENTOS CLASICOS CON PARAMETROS
     move_down_param() {
         Blockly.common.defineBlocksWithJsonArray([
@@ -1007,7 +1015,7 @@ export default class ConfiguradorBloques {
                 "args0": [
                     {
                       "type": "field_image",
-                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "src": "https://cdn-icons-png.flaticon.com/512/590/590772.png",
                       "width": 16,
                       "height": 16,
                       "alt": "*"
@@ -1395,6 +1403,36 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    
+    sensor_zanahoria() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_zanahoria",
+                "message0": "%1 ¿Hay zanahoria aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/257/257615.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_zanahoria"] = function (block) {
+            const code = "detectarZanahoria()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_zanahoria",
+            "kind": "block",
+        }
+    }
     sensor_piedra() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -1422,6 +1460,37 @@ export default class ConfiguradorBloques {
         };
         return {
             "type": "sensor_piedra",
+            "kind": "block",
+        }
+    }
+
+    sensor_avion() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_avion",
+                "message0": "%1 ¿Hay avión adelante?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/3410/3410900.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_avion"] = function (block) {
+            const code = "detectarAvion()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_avion",
             "kind": "block",
         }
     }
@@ -1464,7 +1533,7 @@ export default class ConfiguradorBloques {
                 "args0": [
                     {
                       "type": "field_image",
-                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "src": "https://cdn-icons-png.flaticon.com/512/590/590772.png",
                       "width": 16,
                       "height": 16,
                       "alt": "*"

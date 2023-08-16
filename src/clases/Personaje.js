@@ -81,10 +81,8 @@ export class PersonajeBasico {
     this.colisiones.push(unaColision);
   }
   salirDelCasilleroActual() {
-    this.casilleroActual?.ocupantes.splice(
-      this.casilleroActual?.ocupantes.indexOf(this),
-      1
-    );
+    const posicion=this.casilleroActual?.ocupantes.indexOf(this)
+    posicion>-1 && this.casilleroActual?.ocupantes.splice(posicion,1);
   }
   actualizarCasillero(nuevaY, nuevaX) {
     this.salirDelCasilleroActual();
@@ -199,11 +197,7 @@ export class PersonajeBasico {
     const estadoPrevio = this.estadoActual;
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
-      this.casilleroActual?.ocupantes.splice(
-        this.casilleroActual?.ocupantes.indexOf(this),
-        1
-      );
-      // this.salirDelCasilleroActual();
+      this.salirDelCasilleroActual();
       return {
         exito: true,
         premio: { tipo: this.tipoPersonaje, cantidad: 1 },

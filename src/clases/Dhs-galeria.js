@@ -49,7 +49,11 @@ import bamboo from "../img/bamboo.png";
 import frutilla from "../img/frutilla.png";
 import nubes from "../img/nubes.png";
 import bambooAncho from "../img/bambooAncho.png";
+import pajaro from "../img/pajaro.png"
+import nubesCielo from "../img/nubesCielo.png"
 import diamante from "../img/diamante.png"
+import avion from "../img/avion.png"
+import isla from "../img/isla.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -522,6 +526,34 @@ export class DHS_Gallery {
       themes: ["nubes"],
       url: nubes,
       nombre: "nubes",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    pajaro: {
+      themes: ["pajaro"],
+      url: pajaro,
+      nombre: "pajaro",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    nubesCielo: {
+      themes: ["nubes"],
+      url: nubesCielo,
+      nombre: "nubesCielo",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    avion: {
+      themes: ["avion"],
+      url: avion,
+      nombre: "avion",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    isla: {
+      themes: ["isla"],
+      url: isla,
+      nombre: "isla",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },

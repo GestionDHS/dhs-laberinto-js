@@ -7,6 +7,7 @@ import { CustomCategory } from "../../bloques/CustomCategory";
 import {Dhs_personajes} from '../../clases/Dhs-personajes';
 import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
 import {Dhs_Categorias} from '../../clases/Dhs-categorias';
+import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 
 
 document.querySelector("#appActividad").innerHTML = template(``);
@@ -34,11 +35,12 @@ const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
 const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
+const bandera = personajesGaleria.obtenerPersonaje("bandera")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Juntaste todas las monedas de los cofres!",
+  imagen: "frutilla",
+  texto: "mmmmm que rica Frutilla!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
@@ -74,11 +76,18 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
   { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
-    estrategia: "azarFijos",
+    estrategia: "azarExcluyente",
     personajes: [frutilla, bamboo],
-    posiciones: [[3, 6]],
-    aliasConjunto: "aleatoreosTablero",
+    posiciones: [[3, 5]],
+    aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bandera],
+    posiciones: [[3, 7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
 ];
 
@@ -100,15 +109,26 @@ miJuego.personajePrincipal.comerFruta = function () {
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Este frutilla ya no está.");
   }
+
+};
+
+miJuego.personajePrincipal.llegarALaBandera = function () {
+  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
+  //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
+  //  y si era una frutilla y no se la comio, también viene vacia
+  if (this.mochila.length >= 1 && this.mochila[0]?.tipo) {
+    this.abrirYMostrarModal();
+  }
 };
 
 // BLOCKLY ------------------------------------------------------
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("repCondiSensor")
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Repeticiones","Condicionales","Sensores"])
+
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
+  ["move_left_right", "Movimientos"],
   ["comer_fruta", "Acciones"],
   ["if", "Condicionales"],
   ["controls", "Repeticiones"],
@@ -117,6 +137,6 @@ const ordenJerarquicoBloques = [
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","comerFruta","detectarFrutilla"]
+const funcionesAExponer=["moverDerecha","moverIzquierda","comerFruta","detectarFrutilla"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

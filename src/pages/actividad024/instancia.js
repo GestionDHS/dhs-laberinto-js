@@ -12,35 +12,32 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
-const dimensiones = [10, 9]; //fila, columna
+const dimensiones = [7, 9]; //fila, columna
 
 const tablero = [
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 0, 1, 0, 0, 0],
-  [0, 0, 0, 1, 1, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
-const lupe = personajesGaleria.obtenerPersonaje("lupe");
-const cofre = personajesGaleria.obtenerPersonaje("cofre");
+const conejo = personajesGaleria.obtenerPersonaje("conejo");
+const zanahoria = personajesGaleria.obtenerPersonaje("zanahoria");
 const pasto = personajesGaleria.obtenerPersonaje("pasto");
 const arbol = personajesGaleria.obtenerPersonaje("arbol");
-const bandera = personajesGaleria.obtenerPersonaje("bandera");
+const madriguera = personajesGaleria.obtenerPersonaje("madriguera");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Juntaste todas las monedas de los cofres!",
+  imagen: "conejo",
+  texto: "Te comiste todas las zanahorias y llegaste a la madriguera!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 2.5, "#9ca64e");
@@ -63,73 +60,87 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [lupe],
-    posiciones: [[1, 4]],
+    personajes: [conejo],
+    posiciones: [[3, 0]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
-    estrategia: "azarCantidadTotalFijos",
-    personajes: [cofre],
-    cantidadTotal:3,
-    posiciones: [[2,4],[3,4],[4,4],[5,4],[6,4]],
-    aliasConjunto: "azarCantidadTotalFijos",
-    desapareceAlReiniciar: true,
-  },
-  {
     estrategia: "fijos",
-    personajes: [bandera],
-    posiciones: [[8, 4]],
+    personajes: [madriguera],
+    posiciones: [[3, 8]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "azarCantidadTotalFijos",
+    personajes: [zanahoria],
+    cantidadTotal:3,
+    posiciones: [[3,1],[3,2],[3,3],[3,4],[3,5],[3,6],[3,7]],
+    aliasConjunto: "azarFijos",
+    desapareceAlReiniciar: true,
   },
 ];
 
 
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[63]);
 
 //Método para Cofre
-miJuego.personajePrincipal.detectarCofre = function () {
+miJuego.personajePrincipal.detectarZanahoria = function () {
   // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("cofre") !== undefined
+  return this.buscarObjetoEnCasilleroActual("zanahoria") !== undefined
 };
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+
+miJuego.personajePrincipal.cosecharZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
+  } else if (!intento.exito) {
+    return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
+  }
+};
+
+miJuego.personajePrincipal.comerZanahoria = function () {
+  const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
 
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay cofre.");
+    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
   } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Este cofre ya estaba abierto.");
+    if (intento.estadoPrevio == "juntado") {
+      return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
+    } else if (intento.estadoPrevio == "cerrado") {
+      return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
+    }
   }
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
-  if (this.mochila.length >= 2) {
+  console.log(this.mochila)
+  if (this.mochila.length === 6) {
     this.abrirYMostrarModal();
   } else {
-    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
+    return this.decirTerminar("¡Oh! Quedaron zanahorias en el tablero.");
   }
 };
-
 // BLOCKLY ------------------------------------------------------
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Repeticiones","Condicionales","Sensores"])
-
+const categoriaElegida=categoria.obtenerCategoria("repCondiSensor")
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
-  ["if", "Condicionales"],
+  ["avanzar", "Movimientos"],
+  ["girar_clasico", "Movimientos"],
+  ["cosechar", "Acciones"],
+  ["comer", "Acciones"],
   ["controls", "Repeticiones"],
-  ["sensor_cofre", "Sensores"],
+  ["if","Condicionales"],
+  ["sensor_zanahoria","Sensores"]
 ];
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre","detectarCofre"]
+const funcionesAExponer=["cosecharZanahoria","comerZanahoria","avanzar","girarIzquierda","girarDerecha","detectarZanahoria"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

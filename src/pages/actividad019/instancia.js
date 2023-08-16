@@ -94,7 +94,7 @@ miJuego.personajePrincipal.llegarALaFamilia = function () {
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego,velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("eventosMovimientos")
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],

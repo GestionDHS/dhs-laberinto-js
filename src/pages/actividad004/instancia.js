@@ -79,8 +79,7 @@ miJuego.personajePrincipal.dibujoDeseado = dibujoDeseado;
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("lapizRepeticiones")
-
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Lápiz","Repeticiones"])
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["avanzar_param", "Movimientos"],
