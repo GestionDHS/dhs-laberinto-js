@@ -66,6 +66,7 @@ export class Juego {
   reiniciar() {
     this.puedeDebeContinuar = true;
     this.reiniciarConjuntoPersonajes();
+    console.log(this.listaDeAleatoreos)
     this.generarConjuntoDePersonajes(this.listaDeAleatoreos);
   }
 

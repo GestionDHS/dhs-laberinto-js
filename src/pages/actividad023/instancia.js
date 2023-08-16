@@ -14,19 +14,16 @@ document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-const dimensiones = [10, 9]; //fila, columna
+const dimensiones = [7, 8]; //fila, columna
 
 const tablero = [
-  [1, 1, 1, 1, 0, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 0, 0, 0, 1, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 1, 1, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 1, 1, 0, 1],
-  [1, 1, 1, 0, 0, 1, 1, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 0, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 1, 0, 1],
+  [1, 1, 1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 1, 1, 0, 1],
+  [1, 1, 0, 0, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
@@ -43,7 +40,7 @@ const datosModal = {
   texto: "Lograste esquivar los aviones y emigrar a tiempo!",
   oculto: true,
 };
-miJuego.generarEscenario(dimensiones, 2.5, "#9ca64e");
+miJuego.generarEscenario(dimensiones, 2.5, "#1283FA");
 miJuego.agregarModal(datosModal);
 
 let conjuntosDePersonajes = [
@@ -64,31 +61,30 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [pajaro],
-    posiciones: [[0, 4]],
+    posiciones: [[0, 3]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [isla],
-    posiciones: [[8,7]],
+    posiciones: [[5,6]],
     aliasConjunto: "fijos",
     desapareceAlReiniciar: false,
   },
-  {
-   estrategia: "posicionExcluyente",
-   personajes: [avion],
-   posiciones:[[8,5],[6,7]],
-   aliasConjunto: "posicionExcluyente",
-   desapareceAlReiniciar: true,
+ {
+  estrategia: "posicionExcluyente",
+  personajes: [avion],
+  posiciones:[[3,6],[5,4]],
+  aliasConjunto: "posicionExcluyente",
+  desapareceAlReiniciar: true,
  },
-
 ];
 
 
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[90]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[56]);
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
     this.abrirYMostrarModal();

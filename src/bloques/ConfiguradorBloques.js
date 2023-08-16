@@ -1312,6 +1312,36 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    
+    sensor_zanahoria() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_zanahoria",
+                "message0": "%1 ¿Hay zanahoria aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/257/257615.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_zanahoria"] = function (block) {
+            const code = "detectarZanahoria()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_zanahoria",
+            "kind": "block",
+        }
+    }
     sensor_piedra() {
         Blockly.common.defineBlocksWithJsonArray([
             {

@@ -36,6 +36,7 @@ function estaVacio(posicionProvisoriaY, posicionProvisoriaX, escenario) {
   let estaVacio = true;
   const casillero =
     escenario.objetosCasilleros[posicionProvisoriaY][posicionProvisoriaX];
+    console.log(casillero)
   return (
     casillero.ocupantes[0].tipoPersonaje == "camino" &&
     casillero.ocupantes.length == 1

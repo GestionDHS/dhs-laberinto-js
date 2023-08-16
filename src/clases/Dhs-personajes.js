@@ -937,7 +937,15 @@ export class Dhs_personajes {
       rotable: true,
       colisiones: [
         {
-          con: "nube",
+          con: "nubes",
+          factorDeAvance: 0.7,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! No veo nada... no puedo seguir avanzando.",
+        },
+        {
+          con: "nubesCielo",
           factorDeAvance: 0.7,
           callback: (x) => {
             x.terminar();
@@ -950,7 +958,7 @@ export class Dhs_personajes {
           callback: (x) => {
             x.terminar();
           },
-          mensaje: "¡OH NO! Choqué contra un avión.",
+          mensaje: "¡OH NO! Hay aviones por aquí ... no puedo pasar..." 
         },
         {
           con: "isla",
