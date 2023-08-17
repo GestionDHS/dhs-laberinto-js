@@ -127,7 +127,7 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
 // BLOCKLY ------------------------------------------------------
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("repCondiSensor")
+const categoriaElegida=categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Repeticiones","Condicionales","Sensores"])
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["avanzar", "Movimientos"],
@@ -136,6 +136,7 @@ const ordenJerarquicoBloques = [
   ["comer", "Acciones"],
   ["controls", "Repeticiones"],
   ["if","Condicionales"],
+  ["ifElse","Condicionales"],
   ["sensor_zanahoria","Sensores"]
 ];
 

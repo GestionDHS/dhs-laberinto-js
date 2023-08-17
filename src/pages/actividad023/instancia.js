@@ -103,7 +103,7 @@ miJuego.personajePrincipal.llegarALaIsla = function () {
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego,velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("pajaro")
+const categoriaElegida=categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos", "Repeticiones","Condicionales","Sensores"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
@@ -111,6 +111,7 @@ const ordenJerarquicoBloques = [
   ["girar_clasico", "Movimientos"],
   ["controls", "Repeticiones"],
   ["if", "Condicionales"],
+  ["ifElse","Condicionales"],
   ["sensor_avion", "Sensores"],
 ];
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';

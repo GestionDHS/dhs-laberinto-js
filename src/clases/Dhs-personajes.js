@@ -320,7 +320,7 @@ export class Dhs_personajes {
         {
           con: "pastoDelta",
           factorDeAvance: 1,
-          mensaje: "¡Extrañana el pasto!",
+          mensaje: "¡Extrañaba el pasto!",
         },
         {
           con: "edificiosSendero",
