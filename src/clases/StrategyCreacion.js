@@ -211,6 +211,7 @@ export function PersonajesAlAzarExcluyente() {
     return [personajeACrear];
   };
 }
+
   export function PersonajesPosicionAlAzarExcluyente() {
     this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
       let personajeACrear = conjuntoPersonajes.personajes[0];
