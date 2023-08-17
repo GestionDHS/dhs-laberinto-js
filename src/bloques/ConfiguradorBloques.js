@@ -252,6 +252,14 @@ export default class ConfiguradorBloques {
         ]
     }
 
+    //solo para servir los movimientos de derecha e izquierda
+    move_left_right() {
+        return [
+            this.move_left_simple(),
+            this.move_right_simple(),
+        ]
+    }
+
     // MOVIMIENTOS CLASICOS CON PARAMETROS
     move_down_param() {
         Blockly.common.defineBlocksWithJsonArray([
@@ -1007,7 +1015,7 @@ export default class ConfiguradorBloques {
                 "args0": [
                     {
                       "type": "field_image",
-                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "src": "https://cdn-icons-png.flaticon.com/512/590/590772.png",
                       "width": 16,
                       "height": 16,
                       "alt": "*"
@@ -1112,7 +1120,7 @@ export default class ConfiguradorBloques {
         ]);
 
         Blockly.JavaScript.forBlock["picar_piedra"] = function (block) {
-            const code = "picarPiedra();"
+            const code = "picarPiedra()\n;"
             return code;
         };
 
@@ -1250,11 +1258,94 @@ export default class ConfiguradorBloques {
     // BLOQUES PROGRAMACIÓN
     // Repetir, condicionales, etc, etc, etc, (son MUCHISIMOS)
     
-    if() {
+    ifElse() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "if_else",
+                "message0": "Si %1 %2 entonces... %3 %4 si no... %5 %6",
+                "args0": [
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "condicion"
+                    },
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_statement",
+                        "name": "entonces"
+                    },
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_statement",
+                        "name": "sino"
+                    }
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "logic_blocks",
+              }
+        ]);
+
+        Blockly.JavaScript.forBlock["if_else"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const entonces = Blockly.JavaScript.statementToCode(block, 'entonces')
+            const sino = Blockly.JavaScript.statementToCode(block, 'sino') 
+            const code = "if("+ condicion +"){\n"+ entonces +"\n}else{\n"+ sino +"\n}"
+            return code;
+        };
+
         return {
-            "type": "controls_if",
-            "kind": "block",
+            type: "if_else",
+            kind: "block",
         }
+    }
+    if() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "if",
+                "message0": "Si %1 %2 entonces... %3 %4 ",
+                "args0": [
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "condicion",
+                        'check': 'Boolean',
+                    },
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_statement",
+                        "name": "entonces"
+                    },
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "logic_blocks",
+              }
+        ]);
+
+        Blockly.JavaScript.forBlock["if"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const entonces = Blockly.JavaScript.statementToCode(block, 'entonces')
+            const code = "if("+ condicion +"){\n"+ entonces +"\n}\n"
+            return code;
+        };
+
+        return {
+            "type": "if",
+            "kind": "block",
+        } 
     }
     logic_compare() {
         return {
@@ -1364,7 +1455,7 @@ export default class ConfiguradorBloques {
         ]);
         Blockly.JavaScript.forBlock["sensor_piedra"] = function (block) {
             const code = "detectarPiedra()"
-            return [code, Blockly.JavaScript.ORDER_NONE]
+            return [code, Blockly.JavaScript.ORDER_NONE];
         //    return code;
         };
         return {
@@ -1442,7 +1533,7 @@ export default class ConfiguradorBloques {
                 "args0": [
                     {
                       "type": "field_image",
-                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "src": "https://cdn-icons-png.flaticon.com/512/590/590772.png",
                       "width": 16,
                       "height": 16,
                       "alt": "*"

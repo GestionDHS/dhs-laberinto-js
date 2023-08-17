@@ -99,7 +99,7 @@ miJuego.personajePrincipal.abrirCofre = function () {
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego,velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida=categoria.obtenerCategoria("eventMovAcciones")
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
