@@ -11,6 +11,7 @@ import {
   TipoCreacion,
   PersonajesFijos,
   PersonajesAlAzarRango,
+  PersonajesAlAzarRangoFijos,
   PersonajesAlAzarFijos,
   PersonajesAlAzarExcluyente,
   PersonajesAlAzarCantTotal,
@@ -133,6 +134,7 @@ export class Juego {
     const estrategias = {
       fijos: new PersonajesFijos(),
       azarRango: new PersonajesAlAzarRango(),
+      azarRangoFijos: new PersonajesAlAzarRangoFijos(),
       azarFijos: new PersonajesAlAzarFijos(),
       azarExcluyente: new PersonajesAlAzarExcluyente(),
       posicionExcluyente: new PersonajesPosicionAlAzarExcluyente(),

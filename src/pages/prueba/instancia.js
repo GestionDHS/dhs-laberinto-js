@@ -4,14 +4,18 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
-import { generarCoordenadas } from "../../Utils/Funciones";
+import {
+  generarCoordenadas,
+  configurarYRenderizarToolbox,
+} from "../../Utils/Funciones";
 import { Dhs_personajes } from "../../clases/Dhs-personajes";
+import { Dhs_Categorias } from "../../clases/Dhs-categorias";
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
 // PRIMERO: instanciar el juego y setear velocidad
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 //SEGUNDO: CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO, se crea la variable dimensiónes.
 const dimensiones = [7, 6]; //fila, columna
@@ -52,10 +56,10 @@ let coordenadasCaminoPared = generarCoordenadas(tablero);
 //instanciamos y configuramos su posicionamiento a cada personajes necesarios para el juego
 //Configurar si o si el posicionamiento
 
-const lupe = { ...personajesGaleria.obtenerPersonaje("lupe") };
-const cofre = { ...personajesGaleria.obtenerPersonaje("cofre") };
-const lodo = { ...personajesGaleria.obtenerPersonaje("lodo") };
-const basura = { ...personajesGaleria.obtenerPersonaje("basura")}
+const lupe = personajesGaleria.obtenerPersonaje("lupe");
+const cofre = personajesGaleria.obtenerPersonaje("cofre");
+const lodo = personajesGaleria.obtenerPersonaje("lodo");
+const basura = personajesGaleria.obtenerPersonaje("basura");
 
 //SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciones
 let conjuntosDePersonajes = [
@@ -88,6 +92,15 @@ let conjuntosDePersonajes = [
   //   aliasConjunto: "azarRango",
   //   desapareceAlReiniciar: true,
   // },
+  // {
+  //   estrategia: "azarRangoFijos",
+  //   personajes: [lodo, cofre],
+  //   cantidadMin: 1,
+  //   cantidadMax: 3,
+  //   posiciones: [[2, 1],[3, 1],[4, 1],[5, 1]],
+  //   aliasConjunto: "azarRangoFijos",
+  //   desapareceAlReiniciar: true,
+  // },
   //  {
   //   estrategia: "azarFijos",
   //   personajes: [lodo, cofre],
@@ -95,20 +108,35 @@ let conjuntosDePersonajes = [
   //   aliasConjunto: "azarFijos",
   //   desapareceAlReiniciar: true,
   // },
-    {
-     estrategia: "azarCantTotalFija",
-    personajes: [basura,lodo],
-    cantidadTotal: 2,
-    aliasConjunto: "azarCantTotalFija",
-    desapareceAlReiniciar: true,
-  },
-//   {
-//     estrategia: "azarExcluyente",
-//    personajes: [lodo,cofre],
-//    posiciones: [[2, 1],[1, 2]],
-//    aliasConjunto: "azarExcluyente",
-//    desapareceAlReiniciar: true,
-//  },
+  //   {
+  //     estrategia: "azarExcluyente",
+  //    personajes: [lodo,cofre],
+  //    posiciones: [[2, 1]],
+  //    aliasConjunto: "azarExcluyente",
+  //    desapareceAlReiniciar: true,
+  //  },
+  //   {
+  //     estrategia: "posicionExcluyente",
+  //    personajes: [lodo,cofre],
+  //    posiciones: [[2, 1],[1, 2]],
+  //    aliasConjunto: "posicionExcluyente",
+  //    desapareceAlReiniciar: true,
+  //  },
+  //   {
+  //    estrategia: "azarCantTotal",
+  //   personajes: [basura,lodo],
+  //   cantidadTotal: 2,
+  //   aliasConjunto: "azarCantTotal",
+  //   desapareceAlReiniciar: true,
+  // },
+  //   {
+  //   estrategia: "azarCantidadTotalFijos",
+  //   personajes: [lodo, cofre],
+  //   cantidadTotal: 2,
+  //   posiciones: [[2, 1],[3, 1],[4, 1],[5, 1]],
+  //   aliasConjunto: "azarCantidadTotalFijos",
+  //   desapareceAlReiniciar: true,
+  // },
 ];
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
@@ -197,104 +225,33 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[42]);
 //****3 - Ponemos en consola éste linea: JSON.stringify(miControlador.obtenerBloquesSerializados()) para Obtener bloques precargados
 //****4 - Nos copiamos el string que nos devuelve, y se lo colocamos a la variable "bloquesPrecargadosJSON"
 //****5 - Volvemos a poner "miControlador" como const
+
+// BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
+const categoria = new Dhs_Categorias();
+const categoriaElegida = categoria.obtenerCategoriasNecesarias([
+  "Eventos",
+  "Movimientos",
+  "Acciones",
+  "Repeticiones",
+  "Condicionales",
+  "Sensores",
+]);
 
-//NOVENO: Dejamos habilitadas las categorías que vamos a usar
-const categoriasDeseadas = [
-  {
-    name: "Eventos",
-    categorystyle: "execute",
-  },
-  {
-    name: "Movimientos",
-    categorystyle: "movement",
-  },
-  // {
-  //   name: "Lápiz",
-  //   categorystyle: "pencil",
-  // },
-  // {
-  //   name: "Acciones",
-  //   categorystyle: "action",
-  // },
-  // {
-  //   name: "Condicionales",
-  //   categorystyle: "logic_category",
-  // },
-  // {
-  //   name: "Repeticiones",
-  //   categorystyle: "loop_category",
-  // },
-];
-categoriasDeseadas.forEach((cat) =>
-  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
-);
-
-//DECIMO: Agregamos los bloques a cada categoría
-const bloquesCustomStandardDesados = [
-  // [nombreBloque, categoriaDestino]
-  // [grupoBloques, categoriaDestino]
+const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
-  // ["move_classic_param", "Movimientos"],
-  // ["avanzar_param", "Movimientos"],
-  // ["girar_clasico", "Movimientos"],
-  // ["girar_grados", "Movimientos"],
-  // ["apuntar_hacia", "Movimientos"],
-  // ["abrir_cofre", "Acciones"],
-  // ["juntar_basura", "Acciones"],
-  // ["lapiz", "Lápiz"],
-  // ["if", "Condicionales"],
-  // ["controls", "Repeticiones"],
+  ["move_left_right", "Movimientos"],
 ];
 
-bloquesCustomStandardDesados.forEach((bl) => {
-  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
-});
-
-//ONCEAVO: Instanciamos el Render y se lo inyectamos al Worckspace
-const render = new CustomRenderer();
-render.registrarRender("renderDHS");
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-  theme: "themeDH",
-  renderer: "renderDHS",
-  zoom: {
-    controls: true,
-    wheel: true,
-    pinch: true,
-  },
-});
-
-//DOCEAVO: Generamos los bloques que quedarán fijos en el worckspace.
 const bloquesPrecargadosJSON =
   '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
-miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
+//const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
+const funcionesAExponer = ["moverDerecha", "moverIzquierda"];
 
-//Habilitamos funciones para el manejo del workspace
-miControlador.setearEventoCambioWorkspaceStandard();
-miControlador.habilitarDesactivarHuerfanos();
-miControlador.crearFuncionesGlobalesStandard();
-
-//TRECEAVO: Exponemos globalmente las funciones de los bloques, borrar las que no usmos en cada ejercicio.
-miControlador.juego.agregarGlobalConCallback('moverDerecha');
-miControlador.juego.agregarGlobalConCallback('moverAbajo');
-miControlador.juego.agregarGlobalConCallback('moverArriba');
-miControlador.juego.agregarGlobalConCallback('moverIzquierda');
-// miControlador.juego.agregarGlobalConCallback("abrirCofre");
-// miControlador.juego.agregarGlobalConCallback("juntarBasura");
-// miControlador.juego.agregarGlobalConCallback("avanzar");
-// miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-// miControlador.juego.agregarGlobalConCallback("girarDerecha");
-// miControlador.juego.agregarGlobalConCallback("girarGrados");
-// miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-// miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-// miControlador.juego.agregarGlobalConCallback("subirLapiz");
-// miControlador.juego.agregarGlobalConCallback("setearColor");
-
-//Le enviamos las funciones customizadas al interpreter  (No cambia nunca- No se toca)
-const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
-miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-  miControlador.callbackInterpreteStandard(interpreter, globalObject);
-  callBackJuego(interpreter, globalObject);
-});
+configurarYRenderizarToolbox(
+  miControlador,
+  categoriaElegida,
+  ordenJerarquicoBloques,
+  bloquesPrecargadosJSON,
+  funcionesAExponer
+);

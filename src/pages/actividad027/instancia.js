@@ -122,7 +122,7 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
 };
 
 // BLOCKLY ------------------------------------------------------
-window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
+const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
 const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Repeticiones","Condicionales","Sensores"])
 
