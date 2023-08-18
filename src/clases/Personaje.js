@@ -22,6 +22,8 @@ export class PersonajeBasico {
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
     this.mochila = [];
+    this.desapareceAlReiniciar=objetoConfiguracionPersonaje.desapareceAlReiniciar;
+    this.aliasConjunto=objetoConfiguracionPersonaje.aliasConjunto;
     this.tieneTooltip = objetoConfiguracionPersonaje.tieneTooltip;
     this.controladorDOM = new controladorPersonajeDOM(
       this.tieneTooltip,
@@ -30,6 +32,7 @@ export class PersonajeBasico {
       objetoConfiguracionPersonaje.zIndex,
       objetoConfiguracionPersonaje.paddingImagen
     );
+    // this.excluyente = false
   }
 
   inicializar() {
@@ -51,11 +54,21 @@ export class PersonajeBasico {
       this.posicionInicialX
     );
     this.setearVelocidad(this.juego.duracionIntervalos);
+    // if(this.aleatoreo){
+    //   this.setearVelocidad(0);
+    //   }
   }
-
+  
+  autodestruirse(){
+    this.salirDelCasilleroActual()
+    this.controladorDOM.removerDivDelDOM()
+  }
+  reiniciarse(){
+    this.desapareceAlReiniciar==false?this.inicializar():this.autodestruirse()
+  }
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
-    const imagenDeseada = this.estadosPosibles[nuevoStatus].imageUrl;
+    const imagenDeseada = this.estadosPosibles ? this.estadosPosibles[nuevoStatus].imageUrl : null;
     if (imagenDeseada) {
       this.controladorDOM.setearImagen(
         this.galeria.obtenerUrlDe(imagenDeseada)
@@ -67,21 +80,24 @@ export class PersonajeBasico {
   agregarColision(unaColision) {
     this.colisiones.push(unaColision);
   }
-
+  salirDelCasilleroActual() {
+    const posicion=this.casilleroActual?.ocupantes.indexOf(this)
+    posicion>-1 && this.casilleroActual?.ocupantes.splice(posicion,1);
+  }
   actualizarCasillero(nuevaY, nuevaX) {
-    this.casilleroActual?.ocupantes.splice(
-      this.casilleroActual?.ocupantes.indexOf(this),
-      1
-    );
+    this.salirDelCasilleroActual();
     this.posicionActualY = nuevaY;
     this.posicionActualX = nuevaX;
     //Personaje debería conocer el escenario para poder reutilizar el metodo otenerCasillero
-    this.casilleroActual = this.obtenerCasillero(this.posicionActualY,this.posicionActualX);
-    this.casilleroActual.ocupantes.push(this);
+    this.casilleroActual = this.obtenerCasillero(
+      this.posicionActualY,
+      this.posicionActualX
+    );
+    this.casilleroActual?.ocupantes.push(this);
   }
 
   exponerTooltip(texto, milisegundos = 4000) {
-    this.controladorDOM.visibilizarTooltip(texto,milisegundos)
+    this.controladorDOM.visibilizarTooltip(texto, milisegundos);
   }
 
   setearVelocidad(nuevaVelocidad) {
@@ -112,9 +128,32 @@ export class PersonajeBasico {
     return acto;
   }
 
+  buscarObjetoAdelante(nombreObjeto) {
+    const vector = this.obtenerVectorAvance(this.direccion);
+    let vectorY = this.casilleroActual.fila + vector[0]
+    let vectorX = this.casilleroActual.columna + vector[1]
+    return this.buscarObjetoSegunVector(nombreObjeto, [vectorY,vectorX]);
+  }
+
+  buscarObjetoSegunVector(nombreObjeto, vector) {
+    const casillero = this.obtenerCasillero(vector[0], vector[1]);
+    return this.buscarObjetoEnCasillero(nombreObjeto, casillero);
+  }
+
+  buscarObjetoEnCasillero(nombreObjeto, objetoCasillero) {
+    let objeto = objetoCasillero.ocupantes.find(
+      (obj) => obj.tipoPersonaje == nombreObjeto
+    );
+    return objeto
+  }
+  buscarObjetoEnCasilleroActual(nombreObjeto) {
+    return this.buscarObjetoEnCasillero(nombreObjeto, this.casilleroActual)
+  }
+
   buscarParaRealizarAccion(nameObj, accion, params = false) {
-    const objetoPaciente = this.casilleroActual.ocupantes.find(
-      (obj) => obj.tipoPersonaje == nameObj
+    const objetoPaciente = this.buscarObjetoEnCasillero(
+      nameObj,
+      this.casilleroActual
     );
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
@@ -127,7 +166,21 @@ export class PersonajeBasico {
       estadoPrevio: acto && acto.estadoPrevio,
     };
   }
-  //para abrir cofre y cosechar zanahorias
+
+  buscarParaRealizarAccionAdelante(nameObj, accion, params = false) {
+    const objetoPaciente = this.buscarObjetoAdelante(nameObj);
+    const acto = objetoPaciente
+      ? this.realizarAccionSobre(objetoPaciente, accion, params)
+      : false; 
+    return {
+      objetoEncontrado: objetoPaciente ? true : false,
+      exito: acto && acto.exito,
+      premio: acto && acto.exito ? acto.premio : null,
+      estadoPosterior: acto && acto.estadoPosterior,
+      estadoPrevio: acto && acto.estadoPrevio,
+    };
+  }
+  //para abrir cofre - cosechar zanahorias - picar piedra
   abrirse() {
     if (this.estadoActual === "cerrado") {
       this.setearEstado("abierto");
@@ -144,7 +197,7 @@ export class PersonajeBasico {
     const estadoPrevio = this.estadoActual;
     if (this.estadoActual === "normal" || this.estadoActual === "abierto") {
       this.setearEstado("juntado");
-
+      this.salirDelCasilleroActual();
       return {
         exito: true,
         premio: { tipo: this.tipoPersonaje, cantidad: 1 },
@@ -252,6 +305,9 @@ class controladorPersonajeDOM {
   removerTooltip() {
     this.elementoHTML.classList.remove("tooltipVisible");
   }
+  removerDivDelDOM(){
+    this.elementoHTML.remove()
+  }
 }
 
 class PersonajeMovible extends PersonajeBasico {
@@ -264,10 +320,7 @@ class PersonajeMovible extends PersonajeBasico {
     }
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
-    const casilleroDestino = this.obtenerCasillero(
-      nuevaY,
-      nuevaX
-    );
+    const casilleroDestino = this.obtenerCasillero(nuevaY, nuevaX);
     if (!casilleroDestino) {
       const limite = {
         con: "limitesDelUniverso",
@@ -332,6 +385,30 @@ class PersonajeMovible extends PersonajeBasico {
       return this.estaVivo;
     }
   }
+  obtenerVectorAvance(direccion) {
+    const moduloDireccion360 = direccion % 360; // 0 || +/-90 || +/-180 || +/-270
+    const moduloDireccion360Positivo = moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
+    const puntoCardinal = moduloDireccion360Positivo / 90; // 0 || 1 || 2 || 3
+    if (
+      Number.isInteger(puntoCardinal) &&
+      puntoCardinal >= 0 &&
+      puntoCardinal <= 3
+    ) {
+      const vectores = [
+        [-1, 0],
+        [0, +1],
+        [+1, 0],
+        [0, -1],
+      ];
+      const vectorUsar = vectores[puntoCardinal];
+      return vectorUsar;
+    } else {
+      throw new Error(
+        "Ocurrió un problema al intentar avanzar() en una dirección no permitida: " +
+          direccion
+      );
+    }
+  }
 }
 
 export class PersonajeMovibleSimple extends PersonajeMovible {
@@ -380,31 +457,6 @@ export class PersonajeMovibleGrados extends PersonajeMovible {
     const vector = this.obtenerVectorAvance(this.direccion);
     return this.iterarVectorMovimiento(veces, vector);
   }
-  obtenerVectorAvance(direccion) {
-    const moduloDireccion360 = direccion % 360; // 0 || +/-90 || +/-180 || +/-270
-    const moduloDireccion360Positivo =
-      moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
-    const puntoCardinal = moduloDireccion360Positivo / 90; // 0 || 1 || 2 || 3
-    if (
-      Number.isInteger(puntoCardinal) &&
-      puntoCardinal >= 0 &&
-      puntoCardinal <= 3
-    ) {
-      const vectores = [
-        [-1, 0],
-        [0, +1],
-        [+1, 0],
-        [0, -1],
-      ];
-      const vectorUsar = vectores[puntoCardinal];
-      return vectorUsar;
-    } else {
-      throw new Error(
-        "Ocurrió un problema al intentar avanzar() en una dirección no permitida: " +
-          direccion
-      );
-    }
-  }
 }
 
 export class PersonajeDibujante extends PersonajeMovibleGrados {
@@ -430,7 +482,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
       Array.from(row, () => false)
     );
     this.lapizBajado = false;
-    // console.log(this);
   }
 
   bajarLapiz() {
@@ -482,4 +533,6 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
     }
     return true;
   }
+
+ 
 }

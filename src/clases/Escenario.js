@@ -5,7 +5,7 @@ export class Escenario {
     dimensiones,
     unidadAnchoDeseada,
     elementoHTML,
-    colorBordes,
+    colorBordes
   ) {
     this.galeria = new DHS_Gallery();
     this.dimensiones = dimensiones;

@@ -97,7 +97,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript['on_execute'] = function (block) {
+        Blockly.JavaScript.forBlock['on_execute'] = function (block) {
             let code = Blockly.JavaScript.statementToCode(block, 'EVENT');
             // console.log(code);
             return code;
@@ -135,7 +135,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_down_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_down_simple"] = function (block) {
             const code = "moverAbajo();\n";
             return code;
         };
@@ -167,7 +167,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_up_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_up_simple"] = function (block) {
             const code = "moverArriba();\n"
             return code;
         };
@@ -200,7 +200,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_right_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_right_simple"] = function (block) {
             const code = "moverDerecha();\n";
             return code;
         };
@@ -232,7 +232,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_left_simple"] = function (block) {
+        Blockly.JavaScript.forBlock["move_left_simple"] = function (block) {
             const code = "moverIzquierda();\n"
             return code;
         };
@@ -247,6 +247,14 @@ export default class ConfiguradorBloques {
         return [
             this.move_up_simple(),
             this.move_down_simple(),
+            this.move_left_simple(),
+            this.move_right_simple(),
+        ]
+    }
+
+    //solo para servir los movimientos de derecha e izquierda
+    move_left_right() {
+        return [
             this.move_left_simple(),
             this.move_right_simple(),
         ]
@@ -334,7 +342,7 @@ export default class ConfiguradorBloques {
 
         // Define how to generate JavaScript from the custom block.
         //cambié javascriptGenerator por  Blockly.JavaScript
-        Blockly.JavaScript["move_down_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_down_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverAbajo(" + casillas + ");\n";
             return code;
@@ -425,7 +433,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_up_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_up_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverArriba(" + casillas + ");\n";
             return code;
@@ -515,7 +523,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_right_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_right_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverDerecha(" + casillas + ");\n";
             return code;
@@ -606,7 +614,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["move_left_param"] = function (block) {
+        Blockly.JavaScript.forBlock["move_left_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "moverIzquierda(" + casillas + ");\n";
             return code;
@@ -649,7 +657,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["avanzar"] = function (block) {
+        Blockly.JavaScript.forBlock["avanzar"] = function (block) {
             const code = "avanzar();\n"
             return code;
         };
@@ -739,7 +747,7 @@ export default class ConfiguradorBloques {
         });
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["avanzar_param"] = function (block) {
+        Blockly.JavaScript.forBlock["avanzar_param"] = function (block) {
             const casillas = this.getFieldValue("CASILLAS");
             const code = "avanzar(" + casillas + ");\n";
             return code;
@@ -773,7 +781,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["girar_derecha"] = function (block) {
+        Blockly.JavaScript.forBlock["girar_derecha"] = function (block) {
             const code = "girarDerecha();\n";
             return code;
         };
@@ -804,7 +812,7 @@ export default class ConfiguradorBloques {
         ]);
 
         // Define how to generate JavaScript from the custom block.
-        Blockly.JavaScript["girar_izquierda"] = function (block) {
+        Blockly.JavaScript.forBlock["girar_izquierda"] = function (block) {
             const code = "girarIzquierda();\n";
             return code;
         };
@@ -861,7 +869,7 @@ export default class ConfiguradorBloques {
                 // "extensions": ["turn_degrees_validation"],
             }]);
         
-        Blockly.JavaScript["girar_grados"] = function (block) {
+        Blockly.JavaScript.forBlock["girar_grados"] = function (block) {
             const grados = this.getFieldValue("grados");
                 const code = "girarGrados("+ grados +");\n";
                 return code;
@@ -919,7 +927,7 @@ export default class ConfiguradorBloques {
                 // "extensions": ["turn_degrees_validation"],
             }]);
         
-        Blockly.JavaScript["apuntar_hacia"] = function (block) {
+        Blockly.JavaScript.forBlock["apuntar_hacia"] = function (block) {
             const grados = this.getFieldValue("grados");
                 const code = "apuntarEnDireccion("+ grados +");\n";
                 return code;
@@ -959,7 +967,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["abrir_cofre"] = function (block) {
+        Blockly.JavaScript.forBlock["abrir_cofre"] = function (block) {
             const code = "abrirCofre();\n"
             return code;
         };
@@ -989,13 +997,43 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["juntar_basura"] = function (block) {
+        Blockly.JavaScript.forBlock["juntar_basura"] = function (block) {
             const code = "juntarBasura();\n"
             return code;
         };
 
         return {
             type: "juntar_basura",
+            kind: "block",
+        }
+    }
+    comer_fruta() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "comer_fruta",
+                message0: "%1 comer fruta",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/590/590772.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["comer_fruta"] = function (block) {
+            const code = "comerFruta();"
+            return code;
+        };
+
+        return {
+            type: "comer_fruta",
             kind: "block",
         }
     }
@@ -1020,7 +1058,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["cosechar"] = function (block) {
+        Blockly.JavaScript.forBlock["cosechar"] = function (block) {
             const code = "cosecharZanahoria();\n"
             return code;
         };
@@ -1051,13 +1089,73 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["comer"] = function (block) {
+        Blockly.JavaScript.forBlock["comer"] = function (block) {
             const code = "comerZanahoria();\n"
             return code;
         };
 
         return {
             type: "comer",
+            kind: "block",
+        }
+    }
+    picar_piedra() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "picar_piedra",
+                message0: "%1 picar piedra",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/664/664112.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["picar_piedra"] = function (block) {
+            const code = "picarPiedra()\n;"
+            return code;
+        };
+
+        return {
+            type: "picar_piedra",
+            kind: "block",
+        }
+    }
+    juntar_diamante() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "juntar_diamante",
+                message0: "%1 juntar diamante",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/599/599608.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["juntar_diamante"] = function (block) {
+            const code = "juntarDiamante();\n"
+            return code;
+        };
+
+        return {
+            type: "juntar_diamante",
             kind: "block",
         }
     }
@@ -1082,7 +1180,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["bajar_lapiz"] = function (block) {
+        Blockly.JavaScript.forBlock["bajar_lapiz"] = function (block) {
             const code = "bajarLapiz();\n"
             return code;
         };
@@ -1112,7 +1210,7 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript["subir_lapiz"] = function (block) {
+        Blockly.JavaScript.forBlock["subir_lapiz"] = function (block) {
             const code = "subirLapiz();\n"
             return code;
         };
@@ -1160,12 +1258,301 @@ export default class ConfiguradorBloques {
     // BLOQUES PROGRAMACIÓN
     // Repetir, condicionales, etc, etc, etc, (son MUCHISIMOS)
     
-    if() {
+    ifElse() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "if_else",
+                "message0": "Si %1 %2 entonces... %3 %4 si no... %5 %6",
+                "args0": [
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "condicion"
+                    },
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_statement",
+                        "name": "entonces"
+                    },
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_statement",
+                        "name": "sino"
+                    }
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "logic_blocks",
+              }
+        ]);
+
+        Blockly.JavaScript.forBlock["if_else"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const entonces = Blockly.JavaScript.statementToCode(block, 'entonces')
+            const sino = Blockly.JavaScript.statementToCode(block, 'sino') 
+            const code = "if("+ condicion +"){\n"+ entonces +"\n}else{\n"+ sino +"\n}"
+            return code;
+        };
+
         return {
-            type: "controls_if",
+            type: "if_else",
             kind: "block",
+        }
+    }
+    if() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "if",
+                "message0": "Si %1 %2 entonces... %3 %4 ",
+                "args0": [
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "condicion",
+                        'check': 'Boolean',
+                    },
+                    {
+                        "type": "input_dummy"
+                    },
+                    {
+                        "type": "input_statement",
+                        "name": "entonces"
+                    },
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "logic_blocks",
+              }
+        ]);
+
+        Blockly.JavaScript.forBlock["if"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const entonces = Blockly.JavaScript.statementToCode(block, 'entonces')
+            const code = "if("+ condicion +"){\n"+ entonces +"\n}\n"
+            return code;
+        };
+
+        return {
+            "type": "if",
+            "kind": "block",
         } 
-    } 
+    }
+    logic_compare() {
+        return {
+            "kind": "block",
+            "type": "logic_compare"
+          }
+    }
+    logic_operation() {
+        return {
+            "kind": "block",
+            "type": "logic_operation"
+        }
+    }
+    logic_boolean() {
+        return {
+            "kind": "block",
+            "type": "logic_boolean"
+        }
+    }
+    condicionales() {
+        return [
+            this.if(),
+            this.logic_compare(),
+            this.logic_operation(),
+            // this.logic_boolean(),
+        ]
+    }
+    // Sensores
+    sensor_cofre() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_cofre",
+                "message0": "%1 ¿Hay cofre aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4230/4230569.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_cofre"] = function (block) {
+            const code = "detectarCofre()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_cofre",
+            "kind": "block",
+        }
+    }
+    
+    sensor_zanahoria() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_zanahoria",
+                "message0": "%1 ¿Hay zanahoria aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/257/257615.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_zanahoria"] = function (block) {
+            const code = "detectarZanahoria()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_zanahoria",
+            "kind": "block",
+        }
+    }
+    sensor_piedra() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_piedra",
+                "message0": "%1 ¿Hay piedra adelante?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/7996/7996138.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_piedra"] = function (block) {
+            const code = "detectarPiedra()"
+            return [code, Blockly.JavaScript.ORDER_NONE];
+        //    return code;
+        };
+        return {
+            "type": "sensor_piedra",
+            "kind": "block",
+        }
+    }
+
+    sensor_avion() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_avion",
+                "message0": "%1 ¿Hay avión adelante?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/3410/3410900.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_avion"] = function (block) {
+            const code = "detectarAvion()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_avion",
+            "kind": "block",
+        }
+    }
+    sensor_diamante() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_diamante",
+                "message0": "%1 ¿Hay un diamante aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/599/599608.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_diamante"] = function (block) {
+            const code = "detectarDiamante()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_diamante",
+            "kind": "block",
+        }
+    }
+    sensor_frutilla() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_frutilla",
+                "message0": "%1 ¿Hay frutilla aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/590/590772.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_frutilla"] = function (block) {
+            const code = "detectarFrutilla()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_frutilla",
+            "kind": "block",
+        }
+    }
 
     // LOOPS
     controls_repeat() {

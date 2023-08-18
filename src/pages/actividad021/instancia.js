@@ -4,10 +4,13 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
+import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 const dimensiones = [7, 7]; //fila, columna
 
 const tablero = [
@@ -20,36 +23,6 @@ const tablero = [
   [1, 0, 0, 0, 1, 1, 1],  
 ];
 
-const agua = {
-  idUsarHTML: "agua",
-  tipoPersonaje: "agua",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "agua" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px"
-};
-
-const juncoPastoDelta = {
-  idUsarHTML: "juncoPastoDelta",
-  tipoPersonaje: "juncoPastoDelta",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "juncoPastoDelta" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px"
-};
-
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "ecobrick",
@@ -57,106 +30,56 @@ const datosModal = {
   oculto: true,
 };
 
+const coordenadasCaminoPared = generarCoordenadas(tablero);
+const personajesGaleria = new Dhs_personajes();
+const agua = personajesGaleria.obtenerPersonaje("agua");
+const juncoPastoDelta = personajesGaleria.obtenerPersonaje("juncoPastoDelta");
+const lancha = personajesGaleria.obtenerPersonaje("lancha");
+const plastico = personajesGaleria.obtenerPersonaje("plastico");
+const plantaRecicladora = personajesGaleria.obtenerPersonaje("plantaRecicladora");
+
 miJuego.generarEscenario(dimensiones, 2.7, "#357fbf");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, juncoPastoDelta, agua);
 
-const arrayDePersonajes = [
+const conjuntosDePersonajes = [
   {
-    idUsarHTML: "lancha",
-    tipoPersonaje: "lancha",
-    clasePersonaje: "PersonajeMovibleGrados",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lancha" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 0,
-    posicionInicialX: 5,
-    direccionInicial: 90,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-      {
-        con: "juncoPastoDelta",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra los juncos.",
-      },
-      {
-        con: "plantaReciclajePastoDelta",
-        factorDeAvance: 0.4,
-        callback: (x) => {
-          x.llegarPlanta();
-        },
-      },
-    ],
+    estrategia: "fijos",
+    personajes: [juncoPastoDelta],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-      juntado: { name: "juntado", imageUrl: "agua" }
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 0,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [agua],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-      juntado: { name: "juntado", imageUrl: "agua" }
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 3,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [lancha],
+    posiciones: [[0,5]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plastico",
-    tipoPersonaje: "plastico",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plastico" },
-      juntado: { name: "juntado", imageUrl: "agua" }
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 5,
-    posicionInicialX: 6,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [plastico],
+    posiciones: [[0,1],[3,1],[5,6]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "plantaReciclajePastoDelta",
-    tipoPersonaje: "plantaReciclajePastoDelta",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "plantaReciclajePastoDelta" },
-    },
-    estadoInicial: "normal",
-    zIndex: 1,
-    posicionInicialY: 6,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    rotable: false,
-    paddingImagen: "1px"
+    estrategia: "fijos",
+    personajes: [plantaRecicladora],
+    posiciones: [[6,1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
-];
+]
 
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[49]);
 
 miJuego.personajePrincipal.llegarPlanta = function () {
@@ -176,68 +99,19 @@ miJuego.personajePrincipal.juntarBasura = function () {
   }
 };
 
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-  // 'dhs-blockly-div',
-  // JSON.stringify(toolbox),
-);
+// BLOCKLY ------------------------------------------------------
+const miControlador = new ControladorStandard(miJuego,velocidadInicial);
+const categoria=new Dhs_Categorias()
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones"])
 
-const categoriasDeseadas = [
-  {
-    name: "Eventos",
-    categorystyle: "execute",
-  },
-  {
-    name: "Movimientos",
-    categorystyle: "movement",
-  },
-  {
-    name: "Acciones",
-    categorystyle: "action",
-  },
-];
-categoriasDeseadas.forEach((cat) =>
-  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
-);
-
-const bloquesCustomStandardDesados = [
+const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["avanzar_param", "Movimientos"],
   ["apuntar_hacia", "Movimientos"],
   ["juntar_basura", "Acciones"],
 ];
+const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+//const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
+const funcionesAExponer=["juntarBasura","avanzar","apuntarEnDireccion"]
 
-bloquesCustomStandardDesados.forEach((bl) => {
-  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
-});
-
-const render = new CustomRenderer();
-render.registrarRender("renderDHS");
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-  theme: "themeDH",
-  renderer: "renderDHS",
-  zoom: {
-    controls: true,
-    wheel: true,
-    pinch: true,
-  },
-});
-
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
-
-miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
-miControlador.setearEventoCambioWorkspaceStandard();
-miControlador.habilitarDesactivarHuerfanos();
-miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("juntarBasura");
-miControlador.juego.agregarGlobalConCallback("avanzar");
-miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-
-const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
-miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-  miControlador.callbackInterpreteStandard(interpreter, globalObject);
-  callBackJuego(interpreter, globalObject);
-});
+configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

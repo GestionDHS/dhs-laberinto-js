@@ -7,15 +7,27 @@ import {
   PersonajeMovibleGrados,
 } from "./Personaje";
 
+import {
+  TipoCreacion,
+  PersonajesFijos,
+  PersonajesAlAzarRango,
+  PersonajesAlAzarRangoFijos,
+  PersonajesAlAzarFijos,
+  PersonajesAlAzarExcluyente,
+  PersonajesAlAzarCantTotal,
+  PersonajesAlAzarCantTotalFijos,
+  PersonajesPosicionAlAzarExcluyente,
+} from "../clases/StrategyCreacion";
+
 import { Modal } from "./Modal";
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
-    //this.modo = "inicio"; //Este atributo va a volar someday
     this.sincronico = true;
     this.duracionIntervalos = duracionIntervalos;
     this.escenario = {};
     this.listaDePersonajes = [];
+    this.listaDeAleatoreos = [];
     this.personajePrincipal = null;
     this.puedeDebeContinuar = true;
     this.funcionesPublicadas = [];
@@ -25,68 +37,58 @@ export class Juego {
       PersonajeMovibleSimple: PersonajeMovibleSimple,
       PersonajeMovibleGrados: PersonajeMovibleGrados,
     };
+    this.tipoCreacionPersonajes = {};
   }
 
   /*PARA RENDERIZAR ESCENARIO*/
   // La funcion recibe la matriz tablero la unidad de ancho, el color de bordes, nombre imagen pared, nombre imagen camino
 
-  generarEscenario(
-    dimensiones,
-    unidadAnchoDeseada,
-    colorBordes,
-
-  ) {
+  generarEscenario(dimensiones, unidadAnchoDeseada, colorBordes) {
     const elementoHTMLLaberinto = document.getElementById("elemento-escenario");
     this.escenario = new Escenario(
       dimensiones,
       unidadAnchoDeseada,
       elementoHTMLLaberinto,
-      colorBordes,
+      colorBordes
     );
-    //console.log(this.escenario)
     this.escenario.crearEscenario();
   }
-  generarCaminoYpared(dimensiones, tablero, pared, camino) {
-    for (let fila = 0; fila < dimensiones[0]; fila++) {
-      for (let col = 0; col < dimensiones[1]; col++) {
-        if (tablero[fila][col] == 1) {
-          pared.posicionInicialX = col;
-          pared.posicionInicialY = fila;
-          this.generarPersonajes([pared]);
-        } else {
-          camino.posicionInicialX = col;
-          camino.posicionInicialY = fila;
-          this.generarPersonajes([camino]);
-        }
-      }
-    }
+
+  reiniciarConjuntoPersonajes() {
+    this.listaDePersonajes.forEach((personaje) => {
+      personaje.reiniciarse()
+    });
+    this.listaDePersonajes = this.listaDePersonajes.filter(
+      (personaje) => personaje.desapareceAlReiniciar != true
+    );
+    
   }
 
-  generarPersonajes(arrayDePersonajes) {
-    arrayDePersonajes.forEach((personaje) => {
-      //console.log(personaje.tipoPersonaje);
-      const clasePersonaje = personaje.clasePersonaje;
-      let unPersonaje;
-      if (clasePersonaje) {
-        unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](
-          personaje,
-          this
-        );
-      } else {
-        unPersonaje = new PersonajeBasico(personaje, this);
-      }
-      this.listaDePersonajes.push(unPersonaje);
-      unPersonaje.inicializar();
-    });
+  reiniciar() {
+    this.puedeDebeContinuar = true;
+    this.reiniciarConjuntoPersonajes();
+    this.generarConjuntoDePersonajes(this.listaDeAleatoreos);
+  }
+
+  generarPersonaje(personaje) {
+    const clasePersonaje = personaje.clasePersonaje;
+    let unPersonaje;
+    if (clasePersonaje) {
+      unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](
+        personaje,
+        this
+      ); 
+    } else {
+      unPersonaje = new PersonajeBasico(personaje, this);
+    }
+    this.listaDePersonajes.push(unPersonaje);
+    unPersonaje.inicializar();
   }
 
   setearPersonajePrincipal(personaje) {
     this.personajePrincipal = personaje;
   }
 
-  // renderizarPersonajes(tablero) {
-  //   //1 = árboles - 0 = camino
-  // }
   setearVelocidad(nuevaVelocidad) {
     this.duracionIntervalos = nuevaVelocidad;
     this.listaDePersonajes.forEach((personaje) =>
@@ -96,15 +98,6 @@ export class Juego {
 
   setearSincronicidad(boolean) {
     this.sincronico = boolean;
-  }
-
-  reiniciar() {
-    this.puedeDebeContinuar = true;
-    this.listaDePersonajes.forEach((personaje) => {
-      //personaje.reiniciar();
-      personaje.inicializar();
-    });
-    //this.datosModal.ocultar(); - lo saqué de acá por que puse un setTimeout para que se oculte solo
   }
 
   agregarModal(datosModal) {
@@ -135,5 +128,42 @@ export class Juego {
         );
       });
     };
+  }
+
+  generarConjuntoDePersonajes(conjuntosDePersonajes) {
+    const estrategias = {
+      fijos: new PersonajesFijos(),
+      azarRango: new PersonajesAlAzarRango(),
+      azarRangoFijos: new PersonajesAlAzarRangoFijos(),
+      azarFijos: new PersonajesAlAzarFijos(),
+      azarExcluyente: new PersonajesAlAzarExcluyente(),
+      posicionExcluyente: new PersonajesPosicionAlAzarExcluyente(),
+      azarCantTotal: new PersonajesAlAzarCantTotal(),
+      azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos()
+    };
+    conjuntosDePersonajes.forEach((unConjunto) => {
+      let personajesAGenerar = [];
+      if (this.tipoCreacionPersonajes != unConjunto.estrategia) {
+        this.tipoCreacionPersonajes = estrategias[unConjunto.estrategia];
+      }
+      const arrayPersonajesAux = this.tipoCreacionPersonajes.crearPersonajes(
+        unConjunto,
+        this.escenario
+      );
+
+      personajesAGenerar.push(...arrayPersonajesAux);
+      personajesAGenerar.forEach((unPersonaje) => {
+        this.generarPersonaje(unPersonaje);
+      });
+    });
+  }
+
+  crearPersonajes(conjuntosDePersonajes) {
+    conjuntosDePersonajes.forEach((unConjunto)=>{
+      if(unConjunto.estrategia!="fijos"){
+         this.listaDeAleatoreos.push(unConjunto)
+       }
+      })
+      this.generarConjuntoDePersonajes(conjuntosDePersonajes);
   }
 }

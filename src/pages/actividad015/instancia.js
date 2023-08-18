@@ -4,10 +4,13 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
+import { Dhs_personajes } from "../../clases/Dhs-personajes";
+import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [6, 5]; //fila, columna
 
@@ -20,34 +23,13 @@ const tablero = [
   [1, 1, 1, 1, 1],
 ];
 
-const arbol = {
-  idUsarHTML: "arbol",
-  tipoPersonaje: "arbol",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
-const pasto = {
-  idUsarHTML: "camino",
-  tipoPersonaje: "camino",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "pasto" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-  paddingImagen: "1px",
-};
+const personajesGaleria = new Dhs_personajes();
+const coordenadasCaminoPared = generarCoordenadas(tablero)
+const pared = personajesGaleria.obtenerPersonaje("arbol");
+const camino = personajesGaleria.obtenerPersonaje("pasto");
+const lupe = personajesGaleria.obtenerPersonaje("lupe");
+const lodo = personajesGaleria.obtenerPersonaje("lodo");
+const bandera = personajesGaleria.obtenerPersonaje("bandera");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -58,84 +40,46 @@ const datosModal = {
 
 miJuego.generarEscenario(dimensiones, 4, "#9ca64e");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
 
-const arrayDePersonajes = [
+const conjuntosDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeMovibleSimple",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 4,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    zIndex: 3,
-    rotable: true,
-    paddingImagen: "1px",
-    colisiones: [
-       {
-        con: "bandera",
-        factorDeAvance: 1,
-        callback: (x) => {
-          x.llegarALaBandera();
-        },
-      },
-      {
-        con: "lodo",
-        factorDeAvance: 0.7,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Me atasqué en el lodo.",
-      },
-      {
-        con: "arbol",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un árbol",
-      },
-    ],
+    estrategia: "fijos",
+    personajes: [pared],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 2,
-    posicionInicialX: 1,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [camino],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "bandera",
-    tipoPersonaje: "bandera",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "bandera" },
-      abierto: { name: "abierto", imageUrl: "bandera" }, 
-    },
-    estadoInicial: "cerrado",
-    posicionInicialY: 1,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    paddingImagen: "0.4em",
-    colisiones: [],
-    paddingImagen: "1px",
+    estrategia: "fijos",
+    personajes: [lupe],
+    posiciones: [[4,1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [lodo],
+    posiciones: [[2,1]],
+    aliasConjunto: "fijoLodo",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bandera],
+    posiciones: [[1,3]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
   },
 ];
 
-miJuego.generarPersonajes(arrayDePersonajes);
+miJuego.crearPersonajes(conjuntosDePersonajes)
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
 miJuego.personajePrincipal.abrirCofre = function () {
@@ -152,67 +96,19 @@ miJuego.personajePrincipal.abrirCofre = function () {
   }
 };
 
-const miControlador = new ControladorStandard(
-  miJuego,
-  velocidadInicial
-);
+// BLOCKLY ------------------------------------------------------
+const miControlador = new ControladorStandard(miJuego,velocidadInicial);
+const categoria=new Dhs_Categorias()
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones"])
 
-const categoriasDeseadas = [
-  {
-    name: "Eventos",
-    categorystyle: "execute",
-  },
-  {
-    name: "Movimientos",
-    categorystyle: "movement",
-  },
-  {
-    name: "Acciones",
-    categorystyle: "action",
-  },
-];
-categoriasDeseadas.forEach((cat) =>
-  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
-);
-
-const bloquesCustomStandardDesados = [
+const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_classic_simple", "Movimientos"],
   ["abrir_cofre", "Acciones"],
 ];
 
-bloquesCustomStandardDesados.forEach((bl) => {
-  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
-});
+const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+//const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
+const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre"]
 
-const render = new CustomRenderer();
-render.registrarRender("renderDHS");
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-  theme: "themeDH",
-  renderer: "renderDHS",
-  zoom: {
-    controls: true,
-    wheel: true,
-    pinch: true,
-  },
-});
-
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
-
-miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
-miControlador.setearEventoCambioWorkspaceStandard();
-miControlador.habilitarDesactivarHuerfanos();
-miControlador.crearFuncionesGlobalesStandard();
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
-
-const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
-miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-  miControlador.callbackInterpreteStandard(interpreter, globalObject);
-  callBackJuego(interpreter, globalObject);
-});
+configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)
