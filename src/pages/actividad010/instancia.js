@@ -31,7 +31,7 @@ const lupe = personajesGaleria.obtenerPersonaje("lupe");
 const basura = personajesGaleria.obtenerPersonaje("basura");
 const pasto = personajesGaleria.obtenerPersonaje("pasto");
 const arbol = personajesGaleria.obtenerPersonaje("arbol");
-const bandera = personajesGaleria.obtenerPersonaje("bandera");
+const bandera = personajesGaleria.obtenerPersonaje("plantaRecicladoraSinFondo");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",

@@ -20,6 +20,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 3,
       rotable: true,
+      paddingImagen: "1px",
       colisiones: [
         {
           con: "lodo",
@@ -58,6 +59,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 1,
       rotable: false,
+      paddingImagen: "1px",
       colisiones: [],
       configPosicionamiento: {
         excluyente: false,
@@ -74,6 +76,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: false,
+      paddingImagen: "1px",
       colisiones: [],
     },
     pasto: {
@@ -88,6 +91,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
+      paddingImagen: "1px",
       rotable: false,
     },
     arbol: {
@@ -100,6 +104,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
+      paddingImagen: "1px",
       rotable: false,
     },
     barrera: {
@@ -256,6 +261,20 @@ export class Dhs_personajes {
       tipoPersonaje: "plantaReciclajePastoDelta",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "plantaReciclajePastoDelta" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    plantaRecicladoraSinFondo: {
+      idUsarHTML: "plantaReciclajePastoDelta",
+      tipoPersonaje: "plantaReciclajePastoDelta",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "plantaReciclajePastoDeltaSinFondo" },
       },
       estadoInicial: "normal",
       zIndex: 1,
@@ -639,6 +658,7 @@ export class Dhs_personajes {
       posicionInicialX: 0,
       direccionInicial: 0,
       rotable: false,
+      paddingImagen: "1px",
     },
     conejo: {
       idUsarHTML: "conejo",
@@ -654,7 +674,7 @@ export class Dhs_personajes {
       direccionInicial: 180,
       zIndex: 3,
       rotable: true,
-      paddingImagen: "0.3px",
+      paddingImagen: "1px",
       colisiones: [
         {
           con: "madriguera",
@@ -688,6 +708,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: true,
+      paddingImagen: "1px",
       colisiones: [],
     },
     madriguera: {
@@ -701,6 +722,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
+      paddingImagen: "1px",
       zIndex: 2,
       rotable: false,
       colisiones: [],
@@ -717,6 +739,7 @@ export class Dhs_personajes {
       direccionInicial: 90,
       zIndex: 3,
       rotable: false,
+      paddingImagen: "1px",
       colisiones: [
         {
           con: "piedra",
@@ -756,7 +779,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: false,
-      paddingImagen: "0.5px",
+      paddingImagen: "1px",
       colisiones: [],
     },
     piedraDiamante: {
@@ -772,7 +795,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: false,
-      paddingImagen: "0.5px",
+      paddingImagen: "1px",
       colisiones: [],
     },
     caminoCueva: {
@@ -786,7 +809,7 @@ export class Dhs_personajes {
       posicionInicialX: 0,
       direccionInicial: 0,
       zIndex: 0,
-      paddingImagen: "0.5px",
+      paddingImagen: "1px",
       rotable: false,
       colisiones: [],
     },
@@ -816,6 +839,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: false,
+      paddingImagen: "1px",
       colisiones: [],
       configPosicionamiento: {
         excluyente: false,
@@ -873,7 +897,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: false,
-      paddingImagen: "0.5px",
+      paddingImagen: "1px",
       colisiones: [],
     },
     bambooAncho: {
@@ -905,7 +929,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: false,
-      paddingImagen: "0.5px",
+      paddingImagen: "1px",
       colisiones: [],
     },
     nubes: {
@@ -920,7 +944,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 2,
       rotable: false,
-      paddingImagen: "0.5px",
+      paddingImagen: "1px",
       colisiones: [],
     },
     pajaro: {
@@ -982,7 +1006,7 @@ export class Dhs_personajes {
       direccionInicial: 0,
       zIndex: 1,
       rotable: false,
-      paddingImagen: "0.5px",
+      paddingImagen: "1px",
       colisiones: [],
     },
     avion: {
