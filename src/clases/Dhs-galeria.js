@@ -34,6 +34,7 @@ import carpincho from "../img/carpinchoArriba.png";
 import pato from "../img/patoArriba.png";
 import lancha from "../img/lancha.png";
 import plantaReciclajePastoDelta from "../img/plantaReciclajePastoDelta.png";
+import plantaReciclajePastoDeltaSinFondo from "../img/plantaReciclajePastoDeltaSinFondo.png";
 import plastico from "../img/plasticoAgua.png";
 import familiaPato from "../img/familiaPato.png";
 import rioParana from "../img/rioParana.png";
@@ -49,11 +50,11 @@ import bamboo from "../img/bamboo.png";
 import frutilla from "../img/frutilla.png";
 import nubes from "../img/nubes.png";
 import bambooAncho from "../img/bambooAncho.png";
-import pajaro from "../img/pajaro.png"
-import nubesCielo from "../img/nubesCielo.png"
-import diamante from "../img/diamante.png"
-import avion from "../img/avion.png"
-import isla from "../img/isla.png"
+import pajaro from "../img/pajaro.png";
+import nubesCielo from "../img/nubesCielo.png";
+import diamante from "../img/diamante.png";
+import avion from "../img/avion.png";
+import isla from "../img/isla.png";
 
 export class DHS_Gallery {
   constructor() {
@@ -83,32 +84,28 @@ export class DHS_Gallery {
       themes: [""],
       url: diamante,
       nombre: "diamante",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     piedraDiamante: {
       themes: [""],
       url: piedraDiamante,
       nombre: "piedraDiamante",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     caminoCueva: {
       themes: [""],
       url: caminoCueva,
       nombre: "caminoCueva",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     piedra: {
       themes: [""],
       url: piedra,
       nombre: "piedra",
-      parrafoLicencia:
-        '<p>Imagen desarrollada por Digital House</p>',
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
     minero: {
@@ -467,6 +464,14 @@ export class DHS_Gallery {
       themes: ["delta"],
       url: plantaReciclajePastoDelta,
       nombre: "plantaReciclajePastoDelta",
+      parrafoLicencia:
+        '<p><a href="https://www.flaticon.com/free-icons/recycling-plant" title="recycling plant icons">Recycling plant icons created by surang - Flaticon</a></p>',
+      showLicense: true,
+    },
+    plantaReciclajePastoDeltaSinFondo: {
+      themes: ["delta"],
+      url: plantaReciclajePastoDeltaSinFondo,
+      nombre: "plantaReciclajePastoDeltaSinFondo",
       parrafoLicencia:
         '<p><a href="https://www.flaticon.com/free-icons/recycling-plant" title="recycling plant icons">Recycling plant icons created by surang - Flaticon</a></p>',
       showLicense: true,
