@@ -20,11 +20,11 @@ const dimensiones = [7, 9]; //fila, columna
 const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 1, 1, 1, 1, 1, 1, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
@@ -33,7 +33,8 @@ const panda = personajesGaleria.obtenerPersonaje("panda");
 const agua = personajesGaleria.obtenerPersonaje("agua");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
-const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
+const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje("recuadroPintableDeseado");
+recuadroPintableDeseado.colorFondoInicial = "#6E260E"
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
 const bandera = personajesGaleria.obtenerPersonaje("bandera")
 
@@ -49,7 +50,7 @@ miJuego.agregarModal(datosModal);
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
-    personajes: [bambooAncho],
+    personajes: [recuadroPintableDeseado],
     posiciones: coordenadasCaminoPared.coordenadasPared,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
@@ -64,7 +65,7 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [panda],
-    posiciones: [[3, 3]],
+    posiciones: [[5, 2]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
@@ -78,14 +79,14 @@ let conjuntosDePersonajes = [
   { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
     estrategia: "azarExcluyente",
     personajes: [frutilla, bamboo],
-    posiciones: [[3, 5]],
+    posiciones: [[5, 5]],
     aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,
   },
   {
     estrategia: "fijos",
     personajes: [bandera],
-    posiciones: [[3, 7]],
+    posiciones: [[5, 7]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
@@ -101,7 +102,7 @@ miJuego.personajePrincipal.detectarFrutilla = function () {
   // devuelve true si encuentra o false si no hay cofre
   return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
 };
-miJuego.personajePrincipal.comerFruta = function () {
+miJuego.personajePrincipal.comerFrutilla = function () {
   const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
 
   if (!intento.objetoEncontrado) {
@@ -122,14 +123,13 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
 };
 
 // BLOCKLY ------------------------------------------------------
-const miControlador = new ControladorStandard(miJuego, velocidadInicial);
+window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
 const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Repeticiones","Condicionales","Sensores"])
-
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_left_right", "Movimientos"],
-  ["comer_fruta", "Acciones"],
+  ["comer_frutilla", "Acciones"],
   ["if", "Condicionales"],
   ["controls", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
@@ -137,6 +137,6 @@ const ordenJerarquicoBloques = [
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverIzquierda","comerFruta","detectarFrutilla"]
+const funcionesAExponer=["moverDerecha","moverIzquierda","comerFrutilla","detectarFrutilla"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

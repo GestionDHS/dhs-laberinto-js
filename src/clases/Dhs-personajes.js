@@ -890,6 +890,8 @@ export class Dhs_personajes {
       tipoPersonaje: "bamboo",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "bamboo" },
+        abierto: { name: "normal", imageUrl: "agua" },
+        juntado: { name: "juntado", imageUrl: "agua" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,

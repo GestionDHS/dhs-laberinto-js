@@ -46,6 +46,7 @@ import piedra from "../img/piedra.png";
 import caminoCueva from "../img/caminoCueva.png";
 import piedraDiamante from "../img/piedraDiamante.png";
 import panda from "../img/panda.png";
+import caraPanda from "../img/caraPanda.png";
 import bamboo from "../img/bamboo.png";
 import frutilla from "../img/frutilla.png";
 import nubes from "../img/nubes.png";
@@ -503,6 +504,13 @@ export class DHS_Gallery {
       themes: ["panda"],
       url: panda,
       nombre: "Panda",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    caraPanda: {
+      themes: ["caraPanda"],
+      url: caraPanda,
+      nombre: "caraPanda",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },
