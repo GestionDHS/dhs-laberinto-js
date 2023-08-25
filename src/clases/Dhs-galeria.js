@@ -48,9 +48,15 @@ import piedraDiamante from "../img/piedraDiamante.png";
 import panda from "../img/panda.png";
 import caraPanda from "../img/caraPanda.png";
 import bamboo from "../img/bamboo.png";
+import bordeDerBamboo from "../img/bordeDerechoBamboo.png";
+import bordeIzqBamboo from "../img/bordeIzqBamboo.png";
+import bambooAnchoCamino from "../img/bambooAnchoCamino.png";
+import bambooAncho from "../img/bambooAncho.png";
+import tierra from "../img/tierra.png";
+import tierraPasto from "../img/tierraPasto.png";
+import estrella from "../img/estrella.png";
 import frutilla from "../img/frutilla.png";
 import nubes from "../img/nubes.png";
-import bambooAncho from "../img/bambooAncho.png";
 import pajaro from "../img/pajaro.png";
 import nubesCielo from "../img/nubesCielo.png";
 import diamante from "../img/diamante.png";
@@ -525,6 +531,48 @@ export class DHS_Gallery {
       themes: ["bambooAncho"],
       url: bambooAncho,
       nombre: "bambooAncho",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    bambooAnchoCamino: {
+      themes: ["bambooAnchoCamino"],
+      url: bambooAnchoCamino,
+      nombre: "bambooAnchoCamino",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    bambooIzqHoja: {
+      themes: ["bambooIzqHoja"],
+      url: bordeIzqBamboo,
+      nombre: "bambooIzqHoja",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    bambooDerechoHoja: {
+      themes: ["bambooDerechoHoja"],
+      url: bordeDerBamboo,
+      nombre: "bambooDerechoHoja",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    tierra: {
+      themes: ["tierra"],
+      url: tierra,
+      nombre: "tierra",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    tierraPasto: {
+      themes: ["tierraPasto"],
+      url: tierraPasto,
+      nombre: "tierraPasto",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    estrella: {
+      themes: ["estrella"],
+      url: estrella,
+      nombre: "estrella",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },

@@ -33,10 +33,10 @@ const panda = personajesGaleria.obtenerPersonaje("panda");
 const agua = personajesGaleria.obtenerPersonaje("agua");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
-const recuadroPintableDeseado = personajesGaleria.obtenerPersonaje("recuadroPintableDeseado");
-recuadroPintableDeseado.colorFondoInicial = "#6E260E"
+const tierra = personajesGaleria.obtenerPersonaje("tierra");
+const tierraPasto = personajesGaleria.obtenerPersonaje("tierraPasto");
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
-const bandera = personajesGaleria.obtenerPersonaje("bandera")
+const bandera = personajesGaleria.obtenerPersonaje("estrella")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -50,7 +50,7 @@ miJuego.agregarModal(datosModal);
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
-    personajes: [recuadroPintableDeseado],
+    personajes: [tierra],
     posiciones: coordenadasCaminoPared.coordenadasPared,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
@@ -64,8 +64,15 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
+    personajes: [tierraPasto],
+    posiciones: [[5, 0],[5, 1],[5, 2],[5, 3],[5, 4],[5, 5],[5, 6],[5, 7],[5, 8]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
     personajes: [panda],
-    posiciones: [[5, 2]],
+    posiciones: [[4, 2]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
@@ -79,14 +86,14 @@ let conjuntosDePersonajes = [
   { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
     estrategia: "azarExcluyente",
     personajes: [frutilla, bamboo],
-    posiciones: [[5, 5]],
+    posiciones: [[4, 5]],
     aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,
   },
   {
     estrategia: "fijos",
     personajes: [bandera],
-    posiciones: [[5, 7]],
+    posiciones: [[4, 7]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
@@ -95,7 +102,7 @@ let conjuntosDePersonajes = [
 
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[63]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[72]);
 
 //Método para detectar
 miJuego.personajePrincipal.detectarFrutilla = function () {

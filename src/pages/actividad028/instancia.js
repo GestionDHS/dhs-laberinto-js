@@ -10,10 +10,11 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 
 
+
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 9]; //fila, columna
 
@@ -34,9 +35,11 @@ const agua = personajesGaleria.obtenerPersonaje("agua");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
 const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
+const bambooAnchoCamino = personajesGaleria.obtenerPersonaje("bambooAnchoCamino");
+const bambooIzq = personajesGaleria.obtenerPersonaje("bambooIzqHoja");
+const bambooDerecho = personajesGaleria.obtenerPersonaje("bambooDerechoHoja");
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
 const bandera = personajesGaleria.obtenerPersonaje("bandera")
-
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -64,11 +67,24 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [bambooAncho],
+    personajes: [bambooAnchoCamino],
     posiciones: [[4,2],[4,3],[4,4],[4,5],[4,6],[4,7]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
-    direcciones:[90,90,90,90,90,90,90]
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bambooIzq],
+    posiciones: [[2,0],[4,0],[6,0]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bambooDerecho],
+    posiciones: [[3,2],[5,2]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
