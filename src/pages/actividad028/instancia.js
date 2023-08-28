@@ -14,7 +14,7 @@ import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
+window.miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 9]; //fila, columna
 
@@ -39,7 +39,7 @@ const bambooAnchoCamino = personajesGaleria.obtenerPersonaje("bambooAnchoCamino"
 const bambooIzq = personajesGaleria.obtenerPersonaje("bambooIzqHoja");
 const bambooDerecho = personajesGaleria.obtenerPersonaje("bambooDerechoHoja");
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
-const bandera = personajesGaleria.obtenerPersonaje("bandera")
+const estrella = personajesGaleria.obtenerPersonaje("estrella")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -109,7 +109,7 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [bandera],
+    personajes: [estrella],
     posiciones: [[3, 7]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
@@ -119,7 +119,7 @@ let conjuntosDePersonajes = [
 
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[69]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[74]);
 
 //Método para detectar
 miJuego.personajePrincipal.detectarFrutilla = function () {

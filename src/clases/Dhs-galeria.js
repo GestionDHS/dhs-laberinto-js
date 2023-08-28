@@ -47,6 +47,12 @@ import caminoCueva from "../img/caminoCueva.png";
 import piedraDiamante from "../img/piedraDiamante.png";
 import panda from "../img/panda.png";
 import caraPanda from "../img/caraPanda.png";
+import arbol1 from "../img/arbol1.png";
+import arbol2 from "../img/arbol2.png";
+import arbol3 from "../img/arbol3.png";
+import arbol4 from "../img/arbol4.png";
+import hamacaNeumatico from "../img/hamacaNeumatico.png";
+import arbol5 from "../img/arbol5.png";
 import bamboo from "../img/bamboo.png";
 import bordeDerBamboo from "../img/bordeDerechoBamboo.png";
 import bordeIzqBamboo from "../img/bordeIzqBamboo.png";
@@ -517,6 +523,48 @@ export class DHS_Gallery {
       themes: ["caraPanda"],
       url: caraPanda,
       nombre: "caraPanda",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    arbol1: {
+      themes: ["arbol1"],
+      url: arbol1,
+      nombre: "arbol1",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    arbol2: {
+      themes: ["arbol2"],
+      url: arbol2,
+      nombre: "arbol2",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    arbol3: {
+      themes: ["arbol3"],
+      url: arbol3,
+      nombre: "arbol3",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    arbol4: {
+      themes: ["arbol4"],
+      url: arbol4,
+      nombre: "arbol4",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    hamacaNeumatico: {
+      themes: ["hamacaNeumatico"],
+      url: hamacaNeumatico,
+      nombre: "hamacaNeumatico",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    arbol5: {
+      themes: ["arbol5"],
+      url: arbol5,
+      nombre: "arbol5",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },

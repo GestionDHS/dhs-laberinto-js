@@ -36,7 +36,12 @@ const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
 const tierra = personajesGaleria.obtenerPersonaje("tierra");
 const tierraPasto = personajesGaleria.obtenerPersonaje("tierraPasto");
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
-const bandera = personajesGaleria.obtenerPersonaje("estrella")
+const arbol1 = personajesGaleria.obtenerPersonaje("arbol1")
+const arbol2 = personajesGaleria.obtenerPersonaje("arbol2")
+const arbol3 = personajesGaleria.obtenerPersonaje("arbol3")
+const arbol4 = personajesGaleria.obtenerPersonaje("arbol4")
+const hamacaNeumatico = personajesGaleria.obtenerPersonaje("hamacaNeumatico")
+const arbol5 = personajesGaleria.obtenerPersonaje("arbol5")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -92,8 +97,43 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [bandera],
+    personajes: [arbol1],
+    posiciones: [[2, 7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [arbol2],
+    posiciones: [[2, 8]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [arbol3],
+    posiciones: [[3, 7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [arbol4],
+    posiciones: [[3, 8]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [hamacaNeumatico],
     posiciones: [[4, 7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [arbol5],
+    posiciones: [[4, 8]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
