@@ -1007,11 +1007,11 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
-    comer_fruta() {
+    comer_frutilla() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                type: "comer_fruta",
-                message0: "%1 comer fruta",
+                type: "comer_frutilla",
+                message0: "%1 comer frutilla",
                 "args0": [
                     {
                       "type": "field_image",
@@ -1027,13 +1027,43 @@ export default class ConfiguradorBloques {
             },
         ]);
 
-        Blockly.JavaScript.forBlock["comer_fruta"] = function (block) {
-            const code = "comerFruta();"
+        Blockly.JavaScript.forBlock["comer_frutilla"] = function (block) {
+            const code = "comerFrutilla();"
             return code;
         };
 
         return {
-            type: "comer_fruta",
+            type: "comer_frutilla",
+            kind: "block",
+        }
+    }
+    comer_bamboo() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "comer_bamboo",
+                message0: "%1 comer bamboo",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/6485/6485722.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["comer_bamboo"] = function (block) {
+            const code = "comerBamboo();"
+            return code;
+        };
+
+        return {
+            type: "comer_bamboo",
             kind: "block",
         }
     }
@@ -1550,6 +1580,35 @@ export default class ConfiguradorBloques {
         };
         return {
             "type": "sensor_frutilla",
+            "kind": "block",
+        }
+    }
+    sensor_bamboo() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_bamboo",
+                "message0": "%1 ¿Hay bamboo aquí?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/6485/6485722.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_bamboo"] = function (block) {
+            const code = "detectarBamboo()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_bamboo",
             "kind": "block",
         }
     }
