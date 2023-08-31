@@ -1,3 +1,5 @@
+import circuloAmarilloTransparente from "../img/circuloAmarillo.png"
+import flechaAmarilla from "../img/flechaamarilla.png"
 import robotlupe from "../img/robotlupe.png";
 import lodoPasto from "../img/lodoPasto.png";
 import cofrecerradoPasto from "../img/cofrecerradoPasto.png";
@@ -402,7 +404,14 @@ export class DHS_Gallery {
     },
     circuloAmarilloTransparente: {
       themes: [],
-      url: "../city-commons/img/circulo-amarillo-transparente.png",
+      url: circuloAmarilloTransparente,
+      nombre: "Circulo Amarillo",
+      parrafoLicencia: "<p>Digital House</p>",
+      showLicense: false,
+    },
+    flechaAmarilla: {
+      themes: [],
+      url: flechaAmarilla,
       nombre: "Circulo Amarillo",
       parrafoLicencia: "<p>Digital House</p>",
       showLicense: false,

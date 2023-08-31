@@ -4,348 +4,192 @@ import ControladorStandard from "../../bloques/Controlador";
 import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
+import {Dhs_personajes} from '../../clases/Dhs-personajes';
+import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
+import {Dhs_Categorias} from '../../clases/Dhs-categorias';
+import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
+
+
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
-// PRIMERO: instanciar el juego y setear velocidad
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
-//SEGUNDO: CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO, se crea la variable dimensiónes.
-const dimensiones = [5, 6]; //fila, columna
+const dimensiones = [7, 9]; //fila, columna
 
-//tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 0, 1, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 1, 0, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-//TERCERO: Definir que objetos van a ser "pared", y cuales "camino"
-const arbol = {
-  idUsarHTML: "arbol",
-  tipoPersonaje: "arbol",
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "arboles" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-};
-const pasto = {
-  idUsarHTML: "camino",
-  tipoPersonaje: "camino",
-  pintable: true,
-  estadosPosibles: {
-    normal: { name: "normal", imageUrl: "pasto" },
-  },
-  estadoInicial: "normal",
-  zIndex: 1,
-  posicionInicialY: 0,
-  posicionInicialX: 0,
-  direccionInicial: 0,
-  rotable: false,
-};
+const coordenadasCaminoPared = generarCoordenadas(tablero);
+const personajesGaleria = new Dhs_personajes();
+const panda = personajesGaleria.obtenerPersonaje("panda");
+const agua = personajesGaleria.obtenerPersonaje("agua");
+const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
+const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
+const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
+const bambooAnchoCamino = personajesGaleria.obtenerPersonaje("bambooAnchoCamino");
+const bambooIzq = personajesGaleria.obtenerPersonaje("bambooIzqHoja");
+const bambooDerecho = personajesGaleria.obtenerPersonaje("bambooDerechoHoja");
+const nubes = personajesGaleria.obtenerPersonaje("nubes")
+const estrella = personajesGaleria.obtenerPersonaje("estrella")
 
-//CUARTO: Setear Modal de Ganar
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "monedas",
-  texto: "Encontramos 180 monedas de oro.",
+  imagen: "caraPanda",
+  texto: "¡Objetivo Cumplido!",
   oculto: true,
 };
-
-// QUINTO:Para generar el escenario recibe como parametros: dimensiones, el tablero, el anchoBase de los casilleros
-//(ojo esta en medida relativa "em") el color de borde ...(para los nombres de paredes
-// y caminos disponibles visitar el archivo Dhs-galeria.js , dichos nombres son las claves para acceder a los obj.)
-miJuego.generarEscenario(dimensiones, 3, "white");
+miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
 miJuego.agregarModal(datosModal);
-miJuego.generarCaminoYpared(dimensiones, tablero, arbol, pasto);
-
-//SEXTO: Definir los Objetos Personajes
-//tipoPersonaje : PersonajeBasico / PersonajeMovibleSimple / PersonajeMovibleGrados / PersonajeDibujante
-const arrayDePersonajes = [
+//fijos,azarRango,azarFijos,azarExcluyente,azarCantTotal,azarCantidadTotalFijos
+let conjuntosDePersonajes = [
   {
-    idUsarHTML: "lupe",
-    tipoPersonaje: "lupe",
-    clasePersonaje: "PersonajeDibujante",
-    tieneTooltip: true,
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lupe" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 3,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 3,
-    rotable: true,
-    colisiones: [
-      {
-        con: "lodo",
-        factorDeAvance: 0.7,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Me atasqué en el lodo.",
-      },
-      {
-        con: "arbol",
-        factorDeAvance: 0.2,
-        callback: (x) => {
-          x.terminar();
-        },
-        mensaje: "¡OH NO! Choqué contra un árbol",
-      },
-
-      // {
-      //   con: "cofre",
-      //   factorDeAvance: 1,
-      //   callback: (x) => {
-      //     //depende si tengo el bloque Abrir Cofre
-      //       x.abrir("cofre");
-      //   },
-      //   mensaje: "¡We are the Champions!",
-      // },
-    ],
+    estrategia: "fijos",
+    personajes: [bambooAncho],
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "lodo",
-    tipoPersonaje: "lodo",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "lodo" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 1,
-    posicionInicialX: 3,
-    direccionInicial: 0,
-    zIndex: 1,
-    rotable: false,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [agua],
+    posiciones: coordenadasCaminoPared.coordenadasCamino,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "cofre",
-    tipoPersonaje: "cofre",
-    estadosPosibles: {
-      cerrado: { name: "cerrado", imageUrl: "cofre" },
-      abierto: { name: "abierto", imageUrl: "cofreAbierto" },
-    },
-    estadoInicial: "cerrado", //no seria "cerrado"? y tener una img en "cerrado"
-    posicionInicialY: 3,
-    posicionInicialX: 4,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: false,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [bambooAnchoCamino],
+    posiciones: [[4,2],[4,3],[4,4],[4,5],[4,6],[4,7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
-    idUsarHTML: "basura",
-    tipoPersonaje: "basura",
-    estadosPosibles: {
-      normal: { name: "normal", imageUrl: "basura" },
-      juntado: { name: "juntado", imageUrl: "pasto" },
-    },
-    estadoInicial: "normal",
-    posicionInicialY: 2,
-    posicionInicialX: 2,
-    direccionInicial: 0,
-    zIndex: 2,
-    rotable: true,
-    colisiones: [],
+    estrategia: "fijos",
+    personajes: [bambooIzq],
+    posiciones: [[2,0],[4,0],[6,0]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bambooDerecho],
+    posiciones: [[3,2],[5,2]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [panda],
+    posiciones: [[3, 3]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [nubes],
+    posiciones: [[0, 1],[1, 2],[0, 3],[1, 5],[0, 7],[1, 8]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
+    estrategia: "azarExcluyente",
+    personajes: [frutilla, bamboo],
+    posiciones: [[3, 5]],
+    aliasConjunto: "PersonajesAlAzarExcluyente",
+    desapareceAlReiniciar: true,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [estrella],
+    posiciones: [[3, 7]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
 ];
 
-//SEPTIMO: Generar y setear los Personajes - seteo el PersonajePrincipal y sus funciones
-miJuego.generarPersonajes(arrayDePersonajes);
-// Se debe mirar el arrayDePersonajes para saber en que posición esta el personaje principal
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[30]);
 
-//Método para Abrir el Cofre
-miJuego.personajePrincipal.abrirCofre = function () {
-  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
+miJuego.crearPersonajes(conjuntosDePersonajes);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[74]);
+
+//Método para detectar
+miJuego.personajePrincipal.detectarFrutilla = function () {
+  // devuelve true si encuentra o false si no hay cofre
+  return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
+};
+miJuego.personajePrincipal.comerFrutilla = function () {
+  const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("Oh! Aquí no hay cofre.");
-    //this.abrirModalFalloApertura();
+    return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
   } else if (!intento.exito) {
-    //this.abrirYMostrarModal();
-    return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
-  } else {
-    return this.abrirYMostrarModal();
+    return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
+  }else if (intento.premio?.tipo == "frutilla") {
+    return this.decir("¡mmmm! que rica frutilla.",2000);
   }
+
 };
 
-//Método para Juntar Basura
-miJuego.personajePrincipal.juntarBasura = function () {
-  const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
+miJuego.personajePrincipal.detectarBamboo = function () {
+  // devuelve true si encuentra o false si no hay cofre
+  return this.buscarObjetoEnCasilleroActual("bamboo") !== undefined
+};
+miJuego.personajePrincipal.comerBamboo = function () {
+  const intento = this.buscarParaRealizarAccion("bamboo", "abrirse");
   if (!intento.objetoEncontrado) {
-    this.decirTerminar("Oh! Aquí no hay basura.");
+    return this.decirTerminar("¡Oh! Aquí no hay bambú.");
   } else if (!intento.exito) {
-    this.decirTerminar("Oh! Hubo un problema al juntar la basura.");
+    return this.decirTerminar("¡Oh! Aqui ya no hay bambú.");
+  }else if (intento.premio?.tipo == "bamboo") {
+    return this.decir("¡mmmm! que rica bambú.",2000);
   }
-  return intento;
+
 };
 
-// Lancha
-miJuego.personajePrincipal.llegarPlanta = function () {
-  if (this.mochila.length === 3) {
+miJuego.personajePrincipal.llegarALaEstrella = function () {
+  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
+  //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
+  //  y si era una frutilla y no se la comio, también viene vacia
+  const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
+  if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
     this.abrirYMostrarModal();
-  } else if(!this.intento) {
-    return this.decirTerminar("¡Oh! Quedó basura por levantar.")
   }
-}
-
-// Pedro - Lupe
-miJuego.personajePrincipal.llegarEscuela = function () {
-  this.abrirYMostrarModal();
-}
-
-//Conejo - Nelson
-miJuego.personajePrincipal.cosecharZanahoria = function () {
-  const intento = this.buscarParaRealizarAccion("zanahoria", "abrirse");
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-  } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Esta zanahoria ya fue cosechada.");
-  } 
+  if(casilleroAleatoreoFrutilla && this.mochila.length == 0){
+    this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.")
+  }
+  if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
+    this.abrirYMostrarModal();
+  }else{
+    this.decirTerminar("¡Oh No! Quedó una bamboo sin comer 😟.");
+  }
 };
 
-miJuego.personajePrincipal.comerZanahoria = function () {
-  const intento = this.buscarParaRealizarAccion("zanahoria", "serJuntado");
- 
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay zanahoria.");
-  } else if( intento.estado == "juntado") {
-    return this.decirTerminar("¡Oh! Esta zanahoria ya fue comida.");
-  } else if (!intento.exito ) {
-    return this.decirTerminar("¡Oh! Esta zanahoria aún no fue cosechada.");
-  } 
-};
-
-//Seteo del Dibujo a realizar - Verificación. Para los ejercicios que tienen PersonajesDibujables
-// const EJEMPLO_DIBUJO_DESEADO = [
-//   [null, null, null, null, null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, "#000000", null, "#000000", null],
-//   [null, null, null, null, null],
-// ]
-// miJuego.personajePrincipal.dibujoDeseado = EJEMPLO_DIBUJO_DESEADO
-
-//******************************************************* */
-//    BLOCKLY
-//****************************************************** */
-
-//OCTAVO: Creamos una instancia del controlador, argumentos: el juego, velocidad inicial
-
-//****Si necesitamos que el Workspace tenga bloques precargados, lo que hacemos, para obtener el JSON para setearlo es
-//****lo siguiente: 
-//****1- hacemos global a miControlador "window.miControlador"
-//****2 - En el Navegador, cargamos los bloques que necesitamos ya estén preCargados
-//****3 - Ponemos en consola éste linea: JSON.stringify(miControlador.obtenerBloquesSerializados()) para Obtener bloques precargados
-//****4 - Nos copiamos el string que nos devuelve, y se lo colocamos a la variable "bloquesPrecargadosJSON"
-//****5 - Volvemos a poner "miControlador" como const
+// BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
+const categoria=new Dhs_Categorias()
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Condicionales","Sensores"])
 
-//NOVENO: Dejamos habilitadas las categorías que vamos a usar
-const categoriasDeseadas = [
-  {
-    name: "Eventos",
-    categorystyle: "execute",
-  },
-  {
-    name: "Movimientos",
-    categorystyle: "movement",
-  },
-  {
-    name: "Lápiz",
-    categorystyle: "pencil",
-  },
-  {
-    name: "Acciones",
-    categorystyle: "action",
-  },
-  {
-    name: "Condicionales",
-    categorystyle: "logic_category",
-  },
-  {
-    name: "Repeticiones",
-    categorystyle: "loop_category",
-  },
-];
-categoriasDeseadas.forEach((cat) =>
-  miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
-);
-
-//DECIMO: Agregamos los bloques a cada categoría
-const bloquesCustomStandardDesados = [
-  // [nombreBloque, categoriaDestino]
-  // [grupoBloques, categoriaDestino]
+const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
-  ["move_classic_param", "Movimientos"],
-  ["avanzar_param", "Movimientos"],
-  ["girar_clasico", "Movimientos"],
-  ["girar_grados", "Movimientos"],
-  ["apuntar_hacia", "Movimientos"],
-  ["abrir_cofre", "Acciones"],
-  ["juntar_basura", "Acciones"],
-  ["lapiz", "Lápiz"],
+  ["move_left_right_param", "Movimientos"],
+  ["comer_frutilla", "Acciones"],
+  ["comer_bamboo", "Acciones"],
   ["if", "Condicionales"],
-  ["controls", "Repeticiones"],
+  ["ifElse", "Condicionales"],
+  ["sensor_frutilla", "Sensores"],
+  ["sensor_bamboo", "Sensores"],
 ];
 
-bloquesCustomStandardDesados.forEach((bl) => {
-  miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
-});
+const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+//const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
+const funcionesAExponer=["moverDerecha","moverIzquierda","comerFrutilla","comerBamboo","detectarFrutilla","detectarBamboo"]
 
-//ONCEAVO: Instanciamos el Render y se lo inyectamos al Worckspace
-const render = new CustomRenderer();
-render.registrarRender("renderDHS");
-miControlador.crearInyectarWorkspace("dhs-blockly-div", {
-  toolbox: miControlador.ConfiguradorBloques.toolbox,
-  theme: "themeDH",
-  renderer: "renderDHS",
-  zoom: {
-    controls: true,
-    wheel: true,
-    pinch: true,
-  },
-});
-
-//DOCEAVO: Generamos los bloques que quedarán fijos en el worckspace.
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
-miControlador.setearYCargarBloquesIniciales(JSON.parse(bloquesPrecargadosJSON));
-
-//Habilitamos funciones para el manejo del workspace
-miControlador.setearEventoCambioWorkspaceStandard();
-miControlador.habilitarDesactivarHuerfanos();
-miControlador.crearFuncionesGlobalesStandard();
-
-//TRECEAVO: Exponemos globalmente las funciones de los bloques, borrar las que no usmos en cada ejercicio.
-miControlador.juego.agregarGlobalConCallback("moverDerecha");
-miControlador.juego.agregarGlobalConCallback("moverAbajo");
-miControlador.juego.agregarGlobalConCallback("moverArriba");
-miControlador.juego.agregarGlobalConCallback("moverIzquierda");
-miControlador.juego.agregarGlobalConCallback("abrirCofre");
-miControlador.juego.agregarGlobalConCallback("juntarBasura");
-miControlador.juego.agregarGlobalConCallback("avanzar");
-miControlador.juego.agregarGlobalConCallback("girarIzquierda");
-miControlador.juego.agregarGlobalConCallback("girarDerecha");
-miControlador.juego.agregarGlobalConCallback("girarGrados");
-miControlador.juego.agregarGlobalConCallback("apuntarEnDireccion");
-miControlador.juego.agregarGlobalConCallback("bajarLapiz");
-miControlador.juego.agregarGlobalConCallback("subirLapiz");
-miControlador.juego.agregarGlobalConCallback("setearColor");
-
-//Le enviamos las funciones customizadas al interpreter  (No cambia nunca- No se toca)
-const callBackJuego = miControlador.juego.generarCallbackParaInterprete();
-miControlador.setearCallbackInterprete((interpreter, globalObject) => {
-  miControlador.callbackInterpreteStandard(interpreter, globalObject);
-  callBackJuego(interpreter, globalObject);
-});
+configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

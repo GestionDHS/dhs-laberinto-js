@@ -635,6 +635,14 @@ export default class ConfiguradorBloques {
         ]
     }
 
+    //macro Panda
+    move_left_right_param() {
+        return [
+            this.move_right_param(),
+            this.move_left_param(),
+        ]
+    }
+
     // MOVIMIENTO POR AVANCE 
     avanzar() {
         Blockly.common.defineBlocksWithJsonArray([
@@ -1041,7 +1049,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "comer_bamboo",
-                message0: "%1 comer bamboo",
+                message0: "%1 comer bambú",
                 "args0": [
                     {
                       "type": "field_image",
@@ -1587,7 +1595,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "sensor_bamboo",
-                "message0": "%1 ¿Hay bamboo aquí?",
+                "message0": "%1 ¿Hay bambú aquí?",
                 "output": null,
                 "args0": [
                     {

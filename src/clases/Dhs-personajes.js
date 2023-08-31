@@ -1,3 +1,4 @@
+import circuloAmarilloTransparente from '../img/circuloAmarillo.png';
 
 export class Dhs_personajes {
   constructor() {
@@ -8,6 +9,36 @@ export class Dhs_personajes {
     return this.personajes[nombre];
   }
   personajes = {
+    circuloAmarillo: {
+      idUsarHTML: "circuloAmarillo",
+      tipoPersonaje: "circuloAmarillo",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "circuloAmarilloTransparente" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
+    flechaAmarilla: {
+      idUsarHTML: "flechaAmarilla",
+      tipoPersonaje: "flechaAmarilla",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "flechaAmarilla" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
     lupe: {
       idUsarHTML: "lupe",
       tipoPersonaje: "lupe",
@@ -886,7 +917,14 @@ export class Dhs_personajes {
           con: "hamacaNeumatico",
           factorDeAvance: 1,
           callback: (x) => {
-            x.llegarALaBandera();
+            x.llegarALaHamaca();
+          },
+        },
+        {
+          con: "estrella",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaEstrella();
           },
         },
       ],
@@ -1117,6 +1155,21 @@ export class Dhs_personajes {
       posicionInicialX: 0,
       direccionInicial: 0,
       zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
+    noPersonaje: {
+      idUsarHTML: "noPersonaje",
+      tipoPersonaje: "noPersonaje",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "" }
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 0,
       rotable: false,
       paddingImagen: "1px",
       colisiones: [],

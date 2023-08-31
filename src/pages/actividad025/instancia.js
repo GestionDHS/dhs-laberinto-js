@@ -122,7 +122,6 @@ const ordenJerarquicoBloques = [
   ["avanzar", "Movimientos"],
   ["picar_piedra", "Acciones"],
   ["if", "Condicionales"],
-  ["ifElse", "Condicionales"],
   ["controls", "Repeticiones"],
   ["sensor_piedra", "Sensores"],
 ];

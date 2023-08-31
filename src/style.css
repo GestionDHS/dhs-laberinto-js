@@ -62,3 +62,8 @@ footer #logoBlockly-footer{
   left: 40px;
   bottom:10px;
 }
+
+img {
+  user-select: none;
+  pointer-events: none;
+}

@@ -14,7 +14,7 @@ import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 9]; //fila, columna
 
@@ -44,7 +44,7 @@ const estrella = personajesGaleria.obtenerPersonaje("estrella")
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "caraPanda",
-  texto: "mmmmm que rico!",
+  texto: "¡Objetivo Cumplido!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
@@ -128,11 +128,12 @@ miJuego.personajePrincipal.detectarFrutilla = function () {
 };
 miJuego.personajePrincipal.comerFrutilla = function () {
   const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
-
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
   } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Este frutilla ya no está.");
+    return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
+  }else if (intento.premio?.tipo == "frutilla") {
+    return this.decir("¡Mmmm! Qué rica frutilla.",2000);
   }
 
 };
@@ -143,37 +144,46 @@ miJuego.personajePrincipal.detectarBamboo = function () {
 };
 miJuego.personajePrincipal.comerBamboo = function () {
   const intento = this.buscarParaRealizarAccion("bamboo", "abrirse");
-
   if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay un bamboo.");
+    return this.decirTerminar("¡Oh! Aquí no hay bambú.");
   } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Este bamboo ya no está.");
+    return this.decirTerminar("¡Oh! Aqui ya no hay bambú.");
+  }else if (intento.premio?.tipo == "bamboo") {
+    return this.decir("¡Mmmm! Qué rica rama de bambú.",2000);
   }
 
 };
 
-miJuego.personajePrincipal.llegarALaBandera = function () {
+miJuego.personajePrincipal.llegarALaEstrella = function () {
   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
   //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
   //  y si era una frutilla y no se la comio, también viene vacia
-  if (this.mochila.length >= 1 && this.mochila[0]?.tipo) {
+  const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
+  if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
     this.abrirYMostrarModal();
+  }
+  if(casilleroAleatoreoFrutilla && this.mochila.length == 0){
+    this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.")
+  }
+  if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
+    this.abrirYMostrarModal();
+  }else{
+    this.decirTerminar("¡Oh No! Quedó un bambú sin comer 😟.");
   }
 };
 
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Repeticiones","Condicionales","Sensores"])
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Condicionales","Sensores"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_left_right", "Movimientos"],
+  ["move_left_right_param", "Movimientos"],
   ["comer_frutilla", "Acciones"],
   ["comer_bamboo", "Acciones"],
   ["if", "Condicionales"],
   ["ifElse", "Condicionales"],
-  ["controls", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
   ["sensor_bamboo", "Sensores"],
 ];
