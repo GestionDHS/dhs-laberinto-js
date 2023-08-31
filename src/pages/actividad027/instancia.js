@@ -42,6 +42,7 @@ const arbol3 = personajesGaleria.obtenerPersonaje("arbol3")
 const arbol4 = personajesGaleria.obtenerPersonaje("arbol4")
 const hamacaNeumatico = personajesGaleria.obtenerPersonaje("hamacaNeumatico")
 const arbol5 = personajesGaleria.obtenerPersonaje("arbol5")
+const noPersonaje = personajesGaleria.obtenerPersonaje("noPersonaje")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -90,7 +91,7 @@ let conjuntosDePersonajes = [
   },
   { //azarExcluyente(hay que pasar, minimo 2 posiciones) - azarFijos
     estrategia: "azarExcluyente",
-    personajes: [frutilla, bamboo],
+    personajes: [frutilla, noPersonaje],
     posiciones: [[4, 5]],
     aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,

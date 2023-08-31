@@ -1121,6 +1121,21 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       colisiones: [],
     },
+    noPersonaje: {
+      idUsarHTML: "noPersonaje",
+      tipoPersonaje: "noPersonaje",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "" }
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 0,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
     nubes: {
       idUsarHTML: "nubes",
       tipoPersonaje: "nubes",
