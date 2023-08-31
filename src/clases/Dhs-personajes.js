@@ -920,6 +920,13 @@ export class Dhs_personajes {
             x.llegarALaHamaca();
           },
         },
+        {
+          con: "estrella",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaEstrella();
+          },
+        },
       ],
       configPosicionamiento: {},
     },

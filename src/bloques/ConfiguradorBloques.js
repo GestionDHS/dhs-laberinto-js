@@ -1049,7 +1049,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 type: "comer_bamboo",
-                message0: "%1 comer bamboo",
+                message0: "%1 comer bambú",
                 "args0": [
                     {
                       "type": "field_image",
@@ -1595,7 +1595,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "sensor_bamboo",
-                "message0": "%1 ¿Hay bamboo aquí?",
+                "message0": "%1 ¿Hay bambú aquí?",
                 "output": null,
                 "args0": [
                     {

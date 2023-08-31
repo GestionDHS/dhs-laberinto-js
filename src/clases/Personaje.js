@@ -108,7 +108,7 @@ export class PersonajeBasico {
     !this.estaVivo ? false : this.exponerTooltip(texto, milisegundos);
   }
 
-  decir(texto, milisegundos = 3500) {
+  decir(texto, milisegundos = 4000) {
     this.verificarQueEsteVivoYDecir(texto, milisegundos);
     // Y LOGGEARLO!!
   }
