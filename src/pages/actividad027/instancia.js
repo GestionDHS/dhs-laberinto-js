@@ -13,7 +13,7 @@ import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-const miJuego = new Juego(velocidadInicial);
+window.miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 9]; //fila, columna
 
@@ -32,7 +32,6 @@ const personajesGaleria = new Dhs_personajes();
 const panda = personajesGaleria.obtenerPersonaje("panda");
 const agua = personajesGaleria.obtenerPersonaje("agua");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
-const bamboo = personajesGaleria.obtenerPersonaje("bamboo");
 const tierra = personajesGaleria.obtenerPersonaje("tierra");
 const tierraPasto = personajesGaleria.obtenerPersonaje("tierraPasto");
 const nubes = personajesGaleria.obtenerPersonaje("nubes")
@@ -48,8 +47,8 @@ const flechaAmarilla = personajesGaleria.obtenerPersonaje("flechaAmarilla")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "frutilla",
-  texto: "mmmmm que rica Frutilla!",
+  imagen: "panda",
+  texto: "Llegamos a la hamaca!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
@@ -177,14 +176,21 @@ console.log(intento)
 
 };
 
-miJuego.personajePrincipal.llegarALaBandera = function () {
+miJuego.personajePrincipal.llegarALaHamaca = function () {
   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
   //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
   //  y si era una frutilla y no se la comio, también viene vacia
-  if (this.mochila.length >= 1 && this.mochila[0]?.tipo) {
+
+  //me fijo en el casillero ver si hay frutilla,si hay y la mochi tiene una frutilla ->gana
+  // si no hay frutilla -> gana
+  // si hay frutilla y la mochi esta vacia-> muere
+  const casilleroAleatoreo = miJuego.escenario.objetosCasilleros[4][5].ocupantes.some(p=>p.idHTML == "frutilla")
+  if(!casilleroAleatoreo){
     this.abrirYMostrarModal();
-  }else{
-    this.exponerTooltip("Llegamos a la hamaca, muy bien!");
+  }else if(this.mochila[0]?.tipo == "frutilla"){
+    this.abrirYMostrarModal();
+  }else if(this.mochila.length == 0){
+    this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.");
   }
 };
 

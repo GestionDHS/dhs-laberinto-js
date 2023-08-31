@@ -917,7 +917,7 @@ export class Dhs_personajes {
           con: "hamacaNeumatico",
           factorDeAvance: 1,
           callback: (x) => {
-            x.llegarALaBandera();
+            x.llegarALaHamaca();
           },
         },
       ],
