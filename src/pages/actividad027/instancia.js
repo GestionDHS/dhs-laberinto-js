@@ -15,7 +15,7 @@ import { PersonajesAlAzarExcluyente } from "../../clases/StrategyCreacion";
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 9]; //fila, columna
 
@@ -50,7 +50,7 @@ const flechaAmarilla = personajesGaleria.obtenerPersonaje("flechaAmarilla");
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
   imagen: "caraPanda",
-  texto: "Objetivo Cumplido!",
+  texto: "¡Objetivo Cumplido!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
@@ -190,7 +190,7 @@ miJuego.personajePrincipal.comerFrutilla = function () {
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
   } else if (intento.premio?.tipo == "frutilla") {
-    return this.decir("¡mmmm! que rica frutilla.");
+    return this.decir("¡Mmmm! Qué rica frutilla.");
   }
 };
 

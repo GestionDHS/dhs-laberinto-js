@@ -14,7 +14,7 @@ import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
 document.querySelector("#appActividad").innerHTML = template(``);
 
 const velocidadInicial = 1000;
-window.miJuego = new Juego(velocidadInicial);
+const miJuego = new Juego(velocidadInicial);
 
 const dimensiones = [7, 9]; //fila, columna
 
@@ -133,7 +133,7 @@ miJuego.personajePrincipal.comerFrutilla = function () {
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
   }else if (intento.premio?.tipo == "frutilla") {
-    return this.decir("¡mmmm! que rica frutilla.",2000);
+    return this.decir("¡Mmmm! Qué rica frutilla.",2000);
   }
 
 };
@@ -149,7 +149,7 @@ miJuego.personajePrincipal.comerBamboo = function () {
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Aqui ya no hay bambú.");
   }else if (intento.premio?.tipo == "bamboo") {
-    return this.decir("¡mmmm! que rica bambú.",2000);
+    return this.decir("¡Mmmm! Qué rica rama de bambú.",2000);
   }
 
 };
@@ -168,7 +168,7 @@ miJuego.personajePrincipal.llegarALaEstrella = function () {
   if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
     this.abrirYMostrarModal();
   }else{
-    this.decirTerminar("¡Oh No! Quedó una bamboo sin comer 😟.");
+    this.decirTerminar("¡Oh No! Quedó un bambú sin comer 😟.");
   }
 };
 
