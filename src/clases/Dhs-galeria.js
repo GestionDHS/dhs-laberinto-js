@@ -1,5 +1,5 @@
 import circuloAmarilloTransparente from "../img/circuloAmarillo.png"
-import flechaAmarilla from "../img/flechaamarilla.png"
+import flechaAmarilla from "../img/flechaAmarilla.png"
 import robotlupe from "../img/robotlupe.png";
 import lodoPasto from "../img/lodoPasto.png";
 import cofrecerradoPasto from "../img/cofrecerradoPasto.png";
