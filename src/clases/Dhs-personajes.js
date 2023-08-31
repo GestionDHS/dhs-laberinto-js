@@ -1,3 +1,4 @@
+import circuloAmarilloTransparente from '../img/circuloAmarillo.png';
 
 export class Dhs_personajes {
   constructor() {
@@ -8,6 +9,36 @@ export class Dhs_personajes {
     return this.personajes[nombre];
   }
   personajes = {
+    circuloAmarillo: {
+      idUsarHTML: "circuloAmarillo",
+      tipoPersonaje: "circuloAmarillo",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "circuloAmarilloTransparente" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
+    flechaAmarilla: {
+      idUsarHTML: "flechaAmarilla",
+      tipoPersonaje: "flechaAmarilla",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "flechaAmarilla" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
     lupe: {
       idUsarHTML: "lupe",
       tipoPersonaje: "lupe",

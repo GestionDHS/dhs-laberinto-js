@@ -43,6 +43,8 @@ const arbol4 = personajesGaleria.obtenerPersonaje("arbol4")
 const hamacaNeumatico = personajesGaleria.obtenerPersonaje("hamacaNeumatico")
 const arbol5 = personajesGaleria.obtenerPersonaje("arbol5")
 const noPersonaje = personajesGaleria.obtenerPersonaje("noPersonaje")
+const circuloAmarillo = personajesGaleria.obtenerPersonaje("circuloAmarillo")
+const flechaAmarilla = personajesGaleria.obtenerPersonaje("flechaAmarilla")
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -84,6 +86,13 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
+    personajes: [circuloAmarillo],
+    posiciones: [[4, 2]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
     personajes: [nubes],
     posiciones: [[0, 1],[1, 2],[0, 3],[1, 5],[0, 7],[1, 8]],
     aliasConjunto: "fijosTablero",
@@ -95,6 +104,13 @@ let conjuntosDePersonajes = [
     posiciones: [[4, 5]],
     aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,
+  },
+  { 
+    estrategia: "fijos",
+    personajes: [flechaAmarilla],
+    posiciones: [[3, 5]],
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
@@ -152,7 +168,7 @@ miJuego.personajePrincipal.detectarFrutilla = function () {
 };
 miJuego.personajePrincipal.comerFrutilla = function () {
   const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
-
+console.log(intento)
   if (!intento.objetoEncontrado) {
     return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
   } else if (!intento.exito) {
@@ -167,19 +183,20 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
   //  y si era una frutilla y no se la comio, también viene vacia
   if (this.mochila.length >= 1 && this.mochila[0]?.tipo) {
     this.abrirYMostrarModal();
+  }else{
+    this.exponerTooltip("Llegamos a la hamaca, muy bien!");
   }
 };
 
 // BLOCKLY ------------------------------------------------------
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Repeticiones","Condicionales","Sensores"])
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Condicionales","Sensores"])
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_left_right", "Movimientos"],
+  ["move_left_right_param", "Movimientos"],
   ["comer_frutilla", "Acciones"],
   ["if", "Condicionales"],
-  ["controls", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
 ];
 

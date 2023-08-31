@@ -635,6 +635,14 @@ export default class ConfiguradorBloques {
         ]
     }
 
+    //macro Panda
+    move_left_right_param() {
+        return [
+            this.move_right_param(),
+            this.move_left_param(),
+        ]
+    }
+
     // MOVIMIENTO POR AVANCE 
     avanzar() {
         Blockly.common.defineBlocksWithJsonArray([
