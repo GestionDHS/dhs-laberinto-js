@@ -294,9 +294,5 @@ export function PersonajesAlAzarCantTotalFijos() {
   };
 }
 
-export function PersonajesConsecutivosCantVariables(){
-//[colorInicial,colorResto]
-//Dimension total
-}
 
 
