@@ -1107,7 +1107,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
-      zIndex: 2,
+      zIndex: 1,
       rotable: false,
       paddingImagen: "0px",
       colisiones: [],
