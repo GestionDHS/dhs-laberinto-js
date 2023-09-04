@@ -321,7 +321,7 @@ class PersonajeMovible extends PersonajeBasico {
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
     const casilleroDestino = this.obtenerCasillero(nuevaY, nuevaX);
-    if (!casilleroDestino) {
+    if (!casilleroDestino || casilleroDestino.ocupantes.length==0) {
       const limite = {
         con: "limitesDelUniverso",
         factorDeAvance: 0.35,
@@ -330,6 +330,7 @@ class PersonajeMovible extends PersonajeBasico {
         },
         mensaje: "¡OH NO! me caí del mapa. ",
       };
+    
 
       this.exponerTooltip(limite.mensaje);
       limite.callback(this);

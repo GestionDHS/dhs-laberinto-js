@@ -299,38 +299,38 @@ export function EscenarioFilasAleatoreasSimples(){
       let personajesACrear = [];
       escenario.objetosCasilleros.forEach((fila,index)=>{
         //Personaje cuadroAmarillo
-        let personajeAux = {...conjuntoPersonajes.personajes[0]}
+        let personajeMarcaInicial = {...conjuntoPersonajes.personajes[0]}
         let unaPosicion = [index,0]
-        setearPosiciones(personajeAux,unaPosicion)
+        setearPosiciones(personajeMarcaInicial,unaPosicion)
         setearAliasYAleatorieidad(
-          personajeAux,
+          personajeMarcaInicial,
           conjuntoPersonajes.desapareceAlReiniciar,
           conjuntoPersonajes.aliasConjunto
         );
-        personajesACrear.push(personajeAux);
+        personajesACrear.push(personajeMarcaInicial);
         //Personaje Tierra o de relleno
         const largoFila = obtenerCantidadAleatoria({
           cantidadMax: conjuntoPersonajes.anchoMaximo,
           cantidadMin: conjuntoPersonajes.anchoMinimo,
         });
         for (let i = 0; i <= largoFila; i++) {
-          let personajeRellenoAux = {...conjuntoPersonajes.personajes[1]}
-          setearPosiciones(personajeRellenoAux,[index, i])
+          let personajeRelleno = {...conjuntoPersonajes.personajes[1]}
+          setearPosiciones(personajeRelleno,[index, i])
               setearAliasYAleatorieidad(
-                personajeRellenoAux,
+                personajeRelleno,
                 conjuntoPersonajes.desapareceAlReiniciar,
                 conjuntoPersonajes.aliasConjunto
               );
-              personajesACrear.push(personajeRellenoAux);
+              personajesACrear.push(personajeRelleno);
             }
-            let personajePateableAux = {...conjuntoPersonajes.personajes[2]}
-            setearPosiciones(personajePateableAux,[index, largoFila])
+            let personajeFinalFila = {...conjuntoPersonajes.personajes[2]}
+            setearPosiciones(personajeFinalFila,[index, largoFila])
             setearAliasYAleatorieidad(
-              personajePateableAux,
+              personajeFinalFila,
               conjuntoPersonajes.desapareceAlReiniciar,
               conjuntoPersonajes.aliasConjunto
             );
-            personajesACrear.push(personajePateableAux);
+            personajesACrear.push(personajeFinalFila);
       })
       return personajesACrear
     }
