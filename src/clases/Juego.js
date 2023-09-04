@@ -21,6 +21,7 @@ import {
 
 import { Modal } from "./Modal";
 import { obtenerCantidadAleatoria } from "../Utils/Funciones";
+import {EscenarioFilasAleatoreasSimples} from './StrategyCreacion';
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
@@ -140,6 +141,7 @@ export class Juego {
       posicionExcluyente: new PersonajesPosicionAlAzarExcluyente(),
       azarCantTotal: new PersonajesAlAzarCantTotal(),
       azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos(),
+      filasAleatoriasSimples: new EscenarioFilasAleatoreasSimples(),
     };
     conjuntosDePersonajes.forEach((unConjunto) => {
       let personajesAGenerar = [];
@@ -167,21 +169,21 @@ export class Juego {
     this.generarConjuntoDePersonajes(conjuntosDePersonajes);
   }
 
-  crearPersonajeEscenarioAleatoreo(conjuntoDePersonajes, tablero) {
-    this.crearPersonajes([conjuntoDePersonajes[0]]);
-    tablero.forEach((fila, index) => {
-      const largoFila = obtenerCantidadAleatoria({
-        cantidadMax: fila.length-1,
-        cantidadMin: 2,
-      });
-      for (let i = 0; i <= largoFila; i++) {
-        conjuntoDePersonajes[1].posiciones = [[index, i]];
-        this.crearPersonajes([conjuntoDePersonajes[1]]);
-      }
-      //console.log(conjuntoDePersonajes[2])
-      conjuntoDePersonajes[2].posiciones = [[index, largoFila]];
-      this.crearPersonajes([conjuntoDePersonajes[2]])
-      //console.log(conjuntoDePersonajes[2].posiciones)
-    });
-  }
+  // crearPersonajeEscenarioAleatoreo(conjuntoDePersonajes, tablero) {
+  //   this.crearPersonajes([conjuntoDePersonajes[0]]);
+  //   tablero.forEach((fila, index) => {
+  //     const largoFila = obtenerCantidadAleatoria({
+  //       cantidadMax: fila.length-1,
+  //       cantidadMin: 2,
+  //     });
+  //     for (let i = 0; i <= largoFila; i++) {
+  //       conjuntoDePersonajes[1].posiciones = [[index, i]];
+  //       this.crearPersonajes([conjuntoDePersonajes[1]]);
+  //     }
+  //     //console.log(conjuntoDePersonajes[2])
+  //     conjuntoDePersonajes[2].posiciones = [[index, largoFila]];
+  //     this.crearPersonajes([conjuntoDePersonajes[2]])
+  //     //console.log(conjuntoDePersonajes[2].posiciones)
+  //   });
+  // }
 }

@@ -59,25 +59,33 @@ let conjuntosDePersonajes = [
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
+  // {
+  //   estrategia: "fijos",
+  //   personajes: [tierra],
+  //   //posiciones: coordenadasCaminoPared.coordenadasPared,
+  //   aliasConjunto: "fijosTablero",
+  //   desapareceAlReiniciar: false,
+  // },
+  // {
+  //   estrategia: "fijos",
+  //   personajes: [estrella],
+  //   //posiciones: [[3, 7]],
+  //   aliasConjunto: "fijosTablero",
+  //   desapareceAlReiniciar: false,
+  // },
   {
-    estrategia: "fijos",
-    personajes: [tierra],
-    //posiciones: coordenadasCaminoPared.coordenadasPared,
-    aliasConjunto: "fijosTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [estrella],
-    //posiciones: [[3, 7]],
-    aliasConjunto: "fijosTablero",
-    desapareceAlReiniciar: false,
-  },
+    estrategia: "filasAleatoriasSimples",
+    personajes: [nubes, tierra, estrella],
+    aliasConjunto: "filasAleatoriasSimples",
+    desapareceAlReiniciar: true,
+    anchoMinimo: 2,
+    anchoMaximo: 8, // Warning no exceda el tablero.
+}
 ];
 
 
-miJuego.crearPersonajeEscenarioAleatoreo(conjuntosDePersonajes, tablero);
-//miJuego.crearPersonajes(conjuntosDePersonajes);
+//miJuego.crearPersonajeEscenarioAleatoreo(conjuntosDePersonajes, tablero);
+miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
 
 //Método para detectar

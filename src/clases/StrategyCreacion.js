@@ -294,5 +294,48 @@ export function PersonajesAlAzarCantTotalFijos() {
   };
 }
 
+export function EscenarioFilasAleatoreasSimples(){
+    this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+      let personajesACrear = [];
+      escenario.objetosCasilleros.forEach((fila,index)=>{
+        //Personaje cuadroAmarillo
+        let personajeAux = {...conjuntoPersonajes.personajes[0]}
+        let unaPosicion = [index,0]
+        setearPosiciones(personajeAux,unaPosicion)
+        setearAliasYAleatorieidad(
+          personajeAux,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+        personajesACrear.push(personajeAux);
+        //Personaje Tierra o de relleno
+        const largoFila = obtenerCantidadAleatoria({
+          cantidadMax: conjuntoPersonajes.anchoMaximo,
+          cantidadMin: conjuntoPersonajes.anchoMinimo,
+        });
+        for (let i = 0; i <= largoFila; i++) {
+          let personajeRellenoAux = {...conjuntoPersonajes.personajes[1]}
+          setearPosiciones(personajeRellenoAux,[index, i])
+              setearAliasYAleatorieidad(
+                personajeRellenoAux,
+                conjuntoPersonajes.desapareceAlReiniciar,
+                conjuntoPersonajes.aliasConjunto
+              );
+              personajesACrear.push(personajeRellenoAux);
+            }
+            let personajePateableAux = {...conjuntoPersonajes.personajes[2]}
+            setearPosiciones(personajePateableAux,[index, largoFila])
+            setearAliasYAleatorieidad(
+              personajePateableAux,
+              conjuntoPersonajes.desapareceAlReiniciar,
+              conjuntoPersonajes.aliasConjunto
+            );
+            personajesACrear.push(personajePateableAux);
+      })
+      return personajesACrear
+    }
+}
+
+
 
 
