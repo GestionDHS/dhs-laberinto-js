@@ -105,6 +105,7 @@ let conjuntosDePersonajes = [
     posiciones: [[3, 5]],
     aliasConjunto: "PersonajesAlAzarExcluyente",
     desapareceAlReiniciar: true,
+    classCss:"entradaEase"
   },
   {
     estrategia: "fijos",

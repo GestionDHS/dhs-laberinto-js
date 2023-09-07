@@ -190,6 +190,8 @@ export function PersonajesAlAzarExcluyente() {
         "Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes"
       );
     let personajeACrear = elegirPersonajeRandom(conjuntoPersonajes.personajes);
+    let classAAgregar = conjuntoPersonajes?.classCss ? conjuntoPersonajes.classCss : "null"
+    personajeACrear.classCss = classAAgregar
     const unaPosicion = conjuntoPersonajes.posiciones[0]
     setearPosiciones(personajeACrear, unaPosicion);
     setearAliasYAleatorieidad(

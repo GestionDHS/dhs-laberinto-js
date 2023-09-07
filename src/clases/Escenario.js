@@ -60,6 +60,12 @@ export class Escenario {
     const casillero = fila ? fila[posicionX] : null;
     return casillero;
   }
+  iluminarCasilleros(posiciones,classCss){
+    posiciones.forEach((posicion)=>{
+      this.objetosCasilleros[posicion[0]][posicion[1]].agregarClassCss(classCss)
+    })
+    //console.log("setear classCss")
+  }
 }
 
 export class Casillero {
@@ -96,5 +102,7 @@ export class Casillero {
   vaciarCasillas(){
     this.ocupantes=[]
   }
- 
+ agregarClassCss(classCss){
+  this.casilla.classList.add(classCss);
+ }
 }

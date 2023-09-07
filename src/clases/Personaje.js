@@ -25,12 +25,14 @@ export class PersonajeBasico {
     this.desapareceAlReiniciar=objetoConfiguracionPersonaje.desapareceAlReiniciar;
     this.aliasConjunto=objetoConfiguracionPersonaje.aliasConjunto;
     this.tieneTooltip = objetoConfiguracionPersonaje.tieneTooltip;
+    this.classCss = objetoConfiguracionPersonaje?.classCss ? objetoConfiguracionPersonaje.classCss : "null"
     this.controladorDOM = new controladorPersonajeDOM(
       this.tieneTooltip,
       this.juego.escenario,
       objetoConfiguracionPersonaje.idUsarHTML,
       objetoConfiguracionPersonaje.zIndex,
-      objetoConfiguracionPersonaje.paddingImagen
+      objetoConfiguracionPersonaje.paddingImagen,
+      this.classCss
     );
     // this.excluyente = false
   }
@@ -242,13 +244,14 @@ export class PersonajeBasico {
 
 class controladorPersonajeDOM {
   // constructor(interfazConfigObj) {
-  constructor(tieneTooltip, escenario, idHtml, zIndex, paddingImagen = "0") {
+  constructor(tieneTooltip, escenario, idHtml, zIndex, paddingImagen = "0",classCss) {
     //this.modo = modo;
     this.escenario = escenario;
     this.elementoHTML = document.createElement("DIV");
-    this.elementoHTML.id = idHtml;
+    //this.elementoHTML.id = idHtml;
     this.escenario.elementoHTML.appendChild(this.elementoHTML);
     this.elementoHTML.classList.add("personaje");
+    this.elementoHTML.classList.add(classCss);
     this.elementoHTML.style.zIndex = zIndex;
     this.tieneTooltip = tieneTooltip;
     if (this.tieneTooltip) {
