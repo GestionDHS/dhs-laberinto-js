@@ -1,7 +1,6 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
-import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
 import {Dhs_personajes} from '../../clases/Dhs-personajes';
@@ -109,7 +108,7 @@ const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["avanzar_param", "Movimientos"],
   ["girar_clasico", "Movimientos"],
-  ["controls", "Repeticiones"],
+  ["repeat_times", "Repeticiones"],
   ["if", "Condicionales"],
   ["ifElse","Condicionales"],
   ["sensor_avion", "Sensores"],

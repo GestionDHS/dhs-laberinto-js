@@ -85,7 +85,7 @@ export default class ConfiguradorBloques {
                 "style": "execute_blocks",
                 "tooltip": "Al presionar 'play', se ejecutarán los bloques que contenga",
                 "helpUrl": "",
-                "hat": "rounded",
+                // "hat": "rounded",
                 'extensions': [
                     'on_execute_validation',
                 ],
@@ -1348,11 +1348,8 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "if",
-                "message0": "Si %1 %2 entonces... %3 %4 ",
+                "message0": "Si %1 entonces... %2 %3",
                 "args0": [
-                    {
-                        "type": "input_dummy"
-                    },
                     {
                         "type": "input_value",
                         "name": "condicion",
@@ -1621,48 +1618,183 @@ export default class ConfiguradorBloques {
         }
     }
 
+    sensor_bandera() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_bandera",
+                "message0": "%1 llegue a la bandera",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/6485/6485722.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_bandera"] = function (block) {
+            const code = "detectarBandera()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_bandera",
+            "kind": "block",
+        }
+    }
+
     // LOOPS
-    controls_repeat() {
+    repeat_times() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "repeat_times",
+                "message0": "repetir %1 veces %2 %3",
+                "args0": [
+                  {
+                    "type": "field_dropdown",
+                    "name": "cantidadRepeticiones",
+                    "options": [
+                      [
+                        "1",
+                        "1"
+                      ],
+                      [
+                        "2",
+                        "2"
+                      ],
+                      [
+                        "3",
+                        "3"
+                      ],
+                      [
+                        "4",
+                        "4"
+                      ],
+                      [
+                        "5",
+                        "5"
+                      ],
+                      [
+                        "6",
+                        "6"
+                      ],
+                      [
+                        "7",
+                        "7"
+                      ],
+                      [
+                        "8",
+                        "8"
+                      ],
+                      [
+                        "9",
+                        "9"
+                      ],
+                      [
+                        "10",
+                        "10"
+                      ]
+                    ]
+                  },
+                  {
+                    "type": "input_dummy"
+                  },
+                  {
+                    "type": "input_statement",
+                    "name": "accionesARepetir"
+                  }
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "loop_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["repeat_times"] = function (block) {
+            const cantidadRepeticiones = this.getFieldValue("cantidadRepeticiones");
+            const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
+            const code = "for(let i = 0; i < "+ cantidadRepeticiones +"; i++){\n"+ acciones +"\n}\n"
+            return code;
+        };
         return {
-            type: "controls_repeat",
+            type: "repeat_times",
             kind: "block",
         } 
     }
+    //REPETIR HASTA que
+    repeat_until() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "repetir_hasta_que",
+                "message0": "repetir hasta que %1 %2",
+                "args0": [
+                  {
+                    "type": "input_value",
+                    "name": "condicion"
+                  },
+                  {
+                    "type": "input_statement",
+                    "name": "accionesARepetir",
+                  }
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "tooltip": "",
+                "helpUrl": "",
+                "style": "loop_blocks",
+              },
+        ]);
+        Blockly.JavaScript.forBlock["repetir_hasta_que"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
+            const code = "while(!"+ condicion +"){\n"+ acciones + condicion +"\n}\n"
+            return code;
+        };
+        return {
+            type: "repetir_hasta_que",
+            kind: "block",
+        }
+    }
+    // Por el momento no se usan
+    // controls_repeat_ext() {
+    //     return {
+    //         type: "controls_repeat_ext",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_repeat_ext() {
-        return {
-            type: "controls_repeat_ext",
-            kind: "block",
-        } 
-    }
+    // controls_whileUntil() {
+    //     return {
+    //         type: "controls_whileUntil",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_whileUntil() {
-        return {
-            type: "controls_whileUntil",
-            kind: "block",
-        } 
-    }
+    // controls_for() {
+    //     return {
+    //         type: "controls_for",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_for() {
-        return {
-            type: "controls_for",
-            kind: "block",
-        } 
-    }
+    // controls_forEach() {
+    //     return {
+    //         type: "controls_forEach",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_forEach() {
-        return {
-            type: "controls_forEach",
-            kind: "block",
-        } 
-    }
-
-    controls_flow_statements() {
-        return {
-            type: "controls_flow_statements",
-            kind: "block",
-        } 
-    }
+    // controls_flow_statements() {
+    //     return {
+    //         type: "controls_flow_statements",
+    //         kind: "block",
+    //     } 
+    // }
 
     // controls_forRange() {
     //     return {
@@ -1671,24 +1803,11 @@ export default class ConfiguradorBloques {
     //     } 
     // }
 
-    controls_doWhile() {
-        return {
-            type: "controls_doWhile",
-            kind: "block",
-        } 
-    }
-
-    controls() {
-        return [
-            this.controls_repeat(),
-            // this.controls_repeat_ext(),
-            // this.controls_whileUntil(),
-            // this.controls_for(),
-            // this.controls_forEach(),
-            // this.controls_flow_statements(),
-            // this.controls_forRange(),
-            // this.controls_doWhile()
-        ]
-    }
+    // controls_doWhile() {
+    //     return {
+    //         type: "controls_doWhile",
+    //         kind: "block",
+    //     } 
+    // }
 
 }

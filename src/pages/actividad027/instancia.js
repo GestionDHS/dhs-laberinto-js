@@ -1,7 +1,6 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
-import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
 import { Dhs_personajes } from "../../clases/Dhs-personajes";

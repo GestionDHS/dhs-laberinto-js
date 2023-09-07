@@ -18,11 +18,11 @@ export class Dhs_Categorias {
     },
     {
       name: "Repeticiones",
-      categorystyle: "loop_category",
+      categorystyle: "loops",
     },
     {
       name: "Condicionales",
-      categorystyle: "logic_category",
+      categorystyle: "logic",
     },
     {
       name: "Sensores",

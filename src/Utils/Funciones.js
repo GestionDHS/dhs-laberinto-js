@@ -1,5 +1,3 @@
-import { CustomRenderer } from "../bloques/CustomRender";
-
 //************FUNCION QUE BUSCA POSICIONES RAMDOM DEL TABLERO*************/
 export function posicionValida(escenario, posicionesElegidas, arrayPosiciones) {
   return arrayPosiciones
@@ -136,12 +134,10 @@ export const configurarYRenderizarToolbox = function (
     miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
   });
 
-  const render = new CustomRenderer();
-  render.registrarRender("renderDHS");
   miControlador.crearInyectarWorkspace("dhs-blockly-div", {
     toolbox: miControlador.ConfiguradorBloques.toolbox,
     theme: "themeDH",
-    renderer: "renderDHS",
+    renderer: "thrasos",
     zoom: {
       controls: true,
       wheel: true,

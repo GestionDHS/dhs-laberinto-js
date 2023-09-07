@@ -1,7 +1,6 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
-import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
 import {
@@ -18,17 +17,19 @@ const velocidadInicial = 1000;
 const miJuego = new Juego(velocidadInicial);
 
 //SEGUNDO: CREAR MATRIZ PARA TABLERO SIENDO 1: PARED Y 0: CAMINO, se crea la variable dimensiónes.
-const dimensiones = [7, 6]; //fila, columna
+const dimensiones = [9, 3]; //fila, columna
 
 //tablero y pedirle que rellene árbol y pasto
 const tablero = [
-  [1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1],
+  [1, 0, 1],
+  [1, 0, 1],
+  [1, 0, 1],
+  [1, 0, 1],
+  [1, 0, 1],
+  [1, 0, 1],
+  [1, 0, 1],
+  [1, 1, 1],
 ];
 
 //TERCERO: Definir que objetos van a ser "pared", y cuales "camino"
@@ -58,6 +59,7 @@ let coordenadasCaminoPared = generarCoordenadas(tablero);
 
 const lupe = personajesGaleria.obtenerPersonaje("lupe");
 const cofre = personajesGaleria.obtenerPersonaje("cofre");
+const bandera = personajesGaleria.obtenerPersonaje("bandera");
 const lodo = personajesGaleria.obtenerPersonaje("lodo");
 const basura = personajesGaleria.obtenerPersonaje("basura");
 
@@ -81,6 +83,21 @@ let conjuntosDePersonajes = [
     estrategia: "fijos",
     personajes: [lupe],
     posiciones: [[1, 1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "azarCantidadTotalFijos",
+    personajes: [cofre],
+    cantidadTotal:3,
+    posiciones: [[2,1],[3,1],[4,1],[5,1],[6,1]],
+    aliasConjunto: "azarCantidadTotalFijos",
+    desapareceAlReiniciar: true,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bandera],
+    posiciones: [[7, 1]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
@@ -141,20 +158,28 @@ let conjuntosDePersonajes = [
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
 //// Se debe mirar el arrayDePersonajes para saber en que posición esta el personaje principal
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[42]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[27]);
 
-//Método para Abrir el Cofre
-// miJuego.personajePrincipal.abrirCofre = function () {
-//   const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
+//Método para el Cofre
+miJuego.personajePrincipal.abrirCofre = function () {
+  const intento = this.buscarParaRealizarAccion("cofre", "abrirse");
 
-//   if (!intento.objetoEncontrado) {
-//     return this.decirTerminar("Oh! Aquí no hay cofre.");
-//   } else if (!intento.exito) {
-//     return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
-//   } else {
-//     return this.abrirYMostrarModal();
-//   }
-// };
+  if (!intento.objetoEncontrado) {
+    return this.decirTerminar("Oh! Aquí no hay cofre.");
+  } else if (!intento.exito) {
+    return this.decirTerminar("Oh! Este cofre ya estaba abierto.");
+  }
+};
+
+miJuego.personajePrincipal.detectarCofre = function () {
+  // devuelve true si encuentra o false si no hay cofre
+  return this.buscarObjetoEnCasilleroActual("cofre") !== undefined
+};
+
+miJuego.personajePrincipal.detectarBandera = function () {
+  // devuelve true si encuentra o false si no hay bandera
+  return this.buscarObjetoEnCasilleroActual("bandera") !== undefined
+};
 
 // //Método para Juntar Basura
 // miJuego.personajePrincipal.juntarBasura = function () {
@@ -180,6 +205,14 @@ miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[42]);
 // miJuego.personajePrincipal.llegarEscuela = function () {
 //   this.abrirYMostrarModal();
 // }
+miJuego.personajePrincipal.llegarALaBandera = function () {
+  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
+  if (this.mochila.length >= 3) {
+    this.abrirYMostrarModal();
+  } else {
+    return this.decirTerminar("¡Oh! Quedaron cofres sin abrir.");
+  }
+};
 
 // //Conejo - Nelson
 // miJuego.personajePrincipal.cosecharZanahoria = function () {
@@ -240,13 +273,20 @@ const categoriaElegida = categoria.obtenerCategoriasNecesarias([
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_left_right", "Movimientos"],
+  ["move_classic_simple", "Movimientos"],
+  ["abrir_cofre", "Acciones"],
+  ["if", "Condicionales"],
+  ["repeat_times", "Repeticiones"],
+  ["repeat_until", "Repeticiones"],
+  ["sensor_cofre", "Sensores"],
+  ["sensor_bandera", "Sensores"],
 ];
 
-const bloquesPrecargadosJSON =
-  '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+// const bloquesPrecargadosJSON =
+//   '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer = ["moverDerecha", "moverIzquierda"];
+const bloquesPrecargadosJSON = '{ "blocks": { "languageVersion": 0, "blocks": [ { "type": "on_execute", "id": "rwW]g?!-iwJNk))r*~^C", "x": 61, "y": 69, "inputs": { "EVENT": { "block": { "type": "repetir_hasta_que", "id": "ESTMctZ21tULm}9}6=`/", "inputs": { "condicion": { "block": { "type": "sensor_bandera", "id": "y-]*geVR`[NPdKWgw?qq" } }, "accionesARepetir": { "block": { "type": "move_down_simple", "id": "PZl/2A1}IC+qu2R,6qK0", "next": { "block": { "type": "if", "id": "Iukc+WZWUCe[6b9-v;MC", "inputs": { "condicion": { "block": { "type": "sensor_cofre", "id": "7:pp?;m6U}^9xIgxUpof" } }, "entonces": { "block": { "type": "abrir_cofre", "id": "s^,J)kRBoD$vIU,9$VQt" } } } } } } } } } } } } ] } }'
+const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre","detectarCofre","detectarBandera"]
 
 configurarYRenderizarToolbox(
   miControlador,
