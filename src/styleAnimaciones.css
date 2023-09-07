@@ -1,0 +1,27 @@
+/* Animacion Casillero donde aparecerá un Aleatoreo */
+.recuadroLuminoso{
+    outline: 4px solid #edf0df;
+    box-shadow: 0 0 0 2px rgba(249, 249, 32, 0.598);
+    animation: 1s animateBorder infinite;
+  }
+  @keyframes animateBorder {
+    to {
+      outline-color: #e8ebd4;
+      box-shadow: 0 0 0 6px rgba(249, 249, 32, 0.598);
+    }
+  }
+
+  /* Animacion Personajes Aleatoreos */
+.entradaEase{
+    animation: 1s animacionEntrada ease-in-out;
+}
+@keyframes animacionEntrada {
+    from{
+        transform: scale(0.5);
+        opacity: 0.8;
+    }
+    to {
+        transform: scale(1);
+        opacity:1;
+    }
+  }
