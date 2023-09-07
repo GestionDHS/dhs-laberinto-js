@@ -175,6 +175,7 @@ let conjuntosDePersonajes = [
   },
 ];
 
+miJuego.escenario.iluminarCasilleros([[4,5]],"recuadroLuminoso")
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[72]);
 
