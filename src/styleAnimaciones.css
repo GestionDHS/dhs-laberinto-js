@@ -1,5 +1,7 @@
 /* Animacion Casillero donde aparecerá un Aleatoreo */
-.recuadroLuminoso{
+.recuadroLuminoso{    
+    position: relative;
+    z-index: 4;
     outline: 4px solid #edf0df;
     box-shadow: 0 0 0 2px rgba(249, 249, 32, 0.598);
     animation: 1s animateBorder infinite;
