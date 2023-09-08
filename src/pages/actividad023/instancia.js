@@ -106,7 +106,7 @@ const categoriaElegida=categoria.obtenerCategoriasNecesarias(["Eventos","Movimie
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["avanzar_param", "Movimientos"],
+  ["avanzar", "Movimientos"],
   ["girar_clasico", "Movimientos"],
   ["repeat_times", "Repeticiones"],
   ["if", "Condicionales"],

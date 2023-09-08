@@ -1716,8 +1716,12 @@ export default class ConfiguradorBloques {
         ]);
         Blockly.JavaScript.forBlock["repeat_times"] = function (block) {
             const cantidadRepeticiones = this.getFieldValue("cantidadRepeticiones");
-            const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
-            const code = "for(let i = 0; i < "+ cantidadRepeticiones +"; i++){\n"+ acciones +"\n}\n"
+            // console.log(cantidadRepeticiones);
+            const accionesARepetir = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
+            // console.log(accionesRepeticion);
+            const code = `for (let i = 0; i < ${cantidadRepeticiones}; i++) {
+                ${accionesARepetir}
+            };`;
             return code;
         };
         return {
@@ -1729,7 +1733,7 @@ export default class ConfiguradorBloques {
     repeat_until() {
         Blockly.common.defineBlocksWithJsonArray([
             {
-                "type": "repetir_hasta_que",
+                "type": "repeat_until",
                 "message0": "repetir hasta que %1 %2",
                 "args0": [
                   {
@@ -1749,14 +1753,14 @@ export default class ConfiguradorBloques {
                 "style": "loop_blocks",
               },
         ]);
-        Blockly.JavaScript.forBlock["repetir_hasta_que"] = function (block) {
+        Blockly.JavaScript.forBlock["repeat_until"] = function (block) {
             const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
             const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
             const code = "while(!"+ condicion +"){\n"+ acciones + condicion +"\n}\n"
             return code;
         };
         return {
-            type: "repetir_hasta_que",
+            type: "repeat_until",
             kind: "block",
         }
     }
