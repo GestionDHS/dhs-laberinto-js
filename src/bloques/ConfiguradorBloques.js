@@ -1627,7 +1627,7 @@ export default class ConfiguradorBloques {
                 "args0": [
                     {
                       "type": "field_image",
-                      "src": "https://cdn-icons-png.flaticon.com/512/6485/6485722.png",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4481/4481086.png",
                       "width": 16,
                       "height": 16,
                       "alt": "*"
