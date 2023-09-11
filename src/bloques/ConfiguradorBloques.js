@@ -1529,6 +1529,37 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    sensor_fuego() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_fuego",
+                "message0": "%1 ¿Hay fuego adelante?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-https://cdn-icons-png.flaticon.com/512/599/599502.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_fuego"] = function (block) {
+            const code = "detectarFuego()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_fuego",
+            "kind": "block",
+        }
+    }
+
     sensor_diamante() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -1588,6 +1619,68 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+
+    sensor_estacionBombero() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_estacionBombero",
+                "message0": "%1 ¿Llegué a la estación?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/2052/2052830.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        
+        Blockly.JavaScript.forBlock["sensor_estacionBombero"] = function (block) {
+            const code = "detectarEstacionBombero()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_estacionBombero",
+            "kind": "block",
+        }
+    }
+
+    sensor_tronco() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_tronco",
+                "message0": "%1 ¿LLegué hasta el tronco?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/2140/2140230.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_tronco"] = function (block) {
+            const code = "detectarTronco()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_tronco",
+            "kind": "block",
+        }
+    }
+
     sensor_bamboo() {
         Blockly.common.defineBlocksWithJsonArray([
             {
