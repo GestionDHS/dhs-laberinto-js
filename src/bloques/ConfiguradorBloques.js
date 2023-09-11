@@ -1622,7 +1622,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "sensor_bandera",
-                "message0": "%1 llegue a la bandera",
+                "message0": "%1 ¿Llegó a la bandera?",
                 "output": null,
                 "args0": [
                     {
@@ -1653,7 +1653,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "repeat_times",
-                "message0": "repetir %1 veces %2 %3",
+                "message0": "Repetir %1 veces %2 %3",
                 "args0": [
                   {
                     "type": "field_dropdown",
@@ -1719,7 +1719,7 @@ export default class ConfiguradorBloques {
             // console.log(cantidadRepeticiones);
             const accionesARepetir = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
             // console.log(accionesRepeticion);
-            const code = `for (let i = 0; i < ${cantidadRepeticiones}; i++) {
+            const code = `for (var i = 0; i < ${cantidadRepeticiones}; i++) {
                 ${accionesARepetir}
             };`;
             return code;
@@ -1734,7 +1734,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "repeat_until",
-                "message0": "repetir hasta que %1 %2",
+                "message0": "Repetir hasta que %1 %2",
                 "args0": [
                   {
                     "type": "input_value",
@@ -1761,6 +1761,41 @@ export default class ConfiguradorBloques {
         };
         return {
             type: "repeat_until",
+            kind: "block",
+        }
+    }
+
+    repeat_while() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "repeat_while",
+                "message0": "Repetir mientras que %1 %2",
+                "args0": [
+                  {
+                    "type": "input_value",
+                    "name": "condicion"
+                  },
+                  {
+                    "type": "input_statement",
+                    "name": "accionesARepetir",
+                  }
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "tooltip": "",
+                "helpUrl": "",
+                "style": "loop_blocks",
+              },
+        ]);
+        Blockly.JavaScript.forBlock["repeat_while"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
+            const code = "while("+ condicion +"){\n"+ acciones + condicion +"\n}\n"
+            return code;
+        };
+        return {
+            type: "repeat_while",
             kind: "block",
         }
     }

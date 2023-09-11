@@ -279,6 +279,7 @@ const ordenJerarquicoBloques = [
   ["ifElse", "Condicionales"],
   ["repeat_times", "Repeticiones"],
   ["repeat_until", "Repeticiones"],
+  ["repeat_while", "Repeticiones"],
   ["sensor_cofre", "Sensores"], 
   ["sensor_bandera", "Sensores"],
 ];
