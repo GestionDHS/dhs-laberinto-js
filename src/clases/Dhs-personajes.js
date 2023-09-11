@@ -1165,7 +1165,7 @@ export class Dhs_personajes {
       tipoPersonaje: "frutilla",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "frutilla" },
-        abierto: { name: "normal", imageUrl: "agua" },
+        abierto: { name: "normal", imageUrl: "" },
         juntado: { name: "juntado", imageUrl: "agua" },
       },
       estadoInicial: "cerrado", 

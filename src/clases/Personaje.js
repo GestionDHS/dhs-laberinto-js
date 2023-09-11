@@ -75,6 +75,8 @@ export class PersonajeBasico {
       this.controladorDOM.setearImagen(
         this.galeria.obtenerUrlDe(imagenDeseada)
       );
+    }else{
+      this.controladorDOM.removerImg()
     }
   }
 
@@ -310,6 +312,9 @@ class controladorPersonajeDOM {
   }
   removerDivDelDOM(){
     this.elementoHTML.remove()
+  }
+  removerImg(){
+    this.elementoHTML.querySelector("img") && this.elementoHTML.removeChild(this.imagenAnidada)
   }
 }
 
