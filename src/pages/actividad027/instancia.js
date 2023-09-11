@@ -125,13 +125,6 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [flechaAmarilla],
-    posiciones: [[3, 5]],
-    aliasConjunto: "fijosTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
     personajes: [arbol1],
     posiciones: [[2, 7]],
     aliasConjunto: "fijosTablero",

@@ -70,7 +70,7 @@ class Controlador {
         setTimeout(() => {
           // permite volver a reiniciar pasado medio segundo.
           this.rehabilitarBotonReinicio();
-        }, 700);
+        },1050);
       });
     }
     this.botonLimpiarWorkspace = botonLimpiarWorkspace;

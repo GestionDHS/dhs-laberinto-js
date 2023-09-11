@@ -1,4 +1,5 @@
 import circuloAmarilloTransparente from '../img/circuloAmarillo.png';
+import estrellaSinFondo from '../img/estrellaSinFondo.png';
 
 export class Dhs_personajes {
   constructor() {
@@ -883,10 +884,13 @@ export class Dhs_personajes {
       tieneTooltip: true,
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "panda" },
+        trepando: { name: "normal", imageUrl: "pandaTrepadorSinFondo" },
+        izquierda: { name: "normal", imageUrl: "panda" },
+        derecha: { name: "normal", imageUrl: "panda" },
       },
       estadoInicial: "normal",
       direccionInicial: 0,
-      zIndex: 3,
+      zIndex: 4,
       rotable: true,
       colisiones: [
         {
@@ -1047,7 +1051,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
-      zIndex: 2,
+      zIndex: 3,
       rotable: false,
       paddingImagen: "0px",
       colisiones: [],
@@ -1057,6 +1061,21 @@ export class Dhs_personajes {
       tipoPersonaje: "bambooAnchoCamino",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "bambooAnchoCamino" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
+    bambooCieloCamino: {
+      idUsarHTML: "bambooCieloCamino",
+      tipoPersonaje: "bambooCieloCamino",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "bambooCieloCamino" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,
@@ -1132,6 +1151,21 @@ export class Dhs_personajes {
       tipoPersonaje: "estrella",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "estrella" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
+    estrellaSinFondo: {
+      idUsarHTML: "estrellaSinFondo",
+      tipoPersonaje: "estrellaSinFondo",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "estrellaSinFondo" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,
