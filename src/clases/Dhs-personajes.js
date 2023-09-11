@@ -885,7 +885,7 @@ export class Dhs_personajes {
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "panda" },
         trepando: { name: "normal", imageUrl: "pandaTrepadorSinFondo" },
-        izquierda: { name: "normal", imageUrl: "panda" },
+        izquierda: { name: "normal", imageUrl: "pandaIzquierda" },
         derecha: { name: "normal", imageUrl: "panda" },
       },
       estadoInicial: "normal",
@@ -893,22 +893,6 @@ export class Dhs_personajes {
       zIndex: 4,
       rotable: true,
       colisiones: [
-        {
-          con: "lodo",
-          factorDeAvance: 0.7,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡OH NO! Me atasqué en el lodo.",
-        },
-        {
-          con: "arbol",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡OH NO! Choqué contra un árbol",
-        },
         {
           con: "bandera",
           factorDeAvance: 1,

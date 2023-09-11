@@ -48,7 +48,7 @@ import piedra from "../img/piedra.png";
 import caminoCueva from "../img/caminoCueva.png";
 import piedraDiamante from "../img/piedraDiamante.png";
 import panda from "../img/panda.png";
-import pandaIzquierda from "../img/panda.png";
+import pandaIzquierda from "../img/pandaIzquierda.png";
 import pandaTrepadorSinFondo from "../img/pandaTrepadorSinFondo.png";
 import caraPanda from "../img/caraPanda.png";
 import arbol1 from "../img/arbol1.png";

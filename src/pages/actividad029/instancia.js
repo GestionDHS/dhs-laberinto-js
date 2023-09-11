@@ -33,7 +33,7 @@ const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const panda = personajesGaleria.obtenerPersonaje("panda");
 //panda.paddingImagen = "5px"
-const agua = personajesGaleria.obtenerPersonaje("agua");
+const cielo = personajesGaleria.obtenerPersonaje("agua");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 frutilla.paddingImagen = "10px"
 const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
@@ -74,7 +74,7 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [agua],
+    personajes: [cielo],
     posiciones: coordenadasCaminoPared.coordenadasCamino,
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
@@ -109,6 +109,7 @@ miJuego.personajePrincipal.detectarFrutilla = function () {
   // devuelve true si encuentra o false si no hay cofre
   return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
 };
+
 miJuego.personajePrincipal.comerFrutilla = function () {
   const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
   if (!intento.objetoEncontrado) {
@@ -121,21 +122,34 @@ miJuego.personajePrincipal.comerFrutilla = function () {
 
 };
 
-miJuego.personajePrincipal.detectarBamboo = function () {
-  // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("bamboo") !== undefined
-};
-miJuego.personajePrincipal.comerBamboo = function () {
-  const intento = this.buscarParaRealizarAccion("bamboo", "abrirse");
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay bambú.");
-  } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Aqui ya no hay bambú.");
-  }else if (intento.premio?.tipo == "bamboo") {
-    return this.decir("¡Mmmm! Qué rica rama de bambú.",2000);
+miJuego.personajePrincipal.moverDerecha= function(veces=1){
+  this.setearEstado("derecha")
+      return this.iterarVectorMovimiento(veces, [0, +1]);
   }
 
-};
+miJuego.personajePrincipal.moverIzquierda= function(veces=1){
+    this.setearEstado("izquierda")
+    return this.iterarVectorMovimiento(veces, [0, -1]);
+ }
+
+
+miJuego.personajePrincipal.moverArriba= function(veces=1){
+  if(this.buscarObjetoEnCasilleroActual("bambooAncho") != undefined){
+  this.setearEstado("trepando")
+  return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
+}else{
+  this.decirTerminar("¡Aún no se volar!")
+}
+}
+
+miJuego.personajePrincipal.moverAbajo= function(veces=1){
+  if(this.buscarObjetoAdelante(tierra)!=undefined || this.buscarObjetoAdelante(agua!=undefined) ){
+  this.setearEstado("trepando")
+  return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
+}else{
+  this.decirTerminar("¿Seguro? ¡Pensemos en una acción que pueda realizar!")
+}
+}
 
 miJuego.personajePrincipal.llegarALaEstrella = function () {
   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
@@ -158,21 +172,22 @@ miJuego.personajePrincipal.llegarALaEstrella = function () {
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria=new Dhs_Categorias()
-const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Condicionales","Sensores"])
+const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Condicionales", "Repeticiones","Sensores"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_left_right_param", "Movimientos"],
+  ["move_classic_simple", "Movimientos"],
   ["comer_frutilla", "Acciones"],
   ["comer_bamboo", "Acciones"],
   ["if", "Condicionales"],
   ["ifElse", "Condicionales"],
+  ["repeat_times", "Repeticiones"],
+  ["repeat_until", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
-  ["sensor_bamboo", "Sensores"],
 ];
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverIzquierda","comerFrutilla","comerBamboo","detectarFrutilla","detectarBamboo"]
+const funcionesAExponer=["moverDerecha","moverIzquierda","moverArriba","moverAbajo","comerFrutilla","detectarFrutilla"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)
