@@ -209,13 +209,13 @@ export function PersonajesPosicionAlAzarExcluyente() {
   this.crearPersonajes = function (conjuntoPersonajes, _escenario) {
     let personajeACrear = elegirPersonajeRandom(conjuntoPersonajes.personajes);
     const index = Math.floor(Math.random() * conjuntoPersonajes.posiciones.length)
-    const unaPosicion=conjuntoPersonajes.posiciones[index]
-   setearPosiciones(personajeACrear, unaPosicion);
-   setearAliasYAleatorieidad(
-     personajeACrear,
-     conjuntoPersonajes.desapareceAlReiniciar,
-     conjuntoPersonajes.aliasConjunto
-   );
+    const unaPosicion = conjuntoPersonajes.posiciones[index]
+    setearPosiciones(personajeACrear, unaPosicion);
+    setearAliasYAleatorieidad(
+      personajeACrear,
+      conjuntoPersonajes.desapareceAlReiniciar,
+      conjuntoPersonajes.aliasConjunto
+    );
     return [personajeACrear];
   };
 }
@@ -240,7 +240,7 @@ export function PersonajesAlAzarCantTotal() {
       let personajeElegido = elegirPersonajeRandom(
         conjuntoPersonajes.personajes
       );
-      const unaPosicion = posicionValida(escenario, posicionesElegidas,conjuntoPersonajes.posiciones);
+      const unaPosicion = posicionValida(escenario, posicionesElegidas, conjuntoPersonajes.posiciones);
       posicionesElegidas.push(unaPosicion);
       let personajeAux = { ...personajeElegido };
       setearPosiciones(personajeAux, unaPosicion);
@@ -295,49 +295,94 @@ export function PersonajesAlAzarCantTotalFijos() {
     return personajesACrear;
   };
 }
+//conjuntoPersonajes:
+// {
+//   estrategia: "filasAleatoriasSimples",
+//   personajes: [bambooAncho,bambooAnchoCamino, frutilla,cielo],
+//   aliasConjunto: "filasAleatoriasSimples",
+//   desapareceAlReiniciar: true,
+//   anchoMinimo: 3,
+//   anchoMaximo: 6, // Warning no exceda el tablero.
+//   filas:[1,2,3,4],
+//   desdeColumna:1,
+// }
 
-export function EscenarioFilasAleatoreasSimples(){
-    this.crearPersonajes = function (conjuntoPersonajes, escenario) {
-      let personajesACrear = [];
-        //Personaje Tierra o de relleno
-        conjuntoPersonajes.filas.forEach(fila=>{
-          //Personaje cuadroAmarillo
-        let personajeMarcaInicial = {...conjuntoPersonajes.personajes[0]}
-        let unaPosicion = [fila,conjuntoPersonajes.desdeColumna]
-        setearPosiciones(personajeMarcaInicial,unaPosicion)
+//personajes[primerElementoEnArray,porDondeCaminaElPersonajePPAL,aLoQueTieneQueLlegar,rellenoNoPisable]
+export function EscenarioFilasAleatoreasSimples() {
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    let personajesACrear = [];
+    //Recorro las filas a rellenar
+    conjuntoPersonajes.filas.forEach((fila, index) => {
+      //Personaje cuadroAmarillo - inicio
+      let personajeInicial = { ...conjuntoPersonajes.personajes[0] }
+      let unaPosicion = [fila, conjuntoPersonajes.desdeColumna]
+      setearPosiciones(personajeInicial, unaPosicion)
+      setearAliasYAleatorieidad(
+        personajeInicial,
+        conjuntoPersonajes.desapareceAlReiniciar,
+        conjuntoPersonajes.aliasConjunto
+      );
+      personajesACrear.push(personajeInicial);
+      //Calculo el numero aleatorio
+      let largoFila = obtenerCantidadAleatoria({
+        cantidadMax: conjuntoPersonajes.anchoMaximo,
+        cantidadMin: conjuntoPersonajes.anchoMinimo,
+      });
+      if(index+1 !== conjuntoPersonajes.filas.length){
+        console.log("tengo las filas intermedias")
+            //Relleno con camino
+      for (let i = conjuntoPersonajes.desdeColumna+1; i <= largoFila; i++) {
+        let personajeRelleno = { ...conjuntoPersonajes.personajes[1] }
+        setearPosiciones(personajeRelleno, [fila, i])
         setearAliasYAleatorieidad(
-          personajeMarcaInicial,
+          personajeRelleno,
           conjuntoPersonajes.desapareceAlReiniciar,
           conjuntoPersonajes.aliasConjunto
         );
-        personajesACrear.push(personajeMarcaInicial);
-          const largoFila = obtenerCantidadAleatoria({
-            cantidadMax: conjuntoPersonajes.anchoMaximo,
-            cantidadMin: conjuntoPersonajes.anchoMinimo,
-          });
-          for (let i = conjuntoPersonajes.desdeColumna; i <= largoFila; i++) {
-            let personajeRelleno = {...conjuntoPersonajes.personajes[1]}
-            setearPosiciones(personajeRelleno,[fila, i])
-                setearAliasYAleatorieidad(
-                  personajeRelleno,
-                  conjuntoPersonajes.desapareceAlReiniciar,
-                  conjuntoPersonajes.aliasConjunto
-                );
-                personajesACrear.push(personajeRelleno);
-              }
-              let personajeFinalFila = {...conjuntoPersonajes.personajes[2]}
-              setearPosiciones(personajeFinalFila,[fila, largoFila])
-              setearAliasYAleatorieidad(
-                personajeFinalFila,
-                conjuntoPersonajes.desapareceAlReiniciar,
-                conjuntoPersonajes.aliasConjunto
-              );
-              personajesACrear.push(personajeFinalFila);
-        })
-
+        personajesACrear.push(personajeRelleno);
+      }
+        //Personaje Final
+        let personajeFinalFila = { ...conjuntoPersonajes.personajes[2] }
+        setearPosiciones(personajeFinalFila, [fila, largoFila])
+        setearAliasYAleatorieidad(
+          personajeFinalFila,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+        personajesACrear.push(personajeFinalFila);
+      }else{
+        console.log("tengo la ultima fila")
+        console.log(conjuntoPersonajes.filas[index])
+        largoFila = 1
+      }
   
-      return personajesACrear
-    }
+      //Relleno el resto de la fila con personaje no pisable
+      for(let k = 0;k<conjuntoPersonajes.desdeColumna; k++){
+        let personajeRellenoTablero = { ...conjuntoPersonajes.personajes[3] }
+        setearPosiciones(personajeRellenoTablero, [fila, k])
+        setearAliasYAleatorieidad(
+          personajeRellenoTablero,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+        personajesACrear.push(personajeRellenoTablero);
+      }
+      for(let j = largoFila+1;j<=escenario.dimensiones[1]; j++){
+        let personajeRellenoTablero = { ...conjuntoPersonajes.personajes[3] }
+        setearPosiciones(personajeRellenoTablero, [fila, j])
+        setearAliasYAleatorieidad(
+          personajeRellenoTablero,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+        personajesACrear.push(personajeRellenoTablero);
+      }
+      
+      
+    })
+
+    return personajesACrear
+  }
 }
 
 

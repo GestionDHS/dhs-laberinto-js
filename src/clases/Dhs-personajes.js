@@ -1,6 +1,3 @@
-import circuloAmarilloTransparente from '../img/circuloAmarillo.png';
-import estrellaSinFondo from '../img/estrellaSinFondo.png';
-
 export class Dhs_personajes {
   constructor() {
     this.ready = true;
@@ -217,6 +214,20 @@ export class Dhs_personajes {
       tipoPersonaje: "agua",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "agua" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    cielo: {
+      idUsarHTML: "cielo",
+      tipoPersonaje: "cielo",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "cielo" },
       },
       estadoInicial: "normal",
       zIndex: 1,
@@ -915,6 +926,13 @@ export class Dhs_personajes {
             x.llegarALaEstrella();
           },
         },
+        {
+          con: "cielo",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.decirTerminar("OH! No se volar!");
+          },
+        },
       ],
       configPosicionamiento: {},
     },
@@ -1166,7 +1184,7 @@ export class Dhs_personajes {
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "frutilla" },
         abierto: { name: "normal", imageUrl: "" },
-        juntado: { name: "juntado", imageUrl: "agua" },
+        juntado: { name: "juntado", imageUrl: "" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,

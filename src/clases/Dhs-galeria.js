@@ -30,6 +30,7 @@ import pastoSendero from "../img/pastoSendero.png";
 import ciclista from "../img/ciclista.png";
 import brujula from "../img/brujula.png";
 import agua from "../img/agua.png";
+import cielo from "../img/cielo.png";
 import pastoDelta from "../img/pastoDelta.png";
 import juncoPastoDelta from "../img/juncoPastoDelta.png";
 import carpincho from "../img/carpinchoArriba.png";
@@ -439,6 +440,13 @@ export class DHS_Gallery {
       themes: ["delta"],
       url: agua,
       nombre: "agua",
+      parrafoLicencia: "<p>Digital House</p>",
+      showLicense: false,
+    },
+    cielo: {
+      themes: ["delta"],
+      url: cielo,
+      nombre: "cielo",
       parrafoLicencia: "<p>Digital House</p>",
       showLicense: false,
     },

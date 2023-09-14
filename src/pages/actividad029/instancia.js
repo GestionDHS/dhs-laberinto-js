@@ -25,7 +25,7 @@ const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
@@ -33,13 +33,14 @@ const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const panda = personajesGaleria.obtenerPersonaje("panda");
 //panda.paddingImagen = "5px"
-const cielo = personajesGaleria.obtenerPersonaje("agua");
+const cielo = personajesGaleria.obtenerPersonaje("cielo");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 frutilla.paddingImagen = "10px"
 const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
 const bambooAnchoCamino = personajesGaleria.obtenerPersonaje("bambooCieloCamino");
 const bambooIzq = personajesGaleria.obtenerPersonaje("bambooIzqHoja");
 const tierra = personajesGaleria.obtenerPersonaje("tierraPasto");
+const estrella = personajesGaleria.obtenerPersonaje("estrella");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -60,40 +61,40 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [bambooIzq],
-    posiciones: [[4, 0],[2, 0]],
-    aliasConjunto: "fijoPrincipal",
-    desapareceAlReiniciar: false,
-  },
-    {
-    estrategia: "fijos",
-    personajes: [bambooAncho],
-    posiciones: coordenadasCaminoPared.coordenadasPared,
-    aliasConjunto: "fijosTablero",
+    personajes: [cielo],
+    posiciones: [[0, 0],[0, 2],[0, 3],[0, 4],[0, 5],[0, 6],[0, 7],[0, 8]],
+    aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
-    personajes: [cielo],
-    posiciones: coordenadasCaminoPared.coordenadasCamino,
-    aliasConjunto: "fijosTablero",
+    personajes: [estrella],
+    posiciones: [[0, 1]],
+    aliasConjunto: "fijoTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [bambooIzq],
+    posiciones: [[4, 0],[2, 0]],
+    aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "filasAleatoriasSimples",
-    personajes: [bambooAncho,bambooAnchoCamino, frutilla],
+    personajes: [bambooAncho,bambooAnchoCamino, frutilla,cielo],
     aliasConjunto: "filasAleatoriasSimples",
     desapareceAlReiniciar: true,
     anchoMinimo: 3,
     anchoMaximo: 6, // Warning no exceda el tablero.
-    filas:[1,2,3,4],
+    filas:[1,2,3,4,5],
     desdeColumna:1,
   },
   {
     estrategia: "fijos",
     personajes: [tierra],
     posiciones: [[6, 0],[6, 1],[6, 2],[6, 3],[6, 4],[6, 5],[6, 6],[6, 7],[6, 8]],
-    aliasConjunto: "fijoPrincipal",
+    aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
 ];
@@ -137,8 +138,6 @@ miJuego.personajePrincipal.moverArriba= function(veces=1){
   if(this.buscarObjetoEnCasilleroActual("bambooAncho") != undefined){
   this.setearEstado("trepando")
   return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
-}else{
-  this.decirTerminar("¡Aún no se volar!")
 }
 }
 
@@ -155,18 +154,24 @@ miJuego.personajePrincipal.llegarALaEstrella = function () {
   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
   //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
   //  y si era una frutilla y no se la comio, también viene vacia
-  const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
-  if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
-    this.abrirYMostrarModal();
-  }
-  if(casilleroAleatoreoFrutilla && this.mochila.length == 0){
-    this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.")
-  }
-  if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
-    this.abrirYMostrarModal();
-  }else{
-    this.decirTerminar("¡Oh No! Quedó un bambú sin comer 😟.");
-  }
+  this.abrirYMostrarModal();
+  // if(this.mochila[0]?.length == 0){
+  //   this.abrirYMostrarModal();
+  // }else{
+  //   this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
+  // }
+  // const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
+  // if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
+  //   this.abrirYMostrarModal();
+  // }
+  // if(casilleroAleatoreoFrutilla && this.mochila.length == 0){
+  //   this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.")
+  // }
+  // if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
+  //   this.abrirYMostrarModal();
+  // }else{
+  //   this.decirTerminar("¡Oh No! Quedó un bambú sin comer 😟.");
+  // }
 };
 
 // BLOCKLY ------------------------------------------------------
