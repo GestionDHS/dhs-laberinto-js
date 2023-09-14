@@ -110,6 +110,10 @@ miJuego.personajePrincipal.detectarFrutilla = function () {
   // devuelve true si encuentra o false si no hay cofre
   return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
 };
+miJuego.personajePrincipal.detectarTronco = function () {
+  // devuelve true si encuentra o false si no hay cofre
+  return this.buscarObjetoEnCasilleroActual("bambooAncho") !== undefined
+};
 
 miJuego.personajePrincipal.comerFrutilla = function () {
   const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
@@ -181,18 +185,19 @@ const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimi
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_classic_simple", "Movimientos"],
+  ["move_trepar_simple", "Movimientos"],
+  ["move_sinUp_simple", "Movimientos"],
   ["comer_frutilla", "Acciones"],
-  ["comer_bamboo", "Acciones"],
   ["if", "Condicionales"],
   ["ifElse", "Condicionales"],
   ["repeat_times", "Repeticiones"],
   ["repeat_until", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
+  ["sensor_tronco", "Sensores"],
 ];
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverIzquierda","moverArriba","moverAbajo","comerFrutilla","detectarFrutilla"]
+const funcionesAExponer=["moverDerecha","moverIzquierda","moverArriba","moverAbajo","comerFrutilla","detectarFrutilla","detectarTronco"]
 
 configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)

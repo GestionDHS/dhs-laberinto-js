@@ -177,6 +177,37 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    move_trepar_simple() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "mover_trepar_simple",
+                "message0": "%1 trepar",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+            },
+        ]);
+
+        // Define how to generate JavaScript from the custom block.
+        Blockly.JavaScript.forBlock["mover_trepar_simple"] = function (block) {
+            const code = "moverArriba();\n"
+            return code;
+        };
+
+        return {
+            type: "mover_trepar_simple",
+            kind: "block",
+        }
+    }
     move_right_simple() {
         // Use Blockly's custom block JSON API to define a new block type.
         Blockly.common.defineBlocksWithJsonArray([
@@ -246,6 +277,13 @@ export default class ConfiguradorBloques {
     move_classic_simple() {
         return [
             this.move_up_simple(),
+            this.move_down_simple(),
+            this.move_left_simple(),
+            this.move_right_simple(),
+        ]
+    }
+    move_sinUp_simple() {
+        return [
             this.move_down_simple(),
             this.move_left_simple(),
             this.move_right_simple(),
@@ -1655,7 +1693,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "sensor_tronco",
-                "message0": "%1 ¿LLegué hasta el tronco?",
+                "message0": "%1 ¿LLegué al tronco?",
                 "output": null,
                 "args0": [
                     {
