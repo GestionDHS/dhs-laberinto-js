@@ -34,6 +34,7 @@ const personajesGaleria = new Dhs_personajes();
 const panda = personajesGaleria.obtenerPersonaje("panda");
 //panda.paddingImagen = "5px"
 const cielo = personajesGaleria.obtenerPersonaje("cielo");
+const agua = personajesGaleria.obtenerPersonaje("agua");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 frutilla.paddingImagen = "10px"
 const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
@@ -68,6 +69,13 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
+    personajes: [agua],
+    posiciones: [[5, 0], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [5, 8]],
+    aliasConjunto: "fijoTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
     personajes: [estrella],
     posiciones: [[0, 1]],
     aliasConjunto: "fijoTablero",
@@ -81,13 +89,20 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
   {
+    estrategia: "fijos",
+    personajes: [bambooAncho],
+    posiciones: [[5, 1]],
+    aliasConjunto: "fijoTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
     estrategia: "filasAleatoriasSimples",
     personajes: [bambooAncho, bambooAnchoCamino, frutilla, cielo],
     aliasConjunto: "filasAleatoriasSimples",
     desapareceAlReiniciar: true,
     anchoMinimo: 3,
     anchoMaximo: 6, // Warning no exceda el tablero.
-    filas: [1, 2, 3, 4, 5],
+    filas: [1, 2, 3, 4],
     desdeColumna: 1,
   },
   {

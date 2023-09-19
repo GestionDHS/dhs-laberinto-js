@@ -335,8 +335,9 @@ export function EscenarioFilasAleatoreasSimples() {
         cantidadMax: conjuntoPersonajes.anchoMaximo,
         cantidadMin: conjuntoPersonajes.anchoMinimo,
       });
-      if (index + 1 !== conjuntoPersonajes.filas.length) {
+      // if (index + 1 !== conjuntoPersonajes.filas.length) {
         //Tengo las filas que quiero renderizar con camino y objeto a encontrar
+        
         //Relleno con camino
         for (let i = conjuntoPersonajes.desdeColumna + 1; i <= largoFila; i++) {
           let personajeRelleno = { ...conjuntoPersonajes.personajes[1] };
@@ -357,10 +358,10 @@ export function EscenarioFilasAleatoreasSimples() {
           conjuntoPersonajes.aliasConjunto
         );
         personajesACrear.push(personajeFinalFila);
-      } else {
-        //si entra acá es por que tengo la última fila, que queremos que se renderice solo el tronco
-        largoFila = 1;
-      }
+      // } else {
+      //   //si entra acá es por que tengo la última fila, que queremos que se renderice solo el tronco
+      //   largoFila = 1;
+      // }
 
       //Relleno el resto de la fila con personaje no pisable
       for (let k = 0; k < conjuntoPersonajes.desdeColumna; k++) {
