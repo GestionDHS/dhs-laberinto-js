@@ -935,7 +935,7 @@ export class Dhs_personajes {
         },
         {
           con: "bambooIzqHoja",
-          factorDeAvance: 0.4,
+          factorDeAvance: 0.2,
           callback: (x) => {
             x.decirTerminar("OH! Me voy a caer si piso aquí!");
           },
