@@ -123,6 +123,21 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       rotable: false,
     },
+    pastoCielo: {
+      idUsarHTML: "camino",
+      tipoPersonaje: "camino",
+      pintable: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "pastoCielo" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      paddingImagen: "1px",
+      rotable: false,
+    },
     arbol: {
       tipoPersonaje: "arbol",
       estadosPosibles: {

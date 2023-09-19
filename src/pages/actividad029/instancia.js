@@ -34,7 +34,7 @@ const personajesGaleria = new Dhs_personajes();
 const panda = personajesGaleria.obtenerPersonaje("panda");
 //panda.paddingImagen = "5px"
 const cielo = personajesGaleria.obtenerPersonaje("cielo");
-const agua = personajesGaleria.obtenerPersonaje("agua");
+const pastoCielo = personajesGaleria.obtenerPersonaje("pastoCielo");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 frutilla.paddingImagen = "10px"
 const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
@@ -69,7 +69,7 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [agua],
+    personajes: [pastoCielo],
     posiciones: [[5, 0], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [5, 8]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
@@ -118,7 +118,7 @@ let conjuntosDePersonajes = [
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
-//miJuego.personajePrincipal.setearEstado("trepando")
+
 
 //Método para detectar
 miJuego.personajePrincipal.detectarFrutilla = function () {
@@ -160,10 +160,7 @@ miJuego.personajePrincipal.moverArriba = function (veces = 1) {
   }else{
     return miJuego.personajePrincipal.decirTerminar("Por aquí no puedo trepar")
   }
-  // if (this.buscarObjetoAdelante("bambooIzqHoja") != undefined) {
-  //   this.setearEstado("trepando")
-  //   return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
-  // }
+
 }
 
 miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
