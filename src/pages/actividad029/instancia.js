@@ -189,7 +189,7 @@ const ordenJerarquicoBloques = [
   ["move_sinUp_simple", "Movimientos"],
   ["comer_frutilla", "Acciones"],
   ["if", "Condicionales"],
-  ["ifElse", "Condicionales"],
+  // ["ifElse", "Condicionales"],
   ["repeat_times", "Repeticiones"],
   ["repeat_until", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
