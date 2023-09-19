@@ -3,10 +3,10 @@ import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
-import {Dhs_personajes} from '../../clases/Dhs-personajes';
-import {generarCoordenadas, configurarYRenderizarToolbox} from '../../Utils/Funciones';
-import {Dhs_Categorias} from '../../clases/Dhs-categorias';
-import {PersonajesAlAzarExcluyente} from '../../clases/StrategyCreacion';
+import { Dhs_personajes } from '../../clases/Dhs-personajes';
+import { generarCoordenadas, configurarYRenderizarToolbox } from '../../Utils/Funciones';
+import { Dhs_Categorias } from '../../clases/Dhs-categorias';
+import { PersonajesAlAzarExcluyente } from '../../clases/StrategyCreacion';
 import bambooCieloCamino from '../../img/bambooCieloCamino.png';
 import pandaTrepadorSinFondo from '../../img/pandaTrepadorSinFondo.png';
 
@@ -62,7 +62,7 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [cielo],
-    posiciones: [[0, 0],[0, 2],[0, 3],[0, 4],[0, 5],[0, 6],[0, 7],[0, 8]],
+    posiciones: [[0, 0], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
@@ -76,24 +76,24 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [bambooIzq],
-    posiciones: [[4, 0],[2, 0]],
+    posiciones: [[4, 0], [2, 0]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "filasAleatoriasSimples",
-    personajes: [bambooAncho,bambooAnchoCamino, frutilla,cielo],
+    personajes: [bambooAncho, bambooAnchoCamino, frutilla, cielo],
     aliasConjunto: "filasAleatoriasSimples",
     desapareceAlReiniciar: true,
     anchoMinimo: 3,
     anchoMaximo: 6, // Warning no exceda el tablero.
-    filas:[1,2,3,4,5],
-    desdeColumna:1,
+    filas: [1, 2, 3, 4, 5],
+    desdeColumna: 1,
   },
   {
     estrategia: "fijos",
     personajes: [tierra],
-    posiciones: [[6, 0],[6, 1],[6, 2],[6, 3],[6, 4],[6, 5],[6, 6],[6, 7],[6, 8]],
+    posiciones: [[6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [6, 7], [6, 8]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
@@ -121,49 +121,49 @@ miJuego.personajePrincipal.comerFrutilla = function () {
     return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
-  }else if (intento.premio?.tipo == "frutilla") {
-    return this.decir("¡Mmmm! Qué rica frutilla.",2000);
+  } else if (intento.premio?.tipo == "frutilla") {
+    return this.decir("¡Mmmm! Qué rica frutilla.", 2000);
   }
 
 };
 
-miJuego.personajePrincipal.moverDerecha= function(veces=1){
+miJuego.personajePrincipal.moverDerecha = function (veces = 1) {
   this.setearEstado("derecha")
-      return this.iterarVectorMovimiento(veces, [0, +1]);
+  return this.iterarVectorMovimiento(veces, [0, +1]);
+}
+
+miJuego.personajePrincipal.moverIzquierda = function (veces = 1) {
+  this.setearEstado("izquierda")
+  return this.iterarVectorMovimiento(veces, [0, -1]);
+}
+
+
+miJuego.personajePrincipal.moverArriba = function (veces = 1) {
+  if (this.buscarObjetoEnCasilleroActual("bambooAncho") != undefined) {
+    this.setearEstado("trepando")
+    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
   }
-
-miJuego.personajePrincipal.moverIzquierda= function(veces=1){
-    this.setearEstado("izquierda")
-    return this.iterarVectorMovimiento(veces, [0, -1]);
- }
-
-
-miJuego.personajePrincipal.moverArriba= function(veces=1){
-  if(this.buscarObjetoEnCasilleroActual("bambooAncho") != undefined){
-  this.setearEstado("trepando")
-  return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
-}
 }
 
-miJuego.personajePrincipal.moverAbajo= function(veces=1){
-  if(this.buscarObjetoAdelante(tierra)!=undefined || this.buscarObjetoAdelante(agua!=undefined) ){
-  this.setearEstado("trepando")
-  return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
-}else{
-  this.decirTerminar("¿Seguro? ¡Pensemos en una acción que pueda realizar!")
-}
+miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
+  if (this.buscarObjetoAdelante(tierra) != undefined || this.buscarObjetoAdelante(agua != undefined)) {
+    this.setearEstado("trepando")
+    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
+  } else {
+    this.decirTerminar("¿Seguro? ¡Pensemos en una acción que pueda realizar!")
+  }
 }
 
 miJuego.personajePrincipal.llegarALaEstrella = function () {
   //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
   //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
   //  y si era una frutilla y no se la comio, también viene vacia
-  this.abrirYMostrarModal();
-  // if(this.mochila[0]?.length == 0){
-  //   this.abrirYMostrarModal();
-  // }else{
-  //   this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
-  // }
+
+  if (this.mochila[0]?.length == 4) {
+    this.abrirYMostrarModal();
+  } else {
+    this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
+  }
   // const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
   // if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
   //   this.abrirYMostrarModal();
@@ -180,8 +180,8 @@ miJuego.personajePrincipal.llegarALaEstrella = function () {
 
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
-const categoria=new Dhs_Categorias()
-const categoriaElegida= categoria.obtenerCategoriasNecesarias(["Eventos","Movimientos","Acciones","Condicionales", "Repeticiones","Sensores"])
+const categoria = new Dhs_Categorias()
+const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Movimientos", "Acciones", "Condicionales", "Repeticiones", "Sensores"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
@@ -196,8 +196,8 @@ const ordenJerarquicoBloques = [
   ["sensor_tronco", "Sensores"],
 ];
 
-const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer=["moverDerecha","moverIzquierda","moverArriba","moverAbajo","comerFrutilla","detectarFrutilla","detectarTronco"]
+const funcionesAExponer = ["moverDerecha", "moverIzquierda", "moverArriba", "moverAbajo", "comerFrutilla", "detectarFrutilla", "detectarTronco"]
 
-configurarYRenderizarToolbox(miControlador,categoriaElegida,ordenJerarquicoBloques,bloquesPrecargadosJSON,funcionesAExponer)
+configurarYRenderizarToolbox(miControlador, categoriaElegida, ordenJerarquicoBloques, bloquesPrecargadosJSON, funcionesAExponer)
