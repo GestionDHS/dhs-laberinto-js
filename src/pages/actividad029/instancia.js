@@ -118,7 +118,7 @@ let conjuntosDePersonajes = [
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
-
+//miJuego.personajePrincipal.setearEstado("trepando")
 
 //Método para detectar
 miJuego.personajePrincipal.detectarFrutilla = function () {
@@ -164,7 +164,7 @@ miJuego.personajePrincipal.moverArriba = function (veces = 1) {
 }
 
 miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
-  if (this.buscarObjetoAdelante(tierra) != undefined || this.buscarObjetoAdelante(agua != undefined)) {
+  if (this.buscarObjetoAdelante(tierra != undefined )|| this.buscarObjetoAdelante(pastoCielo != undefined) || this.buscarObjetoAdelante(bambooAnchoCamino != undefined) || this.buscarObjetoAdelante(frutilla != undefined)) {
     this.setearEstado("trepando")
     return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
   } else {
@@ -177,7 +177,7 @@ miJuego.personajePrincipal.llegarALaEstrella = function () {
   //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
   //  y si era una frutilla y no se la comio, también viene vacia
 
-  if (this.mochila[0]?.length == 4) {
+  if (this.mochila?.length == 4) {
     this.abrirYMostrarModal();
   } else {
     this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
