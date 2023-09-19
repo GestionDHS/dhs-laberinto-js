@@ -1,5 +1,3 @@
-import circuloAmarilloTransparente from '../img/circuloAmarillo.png';
-
 export class Dhs_personajes {
   constructor() {
     this.ready = true;
@@ -216,6 +214,20 @@ export class Dhs_personajes {
       tipoPersonaje: "agua",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "agua" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    cielo: {
+      idUsarHTML: "cielo",
+      tipoPersonaje: "cielo",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "cielo" },
       },
       estadoInicial: "normal",
       zIndex: 1,
@@ -883,28 +895,15 @@ export class Dhs_personajes {
       tieneTooltip: true,
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "panda" },
+        trepando: { name: "normal", imageUrl: "pandaTrepadorSinFondo" },
+        izquierda: { name: "normal", imageUrl: "pandaIzquierda" },
+        derecha: { name: "normal", imageUrl: "panda" },
       },
       estadoInicial: "normal",
       direccionInicial: 0,
-      zIndex: 3,
+      zIndex: 4,
       rotable: true,
       colisiones: [
-        {
-          con: "lodo",
-          factorDeAvance: 0.7,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡OH NO! Me atasqué en el lodo.",
-        },
-        {
-          con: "arbol",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡OH NO! Choqué contra un árbol",
-        },
         {
           con: "bandera",
           factorDeAvance: 1,
@@ -925,6 +924,20 @@ export class Dhs_personajes {
           factorDeAvance: 1,
           callback: (x) => {
             x.llegarALaEstrella();
+          },
+        },
+        {
+          con: "cielo",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.decirTerminar("OH! No se volar!");
+          },
+        },
+        {
+          con: "bambooIzqHoja",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.decirTerminar("OH! Me voy a caer si piso aquí!");
           },
         },
       ],
@@ -1047,7 +1060,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
-      zIndex: 2,
+      zIndex: 3,
       rotable: false,
       paddingImagen: "0px",
       colisiones: [],
@@ -1057,6 +1070,21 @@ export class Dhs_personajes {
       tipoPersonaje: "bambooAnchoCamino",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "bambooAnchoCamino" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
+    bambooCieloCamino: {
+      idUsarHTML: "bambooCieloCamino",
+      tipoPersonaje: "bambooCieloCamino",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "bambooCieloCamino" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,
@@ -1142,13 +1170,28 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       colisiones: [],
     },
+    estrellaSinFondo: {
+      idUsarHTML: "estrellaSinFondo",
+      tipoPersonaje: "estrellaSinFondo",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "estrellaSinFondo" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
     frutilla: {
       idUsarHTML: "frutilla",
       tipoPersonaje: "frutilla",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "frutilla" },
-        abierto: { name: "normal", imageUrl: "agua" },
-        juntado: { name: "juntado", imageUrl: "agua" },
+        abierto: { name: "normal", imageUrl: "" },
+        juntado: { name: "juntado", imageUrl: "" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,

@@ -30,6 +30,7 @@ import pastoSendero from "../img/pastoSendero.png";
 import ciclista from "../img/ciclista.png";
 import brujula from "../img/brujula.png";
 import agua from "../img/agua.png";
+import cielo from "../img/cielo.png";
 import pastoDelta from "../img/pastoDelta.png";
 import juncoPastoDelta from "../img/juncoPastoDelta.png";
 import carpincho from "../img/carpinchoArriba.png";
@@ -48,6 +49,8 @@ import piedra from "../img/piedra.png";
 import caminoCueva from "../img/caminoCueva.png";
 import piedraDiamante from "../img/piedraDiamante.png";
 import panda from "../img/panda.png";
+import pandaIzquierda from "../img/pandaIzquierda.png";
+import pandaTrepadorSinFondo from "../img/pandaTrepadorSinFondo.png";
 import caraPanda from "../img/caraPanda.png";
 import arbol1 from "../img/arbol1.png";
 import arbol2 from "../img/arbol2.png";
@@ -60,9 +63,11 @@ import bordeDerBamboo from "../img/bordeDerechoBamboo.png";
 import bordeIzqBamboo from "../img/bordeIzqBamboo.png";
 import bambooAnchoCamino from "../img/bambooAnchoCamino.png";
 import bambooAncho from "../img/bambooAncho.png";
+import bambooCieloCamino from "../img/bambooCieloCamino.png";
 import tierra from "../img/tierra.png";
 import tierraPasto from "../img/tierraPasto.png";
 import estrella from "../img/estrella.png";
+import estrellaSinFondo from "../img/estrellaSinFondo.png";
 import frutilla from "../img/frutilla.png";
 import nubes from "../img/nubes.png";
 import pajaro from "../img/pajaro.png";
@@ -438,6 +443,13 @@ export class DHS_Gallery {
       parrafoLicencia: "<p>Digital House</p>",
       showLicense: false,
     },
+    cielo: {
+      themes: ["delta"],
+      url: cielo,
+      nombre: "cielo",
+      parrafoLicencia: "<p>Digital House</p>",
+      showLicense: false,
+    },
     pastoDelta: {
       themes: ["delta"],
       url: pastoDelta,
@@ -528,6 +540,20 @@ export class DHS_Gallery {
       parrafoLicencia: "Digital House",
       showLicense: true,
     },
+    pandaTrepadorSinFondo: {
+      themes: ["panda"],
+      url: pandaTrepadorSinFondo,
+      nombre: "pandaTrepadorSinFondo",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    pandaIzquierda: {
+      themes: ["panda"],
+      url: pandaIzquierda,
+      nombre: "pandaIzquierda",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
     caraPanda: {
       themes: ["caraPanda"],
       url: caraPanda,
@@ -612,6 +638,13 @@ export class DHS_Gallery {
       parrafoLicencia: "Digital House",
       showLicense: true,
     },
+    bambooCieloCamino: {
+      themes: ["bambooCieloCamino"],
+      url: bambooCieloCamino,
+      nombre: "bambooCieloCamino",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
     tierra: {
       themes: ["tierra"],
       url: tierra,
@@ -630,6 +663,13 @@ export class DHS_Gallery {
       themes: ["estrella"],
       url: estrella,
       nombre: "estrella",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    estrellaSinFondo: {
+      themes: ["estrellaSinFondo"],
+      url: estrellaSinFondo,
+      nombre: "estrellaSinFondo",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },

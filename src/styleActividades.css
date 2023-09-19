@@ -312,3 +312,8 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
     grid-template-columns: 2fr 1fr;
   }
 }
+
+/* Para ocultar las img cuando el personaje las come o las junta*/
+.ocultar{
+  display: none;
+}

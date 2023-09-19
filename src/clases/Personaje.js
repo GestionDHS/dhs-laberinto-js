@@ -50,6 +50,7 @@ export class PersonajeBasico {
     this.setearEstado(this.estadoInicial);
     this.pintarse(this.colorFondoInicial);
     this.direccion = this.direccionInicial;
+    this.controladorDOM.mostrarImg()
     this.controladorDOM.rotarPersonaje(this.direccion);
     this.controladorDOM.posicionarPersonajeEnHtml(
       this.posicionInicialY,
@@ -75,6 +76,9 @@ export class PersonajeBasico {
       this.controladorDOM.setearImagen(
         this.galeria.obtenerUrlDe(imagenDeseada)
       );
+    }else{
+      //this.controladorDOM.removerImg()
+      this.controladorDOM.ocultarImg()
     }
   }
 
@@ -310,6 +314,15 @@ class controladorPersonajeDOM {
   }
   removerDivDelDOM(){
     this.elementoHTML.remove()
+  }
+  removerImg(){
+    this.elementoHTML.querySelector("img") && this.elementoHTML.removeChild(this.imagenAnidada)
+  }
+  ocultarImg(){
+    this.elementoHTML.querySelector("img") && this.elementoHTML.querySelector("img").classList.add("ocultar")
+  }
+  mostrarImg(){
+    this.elementoHTML.querySelector("img") && this.elementoHTML.querySelector("img").classList.remove("ocultar")
   }
 }
 
