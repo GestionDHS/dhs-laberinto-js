@@ -933,6 +933,13 @@ export class Dhs_personajes {
             x.decirTerminar("OH! No se volar!");
           },
         },
+        {
+          con: "bambooIzqHoja",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.decirTerminar("OH! Me voy a caer si piso aquí!");
+          },
+        },
       ],
       configPosicionamiento: {},
     },

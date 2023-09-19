@@ -143,6 +143,11 @@ miJuego.personajePrincipal.moverArriba = function (veces = 1) {
     this.setearEstado("trepando")
     return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
   }
+  if (this.buscarObjetoAdelante("bambooIzqHoja") != undefined) {
+    console.log("lo encontró")
+    this.setearEstado("trepando")
+    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
+  }
 }
 
 miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
