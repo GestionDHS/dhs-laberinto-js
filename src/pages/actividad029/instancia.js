@@ -164,9 +164,10 @@ miJuego.personajePrincipal.moverArriba = function (veces = 1) {
 }
 
 miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
-  if (this.buscarObjetoAdelante(tierra != undefined )|| this.buscarObjetoAdelante(pastoCielo != undefined) || this.buscarObjetoAdelante(bambooAnchoCamino != undefined) || this.buscarObjetoAdelante(frutilla != undefined)) {
+  console.log(this.buscarObjetoAdelante("bambuAncho")!= undefined)
+  if (this.buscarObjetoAdelante("tierra")!= undefined || this.buscarObjetoAdelante("pastoCielo")!= undefined || this.buscarObjetoAdelante("bambooAnchoCamino")!= undefined || this.buscarObjetoAdelante("frutilla")!= undefined ||this.buscarObjetoAdelante("bambooAncho")!= undefined) {
     this.setearEstado("trepando")
-    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
+    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [1, 0]);
   } else {
     this.decirTerminar("¿Seguro? ¡Pensemos en una acción que pueda realizar!")
   }
