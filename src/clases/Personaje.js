@@ -135,7 +135,6 @@ export class PersonajeBasico {
   }
 
   buscarObjetoAdelante(nombreObjeto) {
-    console.log(nombreObjeto)
     const vector = this.obtenerVectorAvance(this.direccion);
     let vectorY = this.casilleroActual.fila + vector[0]
     let vectorX = this.casilleroActual.columna + vector[1]

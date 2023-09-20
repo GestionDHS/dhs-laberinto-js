@@ -164,7 +164,6 @@ miJuego.personajePrincipal.moverArriba = function (veces = 1) {
 }
 
 miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
-  console.log(this.buscarObjetoAdelante("bambuAncho")!= undefined)
   if (this.buscarObjetoAdelante("tierra")!= undefined || this.buscarObjetoAdelante("pastoCielo")!= undefined || this.buscarObjetoAdelante("bambooAnchoCamino")!= undefined || this.buscarObjetoAdelante("frutilla")!= undefined ||this.buscarObjetoAdelante("bambooAncho")!= undefined) {
     this.setearEstado("trepando")
     return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [1, 0]);
