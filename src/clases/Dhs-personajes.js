@@ -1348,7 +1348,7 @@ export class Dhs_personajes {
         normal: { name: "normal", imageUrl: "bombero",imagenUrl2:"chorroAgua" },
       },
       estadoInicial: "normal",
-      direccionInicial: 0,
+      direccionInicial: 90,
       zIndex: 3,
       rotable: true,
       paddingImagen: "1px",
@@ -1378,6 +1378,14 @@ export class Dhs_personajes {
           mensaje: "¡AY Me quemo!",
         },
         {
+          con: "fuegoCuatro",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
           con: "arbol",
           factorDeAvance: 0.2,
           callback: (x) => {
@@ -1397,17 +1405,16 @@ export class Dhs_personajes {
       configPosicionamiento: {},
     },
     fuego: {
-      idUsarHTML: "fuegoCero",
-      tipoPersonaje: "fuegoCero",
+      idUsarHTML: "fuego",
+      tipoPersonaje: "fuego",
       estadosPosibles: {
-        normal: { name: "normal", imageUrl: "fuegoCero" },
         fuegoCero: { name: "fuegoCero", imageUrl: "fuegoCero" },
         fuegoUno: { name: "fuegoUno", imageUrl: "fuegoUno" },
         fuegoDos: { name: "fuegoDos", imageUrl: "fuegoDos" },
         fuegoTres: { name: "fuegoTres", imageUrl: "fuegoTres" },
         fuegoCuatro: { name: "fuegoCuatro", imageUrl: "fuegoCuatro" },
       },
-      estadoInicial: "normal", 
+      estadoInicial: "fuegoCuatro", 
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,

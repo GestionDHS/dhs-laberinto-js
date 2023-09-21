@@ -162,6 +162,7 @@ export class PersonajeBasico {
     let objeto = objetoCasillero.ocupantes.find(
       (obj) => obj.tipoPersonaje == nombreObjeto
     );
+    
     return objeto;
   }
   buscarObjetoEnCasilleroActual(nombreObjeto) {

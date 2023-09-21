@@ -37,12 +37,12 @@ const nube = personajesGaleria.obtenerPersonaje("nubes");
 const pastoCielo = personajesGaleria.obtenerPersonaje("pastoCielo");
 const tierra = personajesGaleria.obtenerPersonaje("tierraPasto");
 const fuego = personajesGaleria.obtenerPersonaje("fuego");
-fuego.estadoInicial= "fuegoCuatro"
+
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "caraPanda",
-  texto: "¡Objetivo Cumplido!",
+  imagen: "bombero",
+  texto: "¡Donde hubo fuego cenizas quedan!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
@@ -103,9 +103,18 @@ miJuego.personajePrincipal.setearImagenSecundaria(miJuego.personajePrincipal.est
 //Método para detectar
 miJuego.personajePrincipal.dispararAgua = function () {
   miJuego.personajePrincipal.mostrarImgSecundaria()
-
+  const fuego=this.buscarObjetoAdelante("fuego")
+  fuego.estadoActual == "fuegoUno" && fuego.setearEstado("fuegoCero")
+  fuego.estadoActual == "fuegoDos" && fuego.setearEstado("fuegoUno")
+  fuego.estadoActual == "fuegoTres" && fuego.setearEstado("fuegoDos")
+  fuego.estadoActual == "fuegoCuatro" && fuego.setearEstado("fuegoTres")
+  fuego.estadoActual == "fuegoCero" && this.abrirYMostrarModal()
 };
 
+miJuego.personajePrincipal.detectarFuegoApagado=function(){
+  const fuego=this.buscarObjetoAdelante("fuego") 
+  return fuego == undefined || fuego.estadoActual == "fuegoCero"
+}
 
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
@@ -121,6 +130,6 @@ const ordenJerarquicoBloques = [
 
 const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer = ["moverDerecha", "moverIzquierda", "dispararAgua"]
+const funcionesAExponer = ["moverDerecha", "moverIzquierda", "dispararAgua","detectarFuegoApagado"]
 
 configurarYRenderizarToolbox(miControlador, categoriaElegida, ordenJerarquicoBloques, bloquesPrecargadosJSON, funcionesAExponer)
