@@ -1607,7 +1607,7 @@ export default class ConfiguradorBloques {
                 "args0": [
                     {
                       "type": "field_image",
-                      "src": "https://cdn-https://cdn-icons-png.flaticon.com/512/599/599502.png",
+                      "src": "https://cdn-icons-png.flaticon.com/512/785/785116.png",
                       "width": 16,
                       "height": 16,
                       "alt": "*"
@@ -1625,6 +1625,36 @@ export default class ConfiguradorBloques {
         };
         return {
             "type": "sensor_fuego",
+            "kind": "block",
+        }
+    }
+    sensor_apagar_fuego() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_apagar_fuego",
+                "message0": "%1 ¿Hay fuego adelante?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/785/785116.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_apagar_fuego"] = function (block) {
+            const code = "detectarFuegoApagado()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_apagar_fuego",
             "kind": "block",
         }
     }
