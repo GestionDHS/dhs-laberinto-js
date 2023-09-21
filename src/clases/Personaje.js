@@ -22,10 +22,13 @@ export class PersonajeBasico {
     // this.mensaje = objetoConfiguracionPersonaje.colisiones[0].mensaje //Pia, no todos tienen "colisiones"
     this.rotable = objetoConfiguracionPersonaje.rotable || false;
     this.mochila = [];
-    this.desapareceAlReiniciar=objetoConfiguracionPersonaje.desapareceAlReiniciar;
-    this.aliasConjunto=objetoConfiguracionPersonaje.aliasConjunto;
+    this.desapareceAlReiniciar =
+      objetoConfiguracionPersonaje.desapareceAlReiniciar;
+    this.aliasConjunto = objetoConfiguracionPersonaje.aliasConjunto;
     this.tieneTooltip = objetoConfiguracionPersonaje.tieneTooltip;
-    this.classCss = objetoConfiguracionPersonaje?.classCss ? objetoConfiguracionPersonaje.classCss : "null"
+    this.classCss = objetoConfiguracionPersonaje?.classCss
+      ? objetoConfiguracionPersonaje.classCss
+      : "null";
     this.controladorDOM = new controladorPersonajeDOM(
       this.tieneTooltip,
       this.juego.escenario,
@@ -50,7 +53,7 @@ export class PersonajeBasico {
     this.setearEstado(this.estadoInicial);
     this.pintarse(this.colorFondoInicial);
     this.direccion = this.direccionInicial;
-    this.controladorDOM.mostrarImg()
+    this.controladorDOM.mostrarImg();
     this.controladorDOM.rotarPersonaje(this.direccion);
     this.controladorDOM.posicionarPersonajeEnHtml(
       this.posicionInicialY,
@@ -61,34 +64,43 @@ export class PersonajeBasico {
     //   this.setearVelocidad(0);
     //   }
   }
-  
-  autodestruirse(){
-    this.salirDelCasilleroActual()
-    this.controladorDOM.removerDivDelDOM()
+
+  autodestruirse() {
+    this.salirDelCasilleroActual();
+    this.controladorDOM.removerDivDelDOM();
   }
-  reiniciarse(){
-    this.desapareceAlReiniciar==false?this.inicializar():this.autodestruirse()
+  reiniciarse() {
+    this.desapareceAlReiniciar == false
+      ? this.inicializar()
+      : this.autodestruirse();
   }
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
-    const imagenDeseada = this.estadosPosibles ? this.estadosPosibles[nuevoStatus].imageUrl : null;
+    const imagenDeseada = this.estadosPosibles
+      ? this.estadosPosibles[nuevoStatus].imageUrl
+      : null;
     if (imagenDeseada) {
       this.controladorDOM.setearImagen(
         this.galeria.obtenerUrlDe(imagenDeseada)
       );
-    }else{
+    } else {
       //this.controladorDOM.removerImg()
-      this.controladorDOM.ocultarImg()
+      this.controladorDOM.ocultarImg();
     }
   }
-
+  setearImagenSecundaria(img) {
+    this.controladorDOM.agregarImagenSecundaria(this.galeria.obtenerUrlDe(img));
+  }
+  mostrarImgSecundaria() {
+    this.controladorDOM.mostrarImagenSecundaria();
+  }
   //recibe un objeto de tipo colision que tiene (con , seMuere, autoMensaje, mensaje)
   agregarColision(unaColision) {
     this.colisiones.push(unaColision);
   }
   salirDelCasilleroActual() {
-    const posicion=this.casilleroActual?.ocupantes.indexOf(this)
-    posicion>-1 && this.casilleroActual?.ocupantes.splice(posicion,1);
+    const posicion = this.casilleroActual?.ocupantes.indexOf(this);
+    posicion > -1 && this.casilleroActual?.ocupantes.splice(posicion, 1);
   }
   actualizarCasillero(nuevaY, nuevaX) {
     this.salirDelCasilleroActual();
@@ -136,9 +148,9 @@ export class PersonajeBasico {
 
   buscarObjetoAdelante(nombreObjeto) {
     const vector = this.obtenerVectorAvance(this.direccion);
-    let vectorY = this.casilleroActual.fila + vector[0]
-    let vectorX = this.casilleroActual.columna + vector[1]
-    return this.buscarObjetoSegunVector(nombreObjeto, [vectorY,vectorX]);
+    let vectorY = this.casilleroActual.fila + vector[0];
+    let vectorX = this.casilleroActual.columna + vector[1];
+    return this.buscarObjetoSegunVector(nombreObjeto, [vectorY, vectorX]);
   }
 
   buscarObjetoSegunVector(nombreObjeto, vector) {
@@ -150,10 +162,11 @@ export class PersonajeBasico {
     let objeto = objetoCasillero.ocupantes.find(
       (obj) => obj.tipoPersonaje == nombreObjeto
     );
-    return objeto
+    
+    return objeto;
   }
   buscarObjetoEnCasilleroActual(nombreObjeto) {
-    return this.buscarObjetoEnCasillero(nombreObjeto, this.casilleroActual)
+    return this.buscarObjetoEnCasillero(nombreObjeto, this.casilleroActual);
   }
 
   buscarParaRealizarAccion(nameObj, accion, params = false) {
@@ -177,7 +190,7 @@ export class PersonajeBasico {
     const objetoPaciente = this.buscarObjetoAdelante(nameObj);
     const acto = objetoPaciente
       ? this.realizarAccionSobre(objetoPaciente, accion, params)
-      : false; 
+      : false;
     return {
       objetoEncontrado: objetoPaciente ? true : false,
       exito: acto && acto.exito,
@@ -248,7 +261,14 @@ export class PersonajeBasico {
 
 class controladorPersonajeDOM {
   // constructor(interfazConfigObj) {
-  constructor(tieneTooltip, escenario, idHtml, zIndex, paddingImagen = "0",classCss) {
+  constructor(
+    tieneTooltip,
+    escenario,
+    idHtml,
+    zIndex,
+    paddingImagen = "0",
+    classCss
+  ) {
     //this.modo = modo;
     this.escenario = escenario;
     this.elementoHTML = document.createElement("DIV");
@@ -275,7 +295,22 @@ class controladorPersonajeDOM {
   setearImagen(url) {
     this.imagenAnidada ? this.imagenAnidada.setAttribute("src", url) : null;
   }
-
+  agregarImagenSecundaria(imagen) {
+    this.imagenAnidadaSecundaria = document.createElement("IMG");
+    this.imagenAnidadaSecundaria.setAttribute("src", imagen);
+    this.imagenAnidadaSecundaria.classList.add("imgHidden");
+    this.elementoHTML.appendChild(this.imagenAnidadaSecundaria);
+  }
+  mostrarImagenSecundaria() {
+    this.imagenAnidadaSecundaria.classList.remove("imgHidden");
+    this.imagenAnidadaSecundaria.classList.add("imgVisible");
+    setTimeout(() => {
+      this.imagenAnidadaSecundaria.classList.remove("imgVisible");
+      this.imagenAnidadaSecundaria.classList.add("imgHidden");
+    }, 2000);
+    
+    
+  }
   setearVelocidad(milisegundos) {
     this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s";
     this.imagenAnidada
@@ -312,17 +347,20 @@ class controladorPersonajeDOM {
   removerTooltip() {
     this.elementoHTML.classList.remove("tooltipVisible");
   }
-  removerDivDelDOM(){
-    this.elementoHTML.remove()
+  removerDivDelDOM() {
+    this.elementoHTML.remove();
   }
-  removerImg(){
-    this.elementoHTML.querySelector("img") && this.elementoHTML.removeChild(this.imagenAnidada)
+  removerImg() {
+    this.elementoHTML.querySelector("img") &&
+      this.elementoHTML.removeChild(this.imagenAnidada);
   }
-  ocultarImg(){
-    this.elementoHTML.querySelector("img") && this.elementoHTML.querySelector("img").classList.add("ocultar")
+  ocultarImg() {
+    this.elementoHTML.querySelector("img") &&
+      this.elementoHTML.querySelector("img").classList.add("ocultar");
   }
-  mostrarImg(){
-    this.elementoHTML.querySelector("img") && this.elementoHTML.querySelector("img").classList.remove("ocultar")
+  mostrarImg() {
+    this.elementoHTML.querySelector("img") &&
+      this.elementoHTML.querySelector("img").classList.remove("ocultar");
   }
 }
 
@@ -337,7 +375,7 @@ class PersonajeMovible extends PersonajeBasico {
     let nuevaY = this.posicionActualY + vectorY;
     let nuevaX = this.posicionActualX + vectorX;
     const casilleroDestino = this.obtenerCasillero(nuevaY, nuevaX);
-    if (!casilleroDestino || casilleroDestino.ocupantes.length==0) {
+    if (!casilleroDestino || casilleroDestino.ocupantes.length == 0) {
       const limite = {
         con: "limitesDelUniverso",
         factorDeAvance: 0.35,
@@ -346,7 +384,6 @@ class PersonajeMovible extends PersonajeBasico {
         },
         mensaje: "¡OH NO! me caí del mapa. ",
       };
-    
 
       this.exponerTooltip(limite.mensaje);
       limite.callback(this);
@@ -404,7 +441,8 @@ class PersonajeMovible extends PersonajeBasico {
   }
   obtenerVectorAvance(direccion) {
     const moduloDireccion360 = direccion % 360; // 0 || +/-90 || +/-180 || +/-270
-    const moduloDireccion360Positivo = moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
+    const moduloDireccion360Positivo =
+      moduloDireccion360 < 0 ? 360 + moduloDireccion360 : moduloDireccion360; // 0 || 90 || 180 || 270
     const puntoCardinal = moduloDireccion360Positivo / 90; // 0 || 1 || 2 || 3
     if (
       Number.isInteger(puntoCardinal) &&
@@ -550,6 +588,4 @@ export class PersonajeDibujante extends PersonajeMovibleGrados {
     }
     return true;
   }
-
- 
 }

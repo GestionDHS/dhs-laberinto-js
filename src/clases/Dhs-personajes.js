@@ -1339,6 +1339,105 @@ export class Dhs_personajes {
       paddingImagen: "0.5px",
       colisiones: [],
     },
+    bombero: {
+      idUsarHTML: "bombero",
+      tipoPersonaje: "bombero",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "bombero",imagenUrl2:"chorroAgua" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 90,
+      zIndex: 3,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [
+        {
+          con: "fuegoUno",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "fuegoDos",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "fuegoTres",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "fuegoCuatro",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "arbol",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un árbol",
+        },
+        {
+          con: "estacionDeBombero",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaBandera();
+          },
+          // mensaje: "¡We are the Champions!",
+        },
+      ],
+      configPosicionamiento: {},
+    },
+    fuego: {
+      idUsarHTML: "fuego",
+      tipoPersonaje: "fuego",
+      estadosPosibles: {
+        fuegoCero: { name: "fuegoCero", imageUrl: "fuegoCero" },
+        fuegoUno: { name: "fuegoUno", imageUrl: "fuegoUno" },
+        fuegoDos: { name: "fuegoDos", imageUrl: "fuegoDos" },
+        fuegoTres: { name: "fuegoTres", imageUrl: "fuegoTres" },
+        fuegoCuatro: { name: "fuegoCuatro", imageUrl: "fuegoCuatro" },
+      },
+      estadoInicial: "fuegoCuatro", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    chorroAgua: {
+      idUsarHTML: "chorroAgua",
+      tipoPersonaje: "chorroAgua",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "chorroAgua" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
   };
 }
 

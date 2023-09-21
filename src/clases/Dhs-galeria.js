@@ -76,6 +76,13 @@ import diamante from "../img/diamante.png";
 import avion from "../img/avion.png";
 import isla from "../img/isla.png";
 import pastoCielo from "../img/cieloPasto.png";
+import bombero from "../img/bombero.png";
+import fuegoCero from "../img/fuegoCero.png";
+import fuegoUno from "../img/fuegoUno.png";
+import fuegoDos from "../img/fuegoDos.png";
+import fuegoTres from "../img/fuegoTres.png";
+import fuegoCuatro from "../img/fuegoCuatro.png";
+import chorroAgua from "../img/chorroAgua.gif";
 
 export class DHS_Gallery {
   constructor() {
@@ -719,6 +726,55 @@ export class DHS_Gallery {
       themes: ["isla"],
       url: isla,
       nombre: "isla",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    bombero: {
+      themes: ["bombero"],
+      url: bombero,
+      nombre: "bombero",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    fuegoCero: {
+      themes: ["fuegoCero"],
+      url: fuegoCero,
+      nombre: "fuegoCero",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    fuegoUno: {
+      themes: ["fuegoUno"],
+      url: fuegoUno,
+      nombre: "fuegoUno",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    fuegoDos: {
+      themes: ["fuegoDos"],
+      url: fuegoDos,
+      nombre: "fuegoDos",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    fuegoTres: {
+      themes: ["fuegoTres"],
+      url: fuegoTres,
+      nombre: "fuegoTres",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    fuegoCuatro: {
+      themes: ["fuegoCuatro"],
+      url: fuegoCuatro,
+      nombre: "fuegoCuatro",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    chorroAgua: {
+      themes: ["chorroAgua"],
+      url: chorroAgua,
+      nombre: "chorroAgua",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },
