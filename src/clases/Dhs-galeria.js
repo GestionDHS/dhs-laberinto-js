@@ -82,6 +82,7 @@ import fuegoUno from "../img/fuegoUno.png";
 import fuegoDos from "../img/fuegoDos.png";
 import fuegoTres from "../img/fuegoTres.png";
 import fuegoCuatro from "../img/fuegoCuatro.png";
+import chorroAgua from "../img/chorroAgua.gif";
 
 export class DHS_Gallery {
   constructor() {
@@ -767,6 +768,13 @@ export class DHS_Gallery {
       themes: ["fuegoCuatro"],
       url: fuegoCuatro,
       nombre: "fuegoCuatro",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    chorroAgua: {
+      themes: ["chorroAgua"],
+      url: chorroAgua,
+      nombre: "chorroAgua",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },

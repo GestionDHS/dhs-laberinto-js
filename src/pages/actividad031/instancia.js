@@ -36,7 +36,8 @@ const cielo = personajesGaleria.obtenerPersonaje("cielo");
 const nube = personajesGaleria.obtenerPersonaje("nubes");
 const pastoCielo = personajesGaleria.obtenerPersonaje("pastoCielo");
 const tierra = personajesGaleria.obtenerPersonaje("tierraPasto");
-const fuegoCuatro = personajesGaleria.obtenerPersonaje("fuegoCuatro");
+const fuego = personajesGaleria.obtenerPersonaje("fuego");
+fuego.estadoInicial= "fuegoCuatro"
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -57,7 +58,7 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [fuegoCuatro],
+    personajes: [fuego],
     posiciones: [[2, 3]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
@@ -93,107 +94,31 @@ let conjuntosDePersonajes = [
 ];
 
 
-
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
-//miJuego.personajePrincipal.setearEstado("trepando")
+//Agregamos la img del agua pero con visibilidad hidden
+miJuego.personajePrincipal.setearImagenSecundaria(miJuego.personajePrincipal.estadosPosibles.normal.imagenUrl2)
+
 
 //Método para detectar
-miJuego.personajePrincipal.detectarFrutilla = function () {
-  // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
-};
-miJuego.personajePrincipal.detectarTronco = function () {
-  // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("bambooAncho") !== undefined
-};
-
-miJuego.personajePrincipal.comerFrutilla = function () {
-  const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
-  } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
-  } else if (intento.premio?.tipo == "frutilla") {
-    return this.decir("¡Mmmm! Qué rica frutilla.", 2000);
-  }
+miJuego.personajePrincipal.dispararAgua = function () {
+  miJuego.personajePrincipal.mostrarImgSecundaria()
 
 };
 
-miJuego.personajePrincipal.moverDerecha = function (veces = 1) {
-  this.setearEstado("derecha")
-  return this.iterarVectorMovimiento(veces, [0, +1]);
-}
-
-miJuego.personajePrincipal.moverIzquierda = function (veces = 1) {
-  this.setearEstado("izquierda")
-  return this.iterarVectorMovimiento(veces, [0, -1]);
-}
-
-
-miJuego.personajePrincipal.moverArriba = function (veces = 1) {
-  this.setearEstado("trepando")
-  if (this.buscarObjetoEnCasilleroActual("bambooAncho") != undefined) {
-    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
-  }else{
-    return miJuego.personajePrincipal.decirTerminar("Por aquí no puedo trepar")
-  }
-
-}
-
-miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
-  if (this.buscarObjetoAdelante("tierra")!= undefined || this.buscarObjetoAdelante("pastoCielo")!= undefined || this.buscarObjetoAdelante("bambooAnchoCamino")!= undefined || this.buscarObjetoAdelante("frutilla")!= undefined ||this.buscarObjetoAdelante("bambooAncho")!= undefined) {
-    this.setearEstado("trepando")
-    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [1, 0]);
-  } else {
-    this.decirTerminar("¡Por aquí no puedo bajar!")
-  }
-}
-
-miJuego.personajePrincipal.llegarALaEstrella = function () {
-  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
-  //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
-  //  y si era una frutilla y no se la comio, también viene vacia
-
-  if (this.mochila?.length == 4) {
-    this.abrirYMostrarModal();
-  } else {
-    this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
-  }
-  // const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
-  // if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
-  //   this.abrirYMostrarModal();
-  // }
-  // if(casilleroAleatoreoFrutilla && this.mochila.length == 0){
-  //   this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.")
-  // }
-  // if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
-  //   this.abrirYMostrarModal();
-  // }else{
-  //   this.decirTerminar("¡Oh No! Quedó un bambú sin comer 😟.");
-  // }
-};
 
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria = new Dhs_Categorias()
-const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Movimientos", "Acciones", "Condicionales", "Repeticiones", "Sensores"])
+const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Acciones",])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_trepar_simple", "Movimientos"],
-  ["move_sinUp_simple", "Movimientos"],
-  ["comer_frutilla", "Acciones"],
-  ["if", "Condicionales"],
-  // ["ifElse", "Condicionales"],
-  ["repeat_times", "Repeticiones"],
-  ["repeat_until", "Repeticiones"],
-  ["sensor_frutilla", "Sensores"],
-  ["sensor_tronco", "Sensores"],
+  ["disparar_agua", "Acciones"],
 ];
 
 const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer = ["moverDerecha", "moverIzquierda", "moverArriba", "moverAbajo", "comerFrutilla", "detectarFrutilla", "detectarTronco"]
+const funcionesAExponer = ["moverDerecha", "moverIzquierda", "dispararAgua"]
 
 configurarYRenderizarToolbox(miControlador, categoriaElegida, ordenJerarquicoBloques, bloquesPrecargadosJSON, funcionesAExponer)

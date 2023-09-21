@@ -1113,6 +1113,37 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    //bombero
+    disparar_agua() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "disparar_agua",
+                message0: "%1 Apagar fuego",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/599/599508.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["disparar_agua"] = function (block) {
+            const code = "dispararAgua();"
+            return code;
+        };
+
+        return {
+            type: "disparar_agua",
+            kind: "block",
+        }
+    }
     //conejo
     cosechar() {
         Blockly.common.defineBlocksWithJsonArray([
