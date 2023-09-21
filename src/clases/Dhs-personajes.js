@@ -945,14 +945,14 @@ export class Dhs_personajes {
           con: "cielo",
           factorDeAvance: 0.4,
           callback: (x) => {
-            x.decirTerminar("OH! No se volar!");
+            x.decirTerminar("¡OH! ¡No sé volar!");
           },
         },
         {
           con: "bambooIzqHoja",
           factorDeAvance: 0.2,
           callback: (x) => {
-            x.decirTerminar("OH! Me voy a caer si piso aquí!");
+            x.decirTerminar("¡OH! ¡Me voy a caer si piso aquí!");
           },
         },
       ],

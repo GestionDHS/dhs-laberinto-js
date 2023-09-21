@@ -168,7 +168,7 @@ miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
     this.setearEstado("trepando")
     return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [1, 0]);
   } else {
-    this.decirTerminar("¿Seguro? ¡Pensemos en una acción que pueda realizar!")
+    this.decirTerminar("¡Por aquí no puedo bajar!")
   }
 }
 
