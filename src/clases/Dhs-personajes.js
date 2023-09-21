@@ -1339,6 +1339,63 @@ export class Dhs_personajes {
       paddingImagen: "0.5px",
       colisiones: [],
     },
+    bombero: {
+      idUsarHTML: "bombero",
+      tipoPersonaje: "bombero",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "bombero" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 3,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [
+        {
+          con: "fuegoAmarillo",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "fuegoNaranja",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "fuegoRojo",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "arbol",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un árbol",
+        },
+        {
+          con: "estacionDeBombero",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaBandera();
+          },
+          // mensaje: "¡We are the Champions!",
+        },
+      ],
+      configPosicionamiento: {},
+    },
   };
 }
 
