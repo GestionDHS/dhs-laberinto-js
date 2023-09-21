@@ -1632,7 +1632,7 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "sensor_apagar_fuego",
-                "message0": "%1 ¿Hay fuego adelante?",
+                "message0": "%1 ¿Está apagado el fuego?",
                 "output": null,
                 "args0": [
                     {
