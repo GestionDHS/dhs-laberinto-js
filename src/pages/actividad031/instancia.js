@@ -19,31 +19,24 @@ document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-const dimensiones = [7, 9]; //fila, columna
+const dimensiones = [4, 6]; //fila, columna
 
 const tablero = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0],
 ];
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
-const panda = personajesGaleria.obtenerPersonaje("panda");
+const bombero = personajesGaleria.obtenerPersonaje("bombero");
 //panda.paddingImagen = "5px"
 const cielo = personajesGaleria.obtenerPersonaje("cielo");
+const nube = personajesGaleria.obtenerPersonaje("nubes");
 const pastoCielo = personajesGaleria.obtenerPersonaje("pastoCielo");
-const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
-frutilla.paddingImagen = "10px"
-const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
-const bambooAnchoCamino = personajesGaleria.obtenerPersonaje("bambooCieloCamino");
-const bambooIzq = personajesGaleria.obtenerPersonaje("bambooIzqHoja");
 const tierra = personajesGaleria.obtenerPersonaje("tierraPasto");
-const estrella = personajesGaleria.obtenerPersonaje("estrella");
+const fuegoCuatro = personajesGaleria.obtenerPersonaje("fuegoCuatro");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -57,60 +50,43 @@ miJuego.agregarModal(datosModal);
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
-    personajes: [panda],
-    posiciones: [[5, 0]],
+    personajes: [bombero],
+    posiciones: [[2, 2]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [fuegoCuatro],
+    posiciones: [[2, 3]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [cielo],
-    posiciones: [[0, 0], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
-    aliasConjunto: "fijoTablero",
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [nube],
+    posiciones: [[0, 0],[0, 2],[0, 4]],
+    aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [pastoCielo],
-    posiciones: [[5, 0], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [5, 8]],
+    posiciones: [[2, 0],[2, 1], [2, 2], [2, 3], [2, 4], [2, 5]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [estrella],
-    posiciones: [[0, 1]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [bambooIzq],
-    posiciones: [[4, 0], [2, 0]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [bambooAncho],
-    posiciones: [[5, 1]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "filasAleatoriasSimples",
-    personajes: [bambooAncho, bambooAnchoCamino, frutilla, cielo],
-    aliasConjunto: "filasAleatoriasSimples",
-    desapareceAlReiniciar: true,
-    anchoMinimo: 3,
-    anchoMaximo: 6, // Warning no exceda el tablero.
-    filas: [1, 2, 3, 4],
-    desdeColumna: 1,
   },
   {
     estrategia: "fijos",
     personajes: [tierra],
-    posiciones: [[6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [6, 7], [6, 8]],
+    posiciones: [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },

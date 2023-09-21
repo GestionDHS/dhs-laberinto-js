@@ -1354,7 +1354,7 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       colisiones: [
         {
-          con: "fuegoAmarillo",
+          con: "fuegoUno",
           factorDeAvance: 0.2,
           callback: (x) => {
             x.terminar();
@@ -1362,7 +1362,7 @@ export class Dhs_personajes {
           mensaje: "¡AY Me quemo!",
         },
         {
-          con: "fuegoNaranja",
+          con: "fuegoDos",
           factorDeAvance: 0.2,
           callback: (x) => {
             x.terminar();
@@ -1370,7 +1370,7 @@ export class Dhs_personajes {
           mensaje: "¡AY Me quemo!",
         },
         {
-          con: "fuegoRojo",
+          con: "fuegoTres",
           factorDeAvance: 0.2,
           callback: (x) => {
             x.terminar();
@@ -1395,6 +1395,81 @@ export class Dhs_personajes {
         },
       ],
       configPosicionamiento: {},
+    },
+    fuegoCero: {
+      idUsarHTML: "fuegoCero",
+      tipoPersonaje: "fuegoCero",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "fuegoCero" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    fuegoUno: {
+      idUsarHTML: "fuegoUno",
+      tipoPersonaje: "fuegoUno",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "fuegoUno" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    fuegoDos: {
+      idUsarHTML: "fuegoDos",
+      tipoPersonaje: "fuegoDos",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "fuegoDos" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    fuegoTres: {
+      idUsarHTML: "fuegoTres",
+      tipoPersonaje: "fuegoTres",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "fuegoTres" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    fuegoCuatro: {
+      idUsarHTML: "fuegoCuatro",
+      tipoPersonaje: "fuegoCuatro",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "fuegoCuatro" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
     },
   };
 }
