@@ -10,7 +10,8 @@ import { PersonajesAlAzarExcluyente } from '../../clases/StrategyCreacion';
 import bambooCieloCamino from '../../img/bambooCieloCamino.png';
 import pandaTrepadorSinFondo from '../../img/pandaTrepadorSinFondo.png';
 
-
+//El Panda en una linea, coma frutilla aleatorea y gane.
+//usar repetir hasta que.
 
 document.querySelector("#appActividad").innerHTML = template(``);
 

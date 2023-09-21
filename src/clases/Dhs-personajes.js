@@ -123,6 +123,21 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       rotable: false,
     },
+    pastoCielo: {
+      idUsarHTML: "camino",
+      tipoPersonaje: "camino",
+      pintable: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "pastoCielo" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      paddingImagen: "1px",
+      rotable: false,
+    },
     arbol: {
       tipoPersonaje: "arbol",
       estadosPosibles: {
@@ -930,14 +945,14 @@ export class Dhs_personajes {
           con: "cielo",
           factorDeAvance: 0.4,
           callback: (x) => {
-            x.decirTerminar("OH! No se volar!");
+            x.decirTerminar("¡OH! ¡No sé volar!");
           },
         },
         {
           con: "bambooIzqHoja",
-          factorDeAvance: 0.4,
+          factorDeAvance: 0.2,
           callback: (x) => {
-            x.decirTerminar("OH! Me voy a caer si piso aquí!");
+            x.decirTerminar("¡OH! ¡Me voy a caer si piso aquí!");
           },
         },
       ],

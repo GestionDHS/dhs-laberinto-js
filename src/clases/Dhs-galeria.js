@@ -75,6 +75,7 @@ import nubesCielo from "../img/nubesCielo.png";
 import diamante from "../img/diamante.png";
 import avion from "../img/avion.png";
 import isla from "../img/isla.png";
+import pastoCielo from "../img/cieloPasto.png";
 
 export class DHS_Gallery {
   constructor() {
@@ -325,6 +326,12 @@ export class DHS_Gallery {
     pasto: {
       themes: ["lupe"],
       url: pasto,
+      nombre: "Pasto",
+      parrafoLicencia: "<p>Digital House</p>",
+    },
+    pastoCielo: {
+      themes: ["panda"],
+      url: pastoCielo,
       nombre: "Pasto",
       parrafoLicencia: "<p>Digital House</p>",
     },

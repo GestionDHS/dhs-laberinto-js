@@ -10,7 +10,8 @@ import { PersonajesAlAzarExcluyente } from '../../clases/StrategyCreacion';
 import bambooCieloCamino from '../../img/bambooCieloCamino.png';
 import pandaTrepadorSinFondo from '../../img/pandaTrepadorSinFondo.png';
 
-
+//Bombero en una fila, con escenario aleatorio y fuegos aleatorios
+//gana cuando llega a la estacion de bomberos
 
 document.querySelector("#appActividad").innerHTML = template(``);
 

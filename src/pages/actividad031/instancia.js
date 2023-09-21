@@ -10,7 +10,9 @@ import { PersonajesAlAzarExcluyente } from '../../clases/StrategyCreacion';
 import bambooCieloCamino from '../../img/bambooCieloCamino.png';
 import pandaTrepadorSinFondo from '../../img/pandaTrepadorSinFondo.png';
 
-
+//Bombero con un fuego solo.
+//fuego con intensidad aleatorea de 1 a 3
+//gana cuando apaga el fuego 
 
 document.querySelector("#appActividad").innerHTML = template(``);
 
