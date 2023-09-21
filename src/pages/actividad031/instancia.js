@@ -41,8 +41,8 @@ const fuego = personajesGaleria.obtenerPersonaje("fuego");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "bombero",
-  texto: "¡Donde hubo fuego cenizas quedan!",
+  imagen: "fuegoCero",
+  texto: "¡Lograste apagar el incendio!",
   oculto: true,
 };
 miJuego.generarEscenario(dimensiones, 3.5, "#375f9e");
@@ -108,11 +108,12 @@ miJuego.personajePrincipal.dispararAgua = function () {
   fuego.estadoActual == "fuegoDos" && fuego.setearEstado("fuegoUno")
   fuego.estadoActual == "fuegoTres" && fuego.setearEstado("fuegoDos")
   fuego.estadoActual == "fuegoCuatro" && fuego.setearEstado("fuegoTres")
-  fuego.estadoActual == "fuegoCero" && this.abrirYMostrarModal()
+ 
 };
 
 miJuego.personajePrincipal.detectarFuegoApagado=function(){
   const fuego=this.buscarObjetoAdelante("fuego") 
+  fuego.estadoActual == "fuegoCero" && this.abrirYMostrarModal()
   return fuego == undefined || fuego.estadoActual == "fuegoCero"
 }
 
