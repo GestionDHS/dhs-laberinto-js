@@ -343,7 +343,7 @@ main
   left: 37px;
   top: -50px;
   transform: rotate(15deg);
-  animation: 2s animacionEntradaImagen ease-in-out;
+  animation: 1s animacionEntradaImagen ease-in-out;
 }
 @keyframes animacionEntradaImagen {
   0% {

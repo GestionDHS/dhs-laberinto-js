@@ -1394,10 +1394,10 @@ export class Dhs_personajes {
           mensaje: "¡OH NO! Choqué contra un árbol",
         },
         {
-          con: "estacionDeBombero",
+          con: "estacionBomberos",
           factorDeAvance: 1,
           callback: (x) => {
-            x.llegarALaBandera();
+            x.llegarALaEstacionBomberos();
           },
           // mensaje: "¡We are the Champions!",
         },

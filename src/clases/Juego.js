@@ -21,7 +21,7 @@ import {
 
 import { Modal } from "./Modal";
 import { obtenerCantidadAleatoria } from "../Utils/Funciones";
-import {EscenarioFilasAleatoreasSimples} from './StrategyCreacion';
+import {EscenarioFilasAleatoreasSimples, PersonajesFijosEstadoAleatorio} from './StrategyCreacion';
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
@@ -134,6 +134,7 @@ export class Juego {
   generarConjuntoDePersonajes(conjuntosDePersonajes) {
     const estrategias = {
       fijos: new PersonajesFijos(),
+      fijoEstadoAleatorio: new PersonajesFijosEstadoAleatorio(),
       azarRango: new PersonajesAlAzarRango(),
       azarRangoFijos: new PersonajesAlAzarRangoFijos(),
       azarFijos: new PersonajesAlAzarFijos(),
