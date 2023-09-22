@@ -108,7 +108,6 @@ miJuego.personajePrincipal.dispararAgua = function () {
   fuego.estadoActual == "fuegoDos" && fuego.setearEstado("fuegoUno")
   fuego.estadoActual == "fuegoTres" && fuego.setearEstado("fuegoDos")
   fuego.estadoActual == "fuegoCuatro" && fuego.setearEstado("fuegoTres")
- 
 };
 
 miJuego.personajePrincipal.detectarFuegoApagado=function(){
