@@ -17,6 +17,7 @@ import {
   PersonajesAlAzarCantTotal,
   PersonajesAlAzarCantTotalFijos,
   PersonajesPosicionAlAzarExcluyente,
+  ElementoPosicionRandomYEstadoAleatorio,
 } from "../clases/StrategyCreacion";
 
 import { Modal } from "./Modal";
@@ -143,6 +144,7 @@ export class Juego {
       azarCantTotal: new PersonajesAlAzarCantTotal(),
       azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos(),
       filasAleatoriasSimples: new EscenarioFilasAleatoreasSimples(),
+      estadoYCantidadAlAzar: new ElementoPosicionRandomYEstadoAleatorio(),
     };
     conjuntosDePersonajes.forEach((unConjunto) => {
       let personajesAGenerar = [];

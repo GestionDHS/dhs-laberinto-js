@@ -420,3 +420,23 @@ export function EscenarioFilasAleatoreasSimples() {
     return personajesACrear;
   };
 }
+
+export function ElementoPosicionRandomYEstadoAleatorio(){
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    let personajesAGenerar=[]
+    let posicionesValidas=conjuntoPersonajes.posiciones
+    const random = Math.floor(Math.random() * posicionesValidas.length)
+    let personajeAux = { ...conjuntoPersonajes.personajes[0] }
+    conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(personajeAux,conjuntoPersonajes.estadoAleatorio)
+    setearPosiciones(personajeAux, posicionesValidas[random]);
+    console.log(personajeAux)
+    setearAliasYAleatorieidad(
+          personajeAux,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+    personajesAGenerar.push(personajeAux)
+    return personajesAGenerar;
+
+  }
+}
