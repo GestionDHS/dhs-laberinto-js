@@ -60,7 +60,7 @@ let conjuntosDePersonajes = [
     estrategia: "fijos",
     personajes: [fuego],
     posiciones: [[2, 3]],
-    aliasConjunto: "fijoPrincipal",
+    aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
   {

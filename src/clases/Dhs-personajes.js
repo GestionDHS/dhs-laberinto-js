@@ -1404,6 +1404,22 @@ export class Dhs_personajes {
       ],
       configPosicionamiento: {},
     },
+    estacionBomberos: {
+      idUsarHTML: "estacionBomberos",
+      tipoPersonaje: "estacionBomberos",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "estacionBomberos"},
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
     fuego: {
       idUsarHTML: "fuego",
       tipoPersonaje: "fuego",
