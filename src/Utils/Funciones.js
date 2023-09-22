@@ -100,6 +100,13 @@ export const obtenerCantidadAleatoria = function (configuracion) {
   );
 };
 
+//Elegir Estado Random de un Personaje
+export const setearElegirEstadoRandom = function(personaje,estadoAleatorio) {
+  const posicionEstadoElegido =
+    Math.floor(Math.random() * estadoAleatorio.length);
+  personaje.estadoInicial = estadoAleatorio[posicionEstadoElegido]
+}
+
 //********************SETEA POSICIONES **************************/
 export const setearPosiciones = function (unPersonaje, unaPosicion) {
   unPersonaje.posicionInicialY = unaPosicion[0];

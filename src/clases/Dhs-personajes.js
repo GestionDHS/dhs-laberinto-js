@@ -1394,14 +1394,30 @@ export class Dhs_personajes {
           mensaje: "¡OH NO! Choqué contra un árbol",
         },
         {
-          con: "estacionDeBombero",
+          con: "estacionBomberos",
           factorDeAvance: 1,
           callback: (x) => {
-            x.llegarALaBandera();
+            x.llegarALaEstacionBomberos();
           },
           // mensaje: "¡We are the Champions!",
         },
       ],
+      configPosicionamiento: {},
+    },
+    estacionBomberos: {
+      idUsarHTML: "estacionBomberos",
+      tipoPersonaje: "estacionBomberos",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "estacionBomberos"},
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
       configPosicionamiento: {},
     },
     fuego: {
