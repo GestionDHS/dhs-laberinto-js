@@ -83,6 +83,12 @@ import fuegoDos from "../img/fuegoDos.png";
 import fuegoTres from "../img/fuegoTres.png";
 import fuegoCuatro from "../img/fuegoCuatro.png";
 import chorroAgua from "../img/chorroAgua.gif";
+import cepillarseDientes from "../img/cepillarseLosDientes.png"
+import desayunar from "../img/desayunar.png"
+import lavarseLaCara from "../img/lavarseLaCara.png"
+import ropa from "../img/ropa.png"
+import salirDeCasa from "../img/salirDeCasa.png"
+import salirDeLaCama from "../img/salirDeLaCama.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -108,6 +114,48 @@ export class DHS_Gallery {
   }
 
   imageLib = {
+    salirDeLaCama: {
+      themes: [""],
+      url: salirDeLaCama,
+      nombre: "salirDeLaCama",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    salirDeCasa: {
+      themes: [""],
+      url: salirDeCasa,
+      nombre: "salirDeCasa",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    ropa: {
+      themes: [""],
+      url: ropa,
+      nombre: "ropa",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    lavarseLaCara: {
+      themes: [""],
+      url: lavarseLaCara,
+      nombre: "lavarseLaCara",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    desayunar: {
+      themes: [""],
+      url: desayunar,
+      nombre: "desayunar",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    cepillarseDientes: {
+      themes: [""],
+      url: cepillarseDientes,
+      nombre: "cepillarseDientes",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
     diamante: {
       themes: [""],
       url: diamante,
