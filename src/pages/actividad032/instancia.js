@@ -137,6 +137,7 @@ miJuego.personajePrincipal.dispararAgua = function () {
   //que aparezca el agua
   miJuego.personajePrincipal.mostrarImgSecundaria();
   const fuego = this.buscarObjetoAdelante("fuego");
+  fuego.estadoActual == "fuegoCero" && this.decirTerminar("¡Oh! ¡Éste fuego ya esta apagado!")
   fuego.estadoActual == "fuegoUno" && fuego.setearEstado("fuegoCero");
   fuego.estadoActual == "fuegoDos" && fuego.setearEstado("fuegoUno");
   fuego.estadoActual == "fuegoTres" && fuego.setearEstado("fuegoDos");
