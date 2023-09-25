@@ -74,6 +74,7 @@ export class PersonajeBasico {
       ? this.inicializar()
       : this.autodestruirse();
   }
+ 
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
     const imagenDeseada = this.estadosPosibles
@@ -162,7 +163,7 @@ export class PersonajeBasico {
     let objeto = objetoCasillero.ocupantes.find(
       (obj) => obj.tipoPersonaje == nombreObjeto
     );
-    
+
     return objeto;
   }
   buscarObjetoEnCasilleroActual(nombreObjeto) {
@@ -308,8 +309,6 @@ class controladorPersonajeDOM {
       this.imagenAnidadaSecundaria.classList.remove("imgVisible");
       this.imagenAnidadaSecundaria.classList.add("imgHidden");
     }, 2000);
-    
-    
   }
   setearVelocidad(milisegundos) {
     this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s";

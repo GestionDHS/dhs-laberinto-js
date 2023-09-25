@@ -77,6 +77,7 @@ import avion from "../img/avion.png";
 import isla from "../img/isla.png";
 import pastoCielo from "../img/cieloPasto.png";
 import bombero from "../img/bombero.png";
+import estacionBomberos from "../img/estacionBomberos.png";
 import fuegoCero from "../img/fuegoCero.png";
 import fuegoUno from "../img/fuegoUno.png";
 import fuegoDos from "../img/fuegoDos.png";
@@ -781,6 +782,13 @@ export class DHS_Gallery {
       themes: ["bombero"],
       url: bombero,
       nombre: "bombero",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    estacionBomberos: {
+      themes: ["estacionBomberos"],
+      url: estacionBomberos,
+      nombre: "estacionBomberos",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },

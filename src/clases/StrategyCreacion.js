@@ -6,6 +6,7 @@ import {
   setearAliasYAleatorieidad,
   setearDireccion,
   lanzarExcepcion,
+  setearElegirEstadoRandom,
 } from "../Utils/Funciones";
 
 //Strategy creacion
@@ -48,6 +49,7 @@ export function PersonajesFijos() {
       );
     let personajesACrear = [];
     conjuntoPersonajes.personajes.forEach((unPersonaje) => {
+     
       conjuntoPersonajes.posiciones.forEach((unaPosicion, i) => {
         let copiaPersonaje = { ...unPersonaje };
         setearPosiciones(copiaPersonaje, unaPosicion);
@@ -56,6 +58,35 @@ export function PersonajesFijos() {
           conjuntoPersonajes.desapareceAlReiniciar,
           conjuntoPersonajes.aliasConjunto
         );
+        conjuntoPersonajes.direcciones
+          ? setearDireccion(copiaPersonaje, conjuntoPersonajes.direcciones, i)
+          : 0;
+        personajesACrear.push(copiaPersonaje);
+      });
+    });
+    return personajesACrear;
+  };
+}
+
+//Personajes Fijos, Estados Aleatorios
+export function PersonajesFijosEstadoAleatorio() {
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    !conjuntoPersonajes.posiciones &&
+      lanzarExcepcion(
+        "Necesita un array de posiciones en la configuracion de cada objeto de conjuntosDePersonajes"
+      );
+    let personajesACrear = [];
+    conjuntoPersonajes.personajes.forEach((unPersonaje) => {
+     
+      conjuntoPersonajes.posiciones.forEach((unaPosicion, i) => {
+        let copiaPersonaje = { ...unPersonaje };
+        setearPosiciones(copiaPersonaje, unaPosicion);
+        setearAliasYAleatorieidad(
+          copiaPersonaje,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+       conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(copiaPersonaje,conjuntoPersonajes.estadoAleatorio)
         conjuntoPersonajes.direcciones
           ? setearDireccion(copiaPersonaje, conjuntoPersonajes.direcciones, i)
           : 0;
@@ -388,4 +419,24 @@ export function EscenarioFilasAleatoreasSimples() {
 
     return personajesACrear;
   };
+}
+
+export function ElementoPosicionRandomYEstadoAleatorio(){
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    let personajesAGenerar=[]
+    let posicionesValidas=conjuntoPersonajes.posiciones
+    const random = Math.floor(Math.random() * posicionesValidas.length)
+    let personajeAux = { ...conjuntoPersonajes.personajes[0] }
+    conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(personajeAux,conjuntoPersonajes.estadoAleatorio)
+    setearPosiciones(personajeAux, posicionesValidas[random]);
+    console.log(personajeAux)
+    setearAliasYAleatorieidad(
+          personajeAux,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+    personajesAGenerar.push(personajeAux)
+    return personajesAGenerar;
+
+  }
 }

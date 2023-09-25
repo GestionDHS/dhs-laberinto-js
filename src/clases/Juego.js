@@ -17,11 +17,12 @@ import {
   PersonajesAlAzarCantTotal,
   PersonajesAlAzarCantTotalFijos,
   PersonajesPosicionAlAzarExcluyente,
+  ElementoPosicionRandomYEstadoAleatorio,
 } from "../clases/StrategyCreacion";
 
 import { Modal } from "./Modal";
 import { obtenerCantidadAleatoria } from "../Utils/Funciones";
-import {EscenarioFilasAleatoreasSimples} from './StrategyCreacion';
+import {EscenarioFilasAleatoreasSimples, PersonajesFijosEstadoAleatorio} from './StrategyCreacion';
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
@@ -134,6 +135,7 @@ export class Juego {
   generarConjuntoDePersonajes(conjuntosDePersonajes) {
     const estrategias = {
       fijos: new PersonajesFijos(),
+      fijoEstadoAleatorio: new PersonajesFijosEstadoAleatorio(),
       azarRango: new PersonajesAlAzarRango(),
       azarRangoFijos: new PersonajesAlAzarRangoFijos(),
       azarFijos: new PersonajesAlAzarFijos(),
@@ -142,6 +144,7 @@ export class Juego {
       azarCantTotal: new PersonajesAlAzarCantTotal(),
       azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos(),
       filasAleatoriasSimples: new EscenarioFilasAleatoreasSimples(),
+      estadoYCantidadAlAzar: new ElementoPosicionRandomYEstadoAleatorio(),
     };
     conjuntosDePersonajes.forEach((unConjunto) => {
       let personajesAGenerar = [];
