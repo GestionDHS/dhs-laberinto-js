@@ -336,7 +336,7 @@ export function PersonajesAlAzarCantTotalFijos() {
 //conjuntoPersonajes:
 // {
 //   estrategia: "filasAleatoriasSimples",
-//   personajes: [bambooAncho,bambooAnchoCamino, frutilla,cielo],
+//   personajes: [panda,bambuancho,bambuAnchoCamino,frutilla, cielo],
 //   aliasConjunto: "filasAleatoriasSimples",
 //   desapareceAlReiniciar: true,
 //   anchoMinimo: 3,
@@ -439,4 +439,46 @@ export function ElementoPosicionRandomYEstadoAleatorio(){
     return personajesAGenerar;
 
   }
+}
+
+
+// QUIERO ELEMENTO-AZAROSO EN LUGARES-ESPECIFICOS, CON UNA CANTIDAD POR RANGO (CUASI-FIJA)
+//agregarDatosPersonajes([{fuego}], {posiciones:[[y,x],[y,x],[y,x],[y,x]], cantidadMinima: 0, cantidadMaxima:3})
+//Estados del Fuego: cero, uno, dos, tres, cuatro
+export function PersonajesAlAzarRangoFijosEstadoAleatorio() {
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    !conjuntoPersonajes.cantidadMin &&
+      lanzarExcepcion(
+        "Necesita un cantidadMin en la configuracion de cada objeto de conjuntosDePersonajes"
+      );
+    !conjuntoPersonajes.cantidadMax &&
+      lanzarExcepcion(
+        "Necesita un cantidadMax en la configuracion de cada objeto de conjuntosDePersonajes"
+      );
+    let personajesACrear = [];
+    let posicionesElegidas = [];
+    const cantidad = obtenerCantidadAleatoria(conjuntoPersonajes);
+    for (let i = 0; i < cantidad; i++) {
+      let personajeElegido = elegirPersonajeRandom(
+        conjuntoPersonajes.personajes
+      );
+      const unaPosicion = posicionValida(
+        escenario,
+        posicionesElegidas,
+        conjuntoPersonajes.posiciones
+      );
+      posicionesElegidas.push(unaPosicion);
+      let personajeAux = { ...personajeElegido };
+      setearPosiciones(personajeAux, unaPosicion);
+      setearAliasYAleatorieidad(
+        personajeAux,
+        conjuntoPersonajes.desapareceAlReiniciar,
+        conjuntoPersonajes.aliasConjunto
+      );
+    conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(personajeAux,conjuntoPersonajes.estadoAleatorio)
+      personajesACrear.push(personajeAux);
+    }
+    posicionesElegidas = [];
+    return personajesACrear;
+  };
 }
