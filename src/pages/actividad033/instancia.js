@@ -164,6 +164,7 @@ miJuego.personajePrincipal.llegarALaEstacionBomberos = function(){
   // }
   this.abrirYMostrarModal();
 }
+
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria = new Dhs_Categorias();

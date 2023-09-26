@@ -176,6 +176,18 @@ miJuego.personajePrincipal.detectarFuegoApagado = function () {
   return fuego == undefined || fuego.estadoActual == "fuegoCero";
 };
 
+miJuego.personajePrincipal.detectarEstacionBombero = function () {
+  return this.buscarObjetoEnCasilleroActual("estacionBombero") !== undefined
+};
+
+// miJuego.personajePrincipal.terminar = function () {
+//   const fueguito=this.buscarObjetoEnCasilleroActual("fuego")
+//   if(fueguito.estadoActual!="fuegoCero"){
+//     this.estaVivo=false
+//     this.juego.puedeDebeContinuar = false;
+//   }
+// };
+
 miJuego.personajePrincipal.llegarALaEstacionBomberos = function () {
   // const casilleroFuego1 = miJuego.escenario.objetosCasilleros[2][2].ocupantes.some(p=>p.idHTML == "fuego" && p.estadoActual == "fuegoCero")
   // const casilleroFuego2 = miJuego.escenario.objetosCasilleros[2][3].ocupantes.some(p=>p.idHTML == "fuego" && p.estadoActual == "fuegoCero")
@@ -204,6 +216,7 @@ const ordenJerarquicoBloques = [
   ["repeat_until", "Repeticiones"],
   ["repeat_times", "Repeticiones"],
   ["sensor_apagar_fuego", "Sensores"],
+  ["sensor_estacionBombero", "Sensores"],
 ];
 
 const bloquesPrecargadosJSON =
@@ -214,6 +227,7 @@ const funcionesAExponer = [
   "moverIzquierda",
   "dispararAgua",
   "detectarFuegoApagado",
+  "detectarEstacionBombero",
 ];
 
 configurarYRenderizarToolbox(

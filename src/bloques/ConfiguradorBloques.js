@@ -1689,6 +1689,7 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    
     sensor_frutilla() {
         Blockly.common.defineBlocksWithJsonArray([
             {

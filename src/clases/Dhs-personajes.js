@@ -1354,7 +1354,7 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       colisiones: [
         {
-          con: "fuegoUno",
+          con: "fuego",
           factorDeAvance: 0.2,
           callback: (x) => {
             x.terminar();
