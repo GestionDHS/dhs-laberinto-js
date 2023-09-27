@@ -74,7 +74,7 @@ export class PersonajeBasico {
       ? this.inicializar()
       : this.autodestruirse();
   }
- 
+
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
     const imagenDeseada = this.estadosPosibles
@@ -138,6 +138,14 @@ export class PersonajeBasico {
   terminar() {
     this.estaVivo = false;
     this.juego.puedeDebeContinuar = false;
+  }
+  evaluar() {
+    let obj = this.buscarObjetoAdelante("fuego");
+    if (obj.estadoActual != "fuegoCero") {
+      //console.log(objetoAux);//no le da el scope
+      //objetoAux.factorDeAvance = "0.2"
+      this.decirTerminar("¡AY! ¡Me quemo!");
+    }
   }
 
   realizarAccionSobre(elemento, accion, params = false) {
@@ -250,7 +258,7 @@ export class PersonajeBasico {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-
+console.log(objetoColision)
     return objetoColision;
   }
 

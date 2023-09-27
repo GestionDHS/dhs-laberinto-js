@@ -1355,35 +1355,11 @@ export class Dhs_personajes {
       colisiones: [
         {
           con: "fuego",
-          factorDeAvance: 0.2,
+          factorDeAvance: 1,
           callback: (x) => {
-            x.terminar();
+            x.evaluar();
           },
-          mensaje: "¡AY Me quemo!",
-        },
-        {
-          con: "fuegoDos",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡AY Me quemo!",
-        },
-        {
-          con: "fuegoTres",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡AY Me quemo!",
-        },
-        {
-          con: "fuegoCuatro",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡AY Me quemo!",
+          // mensaje: "¡AY Me quemo!",
         },
         {
           con: "arbol",

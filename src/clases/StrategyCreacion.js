@@ -421,6 +421,8 @@ export function EscenarioFilasAleatoreasSimples() {
   };
 }
 
+//personaje en lugares Azararozos con "estado" Azarozo
+//personaje[fuego] , EstadosAleatorios[los 4 estados que puede tomar], posiciones: [3 posiciones en las cuales podría estar el fuego]
 export function ElementoPosicionRandomYEstadoAleatorio(){
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
     let personajesAGenerar=[]
@@ -429,7 +431,6 @@ export function ElementoPosicionRandomYEstadoAleatorio(){
     let personajeAux = { ...conjuntoPersonajes.personajes[0] }
     conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(personajeAux,conjuntoPersonajes.estadoAleatorio)
     setearPosiciones(personajeAux, posicionesValidas[random]);
-    console.log(personajeAux)
     setearAliasYAleatorieidad(
           personajeAux,
           conjuntoPersonajes.desapareceAlReiniciar,
