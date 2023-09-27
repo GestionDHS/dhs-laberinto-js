@@ -483,3 +483,23 @@ export function PersonajesAlAzarRangoFijosEstadoAleatorio() {
     return personajesACrear;
   };
 }
+
+//Strategy para la actividad034
+export function PersonajesFijosPosicionsRandomYEstadoAleatorio(){
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    let personajesAGenerar=[]
+    let posicionesValidas=conjuntoPersonajes.posiciones
+    const random = Math.floor(Math.random() * posicionesValidas.length)
+    let personajeAux = { ...conjuntoPersonajes.personajes[0] }
+    conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(personajeAux,conjuntoPersonajes.estadoAleatorio)
+    setearPosiciones(personajeAux, posicionesValidas[random]);
+    setearAliasYAleatorieidad(
+          personajeAux,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+    personajesAGenerar.push(personajeAux)
+    return personajesAGenerar;
+
+  }
+}

@@ -36,6 +36,7 @@ const pastoCielo = personajesGaleria.obtenerPersonaje("pastoCielo");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 frutilla.paddingImagen = "10px"
 const tierra = personajesGaleria.obtenerPersonaje("tierraPasto");
+const nube = personajesGaleria.obtenerPersonaje("nubes");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -58,6 +59,13 @@ let conjuntosDePersonajes = [
     estrategia: "fijos",
     personajes: [cielo],
     posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
+    personajes: [nube],
+    posiciones: [[0, 0],[0, 2],[0, 4],[0, 6],[1, 1],[1, 3],[1, 5],[1, 7]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
