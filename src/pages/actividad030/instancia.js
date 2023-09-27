@@ -18,31 +18,24 @@ document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-const dimensiones = [7, 9]; //fila, columna
+const dimensiones = [5, 7]; //fila, columna
 
 const tablero = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
 ];
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
 const panda = personajesGaleria.obtenerPersonaje("panda");
-//panda.paddingImagen = "5px"
 const cielo = personajesGaleria.obtenerPersonaje("cielo");
 const pastoCielo = personajesGaleria.obtenerPersonaje("pastoCielo");
 const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
 frutilla.paddingImagen = "10px"
-const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
-const bambooAnchoCamino = personajesGaleria.obtenerPersonaje("bambooCieloCamino");
-const bambooIzq = personajesGaleria.obtenerPersonaje("bambooIzqHoja");
 const tierra = personajesGaleria.obtenerPersonaje("tierraPasto");
-const estrella = personajesGaleria.obtenerPersonaje("estrella");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
@@ -57,59 +50,37 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [panda],
-    posiciones: [[5, 0]],
+    posiciones: [[3, 0]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [cielo],
-    posiciones: [[0, 0], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
-    aliasConjunto: "fijoTablero",
+    posiciones: coordenadasCaminoPared.coordenadasPared,
+    aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
   {
     estrategia: "fijos",
     personajes: [pastoCielo],
-    posiciones: [[5, 0], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [5, 8]],
+    posiciones: [[3, 0], [3, 1],[3, 2], [3, 3], [3, 4], [3, 5], [3, 6]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
   {
-    estrategia: "fijos",
-    personajes: [estrella],
-    posiciones: [[0, 1]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [bambooIzq],
-    posiciones: [[4, 0], [2, 0]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [bambooAncho],
-    posiciones: [[5, 1]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "filasAleatoriasSimples",
-    personajes: [bambooAncho, bambooAnchoCamino, frutilla, cielo],
-    aliasConjunto: "filasAleatoriasSimples",
+    estrategia: "azarRangoFijos",
+    personajes: [frutilla],
+    posiciones: [[3, 2],[3, 3],[3, 4],[3, 5]],
+    cantidadMax:1,
+    cantidadMin:1,
+    aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: true,
-    anchoMinimo: 3,
-    anchoMaximo: 6, // Warning no exceda el tablero.
-    filas: [1, 2, 3, 4],
-    desdeColumna: 1,
   },
   {
     estrategia: "fijos",
     personajes: [tierra],
-    posiciones: [[6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [6, 7], [6, 8]],
+    posiciones: [[4, 0], [4, 1], [4, 2], [4, 3], [4, 4], [4, 5], [4, 6]],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
@@ -183,36 +154,20 @@ miJuego.personajePrincipal.llegarALaEstrella = function () {
   } else {
     this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
   }
-  // const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
-  // if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
-  //   this.abrirYMostrarModal();
-  // }
-  // if(casilleroAleatoreoFrutilla && this.mochila.length == 0){
-  //   this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.")
-  // }
-  // if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
-  //   this.abrirYMostrarModal();
-  // }else{
-  //   this.decirTerminar("¡Oh No! Quedó un bambú sin comer 😟.");
-  // }
+
 };
 
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria = new Dhs_Categorias()
-const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Movimientos", "Acciones", "Condicionales", "Repeticiones", "Sensores"])
+const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Movimientos", "Acciones", "Repeticiones", "Sensores"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_trepar_simple", "Movimientos"],
   ["move_sinUp_simple", "Movimientos"],
   ["comer_frutilla", "Acciones"],
-  ["if", "Condicionales"],
-  // ["ifElse", "Condicionales"],
-  ["repeat_times", "Repeticiones"],
   ["repeat_until", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
-  ["sensor_tronco", "Sensores"],
 ];
 
 const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
