@@ -146,8 +146,10 @@ miJuego.personajePrincipal.dispararAgua = function () {
 
 miJuego.personajePrincipal.detectarFuegoApagado = function () {
   const fuego = this.buscarObjetoAdelante("fuego");
-  //fuego.estadoActual == "fuegoCero" && this.abrirYMostrarModal() 
-  return fuego == undefined || fuego.estadoActual == "fuegoCero";
+  if(fuego==undefined){
+    this.decirTerminar("¡Aquí no hay fuego!")
+  }
+  return  fuego.estadoActual == "fuegoCero";
 };
 
 miJuego.personajePrincipal.llegarALaEstacionBomberos = function(){

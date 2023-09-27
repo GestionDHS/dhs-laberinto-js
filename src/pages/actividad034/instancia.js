@@ -170,10 +170,13 @@ miJuego.personajePrincipal.dispararAgua = function () {
   fuego.estadoActual == "fuegoCuatro" && fuego.setearEstado("fuegoTres");
 };
 
+
 miJuego.personajePrincipal.detectarFuegoApagado = function () {
   const fuego = this.buscarObjetoAdelante("fuego");
-  //fuego.estadoActual == "fuegoCero" && this.abrirYMostrarModal()
-  return fuego == undefined || fuego.estadoActual == "fuegoCero";
+  if(fuego==undefined){
+    this.decirTerminar("¡Aquí no hay fuego!")
+  }
+  return  fuego.estadoActual == "fuegoCero";
 };
 
 miJuego.personajePrincipal.detectarEstacionBombero = function () {
@@ -187,6 +190,10 @@ miJuego.personajePrincipal.detectarEstacionBombero = function () {
 //     this.juego.puedeDebeContinuar = false;
 //   }
 // };
+miJuego.personajePrincipal.detectarFuego = function () {
+  // devuelve true si encuentra o false si no hay piedra
+  return this.buscarObjetoAdelante("fuego") !== undefined
+};
 
 miJuego.personajePrincipal.llegarALaEstacionBomberos = function () {
   // const casilleroFuego1 = miJuego.escenario.objetosCasilleros[2][2].ocupantes.some(p=>p.idHTML == "fuego" && p.estadoActual == "fuegoCero")
@@ -207,6 +214,7 @@ const categoriaElegida = categoria.obtenerCategoriasNecesarias([
   "Movimientos",
   "Repeticiones",
   "Sensores",
+  "Condicionales"
 ]);
 
 const ordenJerarquicoBloques = [
@@ -217,6 +225,8 @@ const ordenJerarquicoBloques = [
   ["repeat_times", "Repeticiones"],
   ["sensor_apagar_fuego", "Sensores"],
   ["sensor_estacionBombero", "Sensores"],
+  ["sensor_fuego", "Sensores"],
+  ["if", "Condicionales"],
 ];
 
 const bloquesPrecargadosJSON =
@@ -227,6 +237,7 @@ const funcionesAExponer = [
   "moverIzquierda",
   "dispararAgua",
   "detectarFuegoApagado",
+  "detectarFuego",
   "detectarEstacionBombero",
 ];
 
