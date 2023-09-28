@@ -105,10 +105,7 @@ miJuego.personajePrincipal.detectarFrutilla = function () {
   // devuelve true si encuentra o false si no hay cofre
   return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
 };
-miJuego.personajePrincipal.detectarTronco = function () {
-  // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("bambooAncho") !== undefined
-};
+
 
 miJuego.personajePrincipal.comerFrutilla = function () {
   const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
@@ -117,7 +114,8 @@ miJuego.personajePrincipal.comerFrutilla = function () {
   } else if (!intento.exito) {
     return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
   } else if (intento.premio?.tipo == "frutilla") {
-    return this.decir("¡Mmmm! Qué rica frutilla.", 2000);
+   this.decir("¡Mmmm! Qué rica frutilla.", 2000);
+   this.abrirYMostrarModal()
   }
 
 };
@@ -133,15 +131,6 @@ miJuego.personajePrincipal.moverIzquierda = function (veces = 1) {
 }
 
 
-miJuego.personajePrincipal.moverArriba = function (veces = 1) {
-  this.setearEstado("trepando")
-  if (this.buscarObjetoEnCasilleroActual("bambooAncho") != undefined) {
-    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
-  }else{
-    return miJuego.personajePrincipal.decirTerminar("Por aquí no puedo trepar")
-  }
-
-}
 
 miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
   if (this.buscarObjetoAdelante("tierra")!= undefined || this.buscarObjetoAdelante("pastoCielo")!= undefined || this.buscarObjetoAdelante("bambooAnchoCamino")!= undefined || this.buscarObjetoAdelante("frutilla")!= undefined ||this.buscarObjetoAdelante("bambooAncho")!= undefined) {
@@ -152,18 +141,7 @@ miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
   }
 }
 
-miJuego.personajePrincipal.llegarALaEstrella = function () {
-  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
-  //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
-  //  y si era una frutilla y no se la comio, también viene vacia
 
-  if (this.mochila?.length == 4) {
-    this.abrirYMostrarModal();
-  } else {
-    this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
-  }
-
-};
 
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
@@ -180,6 +158,6 @@ const ordenJerarquicoBloques = [
 
 const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer = ["moverDerecha", "moverIzquierda", "moverArriba", "moverAbajo", "comerFrutilla", "detectarFrutilla", "detectarTronco"]
+const funcionesAExponer = ["moverDerecha", "moverIzquierda", "moverAbajo", "comerFrutilla", "detectarFrutilla"]
 
 configurarYRenderizarToolbox(miControlador, categoriaElegida, ordenJerarquicoBloques, bloquesPrecargadosJSON, funcionesAExponer)
