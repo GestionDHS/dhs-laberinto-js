@@ -60,58 +60,45 @@ let conjuntosDePersonajes = [
     desapareceAlReiniciar: false,
   },
   // {
-    {
-      estrategia: "fijos",
-      personajes: [cielo],
-      posiciones: [
-        [0, 0],
-        [0, 1],
-        [0, 2],
-        [0, 3],
-        [0, 4],
-        [0, 5],
-        [0, 6],
-        [0, 7],
-        [0, 8],
-        [1, 0],
-        [1, 1],
-        [1, 2],
-        [1, 3],
-        [1, 4],
-        [1, 5],
-        [1, 6],
-        [1, 7],
-        [1, 8],
-      ],
-      aliasConjunto: "fijoTablero",
-      desapareceAlReiniciar: false,
-    },
   {
-    estrategia: "filasAleatoriasSimples",
-    personajes: [pastoCielo,pastoCielo,estacionBomberos,pastoCielo],
-    aliasConjunto: "filasAleatoriasSimples",
-    desapareceAlReiniciar: true,
-    anchoMinimo: 6,
-    anchoMaximo: 8, // Warning no exceda el tablero.
-    filas: [2],
-    desdeColumna: 1,
-  },
-  {
-    estrategia: "alAzarRangoEstadoAleatoreo",
-    personajes: [fuego],
+    estrategia: "fijos",
+    personajes: [cielo],
     posiciones: [
-      [2, 1],
-      [2, 2],
-      [2, 3],
-      [2, 4],
-      [2, 5],
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [0, 3],
+      [0, 4],
+      [0, 5],
+      [0, 6],
+      [0, 7],
+      [0, 8],
+      [1, 0],
+      [1, 1],
+      [1, 2],
+      [1, 3],
+      [1, 4],
+      [1, 5],
+      [1, 6],
+      [1, 7],
+      [1, 8],
     ],
-    cantidadMin:2,
-    cantidadMax:3,
-    aliasConjunto: "fijosTablero",
-    desapareceAlReiniciar: true,
-    estadoAleatorio: ["fuegoUno", "fuegoDos", "fuegoTres", "fuegoCuatro"],
+    aliasConjunto: "fijoTablero",
+    desapareceAlReiniciar: false,
   },
+  {
+  estrategia: "actividad034",
+  personajes: [pastoCielo,fuego,estacionBomberos,pastoCielo],
+  aliasConjunto: "actividad034",
+  desapareceAlReiniciar: true,
+  anchoMinimo: 6,//de casilleros donde entraría todo
+  anchoMaximo: 8,
+  filas: [2],
+  desdeColumna: 1, //donde empieza
+  cantidadMin:2,
+  cantidadMax:3,
+  estadoAleatorio: ["fuegoUno", "fuegoDos", "fuegoTres", "fuegoCuatro"],
+},
   {
     estrategia: "fijos",
     personajes: [cielo],
@@ -127,6 +114,7 @@ let conjuntosDePersonajes = [
       [0, 2],
       [0, 4],
       [0, 6],
+      [0, 8],
     ],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
@@ -170,17 +158,16 @@ miJuego.personajePrincipal.dispararAgua = function () {
   fuego.estadoActual == "fuegoCuatro" && fuego.setearEstado("fuegoTres");
 };
 
-
 miJuego.personajePrincipal.detectarFuegoApagado = function () {
   const fuego = this.buscarObjetoAdelante("fuego");
-  if(fuego==undefined){
-    this.decirTerminar("¡Aquí no hay fuego!")
+  if (fuego == undefined) {
+    this.decirTerminar("¡Aquí no hay fuego!");
   }
-  return  fuego.estadoActual == "fuegoCero";
+  return fuego.estadoActual == "fuegoCero";
 };
 
 miJuego.personajePrincipal.detectarEstacionBombero = function () {
-  return this.buscarObjetoEnCasilleroActual("estacionBombero") !== undefined
+  return this.buscarObjetoEnCasilleroActual("estacionBombero") !== undefined;
 };
 
 // miJuego.personajePrincipal.terminar = function () {
@@ -192,7 +179,7 @@ miJuego.personajePrincipal.detectarEstacionBombero = function () {
 // };
 miJuego.personajePrincipal.detectarFuego = function () {
   // devuelve true si encuentra o false si no hay piedra
-  return this.buscarObjetoAdelante("fuego") !== undefined
+  return this.buscarObjetoAdelante("fuego") !== undefined;
 };
 
 miJuego.personajePrincipal.llegarALaEstacionBomberos = function () {
@@ -214,7 +201,7 @@ const categoriaElegida = categoria.obtenerCategoriasNecesarias([
   "Movimientos",
   "Repeticiones",
   "Sensores",
-  "Condicionales"
+  "Condicionales",
 ]);
 
 const ordenJerarquicoBloques = [
