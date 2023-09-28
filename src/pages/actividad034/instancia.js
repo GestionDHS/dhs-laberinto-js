@@ -22,13 +22,15 @@ document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 window.miJuego = new Juego(velocidadInicial);
 
-const dimensiones = [4, 9]; //fila, columna
+const dimensiones = [5, 9]; //fila, columna
 
 const tablero = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  
 ];
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
@@ -55,7 +57,7 @@ let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
     personajes: [bombero],
-    posiciones: [[2, 0]],
+    posiciones: [[3, 0]],
     aliasConjunto: "fijoPrincipal",
     desapareceAlReiniciar: false,
   },
@@ -82,6 +84,15 @@ let conjuntosDePersonajes = [
       [1, 6],
       [1, 7],
       [1, 8],
+      [2, 0],
+      [2, 1],
+      [2, 2],
+      [2, 3],
+      [2, 4],
+      [2, 5],
+      [2, 6],
+      [2, 7],
+      [2, 8],
     ],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
@@ -93,11 +104,12 @@ let conjuntosDePersonajes = [
   desapareceAlReiniciar: true,
   anchoMinimo: 6,//de casilleros donde entraría todo
   anchoMaximo: 8,
-  filas: [2],
+  filas: [3],
   desdeColumna: 1, //donde empieza
   cantidadMin:2,
   cantidadMax:3,
   estadoAleatorio: ["fuegoUno", "fuegoDos", "fuegoTres", "fuegoCuatro"],
+  desapareceAlReiniciar:true,
 },
   {
     estrategia: "fijos",
@@ -123,16 +135,16 @@ let conjuntosDePersonajes = [
     estrategia: "fijos",
     personajes: [tierra],
     posiciones: [
-      [3, 0],
-      [3, 1],
-      [3, 2],
-      [3, 3],
-      [3, 4],
-      [3, 5],
-      [3, 6],
-      [3, 7],
-      [3, 8],
-    ],
+      [4, 0],
+      [4, 1],
+      [4, 2],
+      [4, 3],
+      [4, 4],
+      [4, 5],
+      [4, 6],
+      [4, 7],
+      [4, 8],
+      ],
     aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
