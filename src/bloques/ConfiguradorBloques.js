@@ -2041,4 +2041,361 @@ export default class ConfiguradorBloques {
     //     } 
     // }
 
+    //Algoritmos
+    levantarseDeLaCama() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "levantarse",
+                "message0": "%1 Levantarse de la cama",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/1178/1178862.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["levantarse"] = function (block) {
+            const code = "levantarseDeLaCama();\n"
+            return code
+        };
+        return {
+            "type": "levantarse",
+            "kind": "block",
+        }
+    }
+    salirDeCasa() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "salirDeCasa",
+                "message0": "%1 Salir de casa",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/1670/1670080.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["salirDeCasa"] = function (block) {
+            const code = "salirDeCasa();\n"
+            return code
+        };
+        return {
+            "type": "salirDeCasa",
+            "kind": "block",
+        }
+    }
+    vestirse() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "vestirse",
+                "message0": "%1 Vestirse",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/925/925072.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["vestirse"] = function (block) {
+            const code = "vestirse();\n"
+            return code
+        };
+        return {
+            "type": "vestirse",
+            "kind": "block",
+        }
+    }
+    lavarseLaCara() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "lavarseLaCara",
+                "message0": "%1 Lavarse la cara",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/1686/1686008.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["lavarseLaCara"] = function (block) {
+            const code = "lavarseLaCara();\n"
+            return code
+        };
+        return {
+            "type": "lavarseLaCara",
+            "kind": "block",
+        }
+    }
+
+    cepillarseLosDientes() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "cepillarseLosDientes",
+                "message0": "%1 Cepillarse los dientes",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/3023/3023109.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["cepillarseLosDientes"] = function (block) {
+            const code = "cepillarseLosDientes();\n"
+            return code
+        };
+        return {
+            "type": "cepillarseLosDientes",
+            "kind": "block",
+        }
+    }
+
+    desayunar() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "desayunar",
+                "message0": "%1 Desayunar",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/1163/1163016.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["desayunar"] = function (block) {
+            const code = "desayunar();\n"
+            return code
+        };
+        return {
+            "type": "desayunar",
+            "kind": "block",
+        }
+    }
+
+    ponerMaceta() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "ponerMaceta",
+                "message0": "%1 Poner una maceta",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/3233/3233577.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["ponerMaceta"] = function (block) {
+            const code = "ponerMaceta();\n"
+            return code
+        };
+        return {
+            "type": "ponerMaceta",
+            "kind": "block",
+        }
+    }
+
+    ponerTierra() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "ponerTierra",
+                "message0": "%1 Poner tierra en la maceta",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/6041/6041477.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["ponerTierra"] = function (block) {
+            const code = "ponerTierra();\n"
+            return code
+        };
+        return {
+            "type": "ponerTierra",
+            "kind": "block",
+        }
+    }
+
+    hacerHueco() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "hacerHueco",
+                "message0": "%1 Hacer un hueco en la tierra",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/10172/10172854.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["hacerHueco"] = function (block) {
+            const code = "hacerHueco();\n"
+            return code
+        };
+        return {
+            "type": "hacerHueco",
+            "kind": "block",
+        }
+    }
+
+    ponerSemilla() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "ponerSemilla",
+                "message0": "%1 Poner semilla en el hueco",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/1497/1497611.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["ponerSemilla"] = function (block) {
+            const code = "ponerSemilla();\n"
+            return code
+        };
+        return {
+            "type": "ponerSemilla",
+            "kind": "block",
+        }
+    }
+
+    taparConTierra() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "taparConTierra",
+                "message0": "%1 Tapar con tierra la semilla",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/6041/6041477.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["taparConTierra"] = function (block) {
+            const code = "taparConTierra();\n"
+            return code
+        };
+        return {
+            "type": "taparConTierra",
+            "kind": "block",
+        }
+    }
+
+    regar() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "regar",
+                "message0": "%1 Regar",
+                // "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4769/4769911.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                "previousStatement": null,
+                "nextStatement": null,
+                style: "action_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["regar"] = function (block) {
+            const code = "regar();\n"
+            return code
+        };
+        return {
+            "type": "regar",
+            "kind": "block",
+        }
+    }
 }

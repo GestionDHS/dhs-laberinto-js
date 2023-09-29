@@ -7,6 +7,48 @@ export class Dhs_personajes {
     return this.personajes[nombre];
   }
   personajes = {
+    plantarSemilla: {
+      idUsarHTML: "plantarSemilla",
+      tipoPersonaje: "plantarSemilla",
+      tieneTooltip: true,
+      estadosPosibles: {
+        fondoGris: { name: "fondoGris", imageUrl: "fondoGris" },
+        ponerMaceta: { name: "tomarUnaMaceta", imageUrl: "tomarUnaMaceta" },
+        ponerTierra: { name: "ponerTierra", imageUrl: "ponerTierra" },
+        hacerHueco: { name: "hacerHueco", imageUrl: "hacerHueco" },
+        ponerSemilla: { name: "ponerSemilla", imageUrl: "ponerSemilla" },
+        taparConTierra: { name: "taparConTierra", imageUrl: "taparConTierra" },
+        regar: { name: "regar", imageUrl: "regar" },
+      },
+      estadoInicial: "fondoGris",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
+    rutina: {
+      idUsarHTML: "rutina",
+      tipoPersonaje: "rutina",
+      tieneTooltip: true,
+      estadosPosibles: {
+        enLaCama: { name: "enLaCama", imageUrl: "enLaCama" },
+        levantandose: { name: "levantandose", imageUrl: "levantarseDeLacama" },
+        desayunando: { name: "desayunando", imageUrl: "desayunar" },
+        lavandose: { name: "lavandose", imageUrl: "lavarseLaCara" },
+        cepillandose: { name: "cepillandose", imageUrl: "cepillarseDientes" },
+        vistiendose: { name: "vistiendose", imageUrl: "ropa" },
+        saliendo: { name: "saliendo", imageUrl: "salirDeCasa" },
+      },
+      estadoInicial: "enLaCama",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
     circuloAmarillo: {
       idUsarHTML: "circuloAmarillo",
       tipoPersonaje: "circuloAmarillo",

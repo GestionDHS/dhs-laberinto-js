@@ -7,8 +7,6 @@ import { Dhs_personajes } from '../../clases/Dhs-personajes';
 import { generarCoordenadas, configurarYRenderizarToolbox } from '../../Utils/Funciones';
 import { Dhs_Categorias } from '../../clases/Dhs-categorias';
 import { PersonajesAlAzarExcluyente } from '../../clases/StrategyCreacion';
-import bambooCieloCamino from '../../img/bambooCieloCamino.png';
-import pandaTrepadorSinFondo from '../../img/pandaTrepadorSinFondo.png';
 
 //Bombero en una fila, con escenario aleatorio y fuegos aleatorios
 //gana cuando llega a la estacion de bomberos
@@ -24,192 +22,166 @@ const tablero = [
   [0],
 ];
 
-// const coordenadasCaminoPared = generarCoordenadas(tablero);
 const personajesGaleria = new Dhs_personajes();
-const panda = personajesGaleria.obtenerPersonaje("panda");
-const cielo = personajesGaleria.obtenerPersonaje("cielo");
-const pastoCielo = personajesGaleria.obtenerPersonaje("pastoCielo");
-const frutilla = personajesGaleria.obtenerPersonaje("frutilla");
-frutilla.paddingImagen = "10px"
-const bambooAncho = personajesGaleria.obtenerPersonaje("bambooAncho");
-const bambooAnchoCamino = personajesGaleria.obtenerPersonaje("bambooCieloCamino");
-const bambooIzq = personajesGaleria.obtenerPersonaje("bambooIzqHoja");
-const tierra = personajesGaleria.obtenerPersonaje("tierraPasto");
-const estrella = personajesGaleria.obtenerPersonaje("estrella");
+const rutina = personajesGaleria.obtenerPersonaje("rutina");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "caraPanda",
+  imagen: "escuelaSendero",
   texto: "¡Objetivo Cumplido!",
   oculto: true,
 };
-miJuego.generarEscenario(dimensiones, 7, "#375f9e");
+miJuego.generarEscenario(dimensiones, 15, "white");
+// document.getElementById("elemento-escenario").lastChild.style.marginLeft = "-30px"
+
 miJuego.agregarModal(datosModal);
 //fijos,azarRango,azarFijos,azarExcluyente,azarCantTotal,azarCantidadTotalFijos
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
-    personajes: [panda],
-    posiciones: [[5, 0]],
+    personajes: [rutina],
+    posiciones: [[0, 0]],
     aliasConjunto: "fijoPrincipal",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [cielo],
-    posiciones: [[0, 0], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [pastoCielo],
-    posiciones: [[5, 0], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [5, 8]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [estrella],
-    posiciones: [[0, 1]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [bambooIzq],
-    posiciones: [[4, 0], [2, 0]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [bambooAncho],
-    posiciones: [[5, 1]],
-    aliasConjunto: "fijoTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "filasAleatoriasSimples",
-    personajes: [bambooAncho, bambooAnchoCamino, frutilla, cielo],
-    aliasConjunto: "filasAleatoriasSimples",
-    desapareceAlReiniciar: true,
-    anchoMinimo: 3,
-    anchoMaximo: 6, // Warning no exceda el tablero.
-    filas: [1, 2, 3, 4],
-    desdeColumna: 1,
-  },
-  {
-    estrategia: "fijos",
-    personajes: [tierra],
-    posiciones: [[6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [6, 7], [6, 8]],
-    aliasConjunto: "fijoTablero",
     desapareceAlReiniciar: false,
   },
 ];
 
-
+// document.querySelector(".juego-escenario").style.paddingRight = "100px"
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
-//miJuego.personajePrincipal.setearEstado("trepando")
+miJuego.personajePrincipal.objetivosLogrados = [];
 
-//Método para detectar
-miJuego.personajePrincipal.detectarFrutilla = function () {
-  // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("frutilla") !== undefined
-};
-miJuego.personajePrincipal.detectarTronco = function () {
-  // devuelve true si encuentra o false si no hay cofre
-  return this.buscarObjetoEnCasilleroActual("bambooAncho") !== undefined
-};
-
-miJuego.personajePrincipal.comerFrutilla = function () {
-  const intento = this.buscarParaRealizarAccion("frutilla", "abrirse");
-  if (!intento.objetoEncontrado) {
-    return this.decirTerminar("¡Oh! Aquí no hay frutilla.");
-  } else if (!intento.exito) {
-    return this.decirTerminar("¡Oh! Aqui ya no hay frutilla.");
-  } else if (intento.premio?.tipo == "frutilla") {
-    return this.decir("¡Mmmm! Qué rica frutilla.", 2000);
-  }
-
-};
-
-miJuego.personajePrincipal.moverDerecha = function (veces = 1) {
-  this.setearEstado("derecha")
-  return this.iterarVectorMovimiento(veces, [0, +1]);
-}
-
-miJuego.personajePrincipal.moverIzquierda = function (veces = 1) {
-  this.setearEstado("izquierda")
-  return this.iterarVectorMovimiento(veces, [0, -1]);
-}
-
-
-miJuego.personajePrincipal.moverArriba = function (veces = 1) {
-  this.setearEstado("trepando")
-  if (this.buscarObjetoEnCasilleroActual("bambooAncho") != undefined) {
-    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [-1, 0]);
-  }else{
-    return miJuego.personajePrincipal.decirTerminar("Por aquí no puedo trepar")
-  }
-
-}
-
-miJuego.personajePrincipal.moverAbajo = function (veces = 1) {
-  if (this.buscarObjetoAdelante("tierra")!= undefined || this.buscarObjetoAdelante("pastoCielo")!= undefined || this.buscarObjetoAdelante("bambooAnchoCamino")!= undefined || this.buscarObjetoAdelante("frutilla")!= undefined ||this.buscarObjetoAdelante("bambooAncho")!= undefined) {
-    this.setearEstado("trepando")
-    return miJuego.personajePrincipal.iterarVectorMovimiento(veces, [1, 0]);
+miJuego.personajePrincipal.levantarseDeLaCama = function () {
+  //si levantarse ya esta en objetivosLogrados -> morirDecir ya me levante
+  let accion = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "levantarme de la cama")
+  if (accion) {
+    return this.decirTerminar("Ya me levanté de la cama.");
+  } else if (this.estadoActual == "enLaCama") {
+    //else Si el estadoActual es en la cama pasa al estado levantandose y pushear levantarse a objetivosLogrados
+    this.setearEstado("levantandose")
+    miJuego.personajePrincipal.objetivosLogrados.push("levantarme de la cama")
   } else {
-    this.decirTerminar("¡Por aquí no puedo bajar!")
+    //else morirDecir ya me levante
+    return this.decirTerminar("Ya me levanté de la cama.");
   }
-}
-
-miJuego.personajePrincipal.llegarALaEstrella = function () {
-  //El if depende de la cantidadTotal de cofres que hayamos seteado arriba
-  //console.log(this.mochila[0].tipo) si era un bamboo, la mochila viene vacia,
-  //  y si era una frutilla y no se la comio, también viene vacia
-
-  if (this.mochila?.length == 4) {
-    this.abrirYMostrarModal();
-  } else {
-    this.decirTerminar("¡Oh No! Quedaron frutillas sin comer 😟.")
-  }
-  // const casilleroAleatoreoFrutilla = miJuego.escenario.objetosCasilleros[3][5].ocupantes.some(p=>p.idHTML == "frutilla")
-  // if(casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "frutilla"){
-  //   this.abrirYMostrarModal();
-  // }
-  // if(casilleroAleatoreoFrutilla && this.mochila.length == 0){
-  //   this.decirTerminar("¡Oh No! Quedó una frutilla sin comer 😟.")
-  // }
-  // if(!casilleroAleatoreoFrutilla && this.mochila[0]?.tipo == "bamboo"){
-  //   this.abrirYMostrarModal();
-  // }else{
-  //   this.decirTerminar("¡Oh No! Quedó un bambú sin comer 😟.");
-  // }
 };
+
+miJuego.personajePrincipal.desayunar = function () {
+  let accionA = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "levantarme de la cama")
+  if (accionA) {
+    let accionB = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "desayunar")
+    if(!accionB){
+      this.setearEstado("desayunando")
+      miJuego.personajePrincipal.objetivosLogrados.push("desayunar")
+    } else {
+      return this.decirTerminar("Ya desayuné.");
+    }
+  } else {
+    return this.decirTerminar("No puedo desayunar porque aún no me levanté de la cama.");
+  }
+};
+
+miJuego.personajePrincipal.cepillarseLosDientes = function () {
+  let accionA = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "levantarme de la cama")
+  if (accionA) {
+    let accionB = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "cepillarme los dientes")
+    if(!accionB){
+      this.setearEstado("cepillandose")
+      miJuego.personajePrincipal.objetivosLogrados.push("cepillarme los dientes")
+    } else {
+      return this.decirTerminar("Ya me cepillé los dientes.");
+    }
+  } else {
+    return this.decirTerminar("No puedo cepillarme los dientes porque aún no me levanté de la cama.");
+  }
+};
+
+miJuego.personajePrincipal.lavarseLaCara = function () {
+  let accionA = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "levantarme de la cama")
+  if (accionA) {
+    let accionB = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "lavarme la cara")
+    if(!accionB){
+      this.setearEstado("lavandose")
+      miJuego.personajePrincipal.objetivosLogrados.push("lavarme la cara")
+    } else {
+      return this.decirTerminar("Ya me lavé la cara.");
+    }
+  } else {
+    return this.decirTerminar("No puedo lavarme la cara porque aún no me levanté de la cama.");
+  }
+};
+
+miJuego.personajePrincipal.vestirse = function () {
+  let accionA = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "levantarme de la cama")
+  if (accionA) {
+    let accionB = miJuego.personajePrincipal.objetivosLogrados.find(o=>o == "vestirme")
+    if(!accionB){
+      this.setearEstado("vistiendose")
+      miJuego.personajePrincipal.objetivosLogrados.push("vestirme")
+    } else {
+      return this.decirTerminar("Ya me vestí.");
+    }
+  } else {
+    return this.decirTerminar("No puedo vestirme porque aún no me levanté de la cama.");
+  }
+};
+
+miJuego.personajePrincipal.salirDeCasa = function () {
+  //chequear que elementos de array esten en array
+  const accionesCopia = new Set(miJuego.personajePrincipal.objetivosLogrados)
+  const elementosUnicos = ["levantarme de la cama", "desayunar", "cepillarme los dientes", "lavarme la cara", "vestirme"]
+  const elementosFaltantes = [];
+  let resultado;
+
+  for (let elemento of elementosUnicos) {
+    if (!accionesCopia.has(elemento)) {
+      elementosFaltantes.push(elemento);
+    }
+  }
+
+  if (elementosFaltantes.length === 0) {
+    resultado = { todosPresentes: true };
+  } else {
+    resultado = { todosPresentes: false, elementosFaltantes };
+  }
+
+  if (resultado.todosPresentes === true) {
+    //si true mostrarModal
+    this.setearEstado("saliendo")
+    this.abrirYMostrarModal(); 
+    miJuego.personajePrincipal.objetivosLogrados = [];
+  } else {
+    miJuego.personajePrincipal.objetivosLogrados = [];
+    return this.decirTerminar("No puedo salir de casa aún. Me falta: " + resultado.elementosFaltantes.join(","));
+  }
+};
+
+
+let tooltip = miJuego.personajePrincipal.controladorDOM.elementoHTML.querySelector("div.tooltiptext");
+tooltip.style.right = "0";
+tooltip.style.top = "-50px";
+tooltip.style.maxWidth = "100%"
+tooltip.style.width = "100%"
+tooltip.style.fontSize = "16px"
 
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria = new Dhs_Categorias()
-const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Movimientos", "Acciones", "Condicionales", "Repeticiones", "Sensores"])
+const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Acciones"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
-  ["move_trepar_simple", "Movimientos"],
-  ["move_sinUp_simple", "Movimientos"],
-  ["comer_frutilla", "Acciones"],
-  ["if", "Condicionales"],
-  // ["ifElse", "Condicionales"],
-  ["repeat_times", "Repeticiones"],
-  ["repeat_until", "Repeticiones"],
-  ["sensor_frutilla", "Sensores"],
-  ["sensor_tronco", "Sensores"],
+  ["levantarseDeLaCama", "Acciones"],
+  ["salirDeCasa", "Acciones"],
+  ["vestirse", "Acciones"],
+  ["lavarseLaCara", "Acciones"],
+  ["cepillarseLosDientes", "Acciones"],
+  ["desayunar", "Acciones"],
 ];
 
 const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const funcionesAExponer = ["moverDerecha", "moverIzquierda", "moverArriba", "moverAbajo", "comerFrutilla", "detectarFrutilla", "detectarTronco"]
+const funcionesAExponer = ["levantarseDeLaCama", "salirDeCasa", "desayunar", "vestirse", "lavarseLaCara", "cepillarseLosDientes"]
 
 configurarYRenderizarToolbox(miControlador, categoriaElegida, ordenJerarquicoBloques, bloquesPrecargadosJSON, funcionesAExponer)

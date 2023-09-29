@@ -89,7 +89,16 @@ import desayunar from "../img/desayunar.png"
 import lavarseLaCara from "../img/lavarseLaCara.png"
 import ropa from "../img/ropa.png"
 import salirDeCasa from "../img/salirDeCasa.png"
-import salirDeLaCama from "../img/salirDeLaCama.png"
+import levantarseDeLacama from "../img/salirDeLaCama.png"
+import enLaCama from "../img/enLaCama.png"
+import hacerHueco from "../img/hacerHueco.png"
+import ponerSemilla from "../img/ponerSemilla.png"
+import ponerTierra from "../img/ponerTierra.png"
+import regar from "../img/regar.png"
+import taparConTierra from "../img/taparConTierra.png"
+import tomarUnaMaceta from "../img/tomarUnaMaceta.png"
+import fondoGris from "../img/fondoGris.png"
+import good from "../img/good.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -115,10 +124,73 @@ export class DHS_Gallery {
   }
 
   imageLib = {
-    salirDeLaCama: {
+    good: {
       themes: [""],
-      url: salirDeLaCama,
-      nombre: "salirDeLaCama",
+      url: good,
+      nombre: "good",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    fondoGris: {
+      themes: [""],
+      url: fondoGris,
+      nombre: "fondoGris",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    tomarUnaMaceta: {
+      themes: [""],
+      url: tomarUnaMaceta,
+      nombre: "tomarUnaMaceta",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    taparConTierra: {
+      themes: [""],
+      url: taparConTierra,
+      nombre: "taparConTierra",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    regar: {
+      themes: [""],
+      url: regar,
+      nombre: "regar",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    ponerTierra: {
+      themes: [""],
+      url: ponerTierra,
+      nombre: "ponerTierra",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    ponerSemilla: {
+      themes: [""],
+      url: ponerSemilla,
+      nombre: "ponerSemilla",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    hacerHueco: {
+      themes: [""],
+      url: hacerHueco,
+      nombre: "hacerHueco",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    enLaCama: {
+      themes: [""],
+      url: enLaCama,
+      nombre: "enLaCama",
+      parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
+      showLicense: true,
+    },
+    levantarseDeLacama: {
+      themes: [""],
+      url: levantarseDeLacama,
+      nombre: "levantarseDeLacama",
       parrafoLicencia: "<p>Imagen desarrollada por Digital House</p>",
       showLicense: true,
     },
