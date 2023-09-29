@@ -85,7 +85,7 @@ export default class ConfiguradorBloques {
                 "style": "execute_blocks",
                 "tooltip": "Al presionar 'play', se ejecutarán los bloques que contenga",
                 "helpUrl": "",
-                "hat": "rounded",
+                // "hat": "rounded",
                 'extensions': [
                     'on_execute_validation',
                 ],
@@ -177,6 +177,37 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    move_trepar_simple() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "mover_trepar_simple",
+                "message0": "%1 trepar",
+                "args0": [
+                    {
+                        "type": "field_image",
+                        "src": "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+                        "width": 16,
+                        "height": 16,
+                        "alt": "*"
+                    },
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "movement_blocks",
+            },
+        ]);
+
+        // Define how to generate JavaScript from the custom block.
+        Blockly.JavaScript.forBlock["mover_trepar_simple"] = function (block) {
+            const code = "moverArriba();\n"
+            return code;
+        };
+
+        return {
+            type: "mover_trepar_simple",
+            kind: "block",
+        }
+    }
     move_right_simple() {
         // Use Blockly's custom block JSON API to define a new block type.
         Blockly.common.defineBlocksWithJsonArray([
@@ -246,6 +277,13 @@ export default class ConfiguradorBloques {
     move_classic_simple() {
         return [
             this.move_up_simple(),
+            this.move_down_simple(),
+            this.move_left_simple(),
+            this.move_right_simple(),
+        ]
+    }
+    move_sinUp_simple() {
+        return [
             this.move_down_simple(),
             this.move_left_simple(),
             this.move_right_simple(),
@@ -1075,6 +1113,37 @@ export default class ConfiguradorBloques {
             kind: "block",
         }
     }
+    //bombero
+    disparar_agua() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                type: "disparar_agua",
+                message0: "%1 Apagar fuego",
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/599/599508.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                previousStatement: null,
+                nextStatement: null,
+                style: "action_blocks",
+            },
+        ]);
+
+        Blockly.JavaScript.forBlock["disparar_agua"] = function (block) {
+            const code = "dispararAgua();"
+            return code;
+        };
+
+        return {
+            type: "disparar_agua",
+            kind: "block",
+        }
+    }
     //conejo
     cosechar() {
         Blockly.common.defineBlocksWithJsonArray([
@@ -1348,11 +1417,8 @@ export default class ConfiguradorBloques {
         Blockly.common.defineBlocksWithJsonArray([
             {
                 "type": "if",
-                "message0": "Si %1 %2 entonces... %3 %4 ",
+                "message0": "Si %1 entonces... %2 %3",
                 "args0": [
-                    {
-                        "type": "input_dummy"
-                    },
                     {
                         "type": "input_value",
                         "name": "condicion",
@@ -1532,6 +1598,67 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    sensor_fuego() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_fuego",
+                "message0": "%1 ¿Hay fuego adelante?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/785/785116.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_fuego"] = function (block) {
+            const code = "detectarFuego()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_fuego",
+            "kind": "block",
+        }
+    }
+    sensor_apagar_fuego() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_apagar_fuego",
+                "message0": "%1 ¿Está apagado el fuego?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/785/785116.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_apagar_fuego"] = function (block) {
+            const code = "detectarFuegoApagado()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        //    return code;
+        };
+        return {
+            "type": "sensor_apagar_fuego",
+            "kind": "block",
+        }
+    }
+
     sensor_diamante() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -1562,6 +1689,7 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    
     sensor_frutilla() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -1591,6 +1719,68 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+
+    sensor_estacionBombero() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_estacionBombero",
+                "message0": "%1 ¿Llegué a la estación?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/2052/2052830.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        
+        Blockly.JavaScript.forBlock["sensor_estacionBombero"] = function (block) {
+            const code = "detectarEstacionBombero()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_estacionBombero",
+            "kind": "block",
+        }
+    }
+
+    sensor_tronco() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_tronco",
+                "message0": "%1 ¿LLegué al tronco?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/2140/2140230.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_tronco"] = function (block) {
+            const code = "detectarTronco()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_tronco",
+            "kind": "block",
+        }
+    }
+
     sensor_bamboo() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -1621,48 +1811,222 @@ export default class ConfiguradorBloques {
         }
     }
 
+    sensor_bandera() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "sensor_bandera",
+                "message0": "%1 ¿Llegó a la bandera?",
+                "output": null,
+                "args0": [
+                    {
+                      "type": "field_image",
+                      "src": "https://cdn-icons-png.flaticon.com/512/4481/4481086.png",
+                      "width": 16,
+                      "height": 16,
+                      "alt": "*"
+                    }
+                  ],
+                // "previousStatement": null,
+                // "nextStatement": null,
+                style: "sensor_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["sensor_bandera"] = function (block) {
+            const code = "detectarBandera()"
+            return [code, Blockly.JavaScript.ORDER_NONE]
+        };
+        return {
+            "type": "sensor_bandera",
+            "kind": "block",
+        }
+    }
+
     // LOOPS
-    controls_repeat() {
+    repeat_times() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "repeat_times",
+                "message0": "Repetir %1 veces %2 %3",
+                "args0": [
+                  {
+                    "type": "field_dropdown",
+                    "name": "cantidadRepeticiones",
+                    "options": [
+                      [
+                        "1",
+                        "1"
+                      ],
+                      [
+                        "2",
+                        "2"
+                      ],
+                      [
+                        "3",
+                        "3"
+                      ],
+                      [
+                        "4",
+                        "4"
+                      ],
+                      [
+                        "5",
+                        "5"
+                      ],
+                      [
+                        "6",
+                        "6"
+                      ],
+                      [
+                        "7",
+                        "7"
+                      ],
+                      [
+                        "8",
+                        "8"
+                      ],
+                      [
+                        "9",
+                        "9"
+                      ],
+                      [
+                        "10",
+                        "10"
+                      ]
+                    ]
+                  },
+                  {
+                    "type": "input_dummy"
+                  },
+                  {
+                    "type": "input_statement",
+                    "name": "accionesARepetir"
+                  }
+                ],
+                "previousStatement": null,
+                "nextStatement": null,
+                "style": "loop_blocks",
+            },
+        ]);
+        Blockly.JavaScript.forBlock["repeat_times"] = function (block) {
+            const cantidadRepeticiones = this.getFieldValue("cantidadRepeticiones");
+            // console.log(cantidadRepeticiones);
+            const accionesARepetir = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
+            // console.log(accionesRepeticion);
+            const code = `for (var i = 0; i < ${cantidadRepeticiones}; i++) {
+                ${accionesARepetir}
+            };`;
+            return code;
+        };
         return {
-            type: "controls_repeat",
+            type: "repeat_times",
             kind: "block",
         } 
+    }
+    //REPETIR HASTA que
+    repeat_until() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "repeat_until",
+                "message0": "Repetir hasta que %1 %2",
+                "args0": [
+                  {
+                    "type": "input_value",
+                    "name": "condicion"
+                  },
+                  {
+                    "type": "input_statement",
+                    "name": "accionesARepetir",
+                  }
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "tooltip": "",
+                "helpUrl": "",
+                "style": "loop_blocks",
+              },
+        ]);
+        Blockly.JavaScript.forBlock["repeat_until"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
+            const code = "while(!"+ condicion +"){\n"+ acciones  +"\n}\n"
+            return code;
+        };
+        return {
+            type: "repeat_until",
+            kind: "block",
+        }
     }
 
-    controls_repeat_ext() {
+    repeat_while() {
+        Blockly.common.defineBlocksWithJsonArray([
+            {
+                "type": "repeat_while",
+                "message0": "Repetir mientras que %1 %2",
+                "args0": [
+                  {
+                    "type": "input_value",
+                    "name": "condicion"
+                  },
+                  {
+                    "type": "input_statement",
+                    "name": "accionesARepetir",
+                  }
+                ],
+                "inputsInline": true,
+                "previousStatement": null,
+                "nextStatement": null,
+                "tooltip": "",
+                "helpUrl": "",
+                "style": "loop_blocks",
+              },
+        ]);
+        Blockly.JavaScript.forBlock["repeat_while"] = function (block) {
+            const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
+            const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
+            const code = "while("+ condicion +"){\n"+ acciones +"\n}\n"
+            return code;
+        };
         return {
-            type: "controls_repeat_ext",
+            type: "repeat_while",
             kind: "block",
-        } 
+        }
     }
+    // Por el momento no se usan
+    // controls_repeat_ext() {
+    //     return {
+    //         type: "controls_repeat_ext",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_whileUntil() {
-        return {
-            type: "controls_whileUntil",
-            kind: "block",
-        } 
-    }
+    // controls_whileUntil() {
+    //     return {
+    //         type: "controls_whileUntil",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_for() {
-        return {
-            type: "controls_for",
-            kind: "block",
-        } 
-    }
+    // controls_for() {
+    //     return {
+    //         type: "controls_for",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_forEach() {
-        return {
-            type: "controls_forEach",
-            kind: "block",
-        } 
-    }
+    // controls_forEach() {
+    //     return {
+    //         type: "controls_forEach",
+    //         kind: "block",
+    //     } 
+    // }
 
-    controls_flow_statements() {
-        return {
-            type: "controls_flow_statements",
-            kind: "block",
-        } 
-    }
+    // controls_flow_statements() {
+    //     return {
+    //         type: "controls_flow_statements",
+    //         kind: "block",
+    //     } 
+    // }
 
     // controls_forRange() {
     //     return {
@@ -1671,24 +2035,11 @@ export default class ConfiguradorBloques {
     //     } 
     // }
 
-    controls_doWhile() {
-        return {
-            type: "controls_doWhile",
-            kind: "block",
-        } 
-    }
-
-    controls() {
-        return [
-            this.controls_repeat(),
-            // this.controls_repeat_ext(),
-            // this.controls_whileUntil(),
-            // this.controls_for(),
-            // this.controls_forEach(),
-            // this.controls_flow_statements(),
-            // this.controls_forRange(),
-            // this.controls_doWhile()
-        ]
-    }
+    // controls_doWhile() {
+    //     return {
+    //         type: "controls_doWhile",
+    //         kind: "block",
+    //     } 
+    // }
 
 }

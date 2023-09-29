@@ -15,11 +15,16 @@ import {
   PersonajesAlAzarFijos,
   PersonajesAlAzarExcluyente,
   PersonajesAlAzarCantTotal,
+  PersonajesFijosEstadoAleatorio,
   PersonajesAlAzarCantTotalFijos,
   PersonajesPosicionAlAzarExcluyente,
+  EscenarioFilasAleatoreasSimples,
+  ElementoPosicionRandomYEstadoAleatorio,
+  PersonajesFijosRangoAleatoreoEstadoAleatoreo
 } from "../clases/StrategyCreacion";
 
 import { Modal } from "./Modal";
+import { obtenerCantidadAleatoria } from "../Utils/Funciones";
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
@@ -56,12 +61,11 @@ export class Juego {
 
   reiniciarConjuntoPersonajes() {
     this.listaDePersonajes.forEach((personaje) => {
-      personaje.reiniciarse()
+      personaje.reiniciarse();
     });
     this.listaDePersonajes = this.listaDePersonajes.filter(
       (personaje) => personaje.desapareceAlReiniciar != true
     );
-    
   }
 
   reiniciar() {
@@ -77,7 +81,7 @@ export class Juego {
       unPersonaje = new this.clasesPersonajesPosibles[clasePersonaje](
         personaje,
         this
-      ); 
+      );
     } else {
       unPersonaje = new PersonajeBasico(personaje, this);
     }
@@ -133,13 +137,17 @@ export class Juego {
   generarConjuntoDePersonajes(conjuntosDePersonajes) {
     const estrategias = {
       fijos: new PersonajesFijos(),
+      fijoEstadoAleatorio: new PersonajesFijosEstadoAleatorio(),
       azarRango: new PersonajesAlAzarRango(),
       azarRangoFijos: new PersonajesAlAzarRangoFijos(),
       azarFijos: new PersonajesAlAzarFijos(),
       azarExcluyente: new PersonajesAlAzarExcluyente(),
       posicionExcluyente: new PersonajesPosicionAlAzarExcluyente(),
       azarCantTotal: new PersonajesAlAzarCantTotal(),
-      azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos()
+      azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos(),
+      filasAleatoriasSimples: new EscenarioFilasAleatoreasSimples(),
+      estadoYCantidadAlAzar: new ElementoPosicionRandomYEstadoAleatorio(),
+      actividad034: new PersonajesFijosRangoAleatoreoEstadoAleatoreo(),
     };
     conjuntosDePersonajes.forEach((unConjunto) => {
       let personajesAGenerar = [];
@@ -159,11 +167,29 @@ export class Juego {
   }
 
   crearPersonajes(conjuntosDePersonajes) {
-    conjuntosDePersonajes.forEach((unConjunto)=>{
-      if(unConjunto.estrategia!="fijos"){
-         this.listaDeAleatoreos.push(unConjunto)
-       }
-      })
-      this.generarConjuntoDePersonajes(conjuntosDePersonajes);
+    conjuntosDePersonajes.forEach((unConjunto) => {
+      if (unConjunto.estrategia != "fijos") {
+        this.listaDeAleatoreos.push(unConjunto);
+      }
+    });
+    this.generarConjuntoDePersonajes(conjuntosDePersonajes);
   }
+
+  // crearPersonajeEscenarioAleatoreo(conjuntoDePersonajes, tablero) {
+  //   this.crearPersonajes([conjuntoDePersonajes[0]]);
+  //   tablero.forEach((fila, index) => {
+  //     const largoFila = obtenerCantidadAleatoria({
+  //       cantidadMax: fila.length-1,
+  //       cantidadMin: 2,
+  //     });
+  //     for (let i = 0; i <= largoFila; i++) {
+  //       conjuntoDePersonajes[1].posiciones = [[index, i]];
+  //       this.crearPersonajes([conjuntoDePersonajes[1]]);
+  //     }
+  //     //console.log(conjuntoDePersonajes[2])
+  //     conjuntoDePersonajes[2].posiciones = [[index, largoFila]];
+  //     this.crearPersonajes([conjuntoDePersonajes[2]])
+  //     //console.log(conjuntoDePersonajes[2].posiciones)
+  //   });
+  // }
 }

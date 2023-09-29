@@ -1,9 +1,8 @@
 /* MOBILE */
-*{
+* {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 
 #appActividad {
   height: 100%;
@@ -16,7 +15,7 @@
 
 /* Header: donde estan los botones para reproducir y configurar  */
 
-header{
+header {
   background-color: var(--color-gris-oscuro);
   display: grid;
   gap: 10px;
@@ -28,64 +27,64 @@ header{
   /* padding-top: 15px; */
 }
 
-header div.botones{
+header div.botones {
   display: flex;
   justify-content: space-evenly;
 }
 
-header div.botones button:first-child i{
+header div.botones button:first-child i {
   font-size: 28px;
   color: var(--acento);
 }
 
-header div.desactivarSueltos{
+header div.desactivarSueltos {
   display: none;
   /* display: flex; */
   font-size: 12px;
   text-align: center;
-  padding:1px;
+  padding: 1px;
 }
 
-header div.botones button{
+header div.botones button {
   border: 0;
   background: none;
 }
 
-header div.botones button:disabled i{
+header div.botones button:disabled i {
   color: var(--color-gris-claro);
   font-size: 18px;
 }
 
-header div.botones button:not(:disabled):hover i{
+header div.botones button:not(:disabled):hover i {
   display: inline-block;
   transform: scale(1.2);
   cursor: pointer;
 }
 
-header button.botonera i{
+header button.botonera i {
   font-size: 18px;
   color: var(--color-blanco);
 }
 
-header div.rango{
+header div.rango {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   align-items: center;
   min-width: 300px;
 }
 
-header div.mostrar{
+header div.mostrar {
   display: none;
   /* display: flex; */
   justify-content: center;
 }
 
-header div.mostrar div{
+header div.mostrar div {
   display: flex;
   /* justify-content: center; */
 }
 
-header div.mostrar div input{
+header div.mostrar div input {
   width: 30px;
 }
 
@@ -95,16 +94,16 @@ header div.mostrar div input[type="range"]::-webkit-slider-runnable-track {
   border: 1px solid;
 }
 
-header div.mostrar div input[type="range"]::-webkit-slider-thumb{
+header div.mostrar div input[type="range"]::-webkit-slider-thumb {
   /* -webkit-appearance: none;
   appearance: none; */
   background: red;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 /* Cuando .mostrar este visible, hay que poner en none ésta regla: header div:nth-child(2)*/
-header div:nth-child(2){
-  position:relative;
-  left:100px;
+header div:nth-child(2) {
+  position: relative;
+  left: 100px;
 }
 /* header input[type="range"]::-ms-fill-lower, 
 header input[type="range"]::-moz-range-progress,
@@ -133,7 +132,7 @@ header input[type="range"]{
 
 /* Main: donde esta el workspace, el juego y los bloques para mostrar codigo y output */
 
-main{
+main {
   /* padding: 15px; */
   /* padding-top: 10px; */
   display: grid;
@@ -141,18 +140,18 @@ main{
   height: 100%;
 }
 
-main div.espacioBloques{
+main div.espacioBloques {
   width: 100%;
   height: 100%;
   display: inline-block;
   z-index: 0;
 }
 
-main div.juego-escenario textarea.esconder{
+main div.juego-escenario textarea.esconder {
   display: none;
 }
 
-main div.juego-escenario{
+main div.juego-escenario {
   height: 100%;
   display: grid;
   align-items: center;
@@ -166,7 +165,7 @@ main div.juego-escenario{
   padding: 10px;
 } */
 
-main div.juego-escenario div.juego div.escenario{
+main div.juego-escenario div.juego div.escenario {
   position: relative;
   margin-left: 30px;
 }
@@ -186,7 +185,7 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel {
   border: 1px solid var(--negro);
   z-index: 20;
   text-align: center;
-  transition: all .35s;
+  transition: all 0.35s;
   font-size: 25px;
   border: 3px solid var(--color-primario);
   opacity: 85%;
@@ -202,7 +201,12 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel-hidden {
   font-size: 0px;
 }
 
-main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-modal-pannel-title {
+main
+  div.juego-escenario
+  div.juego
+  div.escenario
+  div.dhs-modal-pannel
+  p.dhs-modal-pannel-title {
   padding: 10px;
   margin: 0;
   color: var(--blanco);
@@ -210,13 +214,23 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   font-weight: bold;
 }
 
-main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel img.dhs-modal-pannel-image {
+main
+  div.juego-escenario
+  div.juego
+  div.escenario
+  div.dhs-modal-pannel
+  img.dhs-modal-pannel-image {
   width: 30%;
   margin: auto;
   border-radius: 20px;
 }
 
-main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-modal-pannel-main-text {
+main
+  div.juego-escenario
+  div.juego
+  div.escenario
+  div.dhs-modal-pannel
+  p.dhs-modal-pannel-main-text {
   font-weight: bold;
   font-size: 65%;
   margin: 0;
@@ -237,16 +251,17 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
 }
 
 /*TOOLTIPS JUEGO*/
-.tooltip, .botonera {
+.tooltip,
+.botonera {
   position: relative;
   display: inline-block;
 }
 
-.rango button.botonera:last-child .tooltiptext{
+.rango button.botonera:last-child .tooltiptext {
   right: 0px;
 }
 
-.botonera .tooltiptext{
+.botonera .tooltiptext {
   right: -48px;
   top: 40px;
 }
@@ -281,7 +296,8 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   z-index: 5;
 }
 
-.tooltipVisible .tooltiptext , .botonera:hover .tooltiptext{
+.tooltipVisible .tooltiptext,
+.botonera:hover .tooltiptext {
   visibility: visible;
 }
 
@@ -296,19 +312,62 @@ main div.juego-escenario div.juego div.escenario div.dhs-modal-pannel p.dhs-moda
   border-radius: 4px;
 }
 
-.blocklyToolboxDiv{
+.blocklyToolboxDiv {
   padding: 10px;
 }
 
-.blocklyTreeLabel{
+.blocklyTreeLabel {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
 
 /* TABLET y PC */
 @media (min-width: 425px) {
-
-  main{
+  main {
     grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Para ocultar las img cuando el personaje las come o las junta*/
+.ocultar {
+  display: none;
+}
+
+/* Actividades Bombero con el Chorro de Agua */
+.imgHidden{
+  visibility: hidden;
+}
+.imgVisible {
+  visibility: visible;
+  position: relative;
+  left: 37px;
+  top: -50px;
+  transform: rotate(15deg);
+  animation: 1s animacionEntradaImagen ease-in-out;
+}
+@keyframes animacionEntradaImagen {
+  0% {
+    opacity: 0.4;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.1;
   }
 }

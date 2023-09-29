@@ -1,5 +1,3 @@
-import circuloAmarilloTransparente from '../img/circuloAmarillo.png';
-
 export class Dhs_personajes {
   constructor() {
     this.ready = true;
@@ -33,9 +31,9 @@ export class Dhs_personajes {
       },
       estadoInicial: "normal",
       direccionInicial: 0,
-      zIndex: 2,
+      zIndex: 1,
       rotable: true,
-      paddingImagen: "1px",
+      paddingImagen: "5px",
       colisiones: [],
       configPosicionamiento: {},
     },
@@ -116,6 +114,21 @@ export class Dhs_personajes {
       pintable: true,
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "pasto" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      paddingImagen: "1px",
+      rotable: false,
+    },
+    pastoCielo: {
+      idUsarHTML: "camino",
+      tipoPersonaje: "camino",
+      pintable: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "pastoCielo" },
       },
       estadoInicial: "normal",
       zIndex: 1,
@@ -216,6 +229,20 @@ export class Dhs_personajes {
       tipoPersonaje: "agua",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "agua" },
+      },
+      estadoInicial: "normal",
+      zIndex: 1,
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      rotable: false,
+      paddingImagen: "1px"
+    },
+    cielo: {
+      idUsarHTML: "cielo",
+      tipoPersonaje: "cielo",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "cielo" },
       },
       estadoInicial: "normal",
       zIndex: 1,
@@ -883,28 +910,15 @@ export class Dhs_personajes {
       tieneTooltip: true,
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "panda" },
+        trepando: { name: "normal", imageUrl: "pandaTrepadorSinFondo" },
+        izquierda: { name: "normal", imageUrl: "pandaIzquierda" },
+        derecha: { name: "normal", imageUrl: "panda" },
       },
       estadoInicial: "normal",
       direccionInicial: 0,
-      zIndex: 3,
+      zIndex: 4,
       rotable: true,
       colisiones: [
-        {
-          con: "lodo",
-          factorDeAvance: 0.7,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡OH NO! Me atasqué en el lodo.",
-        },
-        {
-          con: "arbol",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡OH NO! Choqué contra un árbol",
-        },
         {
           con: "bandera",
           factorDeAvance: 1,
@@ -925,6 +939,20 @@ export class Dhs_personajes {
           factorDeAvance: 1,
           callback: (x) => {
             x.llegarALaEstrella();
+          },
+        },
+        {
+          con: "cielo",
+          factorDeAvance: 0.4,
+          callback: (x) => {
+            x.decirTerminar("¡OH! ¡No sé volar!");
+          },
+        },
+        {
+          con: "bambooIzqHoja",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.decirTerminar("¡OH! ¡Me voy a caer si piso aquí!");
           },
         },
       ],
@@ -1047,7 +1075,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
-      zIndex: 2,
+      zIndex: 3,
       rotable: false,
       paddingImagen: "0px",
       colisiones: [],
@@ -1057,6 +1085,21 @@ export class Dhs_personajes {
       tipoPersonaje: "bambooAnchoCamino",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "bambooAnchoCamino" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
+    bambooCieloCamino: {
+      idUsarHTML: "bambooCieloCamino",
+      tipoPersonaje: "bambooCieloCamino",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "bambooCieloCamino" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,
@@ -1107,7 +1150,7 @@ export class Dhs_personajes {
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
-      zIndex: 2,
+      zIndex: 1,
       rotable: false,
       paddingImagen: "0px",
       colisiones: [],
@@ -1142,13 +1185,28 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       colisiones: [],
     },
+    estrellaSinFondo: {
+      idUsarHTML: "estrellaSinFondo",
+      tipoPersonaje: "estrellaSinFondo",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "estrellaSinFondo" },
+      },
+      estadoInicial: "cerrado", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
     frutilla: {
       idUsarHTML: "frutilla",
       tipoPersonaje: "frutilla",
       estadosPosibles: {
         cerrado: { name: "cerrado", imageUrl: "frutilla" },
-        abierto: { name: "normal", imageUrl: "agua" },
-        juntado: { name: "juntado", imageUrl: "agua" },
+        abierto: { name: "normal", imageUrl: "" },
+        juntado: { name: "juntado", imageUrl: "" },
       },
       estadoInicial: "cerrado", 
       posicionInicialY: 0,
@@ -1271,6 +1329,97 @@ export class Dhs_personajes {
       tipoPersonaje: "isla",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "isla" },
+      },
+      estadoInicial: "normal", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    bombero: {
+      idUsarHTML: "bombero",
+      tipoPersonaje: "bombero",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "bombero",imagenUrl2:"chorroAgua" },
+      },
+      estadoInicial: "normal",
+      direccionInicial: 90,
+      zIndex: 3,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [
+        {
+          con: "fuego",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.evaluar();
+          },
+          // mensaje: "¡AY Me quemo!",
+        },
+        {
+          con: "arbol",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO! Choqué contra un árbol",
+        },
+        {
+          con: "estacionBomberos",
+          factorDeAvance: 1,
+          callback: (x) => {
+            x.llegarALaEstacionBomberos();
+          },
+          // mensaje: "¡We are the Champions!",
+        },
+      ],
+      configPosicionamiento: {},
+    },
+    estacionBomberos: {
+      idUsarHTML: "estacionBomberos",
+      tipoPersonaje: "estacionBomberos",
+      clasePersonaje: "PersonajeMovibleSimple",
+      tieneTooltip: true,
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "estacionBomberos"},
+      },
+      estadoInicial: "normal",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: true,
+      paddingImagen: "1px",
+      colisiones: [],
+      configPosicionamiento: {},
+    },
+    fuego: {
+      idUsarHTML: "fuego",
+      tipoPersonaje: "fuego",
+      estadosPosibles: {
+        fuegoCero: { name: "fuegoCero", imageUrl: "fuegoCero" },
+        fuegoUno: { name: "fuegoUno", imageUrl: "fuegoUno" },
+        fuegoDos: { name: "fuegoDos", imageUrl: "fuegoDos" },
+        fuegoTres: { name: "fuegoTres", imageUrl: "fuegoTres" },
+        fuegoCuatro: { name: "fuegoCuatro", imageUrl: "fuegoCuatro" },
+      },
+      estadoInicial: "fuegoCuatro", 
+      posicionInicialY: 0,
+      posicionInicialX: 0,
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "0.5px",
+      colisiones: [],
+    },
+    chorroAgua: {
+      idUsarHTML: "chorroAgua",
+      tipoPersonaje: "chorroAgua",
+      estadosPosibles: {
+        normal: { name: "normal", imageUrl: "chorroAgua" },
       },
       estadoInicial: "normal", 
       posicionInicialY: 0,

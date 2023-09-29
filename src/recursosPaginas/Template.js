@@ -1,6 +1,7 @@
 //es responsabilidad del juego rellenarlo
 import "../style.css";
 import "../styleActividades.css";
+import "../styleAnimaciones.css";
 import { trash, play, stop, restart,standingPerson, runningPerson, code, comment } from "./Iconos";
 import logoBlockly from "../img/logoBlockly.png";
 import logoDHS from "../img/logodhsBlack.png";

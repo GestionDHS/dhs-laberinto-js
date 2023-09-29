@@ -1,5 +1,5 @@
 export default Blockly.Theme.defineTheme('themeDH', {
-    'base': Blockly.Themes.Zelos,
+    'base': Blockly.Themes.Thrasos,
     'categoryStyles': {
         'movement': {
             'colour': '#757bc8'
@@ -15,6 +15,12 @@ export default Blockly.Theme.defineTheme('themeDH', {
         },
         'sensor': {
             'colour': '#375f9e'
+        },
+        'logic': {
+            'colour': '#4c97ff'
+        },
+        'loops': {
+            'colour': '#0fbd8c'
         }
         // 'background-color': colour
     },
@@ -38,6 +44,14 @@ export default Blockly.Theme.defineTheme('themeDH', {
         "sensor_blocks": {
             "colourPrimary": "#375f9e",
             'colourTertiary':'#253d63'
+        },
+        "logic_blocks": {
+            "colourPrimary": "#4c97ff",
+            'colourTertiary':'#3373cc'
+        },
+        "loop_blocks": {
+            "colourPrimary": "#0fbd8c",
+            'colourTertiary':'#0b8e69'
         },
 
      },

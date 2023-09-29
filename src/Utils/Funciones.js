@@ -1,5 +1,3 @@
-import { CustomRenderer } from "../bloques/CustomRender";
-
 //************FUNCION QUE BUSCA POSICIONES RAMDOM DEL TABLERO*************/
 export function posicionValida(escenario, posicionesElegidas, arrayPosiciones) {
   return arrayPosiciones
@@ -102,6 +100,13 @@ export const obtenerCantidadAleatoria = function (configuracion) {
   );
 };
 
+//Elegir Estado Random de un Personaje
+export const setearElegirEstadoRandom = function(personaje,estadoAleatorio) {
+  const posicionEstadoElegido =
+    Math.floor(Math.random() * estadoAleatorio.length);
+  personaje.estadoInicial = estadoAleatorio[posicionEstadoElegido]
+}
+
 //********************SETEA POSICIONES **************************/
 export const setearPosiciones = function (unPersonaje, unaPosicion) {
   unPersonaje.posicionInicialY = unaPosicion[0];
@@ -136,12 +141,10 @@ export const configurarYRenderizarToolbox = function (
     miControlador.ConfiguradorBloques.configurarUnBloqueCustomStandard(...bl);
   });
 
-  const render = new CustomRenderer();
-  render.registrarRender("renderDHS");
   miControlador.crearInyectarWorkspace("dhs-blockly-div", {
     toolbox: miControlador.ConfiguradorBloques.toolbox,
     theme: "themeDH",
-    renderer: "renderDHS",
+    renderer: "thrasos",
     zoom: {
       controls: true,
       wheel: true,

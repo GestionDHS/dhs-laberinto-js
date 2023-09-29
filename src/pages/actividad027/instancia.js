@@ -1,7 +1,6 @@
 import { Juego } from "../../clases/Juego";
 import { template } from "../../recursosPaginas/Template";
 import ControladorStandard from "../../bloques/Controlador";
-import { CustomRenderer } from "../../bloques/CustomRender";
 import customTheme from "../../bloques/CustomTheme";
 import { CustomCategory } from "../../bloques/CustomCategory";
 import { Dhs_personajes } from "../../clases/Dhs-personajes";
@@ -126,13 +125,6 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [flechaAmarilla],
-    posiciones: [[3, 5]],
-    aliasConjunto: "fijosTablero",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
     personajes: [arbol1],
     posiciones: [[2, 7]],
     aliasConjunto: "fijosTablero",
@@ -175,6 +167,7 @@ let conjuntosDePersonajes = [
   },
 ];
 
+miJuego.escenario.iluminarCasilleros([[4,5]],"recuadroLuminoso")
 miJuego.crearPersonajes(conjuntosDePersonajes);
 miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[72]);
 
