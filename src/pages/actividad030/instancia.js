@@ -7,8 +7,7 @@ import { Dhs_personajes } from '../../clases/Dhs-personajes';
 import { generarCoordenadas, configurarYRenderizarToolbox } from '../../Utils/Funciones';
 import { Dhs_Categorias } from '../../clases/Dhs-categorias';
 import { PersonajesAlAzarExcluyente } from '../../clases/StrategyCreacion';
-import bambooCieloCamino from '../../img/bambooCieloCamino.png';
-import pandaTrepadorSinFondo from '../../img/pandaTrepadorSinFondo.png';
+
 
 //El Panda en una linea, coma frutilla aleatorea y gane.
 //usar repetir hasta que.

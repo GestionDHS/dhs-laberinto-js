@@ -93,7 +93,7 @@ export class PersonajeBasico {
     this.controladorDOM.agregarImagenSecundaria(this.galeria.obtenerUrlDe(img));
   }
   mostrarImgSecundaria() {
-    this.controladorDOM.mostrarImagenSecundaria();
+    this.controladorDOM.mostrarImagenSecundaria(this.juego.duracionIntervalos);
   }
   //recibe un objeto de tipo colision que tiene (con , seMuere, autoMensaje, mensaje)
   agregarColision(unaColision) {
@@ -258,7 +258,6 @@ export class PersonajeBasico {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-console.log(objetoColision)
     return objetoColision;
   }
 
@@ -310,13 +309,13 @@ class controladorPersonajeDOM {
     this.imagenAnidadaSecundaria.classList.add("imgHidden");
     this.elementoHTML.appendChild(this.imagenAnidadaSecundaria);
   }
-  mostrarImagenSecundaria() {
+  mostrarImagenSecundaria(milisegundos) {
     this.imagenAnidadaSecundaria.classList.remove("imgHidden");
     this.imagenAnidadaSecundaria.classList.add("imgVisible");
     setTimeout(() => {
       this.imagenAnidadaSecundaria.classList.remove("imgVisible");
       this.imagenAnidadaSecundaria.classList.add("imgHidden");
-    }, 2000);
+    },milisegundos);
   }
   setearVelocidad(milisegundos) {
     this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s";
