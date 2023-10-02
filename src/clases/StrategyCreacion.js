@@ -521,7 +521,6 @@ export function PersonajesFijosRangoAleatoreoEstadoAleatoreo() {
           conjuntoPersonajes.aliasConjunto
         );
         personajesACrear.push(personajeEstadoVariable);
-        console.log(personajeEstadoVariable)
       }
     });
 
