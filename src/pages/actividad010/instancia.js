@@ -10,18 +10,17 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 const miJuego = new Juego(velocidadInicial);
-const dimensiones = [9, 11]; //fila, columna
+const dimensiones = [8, 10]; //fila, columna
 
 const tablero = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
 const coordenadasCaminoPared = generarCoordenadas(tablero);
@@ -44,6 +43,13 @@ miJuego.agregarModal(datosModal);
 let conjuntosDePersonajes = [
   {
     estrategia: "fijos",
+    personajes: [lupe],
+    posiciones: [[6, 1]],
+    aliasConjunto: "fijoPrincipal",
+    desapareceAlReiniciar: false,
+  },
+  {
+    estrategia: "fijos",
     personajes: [arbol],
     posiciones: coordenadasCaminoPared.coordenadasPared,
     aliasConjunto: "fijosTablero",
@@ -58,15 +64,8 @@ let conjuntosDePersonajes = [
   },
   {
     estrategia: "fijos",
-    personajes: [lupe],
-    posiciones: [[7, 1]],
-    aliasConjunto: "fijoPrincipal",
-    desapareceAlReiniciar: false,
-  },
-  {
-    estrategia: "fijos",
     personajes: [basura],
-    posiciones: [[2,4],[3,3],[5,6],[4,2],[4,7],[3,8]],
+    posiciones: [[2,4],[3,3],[5,5],[4,2],[4,6],[3,7]],
     aliasConjunto: "fijosTablero",
     desapareceAlReiniciar: false,
   },
@@ -80,7 +79,7 @@ let conjuntosDePersonajes = [
 ];
 
 miJuego.crearPersonajes(conjuntosDePersonajes);
-miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[99]);
+miJuego.setearPersonajePrincipal(miJuego.listaDePersonajes[0]);
 miJuego.personajePrincipal.juntarBasura = function () {
   const intento = this.buscarParaRealizarAccion("basura", "serJuntado");
   if (!intento.objetoEncontrado) {

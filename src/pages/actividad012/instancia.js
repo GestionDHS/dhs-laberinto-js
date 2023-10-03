@@ -10,7 +10,7 @@ import {Dhs_Categorias} from '../../clases/Dhs-categorias';
 document.querySelector("#appActividad").innerHTML = template(``);
 const velocidadInicial = 1000;
 const miJuego = new Juego(velocidadInicial);
-const dimensiones = [7, 7]; //fila, columna
+const dimensiones = [7, 8]; //fila, columna
 
 const tablero = [
   [1, 1, 1, 1, 1, 1, 1, 1],
