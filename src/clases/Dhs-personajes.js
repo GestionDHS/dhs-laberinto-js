@@ -131,7 +131,7 @@ export class Dhs_personajes {
         normal: { name: "normal", imageUrl: "pastoCielo" },
       },
       estadoInicial: "normal",
-      zIndex: 1,
+      zIndex: 2,
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
