@@ -199,15 +199,13 @@ miJuego.personajePrincipal.llegarALaEstrella = function () {
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria = new Dhs_Categorias()
-const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Movimientos", "Acciones", "Condicionales", "Repeticiones", "Sensores"])
+const categoriaElegida = categoria.obtenerCategoriasNecesarias(["Eventos", "Movimientos", "Acciones", "Repeticiones", "Sensores"])
 
 const ordenJerarquicoBloques = [
   ["on_execute", "Eventos"],
   ["move_trepar_simple", "Movimientos"],
   ["move_sinUp_simple", "Movimientos"],
   ["comer_frutilla", "Acciones"],
-  ["if", "Condicionales"],
-  // ["ifElse", "Condicionales"],
   ["repeat_times", "Repeticiones"],
   ["repeat_until", "Repeticiones"],
   ["sensor_frutilla", "Sensores"],
