@@ -1689,6 +1689,7 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    
     sensor_frutilla() {
         Blockly.common.defineBlocksWithJsonArray([
             {
@@ -1948,7 +1949,7 @@ export default class ConfiguradorBloques {
         Blockly.JavaScript.forBlock["repeat_until"] = function (block) {
             const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
             const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
-            const code = "while(!"+ condicion +"){\n"+ acciones + condicion +"\n}\n"
+            const code = "while(!"+ condicion +"){\n"+ acciones  +"\n}\n"
             return code;
         };
         return {
@@ -1983,7 +1984,7 @@ export default class ConfiguradorBloques {
         Blockly.JavaScript.forBlock["repeat_while"] = function (block) {
             const condicion = Blockly.JavaScript.valueToCode(block, 'condicion', Blockly.JavaScript.ORDER_NONE)
             const acciones = Blockly.JavaScript.statementToCode(block, 'accionesARepetir')
-            const code = "while("+ condicion +"){\n"+ acciones + condicion +"\n}\n"
+            const code = "while("+ condicion +"){\n"+ acciones +"\n}\n"
             return code;
         };
         return {

@@ -141,16 +141,22 @@ miJuego.personajePrincipal.dispararAgua = function () {
   //que aparezca el agua
   miJuego.personajePrincipal.mostrarImgSecundaria();
   const fuego = this.buscarObjetoAdelante("fuego");
+  fuego.estadoActual == "fuegoCero" && this.decirTerminar("¡Oh! ¡Éste fuego ya esta apagado!")
   fuego.estadoActual == "fuegoUno" && fuego.setearEstado("fuegoCero");
   fuego.estadoActual == "fuegoDos" && fuego.setearEstado("fuegoUno");
   fuego.estadoActual == "fuegoTres" && fuego.setearEstado("fuegoDos");
   fuego.estadoActual == "fuegoCuatro" && fuego.setearEstado("fuegoTres");
 };
-
+miJuego.personajePrincipal.detectarFuego = function () {
+  // devuelve true si encuentra o false si no hay piedra
+  return this.buscarObjetoAdelante("fuego") !== undefined
+};
 miJuego.personajePrincipal.detectarFuegoApagado = function () {
   const fuego = this.buscarObjetoAdelante("fuego");
-  //fuego.estadoActual == "fuegoCero" && this.abrirYMostrarModal() 
-  return fuego == undefined || fuego.estadoActual == "fuegoCero";
+  if(fuego==undefined){
+    this.decirTerminar("¡Aquí no hay fuego!")
+  }
+  return  fuego.estadoActual == "fuegoCero";
 };
 
 miJuego.personajePrincipal.llegarALaEstacionBomberos = function(){
@@ -163,6 +169,7 @@ miJuego.personajePrincipal.llegarALaEstacionBomberos = function(){
   // }
   this.abrirYMostrarModal();
 }
+
 // BLOCKLY ------------------------------------------------------
 const miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria = new Dhs_Categorias();
@@ -172,6 +179,7 @@ const categoriaElegida = categoria.obtenerCategoriasNecesarias([
   "Movimientos",
   "Repeticiones",
   "Sensores",
+  "Condicionales",
 ]);
 
 const ordenJerarquicoBloques = [
@@ -181,6 +189,8 @@ const ordenJerarquicoBloques = [
   ["repeat_until", "Repeticiones"],
   ["repeat_times", "Repeticiones"],
   ["sensor_apagar_fuego", "Sensores"],
+  ["sensor_fuego", "Sensores"],
+  ["if", "Condicionales"],
 ];
 
 const bloquesPrecargadosJSON =
@@ -191,6 +201,7 @@ const funcionesAExponer = [
   "moverIzquierda",
   "dispararAgua",
   "detectarFuegoApagado",
+  "detectarFuego",
 ];
 
 configurarYRenderizarToolbox(

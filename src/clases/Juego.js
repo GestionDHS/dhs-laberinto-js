@@ -15,14 +15,16 @@ import {
   PersonajesAlAzarFijos,
   PersonajesAlAzarExcluyente,
   PersonajesAlAzarCantTotal,
+  PersonajesFijosEstadoAleatorio,
   PersonajesAlAzarCantTotalFijos,
   PersonajesPosicionAlAzarExcluyente,
+  EscenarioFilasAleatoreasSimples,
   ElementoPosicionRandomYEstadoAleatorio,
+  PersonajesFijosRangoAleatoreoEstadoAleatoreo
 } from "../clases/StrategyCreacion";
 
 import { Modal } from "./Modal";
 import { obtenerCantidadAleatoria } from "../Utils/Funciones";
-import {EscenarioFilasAleatoreasSimples, PersonajesFijosEstadoAleatorio} from './StrategyCreacion';
 
 export class Juego {
   constructor(duracionIntervalos = 1000) {
@@ -145,6 +147,7 @@ export class Juego {
       azarCantidadTotalFijos: new PersonajesAlAzarCantTotalFijos(),
       filasAleatoriasSimples: new EscenarioFilasAleatoreasSimples(),
       estadoYCantidadAlAzar: new ElementoPosicionRandomYEstadoAleatorio(),
+      actividad034: new PersonajesFijosRangoAleatoreoEstadoAleatoreo(),
     };
     conjuntosDePersonajes.forEach((unConjunto) => {
       let personajesAGenerar = [];

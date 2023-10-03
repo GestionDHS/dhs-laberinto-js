@@ -173,7 +173,7 @@ export class Dhs_personajes {
         normal: { name: "normal", imageUrl: "pastoCielo" },
       },
       estadoInicial: "normal",
-      zIndex: 1,
+      zIndex: 2,
       posicionInicialY: 0,
       posicionInicialX: 0,
       direccionInicial: 0,
@@ -1396,36 +1396,12 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       colisiones: [
         {
-          con: "fuegoUno",
-          factorDeAvance: 0.2,
+          con: "fuego",
+          factorDeAvance: 1,
           callback: (x) => {
-            x.terminar();
+            x.evaluar();
           },
-          mensaje: "¡AY Me quemo!",
-        },
-        {
-          con: "fuegoDos",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡AY Me quemo!",
-        },
-        {
-          con: "fuegoTres",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡AY Me quemo!",
-        },
-        {
-          con: "fuegoCuatro",
-          factorDeAvance: 0.2,
-          callback: (x) => {
-            x.terminar();
-          },
-          mensaje: "¡AY Me quemo!",
+          // mensaje: "¡AY Me quemo!",
         },
         {
           con: "arbol",

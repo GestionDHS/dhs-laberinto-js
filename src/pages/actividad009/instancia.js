@@ -106,7 +106,7 @@ const ordenJerarquicoBloques = [
   ["avanzar", "Movimientos"],
   ["girar_clasico", "Movimientos"],
   ["cosechar", "Acciones"],
-  ["controls", "Repeticiones"],
+  ["repeat_times", "Repeticiones"],
 ];
 
 const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';

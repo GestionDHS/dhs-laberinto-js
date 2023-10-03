@@ -74,7 +74,7 @@ export class PersonajeBasico {
       ? this.inicializar()
       : this.autodestruirse();
   }
- 
+
   setearEstado(nuevoStatus) {
     this.estadoActual = nuevoStatus;
     const imagenDeseada = this.estadosPosibles
@@ -93,7 +93,7 @@ export class PersonajeBasico {
     this.controladorDOM.agregarImagenSecundaria(this.galeria.obtenerUrlDe(img));
   }
   mostrarImgSecundaria() {
-    this.controladorDOM.mostrarImagenSecundaria();
+    this.controladorDOM.mostrarImagenSecundaria(this.juego.duracionIntervalos);
   }
   //recibe un objeto de tipo colision que tiene (con , seMuere, autoMensaje, mensaje)
   agregarColision(unaColision) {
@@ -138,6 +138,14 @@ export class PersonajeBasico {
   terminar() {
     this.estaVivo = false;
     this.juego.puedeDebeContinuar = false;
+  }
+  evaluar() {
+    let obj = this.buscarObjetoAdelante("fuego");
+    if (obj.estadoActual != "fuegoCero") {
+      //console.log(objetoAux);//no le da el scope
+      //objetoAux.factorDeAvance = "0.2"
+      this.decirTerminar("¡AY! ¡Me quemo!");
+    }
   }
 
   realizarAccionSobre(elemento, accion, params = false) {
@@ -250,7 +258,6 @@ export class PersonajeBasico {
   verificarColision(casilleroDestino) {
     // retorna el factor de Avance
     const objetoColision = casilleroDestino.hayColisionCon(this.colisiones);
-
     return objetoColision;
   }
 
@@ -302,13 +309,13 @@ class controladorPersonajeDOM {
     this.imagenAnidadaSecundaria.classList.add("imgHidden");
     this.elementoHTML.appendChild(this.imagenAnidadaSecundaria);
   }
-  mostrarImagenSecundaria() {
+  mostrarImagenSecundaria(milisegundos) {
     this.imagenAnidadaSecundaria.classList.remove("imgHidden");
     this.imagenAnidadaSecundaria.classList.add("imgVisible");
     setTimeout(() => {
       this.imagenAnidadaSecundaria.classList.remove("imgVisible");
       this.imagenAnidadaSecundaria.classList.add("imgHidden");
-    }, 2000);
+    },milisegundos);
   }
   setearVelocidad(milisegundos) {
     this.elementoHTML.style.transition = "all " + milisegundos / 1000 + "s";

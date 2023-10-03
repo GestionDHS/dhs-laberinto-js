@@ -49,7 +49,6 @@ export function PersonajesFijos() {
       );
     let personajesACrear = [];
     conjuntoPersonajes.personajes.forEach((unPersonaje) => {
-     
       conjuntoPersonajes.posiciones.forEach((unaPosicion, i) => {
         let copiaPersonaje = { ...unPersonaje };
         setearPosiciones(copiaPersonaje, unaPosicion);
@@ -77,7 +76,6 @@ export function PersonajesFijosEstadoAleatorio() {
       );
     let personajesACrear = [];
     conjuntoPersonajes.personajes.forEach((unPersonaje) => {
-     
       conjuntoPersonajes.posiciones.forEach((unaPosicion, i) => {
         let copiaPersonaje = { ...unPersonaje };
         setearPosiciones(copiaPersonaje, unaPosicion);
@@ -86,7 +84,11 @@ export function PersonajesFijosEstadoAleatorio() {
           conjuntoPersonajes.desapareceAlReiniciar,
           conjuntoPersonajes.aliasConjunto
         );
-       conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(copiaPersonaje,conjuntoPersonajes.estadoAleatorio)
+        conjuntoPersonajes?.estadoAleatorio &&
+          setearElegirEstadoRandom(
+            copiaPersonaje,
+            conjuntoPersonajes.estadoAleatorio
+          );
         conjuntoPersonajes.direcciones
           ? setearDireccion(copiaPersonaje, conjuntoPersonajes.direcciones, i)
           : 0;
@@ -333,10 +335,11 @@ export function PersonajesAlAzarCantTotalFijos() {
     return personajesACrear;
   };
 }
+
 //conjuntoPersonajes:
 // {
 //   estrategia: "filasAleatoriasSimples",
-//   personajes: [bambooAncho,bambooAnchoCamino, frutilla,cielo],
+//   personajes: [panda,bambuancho,bambuAnchoCamino,frutilla, cielo],
 //   aliasConjunto: "filasAleatoriasSimples",
 //   desapareceAlReiniciar: true,
 //   anchoMinimo: 3,
@@ -344,7 +347,6 @@ export function PersonajesAlAzarCantTotalFijos() {
 //   filas:[1,2,3,4],
 //   desdeColumna:1,
 // }
-
 //personajes[primerElementoEnArray,porDondeCaminaElPersonajePPAL,aLoQueTieneQueLlegar,rellenoNoPisable]
 export function EscenarioFilasAleatoreasSimples() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
@@ -367,28 +369,28 @@ export function EscenarioFilasAleatoreasSimples() {
         cantidadMin: conjuntoPersonajes.anchoMinimo,
       });
       // if (index + 1 !== conjuntoPersonajes.filas.length) {
-        //Tengo las filas que quiero renderizar con camino y objeto a encontrar
-        
-        //Relleno con camino
-        for (let i = conjuntoPersonajes.desdeColumna + 1; i <= largoFila; i++) {
-          let personajeRelleno = { ...conjuntoPersonajes.personajes[1] };
-          setearPosiciones(personajeRelleno, [fila, i]);
-          setearAliasYAleatorieidad(
-            personajeRelleno,
-            conjuntoPersonajes.desapareceAlReiniciar,
-            conjuntoPersonajes.aliasConjunto
-          );
-          personajesACrear.push(personajeRelleno);
-        }
-        //Personaje Final
-        let personajeFinalFila = { ...conjuntoPersonajes.personajes[2] };
-        setearPosiciones(personajeFinalFila, [fila, largoFila]);
+      //Tengo las filas que quiero renderizar con camino y objeto a encontrar
+
+      //Relleno con camino
+      for (let i = conjuntoPersonajes.desdeColumna + 1; i <= largoFila; i++) {
+        let personajeRelleno = { ...conjuntoPersonajes.personajes[1] };
+        setearPosiciones(personajeRelleno, [fila, i]);
         setearAliasYAleatorieidad(
-          personajeFinalFila,
+          personajeRelleno,
           conjuntoPersonajes.desapareceAlReiniciar,
           conjuntoPersonajes.aliasConjunto
         );
-        personajesACrear.push(personajeFinalFila);
+        personajesACrear.push(personajeRelleno);
+      }
+      //Personaje Final
+      let personajeFinalFila = { ...conjuntoPersonajes.personajes[2] };
+      setearPosiciones(personajeFinalFila, [fila, largoFila]);
+      setearAliasYAleatorieidad(
+        personajeFinalFila,
+        conjuntoPersonajes.desapareceAlReiniciar,
+        conjuntoPersonajes.aliasConjunto
+      );
+      personajesACrear.push(personajeFinalFila);
       // } else {
       //   //si entra acá es por que tengo la última fila, que queremos que se renderice solo el tronco
       //   largoFila = 1;
@@ -421,22 +423,108 @@ export function EscenarioFilasAleatoreasSimples() {
   };
 }
 
-export function ElementoPosicionRandomYEstadoAleatorio(){
+//personaje en lugares Azararozos con "estado" Azarozo
+//personaje[fuego] , EstadosAleatorios[los 4 estados que puede tomar], posiciones: [3 posiciones en las cuales podría estar el fuego]
+export function ElementoPosicionRandomYEstadoAleatorio() {
   this.crearPersonajes = function (conjuntoPersonajes, escenario) {
-    let personajesAGenerar=[]
-    let posicionesValidas=conjuntoPersonajes.posiciones
-    const random = Math.floor(Math.random() * posicionesValidas.length)
-    let personajeAux = { ...conjuntoPersonajes.personajes[0] }
-    conjuntoPersonajes?.estadoAleatorio && setearElegirEstadoRandom(personajeAux,conjuntoPersonajes.estadoAleatorio)
+    let personajesAGenerar = [];
+    let posicionesValidas = conjuntoPersonajes.posiciones;
+    const random = Math.floor(Math.random() * posicionesValidas.length);
+    let personajeAux = { ...conjuntoPersonajes.personajes[0] };
+    conjuntoPersonajes?.estadoAleatorio &&
+      setearElegirEstadoRandom(
+        personajeAux,
+        conjuntoPersonajes.estadoAleatorio
+      );
     setearPosiciones(personajeAux, posicionesValidas[random]);
-    console.log(personajeAux)
     setearAliasYAleatorieidad(
-          personajeAux,
+      personajeAux,
+      conjuntoPersonajes.desapareceAlReiniciar,
+      conjuntoPersonajes.aliasConjunto
+    );
+    personajesAGenerar.push(personajeAux);
+    return personajesAGenerar;
+  };
+}
+
+
+export function PersonajesFijosRangoAleatoreoEstadoAleatoreo() {
+  this.crearPersonajes = function (conjuntoPersonajes, escenario) {
+    let personajesACrear = [];
+
+    // Recorro las filas a rellenar
+    conjuntoPersonajes.filas.forEach((fila, index) => {
+      // Aplico el fondo a toda la fila
+      for (let i = 0; i <= escenario.dimensiones[1] - 1; i++) {
+        let personajeFondo = { ...conjuntoPersonajes.personajes[0] };
+        let unaPosicion = [fila, i];
+        setearPosiciones(personajeFondo, unaPosicion);
+        setearAliasYAleatorieidad(
+          personajeFondo,
           conjuntoPersonajes.desapareceAlReiniciar,
           conjuntoPersonajes.aliasConjunto
         );
-    personajesAGenerar.push(personajeAux)
-    return personajesAGenerar;
+        personajesACrear.push(personajeFondo);
+      }
 
-  }
+      // Calculo el número aleatorio para las celdas donde estarán los personajes aleatorios
+      let largoFila = obtenerCantidadAleatoria({
+        cantidadMax: conjuntoPersonajes.anchoMaximo,
+        cantidadMin: conjuntoPersonajes.anchoMinimo,
+      });
+
+      // Creo un array de posiciones disponibles en la fila actual
+      let arrPosicionesPosibles = Array.from({ length: largoFila }, (v, index) => index + 1);
+
+      // Agrego el último personaje en la última posición
+      let personajeUltimo = { ...conjuntoPersonajes.personajes[2] };
+      let ultimaPosicion = arrPosicionesPosibles.pop();
+      let unaPosicionUltima = [fila, ultimaPosicion];
+      setearPosiciones(personajeUltimo, unaPosicionUltima);
+      setearAliasYAleatorieidad(
+        personajeUltimo,
+        conjuntoPersonajes.desapareceAlReiniciar,
+        conjuntoPersonajes.aliasConjunto
+      );
+      personajesACrear.push(personajeUltimo);
+
+      // Relleno con los personajes aleatorios estadoAleatorio
+      let cantidadPersonajesAleat = obtenerCantidadAleatoria({
+        cantidadMax: conjuntoPersonajes.cantidadMax,
+        cantidadMin: conjuntoPersonajes.cantidadMin,
+      });
+      for (let i = 1; i <= cantidadPersonajesAleat; i++) {
+        if (arrPosicionesPosibles.length === 0) {
+          // Si ya no quedan posiciones disponibles, salir del bucle
+          break;
+        }
+        
+        // Obtengo una posición aleatoria de las disponibles
+        let posicionAleatoreaIndex = Math.floor(Math.random() * arrPosicionesPosibles.length);
+        let posicionAleatorea = arrPosicionesPosibles[posicionAleatoreaIndex];
+        
+        // Elimino la posición del array de posiciones disponibles
+        arrPosicionesPosibles.splice(posicionAleatoreaIndex, 1);
+
+        let personajeEstadoVariable = { ...conjuntoPersonajes.personajes[1] };
+        
+        // Asigno la posición
+        conjuntoPersonajes?.estadoAleatorio &&
+        setearElegirEstadoRandom(
+          personajeEstadoVariable,
+          conjuntoPersonajes.estadoAleatorio
+        );
+        setearPosiciones(personajeEstadoVariable, [fila, posicionAleatorea]);
+        setearAliasYAleatorieidad(
+          personajeEstadoVariable,
+          conjuntoPersonajes.desapareceAlReiniciar,
+          conjuntoPersonajes.aliasConjunto
+        );
+        personajesACrear.push(personajeEstadoVariable);
+      }
+    });
+
+    return personajesACrear;
+  };
 }
+
