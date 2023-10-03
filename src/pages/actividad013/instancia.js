@@ -35,7 +35,7 @@ const datosModal = {
   oculto: true,
 };
 
-miJuego.generarEscenario(dimensiones, 3, "#9ca64e");
+miJuego.generarEscenario(dimensiones, 2.5, "#9ca64e");
 miJuego.agregarModal(datosModal);
 
 const conjuntosDePersonajes = [
