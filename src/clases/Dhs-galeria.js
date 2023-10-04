@@ -5,6 +5,7 @@ import lodoPasto from "../img/lodoPasto.png";
 import cofrecerradoPasto from "../img/cofrecerradoPasto.png";
 import cofreAbierto from "../img/cofreabierto.png";
 import cofreCerrado from "../img/cofrecerrado.png";
+import collar from "../img/collar-perlas.png";
 import arbolesPasto from "../img/arbolesPasto.png";
 import muchasmonedas from "../img/muchasMonedas.png";
 import pasto from "../img/pasto.png";
@@ -528,9 +529,9 @@ export class DHS_Gallery {
       showLicense: true,
     },
     collar: {
-      themes: ["lupe"],
-      url: "../lupe-commons/img/collar-perlas.png",
-      nombre: "Perlas",
+      themes: ["collar"],
+      url: collar,
+      nombre: "collar",
       parrafoLicencia:
         '<p>Licencia: <a href="https://www.flaticon.es/iconos-gratis/perla" title="perla iconos">Perla iconos creados por Freepik - Flaticon</a></p>',
       showLicense: true,

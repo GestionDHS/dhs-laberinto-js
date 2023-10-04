@@ -166,6 +166,7 @@ export class Juego {
     });
   }
 
+  //se lo llama desde la instancia de cada Actividad
   crearPersonajes(conjuntosDePersonajes) {
     conjuntosDePersonajes.forEach((unConjunto) => {
       if (unConjunto.estrategia != "fijos") {
@@ -174,22 +175,4 @@ export class Juego {
     });
     this.generarConjuntoDePersonajes(conjuntosDePersonajes);
   }
-
-  // crearPersonajeEscenarioAleatoreo(conjuntoDePersonajes, tablero) {
-  //   this.crearPersonajes([conjuntoDePersonajes[0]]);
-  //   tablero.forEach((fila, index) => {
-  //     const largoFila = obtenerCantidadAleatoria({
-  //       cantidadMax: fila.length-1,
-  //       cantidadMin: 2,
-  //     });
-  //     for (let i = 0; i <= largoFila; i++) {
-  //       conjuntoDePersonajes[1].posiciones = [[index, i]];
-  //       this.crearPersonajes([conjuntoDePersonajes[1]]);
-  //     }
-  //     //console.log(conjuntoDePersonajes[2])
-  //     conjuntoDePersonajes[2].posiciones = [[index, largoFila]];
-  //     this.crearPersonajes([conjuntoDePersonajes[2]])
-  //     //console.log(conjuntoDePersonajes[2].posiciones)
-  //   });
-  // }
 }

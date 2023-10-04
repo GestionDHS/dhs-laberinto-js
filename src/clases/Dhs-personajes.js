@@ -150,6 +150,20 @@ export class Dhs_personajes {
       paddingImagen: "1px",
       colisiones: [],
     },
+    collar: {
+      idUsarHTML: "collar",
+      tipoPersonaje: "collar",
+      estadosPosibles: {
+        cerrado: { name: "cerrado", imageUrl: "collar" },
+        abierto: { name: "abierto", imageUrl: "collar" },
+      },
+      estadoInicial: "cerrado",
+      direccionInicial: 0,
+      zIndex: 2,
+      rotable: false,
+      paddingImagen: "1px",
+      colisiones: [],
+    },
     pasto: {
       idUsarHTML: "camino",
       tipoPersonaje: "camino",
