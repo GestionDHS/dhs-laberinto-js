@@ -34,8 +34,8 @@ const lodo = personajesGaleria.obtenerPersonaje("lodo");
 
 const datosModal = {
   titulo: "¡BUEN TRABAJO!",
-  imagen: "cofreAbierto",
-  texto: "¡Juntaste todas las monedas del cofre!.",
+  imagen: "collar",
+  texto: "¡Encontraste un collar de perlas!.",
   oculto: true,
 };
 
