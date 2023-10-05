@@ -1391,7 +1391,7 @@ export class Dhs_personajes {
       },
       estadoInicial: "normal",
       direccionInicial: 90,
-      zIndex: 3,
+      zIndex: 4,
       rotable: true,
       paddingImagen: "1px",
       colisiones: [
