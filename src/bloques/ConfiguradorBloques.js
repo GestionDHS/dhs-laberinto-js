@@ -2399,4 +2399,117 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
+    prompt(){
+        // Blockly.dialog.setPrompt(function(message, defaultValue, callback) {
+        //     console.log('Prompt: ' + message);
+        //     CustomDialog.show('Prompt', message, {
+        //       showInput: true,
+        //       showOkay: true,
+        //       onOkay: function() {
+        //         callback(CustomDialog.inputField.value);
+        //       },
+        //       showCancel: true,
+        //       onCancel: function() {
+        //         callback(null);
+        //       },
+        //     });
+        //     CustomDialog.inputField.value = defaultValue;
+        //   });
+
+        Blockly.common.defineBlocksWithJsonArray([
+            // {
+            //     "type": "prompt",
+            //     "name": "Prompt asincrónico",
+            //     "inputs": [
+            //       {
+            //         "type": "input",
+            //         "name": "Pregunta",
+            //         "value": "¿Cuál es tu nombre?"
+            //       }
+            //     ],
+            //     "outputs": [
+            //       {
+            //         "type": "output",
+            //         "name": "Nombre",
+            //         "value": ""
+            //       }],
+            //     "async": true,
+            //   },
+            {
+                "type": "prompt",
+                "message0": "Preguntar %1",
+                "args0": [
+                  {
+                    "type": "field_input",
+                    "name": "pregunta",
+                  }
+                ],
+                "output":null,
+                "colour": 232,
+                "tooltip": "",
+                "async": true,
+              }
+        ]);
+        Blockly.JavaScript.forBlock["prompt"] = function (block) {
+            const pregunta = this.getFieldValue("pregunta")
+            const code = "prompt('"+ pregunta +"');"
+            //return pregunta && [code, Blockly.JavaScript.ORDER_ATOMIC];
+            return code
+        };
+        return {
+            "type": "prompt",
+            "kind": "block",
+        }
+    }
+    var(){
+        //Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'panda');
+        Blockly.common.defineBlocksWithJsonArray([
+       {
+            "type": "variables_set",
+            "message0": "%{BKY_VARIABLES_SET}",
+            "args0": [
+              {
+                "type": "field_variable",
+                "name": "VAR",
+                "variable": "%{BKY_VARIABLES_DEFAULT_NAME}"
+              },
+              {
+                "type": "input_value",    
+                "name": "VALUE"
+              }
+            ],
+          }])
+          
+    
+
+        // Blockly.common.defineBlocksWithJsonArray([
+        // {
+        //     "type": "create_variable",
+        //     "message0": "var %1",
+        //     "args0": [
+        //       {
+        //         "type": "field_variable",
+        //         "name": "VAR",
+        //         "variable": "mi_variable"
+        //       }
+        //     ],
+        //     "previousStatement": null,
+        //     "nextStatement": null,
+        //     "colour": 230,
+        //     "tooltip": "Crea una variable personalizada",
+        //     "helpUrl": ""
+        //   }
+        // ])
+        // Blockly.JavaScript.forBlock["create_variable"] = function (block) {
+        //     //const pregunta = this.getFieldValue("pregunta")
+        //     //const code = "prompt('"+ pregunta +"');"
+        //     //return pregunta && [code, Blockly.JavaScript.ORDER_ATOMIC];
+        // console.log("creo la variable??")
+        // };
+        return {
+            "type": "variables_set",
+            "kind": "block",
+        }
+    }
 }
+

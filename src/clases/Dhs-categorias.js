@@ -28,6 +28,10 @@ export class Dhs_Categorias {
       name: "Sensores",
       categorystyle: "sensor",
     },
+    {
+      name: "Variables",
+      categorystyle: "execute",
+    },
   ];
 
   obtenerCategoriasNecesarias(arrayCategorias) {

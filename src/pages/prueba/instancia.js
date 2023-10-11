@@ -269,6 +269,7 @@ const categoriaElegida = categoria.obtenerCategoriasNecesarias([
   "Repeticiones",
   "Condicionales",
   "Sensores",
+  "Variables"
 ]);
 
 const ordenJerarquicoBloques = [
@@ -282,11 +283,13 @@ const ordenJerarquicoBloques = [
   ["repeat_while", "Repeticiones"],
   ["sensor_cofre", "Sensores"], 
   ["sensor_bandera", "Sensores"],
+  ["prompt", "Sensores"],
+  ["var", "Variables"],
 ];
 
-// const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const bloquesPrecargadosJSON = '{ "blocks": { "languageVersion": 0, "blocks": [ { "type": "on_execute", "id": "rwW]g?!-iwJNk))r*~^C", "x": 61, "y": 69, "inputs": { "EVENT": { "block": { "type": "repeat_until", "id": "ESTMctZ21tULm}9}6=`/", "inputs": { "condicion": { "block": { "type": "sensor_bandera", "id": "y-]*geVR`[NPdKWgw?qq" } }, "accionesARepetir": { "block": { "type": "move_down_simple", "id": "PZl/2A1}IC+qu2R,6qK0", "next": { "block": { "type": "if", "id": "Iukc+WZWUCe[6b9-v;MC", "inputs": { "condicion": { "block": { "type": "sensor_cofre", "id": "7:pp?;m6U}^9xIgxUpof" } }, "entonces": { "block": { "type": "abrir_cofre", "id": "s^,J)kRBoD$vIU,9$VQt" } } } } } } } } } } } } ] } }'
+//const bloquesPrecargadosJSON = '{ "blocks": { "languageVersion": 0, "blocks": [ { "type": "on_execute", "id": "rwW]g?!-iwJNk))r*~^C", "x": 61, "y": 69, "inputs": { "EVENT": { "block": { "type": "repeat_until", "id": "ESTMctZ21tULm}9}6=`/", "inputs": { "condicion": { "block": { "type": "sensor_bandera", "id": "y-]*geVR`[NPdKWgw?qq" } }, "accionesARepetir": { "block": { "type": "move_down_simple", "id": "PZl/2A1}IC+qu2R,6qK0", "next": { "block": { "type": "if", "id": "Iukc+WZWUCe[6b9-v;MC", "inputs": { "condicion": { "block": { "type": "sensor_cofre", "id": "7:pp?;m6U}^9xIgxUpof" } }, "entonces": { "block": { "type": "abrir_cofre", "id": "s^,J)kRBoD$vIU,9$VQt" } } } } } } } } } } } } ] } }'
 const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre","detectarCofre","detectarBandera"]
 
 configurarYRenderizarToolbox(
