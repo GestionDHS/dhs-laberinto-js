@@ -2461,54 +2461,32 @@ export default class ConfiguradorBloques {
             "kind": "block",
         }
     }
-    var(){
-        //Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'panda');
+    var() {    
         Blockly.common.defineBlocksWithJsonArray([
-       {
-            "type": "variables_set",
-            "message0": "%{BKY_VARIABLES_SET}",
-            "args0": [
-              {
-                "type": "field_variable",
-                "name": "VAR",
-                "variable": "%{BKY_VARIABLES_DEFAULT_NAME}"
-              },
-              {
-                "type": "input_value",    
-                "name": "VALUE"
-              }
-            ],
-          }])
-          
-    
+            {
+                "type": "create_variable",
+                // 'extensions': [
+                //     'create_variable_validation',
+                // ],
+            }
+        ])
 
-        // Blockly.common.defineBlocksWithJsonArray([
-        // {
-        //     "type": "create_variable",
-        //     "message0": "var %1",
-        //     "args0": [
-        //       {
-        //         "type": "field_variable",
-        //         "name": "VAR",
-        //         "variable": "mi_variable"
-        //       }
-        //     ],
-        //     "previousStatement": null,
-        //     "nextStatement": null,
-        //     "colour": 230,
-        //     "tooltip": "Crea una variable personalizada",
-        //     "helpUrl": ""
-        //   }
-        // ])
-        // Blockly.JavaScript.forBlock["create_variable"] = function (block) {
-        //     //const pregunta = this.getFieldValue("pregunta")
-        //     //const code = "prompt('"+ pregunta +"');"
-        //     //return pregunta && [code, Blockly.JavaScript.ORDER_ATOMIC];
-        // console.log("creo la variable??")
-        // };
+    
+        Blockly.JavaScript.forBlock["create_variable"] = function (block) {
+            var variableName = Blockly.prompt('Ingrese el nombre de la variable:', '');
+            Blockly.JavaScript.statementToCode(block, 'VALUE');
+            Blockly.Variables.createVariable(variableName, '');
+        };
+
+        function myButton() {
+            var variableName = Blockly.prompt('Ingrese el nombre de la variable:', '');
+            Blockly.Variables.createVariable(Blockly.Msg.NEW_VARIABLE_TITLE, variableName);
+        }
+
         return {
-            "type": "variables_set",
-            "kind": "block",
+            "kind": "button",
+            "text": "Crear variable",
+            "callbackKey": "myButton"
         }
     }
 }
