@@ -29,8 +29,14 @@ export class Dhs_Categorias {
       categorystyle: "sensor",
     },
     {
-      name: "Variables",
-      categorystyle: "execute",
+      kind:"category",//necesita este kind como categorya
+      name:"Variables",
+      categorystyle:"sensor",
+    },
+    {
+      kind:"category",//necesita este kind como categorya
+      name:"Funciones",
+      categorystyle:"sensor",
     },
   ];
 
