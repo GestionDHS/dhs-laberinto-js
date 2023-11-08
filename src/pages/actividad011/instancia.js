@@ -103,7 +103,7 @@ miJuego.personajePrincipal.comerZanahoria = function () {
 };
 
 miJuego.personajePrincipal.llegarALaBandera = function () {
-  if (this.mochila.length === 16) {
+  if (this.mochila.length === 8) {
     this.abrirYMostrarModal();
   } else {
     return this.decirTerminar("¡Oh! Quedaron zanahorias sin cosechar.");
