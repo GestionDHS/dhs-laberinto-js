@@ -102,6 +102,14 @@ export class Dhs_personajes {
           mensaje: "¡OH NO! Me atasqué en el lodo.",
         },
         {
+          con: "cerco",
+          factorDeAvance: 0.2,
+          callback: (x) => {
+            x.terminar();
+          },
+          mensaje: "¡OH NO!  Choqué contra un cerco.",
+        },
+        {
           con: "arbol",
           factorDeAvance: 0.2,
           callback: (x) => {
@@ -762,7 +770,7 @@ export class Dhs_personajes {
       paddingImagen: "1px"
     },
     cerco: {
-      tipoPersonaje: "arbol",
+      tipoPersonaje: "cerco",
       estadosPosibles: {
         normal: { name: "normal", imageUrl: "cerco" },
       },
