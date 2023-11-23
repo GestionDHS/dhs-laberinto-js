@@ -16,6 +16,12 @@ export default Blockly.Theme.defineTheme('themeDH', {
         'sensor': {
             'colour': '#375f9e'
         },
+        'procedure': {
+            'colour': '#FF5733'
+        },
+        'variable': {
+            'colour': '#F7DD47'
+        },
         'logic': {
             'colour': '#4c97ff'
         },

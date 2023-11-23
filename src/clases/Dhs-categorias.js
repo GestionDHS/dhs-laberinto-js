@@ -31,12 +31,12 @@ export class Dhs_Categorias {
     {
       kind:"category",//necesita este kind como categorya
       name:"Variables",
-      categorystyle:"sensor",
+      categorystyle:"variable",
     },
     {
       kind:"category",//necesita este kind como categorya
       name:"Funciones",
-      categorystyle:"sensor",
+      categorystyle:"procedure",
     },
   ];
 
