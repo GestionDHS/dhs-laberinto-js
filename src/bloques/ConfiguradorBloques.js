@@ -2348,179 +2348,41 @@ export default class ConfiguradorBloques {
     };
   }
   funcion(){
+    // Blockly.Blocks.procedures_defnoreturn.init = function(){
+    //   Blockly.Blocks.procedures_defnoreturn.init.call(this); 
+    //   console.log(Object.keys(this))
+    //   //console.log(this.destroy) - lo tiene
+    //   //this.destroy(); - pero no lo ejecuta
+    //   //console.log(this.deletable_) - esta en true
+      
+      
+    
+    //   this.setMutator(undefined);
+    //   // old.renameProcedure("pepa");
+    //   this.jsonInit( {
+    //     type: "block_type",
+    //     message0: "funcion %1 () %2 %3",
+    //     args0: [
+    //       {
+    //         "type": "field_input",
+    //         "name": "NAME",
+    //         "text": "nameFn"
+    //       },
+    //       {
+    //         "type": "input_dummy"
+    //       },
+    //       {
+    //         "type": "input_statement",
+    //         "name": "hacer"
+    //       }
+    //     ],
+    //     inputsInline: true,
+    //     colour: 230,
+    //   });
+    //   };
     return {
         kind:"pepe",
         custom:"PROCEDURE"
     };
   }
-  //borrar.................................................
-  variable_pia1() {
-    console.log("variable_pia1")
-  
-        Blockly.common.defineBlocksWithJsonArray([
-            {
-                "type": "variables_set",
-                "message0": "%{BKY_VARIABLES_SET}",
-                "args0": [
-                  {
-                    "type": "field_variable",
-                    "name": "VAR",
-                    "variable": "%{BKY_VARIABLES_DEFAULT_NAME}"
-                  },
-                  {
-                    "type": "input_value",    // This expects an input of any type
-                    "name": "VALUE"
-                  }
-                ]
-              }
-        ]);
-      
-        // Define la función de la fábrica de devolución de llamada para renombrar la variable
-        const renameVariableCallbackFactory = function (block) {
-          return function () {
-            const workspace = block.workspace;
-            const variableField = block.getField('VAR');
-            const variable = variableField.getVariable();
-            Variables.renameVariable(workspace, variable);
-          };
-        };
-      
-        // Define la función para crear una nueva variable
-        function createVariable() {
-          var variableName = Blockly.prompt(
-            "Ingrese el nombre de la variable:",
-            ""
-          );
-          Blockly.Variables.createVariable(
-            Blockly.Msg.NEW_VARIABLE_TITLE,
-            variableName
-          );
-        }
-      
-        return {
-          kind: "button",
-          text: "Crear variable",
-          callbackKey: "createVariable",
-          callback: renameVariableCallbackFactory,
-          // Agrega la función de devolución de llamada para renombrar la variable
-          renameOptionCallbackFactory: renameVariableCallbackFactory,
-        };
-      }
-      
-//   variable_pia() {
-//     console.log("entro a variable_pia")
-//     Blockly.common.defineBlocksWithJsonArray([
-//         {
-//           "type": "create_variable",
-//           "message0": "Crear variable %1",
-//           "args0": [
-//             {
-//               "type": "field_input",
-//               "name": "VAR_NAME",
-//               "text": "nombre_variable"
-//             }
-//           ],
-//           "previousStatement": null,
-//           "nextStatement": null,
-//           "colour": 330,
-//           "tooltip": "Este bloque crea una nueva variable.",
-//           "helpUrl": ""
-//         },
-//       ]);
-//     Blockly.Blocks['create_variable'] = {
-//         init: function() {
-//             console.log("la llamo")
-//           this.appendDummyInput()
-//               .appendField("Crear variable")
-//               .appendField(new Blockly.FieldTextInput("nombre_variable"), "VAR_NAME");
-//           this.setPreviousStatement(true, null);
-//           this.setNextStatement(true, null);
-//           this.setColour(330);
-//           this.setTooltip('Este bloque crea una nueva variable.');
-//           this.setHelpUrl('');
-//         }
-//       };
-      
-//       Blockly.JavaScript['create_variable'] = function(block) {
-//         var variableName = block.getFieldValue('VAR_NAME');
-//         // Crea la variable en el código JavaScript
-//         var code = 'var ' + variableName + ';';
-//         return code;
-//       };
-//       return {
-//         kind: "button",
-//         text: "Crear variable",
-//       };
-//     // Blockly.common.defineBlocksWithJsonArray([
-//     //       {
-//     //         kind: "CATEGORY",
-//     //         name: "Text",
-//     //         colour: "%{BKY_TEXTS_HUE}",
-//     //         contents: [
-//     //           { kind: "BLOCK", type: "text" },
-//     //           {
-//     //             kind: "BLOCK",
-//     //             type: "text_length",
-//     //             inputs: {
-//     //               VALUE: { shadow: { type: "text", fields: { TEXT: "abc" } } },
-//     //             },
-//     //           },
-//     //           {
-//     //             kind: "BLOCK",
-//     //             type: "text_print",
-//     //             inputs: {
-//     //               TEXT: { shadow: { type: "text", fields: { TEXT: "abc" } } },
-//     //             },
-//     //           },
-//     //           {
-//     //             kind: "BLOCK",
-//     //             type: "text_prompt_ext",
-//     //             inputs: {
-//     //               TEXT: { shadow: { type: "text", fields: { TEXT: "abc" } } },
-//     //             },
-//     //           },
-//     //         ],
-//     //       },
-//     //       {
-//     //         kind: "CATEGORY",
-//     //         name: "Variables",
-//     //         custom: "VARIABLE",
-//     //         colour: "%{BKY_VARIABLES_HUE}",
-//     //       },
-//     //       {
-//     //         kind: "CATEGORY",
-//     //         name: "Functions",
-//     //         custom: "PROCEDURE",
-//     //         colour: "%{BKY_PROCEDURES_HUE}",
-//     //       },
-//     // ]);
-//   }
-  var_pia2(){
-    console.log("entro a var_pia2")
-    Blockly.Extensions.register('create_variable', function() {
-        this.getInput('NAME')
-            .appendField(new Blockly.FieldTextInput('nombre_variable'), 'VAR_NAME');
-      });
-      
-      function myButton() {
-        console.log("llamo a myButton")
-        var variableName = Blockly.prompt(
-          "Ingrese el nombre de la variable:",
-          ""
-        );
-        if (variableName) {
-          // Crea la variable usando el nombre proporcionado
-          Blockly.Variables.createVariable(variableName);
-        }
-      }
-      
-      return {
-        kind: "button",
-        text: "Crear variable",
-        callbackKey: "myButton",
-        callback: myButton,
-      };
-      
-  }
 }
-//borrar- Fin.....................................................

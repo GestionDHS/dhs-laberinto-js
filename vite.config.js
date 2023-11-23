@@ -2,11 +2,17 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 const root = resolve(__dirname, "src");
 const outDir = resolve(__dirname, "dist");
+const procedure_path= resolve(__dirname, '@blockly/block-shareable-procedures/');
+console.log(procedure_path)
+// import {registerProcedureSerializer} from ${procedure_path};
 /*saco la base
 root:"src"
 outDir:"../dist"
 */
 export default defineConfig({
+  // plugins: [
+  //   registerProcedureSerializer(),
+  // ],
   base: "/dhs-laberinto-js/",
   root,
   build: {
