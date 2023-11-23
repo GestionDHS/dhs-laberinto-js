@@ -10,7 +10,16 @@ import {
 import { Dhs_personajes } from "../../clases/Dhs-personajes";
 import { Dhs_Categorias } from "../../clases/Dhs-categorias";
 
+
 document.querySelector("#appActividad").innerHTML = template(``);
+
+// shareable-procedure
+//import * as blocklyShareableProcedures from '../../node_modules/@blockly/block-shareable-procedures/dist/index.js';
+//import {unregisterProcedureBlocks} from './node_modules/@blockly/block-shareable-procedures/dist/index.js';
+
+// goog.provide('Blockly.Blocks.procedures'); ----> probando, rompe
+// goog.require('Blockly.Blocks');
+
 
 // PRIMERO: instanciar el juego y setear velocidad
 const velocidadInicial = 1000;
@@ -260,6 +269,7 @@ miJuego.personajePrincipal.llegarALaBandera = function () {
 //****5 - Volvemos a poner "miControlador" como const
 
 // BLOCKLY ------------------------------------------------------
+
 window.miControlador = new ControladorStandard(miJuego, velocidadInicial);
 const categoria = new Dhs_Categorias();
 const categoriaElegida = categoria.obtenerCategoriasNecesarias([
@@ -269,6 +279,8 @@ const categoriaElegida = categoria.obtenerCategoriasNecesarias([
   "Repeticiones",
   "Condicionales",
   "Sensores",
+  "Variables",
+  "Funciones"
 ]);
 
 const ordenJerarquicoBloques = [
@@ -282,11 +294,19 @@ const ordenJerarquicoBloques = [
   ["repeat_while", "Repeticiones"],
   ["sensor_cofre", "Sensores"], 
   ["sensor_bandera", "Sensores"],
+  ["prompt", "Sensores"],
+  ["var", "Variables"],
+  // ["variable_pia1", "Variables"],
+  ["procedure", "Funciones"],
 ];
 
-// const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
+delete Blockly.Blocks['procedures_defreturn'];
+delete Blockly.Blocks['procedures_ifreturn'];
+
+//const bloquesPrecargadosJSON = '{"contents":[{"kind":"CATEGORY","name":"Logic","colour":"%{BKY_LOGIC_HUE}","contents":[{"kind":"BLOCK","type":"controls_if"},{"kind":"BLOCK","type":"logic_compare"},{"kind":"BLOCK","type":"logic_operation"},{"kind":"BLOCK","type":"logic_negate"},{"kind":"BLOCK","type":"logic_boolean"}]},{"kind":"CATEGORY","name":"Loops","colour":"%{BKY_LOOPS_HUE}","contents":[{"kind":"BLOCK","type":"controls_repeat_ext","inputs":{"TIMES":{"shadow":{"type":"math_number","fields":{"NUM":10}}}}},{"kind":"BLOCK","type":"controls_whileUntil"}]},{"kind":"CATEGORY","name":"Math","colour":"%{BKY_MATH_HUE}","contents":[{"kind":"BLOCK","type":"math_number"},{"kind":"BLOCK","type":"math_arithmetic","inputs":{"A":{"shadow":{"type":"math_number","fields":{"NUM":1}}},"B":{"shadow":{"type":"math_number","fields":{"NUM":1}}}}},{"kind":"BLOCK","type":"math_single","inputs":{"NUM":{"shadow":{"type":"math_number","fields":{"NUM":9}}}}}]},{"kind":"CATEGORY","name":"Text","colour":"%{BKY_TEXTS_HUE}","contents":[{"kind":"BLOCK","type":"text"},{"kind":"BLOCK","type":"text_length","inputs":{"VALUE":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}},{"kind":"BLOCK","type":"text_print","inputs":{"TEXT":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}},{"kind":"BLOCK","type":"text_prompt_ext","inputs":{"TEXT":{"shadow":{"type":"text","fields":{"TEXT":"abc"}}}}}]},{"kind":"SEP"},{"kind":"CATEGORY","name":"Variables","custom":"VARIABLE","colour":"%{BKY_VARIABLES_HUE}"},{"kind":"CATEGORY","name":"Functions","custom":"PROCEDURE","colour":"%{BKY_PROCEDURES_HUE}"}]}';
+const bloquesPrecargadosJSON = '{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69}]}}';
 //const bloquesPrecargadosJSON ='{"blocks":{"languageVersion":0,"blocks":[{"type":"on_execute","id":"rwW]g?!-iwJNk))r*~^C","x":61,"y":69,"inputs":{"EVENT":{"block":{"type":"avanzar_param","id":"=#y0[*$GJ+W{WlW|MSqI","fields":{"CASILLAS":1},"next":{"block":{"type":"girar_derecha","id":"^*0eVn,V}s/U%UV3z|d;"}}}}}}]}}'
-const bloquesPrecargadosJSON = '{ "blocks": { "languageVersion": 0, "blocks": [ { "type": "on_execute", "id": "rwW]g?!-iwJNk))r*~^C", "x": 61, "y": 69, "inputs": { "EVENT": { "block": { "type": "repeat_until", "id": "ESTMctZ21tULm}9}6=`/", "inputs": { "condicion": { "block": { "type": "sensor_bandera", "id": "y-]*geVR`[NPdKWgw?qq" } }, "accionesARepetir": { "block": { "type": "move_down_simple", "id": "PZl/2A1}IC+qu2R,6qK0", "next": { "block": { "type": "if", "id": "Iukc+WZWUCe[6b9-v;MC", "inputs": { "condicion": { "block": { "type": "sensor_cofre", "id": "7:pp?;m6U}^9xIgxUpof" } }, "entonces": { "block": { "type": "abrir_cofre", "id": "s^,J)kRBoD$vIU,9$VQt" } } } } } } } } } } } } ] } }'
+//const bloquesPrecargadosJSON = '{ "blocks": { "languageVersion": 0, "blocks": [ { "type": "on_execute", "id": "rwW]g?!-iwJNk))r*~^C", "x": 61, "y": 69, "inputs": { "EVENT": { "block": { "type": "repeat_until", "id": "ESTMctZ21tULm}9}6=`/", "inputs": { "condicion": { "block": { "type": "sensor_bandera", "id": "y-]*geVR`[NPdKWgw?qq" } }, "accionesARepetir": { "block": { "type": "move_down_simple", "id": "PZl/2A1}IC+qu2R,6qK0", "next": { "block": { "type": "if", "id": "Iukc+WZWUCe[6b9-v;MC", "inputs": { "condicion": { "block": { "type": "sensor_cofre", "id": "7:pp?;m6U}^9xIgxUpof" } }, "entonces": { "block": { "type": "abrir_cofre", "id": "s^,J)kRBoD$vIU,9$VQt" } } } } } } } } } } } } ] } }'
 const funcionesAExponer=["moverDerecha","moverAbajo","moverArriba","moverIzquierda","abrirCofre","detectarCofre","detectarBandera"]
 
 configurarYRenderizarToolbox(
@@ -296,3 +316,32 @@ configurarYRenderizarToolbox(
   bloquesPrecargadosJSON,
   funcionesAExponer
 );
+
+
+var varDefNoRet = Blockly.Blocks.procedures_defnoreturn.init; 
+var json= {  
+  "type": "block_type",
+  "message0": "funcion %1 () %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "nameFn"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "hacer"
+    }
+  ],
+  "inputsInline": true,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
+
+
+
+
