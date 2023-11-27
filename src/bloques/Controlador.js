@@ -191,8 +191,11 @@ class Controlador {
 
   // METODOS PARA EL WORKSPACE - SERIALIZACION
 
-  crearInyectarWorkspace(idElemento, objetoConfig) {
+  crearInyectarWorkspace(idElemento, objetoConfig,LexicalVariables) {
     this.workspace = Blockly.inject(idElemento, objetoConfig);
+    console.log(LexicalVariables.LexicalVariable.renameFree)
+    //LexicalVariables.init()
+    //  LexicalVariables.init(this.workspace)
   }
 
   habilitarEdicionWorkspace() {

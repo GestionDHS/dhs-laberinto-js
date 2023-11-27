@@ -131,7 +131,8 @@ export const configurarYRenderizarToolbox = function (
   categoriaElegida,
   ordenJerarquicoBloques,
   bloquesPrecargadosJSON,
-  funcionesAExporner
+  funcionesAExporner,
+  LexicalVariables
 ) {
   categoriaElegida.tipos.forEach((cat) =>
     miControlador.ConfiguradorBloques.crearCategoriaToolbox(cat)
@@ -150,7 +151,7 @@ export const configurarYRenderizarToolbox = function (
       wheel: true,
       pinch: true,
     },
-  });
+  },LexicalVariables);
   miControlador.setearYCargarBloquesIniciales(
     JSON.parse(bloquesPrecargadosJSON)
   );
