@@ -297,7 +297,7 @@ const ordenJerarquicoBloques = [
   ["prompt", "Sensores"],
   ["var", "Variables"],
   // ["variable_pia1", "Variables"],
-  ["prodecimientosEstiloJs", "Funciones"],
+  ["procedimientosEstiloJs", "Funciones"],
 ];
 
 delete Blockly.Blocks['procedures_defreturn'];

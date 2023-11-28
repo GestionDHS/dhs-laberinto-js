@@ -2405,7 +2405,7 @@ export default class ConfiguradorBloques {
     //   callback: myButton,
     };
   }
-  prodecimientosEstiloJs(){
+  procedimientosEstiloJs(){
     Blockly.Blocks['procedures_defnoreturn'] = {
     /**
      * Block for defining a procedure with no return value.
@@ -2783,7 +2783,7 @@ export default class ConfiguradorBloques {
         custom:"PROCEDURE"
     };
   }
-  procedimientosEstiloKoff(){
+  procedimientoEstiloKoff(){
     return {
       kind:"procedureCustomizada",
       custom:"PROCEDURE"

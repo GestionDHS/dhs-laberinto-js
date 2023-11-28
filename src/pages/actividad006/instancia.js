@@ -118,7 +118,7 @@ const ordenJerarquicoBloques = [
   ["move_classic_simple", "Movimientos"],
   ["abrir_cofre", "Acciones"],
   ["repeat_times", "Repeticiones"],
-  ["procedure", "Funciones"],
+  ["procedimientosEstiloJs", "Funciones"],
 ];
 delete Blockly.Blocks['procedures_defreturn'];
 delete Blockly.Blocks['procedures_ifreturn'];
