@@ -3,7 +3,7 @@ import ConfiguradorBloques from "./ConfiguradorBloques";
 import { PersonajeDibujante } from "../clases/Personaje";
 
 import Swal from "sweetalert2";
-
+import * as LexicalVariables from '@mit-app-inventor/blockly-block-lexical-variables';
 class Controlador {
   constructor(
     juego,
@@ -191,9 +191,10 @@ class Controlador {
 
   // METODOS PARA EL WORKSPACE - SERIALIZACION
 
-  crearInyectarWorkspace(idElemento, objetoConfig,LexicalVariables) {
+  crearInyectarWorkspace(idElemento, objetoConfig) {
     this.workspace = Blockly.inject(idElemento, objetoConfig);
-    console.log(LexicalVariables.LexicalVariable.renameFree)
+    //console.log(LexicalVariables.LexicalVariable.renameFree)
+    console.log(LexicalVariables)
     //LexicalVariables.init()
     //  LexicalVariables.init(this.workspace)
   }

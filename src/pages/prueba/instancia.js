@@ -297,7 +297,7 @@ const ordenJerarquicoBloques = [
   ["prompt", "Sensores"],
   ["var", "Variables"],
   // ["variable_pia1", "Variables"],
-  ["procedure", "Funciones"],
+  ["prodecimientosEstiloJs", "Funciones"],
 ];
 
 delete Blockly.Blocks['procedures_defreturn'];
@@ -315,8 +315,7 @@ configurarYRenderizarToolbox(
   categoriaElegida,
   ordenJerarquicoBloques,
   bloquesPrecargadosJSON,
-  funcionesAExponer,
-  LexicalVariables
+  funcionesAExponer
 );
 
 

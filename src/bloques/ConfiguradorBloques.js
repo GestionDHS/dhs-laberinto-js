@@ -2287,45 +2287,45 @@ export default class ConfiguradorBloques {
     };
   }
   var() {
-    Blockly.common.defineBlocksWithJsonArray([{  type: "var",
-    message0: "var %1",
-    args0: [
-      {
-        type: "field_input",
-        name: "pregunta",
-      },
-    ],
-    output: null,
-    colour: 232,
-    tooltip: "",
-    async: true,}])
-    Blockly.Blocks['variables_create'] = {
-      /**
-       * Block for creating a variable.
-       * @this Blockly.Block
-       */
-      init: function() {
-        console.log("hola variaableee")
-        this.appendDummyInput()
-          .appendField('Crear variable');
-        this.appendStatementInput('variableName')
-          .setCheck(['String'])
-          .setTitle('Nombre de la variable');
-        this.appendStatementInput('initialValue')
-          .setCheck(['Number', 'String', 'Boolean'])
-          .setTitle('Valor inicial');
-        this.setInputsInline(true);
-        this.setOutput(true, 'Variable');
-        this.setTooltip('Crea una nueva variable.');
-      },
-      /**
-       * Returns the type of value produced by this block.
-       * @return {string} The type of value produced.
-       */
-      getOutputType: function() {
-        return 'Variable';
-      },
-    };
+    // Blockly.common.defineBlocksWithJsonArray([{  type: "var",
+    // message0: "var %1",
+    // args0: [
+    //   {
+    //     type: "field_input",
+    //     name: "pregunta",
+    //   },
+    // ],
+    // output: null,
+    // colour: 232,
+    // tooltip: "",
+    // async: true,}])
+    // Blockly.Blocks['variables_create'] = {
+    //   /**
+    //    * Block for creating a variable.
+    //    * @this Blockly.Block
+    //    */
+    //   init: function() {
+    //     console.log("hola variaableee")
+    //     this.appendDummyInput()
+    //       .appendField('Crear variable');
+    //     this.appendStatementInput('variableName')
+    //       .setCheck(['String'])
+    //       .setTitle('Nombre de la variable');
+    //     this.appendStatementInput('initialValue')
+    //       .setCheck(['Number', 'String', 'Boolean'])
+    //       .setTitle('Valor inicial');
+    //     this.setInputsInline(true);
+    //     this.setOutput(true, 'Variable');
+    //     this.setTooltip('Crea una nueva variable.');
+    //   },
+    //   /**
+    //    * Returns the type of value produced by this block.
+    //    * @return {string} The type of value produced.
+    //    */
+    //   getOutputType: function() {
+    //     return 'Variable';
+    //   },
+    // };
   //   Blockly.Blocks['local-declaration-statement'] = {
   //     /**
   //    * Block for defining a procedure with no return value.
@@ -2390,9 +2390,10 @@ export default class ConfiguradorBloques {
     //     return [code, Blockly.JavaScript.ORDER_NONE];
     //   };
     return {
-        kind:"variableCustomizada",
-        custom:"LEXICAL_VARIABLE",
-        // custom: "VARIABLE_DYNAMIC",
+        kind:"variable",
+        custom:"VARIABLE",
+        //custom:"LEXICAL_VARIABLE",
+        //custom: "VARIABLE_DYNAMIC",
         // type:"var",
         // cssConfig: {
         //     "container": "yourClassName"
@@ -2404,7 +2405,7 @@ export default class ConfiguradorBloques {
     //   callback: myButton,
     };
   }
-  procedure(){
+  prodecimientosEstiloJs(){
     Blockly.Blocks['procedures_defnoreturn'] = {
     /**
      * Block for defining a procedure with no return value.
@@ -2781,5 +2782,11 @@ export default class ConfiguradorBloques {
         kind:"procedureCustomizada",
         custom:"PROCEDURE"
     };
+  }
+  procedimientosEstiloKoff(){
+    return {
+      kind:"procedureCustomizada",
+      custom:"PROCEDURE"
+  };
   }
 }
