@@ -2287,15 +2287,72 @@ export default class ConfiguradorBloques {
     };
   }
   var() {
-    Blockly.common.defineBlocksWithJsonArray([
-      {
-        //no existe un create_variable
-        type: "var",
-        // 'extensions': [
-        //     'create_variable_validation',
-        // ],
-      },
-    ]);
+    // Blockly.common.defineBlocksWithJsonArray([{  type: "var",
+    // message0: "var %1",
+    // args0: [
+    //   {
+    //     type: "field_input",
+    //     name: "pregunta",
+    //   },
+    // ],
+    // output: null,
+    // colour: 232,
+    // tooltip: "",
+    // async: true,}])
+    // Blockly.Blocks['variables_create'] = {
+    //   /**
+    //    * Block for creating a variable.
+    //    * @this Blockly.Block
+    //    */
+    //   init: function() {
+    //     console.log("hola variaableee")
+    //     this.appendDummyInput()
+    //       .appendField('Crear variable');
+    //     this.appendStatementInput('variableName')
+    //       .setCheck(['String'])
+    //       .setTitle('Nombre de la variable');
+    //     this.appendStatementInput('initialValue')
+    //       .setCheck(['Number', 'String', 'Boolean'])
+    //       .setTitle('Valor inicial');
+    //     this.setInputsInline(true);
+    //     this.setOutput(true, 'Variable');
+    //     this.setTooltip('Crea una nueva variable.');
+    //   },
+    //   /**
+    //    * Returns the type of value produced by this block.
+    //    * @return {string} The type of value produced.
+    //    */
+    //   getOutputType: function() {
+    //     return 'Variable';
+    //   },
+    // };
+  //   Blockly.Blocks['local-declaration-statement'] = {
+  //     /**
+  //    * Block for defining a procedure with no return value.
+  //    * @this Blockly.Block
+  //    */
+  //   init: function() {
+  //     console.log("estoy en el global-decl-state")
+  //     var nameField = new Blockly.FieldTextInput('',
+  //         Blockly.Procedures.rename);
+  //     nameField.setSpellcheck(false);
+  //     this.appendDummyInput()
+  //         .appendField("var ")
+  //         .appendField(nameField, 'NAME')
+  //         .appendField("=")
+  //         .appendField('', 'PARAMS');
+  //     this.setColour("#FF5733");
+  //   }
+  //  }
+  //   Blockly.common.defineBlocksWithJsonArray([
+  //     {
+  //       //no existe un create_variable
+  //       type: "var",
+  //       // 'extensions': [
+  //       //     'create_variable_validation',
+  //       // ],
+  //     },
+  //   ]);
 
     // Blockly.JavaScript.forBlock["create_variable"] = function (block) {
     //   var variableName = Blockly.prompt(
@@ -2326,17 +2383,18 @@ export default class ConfiguradorBloques {
     // }
    //console.log("estoy en var")
    //no llama a Blockly.JavaScript.forBlock["var"]
-    Blockly.JavaScript.forBlock["var"] = function (block) {
-        const p = Blockly.dialog.prompt()
-        console.log(p)
-        const code = "detectarBandera()";
-        return [code, Blockly.JavaScript.ORDER_NONE];
-      };
+    // Blockly.JavaScript.forBlock["var"] = function (block) {
+    //     const p = Blockly.dialog.prompt()
+    //     console.log(p)
+    //     const code = "detectarBandera()";
+    //     return [code, Blockly.JavaScript.ORDER_NONE];
+    //   };
     return {
-        kind:"pepe",
+        kind:"variable",
         custom:"VARIABLE",
-        // custom: "VARIABLE_DYNAMIC",
-        type:"var",
+        //custom:"LEXICAL_VARIABLE",
+        //custom: "VARIABLE_DYNAMIC",
+        // type:"var",
         // cssConfig: {
         //     "container": "yourClassName"
         //   }
@@ -2347,7 +2405,7 @@ export default class ConfiguradorBloques {
     //   callback: myButton,
     };
   }
-  procedure(){
+  prodecimientosEstiloJs(){
     Blockly.Blocks['procedures_defnoreturn'] = {
     /**
      * Block for defining a procedure with no return value.
@@ -2440,7 +2498,7 @@ export default class ConfiguradorBloques {
           .appendField("()");
       this.setPreviousStatement(true);
       this.setNextStatement(true);
-      this.setColour(128);
+      this.setColour("FF5733");
       // Tooltip is set in renameProcedure.
       this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL);
       this.arguments_ = [];
@@ -2721,8 +2779,14 @@ export default class ConfiguradorBloques {
     defType_: 'procedures_defnoreturn'
   };
     return {
-        kind:"pepe",
+        kind:"procedureCustomizada",
         custom:"PROCEDURE"
     };
+  }
+  procedimientosEstiloKoff(){
+    return {
+      kind:"procedureCustomizada",
+      custom:"PROCEDURE"
+  };
   }
 }
