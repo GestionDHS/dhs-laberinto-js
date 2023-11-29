@@ -2287,6 +2287,7 @@ export default class ConfiguradorBloques {
     };
   }
   var() {
+    //Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'panda');
     // Blockly.common.defineBlocksWithJsonArray([{  type: "var",
     // message0: "var %1",
     // args0: [
@@ -2299,6 +2300,31 @@ export default class ConfiguradorBloques {
     // colour: 232,
     // tooltip: "",
     // async: true,}])
+    Blockly.common.defineBlocksWithJsonArray([{
+      "type": "example_variable_untyped",
+      "message0": "var %1",
+      "args0": [
+        {
+          "type": "field_variable",
+          "name": "FIELDNAME",
+          "variable": "nombreDeMiVariable"
+        }
+      ],
+      "colour": "#F7DD47",
+    }])
+    // Blockly.common.defineBlocksWithJsonArray([{
+    //   "type": "example_variable_typed",
+    //   "message0": "variable: %1",
+    //   "args0": [
+    //     {
+    //       "type": "field_variable",
+    //       "name": "FIELDNAME",
+    //       "variable": "nombreDeVariable",
+    //       "variableTypes": ["Number", "String"],
+    //       "defaultType": "Number"
+    //     }
+    //   ]
+    // }])
     // Blockly.Blocks['variables_create'] = {
     //   /**
     //    * Block for creating a variable.
@@ -2354,14 +2380,15 @@ export default class ConfiguradorBloques {
   //     },
   //   ]);
 
-    // Blockly.JavaScript.forBlock["create_variable"] = function (block) {
-    //   var variableName = Blockly.prompt(
-    //     "Ingrese el nombre de la variable:",
-    //     ""
-    //   );
-    //   Blockly.JavaScript.statementToCode(block, "VALUE");
-    //   Blockly.Variables.createVariable(variableName, "");
-    // };
+    Blockly.JavaScript.forBlock["example_variable_untyped"] = function (block) {
+      console.log("entro")
+      var variableName = Blockly.prompt(
+        "Ingrese el nombre de la variable:",
+        ""
+      );
+      Blockly.JavaScript.statementToCode(block, "VALUE");
+      Blockly.Variables.createVariable(variableName, "");
+    };
 
     // function myButton() {
     // //promptName(Msg['NEW_VARIABLE_TITLE'], defaultName, function (text) {
@@ -2390,8 +2417,10 @@ export default class ConfiguradorBloques {
     //     return [code, Blockly.JavaScript.ORDER_NONE];
     //   };
     return {
-        kind:"variable",
-        custom:"VARIABLE",
+        kind:"block",
+        //type: "example_variable_typed",
+        type:"example_variable_untyped",       
+        //custom:"VARIABLE",
         //custom:"LEXICAL_VARIABLE",
         //custom: "VARIABLE_DYNAMIC",
         // type:"var",
