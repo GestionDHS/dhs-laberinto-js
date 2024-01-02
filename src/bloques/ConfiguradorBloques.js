@@ -2320,7 +2320,7 @@ export default class ConfiguradorBloques {
           'variable': 'variable',
         }, {
           "type": "input_value",
-          "name": "NAME"
+          "name": "VAR_NAME"
         }
 
       ],
@@ -2367,9 +2367,13 @@ export default class ConfiguradorBloques {
       // }
       Blockly.Extensions.register("variable_test", function () {
         // 4 veces hace la llamada a esta fn, creo q tiene algo que ver los 2 bloques que se generan
-        // validar que sean letras sin caracteres especiales
+        // validar que el nombre de la variable empiece con letras y no con num o caracteres especiales
         this.setOnChange(function (event) {
           console.log("dentro del setOnChange", event.blockId)
+          console.log("dentro del setOnChange", event)
+          const variable1 = this.getFieldValue("VAR")
+          const variable2 = this.getFieldValue("VAR_NAME")
+          console.log(variable1 + " " + variable2)
           // let listo= true
           // while(listo){
           //   const variable = this.getFieldValue("VAR");
