@@ -1,9 +1,11 @@
+import { DHS_Gallery } from '../clases/Dhs-galeria';
 export default class ConfiguradorBloques {
   constructor() {
     this.toolbox = {
       kind: "categoryToolbox",
       contents: [],
     };
+    this.galeria = new DHS_Gallery
   }
 
   crearCategoriaToolbox(datosCategoria) {
@@ -132,7 +134,7 @@ export default class ConfiguradorBloques {
         args0: [
           {
             type: "field_image",
-            src: "https://icons-for-free.com/iconfiles/png/512/arrow-131964784790508314.png",
+            src: this.galeria.imageLib.flechaAbajo.url,
             width: 16,
             height: 16,
             alt: "*",
@@ -164,7 +166,7 @@ export default class ConfiguradorBloques {
         args0: [
           {
             type: "field_image",
-            src: "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+            src: this.galeria.imageLib.flechaArriba.url,
             width: 16,
             height: 16,
             alt: "*",
@@ -195,7 +197,7 @@ export default class ConfiguradorBloques {
         args0: [
           {
             type: "field_image",
-            src: "https://icons-for-free.com/iconfiles/png/512/arrow-131964785050550748.png",
+            src: this.galeria.imageLib.flechaArriba.url,
             width: 16,
             height: 16,
             alt: "*",
@@ -227,7 +229,7 @@ export default class ConfiguradorBloques {
         args0: [
           {
             type: "field_image",
-            src: "https://icons-for-free.com/iconfiles/png/512/arrow-131964784973444275.png",
+            src: this.galeria.imageLib.flechaDerecha.url,
             width: 16,
             height: 16,
             alt: "*",
@@ -259,7 +261,7 @@ export default class ConfiguradorBloques {
         args0: [
           {
             type: "field_image",
-            src: "https://icons-for-free.com/iconfiles/png/512/arrow-131964784886798044.png",
+            src: this.galeria.imageLib.flechaIzquierda.url,
             width: 16,
             height: 16,
             alt: "*",
