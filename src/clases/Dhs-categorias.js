@@ -28,6 +28,16 @@ export class Dhs_Categorias {
       name: "Sensores",
       categorystyle: "sensor",
     },
+    {
+      kind:"category",//necesita este kind como categorya
+      name:"Variables",
+      categorystyle:"variable",
+    },
+    {
+      kind:"category",//necesita este kind como categorya
+      name:"Funciones",
+      categorystyle:"procedure",
+    },
   ];
 
   obtenerCategoriasNecesarias(arrayCategorias) {

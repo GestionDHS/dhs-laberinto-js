@@ -100,6 +100,10 @@ import taparConTierra from "../img/taparConTierra.png"
 import tomarUnaMaceta from "../img/tomarUnaMaceta.png"
 import fondoGris from "../img/fondoGris.png"
 import good from "../img/good.png"
+import flechaDerecha from "../img/flechaDerecha.png"
+import flechaIzquierda from "../img/flechaIzquierda.png"
+import flechaArriba from "../img/flechaArriba.png"
+import flechaAbajo from "../img/flechaAbajo.png"
 
 export class DHS_Gallery {
   constructor() {
@@ -904,6 +908,34 @@ export class DHS_Gallery {
       themes: ["chorroAgua"],
       url: chorroAgua,
       nombre: "chorroAgua",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    flechaDerecha: {
+      themes: ["flechaDerecha"],
+      url: flechaDerecha,
+      nombre: "flechaDerecha",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    flechaIzquierda: {
+      themes: ["flechaIzquierda"],
+      url: flechaIzquierda,
+      nombre: "flechaIzquierda",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    flechaArriba: {
+      themes: ["flechaArriba"],
+      url: flechaArriba,
+      nombre: "flechaArriba",
+      parrafoLicencia: "Digital House",
+      showLicense: true,
+    },
+    flechaAbajo: {
+      themes: ["flechaAbajo"],
+      url: flechaAbajo,
+      nombre: "flechaAbajo",
       parrafoLicencia: "Digital House",
       showLicense: true,
     },
