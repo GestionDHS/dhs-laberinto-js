@@ -194,7 +194,7 @@ class Controlador {
   crearInyectarWorkspace(idElemento, objetoConfig) {
     this.workspace = Blockly.inject(idElemento, objetoConfig);
     //console.log(LexicalVariables.LexicalVariable.renameFree)
-    console.log(LexicalVariables)
+    //console.log(LexicalVariables)
     //LexicalVariables.init()
     //  LexicalVariables.init(this.workspace)
   }
