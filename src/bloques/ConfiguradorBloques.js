@@ -2375,7 +2375,7 @@ export default class ConfiguradorBloques {
           console.log("dentro del setOnChange", event)
           const variable1 = this.getFieldValue("VAR")
           const variable2 = this.getFieldValue("VAR_NAME")
-          console.log(variable1 + " " + variable2)
+          console.log(variable1 + " ----- " + variable2)
           // let listo= true
           // while(listo){
           //   const variable = this.getFieldValue("VAR");
