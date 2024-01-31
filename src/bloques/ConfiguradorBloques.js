@@ -575,7 +575,7 @@ export default class ConfiguradorBloques {
         args0: [
           {
             type: "field_image",
-            src: "https://icons-for-free.com/iconfiles/png/512/forward+icon-1320166878041096316.png",
+            src: this.galeria.imageLib.flechaDerecha.url,
             width: 16,
             height: 16,
             alt: "*",
@@ -622,7 +622,7 @@ export default class ConfiguradorBloques {
           },
           {
             type: "field_image",
-            src: "https://icons-for-free.com/iconfiles/png/512/forward+icon-1320166878041096316.png",
+            src: this.galeria.imageLib.flechaDerecha.url,
             width: 16,
             height: 16,
             alt: "*",
