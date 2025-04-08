@@ -1,18 +1,10 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
+
 const root = resolve(__dirname, "src");
 const outDir = resolve(__dirname, "dist");
-// const procedure_path= resolve(__dirname, '@blockly/block-shareable-procedures/');
-// console.log(procedure_path)
-// import {registerProcedureSerializer} from ${procedure_path};
-/*saco la base
-root:"src"
-outDir:"../dist"
-*/
+
 export default defineConfig({
-  // plugins: [
-  //   registerProcedureSerializer(),
-  // ],
   base: "/dhs-laberinto-js/",
   root,
   build: {
@@ -21,42 +13,42 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
-        act1: resolve(root, "pages", "actividad001", "act.html"),
-        act2: resolve(root, "pages", "actividad002", "act.html"),
-        act3: resolve(root, "pages", "actividad003", "act.html"),
-        act4: resolve(root, "pages", "actividad004", "act.html"),
-        act5: resolve(root, "pages", "actividad005", "act.html"),
-        act6: resolve(root, "pages", "actividad006", "act.html"),
-        act7: resolve(root, "pages", "actividad007", "act.html"),
-        act8: resolve(root, "pages", "actividad008", "act.html"),
-        act9: resolve(root, "pages", "actividad009", "act.html"),
-        act10: resolve(root, "pages", "actividad010", "act.html"),
-        act11: resolve(root, "pages", "actividad011", "act.html"),
-        act12: resolve(root, "pages", "actividad012", "act.html"),
-        act13: resolve(root, "pages", "actividad013", "act.html"),
-        act14: resolve(root, "pages", "actividad014", "act.html"),
-        act15: resolve(root, "pages", "actividad015", "act.html"),
-        act16: resolve(root, "pages", "actividad016", "act.html"),
-        act17: resolve(root, "pages", "actividad017", "act.html"),
-        act18: resolve(root, "pages", "actividad018", "act.html"),
-        act19: resolve(root, "pages", "actividad019", "act.html"),
-        act20: resolve(root, "pages", "actividad020", "act.html"),
-        act21: resolve(root, "pages", "actividad021", "act.html"),
-        act22: resolve(root, "pages", "actividad022", "act.html"),
-        act23: resolve(root, "pages", "actividad023", "act.html"),
-        act24: resolve(root, "pages", "actividad024", "act.html"),
-        act25: resolve(root, "pages", "actividad025", "act.html"),
-        act26: resolve(root, "pages", "actividad026", "act.html"),
-        act27: resolve(root, "pages", "actividad027", "act.html"),
-        act28: resolve(root, "pages", "actividad028", "act.html"),
-        act29: resolve(root, "pages", "actividad029", "act.html"),
-        act30: resolve(root, "pages", "actividad030", "act.html"),
-        act31: resolve(root, "pages", "actividad031", "act.html"),
-        act32: resolve(root, "pages", "actividad032", "act.html"),
-        act33: resolve(root, "pages", "actividad033", "act.html"),
-        act34: resolve(root, "pages", "actividad034", "act.html"),
-        act35: resolve(root, "pages", "actividad035", "act.html"),
-        act36: resolve(root, "pages", "actividad036", "act.html"),
+        "pages/actividad001/act": resolve(root, "pages", "actividad001", "act.html"),
+        "pages/actividad002/act": resolve(root, "pages", "actividad002", "act.html"),
+        "pages/actividad003/act": resolve(root, "pages", "actividad003", "act.html"),
+        "pages/actividad004/act": resolve(root, "pages", "actividad004", "act.html"),
+        "pages/actividad005/act": resolve(root, "pages", "actividad005", "act.html"),
+        "pages/actividad006/act": resolve(root, "pages", "actividad006", "act.html"),
+        "pages/actividad007/act": resolve(root, "pages", "actividad007", "act.html"),
+        "pages/actividad008/act": resolve(root, "pages", "actividad008", "act.html"),
+        "pages/actividad009/act": resolve(root, "pages", "actividad009", "act.html"),
+        "pages/actividad010/act": resolve(root, "pages", "actividad010", "act.html"),
+        "pages/actividad011/act": resolve(root, "pages", "actividad011", "act.html"),
+        "pages/actividad012/act": resolve(root, "pages", "actividad012", "act.html"),
+        "pages/actividad013/act": resolve(root, "pages", "actividad013", "act.html"),
+        "pages/actividad014/act": resolve(root, "pages", "actividad014", "act.html"),
+        "pages/actividad015/act": resolve(root, "pages", "actividad015", "act.html"),
+        "pages/actividad016/act": resolve(root, "pages", "actividad016", "act.html"),
+        "pages/actividad017/act": resolve(root, "pages", "actividad017", "act.html"),
+        "pages/actividad018/act": resolve(root, "pages", "actividad018", "act.html"),
+        "pages/actividad019/act": resolve(root, "pages", "actividad019", "act.html"),
+        "pages/actividad020/act": resolve(root, "pages", "actividad020", "act.html"),
+        "pages/actividad021/act": resolve(root, "pages", "actividad021", "act.html"),
+        "pages/actividad022/act": resolve(root, "pages", "actividad022", "act.html"),
+        "pages/actividad023/act": resolve(root, "pages", "actividad023", "act.html"),
+        "pages/actividad024/act": resolve(root, "pages", "actividad024", "act.html"),
+        "pages/actividad025/act": resolve(root, "pages", "actividad025", "act.html"),
+        "pages/actividad026/act": resolve(root, "pages", "actividad026", "act.html"),
+        "pages/actividad027/act": resolve(root, "pages", "actividad027", "act.html"),
+        "pages/actividad028/act": resolve(root, "pages", "actividad028", "act.html"),
+        "pages/actividad029/act": resolve(root, "pages", "actividad029", "act.html"),
+        "pages/actividad030/act": resolve(root, "pages", "actividad030", "act.html"),
+        "pages/actividad031/act": resolve(root, "pages", "actividad031", "act.html"),
+        "pages/actividad032/act": resolve(root, "pages", "actividad032", "act.html"),
+        "pages/actividad033/act": resolve(root, "pages", "actividad033", "act.html"),
+        "pages/actividad034/act": resolve(root, "pages", "actividad034", "act.html"),
+        "pages/actividad035/act": resolve(root, "pages", "actividad035", "act.html"),
+        "pages/actividad036/act": resolve(root, "pages", "actividad036", "act.html"),
       },
     },
   },
